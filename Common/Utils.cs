@@ -19,29 +19,19 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
-using Casasoft.CCDV;
 
-Formats fmt = new(300);
-Images img = new(fmt);
-
-MagickImage final = img.InCartha20x27_o();
-MagickImageCollection images = new();
-
-MagickImage dorsoOrig = new(args[0]);
-
-MagickImage dorso = Utils.ResizeAndFill(dorsoOrig, fmt.CDV_Full_v);
-dorso.BorderColor = MagickColors.Black;
-dorso.Border(1);
-
-for (int i = 0; i < 4; i++) images.Add(dorso.Clone());
-final.Composite(images.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
-
-images.Clear();
-dorso.Rotate(90);
-for (int i = 0; i < 2; i++) images.Add(dorso.Clone());
-final.Composite(images.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + dorso.Width - 1));
-
-final.Write(args[1]);
-
-
-
+namespace Casasoft.CCDV
+{
+    public static class Utils
+    {
+        public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill)
+        {
+            MagickImage i = (MagickImage)img.Clone();
+            i.Resize(size);
+            i.Extent(size, Gravity.Center, fill);
+            return i;
+        }
+        public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) =>
+            ResizeAndFill(img, size, MagickColors.White);
+    }
+}
