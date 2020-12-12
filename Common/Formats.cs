@@ -45,7 +45,7 @@ namespace Casasoft.CCDV
 
         public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(65));
         public MagickGeometry CDV_Full_v => new(ToPixels(65), ToPixels(100));
-        public MagickGeometry CDV_Internal_o => new(ToPixels(60), ToPixels(55));
+        public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(55));
         public MagickGeometry CDV_Internal_v => new(ToPixels(55), ToPixels(90));
     }
 }
