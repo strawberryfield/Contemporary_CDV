@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MontaggioDorsi": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\foto\\fq\\cdv\\dorso.jpg mosaic.jpg"
+    }
+  }
+}
