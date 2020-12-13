@@ -19,6 +19,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using System;
 
 namespace Casasoft.CCDV
 {
@@ -33,5 +34,8 @@ namespace Casasoft.CCDV
         }
         public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) =>
             ResizeAndFill(img, size, MagickColors.White);
+
+        public static void WelcomeBanner(string exeName) => 
+            Console.Error.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020 Roberto Ceccarelli - Casasoft\n");
     }
 }

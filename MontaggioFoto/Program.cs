@@ -20,22 +20,58 @@
 
 using Casasoft.CCDV;
 using ImageMagick;
+using Mono.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+bool shouldShowHelp = false;
+string outputName = "card-";
+
+string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
+Utils.WelcomeBanner(exeName);
+
+OptionSet options = new OptionSet
+{
+    { "o|output=", "set output dir/prefix", o => outputName = o },
+    { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+};
+
+List<string> extra;
+try
+{
+    // parse the command line
+    extra = options.Parse(args);
+}
+catch (OptionException e)
+{
+    // output some error message
+    Console.Error.WriteLine($"{exeName}: {e.Message}");
+    Console.Error.WriteLine($"Try '{exeName} --help' for more information.");
+    return;
+}
+
+if (shouldShowHelp)
+{
+    Console.WriteLine($"Usage: {exeName} [-o |--output=OutPathName] inputfile [inputfile]+");
+    Console.WriteLine();
+
+    // output the options
+    Console.WriteLine("Options:");
+    options.WriteOptionDescriptions(Console.Out);
+}
+
 Formats fmt = new(300);
 Images img = new(fmt);
 
 List<string> files = new();
-for(int p=0; p<args.Length; p++)
+foreach(string filename in extra)
 {
-    string filename = args[p];
     files.AddRange(Directory.GetFiles(Path.GetDirectoryName(filename), Path.GetFileName(filename)).ToList());
 }
 
-for(int i = 0; i < files.Count; i++)
+for (int i = 0; i < files.Count; i++)
 {
     MagickImage final = img.FineArt10x15_o();
     Console.WriteLine($"Processing: {files[i]}");
@@ -43,7 +79,7 @@ for(int i = 0; i < files.Count; i++)
 
     MagickImage img2;
     i++;
-    if(i < files.Count)
+    if (i < files.Count)
     {
         Console.WriteLine($"Processing: {files[i]}");
         img2 = Utils.ResizeAndFill(new(files[i]), fmt.CDV_Internal_v);
@@ -56,7 +92,7 @@ for(int i = 0; i < files.Count; i++)
     final.Composite(HalfCard(img1), Gravity.West);
     final.Composite(HalfCard(img2), Gravity.East);
 
-    final.Write($"card{(i+1)/2,3:D3}.jpg");
+    final.Write($"{outputName}{(i + 1) / 2,3:D3}.jpg");
 }
 
 MagickImage HalfCard(MagickImage img)
