@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MontaggioFoto": {
+      "commandName": "Project",
+      "commandLineArgs": "c:\\foto\\fq\\storia*.jpg"
+    }
+  }
+}
