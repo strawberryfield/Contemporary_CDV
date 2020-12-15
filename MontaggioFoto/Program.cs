@@ -46,21 +46,13 @@ try
 }
 catch (OptionException e)
 {
-    // output some error message
-    Console.Error.WriteLine($"{exeName}: {e.Message}");
-    Console.Error.WriteLine($"Try '{exeName} --help' for more information.");
+    Utils.ShowParametersError(exeName, e);
     return;
 }
 
 if (shouldShowHelp)
-{
-    Console.WriteLine($"Usage: {exeName} [-o |--output=OutPathName] inputfile [inputfile]+");
-    Console.WriteLine();
+    Utils.ShowHelp(exeName, "[-o |--output=OutPathName] inputfile+", options);
 
-    // output the options
-    Console.WriteLine("Options:");
-    options.WriteOptionDescriptions(Console.Out);
-}
 
 Formats fmt = new(300);
 Images img = new(fmt);

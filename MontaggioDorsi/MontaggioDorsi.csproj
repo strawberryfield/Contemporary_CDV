@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.22.2.2" />
+    <PackageReference Include="Mono.Options" Version="6.6.0.161" />
   </ItemGroup>
 
   <ItemGroup>

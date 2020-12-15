@@ -19,6 +19,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using Mono.Options;
 using System;
 
 namespace Casasoft.CCDV
@@ -37,5 +38,22 @@ namespace Casasoft.CCDV
 
         public static void WelcomeBanner(string exeName) => 
             Console.Error.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020 Roberto Ceccarelli - Casasoft\n");
+
+        public static void ShowHelp(string exeName, string parameters, OptionSet opt)
+        {
+            Console.WriteLine($"Usage: {exeName} {parameters}");
+            Console.WriteLine();
+
+            // output the options
+            Console.WriteLine("Options:");
+            opt.WriteOptionDescriptions(Console.Out);
+        }
+
+        public static void ShowParametersError(string exeName, OptionException e)
+        {
+            // output some error message
+            Console.Error.WriteLine($"{exeName}: {e.Message}");
+            Console.Error.WriteLine($"Try '{exeName} --help' for more information.");
+        }
     }
 }
