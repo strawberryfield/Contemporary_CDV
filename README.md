@@ -2,6 +2,8 @@
 
 ![Carte de Visite di Gabriele Chiesa al SemplicementeFotografareLive 2019](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_gabriele_chiesa_semplicementefotografarelive.jpg)
 
+*Sorry, these notes are only in italian language*
+
 ## Storia della Carte de Visite fotografica
 
 Nel 1854 il fotografo parigino 
@@ -17,7 +19,7 @@ del negativo per poterlo impressionare più volte.
 Dieci erano gli scatti previsti e descritti nel brevetto del 1854, 
 otto, in realtà, quelli pervenuti integri sui fogli non tagliati. 
 
-In questo modo si poteva impressionare, sviluppare e stampare 
+In questo modo si potevano impressionare, sviluppare e stampare 
 contemporaneamente molte immagini di dimensioni ridotte e abbattere i costi
 di produzione di ogni singola fotografia. 
 
@@ -69,7 +71,7 @@ ne ha fatto nel tempo oggetto di collezionismo.
 
 Moltissimi sono i piccoli ed i grandi collezionisti che hanno raccolto con 
 passione queste minuscole finestre fotografiche aperte nel tempo e nello spazio.  
-Senza il loro contributo la cono-scenza storica e sociale della fondamentale 
+Senza il loro contributo la conoscenza storica e sociale della fondamentale 
 epoca che ha segnato l’unificazione nazionale italiana sarebbe lacunosa.
 
 ### Bibliografia
@@ -118,11 +120,31 @@ possono dare.
 
 ### Bibliografia
 
-[Gruppo Facebook Contemporary Carte de Visite](https://www.facebook.com/groups/cartedevisite)
+[Gruppo Facebook "Contemporary Carte de Visite"](https://www.facebook.com/groups/cartedevisite)
 
 [Catalogo "Il mondo in tasca 2020"](https://www.gri.it/support/Il-Mondo-in-Tasca-2020-CdV-web.pdf?fbclid=IwAR1mZy4oHk46hpe8w6rEjygDyYo87H87MzgImDL1IDSFy0ojO8pjdDVfqpw)
 
 ## I tools per Carte da Visite contemporanee
+
+Dopo aver assistito alle interviste in diretta streaming sul 
+[gruppo Facebook "Contemporary Carte de Visite"](https://www.facebook.com/groups/cartedevisite)
+e sfogliato il 
+[catalogo del concorso "Il mondo in tasca 2020"](https://www.gri.it/support/Il-Mondo-in-Tasca-2020-CdV-web.pdf?fbclid=IwAR1mZy4oHk46hpe8w6rEjygDyYo87H87MzgImDL1IDSFy0ojO8pjdDVfqpw)
+ho voluto tentare anch'io di creare delle carte de visite fotografiche.
+
+Ho pensato di dare un corpo fisico a delle immagini che avevo utilizzato come 
+[storie per Instagram e Facebook](https://strawberryfield.altervista.org/fq/storie_facebook_instagram.php)
+per pubblicizzare la 
+[mostra "il fotografo quantistico"](https://strawberryfield.altervista.org/fq/mostrafotografica-robertoceccarelli-semplicementefotografare-novafeltria.php).
+
+Le "storie" sono immagini digitale dalla vita brevissima, dopo 24 ore dalla pubblicazione scompaiono.  
+Stampandole su un supporto fisico gli si dona una lunghissima durata e si mettono al
+riparo dalla obsolescenza tecnologica: i file digitali per essere vionati devono essere
+elaborati da apparecchiature che nel tempo diventano irreperibili; chi ha i mezzi per leggere
+un floppy disk di 20 anni fa?
+
+Manualmente scalo le immagini e le combino in "collage" stampabili su formati standard
+da un service online.
 
 
 ### Bibliografia
