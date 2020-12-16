@@ -26,6 +26,7 @@ namespace Casasoft.CCDV
 {
     public static class Utils
     {
+        #region image resize
         public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill)
         {
             MagickImage i = (MagickImage)img.Clone();
@@ -35,7 +36,9 @@ namespace Casasoft.CCDV
         }
         public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) =>
             ResizeAndFill(img, size, MagickColors.White);
+        #endregion
 
+        #region command line
         public static void WelcomeBanner(string exeName) => 
             Console.Error.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020 Roberto Ceccarelli - Casasoft\n");
 
@@ -55,5 +58,6 @@ namespace Casasoft.CCDV
             Console.Error.WriteLine($"{exeName}: {e.Message}");
             Console.Error.WriteLine($"Try '{exeName} --help' for more information.");
         }
+        #endregion
     }
 }

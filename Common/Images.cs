@@ -26,6 +26,7 @@ namespace Casasoft.CCDV
     {
         protected Formats fmt;
 
+        #region constructors
         public Images(int dpi)
         {
             fmt = new(dpi);
@@ -37,27 +38,30 @@ namespace Casasoft.CCDV
         {
             fmt = f;
         }
+        #endregion
 
+        #region commercial formats
         public MagickImage InCartha20x27_o(MagickColor c) => new(c, fmt.InCartha20x27_o.Width, fmt.InCartha20x27_o.Height);
         public MagickImage InCartha20x27_v(MagickColor c) => new(c, fmt.InCartha20x27_v.Width, fmt.InCartha20x27_v.Height);
         public MagickImage FineArt10x15_o(MagickColor c) => new(c, fmt.FineArt10x15_o.Width, fmt.FineArt10x15_o.Height);
         public MagickImage FineArt10x15_v(MagickColor c) => new(c, fmt.FineArt10x15_v.Width, fmt.FineArt10x15_v.Height);
 
+        public MagickImage InCartha20x27_o() => InCartha20x27_o(MagickColors.White);
+        public MagickImage InCartha20x27_v() => InCartha20x27_v(MagickColors.White);
+        public MagickImage FineArt10x15_o() => FineArt10x15_o(MagickColors.White);
+        public MagickImage FineArt10x15_v() => FineArt10x15_v(MagickColors.White);
+        #endregion
+
+        #region cdv
         public MagickImage CDV_Full_o(MagickColor c) => new(c, fmt.CDV_Full_o.Width, fmt.CDV_Full_o.Height);
         public MagickImage CDV_Full_v(MagickColor c) => new(c, fmt.CDV_Full_v.Width, fmt.CDV_Full_v.Height);
         public MagickImage CDV_Internal_o(MagickColor c) => new(c, fmt.CDV_Internal_o.Width, fmt.CDV_Internal_o.Height);
         public MagickImage CDV_Internal_v(MagickColor c) => new(c, fmt.CDV_Internal_v.Width, fmt.CDV_Internal_v.Height);
 
-        public MagickImage InCartha20x27_o() => InCartha20x27_o(MagickColors.White);
-        public MagickImage InCartha20x27_v() => InCartha20x27_v(MagickColors.White);
-        public MagickImage FineArt10x15_o() => FineArt10x15_o(MagickColors.White);
-        public MagickImage FineArt10x15_v() => FineArt10x15_v(MagickColors.White);
-
-
         public MagickImage CDV_Full_o() => CDV_Full_o(MagickColors.White);
         public MagickImage CDV_Full_v() => CDV_Full_v(MagickColors.White);
         public MagickImage CDV_Internal_o() => CDV_Internal_o(MagickColors.White);
         public MagickImage CDV_Internal_v() => CDV_Internal_v(MagickColors.White);
-
+        #endregion
     }
 }

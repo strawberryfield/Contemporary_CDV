@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+#region command line
 bool shouldShowHelp = false;
 string outputName = "dorsi";
 
@@ -37,11 +38,11 @@ OptionSet options = new OptionSet
     { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
 };
 
-List<string> extra;
+List<string> filesList;
 try
 {
     // parse the command line
-    extra = options.Parse(args);
+    filesList = options.Parse(args);
 }
 catch (OptionException e)
 {
@@ -51,7 +52,7 @@ catch (OptionException e)
 
 if (shouldShowHelp)
     Utils.ShowHelp(exeName, "[-o |--output=OutPathName] inputfile", options);
-
+#endregion
 
 Formats fmt = new(300);
 Images img = new(fmt);
@@ -59,9 +60,10 @@ Images img = new(fmt);
 MagickImage final = img.InCartha20x27_o();
 MagickImageCollection images = new();
 
+// if no file specified use a blank image
 MagickImage dorsoOrig;
-if (extra.Count > 0)
-    dorsoOrig = new(extra[0]);
+if (filesList.Count > 0)
+    dorsoOrig = new(filesList[0]);
 else
     dorsoOrig = img.CDV_Full_v();
 

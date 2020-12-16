@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+#region command line
 bool shouldShowHelp = false;
 string outputName = "card-";
 
@@ -38,11 +39,11 @@ OptionSet options = new OptionSet
     { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
 };
 
-List<string> extra;
+List<string> filesList;
 try
 {
     // parse the command line
-    extra = options.Parse(args);
+    filesList = options.Parse(args);
 }
 catch (OptionException e)
 {
@@ -52,13 +53,14 @@ catch (OptionException e)
 
 if (shouldShowHelp)
     Utils.ShowHelp(exeName, "[-o |--output=OutPathName] inputfile+", options);
-
+#endregion
 
 Formats fmt = new(300);
 Images img = new(fmt);
 
+// expand wildcards
 List<string> files = new();
-foreach(string filename in extra)
+foreach(string filename in filesList)
 {
     files.AddRange(Directory.GetFiles(Path.GetDirectoryName(filename), Path.GetFileName(filename)).ToList());
 }
