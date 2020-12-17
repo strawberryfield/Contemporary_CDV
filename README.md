@@ -89,7 +89,7 @@ epoca che ha segnato l’unificazione nazionale italiana sarebbe lacunosa.
 ![Le Carte de Visite di "il fotografo quantistico"](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_ilfotografoquantistico.jpg)
 
 L’idea di un biglietto da visita fotografico, su supporto fisico permanente, 
-resta ancora oggi rivoluzionaria, nell’attuale epo-ca di immagini ed 
+resta ancora oggi rivoluzionaria, nell’attuale epoca di immagini ed 
 informazioni fluide. 
 
 L’ambizione è quella di riproporne l’attualità nella sua funzione di 
@@ -105,11 +105,11 @@ del futuro che sa reinventare il passato.
 Ne abbiamo trovato conferma nella reinterpretazione degli antichi processi, 
 dall’oleotipia, alla gomma bicromata, al sale, alla cianotipia...   
 Gli artisti contemporanei che oggi reinterpretano creativamente la Carte de Visite 
-raccolgono la sfida di uno spazio mi-nuscolo per creare qualcosa di grande 
+raccolgono la sfida di uno spazio minuscolo per creare qualcosa di grande 
 ed innovativo.
 
 Le opere presentate per il concorso “Il Mondo in Tasca”, Lodi 2020, 
-lasciano ancora una volta sbalorditi per la finezza, l’impe-to e la ricchezza 
+lasciano ancora una volta sbalorditi per la finezza, l’impeto e la ricchezza 
 di giochi, rimandi, allusioni che solo una precisa lettura attenta al minimo 
 dettaglio può rivelare.
 
@@ -125,6 +125,8 @@ possono dare.
 [Catalogo "Il mondo in tasca 2020"](https://www.gri.it/support/Il-Mondo-in-Tasca-2020-CdV-web.pdf?fbclid=IwAR1mZy4oHk46hpe8w6rEjygDyYo87H87MzgImDL1IDSFy0ojO8pjdDVfqpw)
 
 ## I tools per Carte da Visite contemporanee
+
+![Dorsi di carte de visite sulla taglierina](https://strawberryfield.altervista.org/carte_de_visite/foto/dorsi_cdv_taglierina.jpg)
 
 Dopo aver assistito alle interviste in diretta streaming sul 
 [gruppo Facebook "Contemporary Carte de Visite"](https://www.facebook.com/groups/cartedevisite)
@@ -144,7 +146,32 @@ elaborati da apparecchiature che nel tempo diventano irreperibili; chi ha i mezz
 un floppy disk di 20 anni fa?
 
 Manualmente scalo le immagini e le combino in "collage" stampabili su formati standard
-da un service online.
+da un service online. Lavoro lungo e noioso.
+
+In capo a pochi giorni ricevo i cartoncini con le stampe da ritagliare ed incollare.  
+E proprio dal ritaglio emergono i primi problemi: alcune immagini, tra cui tutti i dorsi,
+hanno un fondo bianco e non ho riferimenti per i tagli.
+
+Quello che mi è mancato è un processo di tipo "industriale" che trasformi le immagini digitali
+in semilavorati (le stampe del service) facilmente trasformabili nel prodotto finito.  
+Una quindicina di anni fa avevo lo stesso tipo di problema con la creazione dei menu
+per i DVD video: lo risolsi utilizzando [ImageMagick](https://imagemagick.org/), un vero
+e proprio "coltellino svizzero" per la manipolazione delle immagini, che si usa
+rigorosamente da linea di comando.
+
+Descrissi il procedimento messo a punto su una [importante rivista di programmazione](https://strawberryfield.altervista.org/cp/10.pdf)
+ed in un [tutorial sul mio sito](https://strawberryfield.altervista.org/creare_dvd_video/index.php).
+
+In questo repository sono presenti i sorgenti dei tools per la creazione delle carte de viste
+e relativi accessori; a differenza dei tools per DVD video questi sono scritti in 
+[C# 9](https://docs.microsoft.com/it-it/dotnet/csharp/whats-new/csharp-9)
+utilizzando la [libreria Magick.NET](https://github.com/dlemstra/Magick.NET) che incorpora
+già ImageMagick e quindi non necessita di una installazione separata.
+
+I programmi compilati possono funzionare su Windows 10, Mac OSX e Linux (solo su processori x86);
+purtroppo non è disponibile la versione della libreria per processori ARM e dunque
+non si possono eseguire su computer in formato "carte de visite" come il
+[Raspberry Pi](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
 
 
 ### Bibliografia
