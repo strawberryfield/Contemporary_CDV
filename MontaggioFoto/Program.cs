@@ -69,7 +69,7 @@ for (int i = 0; i < files.Count; i++)
 {
     MagickImage final = img.FineArt10x15_o();
     Console.WriteLine($"Processing: {files[i]}");
-    MagickImage img1 = Utils.ResizeAndFill(new(files[i]), fmt.CDV_Internal_v);
+    MagickImage img1 = Utils.RotateResizeAndFill(new(files[i]), fmt.CDV_Internal_v);
 
     MagickImage img2;
     i++;

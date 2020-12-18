@@ -1,10 +1,11 @@
 # Contemporary Carte de Visite Tools
 
-![Carte de Visite di Gabriele Chiesa al SemplicementeFotografareLive 2019](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_gabriele_chiesa_semplicementefotografarelive.jpg)
 
 *Sorry, these notes are only in italian language*
 
 ## Storia della Carte de Visite fotografica
+
+![Carte de Visite di Gabriele Chiesa al SemplicementeFotografareLive 2019](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_gabriele_chiesa_semplicementefotografarelive.jpg)
 
 Nel 1854 il fotografo parigino 
 [André Adolphe Eugène Disderi](https://it.wikipedia.org/wiki/Andr%C3%A9-Adolphe-Eug%C3%A8ne_Disd%C3%A9ri) ,

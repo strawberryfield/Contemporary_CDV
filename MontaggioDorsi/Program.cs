@@ -67,7 +67,7 @@ if (filesList.Count > 0)
 else
     dorsoOrig = img.CDV_Full_v();
 
-MagickImage dorso = Utils.ResizeAndFill(dorsoOrig, fmt.CDV_Full_v);
+MagickImage dorso = Utils.RotateResizeAndFill(dorsoOrig, fmt.CDV_Full_v);
 dorso.BorderColor = MagickColors.Black;
 dorso.Border(1);
 
