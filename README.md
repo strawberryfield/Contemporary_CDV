@@ -8,7 +8,7 @@
 ![Carte de Visite di Gabriele Chiesa al SemplicementeFotografareLive 2019](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_gabriele_chiesa_semplicementefotografarelive.jpg)
 
 Nel 1854 il fotografo parigino 
-[André Adolphe Eugène Disderi](https://it.wikipedia.org/wiki/Andr%C3%A9-Adolphe-Eug%C3%A8ne_Disd%C3%A9ri) ,
+[André Adolphe Eugène Disderi](https://it.wikipedia.org/wiki/Andr%C3%A9-Adolphe-Eug%C3%A8ne_Disd%C3%A9ri),
 proprietario dal 1848 di uno studio in Boulevard des Italiens,
 trovò il metodo per ottenere otto diversi negativi su una sola lastra, 
 probabilmente ispirandosi alle fotografie stereoscopiche, 
@@ -45,8 +45,8 @@ creava una sorta di passepartout dove era possibile inserire l’impronta
 del timbro, ad inchiostro o a secco, dello studio fotografico, il luogo 
 della ripresa, il titolo dell’immagine o altre indicazioni.  
 Anche il verso del cartoncino veniva utilizzato per indicare queste notizie,
-a stampa o manoscritte.  Di solito sul verso venivano indicate anche
-le medaglie e i premi vinti.
+a stampa o manoscritte.  
+Di solito sul verso venivano indicate anche le medaglie e i premi vinti.
 
 Le carte de visite hanno un successo enorme che coinvolge potenti 
 e persone comuni: così, soggetti di estrazione sociale anche modesta, 
@@ -93,7 +93,8 @@ L’idea di un biglietto da visita fotografico, su supporto fisico permanente,
 resta ancora oggi rivoluzionaria, nell’attuale epoca di immagini ed 
 informazioni fluide. 
 
-L’ambizione è quella di riproporne l’attualità nella sua funzione di 
+L’ambizione di chi si occupa di "carte de visite contemporanee"
+è quella di riproporne l’attualità nella sua funzione di 
 comunicazione e testimonianza sociale, nel suo ruolo di minuscolo strumento 
 di espressione artistica: tascabile, pratico, economico; concreto e 
 persistente segno di presenza in un’epoca di figure effimere.
@@ -109,7 +110,7 @@ Gli artisti contemporanei che oggi reinterpretano creativamente la Carte de Visi
 raccolgono la sfida di uno spazio minuscolo per creare qualcosa di grande 
 ed innovativo.
 
-Le opere presentate per il concorso “Il Mondo in Tasca”, Lodi 2020, 
+Allo stesso modo, le opere presentate per il concorso “Il Mondo in Tasca”, Lodi 2020, 
 lasciano ancora una volta sbalorditi per la finezza, l’impeto e la ricchezza 
 di giochi, rimandi, allusioni che solo una precisa lettura attenta al minimo 
 dettaglio può rivelare.
