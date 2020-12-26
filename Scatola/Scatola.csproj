@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Casasoft.CCDV.Common</AssemblyName>
     <RootNamespace>Casasoft.CCDV</RootNamespace>
     <Authors>Roberto Ceccarelli - Casasoft</Authors>
     <Product>Casasoft Contemporary Carte de Visite Tools</Product>
@@ -19,6 +19,10 @@
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.22.2.2" />
     <PackageReference Include="Mono.Options" Version="6.6.0.161" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
