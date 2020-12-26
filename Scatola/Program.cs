@@ -38,7 +38,7 @@ OptionSet options = new OptionSet
 {
     { "t|thickness=", "set the box thickness (default 5mm)", t => thickness = t },
     { "o|output=", "set output filename (default 'box')", o => outputName = o },
-    { "dpi=", "set output resolution (default 300)", res => dpi = res },
+    { "  dpi=", "set output resolution (default 300)", res => dpi = res },
     { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
 };
 
@@ -56,21 +56,10 @@ catch (OptionException e)
 
 if (shouldShowHelp)
     Utils.ShowHelp(exeName, "[option]+", options);
+
+int nthickness = Utils.GetIntParameter(thickness, 5, "Incorrect thickness value '{0}'. Using default value.");
+int ndpi = Utils.GetDPI(dpi, 300);
 #endregion
-
-int nthickness;
-if (!Int32.TryParse(thickness, out nthickness))
-{
-    Console.Error.WriteLine($"Incorrect thickness value '{thickness}'. Using default value.");
-    nthickness = 5;
-}
-
-int ndpi;
-if (!Int32.TryParse(dpi, out ndpi))
-{
-    Console.Error.WriteLine($"Incorrect dpi value '{dpi}'. Using default value.");
-    ndpi = 300;
-}
 
 Formats fmt = new(ndpi);
 Images img = new(fmt);

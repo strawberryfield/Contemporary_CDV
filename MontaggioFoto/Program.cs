@@ -29,6 +29,7 @@ using System.Linq;
 #region command line
 bool shouldShowHelp = false;
 string outputName = "card-";
+string dpi = "300";
 
 string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
 Utils.WelcomeBanner(exeName);
@@ -36,6 +37,7 @@ Utils.WelcomeBanner(exeName);
 OptionSet options = new OptionSet
 {
     { "o|output=", "set output dir/prefix", o => outputName = o },
+    { "  dpi=", "set output resolution (default 300)", res => dpi = res },
     { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
 };
 
@@ -53,9 +55,11 @@ catch (OptionException e)
 
 if (shouldShowHelp)
     Utils.ShowHelp(exeName, "[-o |--output=OutPathName] inputfile+", options);
+
+int ndpi = Utils.GetDPI(dpi, 300);
 #endregion
 
-Formats fmt = new(300);
+Formats fmt = new(ndpi);
 Images img = new(fmt);
 
 // expand wildcards

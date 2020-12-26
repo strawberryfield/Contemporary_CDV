@@ -83,6 +83,20 @@ namespace Casasoft.CCDV
             Console.Error.WriteLine($"{exeName}: {e.Message}");
             Console.Error.WriteLine($"Try '{exeName} --help' for more information.");
         }
+
+        public static int GetIntParameter(string val, int fallback, string message)
+        {
+            int ret;
+            if (!Int32.TryParse(val, out ret))
+            {
+                Console.Error.WriteLine(string.Format(message, val));
+                ret = fallback;
+            }
+            return ret;
+        }
+
+        public static int GetDPI(string val, int fallback) =>
+            GetIntParameter(val, fallback, "Incorrect dpi value '{0}'. Using default value.");
         #endregion
     }
 }
