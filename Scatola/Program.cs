@@ -43,12 +43,12 @@ Utils.WelcomeBanner(exeName);
 
 OptionSet options = new OptionSet
 {
-    { "a|aboveimage=", "set the image for the top cover)", i => topImage = i },
-    { "z|bottomimage=", "set the image for the bottom)", i => bottomImage = i },
-    { "l|leftimage=", "set the image for the left border)", i => leftImage = i },
-    { "r|rightimage=", "set the image for the right border)", i => rightImage = i },
-    { "f|frontimage=", "set the image for the front)", i => frontImage = i },
-    { "b|backimage=", "set the image for the back)", i => backImage = i },
+    { "a|aboveimage=", "set the image for the top cover", i => topImage = i },
+    { "z|bottomimage=", "set the image for the bottom", i => bottomImage = i },
+    { "l|leftimage=", "set the image for the left border", i => leftImage = i },
+    { "r|rightimage=", "set the image for the right border", i => rightImage = i },
+    { "f|frontimage=", "set the image for the front", i => frontImage = i },
+    { "b|backimage=", "set the image for the back", i => backImage = i },
     { "t|thickness=", "set the box thickness (default 5mm)", t => thickness = t },
     { "o|output=", "set output filename (default 'box')", o => outputName = o },
     { "dpi=", "set output resolution (default 300)", res => dpi = res },
