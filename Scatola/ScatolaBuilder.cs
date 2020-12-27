@@ -122,10 +122,15 @@ namespace Casasoft.CCDV
             topImage.Rotate(180);
             BackWithTop.Composite(topImage, Gravity.North, new PointD(0, fmt.ToPixels(10)));
             MagickImage frontTopImage = (MagickImage)frontImage.Clone();
-            frontTopImage.Crop(frontFormat.Width, fmt.ToPixels(10));
+            frontTopImage.Crop(frontFormat.Width-2, fmt.ToPixels(10), Gravity.North);
             frontTopImage.Rotate(180);
-            BackWithTop.Composite(frontTopImage, Gravity.North);
+            BackWithTop.Composite(frontTopImage, Gravity.North, new PointD(0,1));
 
+            // Assembliamo le immagini
+            ret.Composite(BackWithTop, Gravity.Northwest, new PointD(1, 0));
+            ret.Composite(LeftBorderWithExtra, Gravity.West, new PointD(1 + frontFormat.Width, 0));
+            ret.Composite(FrontWithBottom, Gravity.Southwest, new PointD(1 + frontFormat.Width + borderFormat.Width, 0));
+            ret.Composite(RightBorderWithExtra, Gravity.West, new PointD(1 + frontFormat.Width * 2 + borderFormat.Width, 0));
 
             // Margini di taglio
             draw = new();
@@ -141,12 +146,6 @@ namespace Casasoft.CCDV
             draw.Line(marginright - fmt.ToPixels(10) - spessore, bordertop,
                 marginright - fmt.ToPixels(10) - spessore - frontFormat.Width, bordertop);
             draw.Draw(ret);
-
-            // Infine assembliamo tutto
-            ret.Composite(BackWithTop, Gravity.Northwest, new PointD(1, 0));
-            ret.Composite(LeftBorderWithExtra, Gravity.West, new PointD(1 + frontFormat.Width, 0));
-            ret.Composite(FrontWithBottom, Gravity.Southwest, new PointD(1 + frontFormat.Width + borderFormat.Width, 0));
-            ret.Composite(RightBorderWithExtra, Gravity.West, new PointD(1 + frontFormat.Width * 2 + borderFormat.Width, 0));
 
             return ret;
         }

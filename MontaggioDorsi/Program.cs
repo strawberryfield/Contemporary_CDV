@@ -36,7 +36,7 @@ Utils.WelcomeBanner(exeName);
 OptionSet options = new OptionSet
 {
     { "o|output=", "set output dir/filename", o => outputName = o },
-    { "  dpi=", "set output resolution (default 300)", res => dpi = res },
+    { "dpi=", "set output resolution (default 300)", res => dpi = res },
     { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
 };
 

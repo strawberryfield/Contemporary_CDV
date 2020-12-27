@@ -51,7 +51,7 @@ OptionSet options = new OptionSet
     { "b|backimage=", "set the image for the back)", i => backImage = i },
     { "t|thickness=", "set the box thickness (default 5mm)", t => thickness = t },
     { "o|output=", "set output filename (default 'box')", o => outputName = o },
-    { "  dpi=", "set output resolution (default 300)", res => dpi = res },
+    { "dpi=", "set output resolution (default 300)", res => dpi = res },
     { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
 };
 

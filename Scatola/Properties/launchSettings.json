@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Scatola": {
-      "commandName": "Project",
-      "commandLineArgs": "--frontimage=C:\\Users\\rober\\Documents\\sito\\carte_de_visite\\foto\\storia01.jpg"
+      "commandName": "Project"
     }
   }
 }
