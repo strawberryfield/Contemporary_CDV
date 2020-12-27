@@ -31,11 +31,24 @@ string outputName = "box";
 string dpi = "300";
 string thickness = "5";
 
+string topImage = string.Empty;
+string bottomImage = string.Empty;
+string frontImage = string.Empty;
+string backImage = string.Empty;
+string leftImage = string.Empty;
+string rightImage = string.Empty;
+
 string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
 Utils.WelcomeBanner(exeName);
 
 OptionSet options = new OptionSet
 {
+    { "a|aboveimage=", "set the image for the top cover)", i => topImage = i },
+    { "z|bottomimage=", "set the image for the bottom)", i => bottomImage = i },
+    { "l|leftimage=", "set the image for the left border)", i => leftImage = i },
+    { "r|rightimage=", "set the image for the right border)", i => rightImage = i },
+    { "f|frontimage=", "set the image for the front)", i => frontImage = i },
+    { "b|backimage=", "set the image for the back)", i => backImage = i },
     { "t|thickness=", "set the box thickness (default 5mm)", t => thickness = t },
     { "o|output=", "set output filename (default 'box')", o => outputName = o },
     { "  dpi=", "set output resolution (default 300)", res => dpi = res },
@@ -68,6 +81,13 @@ ScatolaBuilder sc = new(nthickness, fmt);
 
 // only for test 
 sc.CreateTestImages();
+
+sc.SetFrontImage(frontImage);
+sc.SetBackImage(backImage);
+sc.SetTopImage(topImage);
+sc.SetBottomImage(bottomImage);
+sc.SetLeftImage(leftImage);
+sc.SetRightImage(rightImage);
 
 output.Composite(sc.Build(), Gravity.Center);
 fmt.SetImageParameters(output);

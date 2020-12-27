@@ -51,14 +51,16 @@ namespace Casasoft.CCDV
             i.Extent(size, Gravity.Center, fill);
             return i;
         }
-
         public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) =>
             ResizeAndFill(img, size, MagickColors.White);
 
         public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill) =>
             ResizeAndFill(AutoRotate(img, size), size, fill);
-
+        public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, MagickColor fill) =>
+            RotateResizeAndFill(img, new MagickGeometry(size.Width, size.Height), fill);
         public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size) =>
+            RotateResizeAndFill(img, size, MagickColors.White);
+        public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) =>
             RotateResizeAndFill(img, size, MagickColors.White);
 
         #endregion

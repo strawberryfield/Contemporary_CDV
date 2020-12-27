@@ -19,6 +19,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using System.IO;
 
 namespace Casasoft.CCDV
 {
@@ -72,12 +73,16 @@ namespace Casasoft.CCDV
             backImage = new(MagickColors.White, frontFormat.Width, frontFormat.Height);
         }
 
-        public void SetTopImage(string filename) => topImage = Utils.RotateResizeAndFill(new(filename), topFormat);
-        public void SetBottomImage(string filename) => bottomImage = Utils.RotateResizeAndFill(new(filename), topFormat);
-        public void SetLeftImage(string filename) => leftImage = Utils.RotateResizeAndFill(new(filename), borderFormat);
-        public void SetRightImage(string filename) => rightImage = Utils.RotateResizeAndFill(new(filename), borderFormat);
-        public void SetFrontImage(string filename) => frontImage = Utils.RotateResizeAndFill(new(filename), frontFormat);
-        public void SetBackImage(string filename) => backImage = Utils.RotateResizeAndFill(new(filename), frontFormat);
+        private MagickImage checkAndLoad(string filename, MagickImage template) =>
+            (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename)) ?
+            Utils.RotateResizeAndFill(new(filename), template) : template;
+
+        public void SetTopImage(string filename) => topImage = checkAndLoad(filename, topImage);
+        public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, topImage);
+        public void SetLeftImage(string filename) => leftImage = checkAndLoad(filename, leftImage);
+        public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);
+        public void SetFrontImage(string filename) => frontImage = checkAndLoad(filename, frontImage);
+        public void SetBackImage(string filename) => backImage = checkAndLoad(filename, backImage);
 
         public MagickImage Build()
         {
