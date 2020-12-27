@@ -70,4 +70,5 @@ ScatolaBuilder sc = new(nthickness, fmt);
 sc.CreateTestImages();
 
 output.Composite(sc.Build(), Gravity.Center);
+fmt.SetImageParameters(output);
 output.Write($"{outputName}.jpg");

@@ -90,6 +90,7 @@ for (int i = 0; i < files.Count; i++)
     final.Composite(HalfCard(img1), Gravity.West);
     final.Composite(HalfCard(img2), Gravity.East);
 
+    fmt.SetImageParameters(final);
     final.Write($"{outputName}{(i + 1) / 2,3:D3}.jpg");
 }
 

@@ -83,4 +83,5 @@ dorso.Rotate(90);
 for (int i = 0; i < 2; i++) images.Add(dorso.Clone());
 final.Composite(images.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + dorso.Width - 1));
 
+fmt.SetImageParameters(final);
 final.Write($"{outputName}.jpg");

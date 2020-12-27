@@ -51,5 +51,19 @@ namespace Casasoft.CCDV
         public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(55));
         public MagickGeometry CDV_Internal_v => new(ToPixels(55), ToPixels(90));
         #endregion
+
+        public void SetImageParameters(MagickImage img)
+        {
+            img.Format = MagickFormat.Jpg;
+            img.Quality = 95;
+            img.Density = new Density(_dpi);
+            img.ColorSpace = ColorSpace.sRGB;
+
+            ExifProfile exif = new();
+            exif.SetValue(ExifTag.Make, "Casasoft");
+            exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");
+            exif.SetValue(ExifTag.Software, "Casasoft Contemporary Carte de Visite Tools");
+            img.SetProfile(exif);
+        }
     }
 }
