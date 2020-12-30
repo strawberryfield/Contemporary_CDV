@@ -20,45 +20,19 @@
 
 using Casasoft.CCDV;
 using ImageMagick;
-using Mono.Options;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 #region command line
-bool shouldShowHelp = false;
-string outputName = "dorsi";
-string dpi = "300";
-
 string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
-Utils.WelcomeBanner(exeName);
-
-OptionSet options = new OptionSet
-{
-    { "o|output=", "set output dir/filename", o => outputName = o },
-    { "dpi=", "set output resolution (default 300)", res => dpi = res },
-    { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
-};
-
-List<string> filesList;
-try
-{
-    // parse the command line
-    filesList = options.Parse(args);
-}
-catch (OptionException e)
-{
-    Utils.ShowParametersError(exeName, e);
-    return;
-}
-
-if (shouldShowHelp)
-    Utils.ShowHelp(exeName, "[-o |--output=OutPathName] inputfile", options);
-
-int ndpi = Utils.GetDPI(dpi, 300);
+CommandLine par = new(exeName, "dorsi");
+par.WelcomeBanner();
+par.AddBaseOptions();
+par.Usage = "[options]* inputfile";
+if (par.Parse(args)) return;
 #endregion
 
-Formats fmt = new(ndpi);
+Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 
 MagickImage final = img.InCartha20x27_o();
@@ -66,8 +40,8 @@ MagickImageCollection images = new();
 
 // if no file specified use a blank image
 MagickImage dorsoOrig;
-if (filesList.Count > 0)
-    dorsoOrig = new(filesList[0]);
+if (par.FilesList.Count > 0)
+    dorsoOrig = new(par.FilesList[0]);
 else
     dorsoOrig = img.CDV_Full_v();
 
@@ -84,4 +58,4 @@ for (int i = 0; i < 2; i++) images.Add(dorso.Clone());
 final.Composite(images.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + dorso.Width - 1));
 
 fmt.SetImageParameters(final);
-final.Write($"{outputName}.jpg");
+final.Write($"{par.OutputName}.jpg");

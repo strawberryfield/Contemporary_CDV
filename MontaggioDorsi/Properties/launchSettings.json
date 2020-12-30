@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioDorsi": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\foto\\fq\\cdv\\dorso.jpg mosaic.jpg"
+      "commandLineArgs": "--dpi=600 C:\\foto\\fq\\cdv\\dorso.jpg "
     }
   }
 }

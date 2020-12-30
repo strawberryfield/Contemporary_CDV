@@ -19,8 +19,6 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
-using Mono.Options;
-using System;
 
 namespace Casasoft.CCDV
 {
@@ -29,7 +27,7 @@ namespace Casasoft.CCDV
         #region image resize
         public static MagickImage AutoRotate(MagickImage img, MagickGeometry size)
         {
-            if(size.Height > size.Width)
+            if (size.Height > size.Width)
             {
                 // output must be portrait
                 if (img.Height < img.Width)
@@ -63,42 +61,6 @@ namespace Casasoft.CCDV
         public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) =>
             RotateResizeAndFill(img, size, MagickColors.White);
 
-        #endregion
-
-        #region command line
-        public static void WelcomeBanner(string exeName) => 
-            Console.Error.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020 Roberto Ceccarelli - Casasoft\n");
-
-        public static void ShowHelp(string exeName, string parameters, OptionSet opt)
-        {
-            Console.WriteLine($"Usage: {exeName} {parameters}");
-            Console.WriteLine();
-
-            // output the options
-            Console.WriteLine("Options:");
-            opt.WriteOptionDescriptions(Console.Out);
-        }
-
-        public static void ShowParametersError(string exeName, OptionException e)
-        {
-            // output some error message
-            Console.Error.WriteLine($"{exeName}: {e.Message}");
-            Console.Error.WriteLine($"Try '{exeName} --help' for more information.");
-        }
-
-        public static int GetIntParameter(string val, int fallback, string message)
-        {
-            int ret;
-            if (!Int32.TryParse(val, out ret))
-            {
-                Console.Error.WriteLine(string.Format(message, val));
-                ret = fallback;
-            }
-            return ret;
-        }
-
-        public static int GetDPI(string val, int fallback) =>
-            GetIntParameter(val, fallback, "Incorrect dpi value '{0}'. Using default value.");
         #endregion
     }
 }

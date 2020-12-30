@@ -22,73 +22,70 @@ using Casasoft.CCDV;
 using ImageMagick;
 using Mono.Options;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 #region command line
-bool shouldShowHelp = false;
-string outputName = "box";
-string dpi = "300";
-string thickness = "5";
-
-string topImage = string.Empty;
-string bottomImage = string.Empty;
-string frontImage = string.Empty;
-string backImage = string.Empty;
-string leftImage = string.Empty;
-string rightImage = string.Empty;
-
 string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
-Utils.WelcomeBanner(exeName);
-
-OptionSet options = new OptionSet
-{
-    { "a|aboveimage=", "set the image for the top cover", i => topImage = i },
-    { "z|bottomimage=", "set the image for the bottom", i => bottomImage = i },
-    { "l|leftimage=", "set the image for the left border", i => leftImage = i },
-    { "r|rightimage=", "set the image for the right border", i => rightImage = i },
-    { "f|frontimage=", "set the image for the front", i => frontImage = i },
-    { "b|backimage=", "set the image for the back", i => backImage = i },
-    { "t|thickness=", "set the box thickness (default 5mm)", t => thickness = t },
-    { "o|output=", "set output filename (default 'box')", o => outputName = o },
-    { "dpi=", "set output resolution (default 300)", res => dpi = res },
-    { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
-};
-
-List<string> filesList;
-try
-{
-    // parse the command line
-    filesList = options.Parse(args);
-}
-catch (OptionException e)
-{
-    Utils.ShowParametersError(exeName, e);
-    return;
-}
-
-if (shouldShowHelp)
-    Utils.ShowHelp(exeName, "[option]+", options);
-
-int nthickness = Utils.GetIntParameter(thickness, 5, "Incorrect thickness value '{0}'. Using default value.");
-int ndpi = Utils.GetDPI(dpi, 300);
+BoxCommandLine par = new(exeName, "box"); 
+par.WelcomeBanner();
+par.Usage = "[options]*";
+if (par.Parse(args)) return;
 #endregion
 
-Formats fmt = new(ndpi);
+#region main
+Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 MagickImage output = img.InCartha20x27_o();
-ScatolaBuilder sc = new(nthickness, fmt);
+ScatolaBuilder sc = new(par.thickness, fmt);
 
 // only for test 
 sc.CreateTestImages();
 
-sc.SetFrontImage(frontImage);
-sc.SetBackImage(backImage);
-sc.SetTopImage(topImage);
-sc.SetBottomImage(bottomImage);
-sc.SetLeftImage(leftImage);
-sc.SetRightImage(rightImage);
+sc.SetFrontImage(par.frontImage);
+sc.SetBackImage(par.backImage);
+sc.SetTopImage(par.topImage);
+sc.SetBottomImage(par.bottomImage);
+sc.SetLeftImage(par.leftImage);
+sc.SetRightImage(par.rightImage);
 
 output.Composite(sc.Build(), Gravity.Center);
 fmt.SetImageParameters(output);
-output.Write($"{outputName}.jpg");
+output.Write($"{par.OutputName}.jpg");
+#endregion
+
+internal class BoxCommandLine : CommandLine
+{
+    public int thickness = 5;
+    public string topImage = string.Empty;
+    public string bottomImage = string.Empty;
+    public string frontImage = string.Empty;
+    public string backImage = string.Empty;
+    public string leftImage = string.Empty;
+    public string rightImage = string.Empty;
+
+    private string sThickness = "5";
+    
+    public BoxCommandLine(string exename, string outputname) : base ( exename, outputname)
+    {
+        Options = new OptionSet
+        {
+            { "a|aboveimage=", "set the image for the top cover", i => topImage = i },
+            { "z|bottomimage=", "set the image for the bottom", i => bottomImage = i },
+            { "l|leftimage=", "set the image for the left border", i => leftImage = i },
+            { "r|rightimage=", "set the image for the right border", i => rightImage = i },
+            { "f|frontimage=", "set the image for the front", i => frontImage = i },
+            { "b|backimage=", "set the image for the back", i => backImage = i },
+            { "t|thickness=", "set the box thickness (default 5mm)", t => sThickness = t },
+        };
+        AddBaseOptions();
+    }
+
+    public override bool Parse(string[] args)
+    {
+        if (base.Parse(args)) return true;
+
+        thickness = GetIntParameter(sThickness, thickness, 
+            $"Incorrect thickness value '{sThickness}'. Using default value.");
+        return false;
+    }
+}

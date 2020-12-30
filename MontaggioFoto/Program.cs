@@ -20,67 +20,36 @@
 
 using Casasoft.CCDV;
 using ImageMagick;
-using Mono.Options;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 #region command line
-bool shouldShowHelp = false;
-string outputName = "card-";
-string dpi = "300";
-
 string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
-Utils.WelcomeBanner(exeName);
+CommandLine par = new(exeName, "card");
+par.WelcomeBanner();
+par.AddBaseOptions();
+par.Usage = "[options]* inputfile+";
+if (par.Parse(args)) return;
 
-OptionSet options = new OptionSet
-{
-    { "o|output=", "set output dir/prefix", o => outputName = o },
-    { "dpi=", "set output resolution (default 300)", res => dpi = res },
-    { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
-};
-
-List<string> filesList;
-try
-{
-    // parse the command line
-    filesList = options.Parse(args);
-}
-catch (OptionException e)
-{
-    Utils.ShowParametersError(exeName, e);
-    return;
-}
-
-if (shouldShowHelp)
-    Utils.ShowHelp(exeName, "[-o |--output=OutPathName] inputfile+", options);
-
-int ndpi = Utils.GetDPI(dpi, 300);
+par.ExpandWildcards();
 #endregion
 
-Formats fmt = new(ndpi);
+#region main
+Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 
-// expand wildcards
-List<string> files = new();
-foreach(string filename in filesList)
-{
-    files.AddRange(Directory.GetFiles(Path.GetDirectoryName(filename), Path.GetFileName(filename)).ToList());
-}
-
-for (int i = 0; i < files.Count; i++)
+for (int i = 0; i < par.FilesList.Count; i++)
 {
     MagickImage final = img.FineArt10x15_o();
-    Console.WriteLine($"Processing: {files[i]}");
-    MagickImage img1 = Utils.RotateResizeAndFill(new(files[i]), fmt.CDV_Internal_v);
+    Console.WriteLine($"Processing: {par.FilesList[i]}");
+    MagickImage img1 = Utils.RotateResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v);
 
     MagickImage img2;
     i++;
-    if (i < files.Count)
+    if (i < par.FilesList.Count)
     {
-        Console.WriteLine($"Processing: {files[i]}");
-        img2 = Utils.ResizeAndFill(new(files[i]), fmt.CDV_Internal_v);
+        Console.WriteLine($"Processing: {par.FilesList[i]}");
+        img2 = Utils.ResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v);
     }
     else
     {
@@ -91,8 +60,9 @@ for (int i = 0; i < files.Count; i++)
     final.Composite(HalfCard(img2), Gravity.East);
 
     fmt.SetImageParameters(final);
-    final.Write($"{outputName}{(i + 1) / 2,3:D3}.jpg");
+    final.Write($"{par.OutputName}-{(i + 1) / 2,3:D3}.jpg");
 }
+#endregion
 
 MagickImage HalfCard(MagickImage img)
 {
