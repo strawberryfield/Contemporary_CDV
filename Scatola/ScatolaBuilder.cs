@@ -27,14 +27,18 @@ namespace Casasoft.CCDV
     {
         private int spessore;
         private Formats fmt;
+        private MagickColor fillColor;
 
         #region constructors
         public ScatolaBuilder(int Spessore, int dpi) : this(Spessore, new Formats(dpi)) { }
+        public ScatolaBuilder(int Spessore, Formats formats) : this(Spessore, formats, MagickColors.White) { }
+        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor) : this(Spessore, new Formats(dpi), fillcolor) { }
 
-        public ScatolaBuilder(int Spessore, Formats formats)
+        public ScatolaBuilder(int Spessore, Formats formats, MagickColor fillcolor)
         {
             fmt = formats;
             spessore = fmt.ToPixels(Spessore);
+            fillColor = fillcolor;
             makeEmptyImages();
         }
 
@@ -63,19 +67,19 @@ namespace Casasoft.CCDV
             borderFormat = new(spessore, frontFormat.Height);
             topFormat = new(frontFormat.Width, spessore);
 
-            topImage = new(MagickColors.White, topFormat.Width, topFormat.Height);
-            bottomImage = new(MagickColors.White, topFormat.Width, topFormat.Height);
+            topImage = new(fillColor, topFormat.Width, topFormat.Height);
+            bottomImage = new(fillColor, topFormat.Width, topFormat.Height);
 
-            leftImage = new(MagickColors.White, borderFormat.Width, borderFormat.Height);
-            rightImage = new(MagickColors.White, borderFormat.Width, borderFormat.Height);
+            leftImage = new(fillColor, borderFormat.Width, borderFormat.Height);
+            rightImage = new(fillColor, borderFormat.Width, borderFormat.Height);
 
-            frontImage = new(MagickColors.White, frontFormat.Width, frontFormat.Height);
-            backImage = new(MagickColors.White, frontFormat.Width, frontFormat.Height);
+            frontImage = new(fillColor, frontFormat.Width, frontFormat.Height);
+            backImage = new(fillColor, frontFormat.Width, frontFormat.Height);
         }
 
         private MagickImage checkAndLoad(string filename, MagickImage template) =>
             (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename)) ?
-            Utils.RotateResizeAndFill(new(filename), template) : template;
+            Utils.RotateResizeAndFill(new(filename), template, fillColor) : template;
 
         public void SetTopImage(string filename) => topImage = checkAndLoad(filename, topImage);
         public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, topImage);

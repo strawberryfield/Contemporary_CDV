@@ -42,14 +42,14 @@ for (int i = 0; i < par.FilesList.Count; i++)
 {
     MagickImage final = img.FineArt10x15_o();
     Console.WriteLine($"Processing: {par.FilesList[i]}");
-    MagickImage img1 = Utils.RotateResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v);
+    MagickImage img1 = Utils.RotateResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v, par.FillColor);
 
     MagickImage img2;
     i++;
     if (i < par.FilesList.Count)
     {
         Console.WriteLine($"Processing: {par.FilesList[i]}");
-        img2 = Utils.ResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v);
+        img2 = Utils.RotateResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v, par.FillColor);
     }
     else
     {

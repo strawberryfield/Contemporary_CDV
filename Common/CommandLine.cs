@@ -18,6 +18,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using ImageMagick;
 using Mono.Options;
 using System;
 using System.Collections.Generic;
@@ -37,19 +38,23 @@ namespace Casasoft.CCDV
         public List<string> FilesList { get; set; }
         public OptionSet Options { get; set; }
         public string Usage { get; set; }
+        public MagickColor FillColor { get; set; }
 
         private string sDpi = "300";
+        private string sFillColor = "#FFFFFF";
 
         public CommandLine(string exename, string outputname)
         {
             exeName = exename;
             OutputName = outputname;
-            Dpi = 300;
+            Dpi = Convert.ToInt16(sDpi);
             shouldShowHelp = false;
+            FillColor = GetColor(sFillColor);
 
             Options = new();
             baseOptions = new OptionSet
             {
+                { "fillcolor=", "set the color used to fiil images (default #ffffff)", c => sFillColor = c },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "dpi=", "set output resolution (default 300)", res => sDpi = res },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
@@ -90,6 +95,7 @@ namespace Casasoft.CCDV
             }
 
             Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
+            FillColor = GetColor(sFillColor);
             return false;
         }
 
@@ -106,6 +112,8 @@ namespace Casasoft.CCDV
 
         protected void GetDPI() =>
             Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
+
+        protected static MagickColor GetColor(string color) => new MagickColor(color);
 
         public void ExpandWildcards()
         {

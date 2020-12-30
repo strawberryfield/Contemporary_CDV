@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "c:\\foto\\fq\\storia*.jpg"
+      "commandLineArgs": "--fillcolor=#000 c:\\foto\\cdv\\frattali\\img*.tif"
     }
   }
 }
