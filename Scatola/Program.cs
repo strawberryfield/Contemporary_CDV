@@ -73,7 +73,7 @@ internal class BoxCommandLine : CommandLine
             { "r|rightimage=", "set the image for the right border", i => rightImage = i },
             { "f|frontimage=", "set the image for the front", i => frontImage = i },
             { "b|backimage=", "set the image for the back", i => backImage = i },
-            { "t|thickness=", "set the box thickness (default 5mm)", t => sThickness = t },
+            { "t|thickness=", $"set the box thickness (default {sThickness}mm)", t => sThickness = t },
         };
         AddBaseOptions();
     }

@@ -68,8 +68,8 @@ namespace Casasoft.CCDV
             baseOptions = new OptionSet
             {
                 { "fillcolor=", $"set the color used to fiil the images\n(default {sFillColor})", c => sFillColor = c },
-                { "bordercolor=", "set the color used to border the images\n(default {sBorderColor})", c => sBorderColor = c },
-                { "dpi=", "set output resolution (default {sDpi})", res => sDpi = res },
+                { "bordercolor=", $"set the color used to border the images\n(default {sBorderColor})", c => sBorderColor = c },
+                { "dpi=", $"set output resolution (default {sDpi})", res => sDpi = res },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
             };
