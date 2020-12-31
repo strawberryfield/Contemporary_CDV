@@ -45,11 +45,15 @@ namespace Casasoft.CCDV
         public MagickImage InCartha20x27_v(MagickColor c) => new(c, fmt.InCartha20x27_v.Width, fmt.InCartha20x27_v.Height);
         public MagickImage FineArt10x15_o(MagickColor c) => new(c, fmt.FineArt10x15_o.Width, fmt.FineArt10x15_o.Height);
         public MagickImage FineArt10x15_v(MagickColor c) => new(c, fmt.FineArt10x15_v.Width, fmt.FineArt10x15_v.Height);
+        public MagickImage FineArt10x18_o(MagickColor c) => new(c, fmt.FineArt10x18_o.Width, fmt.FineArt10x18_o.Height);
+        public MagickImage FineArt10x18_v(MagickColor c) => new(c, fmt.FineArt10x18_v.Width, fmt.FineArt10x18_v.Height);
 
         public MagickImage InCartha20x27_o() => InCartha20x27_o(MagickColors.White);
         public MagickImage InCartha20x27_v() => InCartha20x27_v(MagickColors.White);
         public MagickImage FineArt10x15_o() => FineArt10x15_o(MagickColors.White);
         public MagickImage FineArt10x15_v() => FineArt10x15_v(MagickColors.White);
+        public MagickImage FineArt10x18_o() => FineArt10x18_o(MagickColors.White);
+        public MagickImage FineArt10x18_v() => FineArt10x18_v(MagickColors.White);
         #endregion
 
         #region cdv

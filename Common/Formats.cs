@@ -43,6 +43,8 @@ namespace Casasoft.CCDV
         public MagickGeometry InCartha20x27_v => new(ToPixels(196 - 6), ToPixels(270 - 6));
         public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));
         public MagickGeometry FineArt10x15_v => new(ToPixels(102), ToPixels(152));
+        public MagickGeometry FineArt10x18_o => new(ToPixels(180), ToPixels(102));
+        public MagickGeometry FineArt10x18_v => new(ToPixels(102), ToPixels(180));
         #endregion
 
         #region cdv
