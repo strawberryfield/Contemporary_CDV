@@ -66,7 +66,7 @@ for (int i = 0; i < par.FilesList.Count; i++)
 
 MagickImage HalfCard(MagickImage img)
 {
-    img.BorderColor = MagickColors.Black;
+    img.BorderColor = par.BorderColor;
     img.Border(1);
     MagickImage half = new(MagickColors.White, fmt.FineArt10x15_o.Width / 2, fmt.FineArt10x15_o.Height);
     half.Composite(img, Gravity.Center);

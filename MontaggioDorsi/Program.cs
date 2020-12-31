@@ -46,7 +46,7 @@ else
     dorsoOrig = img.CDV_Full_v();
 
 MagickImage dorso = Utils.RotateResizeAndFill(dorsoOrig, fmt.CDV_Full_v, par.FillColor);
-dorso.BorderColor = MagickColors.Black;
+dorso.BorderColor = par.BorderColor;
 dorso.Border(1);
 
 for (int i = 0; i < 4; i++) images.Add(dorso.Clone());

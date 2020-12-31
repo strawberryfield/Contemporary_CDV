@@ -39,9 +39,11 @@ namespace Casasoft.CCDV
         public OptionSet Options { get; set; }
         public string Usage { get; set; }
         public MagickColor FillColor { get; set; }
+        public MagickColor BorderColor { get; set; }
 
         private string sDpi = "300";
         private string sFillColor = "#FFFFFF";
+        private string sBorderColor = "#000000";
 
         public CommandLine(string exename, string outputname)
         {
@@ -50,11 +52,13 @@ namespace Casasoft.CCDV
             Dpi = Convert.ToInt16(sDpi);
             shouldShowHelp = false;
             FillColor = GetColor(sFillColor);
+            BorderColor = GetColor(sBorderColor);
 
             Options = new();
             baseOptions = new OptionSet
             {
-                { "fillcolor=", "set the color used to fiil images (default #ffffff)", c => sFillColor = c },
+                { "fillcolor=", "set the color used to fiil the images (default #ffffff)", c => sFillColor = c },
+                { "bordercolor=", "set the color used to border the images (default #000000)", c => sBorderColor = c },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "dpi=", "set output resolution (default 300)", res => sDpi = res },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },

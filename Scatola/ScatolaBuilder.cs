@@ -28,19 +28,26 @@ namespace Casasoft.CCDV
         private int spessore;
         private Formats fmt;
         private MagickColor fillColor;
+        private MagickColor borderColor;
 
         #region constructors
-        public ScatolaBuilder(int Spessore, int dpi) : this(Spessore, new Formats(dpi)) { }
-        public ScatolaBuilder(int Spessore, Formats formats) : this(Spessore, formats, MagickColors.White) { }
-        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor) : this(Spessore, new Formats(dpi), fillcolor) { }
+        public ScatolaBuilder(int Spessore, int dpi) : 
+            this(Spessore, new Formats(dpi)) { }
+        public ScatolaBuilder(int Spessore, Formats formats) : 
+            this(Spessore, formats, MagickColors.White, MagickColors.Black) { }
+        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor) :
+            this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black) { }
+        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor) : 
+            this(Spessore, new Formats(dpi), fillcolor, bordercolor) { }
 
-        public ScatolaBuilder(int Spessore, Formats formats, MagickColor fillcolor)
+        public ScatolaBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor)
         {
             fmt = formats;
             spessore = fmt.ToPixels(Spessore);
             fillColor = fillcolor;
+            borderColor = bordercolor;
             makeEmptyImages();
-        }
+        } 
 
         public ScatolaBuilder(int Spessore) : this(Spessore, 300) { }
         public ScatolaBuilder() : this(5) { }
@@ -99,7 +106,7 @@ namespace Casasoft.CCDV
             MagickImage LeftBorderWithExtra = new(MagickColors.White,
                 borderFormat.Width, borderFormat.Height + fmt.ToPixels(20));
             Drawables draw = new();
-            draw.StrokeColor(MagickColors.Black).StrokeWidth(1);
+            draw.StrokeColor(borderColor).StrokeWidth(1);
             draw = cap(draw, spessore, fmt.ToPixels(10));
             draw.Draw(LeftBorderWithExtra);
             LeftBorderWithExtra.Rotate(180);
@@ -114,7 +121,7 @@ namespace Casasoft.CCDV
             MagickImage BackWithTop = new(MagickColors.White,
                 frontFormat.Width, frontFormat.Height + spessore + fmt.ToPixels(10));
             draw = new();
-            draw.StrokeColor(MagickColors.Black).StrokeWidth(1);
+            draw.StrokeColor(borderColor).StrokeWidth(1);
             cap(draw, frontFormat.Width, fmt.ToPixels(10)).Draw(BackWithTop);
 
             MagickImage FrontWithBottom = (MagickImage)BackWithTop.Clone();
@@ -138,7 +145,7 @@ namespace Casasoft.CCDV
 
             // Margini di taglio
             draw = new();
-            draw.StrokeColor(MagickColors.Black).StrokeWidth(1);
+            draw.StrokeColor(borderColor).StrokeWidth(1);
             int bordertop = spessore + fmt.ToPixels(10);
             int borderbottom = bordertop + +frontFormat.Height;
             int marginright = ret.Width - 1;

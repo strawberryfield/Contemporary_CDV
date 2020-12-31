@@ -36,7 +36,7 @@ if (par.Parse(args)) return;
 Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 MagickImage output = img.InCartha20x27_o();
-ScatolaBuilder sc = new(par.thickness, fmt, par.FillColor);
+ScatolaBuilder sc = new(par.thickness, fmt, par.FillColor, par.BorderColor);
 
 // only for test 
 sc.CreateTestImages();
