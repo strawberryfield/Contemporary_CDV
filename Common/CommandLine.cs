@@ -33,6 +33,7 @@ namespace Casasoft.CCDV
         protected string exeName { get; set; }
         protected OptionSet baseOptions { get; set; }
 
+        #region properties
         public string OutputName { get; set; }
         public int Dpi { get; set; }
         public List<string> FilesList { get; set; }
@@ -40,11 +41,20 @@ namespace Casasoft.CCDV
         public string Usage { get; set; }
         public MagickColor FillColor { get; set; }
         public MagickColor BorderColor { get; set; }
+        #endregion
 
+        #region defaults
         private string sDpi = "300";
         private string sFillColor = "#FFFFFF";
         private string sBorderColor = "#000000";
+        #endregion
 
+        #region constructors
+        public static string ExeName() => Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
+
+        public CommandLine(string outputname) :
+            this(ExeName(), outputname)
+        { }
         public CommandLine(string exename, string outputname)
         {
             exeName = exename;
@@ -57,20 +67,21 @@ namespace Casasoft.CCDV
             Options = new();
             baseOptions = new OptionSet
             {
-                { "fillcolor=", "set the color used to fiil the images (default #ffffff)", c => sFillColor = c },
-                { "bordercolor=", "set the color used to border the images (default #000000)", c => sBorderColor = c },
+                { "fillcolor=", $"set the color used to fiil the images\n(default {sFillColor})", c => sFillColor = c },
+                { "bordercolor=", "set the color used to border the images\n(default {sBorderColor})", c => sBorderColor = c },
+                { "dpi=", "set output resolution (default {sDpi})", res => sDpi = res },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
-                { "dpi=", "set output resolution (default 300)", res => sDpi = res },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
             };
         }
+        #endregion
 
         public void WelcomeBanner() =>
             Console.Error.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020 Roberto Ceccarelli - Casasoft\n");
 
         public void AddBaseOptions()
         {
-            foreach(var opt in baseOptions)
+            foreach (var opt in baseOptions)
             {
                 Options.Add(opt);
             }
@@ -85,9 +96,10 @@ namespace Casasoft.CCDV
             catch (OptionException e)
             {
                 Console.Error.WriteLine($"{exeName}: {e.Message}");
-                Console.Error.WriteLine($"Try '{exeName} --help' for more information.");
+                Console.Error.WriteLine($"Try '{exeName} --help' for more informations.");
                 return true;
             }
+
             if (shouldShowHelp)
             {
                 Console.WriteLine($"Usage: {exeName} {Usage}");
@@ -98,7 +110,7 @@ namespace Casasoft.CCDV
                 return true;
             }
 
-            Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
+            Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using the default value.");
             FillColor = GetColor(sFillColor);
             return false;
         }

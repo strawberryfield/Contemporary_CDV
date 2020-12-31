@@ -21,12 +21,9 @@
 using Casasoft.CCDV;
 using ImageMagick;
 using Mono.Options;
-using System;
-using System.IO;
 
 #region command line
-string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
-BoxCommandLine par = new(exeName, "box"); 
+BoxCommandLine par = new("box");
 par.WelcomeBanner();
 par.Usage = "[options]*";
 if (par.Parse(args)) return;
@@ -64,8 +61,9 @@ internal class BoxCommandLine : CommandLine
     public string rightImage = string.Empty;
 
     private string sThickness = "5";
-    
-    public BoxCommandLine(string exename, string outputname) : base ( exename, outputname)
+
+    public BoxCommandLine(string outputname) : this(ExeName(), outputname) { }
+    public BoxCommandLine(string exename, string outputname) : base(exename, outputname)
     {
         Options = new OptionSet
         {
@@ -84,7 +82,7 @@ internal class BoxCommandLine : CommandLine
     {
         if (base.Parse(args)) return true;
 
-        thickness = GetIntParameter(sThickness, thickness, 
+        thickness = GetIntParameter(sThickness, thickness,
             $"Incorrect thickness value '{sThickness}'. Using default value.");
         return false;
     }

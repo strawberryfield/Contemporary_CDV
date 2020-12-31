@@ -21,11 +21,9 @@
 using Casasoft.CCDV;
 using ImageMagick;
 using System;
-using System.IO;
 
 #region command line
-string exeName = Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
-CommandLine par = new(exeName, "card");
+CommandLine par = new("card");
 par.WelcomeBanner();
 par.AddBaseOptions();
 par.Usage = "[options]* inputfile+";
