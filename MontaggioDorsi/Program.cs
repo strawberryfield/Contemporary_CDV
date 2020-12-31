@@ -23,7 +23,6 @@ using ImageMagick;
 
 #region command line
 CommandLine par = new("dorsi");
-par.WelcomeBanner();
 par.AddBaseOptions();
 par.Usage = "[options]* inputfile";
 if (par.Parse(args)) return;

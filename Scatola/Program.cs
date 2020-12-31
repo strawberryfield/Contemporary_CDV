@@ -24,7 +24,6 @@ using Mono.Options;
 
 #region command line
 BoxCommandLine par = new("box");
-par.WelcomeBanner();
 par.Usage = "[options]*";
 if (par.Parse(args)) return;
 #endregion

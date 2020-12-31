@@ -24,7 +24,6 @@ using System;
 
 #region command line
 CommandLine par = new("card");
-par.WelcomeBanner();
 par.AddBaseOptions();
 par.Usage = "[options]* inputfile+";
 if (par.Parse(args)) return;

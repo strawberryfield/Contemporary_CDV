@@ -32,6 +32,7 @@ namespace Casasoft.CCDV
         protected bool shouldShowHelp { get; set; }
         protected string exeName { get; set; }
         protected OptionSet baseOptions { get; set; }
+        protected bool noBanner { get; set; }
 
         #region properties
         public string OutputName { get; set; }
@@ -61,6 +62,7 @@ namespace Casasoft.CCDV
             OutputName = outputname;
             Dpi = Convert.ToInt16(sDpi);
             shouldShowHelp = false;
+            noBanner = false;
             FillColor = GetColor(sFillColor);
             BorderColor = GetColor(sBorderColor);
 
@@ -71,13 +73,14 @@ namespace Casasoft.CCDV
                 { "bordercolor=", $"set the color used to border the images\n(default {sBorderColor})", c => sBorderColor = c },
                 { "dpi=", $"set output resolution (default {sDpi})", res => sDpi = res },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
+                { "nobanner", "supress banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
             };
         }
         #endregion
 
-        public void WelcomeBanner() =>
-            Console.Error.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020 Roberto Ceccarelli - Casasoft\n");
+        public virtual void WelcomeBanner() =>
+            Console.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020 Roberto Ceccarelli - Casasoft\n");
 
         public void AddBaseOptions()
         {
@@ -99,6 +102,8 @@ namespace Casasoft.CCDV
                 Console.Error.WriteLine($"Try '{exeName} --help' for more informations.");
                 return true;
             }
+
+            if (!noBanner) WelcomeBanner();
 
             if (shouldShowHelp)
             {
