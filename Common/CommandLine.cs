@@ -1,7 +1,8 @@
-﻿// copyright (c) 2020 Roberto Ceccarelli - Casasoft
+﻿// copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft
 // http://strawberryfield.altervista.org 
 // 
 // This file is part of Casasoft Contemporary Carte de Visite Tools
+// https://github.com/strawberryfield/Contemporary_CDV
 // 
 // Casasoft CCDV Tools is free software: 
 // you can redistribute it and/or modify it
