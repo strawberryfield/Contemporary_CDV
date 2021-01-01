@@ -36,7 +36,7 @@ MagickImage output = img.InCartha20x27_o();
 ScatolaBuilder sc = new(par.thickness, fmt, par.FillColor, par.BorderColor);
 
 // only for test 
-sc.CreateTestImages();
+if(par.useSampleImages) sc.CreateTestImages();
 
 sc.SetFrontImage(par.frontImage);
 sc.SetBackImage(par.backImage, par.isHorizontal);
@@ -62,6 +62,7 @@ internal class BoxCommandLine : CommandLine
 
     private string sThickness = "5";
     public bool isHorizontal { get; set; }
+    public bool useSampleImages { get; set; }
 
     public BoxCommandLine(string outputname) : this(ExeName(), outputname) { }
     public BoxCommandLine(string exename, string outputname) : base(exename, outputname)
@@ -76,6 +77,7 @@ internal class BoxCommandLine : CommandLine
             { "b|backimage=", "set the image for the back", i => backImage = i },
             { "t|thickness=", $"set the box thickness (default {sThickness}mm)", t => sThickness = t },
             { "horizontal", "configure box in horizontal mode", o => isHorizontal = o != null },
+            { "sample", "generate sample images", s => useSampleImages = s != null },
         };
         AddBaseOptions();
     }

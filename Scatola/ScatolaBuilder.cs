@@ -20,7 +20,6 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
-using System.IO;
 
 namespace Casasoft.CCDV
 {
@@ -96,17 +95,18 @@ namespace Casasoft.CCDV
 
         public MagickImage Build()
         {
+            int fold = fmt.ToPixels(12);
             MagickImage ret = new(MagickColors.White,
-                frontFormat.Width * 2 + spessore * 2 + fmt.ToPixels(10) + 2,
-                frontFormat.Height + spessore * 2 + fmt.ToPixels(20) + 2);
+                frontFormat.Width * 2 + spessore * 2 + fold + 2,
+                frontFormat.Height + spessore * 2 + fold*2 + 2);
 
 
             // Aggiunge le alette ai bordi della scatola
             MagickImage LeftBorderWithExtra = new(MagickColors.White,
-                borderFormat.Width, borderFormat.Height + fmt.ToPixels(20));
+                borderFormat.Width, borderFormat.Height + fold*2);
             Drawables draw = new();
             draw.StrokeColor(borderColor).StrokeWidth(1);
-            draw = cap(draw, spessore, fmt.ToPixels(10));
+            draw = cap(draw, spessore, fold);
             draw.Draw(LeftBorderWithExtra);
             LeftBorderWithExtra.Rotate(180);
             draw.Draw(LeftBorderWithExtra);
@@ -118,21 +118,21 @@ namespace Casasoft.CCDV
 
             // Aggiungiamo coperchi e lembi di chiusura
             MagickImage BackWithTop = new(MagickColors.White,
-                frontFormat.Width, frontFormat.Height + spessore + fmt.ToPixels(10));
+                frontFormat.Width, frontFormat.Height + spessore + fold);
             draw = new();
             draw.StrokeColor(borderColor).StrokeWidth(1);
-            cap(draw, frontFormat.Width, fmt.ToPixels(10)).Draw(BackWithTop);
+            cap(draw, frontFormat.Width, fold).Draw(BackWithTop);
 
             MagickImage FrontWithBottom = (MagickImage)BackWithTop.Clone();
             FrontWithBottom.Rotate(180);
 
             FrontWithBottom.Composite(frontImage, Gravity.North);
-            FrontWithBottom.Composite(bottomImage, Gravity.South, new PointD(0, fmt.ToPixels(10)));
+            FrontWithBottom.Composite(bottomImage, Gravity.South, new PointD(0, fold));
             BackWithTop.Composite(backImage, Gravity.South);
             topImage.Rotate(180);
-            BackWithTop.Composite(topImage, Gravity.North, new PointD(0, fmt.ToPixels(10)));
+            BackWithTop.Composite(topImage, Gravity.North, new PointD(0, fold));
             MagickImage frontTopImage = (MagickImage)frontImage.Clone();
-            frontTopImage.Crop(frontFormat.Width - 2, fmt.ToPixels(10), Gravity.North);
+            frontTopImage.Crop(frontFormat.Width - 2, fold, Gravity.North);
             frontTopImage.Rotate(180);
             BackWithTop.Composite(frontTopImage, Gravity.North, new PointD(0, 1));
 
@@ -145,16 +145,16 @@ namespace Casasoft.CCDV
             // Margini di taglio
             draw = new();
             draw.StrokeColor(borderColor).StrokeWidth(1);
-            int bordertop = spessore + fmt.ToPixels(10);
+            int bordertop = spessore + fold;
             int borderbottom = bordertop + +frontFormat.Height;
             int marginright = ret.Width - 1;
             draw.Line(0, bordertop - spessore, 0, borderbottom);
             draw.Line(marginright, bordertop, marginright, borderbottom);
-            draw.Line(marginright - fmt.ToPixels(10), bordertop, marginright, bordertop);
-            draw.Line(marginright - fmt.ToPixels(10), borderbottom, marginright, borderbottom);
+            draw.Line(marginright - fold, bordertop, marginright, bordertop);
+            draw.Line(marginright - fold, borderbottom, marginright, borderbottom);
             draw.Line(0, borderbottom, frontFormat.Width, borderbottom);
-            draw.Line(marginright - fmt.ToPixels(10) - spessore, bordertop,
-                marginright - fmt.ToPixels(10) - spessore - frontFormat.Width, bordertop);
+            draw.Line(marginright - fold - spessore, bordertop,
+                marginright - fold - spessore - frontFormat.Width, bordertop);
             draw.Draw(ret);
 
             return ret;

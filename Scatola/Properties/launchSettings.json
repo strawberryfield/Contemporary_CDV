@@ -2,7 +2,7 @@
   "profiles": {
     "Scatola": {
       "commandName": "Project",
-      "commandLineArgs": "--dpi=600 -t10 --horizontal --frontimage=c:\\foto\\cdv\\frattali\\dorso2.psd --backimage=c:\\foto\\cdv\\frattali\\dorso3.psd"
+      "commandLineArgs": " -t10 --horizontal --fillcolor=#EDE8E0 --frontimage=c:\\foto\\cdv\\frattali\\boxcover4.psd --backimage=c:\\foto\\cdv\\frattali\\boxback.psd"
     }
   }
 }
