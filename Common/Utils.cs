@@ -31,7 +31,7 @@ namespace Casasoft.CCDV
             {
                 // output must be portrait
                 if (img.Height < img.Width)
-                    img.Rotate(90);
+                    img.Rotate(-90);
             }
             else
             {

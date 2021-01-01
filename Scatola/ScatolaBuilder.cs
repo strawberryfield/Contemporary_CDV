@@ -23,34 +23,31 @@ using System.IO;
 
 namespace Casasoft.CCDV
 {
-    public class ScatolaBuilder
+    public class ScatolaBuilder : BaseBuilder
     {
-        private int spessore;
-        private Formats fmt;
-        private MagickColor fillColor;
-        private MagickColor borderColor;
 
         #region constructors
-        public ScatolaBuilder(int Spessore, int dpi) : 
-            this(Spessore, new Formats(dpi)) { }
-        public ScatolaBuilder(int Spessore, Formats formats) : 
-            this(Spessore, formats, MagickColors.White, MagickColors.Black) { }
+        public ScatolaBuilder(int Spessore, int dpi) :
+            base(Spessore, dpi)
+        { }
+        public ScatolaBuilder(int Spessore, Formats formats) :
+            base(Spessore, formats)
+        { }
         public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor) :
-            this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black) { }
-        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor) : 
-            this(Spessore, new Formats(dpi), fillcolor, bordercolor) { }
-
-        public ScatolaBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor)
-        {
-            fmt = formats;
-            spessore = fmt.ToPixels(Spessore);
-            fillColor = fillcolor;
-            borderColor = bordercolor;
-            makeEmptyImages();
-        } 
-
-        public ScatolaBuilder(int Spessore) : this(Spessore, 300) { }
-        public ScatolaBuilder() : this(5) { }
+            base(Spessore, dpi, fillcolor)
+        { }
+        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor) :
+            base(Spessore, dpi, fillcolor, bordercolor)
+        { }
+        public ScatolaBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor) :
+            base(Spessore, formats, fillcolor, bordercolor)
+        { }
+        public ScatolaBuilder(int Spessore) :
+            base(Spessore)
+        { }
+        public ScatolaBuilder() :
+            base()
+        { }
         #endregion
 
         private MagickGeometry topFormat;
@@ -65,7 +62,7 @@ namespace Casasoft.CCDV
         private MagickImage backImage;
 
 
-        private void makeEmptyImages()
+        protected override void makeEmptyImages()
         {
             frontFormat = fmt.CDV_Full_v;
             frontFormat.Width += fmt.ToPixels(5);
@@ -83,10 +80,6 @@ namespace Casasoft.CCDV
             frontImage = new(fillColor, frontFormat.Width, frontFormat.Height);
             backImage = new(fillColor, frontFormat.Width, frontFormat.Height);
         }
-
-        private MagickImage checkAndLoad(string filename, MagickImage template) =>
-            (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename)) ?
-            Utils.RotateResizeAndFill(new(filename), template, fillColor) : template;
 
         public void SetTopImage(string filename) => topImage = checkAndLoad(filename, topImage);
         public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, topImage);
@@ -133,9 +126,9 @@ namespace Casasoft.CCDV
             topImage.Rotate(180);
             BackWithTop.Composite(topImage, Gravity.North, new PointD(0, fmt.ToPixels(10)));
             MagickImage frontTopImage = (MagickImage)frontImage.Clone();
-            frontTopImage.Crop(frontFormat.Width-2, fmt.ToPixels(10), Gravity.North);
+            frontTopImage.Crop(frontFormat.Width - 2, fmt.ToPixels(10), Gravity.North);
             frontTopImage.Rotate(180);
-            BackWithTop.Composite(frontTopImage, Gravity.North, new PointD(0,1));
+            BackWithTop.Composite(frontTopImage, Gravity.North, new PointD(0, 1));
 
             // Assembliamo le immagini
             ret.Composite(BackWithTop, Gravity.Northwest, new PointD(1, 0));

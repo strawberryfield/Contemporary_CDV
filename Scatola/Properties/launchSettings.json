@@ -2,7 +2,7 @@
   "profiles": {
     "Scatola": {
       "commandName": "Project",
-      "commandLineArgs": "--dpi=600 -t10 --backimage=c:\\foto\\cdv\\frattali\\serpentone.jpg"
+      "commandLineArgs": "--dpi=600 -t10 --frontimage=c:\\foto\\cdv\\frattali\\dorso2.psd"
     }
   }
 }
