@@ -38,7 +38,7 @@ ScatolaBuilder sc = new(par.thickness, fmt, par.FillColor, par.BorderColor);
 sc.CreateTestImages();
 
 sc.SetFrontImage(par.frontImage);
-sc.SetBackImage(par.backImage);
+sc.SetBackImage(par.backImage, par.isHorizontal);
 sc.SetTopImage(par.topImage);
 sc.SetBottomImage(par.bottomImage);
 sc.SetLeftImage(par.leftImage);
@@ -60,6 +60,7 @@ internal class BoxCommandLine : CommandLine
     public string rightImage = string.Empty;
 
     private string sThickness = "5";
+    public bool isHorizontal { get; set; }
 
     public BoxCommandLine(string outputname) : this(ExeName(), outputname) { }
     public BoxCommandLine(string exename, string outputname) : base(exename, outputname)
@@ -73,6 +74,7 @@ internal class BoxCommandLine : CommandLine
             { "f|frontimage=", "set the image for the front", i => frontImage = i },
             { "b|backimage=", "set the image for the back", i => backImage = i },
             { "t|thickness=", $"set the box thickness (default {sThickness}mm)", t => sThickness = t },
+            { "horizontal", "configure box in horizontal mode", o => isHorizontal = o != null },
         };
         AddBaseOptions();
     }

@@ -62,5 +62,20 @@ namespace Casasoft.CCDV
             RotateResizeAndFill(img, size, MagickColors.White);
 
         #endregion
+
+        #region text
+        public static Drawables CenteredText(string text, int size, int width, int height)
+        {
+            Drawables draw = new();
+            draw.StrokeColor(MagickColors.Black).FontPointSize(size).TextAlignment(TextAlignment.Center);
+            draw.Text(width / 2, height / 2, text);
+            return draw;
+        }
+
+        public static Drawables CenteredText(string text, int size, MagickGeometry fmt) =>
+            CenteredText(text, size, fmt.Width, fmt.Height);
+        public static Drawables CenteredText(string text, int size, MagickImage fmt) =>
+            CenteredText(text, size, fmt.Width, fmt.Height);
+        #endregion
     }
 }

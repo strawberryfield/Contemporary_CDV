@@ -82,11 +82,16 @@ namespace Casasoft.CCDV
         }
 
         public void SetTopImage(string filename) => topImage = checkAndLoad(filename, topImage);
-        public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, topImage);
+        public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, bottomImage);
         public void SetLeftImage(string filename) => leftImage = checkAndLoad(filename, leftImage);
         public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);
         public void SetFrontImage(string filename) => frontImage = checkAndLoad(filename, frontImage);
-        public void SetBackImage(string filename) => backImage = checkAndLoad(filename, backImage);
+        public void SetBackImage(string filename, bool isHorizontal = false)
+        {
+            backImage = checkAndLoad(filename, backImage);
+            if (isHorizontal)
+                backImage.Rotate(180);
+        }
 
         public MagickImage Build()
         {
@@ -161,42 +166,25 @@ namespace Casasoft.CCDV
         public void CreateTestImages()
         {
             frontImage = new(MagickColors.LightGray, frontFormat.Width, frontFormat.Height);
-            Drawables draw = new();
-            draw.StrokeColor(MagickColors.Black).FontPointSize(120).TextAlignment(TextAlignment.Center);
-            draw.Text(frontImage.Width / 2, frontImage.Height / 2, "Front");
-            draw.FontPointSize(50).Text(frontImage.Width / 2, fmt.ToPixels(6), "Front top");
-            draw.Draw(frontImage);
+            Utils.CenteredText("Bottom", 120, frontFormat)
+                .FontPointSize(50).Text(frontImage.Width / 2, fmt.ToPixels(6), "Front top")
+                .Draw(frontImage);
 
             backImage = new(MagickColors.LightBlue, frontFormat.Width, frontFormat.Height);
-            draw = new();
-            draw.StrokeColor(MagickColors.Black).FontPointSize(120).TextAlignment(TextAlignment.Center);
-            draw.Text(frontFormat.Width / 2, frontFormat.Height / 2, "Back");
-            draw.Draw(backImage);
+            Utils.CenteredText("Back", 120, frontFormat).Draw(backImage);
 
             topImage = new(MagickColors.LightGreen, topFormat.Width, topFormat.Height);
-            draw = new();
-            draw.StrokeColor(MagickColors.Black).FontPointSize(30).TextAlignment(TextAlignment.Center);
-            draw.Text(topFormat.Width / 2, topFormat.Height / 2, "Top");
-            draw.Draw(topImage);
+            Utils.CenteredText("Top", 30, topFormat).Draw(topImage);
 
             bottomImage = new(MagickColors.LightCoral, topFormat.Width, topFormat.Height);
-            draw = new();
-            draw.StrokeColor(MagickColors.Black).FontPointSize(30).TextAlignment(TextAlignment.Center);
-            draw.Text(topFormat.Width / 2, topFormat.Height / 2, "Bottom");
-            draw.Draw(bottomImage);
+            Utils.CenteredText("Bottom", 30, topFormat).Draw(bottomImage);
 
             leftImage = new(MagickColors.LightYellow, borderFormat.Height, borderFormat.Width);
-            draw = new();
-            draw.StrokeColor(MagickColors.Black).FontPointSize(30).TextAlignment(TextAlignment.Center);
-            draw.Text(borderFormat.Height / 2, borderFormat.Width / 2, "Left");
-            draw.Draw(leftImage);
+            Utils.CenteredText("Left", 30, leftImage).Draw(leftImage);
             leftImage.Rotate(90);
 
             rightImage = new(MagickColors.Linen, borderFormat.Height, borderFormat.Width);
-            draw = new();
-            draw.StrokeColor(MagickColors.Black).FontPointSize(30).TextAlignment(TextAlignment.Center);
-            draw.Text(borderFormat.Height / 2, borderFormat.Width / 2, "Right");
-            draw.Draw(rightImage);
+            Utils.CenteredText("Right", 30, rightImage).Draw(rightImage);
             rightImage.Rotate(90);
         }
         #endregion
