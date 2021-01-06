@@ -50,48 +50,6 @@ namespace Casasoft.CCDV
         { }
         #endregion
 
-        private MagickGeometry topFormat;
-        private MagickGeometry borderFormat;
-        private MagickGeometry frontFormat;
-
-        private MagickImage topImage;
-        private MagickImage bottomImage;
-        private MagickImage leftImage;
-        private MagickImage rightImage;
-        private MagickImage frontImage;
-        private MagickImage backImage;
-
-
-        protected override void makeEmptyImages()
-        {
-            frontFormat = fmt.CDV_Full_v;
-            frontFormat.Width += fmt.ToPixels(5);
-            frontFormat.Height += fmt.ToPixels(5);
-
-            borderFormat = new(spessore, frontFormat.Height);
-            topFormat = new(frontFormat.Width, spessore);
-
-            topImage = new(fillColor, topFormat.Width, topFormat.Height);
-            bottomImage = new(fillColor, topFormat.Width, topFormat.Height);
-
-            leftImage = new(fillColor, borderFormat.Width, borderFormat.Height);
-            rightImage = new(fillColor, borderFormat.Width, borderFormat.Height);
-
-            frontImage = new(fillColor, frontFormat.Width, frontFormat.Height);
-            backImage = new(fillColor, frontFormat.Width, frontFormat.Height);
-        }
-
-        public void SetTopImage(string filename) => topImage = checkAndLoad(filename, topImage);
-        public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, bottomImage);
-        public void SetLeftImage(string filename) => leftImage = checkAndLoad(filename, leftImage);
-        public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);
-        public void SetFrontImage(string filename) => frontImage = checkAndLoad(filename, frontImage);
-        public void SetBackImage(string filename, bool isHorizontal = false)
-        {
-            backImage = checkAndLoad(filename, backImage);
-            if (isHorizontal)
-                backImage.Rotate(180);
-        }
 
         public MagickImage Build()
         {
@@ -164,29 +122,14 @@ namespace Casasoft.CCDV
             (Drawables)d.Line(0, h - 1, 0, 0).Line(w - 1, h - 1, w - 1, 0).Line(0, 0, w - 1, 0);
 
         #region test
-        public void CreateTestImages()
+        public override void CreateTestImages()
         {
-            frontImage = new(MagickColors.LightGray, frontFormat.Width, frontFormat.Height);
-            Utils.CenteredText("Bottom", 120, frontFormat)
-                .FontPointSize(50).Text(frontImage.Width / 2, fmt.ToPixels(6), "Front top")
+            base.CreateTestImages();
+
+            Drawables draw = new();
+            draw.StrokeColor(MagickColors.Black).FontPointSize(50)
+                .Text(frontImage.Width / 2, fmt.ToPixels(6), "Front top")
                 .Draw(frontImage);
-
-            backImage = new(MagickColors.LightBlue, frontFormat.Width, frontFormat.Height);
-            Utils.CenteredText("Back", 120, frontFormat).Draw(backImage);
-
-            topImage = new(MagickColors.LightGreen, topFormat.Width, topFormat.Height);
-            Utils.CenteredText("Top", 30, topFormat).Draw(topImage);
-
-            bottomImage = new(MagickColors.LightCoral, topFormat.Width, topFormat.Height);
-            Utils.CenteredText("Bottom", 30, topFormat).Draw(bottomImage);
-
-            leftImage = new(MagickColors.LightYellow, borderFormat.Height, borderFormat.Width);
-            Utils.CenteredText("Left", 30, leftImage).Draw(leftImage);
-            leftImage.Rotate(90);
-
-            rightImage = new(MagickColors.Linen, borderFormat.Height, borderFormat.Width);
-            Utils.CenteredText("Right", 30, rightImage).Draw(rightImage);
-            rightImage.Rotate(90);
         }
         #endregion
     }

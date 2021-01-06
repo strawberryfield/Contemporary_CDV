@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Cartella": {
+      "commandName": "Project",
+      "commandLineArgs": "--sample"
+    }
+  }
+}

@@ -31,6 +31,17 @@ namespace Casasoft.CCDV
         protected MagickColor fillColor;
         protected MagickColor borderColor;
 
+        protected MagickGeometry topFormat;
+        protected MagickGeometry borderFormat;
+        protected MagickGeometry frontFormat;
+
+        protected MagickImage topImage;
+        protected MagickImage bottomImage;
+        protected MagickImage leftImage;
+        protected MagickImage rightImage;
+        protected MagickImage frontImage;
+        protected MagickImage backImage;
+
 
         #region constructors
         public BaseBuilder(int Spessore, int dpi) :
@@ -59,10 +70,67 @@ namespace Casasoft.CCDV
         public BaseBuilder() : this(5) { }
         #endregion
 
-        protected virtual void makeEmptyImages() { }
+        protected virtual void makeEmptyImages()
+        {
+            frontFormat = fmt.CDV_Full_v;
+            frontFormat.Width += fmt.ToPixels(5);
+            frontFormat.Height += fmt.ToPixels(5);
+
+            borderFormat = new(spessore, frontFormat.Height);
+            topFormat = new(frontFormat.Width, spessore);
+
+            topImage = new(fillColor, topFormat.Width, topFormat.Height);
+            bottomImage = new(fillColor, topFormat.Width, topFormat.Height);
+
+            leftImage = new(fillColor, borderFormat.Width, borderFormat.Height);
+            rightImage = new(fillColor, borderFormat.Width, borderFormat.Height);
+
+            frontImage = new(fillColor, frontFormat.Width, frontFormat.Height);
+            backImage = new(fillColor, frontFormat.Width, frontFormat.Height);
+
+        }
 
         protected MagickImage checkAndLoad(string filename, MagickImage template) =>
             (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename)) ?
             Utils.RotateResizeAndFill(new(filename), template, fillColor) : template;
+
+        public void SetTopImage(string filename) => topImage = checkAndLoad(filename, topImage);
+        public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, bottomImage);
+        public void SetLeftImage(string filename) => leftImage = checkAndLoad(filename, leftImage);
+        public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);
+        public void SetFrontImage(string filename) => frontImage = checkAndLoad(filename, frontImage);
+        public void SetBackImage(string filename, bool isHorizontal = false)
+        {
+            backImage = checkAndLoad(filename, backImage);
+            if (isHorizontal)
+                backImage.Rotate(180);
+        }
+
+        #region test
+        public virtual void CreateTestImages()
+        {
+            frontImage = new(MagickColors.LightGray, frontFormat.Width, frontFormat.Height);
+            Utils.CenteredText("Front", 120, frontFormat)
+                .Draw(frontImage);
+
+            backImage = new(MagickColors.LightBlue, frontFormat.Width, frontFormat.Height);
+            Utils.CenteredText("Back", 120, frontFormat).Draw(backImage);
+
+            topImage = new(MagickColors.LightGreen, topFormat.Width, topFormat.Height);
+            Utils.CenteredText("Top", 30, topFormat).Draw(topImage);
+
+            bottomImage = new(MagickColors.LightCoral, topFormat.Width, topFormat.Height);
+            Utils.CenteredText("Bottom", 30, topFormat).Draw(bottomImage);
+
+            leftImage = new(MagickColors.LightYellow, borderFormat.Height, borderFormat.Width);
+            Utils.CenteredText("Left", 30, leftImage).Draw(leftImage);
+            leftImage.Rotate(90);
+
+            rightImage = new(MagickColors.Linen, borderFormat.Height, borderFormat.Width);
+            Utils.CenteredText("Right", 30, rightImage).Draw(rightImage);
+            rightImage.Rotate(90);
+        }
+        #endregion
+
     }
 }
