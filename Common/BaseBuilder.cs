@@ -68,6 +68,19 @@ namespace Casasoft.CCDV
 
         public BaseBuilder(int Spessore) : this(Spessore, 300) { }
         public BaseBuilder() : this(5) { }
+
+        public BaseBuilder(BaseBuilderCommandLine par, Formats formats) :
+            this(par.thickness, formats, par.FillColor, par.BorderColor) 
+        {
+            if (par.useSampleImages) CreateTestImages();
+
+            SetFrontImage(par.frontImage);
+            SetBackImage(par.backImage, par.isHorizontal);
+            SetTopImage(par.topImage);
+            SetBottomImage(par.bottomImage);
+            SetLeftImage(par.leftImage);
+            SetRightImage(par.rightImage);
+        }
         #endregion
 
         protected virtual void makeEmptyImages()

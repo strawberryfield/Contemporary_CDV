@@ -25,18 +25,18 @@ namespace Casasoft.CCDV
 {
     public class BaseBuilderCommandLine : CommandLine
     {
-        public int thickness = 5;
-        public string topImage = string.Empty;
-        public string bottomImage = string.Empty;
-        public string frontImage = string.Empty;
-        public string backImage = string.Empty;
-        public string leftImage = string.Empty;
-        public string rightImage = string.Empty;
-
-        private string sThickness = "5";
+        public int thickness { get; set; }
+        public string topImage { get; set; }
+        public string bottomImage { get; set; }
+        public string frontImage { get; set; }
+        public string backImage { get; set; }
+        public string leftImage { get; set; }
+        public string rightImage { get; set; }
         public bool isHorizontal { get; set; }
         public bool useSampleImages { get; set; }
 
+        private string sThickness = "5";
+ 
         public BaseBuilderCommandLine(string outputname) : base(outputname) { }
         public BaseBuilderCommandLine(string exename, string outputname) :
             base(exename, outputname)
@@ -54,6 +54,13 @@ namespace Casasoft.CCDV
                 { "sample", "generate sample images", s => useSampleImages = s != null },
             };
             AddBaseOptions();
+
+            topImage = string.Empty;
+            bottomImage = string.Empty;
+            frontImage = string.Empty;
+            backImage = string.Empty;
+            leftImage = string.Empty;
+            rightImage = string.Empty;
         }
 
         public override bool Parse(string[] args)

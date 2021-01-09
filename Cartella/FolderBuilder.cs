@@ -48,6 +48,9 @@ namespace Casasoft.CCDV
         public FolderBuilder() :
             base()
         { }
+        public FolderBuilder(BaseBuilderCommandLine par, Formats formats) :
+           base(par, formats)
+        { }
         #endregion
 
 

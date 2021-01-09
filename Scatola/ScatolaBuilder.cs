@@ -48,6 +48,9 @@ namespace Casasoft.CCDV
         public ScatolaBuilder() :
             base()
         { }
+        public ScatolaBuilder(BaseBuilderCommandLine par, Formats formats) :
+            base(par, formats)
+        { }
         #endregion
 
 

@@ -32,20 +32,9 @@ if (par.Parse(args)) return;
 Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 MagickImage output = img.InCartha20x27_o();
-ScatolaBuilder sc = new(par.thickness, fmt, par.FillColor, par.BorderColor);
-
-// only for test 
-if(par.useSampleImages) sc.CreateTestImages();
-
-sc.SetFrontImage(par.frontImage);
-sc.SetBackImage(par.backImage, par.isHorizontal);
-sc.SetTopImage(par.topImage);
-sc.SetBottomImage(par.bottomImage);
-sc.SetLeftImage(par.leftImage);
-sc.SetRightImage(par.rightImage);
+ScatolaBuilder sc = new(par, fmt);
 
 output.Composite(sc.Build(), Gravity.Center);
 fmt.SetImageParameters(output);
 output.Write($"{par.OutputName}.jpg");
 #endregion
-
