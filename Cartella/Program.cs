@@ -21,10 +21,9 @@
 
 using Casasoft.CCDV;
 using ImageMagick;
-using Mono.Options;
 
 #region command line
-BoxCommandLine par = new("folder");
+BaseBuilderCommandLine par = new("folder");
 par.Usage = "[options]*";
 if (par.Parse(args)) return;
 #endregion
@@ -49,46 +48,3 @@ output.Composite(sc.Build(), Gravity.Center);
 fmt.SetImageParameters(output);
 output.Write($"{par.OutputName}.jpg");
 #endregion
-
-internal class BoxCommandLine : CommandLine
-{
-    public int thickness = 5;
-    public string topImage = string.Empty;
-    public string bottomImage = string.Empty;
-    public string frontImage = string.Empty;
-    public string backImage = string.Empty;
-    public string leftImage = string.Empty;
-    public string rightImage = string.Empty;
-
-    private string sThickness = "5";
-    public bool isHorizontal { get; set; }
-    public bool useSampleImages { get; set; }
-
-    public BoxCommandLine(string outputname) : this(ExeName(), outputname) { }
-    public BoxCommandLine(string exename, string outputname) : base(exename, outputname)
-    {
-        Options = new OptionSet
-        {
-            { "a|aboveimage=", "set the image for the top cover", i => topImage = i },
-            { "z|bottomimage=", "set the image for the bottom", i => bottomImage = i },
-            { "l|leftimage=", "set the image for the left border", i => leftImage = i },
-            { "r|rightimage=", "set the image for the right border", i => rightImage = i },
-            { "f|frontimage=", "set the image for the front", i => frontImage = i },
-            { "b|backimage=", "set the image for the back", i => backImage = i },
-            { "t|thickness=", $"set the box thickness (default {sThickness}mm)", t => sThickness = t },
-            { "horizontal", "configure box in horizontal mode", o => isHorizontal = o != null },
-            { "sample", "generate sample images", s => useSampleImages = s != null },
-        };
-        AddBaseOptions();
-    }
-
-    public override bool Parse(string[] args)
-    {
-        if (base.Parse(args)) return true;
-
-        thickness = GetIntParameter(sThickness, thickness,
-            $"Incorrect thickness value '{sThickness}'. Using default value.");
-        return false;
-    }
-}
-
