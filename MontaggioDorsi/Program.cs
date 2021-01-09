@@ -25,7 +25,7 @@ using ImageMagick;
 #region command line
 CommandLine par = new("dorsi");
 par.AddBaseOptions();
-par.Usage = "[options]* inputfile";
+par.Usage = "[options]* inputfile+";
 if (par.Parse(args)) return;
 #endregion
 
@@ -33,26 +33,45 @@ Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 
 MagickImage final = img.InCartha20x27_o();
-MagickImageCollection images = new();
+MagickImageCollection imagesV = new();
+MagickImageCollection imagesO = new();
 
 // if no file specified use a blank image
-MagickImage dorsoOrig;
-if (par.FilesList.Count > 0)
-    dorsoOrig = new(par.FilesList[0]);
+if (par.FilesList.Count == 0)
+{
+    MagickImage dorsoOrig = img.CDV_Full_v();
+    for (int i = 0; i < 4; i++) imagesV.Add(dorsoOrig.Clone());
+    dorsoOrig.Rotate(90);
+    for (int i = 0; i < 2; i++) imagesO.Add(dorsoOrig.Clone());
+}
 else
-    dorsoOrig = img.CDV_Full_v();
+{
+    int nImg = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(par.FilesList[nImg]), fmt.CDV_Full_v, par.FillColor);
+        dorso.BorderColor = par.BorderColor;
+        dorso.Border(1);
+        imagesV.Add(dorso);
 
-MagickImage dorso = Utils.RotateResizeAndFill(dorsoOrig, fmt.CDV_Full_v, par.FillColor);
-dorso.BorderColor = par.BorderColor;
-dorso.Border(1);
+        nImg++;
+        if (nImg >= par.FilesList.Count) nImg = 0;
+    }
 
-for (int i = 0; i < 4; i++) images.Add(dorso.Clone());
-final.Composite(images.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
+    for (int i = 0; i < 2; i++)
+    {
+        MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(par.FilesList[nImg]), fmt.CDV_Full_o, par.FillColor);
+        dorso.BorderColor = par.BorderColor;
+        dorso.Border(1);
+        imagesO.Add(dorso);
 
-images.Clear();
-dorso.Rotate(90);
-for (int i = 0; i < 2; i++) images.Add(dorso.Clone());
-final.Composite(images.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + dorso.Width - 1));
+        nImg++;
+        if (nImg >= par.FilesList.Count) nImg = 0;
+    }
+}
+
+final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
+final.Composite(imagesO.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
 
 fmt.SetImageParameters(final);
 final.Write($"{par.OutputName}.jpg");
