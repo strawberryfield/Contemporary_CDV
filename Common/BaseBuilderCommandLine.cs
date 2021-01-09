@@ -34,13 +34,26 @@ namespace Casasoft.CCDV
         public string rightImage { get; set; }
         public bool isHorizontal { get; set; }
         public bool useSampleImages { get; set; }
+        public string borderText { get; set; }
+        public string font { get; set; }
 
         private string sThickness = "5";
- 
-        public BaseBuilderCommandLine(string outputname) : base(outputname) { }
+
+        public BaseBuilderCommandLine(string outputname) : 
+            this(ExeName(), outputname)
+        { }
         public BaseBuilderCommandLine(string exename, string outputname) :
             base(exename, outputname)
         {
+            topImage = string.Empty;
+            bottomImage = string.Empty;
+            frontImage = string.Empty;
+            backImage = string.Empty;
+            leftImage = string.Empty;
+            rightImage = string.Empty;
+            borderText = string.Empty;
+            font = "Arial";
+
             Options = new OptionSet
             {
                 { "a|aboveimage=", "set the image for the top cover", i => topImage = i },
@@ -51,16 +64,11 @@ namespace Casasoft.CCDV
                 { "b|backimage=", "set the image for the back", i => backImage = i },
                 { "t|thickness=", $"set the box thickness (default {sThickness}mm)", t => sThickness = t },
                 { "horizontal", "configure box in horizontal mode", o => isHorizontal = o != null },
+                { "bordertext=", "text to print on left border", t => borderText = t },
+                { "font=", $"text font (default {font})", t => font = t },
                 { "sample", "generate sample images", s => useSampleImages = s != null },
             };
             AddBaseOptions();
-
-            topImage = string.Empty;
-            bottomImage = string.Empty;
-            frontImage = string.Empty;
-            backImage = string.Empty;
-            leftImage = string.Empty;
-            rightImage = string.Empty;
         }
 
         public override bool Parse(string[] args)

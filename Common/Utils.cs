@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using System;
 
 namespace Casasoft.CCDV
 {
@@ -65,18 +66,24 @@ namespace Casasoft.CCDV
         #endregion
 
         #region text
-        public static Drawables CenteredText(string text, int size, int width, int height)
+        public static Drawables CenteredText(string text, int size, int width, int height, string font = "", int rotation = 0)
         {
             Drawables draw = new();
+            draw.Rotation(rotation);
+            if(!string.IsNullOrWhiteSpace(font)) draw.Font(font);
             draw.StrokeColor(MagickColors.Black).FontPointSize(size).TextAlignment(TextAlignment.Center);
-            draw.Text(width / 2, height / 2, text);
+            if (Math.Abs(rotation) != 90)
+                draw.Text(width / 2, height / 2, text);
+            else
+                draw.Text(Math.Sign(rotation) * height / 2, width / 2, text);
+
             return draw;
         }
 
-        public static Drawables CenteredText(string text, int size, MagickGeometry fmt) =>
-            CenteredText(text, size, fmt.Width, fmt.Height);
-        public static Drawables CenteredText(string text, int size, MagickImage fmt) =>
-            CenteredText(text, size, fmt.Width, fmt.Height);
+        public static Drawables CenteredText(string text, int size, MagickGeometry fmt, string font = "", int rotation = 0) =>
+            CenteredText(text, size, fmt.Width, fmt.Height, font, rotation);
+        public static Drawables CenteredText(string text, int size, MagickImage fmt, string font = "", int rotation = 0) =>
+            CenteredText(text, size, fmt.Width, fmt.Height, font, rotation);
         #endregion
     }
 }
