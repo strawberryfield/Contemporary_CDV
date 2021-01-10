@@ -73,10 +73,6 @@ namespace Casasoft.CCDV
             BackWithTop.Composite(backImage, Gravity.Center);
             BackWithTop.Composite(topImage, Gravity.North, new PointD(0, fold));
             BackWithTop.Composite(bottomImage, Gravity.South, new PointD(0, fold));
-            //MagickImage frontTopImage = (MagickImage)frontImage.Clone();
-            //frontTopImage.Crop(frontFormat.Width - 2, fold, Gravity.North);
-            //frontTopImage.Rotate(180);
-            //BackWithTop.Composite(frontTopImage, Gravity.North, new PointD(0, 1));
 
             // Clip di chiusura
             MagickImage BackClip = (MagickImage)backImage.Clone();

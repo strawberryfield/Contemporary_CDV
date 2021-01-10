@@ -21,11 +21,11 @@
 
 using Casasoft.CCDV;
 using ImageMagick;
+using Mono.Options;
 using System;
 
 #region command line
-CommandLine par = new("card");
-par.AddBaseOptions();
+MontaggioFotoCommandLine par = new("card");
 par.Usage = "[options]* inputfile+";
 if (par.Parse(args)) return;
 
@@ -39,15 +39,13 @@ Images img = new(fmt);
 for (int i = 0; i < par.FilesList.Count; i++)
 {
     MagickImage final = img.FineArt10x15_o();
-    Console.WriteLine($"Processing: {par.FilesList[i]}");
-    MagickImage img1 = Utils.RotateResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v, par.FillColor);
+    MagickImage img1 = Get(par.FilesList[i]);
 
     MagickImage img2;
     i++;
     if (i < par.FilesList.Count)
-    {
-        Console.WriteLine($"Processing: {par.FilesList[i]}");
-        img2 = Utils.RotateResizeAndFill(new(par.FilesList[i]), fmt.CDV_Internal_v, par.FillColor);
+    {        
+        img2 = Get(par.FilesList[i]);
     }
     else
     {
@@ -70,3 +68,48 @@ MagickImage HalfCard(MagickImage img)
     half.Composite(img, Gravity.Center);
     return half;
 }
+
+MagickImage Get(string filename)
+{
+    Console.WriteLine($"Processing: {filename}");
+    MagickImage img1 = Utils.RotateResizeAndFill(new(filename), 
+        par.FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v, 
+        par.FillColor);
+    if (par.Trim) img1.Trim();
+    if (par.WithBorder)
+    {
+        MagickImage img2 = img.CDV_Full_v(par.FillColor);
+        img2.Composite(img1, Gravity.Center);
+        return img2;
+    }
+    else
+        return img1;
+}
+
+#region command line
+internal class MontaggioFotoCommandLine : CommandLine
+{
+    public bool FullSize { get; set; }
+    public bool WithBorder { get; set; }
+    public bool Trim { get; set; }
+
+    public MontaggioFotoCommandLine(string outputname) :
+    this(ExeName(), outputname)
+    { }
+    public MontaggioFotoCommandLine(string exename, string outputname) :
+        base(exename, outputname)
+    {
+        FullSize = false;
+        WithBorder = false;
+        Trim = false;
+
+        Options = new OptionSet
+            {
+                { "fullsize", "resize image to full format", o => FullSize = o != null },
+                { "withborder", "include border to full format", o => WithBorder = o != null },
+                { "trim", "trim white space", o => Trim = o != null },
+            };
+        AddBaseOptions();
+    }
+}
+#endregion
