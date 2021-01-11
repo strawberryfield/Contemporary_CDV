@@ -41,19 +41,27 @@ namespace Casasoft.CCDV
 
         #region commercial formats
         public MagickGeometry InCartha20x27_o => new(ToPixels(270 - 6), ToPixels(196 - 6));
-        public MagickGeometry InCartha20x27_v => new(ToPixels(196 - 6), ToPixels(270 - 6));
+        public MagickGeometry InCartha20x27_v => swap(InCartha20x27_o);
         public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));
-        public MagickGeometry FineArt10x15_v => new(ToPixels(102), ToPixels(152));
+        public MagickGeometry FineArt10x15_v => swap(FineArt10x15_o);
         public MagickGeometry FineArt10x18_o => new(ToPixels(180), ToPixels(102));
-        public MagickGeometry FineArt10x18_v => new(ToPixels(102), ToPixels(180));
+        public MagickGeometry FineArt10x18_v => swap(FineArt10x18_o);
         #endregion
 
         #region cdv
         public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
-        public MagickGeometry CDV_Full_v => new(ToPixels(64), ToPixels(100));
+        public MagickGeometry CDV_Full_v => swap(CDV_Full_o);
         public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(55));
-        public MagickGeometry CDV_Internal_v => new(ToPixels(55), ToPixels(90));
+        public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
         #endregion
+
+        private MagickGeometry swap(MagickGeometry g)
+        {
+            int tmp = g.Width;
+            g.Width = g.Height;
+            g.Height = tmp;
+            return g;
+        }
 
         public void SetImageParameters(MagickImage img)
         {
