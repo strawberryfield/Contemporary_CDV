@@ -49,8 +49,8 @@ namespace Casasoft.CCDV
         #endregion
 
         #region cdv
-        public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(65));
-        public MagickGeometry CDV_Full_v => new(ToPixels(65), ToPixels(100));
+        public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
+        public MagickGeometry CDV_Full_v => new(ToPixels(64), ToPixels(100));
         public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(55));
         public MagickGeometry CDV_Internal_v => new(ToPixels(55), ToPixels(90));
         #endregion
@@ -61,7 +61,7 @@ namespace Casasoft.CCDV
             img.Quality = 95;
             img.Density = new Density(_dpi);
             img.ColorSpace = ColorSpace.sRGB;
-
+            
             ExifProfile exif = new();
             exif.SetValue(ExifTag.Make, "Casasoft");
             exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");

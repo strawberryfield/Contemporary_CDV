@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "--trim C:\\foto\\fq\\storia_noc2.png C:\\foto\\fq\\storia_ultimogiorno.jpg"
+      "commandLineArgs": "--fullsize --fillcolor=#808080 C:\\foto\\fq\\storia_noc2.png C:\\foto\\fq\\storia_ultimogiorno_cdv.jpg"
     }
   }
 }
