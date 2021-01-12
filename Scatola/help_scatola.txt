@@ -1,0 +1,32 @@
+Casasoft Contemporary Carte de Visite Scatola
+Copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft
+
+Usage: Scatola [options]*
+
+Options:
+  -a, --aboveimage=VALUE     set the image for the top cover
+  -z, --bottomimage=VALUE    set the image for the bottom
+  -l, --leftimage=VALUE      set the image for the left border
+  -r, --rightimage=VALUE     set the image for the right border
+  -f, --frontimage=VALUE     set the image for the front
+  -b, --backimage=VALUE      set the image for the back
+  -t, --thickness=VALUE      set the box thickness (default 5mm)
+      --horizontal           configure box in horizontal mode
+      --bordertext=VALUE     text to print on left border
+      --font=VALUE           text font (default Arial)
+      --sample               generate sample images
+      --fillcolor=VALUE      set the color used to fiil the images
+                               (default #FFFFFF)
+      --bordercolor=VALUE    set the color used to border the images
+                               (default #000000)
+      --dpi=VALUE            set output resolution (default 300)
+  -o, --output=VALUE         set output dir/filename
+      --nobanner             suppress the banner
+  -h, --help                 show this message and exit
+
+Colors can be written in any of these formats:
+  #rgb
+  #rrggbb
+  #rrggbbaa
+  #rrrrggggbbbb
+  #rrrrggggbbbbaaaa

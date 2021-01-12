@@ -1,0 +1,21 @@
+Casasoft Contemporary Carte de Visite MontaggioDorsi
+Copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft
+
+Usage: MontaggioDorsi [options]* inputfile+
+
+Options:
+      --fillcolor=VALUE      set the color used to fiil the images
+                               (default #FFFFFF)
+      --bordercolor=VALUE    set the color used to border the images
+                               (default #000000)
+      --dpi=VALUE            set output resolution (default 300)
+  -o, --output=VALUE         set output dir/filename
+      --nobanner             suppress the banner
+  -h, --help                 show this message and exit
+
+Colors can be written in any of these formats:
+  #rgb
+  #rrggbb
+  #rrggbbaa
+  #rrrrggggbbbb
+  #rrrrggggbbbbaaaa
