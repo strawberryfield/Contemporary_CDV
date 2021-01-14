@@ -51,7 +51,7 @@ namespace Casasoft.CCDV
         #region cdv
         public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
         public MagickGeometry CDV_Full_v => swap(CDV_Full_o);
-        public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(55));
+        public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(54));
         public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
         #endregion
 
