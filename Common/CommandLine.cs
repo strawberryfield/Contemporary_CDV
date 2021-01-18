@@ -34,6 +34,7 @@ namespace Casasoft.CCDV
         protected string exeName { get; set; }
         protected OptionSet baseOptions { get; set; }
         protected bool noBanner { get; set; }
+        protected string outputDir { get; private set; }
 
         #region properties
         public string OutputName { get; set; }
@@ -62,8 +63,10 @@ namespace Casasoft.CCDV
             exeName = exename;
             OutputName = outputname;
             Dpi = Convert.ToInt16(sDpi);
+            sDpi = string.Empty;
             shouldShowHelp = false;
             noBanner = false;
+            GetEnvVars();
             FillColor = GetColor(sFillColor);
             BorderColor = GetColor(sBorderColor);
 
@@ -72,7 +75,7 @@ namespace Casasoft.CCDV
             {
                 { "fillcolor=", $"set the color used to fiil the images\n(default {sFillColor})", c => sFillColor = c },
                 { "bordercolor=", $"set the color used to border the images\n(default {sBorderColor})", c => sBorderColor = c },
-                { "dpi=", $"set output resolution (default {sDpi})", res => sDpi = res },
+                { "dpi=", $"set output resolution (default {Dpi})", res => sDpi = res },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
@@ -118,12 +121,41 @@ namespace Casasoft.CCDV
   #rrggbbaa
   #rrrrggggbbbb
   #rrrrggggbbbbaaaa");
+                Console.WriteLine("\nEnvironment variables");
+                Console.WriteLine(@"The program can read values from these variables:
+  CDV_OUTPATH  Base path for output files
+  CDV_DPI      Resolution for output files
+  CDV_FILL     Color used to fill images
+  CDV_BORDER   Border color");
+
                 return true;
             }
 
-            Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using the default value.");
+            if(!Path.IsPathRooted(OutputName))
+            {
+                outputDir = Environment.GetEnvironmentVariable("CDV_OUTPATH");
+                if (!string.IsNullOrWhiteSpace(outputDir))
+                    OutputName = Path.Combine(outputDir, OutputName);
+            }
+
+            GetDPI();
             FillColor = GetColor(sFillColor);
             return false;
+        }
+
+        protected void GetEnvVars()
+        {
+            string eDpi = Environment.GetEnvironmentVariable("CDV_DPI");
+            if (!string.IsNullOrWhiteSpace(eDpi))
+                Dpi = GetIntParameter(eDpi, Dpi, "Incorrect CDV_DPI environment variable value '{0}'.");
+
+            string eFill = Environment.GetEnvironmentVariable("CDV_FILL");
+            if(!string.IsNullOrWhiteSpace(eFill))
+                sFillColor = eFill;
+
+            string eBorder = Environment.GetEnvironmentVariable("CDV_BORDER");
+            if (!string.IsNullOrWhiteSpace(eBorder))
+                sFillColor = eBorder;
         }
 
         public static int GetIntParameter(string val, int fallback, string message)
@@ -137,8 +169,11 @@ namespace Casasoft.CCDV
             return ret;
         }
 
-        protected void GetDPI() =>
-            Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
+        protected void GetDPI()
+        {
+            if(!string.IsNullOrWhiteSpace(sDpi))
+                Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
+        }
 
         protected static MagickColor GetColor(string color) => new MagickColor(color);
 

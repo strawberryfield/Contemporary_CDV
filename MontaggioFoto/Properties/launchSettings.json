@@ -2,7 +2,11 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "--fullsize --fillcolor=#808080 C:\\foto\\fq\\storia_noc2.png C:\\foto\\fq\\storia_ultimogiorno_cdv.jpg"
+      "commandLineArgs": "--fullsize --fillcolor=#808080 C:\\foto\\fq\\storia_noc2.png C:\\foto\\fq\\storia_ultimogiorno_cdv.jpg",
+      "environmentVariables": {
+        "CDV_DPI": "600",
+        "CDV_OUTPATH": "C:\\temp"
+      }
     }
   }
 }
