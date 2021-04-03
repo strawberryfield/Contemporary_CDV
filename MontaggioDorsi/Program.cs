@@ -21,6 +21,7 @@
 
 using Casasoft.CCDV;
 using ImageMagick;
+using System;
 
 #region command line
 CommandLine par = new("dorsi");
@@ -49,6 +50,7 @@ else
     int nImg = 0;
     for (int i = 0; i < 4; i++)
     {
+        Console.WriteLine($"Processing: {par.FilesList[nImg]}");
         MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(par.FilesList[nImg]), fmt.CDV_Full_v, par.FillColor);
         dorso.BorderColor = par.BorderColor;
         dorso.Border(1);
@@ -60,6 +62,7 @@ else
 
     for (int i = 0; i < 2; i++)
     {
+        Console.WriteLine($"Processing: {par.FilesList[nImg]}");
         MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(par.FilesList[nImg]), fmt.CDV_Full_o, par.FillColor);
         dorso.BorderColor = par.BorderColor;
         dorso.Border(1);
