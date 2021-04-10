@@ -84,7 +84,10 @@ namespace Casasoft.CCDV
         #endregion
 
         public virtual void WelcomeBanner() =>
-            Console.WriteLine($"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n");
+            Console.WriteLine(WelcomeBannerText());
+
+        public virtual string WelcomeBannerText() =>
+            $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
 
         public void AddBaseOptions()
         {

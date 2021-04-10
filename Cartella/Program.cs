@@ -31,7 +31,8 @@ if (par.Parse(args)) return;
 #region main
 Formats fmt = new(par.Dpi);
 Images img = new(fmt);
-MagickImage output = img.InCartha20x27_o();
+//MagickImage output = img.InCartha20x27_o();
+MagickImage output = img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg"); 
 FolderBuilder sc = new(par, fmt);
 
 output.Composite(sc.Build(), Gravity.Center);

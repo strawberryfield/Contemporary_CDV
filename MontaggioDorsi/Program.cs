@@ -33,7 +33,8 @@ if (par.Parse(args)) return;
 Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 
-MagickImage final = img.InCartha20x27_o();
+//MagickImage final = img.InCartha20x27_o();
+MagickImage final = img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg");
 MagickImageCollection imagesV = new();
 MagickImageCollection imagesO = new();
 

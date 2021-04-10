@@ -20,6 +20,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using System;
+using System.Globalization;
 
 namespace Casasoft.CCDV
 {
@@ -68,5 +70,24 @@ namespace Casasoft.CCDV
         public MagickImage CDV_Internal_o() => CDV_Internal_o(MagickColors.White);
         public MagickImage CDV_Internal_v() => CDV_Internal_v(MagickColors.White);
         #endregion
+
+        public MagickImage Info(string i, string o)
+        {
+            MagickImage ret = InCartha20x27_o();
+            Drawables d = new Drawables();
+
+            d.FontPointSize(fmt.ToPixels(3))
+                .Font("Arial")
+                .FillColor(MagickColors.Black)
+                .TextAlignment(TextAlignment.Left);
+
+            d.Text(fmt.ToPixels(10), fmt.ToPixels(185), $"{i}Run {DateTime.Now.ToString("R")}")
+                .Draw(ret);
+
+            d.Text(ret.Width/2, fmt.ToPixels(185), $"DPI: {fmt.DPI}\nOutput: {o}")
+                .Draw(ret);
+
+            return ret;
+        }
     }
 }

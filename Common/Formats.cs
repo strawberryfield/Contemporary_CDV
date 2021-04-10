@@ -38,6 +38,7 @@ namespace Casasoft.CCDV
         #endregion
 
         public int ToPixels(int mm) => (int)(mm * _dpi / _inch);
+        public int DPI => _dpi;
 
         #region commercial formats
         public MagickGeometry InCartha20x27_o => new(ToPixels(270), ToPixels(200));
@@ -51,7 +52,7 @@ namespace Casasoft.CCDV
         #region cdv
         public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
         public MagickGeometry CDV_Full_v => swap(CDV_Full_o);
-        public MagickGeometry CDV_Internal_o => new(ToPixels(94), ToPixels(58));
+        public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(54));
         public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
         #endregion
 
