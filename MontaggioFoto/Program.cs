@@ -44,7 +44,7 @@ for (int i = 0; i < par.FilesList.Count; i++)
     MagickImage img2;
     i++;
     if (i < par.FilesList.Count)
-    {        
+    {
         img2 = Get(par.FilesList[i]);
     }
     else
@@ -60,20 +60,36 @@ for (int i = 0; i < par.FilesList.Count; i++)
 }
 #endregion
 
-MagickImage HalfCard(MagickImage img)
+Drawables BaseText()
 {
-    img.BorderColor = par.BorderColor;
-    img.Border(1);
+    Drawables d = new Drawables();
+    d.FontPointSize(fmt.ToPixels(3) / 2)
+        .Font("Arial")
+        .FillColor(MagickColors.Black)
+        .TextAlignment(TextAlignment.Left)
+        .Gravity(Gravity.Northwest)
+        .Rotation(90);
+    return d;
+}
+
+MagickImage HalfCard(MagickImage image)
+{
+    image.BorderColor = par.BorderColor;
+    image.Border(1);
     MagickImage half = new(MagickColors.White, fmt.FineArt10x15_o.Width / 2, fmt.FineArt10x15_o.Height);
-    half.Composite(img, Gravity.Center);
+    half.Composite(image, Gravity.Center);
+    BaseText().Text(fmt.ToPixels(5), -half.Width + fmt.ToPixels(3), $"Source: {image.FileName}")
+        .Text(fmt.ToPixels(5), -fmt.ToPixels(3), par.WelcomeBannerText())
+        .Text(half.Height/2, -fmt.ToPixels(3), $"Run {DateTime.Now.ToString("R")}")
+        .Draw(half);
     return half;
 }
 
 MagickImage Get(string filename)
 {
     Console.WriteLine($"Processing: {filename}");
-    MagickImage img1 = Utils.RotateResizeAndFill(new(filename), 
-        par.FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v, 
+    MagickImage img1 = Utils.RotateResizeAndFill(new(filename),
+        par.FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v,
         par.FillColor);
     if (par.Trim) img1.Trim();
     if (par.WithBorder)

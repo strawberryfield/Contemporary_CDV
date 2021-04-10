@@ -82,9 +82,7 @@ namespace Casasoft.CCDV
                 .TextAlignment(TextAlignment.Left);
 
             d.Text(fmt.ToPixels(10), fmt.ToPixels(185), $"{i}Run {DateTime.Now.ToString("R")}")
-                .Draw(ret);
-
-            d.Text(ret.Width/2, fmt.ToPixels(185), $"DPI: {fmt.DPI}\nOutput: {o}")
+                .Text(ret.Width / 2, fmt.ToPixels(185), $"DPI: {fmt.DPI}\nOutput: {o}")
                 .Draw(ret);
 
             return ret;
