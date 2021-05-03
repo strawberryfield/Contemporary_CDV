@@ -3,37 +3,39 @@
 
 *Sorry, these notes are only in italian language*
 
+Una pi√π completa trattazione √® disponibile nella [sezione Contemporary Carte de Visite del mio sito](https://strawberryfield.altervista.org/carte_de_visite).
+
 ## Storia della Carte de Visite fotografica
 
 ![Carte de Visite di Gabriele Chiesa al SemplicementeFotografareLive 2019](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_gabriele_chiesa_semplicementefotografarelive.jpg)
 
 Nel 1854 il fotografo parigino 
-[AndrÈ Adolphe EugËne Disderi](https://it.wikipedia.org/wiki/Andr%C3%A9-Adolphe-Eug%C3%A8ne_Disd%C3%A9ri),
+[Andr√© Adolphe Eug√®ne Disderi](https://it.wikipedia.org/wiki/Andr%C3%A9-Adolphe-Eug%C3%A8ne_Disd%C3%A9ri),
 proprietario dal 1848 di uno studio in Boulevard des Italiens,
-trovÚ il metodo per ottenere otto diversi negativi su una sola lastra, 
+trov√≤ il metodo per ottenere otto diversi negativi su una sola lastra, 
 probabilmente ispirandosi alle fotografie stereoscopiche, 
-scattate con fotocamere a due obiettivi e gi‡ in uso dal 1850. 
+scattate con fotocamere a due obiettivi e gi√† in uso dal 1850. 
 
-La fotocamera ideata e brevettata da DisdÈri incorporava quattro obiettivi
+La fotocamera ideata e brevettata da Disd√©ri incorporava quattro obiettivi
 e un telaio porta lastra a scorrimento, che permetteva il posizionamento 
-del negativo per poterlo impressionare pi˘ volte.   
+del negativo per poterlo impressionare pi√π volte.   
 Dieci erano gli scatti previsti e descritti nel brevetto del 1854, 
-otto, in realt‡, quelli pervenuti integri sui fogli non tagliati. 
+otto, in realt√†, quelli pervenuti integri sui fogli non tagliati. 
 
 In questo modo si potevano impressionare, sviluppare e stampare 
 contemporaneamente molte immagini di dimensioni ridotte e abbattere i costi
 di produzione di ogni singola fotografia. 
 
-Venne cosÏ ideata una sorta di produzione seriale di immagini 
-che portÚ notevoli cambiamenti nel mondo della fotografia.  
+Venne cos√¨ ideata una sorta di produzione seriale di immagini 
+che port√≤ notevoli cambiamenti nel mondo della fotografia.  
 Le dimensioni di una carte de visite si aggiravano attorno ai 54 mm 
 (2.125 in.=inch=pollice) di base e 89 mm (3.5 in.) di altezza per le 
 immagini verticali, viceversa per quelle orizzontali. 
 
-Líimmagine veniva stampata su carta sottile e compatta, 
-solitamente allíalbumina. Eí possibile trovare esemplari antichi stampati 
+L‚Äôimmagine veniva stampata su carta sottile e compatta, 
+solitamente all‚Äôalbumina. E‚Äô possibile trovare esemplari antichi stampati 
 su carta salata, ma sono molto rari e preziosi.  
-Pi˘ recente era líuso con procedimenti al collodio, aristotipia o di 
+Pi√π recente era l‚Äôuso con procedimenti al collodio, aristotipia o di 
 altro tipo. 
 
 Queste stampe venivano poi montate, quasi sempre a caldo, 
@@ -41,39 +43,39 @@ su un supporto cartaceo rigido.
 Le dimensioni del cartoncino erano di circa 64 mm (2.5 in.)  per 100 mm (4 in.)
 
 La differenza tra la carta stampata e il supporto sul quale veniva incollata
-creava una sorta di passepartout dove era possibile inserire líimpronta 
+creava una sorta di passepartout dove era possibile inserire l‚Äôimpronta 
 del timbro, ad inchiostro o a secco, dello studio fotografico, il luogo 
-della ripresa, il titolo dellíimmagine o altre indicazioni.  
+della ripresa, il titolo dell‚Äôimmagine o altre indicazioni.  
 Anche il verso del cartoncino veniva utilizzato per indicare queste notizie,
 a stampa o manoscritte.  
 Di solito sul verso venivano indicate anche le medaglie e i premi vinti.
 
 Le carte de visite hanno un successo enorme che coinvolge potenti 
-e persone comuni: cosÏ, soggetti di estrazione sociale anche modesta, 
+e persone comuni: cos√¨, soggetti di estrazione sociale anche modesta, 
 si fanno immortalare circondati da un'apparente ricchezza grazie 
 agli arredi e alle suppellettili presenti negli studi di Disderi.  
 Nel giro di poco si afferma la moda di collezionare le carte de visite 
-dei personaggi della politica, della cultura, dellíattualit‡: 
+dei personaggi della politica, della cultura, dell‚Äôattualit√†: 
 negli ambienti vittoriani il ritratto della regina madre apre gli album 
-dedicati alle celebrit‡, album con finiture pi˘ o meno preziose, 
+dedicati alle celebrit√†, album con finiture pi√π o meno preziose, 
 ma tutti ugualmente concepiti per ospitare in serie il magico formato.
 
 Insomma, il Facebook del XIX secolo.
 
 Inizialmente la Carte de Visite fu uno strumento di riconoscimento ed autocelebrazione 
-della borghesia in ascesa, ma presto si rivelÚ una conveniente risorsa 
-culturale per conoscere luoghi ed opere díarte lontane. 
+della borghesia in ascesa, ma presto si rivel√≤ una conveniente risorsa 
+culturale per conoscere luoghi ed opere d‚Äôarte lontane. 
 
 La CdV racconta e testimonia un intero periodo storico che va dal Risorgimento 
 alla Prima Guerra Mondiale, documentando costumi, valori ed atteggiamenti.  
 Il suo insostituibile valore come elemento di studio e ricerca storica e 
-sociale, anche grazie allíaspetto di semplice figurina che la caratterizza, 
+sociale, anche grazie all‚Äôaspetto di semplice figurina che la caratterizza, 
 ne ha fatto nel tempo oggetto di collezionismo. 
 
 Moltissimi sono i piccoli ed i grandi collezionisti che hanno raccolto con 
 passione queste minuscole finestre fotografiche aperte nel tempo e nello spazio.  
 Senza il loro contributo la conoscenza storica e sociale della fondamentale 
-epoca che ha segnato líunificazione nazionale italiana sarebbe lacunosa.
+epoca che ha segnato l‚Äôunificazione nazionale italiana sarebbe lacunosa.
 
 ### Bibliografia
 
@@ -89,34 +91,34 @@ epoca che ha segnato líunificazione nazionale italiana sarebbe lacunosa.
 
 ![Le Carte de Visite di "il fotografo quantistico"](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_ilfotografoquantistico.jpg)
 
-Líidea di un biglietto da visita fotografico, su supporto fisico permanente, 
-resta ancora oggi rivoluzionaria, nellíattuale epoca di immagini ed 
+L‚Äôidea di un biglietto da visita fotografico, su supporto fisico permanente, 
+resta ancora oggi rivoluzionaria, nell‚Äôattuale epoca di immagini ed 
 informazioni fluide. 
 
-Líambizione di chi si occupa di "carte de visite contemporanee"
-Ë quella di riproporne líattualit‡ nella sua funzione di 
+L‚Äôambizione di chi si occupa di "carte de visite contemporanee"
+√® quella di riproporne l‚Äôattualit√† nella sua funzione di 
 comunicazione e testimonianza sociale, nel suo ruolo di minuscolo strumento 
 di espressione artistica: tascabile, pratico, economico; concreto e 
-persistente segno di presenza in uníepoca di figure effimere.
+persistente segno di presenza in un‚Äôepoca di figure effimere.
 
 Il Primo concorso mondiale per Carte de Visite Contemporanea, 
-Premio Gianluigi Parpani ìIl Mondo in Tascaî, Lodi, 2019 ha rivelato che 
+Premio Gianluigi Parpani ‚ÄúIl Mondo in Tasca‚Äù, Lodi, 2019 ha rivelato che 
 esiste ancora ampio spazio di innovazione e meraviglia nella fotografia 
 del futuro che sa reinventare il passato.
 
 Ne abbiamo trovato conferma nella reinterpretazione degli antichi processi, 
-dallíoleotipia, alla gomma bicromata, al sale, alla cianotipia...   
+dall‚Äôoleotipia, alla gomma bicromata, al sale, alla cianotipia...   
 Gli artisti contemporanei che oggi reinterpretano creativamente la Carte de Visite 
 raccolgono la sfida di uno spazio minuscolo per creare qualcosa di grande 
 ed innovativo.
 
-Allo stesso modo, le opere presentate per il concorso ìIl Mondo in Tascaî, Lodi 2020, 
-lasciano ancora una volta sbalorditi per la finezza, líimpeto e la ricchezza 
+Allo stesso modo, le opere presentate per il concorso ‚ÄúIl Mondo in Tasca‚Äù, Lodi 2020, 
+lasciano ancora una volta sbalorditi per la finezza, l‚Äôimpeto e la ricchezza 
 di giochi, rimandi, allusioni che solo una precisa lettura attenta al minimo 
-dettaglio puÚ rivelare.
+dettaglio pu√≤ rivelare.
 
-Líistantanea percezione visiva globale, quella che brucia la visione delle 
-immagini su display in un solo attimo, non arriva che a sfiorare la profondit‡ 
+L‚Äôistantanea percezione visiva globale, quella che brucia la visione delle 
+immagini su display in un solo attimo, non arriva che a sfiorare la profondit√† 
 di espressione che le migliori opere fotografiche in formato Carte de Visite 
 possono dare.
 
@@ -154,7 +156,7 @@ In capo a pochi giorni ricevo i cartoncini con le stampe da ritagliare ed incoll
 E proprio dal ritaglio emergono i primi problemi: alcune immagini, tra cui tutti i dorsi,
 hanno un fondo bianco e non ho riferimenti per i tagli.
 
-Quello che mi Ë mancato Ë un processo di tipo "industriale" che trasformi le immagini digitali
+Quello che mi √® mancato √® un processo di tipo "industriale" che trasformi le immagini digitali
 in semilavorati (le stampe del service) facilmente trasformabili nel prodotto finito.  
 Una quindicina di anni fa avevo lo stesso tipo di problema con la creazione dei menu
 per i DVD video: lo risolsi utilizzando [ImageMagick](https://imagemagick.org/), un vero
@@ -168,10 +170,10 @@ In questo repository sono presenti i sorgenti dei tools per la creazione delle c
 e relativi accessori; a differenza dei tools per DVD video questi sono scritti in 
 [C# 9](https://docs.microsoft.com/it-it/dotnet/csharp/whats-new/csharp-9)
 utilizzando la [libreria Magick.NET](https://github.com/dlemstra/Magick.NET) che incorpora
-gi‡ ImageMagick e quindi non necessita di una installazione separata.
+gi√† ImageMagick e quindi non necessita di una installazione separata.
 
 I programmi compilati possono funzionare su Windows 10, Mac OSX e Linux (solo su processori x86);
-purtroppo non Ë disponibile la versione della libreria per processori ARM e dunque
+purtroppo non √® disponibile la versione della libreria per processori ARM e dunque
 non si possono eseguire su computer in formato "carte de visite" come il
 [Raspberry Pi](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
 
