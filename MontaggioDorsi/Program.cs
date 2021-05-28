@@ -74,6 +74,14 @@ else
     }
 }
 
+// Margini di taglio
+Drawables draw = new();
+draw.StrokeColor(par.BorderColor).StrokeWidth(1);
+draw.Line(0, fmt.ToPixels(10), final.Width, fmt.ToPixels(10));
+draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height, final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height);
+draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width, final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width);
+draw.Draw(final);
+
 final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
 final.Composite(imagesO.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
 
