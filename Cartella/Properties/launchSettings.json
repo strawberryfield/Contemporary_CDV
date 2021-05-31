@@ -2,7 +2,7 @@
   "profiles": {
     "Cartella": {
       "commandName": "Project",
-      "commandLineArgs": "-t10 --frontimage=c:\\foto\\fq\\storia_instagram.jpg --backimage=C:\\foto\\fq\\cdv\\dorso.psd"
+      "commandLineArgs": "-t10 --sample"
     }
   }
 }
