@@ -5,6 +5,8 @@
 
 Una più completa trattazione è disponibile nella [sezione Contemporary Carte de Visite del mio sito](https://strawberryfield.altervista.org/carte_de_visite).
 
+Sullo stesso sito si può trovare un [esempio di progetto di carte de visite contemporanee](https://strawberryfield.altervista.org/carte_de_visite/il_mondo_in_tasca.php) presentato al [Premio Gianluigi Parpani "Il Mondo in Tasca" per carte de visite contemporanea 2021](https://www.gri.it/notizie/eventi/296-premio-gianluigi-parpani-il-mondo-in-tasca-per-carte-de-visite-contemporanea-2021.html).
+
 ## Storia della Carte de Visite fotografica
 
 ![Carte de Visite di Gabriele Chiesa al SemplicementeFotografareLive 2019](https://strawberryfield.altervista.org/carte_de_visite/foto/cdv_gabriele_chiesa_semplicementefotografarelive.jpg)
