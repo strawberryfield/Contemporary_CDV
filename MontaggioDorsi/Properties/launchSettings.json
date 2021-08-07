@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioDorsi": {
       "commandName": "Project",
-      "commandLineArgs": "--dpi=600 C:\\foto\\fq\\cdv\\dorso.jpg "
+      "commandLineArgs": "--dpi=600 C:\\Users\\r.ceccarelli\\Pictures\\project\\P1780001.jpg"
     }
   }
 }

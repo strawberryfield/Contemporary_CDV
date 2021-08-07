@@ -31,7 +31,7 @@ namespace Casasoft.CCDV
         #region constructors
         public Formats() : this(300) { }
 
-        public Formats(int dpi) 
+        public Formats(int dpi)
         {
             _dpi = dpi;
         }
@@ -41,7 +41,13 @@ namespace Casasoft.CCDV
         public int DPI => _dpi;
 
         #region commercial formats
-        public MagickGeometry InCartha20x27_o => new(ToPixels(270), ToPixels(200));
+        /// <summary>
+        /// Photocity Digital print over paper
+        /// </summary>
+        /// <remarks>
+        /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
+        /// </remarks>
+        public MagickGeometry InCartha20x27_o => new(ToPixels((int)(270 * 1.04)), ToPixels((int)(200 * 1.04)));
         public MagickGeometry InCartha20x27_v => swap(InCartha20x27_o);
         public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));
         public MagickGeometry FineArt10x15_v => swap(FineArt10x15_o);
@@ -75,7 +81,7 @@ namespace Casasoft.CCDV
             img.Quality = 95;
             img.Density = new Density(_dpi);
             img.ColorSpace = ColorSpace.sRGB;
-            
+
             ExifProfile exif = new();
             exif.SetValue(ExifTag.Make, "Casasoft");
             exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");
