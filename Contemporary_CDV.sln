@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MontaggioFoto", "MontaggioF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scatola", "Scatola\Scatola.csproj", "{480B4866-7BB8-4779-A95B-D616BEB0D2FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cartella", "Cartella\Cartella.csproj", "{30A462AE-6B5C-46E4-94E5-5C99671D19EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cartella", "Cartella\Cartella.csproj", "{30A462AE-6B5C-46E4-94E5-5C99671D19EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCard", "CreditCard\CreditCard.csproj", "{0BD9A192-C3F5-49D8-9F7D-B016BEBC5AE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{30A462AE-6B5C-46E4-94E5-5C99671D19EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30A462AE-6B5C-46E4-94E5-5C99671D19EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30A462AE-6B5C-46E4-94E5-5C99671D19EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD9A192-C3F5-49D8-9F7D-B016BEBC5AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD9A192-C3F5-49D8-9F7D-B016BEBC5AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD9A192-C3F5-49D8-9F7D-B016BEBC5AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD9A192-C3F5-49D8-9F7D-B016BEBC5AE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

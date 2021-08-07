@@ -42,6 +42,23 @@ namespace Casasoft.CCDV
         public ScatolaBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor) :
             base(Spessore, formats, fillcolor, bordercolor)
         { }
+
+        public ScatolaBuilder(int Spessore, int dpi, TargetType targetype) :
+            base(Spessore, dpi, targetype)
+        { }
+        public ScatolaBuilder(int Spessore, Formats formats, TargetType targetype) :
+            base(Spessore, formats, targetype)
+        { }
+        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype) :
+            base(Spessore, dpi, fillcolor, targetype)
+        { }
+        public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
+            base(Spessore, dpi, fillcolor, bordercolor, targetype)
+        { }
+        public ScatolaBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
+            base(Spessore, formats, fillcolor, bordercolor, targetype)
+        { }
+
         public ScatolaBuilder(int Spessore) :
             base(Spessore)
         { }

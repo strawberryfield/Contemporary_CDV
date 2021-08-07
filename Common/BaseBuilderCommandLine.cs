@@ -20,9 +20,12 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Mono.Options;
+using System;
 
 namespace Casasoft.CCDV
 {
+    public enum TargetType { cdv, cc }
+
     public class BaseBuilderCommandLine : CommandLine
     {
         public int thickness { get; set; }
@@ -36,10 +39,12 @@ namespace Casasoft.CCDV
         public bool useSampleImages { get; set; }
         public string borderText { get; set; }
         public string font { get; set; }
+        public TargetType targetType { get; set; }
 
         private string sThickness = "5";
+        private string sTargetType = "CDV";
 
-        public BaseBuilderCommandLine(string outputname) : 
+        public BaseBuilderCommandLine(string outputname) :
             this(ExeName(), outputname)
         { }
         public BaseBuilderCommandLine(string exename, string outputname) :
@@ -66,6 +71,7 @@ namespace Casasoft.CCDV
                 { "horizontal", "configure box in horizontal mode", o => isHorizontal = o != null },
                 { "bordertext=", "text to print on left border", t => borderText = t },
                 { "font=", $"text font (default {font})", t => font = t },
+                { "format=", $"size of the box: 'cdv' or 'cc' (default '{sTargetType}')", t => sTargetType = t.ToUpper() },
                 { "sample", "generate sample images", s => useSampleImages = s != null },
             };
             AddBaseOptions();
@@ -77,6 +83,19 @@ namespace Casasoft.CCDV
 
             thickness = GetIntParameter(sThickness, thickness,
                 $"Incorrect thickness value '{sThickness}'. Using default value.");
+            if (sTargetType == "CDV")
+            {
+                targetType = TargetType.cdv;
+            }
+            else if (sTargetType == "CC")
+            {
+                targetType = TargetType.cc;
+            }
+            else
+            {
+                Console.Error.WriteLine($"Incorrect format value '{sTargetType}'. Using default value.");
+            }
+
             return false;
         }
     }

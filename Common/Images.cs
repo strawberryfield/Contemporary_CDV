@@ -21,7 +21,6 @@
 
 using ImageMagick;
 using System;
-using System.Globalization;
 
 namespace Casasoft.CCDV
 {
@@ -69,6 +68,15 @@ namespace Casasoft.CCDV
         public MagickImage CDV_Full_v() => CDV_Full_v(MagickColors.White);
         public MagickImage CDV_Internal_o() => CDV_Internal_o(MagickColors.White);
         public MagickImage CDV_Internal_v() => CDV_Internal_v(MagickColors.White);
+        #endregion
+
+        #region credit card
+        public MagickImage CC_o(MagickColor c) => new(c, fmt.CC_o.Width, fmt.CC_o.Height);
+        public MagickImage CC_v(MagickColor c) => new(c, fmt.CC_v.Width, fmt.CC_v.Height);
+
+        public MagickImage CC_o() => CC_o(MagickColors.White);
+        public MagickImage CC_v() => CC_v(MagickColors.White);
+
         #endregion
 
         public MagickImage Info(string i, string o)

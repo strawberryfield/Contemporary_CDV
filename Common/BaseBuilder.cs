@@ -31,6 +31,7 @@ namespace Casasoft.CCDV
         protected BaseBuilderCommandLine par;
         protected MagickColor fillColor;
         protected MagickColor borderColor;
+        protected TargetType targetType;
 
         protected MagickGeometry topFormat;
         protected MagickGeometry borderFormat;
@@ -46,24 +47,43 @@ namespace Casasoft.CCDV
 
         #region constructors
         public BaseBuilder(int Spessore, int dpi) :
-            this(Spessore, new Formats(dpi))
+            this(Spessore, new Formats(dpi), TargetType.cdv)
         { }
-        public BaseBuilder(int Spessore, Formats formats) :
-            this(Spessore, formats, MagickColors.White, MagickColors.Black)
-        { }
-        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor) :
-            this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black)
-        { }
-        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor) :
-            this(Spessore, new Formats(dpi), fillcolor, bordercolor)
+        public BaseBuilder(int Spessore, int dpi, TargetType targetype) :
+            this(Spessore, new Formats(dpi), targetype)
         { }
 
-        public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor)
+        public BaseBuilder(int Spessore, Formats formats) :
+            this(Spessore, formats, MagickColors.White, MagickColors.Black, TargetType.cdv)
+        { }
+        public BaseBuilder(int Spessore, Formats formats, TargetType targetype) :
+            this(Spessore, formats, MagickColors.White, MagickColors.Black, targetype)
+        { }
+
+        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor) :
+            this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, TargetType.cdv)
+        { }
+        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype) :
+           this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype)
+        { }
+
+        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor) :
+            this(Spessore, new Formats(dpi), fillcolor, bordercolor, TargetType.cdv)
+        { }
+        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
+           this(Spessore, new Formats(dpi), fillcolor, bordercolor, targetype)
+        { }
+
+        public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor) :
+            this(Spessore, formats, fillcolor, bordercolor, TargetType.cdv)
+        { }
+        public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype)
         {
             fmt = formats;
             spessore = fmt.ToPixels(Spessore);
             fillColor = fillcolor;
             borderColor = bordercolor;
+            targetType = targetype;
             makeEmptyImages();
         }
 
@@ -71,7 +91,7 @@ namespace Casasoft.CCDV
         public BaseBuilder() : this(5) { }
 
         public BaseBuilder(BaseBuilderCommandLine parameters, Formats formats) :
-            this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor) 
+            this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType)
         {
             par = parameters;
 
@@ -88,7 +108,18 @@ namespace Casasoft.CCDV
 
         protected virtual void makeEmptyImages()
         {
-            frontFormat = fmt.CDV_Full_v;
+            switch (targetType)
+            {
+                case TargetType.cdv:
+                    frontFormat = fmt.CDV_Full_v;
+                    break;
+                case TargetType.cc:
+                    frontFormat = fmt.CC_o;
+                    break;
+                default:
+                    frontFormat = fmt.CDV_Full_v;
+                    break;
+            }         
             frontFormat.Width += fmt.ToPixels(5);
             frontFormat.Height += fmt.ToPixels(5);
 
@@ -115,9 +146,9 @@ namespace Casasoft.CCDV
         public void SetLeftImage(string filename)
         {
             leftImage = checkAndLoad(filename, leftImage);
-            if(!string.IsNullOrWhiteSpace(par.borderText))
+            if (!string.IsNullOrWhiteSpace(par.borderText))
             {
-                Utils.CenteredText(par.borderText, leftImage.Width/2, leftImage, par.font, -90).Draw(leftImage);
+                Utils.CenteredText(par.borderText, leftImage.Width / 2, leftImage, par.font, -90).Draw(leftImage);
             }
         }
         public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);

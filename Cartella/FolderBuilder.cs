@@ -42,6 +42,23 @@ namespace Casasoft.CCDV
         public FolderBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor) :
             base(Spessore, formats, fillcolor, bordercolor)
         { }
+
+        public FolderBuilder(int Spessore, int dpi, TargetType targetype) :
+            base(Spessore, dpi, targetype)
+        { }
+        public FolderBuilder(int Spessore, Formats formats, TargetType targetype) :
+            base(Spessore, formats, targetype)
+        { }
+        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype) :
+            base(Spessore, dpi, fillcolor, targetype)
+        { }
+        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
+            base(Spessore, dpi, fillcolor, bordercolor, targetype)
+        { }
+        public FolderBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
+            base(Spessore, formats, fillcolor, bordercolor, targetype)
+        { }
+
         public FolderBuilder(int Spessore) :
             base(Spessore)
         { }

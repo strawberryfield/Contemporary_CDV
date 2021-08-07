@@ -56,6 +56,11 @@ namespace Casasoft.CCDV
         public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
         #endregion
 
+        #region credit card
+        public MagickGeometry CC_o => new(ToPixels(86), ToPixels(54));
+        public MagickGeometry CC_v => swap(CC_o);
+        #endregion
+
         private MagickGeometry swap(MagickGeometry g)
         {
             int tmp = g.Width;
