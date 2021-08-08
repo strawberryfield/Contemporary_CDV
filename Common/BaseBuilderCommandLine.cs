@@ -43,6 +43,7 @@ namespace Casasoft.CCDV
 
         private string sThickness = "5";
         private string sTargetType = "CDV";
+        private string sOrientation = "PORTRAIT";
 
         public BaseBuilderCommandLine(string outputname) :
             this(ExeName(), outputname)
@@ -68,10 +69,10 @@ namespace Casasoft.CCDV
                 { "f|frontimage=", "set the image for the front", i => frontImage = i },
                 { "b|backimage=", "set the image for the back", i => backImage = i },
                 { "t|thickness=", $"set the box thickness (default {sThickness}mm)", t => sThickness = t },
-                { "horizontal", "configure box in horizontal mode", o => isHorizontal = o != null },
                 { "bordertext=", "text to print on left border", t => borderText = t },
                 { "font=", $"text font (default {font})", t => font = t },
                 { "format=", $"size of the box: 'cdv' or 'cc' (default '{sTargetType}')", t => sTargetType = t.ToUpper() },
+                { "orientation=", $"orientation of the box: 'portrait' or 'landscape' (default '{sOrientation}')", t => sOrientation = t.ToUpper() },
                 { "sample", "generate sample images", s => useSampleImages = s != null },
             };
             AddBaseOptions();
@@ -83,6 +84,7 @@ namespace Casasoft.CCDV
 
             thickness = GetIntParameter(sThickness, thickness,
                 $"Incorrect thickness value '{sThickness}'. Using default value.");
+
             if (sTargetType == "CDV")
             {
                 targetType = TargetType.cdv;
@@ -94,6 +96,21 @@ namespace Casasoft.CCDV
             else
             {
                 Console.Error.WriteLine($"Incorrect format value '{sTargetType}'. Using default value.");
+                targetType = TargetType.cdv;
+            }
+
+            if(sOrientation == "PORTRAIT")
+            {
+                isHorizontal = false;
+            }
+            else if (sOrientation == "LANDSCAPE")
+            {
+                isHorizontal = true;
+            }
+            else
+            {
+                Console.Error.WriteLine($"Incorrect orientation value '{sOrientation}'. Using default value.");
+                isHorizontal = false;
             }
 
             return false;

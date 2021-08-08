@@ -32,6 +32,7 @@ namespace Casasoft.CCDV
         protected MagickColor fillColor;
         protected MagickColor borderColor;
         protected TargetType targetType;
+        protected bool isHorizontal = false;
 
         protected MagickGeometry topFormat;
         protected MagickGeometry borderFormat;
@@ -77,13 +78,14 @@ namespace Casasoft.CCDV
         public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor) :
             this(Spessore, formats, fillcolor, bordercolor, TargetType.cdv)
         { }
-        public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype)
+        public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype, bool isHor = false)
         {
             fmt = formats;
             spessore = fmt.ToPixels(Spessore);
             fillColor = fillcolor;
             borderColor = bordercolor;
             targetType = targetype;
+            isHorizontal = isHor;
             makeEmptyImages();
         }
 
@@ -91,7 +93,7 @@ namespace Casasoft.CCDV
         public BaseBuilder() : this(5) { }
 
         public BaseBuilder(BaseBuilderCommandLine parameters, Formats formats) :
-            this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType)
+            this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType, parameters.isHorizontal)
         {
             par = parameters;
 
@@ -111,13 +113,13 @@ namespace Casasoft.CCDV
             switch (targetType)
             {
                 case TargetType.cdv:
-                    frontFormat = fmt.CDV_Full_v;
+                    frontFormat = isHorizontal ? fmt.CDV_Full_o : fmt.CDV_Full_v;
                     break;
                 case TargetType.cc:
-                    frontFormat = fmt.CC_o;
+                    frontFormat = isHorizontal ? fmt.CC_o : fmt.CC_v;
                     break;
                 default:
-                    frontFormat = fmt.CDV_Full_v;
+                    frontFormat = isHorizontal ? fmt.CDV_Full_o : fmt.CDV_Full_v;
                     break;
             }
             frontFormat.Width += fmt.ToPixels(5);
