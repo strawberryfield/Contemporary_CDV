@@ -47,38 +47,33 @@ namespace Casasoft.CCDV
 
 
         #region constructors
-        public BaseBuilder(int Spessore, int dpi) :
-            this(Spessore, new Formats(dpi), TargetType.cdv)
-        { }
-        public BaseBuilder(int Spessore, int dpi, TargetType targetype) :
-            this(Spessore, new Formats(dpi), targetype)
+        public BaseBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
+           this(Spessore, new Formats(dpi), targetype, isHor)
         { }
 
-        public BaseBuilder(int Spessore, Formats formats) :
-            this(Spessore, formats, MagickColors.White, MagickColors.Black, TargetType.cdv)
-        { }
-        public BaseBuilder(int Spessore, Formats formats, TargetType targetype) :
-            this(Spessore, formats, MagickColors.White, MagickColors.Black, targetype)
+        public BaseBuilder(int Spessore, Formats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+           this(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
         { }
 
-        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor) :
-            this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, TargetType.cdv)
-        { }
-        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype) :
-           this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype)
+        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
+           this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype, isHor)
         { }
 
-        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor) :
-            this(Spessore, new Formats(dpi), fillcolor, bordercolor, TargetType.cdv)
-        { }
-        public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
-           this(Spessore, new Formats(dpi), fillcolor, bordercolor, targetype)
+        public BaseBuilder(int Spessore,
+            int dpi,
+            MagickColor fillcolor,
+            MagickColor bordercolor,
+            TargetType targetype = TargetType.cdv,
+            bool isHor = false) :
+           this(Spessore, new Formats(dpi), fillcolor, bordercolor, targetype, isHor)
         { }
 
-        public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor) :
-            this(Spessore, formats, fillcolor, bordercolor, TargetType.cdv)
-        { }
-        public BaseBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype, bool isHor = false)
+        public BaseBuilder(int Spessore,
+            Formats formats,
+            MagickColor fillcolor,
+            MagickColor bordercolor,
+            TargetType targetype = TargetType.cdv,
+            bool isHor = false)
         {
             fmt = formats;
             spessore = fmt.ToPixels(Spessore);
@@ -88,9 +83,6 @@ namespace Casasoft.CCDV
             isHorizontal = isHor;
             makeEmptyImages();
         }
-
-        public BaseBuilder(int Spessore) : this(Spessore, 300) { }
-        public BaseBuilder() : this(5) { }
 
         public BaseBuilder(BaseBuilderCommandLine parameters, Formats formats) :
             this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType, parameters.isHorizontal)

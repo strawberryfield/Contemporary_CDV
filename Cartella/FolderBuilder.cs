@@ -27,44 +27,33 @@ namespace Casasoft.CCDV
     {
 
         #region constructors
-        public FolderBuilder(int Spessore, int dpi) :
-            base(Spessore, dpi)
+        public FolderBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
+           base(Spessore, new Formats(dpi), targetype, isHor)
         { }
-        public FolderBuilder(int Spessore, Formats formats) :
-            base(Spessore, formats)
+        public FolderBuilder(int Spessore, Formats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+           base(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
         { }
-        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor) :
-            base(Spessore, dpi, fillcolor)
+        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
+          base(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype, isHor)
         { }
-        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor) :
-            base(Spessore, dpi, fillcolor, bordercolor)
-        { }
-        public FolderBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor) :
-            base(Spessore, formats, fillcolor, bordercolor)
-        { }
-
-        public FolderBuilder(int Spessore, int dpi, TargetType targetype) :
-            base(Spessore, dpi, targetype)
-        { }
-        public FolderBuilder(int Spessore, Formats formats, TargetType targetype) :
-            base(Spessore, formats, targetype)
-        { }
-        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype) :
-            base(Spessore, dpi, fillcolor, targetype)
-        { }
-        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
-            base(Spessore, dpi, fillcolor, bordercolor, targetype)
-        { }
-        public FolderBuilder(int Spessore, Formats formats, MagickColor fillcolor, MagickColor bordercolor, TargetType targetype) :
-            base(Spessore, formats, fillcolor, bordercolor, targetype)
+        public FolderBuilder(int Spessore,
+            int dpi,
+            MagickColor fillcolor,
+            MagickColor bordercolor,
+            TargetType targetype = TargetType.cdv,
+            bool isHor = false) :
+           base(Spessore, new Formats(dpi), fillcolor, bordercolor, targetype, isHor)
         { }
 
-        public FolderBuilder(int Spessore) :
-            base(Spessore)
+        public FolderBuilder(int Spessore,
+            Formats formats,
+            MagickColor fillcolor,
+            MagickColor bordercolor,
+            TargetType targetype = TargetType.cdv,
+            bool isHor = false) :
+           base(Spessore, formats, fillcolor, bordercolor, targetype, isHor)
         { }
-        public FolderBuilder() :
-            base()
-        { }
+
         public FolderBuilder(BaseBuilderCommandLine par, Formats formats) :
            base(par, formats)
         { }
