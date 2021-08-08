@@ -31,11 +31,13 @@ if (par.Parse(args)) return;
 #region main
 Formats fmt = new(par.Dpi);
 Images img = new(fmt);
-//MagickImage output = img.InCartha20x27_o();
-MagickImage output = img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg"); 
+MagickImage output = img.InCartha20x27_o();
+//MagickImage output = img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg"); 
 ScatolaBuilder sc = new(par, fmt);
 
 output.Composite(sc.Build(), Gravity.Center);
+sc.AddCuttingLines(output);
+img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg").Draw(output);
 fmt.SetImageParameters(output);
 output.Write($"{par.OutputName}.jpg");
 #endregion

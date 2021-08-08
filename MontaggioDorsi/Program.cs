@@ -33,8 +33,8 @@ if (par.Parse(args)) return;
 Formats fmt = new(par.Dpi);
 Images img = new(fmt);
 
-//MagickImage final = img.InCartha20x27_o();
-MagickImage final = img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg");
+MagickImage final = img.InCartha20x27_o();
+//MagickImage final = img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg");
 MagickImageCollection imagesV = new();
 MagickImageCollection imagesO = new();
 
@@ -85,5 +85,6 @@ draw.Draw(final);
 final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
 final.Composite(imagesO.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
 
+img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg").Draw(final);
 fmt.SetImageParameters(final);
 final.Write($"{par.OutputName}.jpg");

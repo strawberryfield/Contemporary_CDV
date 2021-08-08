@@ -79,9 +79,8 @@ namespace Casasoft.CCDV
 
         #endregion
 
-        public MagickImage Info(string i, string o)
+        public Drawables Info(string i, string o)
         {
-            MagickImage ret = InCartha20x27_o();
             Drawables d = new Drawables();
 
             d.FontPointSize(fmt.ToPixels(3))
@@ -90,10 +89,10 @@ namespace Casasoft.CCDV
                 .TextAlignment(TextAlignment.Left);
 
             d.Text(fmt.ToPixels(10), fmt.ToPixels(185), $"{i}Run {DateTime.Now.ToString("R")}")
-                .Text(ret.Width / 2, fmt.ToPixels(185), $"DPI: {fmt.DPI}\nOutput: {o}")
-                .Draw(ret);
+                .Text(fmt.InCartha20x27_o.Width / 2, fmt.ToPixels(185), $"DPI: {fmt.DPI}\nOutput: {o}");
 
-            return ret;
+            return d;
         }
+
     }
 }

@@ -119,7 +119,7 @@ namespace Casasoft.CCDV
                 default:
                     frontFormat = fmt.CDV_Full_v;
                     break;
-            }         
+            }
             frontFormat.Width += fmt.ToPixels(5);
             frontFormat.Height += fmt.ToPixels(5);
 
@@ -158,6 +158,22 @@ namespace Casasoft.CCDV
             backImage = checkAndLoad(filename, backImage);
             if (isHorizontal)
                 backImage.Rotate(180);
+        }
+
+        public void AddCuttingLines(MagickImage img)
+        {
+            MagickImage trim = (MagickImage)img.Clone();
+            trim.Trim();
+            int h_offset = (img.Width - trim.Width) / 2;
+            int v_offset = (img.Height - trim.Height) / 2;
+
+            Drawables d = new();
+            d.StrokeColor(borderColor).StrokeWidth(1);
+            d.Line(0, v_offset, img.Width, v_offset);
+            d.Line(0, img.Height - v_offset, img.Width, img.Height - v_offset);
+            d.Line(h_offset, 0, h_offset, img.Height - v_offset);
+            d.Line(img.Width - h_offset, 0, img.Width - h_offset, img.Height);
+            d.Draw(img);
         }
 
         #region test
