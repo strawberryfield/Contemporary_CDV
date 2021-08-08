@@ -11,9 +11,11 @@ Options:
   -f, --frontimage=VALUE     set the image for the front
   -b, --backimage=VALUE      set the image for the back
   -t, --thickness=VALUE      set the box thickness (default 5mm)
-      --horizontal           configure box in horizontal mode
       --bordertext=VALUE     text to print on left border
       --font=VALUE           text font (default Arial)
+      --format=VALUE         size of the box: 'cdv' or 'cc' (default 'CDV')
+      --orientation=VALUE    orientation of the box: 'portrait' or 'landscape' (
+                               default 'PORTRAIT')
       --sample               generate sample images
       --fillcolor=VALUE      set the color used to fiil the images
                                (default #FFFFFF)

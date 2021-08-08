@@ -1,0 +1,35 @@
+Casasoft Contemporary Carte de Visite CreditCard
+Copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft
+
+Usage: CreditCard [options]* inputfile
+
+Options:
+      --fronttext=VALUE      text in front (Cardholder name)
+      --fronttextfont=VALUE  front text font (default 'Arial')
+      --fronttextcolor=VALUE front text color (default #000000)
+      --fronttextborder=VALUE
+                             front text border color (default #000000)
+      --mbcolor=VALUE        magnetic band color (default #8B4545)
+      --mbimage=VALUE        magnetic band overlay image
+      --fillcolor=VALUE      set the color used to fiil the images
+                               (default #FFFFFF)
+      --bordercolor=VALUE    set the color used to border the images
+                               (default #000000)
+      --dpi=VALUE            set output resolution (default 300)
+  -o, --output=VALUE         set output dir/filename
+      --nobanner             suppress the banner
+  -h, --help                 show this message and exit
+
+Colors can be written in any of these formats:
+  #rgb
+  #rrggbb
+  #rrggbbaa
+  #rrrrggggbbbb
+  #rrrrggggbbbbaaaa
+
+Environment variables
+The program can read values from these variables:
+  CDV_OUTPATH  Base path for output files
+  CDV_DPI      Resolution for output files
+  CDV_FILL     Color used to fill images
+  CDV_BORDER   Border color
