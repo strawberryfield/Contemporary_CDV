@@ -37,6 +37,8 @@ Images img = new(fmt);
 
 MagickImage final = img.FineArt10x15_v();
 MagickImage front = Get(par.FilesList[0]);
+int bordertop = final.Height / 2 - front.Height;
+int borderleft = (final.Width - front.Width) / 2;
 
 // Create rear image
 MagickImage rear;
@@ -104,7 +106,28 @@ images.Add(front);
 
 final.Composite(images.AppendVertically(), Gravity.Center);
 CutLines();
+
+draw = new();
+draw.FontPointSize(fmt.ToPixels(2))
+    .Font("Arial")
+    .FillColor(MagickColors.Black)
+    .TextAlignment(TextAlignment.Left)
+    .Gravity(Gravity.Northwest)
+    .Text(borderleft+fmt.ToPixels(5), final.Height -bordertop + fmt.ToPixels(5), @$"{par.WelcomeBannerText()}
+Source: {par.FilesList[0]}
+Run {DateTime.Now.ToString("R")}")
+    .Draw(final);
+
+draw = new();
+draw.FillColor(MagickColors.Black)
+    .Font(par.FrontTextFont)
+    .FontPointSize(fmt.ToPixels(4))
+    .TextKerning(10)
+    .Gravity(Gravity.Northwest)
+    .Text(borderleft + fmt.ToPixels(4), bordertop - fmt.ToPixels(10), par.FrontText)
+    .Draw(final);
 fmt.SetImageParameters(final);
+
 final.Write($"{par.OutputName}.jpg");
 
 // ----------------------------------------------------------------
@@ -123,8 +146,6 @@ void CutLines()
     // Margini di taglio
     Drawables draw = new();
     draw.StrokeColor(par.BorderColor).StrokeWidth(1);
-    int bordertop = final.Height / 2 - front.Height;
-    int borderleft = (final.Width - front.Width) / 2;
     draw.Line(0, bordertop, final.Width, bordertop);
     draw.Line(0, final.Height - bordertop, final.Width, final.Height - bordertop);
     draw.Line(borderleft, 0, borderleft, final.Height);
