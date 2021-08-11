@@ -11,6 +11,10 @@ Options:
                              front text border color (default #000000)
       --mbcolor=VALUE        magnetic band color (default #8B4545)
       --mbimage=VALUE        magnetic band overlay image
+      --backimage=VALUE      image for back side
+      --backtext=VALUE       pango markup for text on back side.
+                               Text can be stored in a file instead of a string.
+                               The file must be referenced as '@filename'
       --fillcolor=VALUE      set the color used to fiil the images
                                (default #FFFFFF)
       --bordercolor=VALUE    set the color used to border the images

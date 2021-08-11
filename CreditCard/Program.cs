@@ -173,7 +173,10 @@ internal class CreditCardCommandLine : CommandLine
                 { "mbcolor=", $"magnetic band color (default {sMagneticBandColor})", o => sMagneticBandColor = o },
                 { "mbimage=", $"magnetic band overlay image", o => MagneticBandImage = o },
                 { "backimage=", "image for back side", o => BackImage = o },
-                { "backtext=", "pango markup for text on back side", o => BackText = GetFileParameter(o) },
+                { "backtext=", "pango markup for text on back side." +
+                    "\nText can be stored in a file instead of a string." +
+                    "The file must be referenced as '@filename'",
+                    o => BackText = GetFileParameter(o) },
 
             };
         AddBaseOptions();
