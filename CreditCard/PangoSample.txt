@@ -1,0 +1,9 @@
+﻿pango:<span size='45000' face='Arial'>
+Un fotoreporter di successo, L.B. "Jeff" Jeffries, è costretto su una sedia
+a rotelle da quasi 2 mesi a causa di una frattura alla gamba sinistra.\n
+Annoiato per la forzata e lunga inattività, Jeff inizia a osservare i suoi
+vicini di casa, servendosi di un binocolo e della propria macchina 
+fotografica con teleobiettivo.\n
+A causa dell'afa persistente gli abitanti del quartiere tengono le finestre
+spalancate giorno e notte e ciò permette a Jeff di guardare ciò che
+succede all'interno dei loro appartamenti.\n\n</span>

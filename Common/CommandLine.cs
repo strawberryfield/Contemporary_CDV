@@ -161,6 +161,36 @@ namespace Casasoft.CCDV
                 sFillColor = eBorder;
         }
 
+        protected string GetFileParameter(string p)
+        {
+            if(!string.IsNullOrWhiteSpace(p) && p[0] == '@')
+            {
+                string ret = string.Empty;
+                int l = p.Length;
+                if(l < 2)
+                {
+                    Console.Error.WriteLine("Missing filename for '@' parameter");
+                }
+                else
+                {
+                    string filename = p.Substring(1);
+                    if(File.Exists(filename))
+                    {
+                        ret = File.ReadAllText(filename);
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"File '{filename}' not found.");
+                    }
+                }
+                return ret;
+            }
+            else
+            {
+                return p;
+            }
+        }
+
         public static int GetIntParameter(string val, int fallback, string message)
         {
             int ret;

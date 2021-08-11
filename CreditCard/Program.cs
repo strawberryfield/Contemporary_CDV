@@ -39,9 +39,17 @@ MagickImage final = img.FineArt10x15_v();
 MagickImage front = Get(par.FilesList[0]);
 
 // Create rear image
-MagickImage rear = (MagickImage)front.Clone();
-rear.Blur(0, 10);
-rear.Level(new Percentage(0), new Percentage(100), 3);
+MagickImage rear;
+if (string.IsNullOrWhiteSpace(par.BackImage))
+{
+    rear = (MagickImage)front.Clone();
+    rear.Blur(0, 10);
+    rear.Level(new Percentage(0), new Percentage(100), 3);
+}
+else
+{
+    rear = Get(par.BackImage);
+}
 
 // Write text in front
 Drawables draw;
@@ -54,7 +62,8 @@ if (!string.IsNullOrWhiteSpace(par.FrontText))
         .FillColor(par.FrontTextColor)
         .StrokeAntialias(true)
         .StrokeWidth(1)
-        .FontPointSize(fmt.ToPixels(4));
+        .FontPointSize(fmt.ToPixels(4))
+        .TextKerning(10);
     draw.Text(fmt.ToPixels(4), front.Height - fmt.ToPixels(4), par.FrontText);
     draw.Draw(front);
 }
@@ -74,6 +83,17 @@ if (!string.IsNullOrWhiteSpace(par.MagneticBandImage))
         MagickColors.Transparent);
     overlay.Flop();
     rear.Composite(overlay, Gravity.North, new PointD(0, fmt.ToPixels(4)), CompositeOperator.Over);
+}
+
+// Back text
+if (!string.IsNullOrWhiteSpace(par.BackText))
+{
+    Console.WriteLine("Rendering text");
+    MagickImage backText = new(par.BackText);
+    backText.ColorFuzz = new Percentage(20);
+    backText.Transparent(MagickColors.White);
+    backText.Flop();
+    rear.Composite(backText, Gravity.South, new PointD(0, fmt.ToPixels(4)), CompositeOperator.Over);
 }
 
 // Final assembly
@@ -121,6 +141,8 @@ internal class CreditCardCommandLine : CommandLine
     public MagickColor FrontTextBorder { get; set; }
     public MagickColor MagneticBandColor { get; set; }
     public string MagneticBandImage { get; set; }
+    public string BackImage { get; set; }
+    public string BackText { get; set; }
 
     private string sFrontTextColor = MagickColors.Black.ToHexString();
     private string sFrontTextBorder = MagickColors.Black.ToHexString();
@@ -139,6 +161,8 @@ internal class CreditCardCommandLine : CommandLine
         FrontTextBorder = GetColor(sFrontTextBorder);
         MagneticBandColor = GetColor(sMagneticBandColor);
         MagneticBandImage = string.Empty;
+        BackImage = string.Empty;
+        BackText = string.Empty;
 
         Options = new OptionSet
             {
@@ -148,6 +172,9 @@ internal class CreditCardCommandLine : CommandLine
                 { "fronttextborder=", $"front text border color (default {sFrontTextBorder})", o => sFrontTextBorder = o },
                 { "mbcolor=", $"magnetic band color (default {sMagneticBandColor})", o => sMagneticBandColor = o },
                 { "mbimage=", $"magnetic band overlay image", o => MagneticBandImage = o },
+                { "backimage=", "image for back side", o => BackImage = o },
+                { "backtext=", "pango markup for text on back side", o => BackText = GetFileParameter(o) },
+
             };
         AddBaseOptions();
     }
