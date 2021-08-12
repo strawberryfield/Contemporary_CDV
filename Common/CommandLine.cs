@@ -25,12 +25,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 
 namespace Casasoft.CCDV
 {
     public class CommandLine
     {
         protected bool shouldShowHelp { get; set; }
+        protected bool shouldShowLicense { get; set; }
         protected string exeName { get; set; }
         protected OptionSet baseOptions { get; set; }
         protected bool noBanner { get; set; }
@@ -79,6 +82,7 @@ namespace Casasoft.CCDV
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+                { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
             };
         }
         #endregion
@@ -132,6 +136,20 @@ namespace Casasoft.CCDV
   CDV_BORDER   Border color");
 
                 return true;
+            }
+
+            if(shouldShowLicense)
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
+                {
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        string result = reader.ReadToEnd();
+                        Console.WriteLine("This program is released under:\n");
+                        Console.WriteLine(result);
+                    }
+                }
             }
 
             if(!Path.IsPathRooted(OutputName))

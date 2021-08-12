@@ -2,7 +2,7 @@
   "profiles": {
     "Scatola": {
       "commandName": "Project",
-      "commandLineArgs": " -t10 --horizontal --fillcolor=#EDE8E0 --frontimage=c:\\foto\\cdv\\frattali\\boxcover4.psd --backimage=c:\\foto\\cdv\\frattali\\boxback.psd --bordertext=\"Frattali con gnofract4d\" --font=\"Courier new\""
+      "commandLineArgs": "--license"
     }
   }
 }
