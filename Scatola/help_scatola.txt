@@ -25,6 +25,8 @@ Options:
   -o, --output=VALUE         set output dir/filename
       --nobanner             suppress the banner
   -h, --help                 show this message and exit
+      --colors               list available colors by name
+      --license              show program license (AGPL 3.0)
 
 Colors can be written in any of these formats:
   #rgb
@@ -32,6 +34,7 @@ Colors can be written in any of these formats:
   #rrggbbaa
   #rrrrggggbbbb
   #rrrrggggbbbbaaaa
+  colorname    (use Scatola --colors  to see all available colors)
 
 Environment variables
 The program can read values from these variables:

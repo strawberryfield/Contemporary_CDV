@@ -2,7 +2,7 @@
   "profiles": {
     "CreditCard": {
       "commandName": "Project",
-      "commandLineArgs": "--dpi=600 --mbimage=c:\\foto\\creditcards\\magneticband.psd --fronttext=\"LA FINESTRA SUL CORTILE\" --fronttextfont=\"OCR-A\" --fronttextcolor=#ffffff -backtext=@C:\\projects\\Contemporary_CDV\\CreditCard\\PangoSample.txt c:\\users\\rober\\Pictures\\CCExample.jpg"
+      "commandLineArgs": "--dpi=600 --mbimage=c:\\foto\\creditcards\\magneticband.psd --fronttext=\"LA FINESTRA SUL CORTILE\" --fronttextfont=\"OCR-A\" --fronttextcolor=Red -backtext=@C:\\projects\\Contemporary_CDV\\CreditCard\\PangoSample.txt c:\\users\\rober\\Pictures\\CCExample.jpg"
     }
   }
 }

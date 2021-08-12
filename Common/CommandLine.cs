@@ -26,13 +26,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Resources;
 
 namespace Casasoft.CCDV
 {
     public class CommandLine
     {
         protected bool shouldShowHelp { get; set; }
+        protected bool shouldShowColors { get; set; }
         protected bool shouldShowLicense { get; set; }
         protected string exeName { get; set; }
         protected OptionSet baseOptions { get; set; }
@@ -73,6 +73,8 @@ namespace Casasoft.CCDV
             FillColor = GetColor(sFillColor);
             BorderColor = GetColor(sBorderColor);
 
+            fillColorDictionary();
+
             Options = new();
             baseOptions = new OptionSet
             {
@@ -82,6 +84,7 @@ namespace Casasoft.CCDV
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+                { "colors", "list available colors by name", h => shouldShowColors = h != null },
                 { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
             };
         }
@@ -122,12 +125,13 @@ namespace Casasoft.CCDV
                 Console.WriteLine("\nOptions:");
                 Options.WriteOptionDescriptions(Console.Out);
                 Console.WriteLine();
-                Console.WriteLine(@"Colors can be written in any of these formats:
+                Console.WriteLine(@$"Colors can be written in any of these formats:
   #rgb
   #rrggbb
   #rrggbbaa
   #rrrrggggbbbb
-  #rrrrggggbbbbaaaa");
+  #rrrrggggbbbbaaaa
+  colorname    (use {exeName} --colors  to see all available colors)");
                 Console.WriteLine("\nEnvironment variables");
                 Console.WriteLine(@"The program can read values from these variables:
   CDV_OUTPATH  Base path for output files
@@ -135,6 +139,16 @@ namespace Casasoft.CCDV
   CDV_FILL     Color used to fill images
   CDV_BORDER   Border color");
 
+                return true;
+            }
+
+            if (shouldShowColors)
+            {
+                Console.WriteLine("Available colors are:");
+                foreach (var color in colorDictionary)
+                {
+                    Console.WriteLine("{0,-24}{1}", color.Key, color.Value.ToHexString());
+                }
                 return true;
             }
 
@@ -150,6 +164,7 @@ namespace Casasoft.CCDV
                         Console.WriteLine(result);
                     }
                 }
+                return true;
             }
 
             if(!Path.IsPathRooted(OutputName))
@@ -161,6 +176,7 @@ namespace Casasoft.CCDV
 
             GetDPI();
             FillColor = GetColor(sFillColor);
+            BorderColor = GetColor(sBorderColor);
             return false;
         }
 
@@ -226,7 +242,46 @@ namespace Casasoft.CCDV
                 Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
         }
 
-        protected static MagickColor GetColor(string color) => new MagickColor(color);
+        protected Dictionary<string, MagickColor> colorDictionary;
+        protected void fillColorDictionary()
+        {
+            colorDictionary = new();
+            Type cl = typeof(MagickColors);
+            foreach (var color in cl.GetProperties())
+            {
+                colorDictionary.Add(color.Name, (MagickColor)color.GetValue(null));
+            }
+        }
+
+        protected MagickColor GetColor(string color)
+        {
+            if(!string.IsNullOrWhiteSpace(color))
+            {
+                if(color[0] == '#')
+                {
+                    return new MagickColor(color);
+                }
+                else
+                {
+                    MagickColor ret;
+                    if(colorDictionary.TryGetValue(color, out ret))
+                    {
+                        return ret;
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"Unknown color '{color}'\nTry {exeName} --colors");
+                        return MagickColors.Transparent;
+                    }
+                    
+                }
+            }
+            else
+            {
+                Console.Error.WriteLine("Invalid empty color");
+                return MagickColors.Transparent;
+            }            
+        }
 
         public void ExpandWildcards()
         {
