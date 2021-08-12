@@ -3,14 +3,29 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Casasoft.CCDV</RootNamespace>
+    <Authors>Roberto Ceccarelli - Casasoft</Authors>
+    <Product>Casasoft Contemporary Carte de Visite Tools</Product>
+    <Description>Strumenti di manipolazione delle immagini per la creazione di Carte de Visite contemporanee</Description>
+    <Copyright>copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/strawberryfield/Contemporary_CDV/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>C:\projects\Contemporary_CDV\bin\build\</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>C:\projects\Contemporary_CDV\bin\build\</OutputPath>
+  </PropertyGroup>
+  
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.1.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.2.1" />
     <PackageReference Include="Mono.Options" Version="6.6.0.161" />
   </ItemGroup>
 
@@ -18,4 +33,10 @@
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
+ <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 </Project>
