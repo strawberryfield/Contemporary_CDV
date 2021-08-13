@@ -1,0 +1,2 @@
+#!/bin/bash
+dotnet $0.dll $@

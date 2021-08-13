@@ -40,4 +40,10 @@
     <PackageReference Include="Mono.Options" Version="6.6.0.161" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="MontaggioFoto">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

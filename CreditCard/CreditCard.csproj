@@ -39,4 +39,10 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+
+ <ItemGroup>
+   <None Update="CreditCard">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </None>
+ </ItemGroup>
 </Project>

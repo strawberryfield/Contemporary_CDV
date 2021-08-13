@@ -245,7 +245,7 @@ namespace Casasoft.CCDV
         protected Dictionary<string, MagickColor> colorDictionary;
         protected void fillColorDictionary()
         {
-            colorDictionary = new();
+            colorDictionary = new(StringComparer.OrdinalIgnoreCase);
             Type cl = typeof(MagickColors);
             foreach (var color in cl.GetProperties())
             {

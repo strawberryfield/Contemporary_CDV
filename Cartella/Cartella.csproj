@@ -34,4 +34,10 @@ Creazione di asrucci a cartellina</Description>
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Cartella">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

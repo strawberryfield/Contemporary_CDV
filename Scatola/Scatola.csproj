@@ -40,4 +40,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Scatola">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scatola", "Scatola\Scatola.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cartella", "Cartella\Cartella.csproj", "{30A462AE-6B5C-46E4-94E5-5C99671D19EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditCard", "CreditCard\CreditCard.csproj", "{0BD9A192-C3F5-49D8-9F7D-B016BEBC5AE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCard", "CreditCard\CreditCard.csproj", "{0BD9A192-C3F5-49D8-9F7D-B016BEBC5AE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
