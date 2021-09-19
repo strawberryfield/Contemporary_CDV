@@ -51,6 +51,7 @@ if (string.IsNullOrWhiteSpace(par.BackImage))
 else
 {
     rear = Get(par.BackImage);
+    rear.Flop();
 }
 
 // Write text in front
