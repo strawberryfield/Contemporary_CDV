@@ -21,72 +21,71 @@
 
 using ImageMagick;
 
-namespace Casasoft.CCDV
+namespace Casasoft.CCDV;
+
+public class Formats
 {
-    public class Formats
+    private int _dpi;
+    private double _inch = 25.4;
+
+    #region constructors
+    public Formats() : this(300) { }
+
+    public Formats(int dpi)
     {
-        private int _dpi;
-        private double _inch = 25.4;
+        _dpi = dpi;
+    }
+    #endregion
 
-        #region constructors
-        public Formats() : this(300) { }
+    public int ToPixels(int mm) => (int)(mm * _dpi / _inch);
+    public int DPI => _dpi;
 
-        public Formats(int dpi)
-        {
-            _dpi = dpi;
-        }
-        #endregion
+    #region commercial formats
+    /// <summary>
+    /// Photocity Digital print over paper
+    /// </summary>
+    /// <remarks>
+    /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
+    /// </remarks>
+    public MagickGeometry InCartha20x27_o => new(ToPixels((int)(270 * 1.04)), ToPixels((int)(200 * 1.04)));
+    public MagickGeometry InCartha20x27_v => swap(InCartha20x27_o);
+    public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));
+    public MagickGeometry FineArt10x15_v => swap(FineArt10x15_o);
+    public MagickGeometry FineArt10x18_o => new(ToPixels(180), ToPixels(102));
+    public MagickGeometry FineArt10x18_v => swap(FineArt10x18_o);
+    #endregion
 
-        public int ToPixels(int mm) => (int)(mm * _dpi / _inch);
-        public int DPI => _dpi;
+    #region cdv
+    public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
+    public MagickGeometry CDV_Full_v => swap(CDV_Full_o);
+    public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(54));
+    public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
+    #endregion
 
-        #region commercial formats
-        /// <summary>
-        /// Photocity Digital print over paper
-        /// </summary>
-        /// <remarks>
-        /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
-        /// </remarks>
-        public MagickGeometry InCartha20x27_o => new(ToPixels((int)(270 * 1.04)), ToPixels((int)(200 * 1.04)));
-        public MagickGeometry InCartha20x27_v => swap(InCartha20x27_o);
-        public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));
-        public MagickGeometry FineArt10x15_v => swap(FineArt10x15_o);
-        public MagickGeometry FineArt10x18_o => new(ToPixels(180), ToPixels(102));
-        public MagickGeometry FineArt10x18_v => swap(FineArt10x18_o);
-        #endregion
+    #region credit card
+    public MagickGeometry CC_o => new(ToPixels(86), ToPixels(54));
+    public MagickGeometry CC_v => swap(CC_o);
+    #endregion
 
-        #region cdv
-        public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
-        public MagickGeometry CDV_Full_v => swap(CDV_Full_o);
-        public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(54));
-        public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
-        #endregion
+    private MagickGeometry swap(MagickGeometry g)
+    {
+        int tmp = g.Width;
+        g.Width = g.Height;
+        g.Height = tmp;
+        return g;
+    }
 
-        #region credit card
-        public MagickGeometry CC_o => new(ToPixels(86), ToPixels(54));
-        public MagickGeometry CC_v => swap(CC_o);
-        #endregion
+    public void SetImageParameters(MagickImage img)
+    {
+        img.Format = MagickFormat.Jpg;
+        img.Quality = 95;
+        img.Density = new Density(_dpi);
+        img.ColorSpace = ColorSpace.sRGB;
 
-        private MagickGeometry swap(MagickGeometry g)
-        {
-            int tmp = g.Width;
-            g.Width = g.Height;
-            g.Height = tmp;
-            return g;
-        }
-
-        public void SetImageParameters(MagickImage img)
-        {
-            img.Format = MagickFormat.Jpg;
-            img.Quality = 95;
-            img.Density = new Density(_dpi);
-            img.ColorSpace = ColorSpace.sRGB;
-
-            ExifProfile exif = new();
-            exif.SetValue(ExifTag.Make, "Casasoft");
-            exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");
-            exif.SetValue(ExifTag.Software, "Casasoft Contemporary Carte de Visite Tools");
-            img.SetProfile(exif);
-        }
+        ExifProfile exif = new();
+        exif.SetValue(ExifTag.Make, "Casasoft");
+        exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");
+        exif.SetValue(ExifTag.Software, "Casasoft Contemporary Carte de Visite Tools");
+        img.SetProfile(exif);
     }
 }

@@ -22,45 +22,45 @@
 using Mono.Options;
 using System;
 
-namespace Casasoft.CCDV
+namespace Casasoft.CCDV;
+
+public enum TargetType { cdv, cc }
+
+public class BaseBuilderCommandLine : CommandLine
 {
-    public enum TargetType { cdv, cc }
+    public int thickness { get; set; }
+    public string topImage { get; set; }
+    public string bottomImage { get; set; }
+    public string frontImage { get; set; }
+    public string backImage { get; set; }
+    public string leftImage { get; set; }
+    public string rightImage { get; set; }
+    public bool isHorizontal { get; set; }
+    public bool useSampleImages { get; set; }
+    public string borderText { get; set; }
+    public string font { get; set; }
+    public TargetType targetType { get; set; }
 
-    public class BaseBuilderCommandLine : CommandLine
+    private string sThickness = "5";
+    private string sTargetType = "CDV";
+    private string sOrientation = "PORTRAIT";
+
+    public BaseBuilderCommandLine(string outputname) :
+        this(ExeName(), outputname)
+    { }
+    public BaseBuilderCommandLine(string exename, string outputname) :
+        base(exename, outputname)
     {
-        public int thickness { get; set; }
-        public string topImage { get; set; }
-        public string bottomImage { get; set; }
-        public string frontImage { get; set; }
-        public string backImage { get; set; }
-        public string leftImage { get; set; }
-        public string rightImage { get; set; }
-        public bool isHorizontal { get; set; }
-        public bool useSampleImages { get; set; }
-        public string borderText { get; set; }
-        public string font { get; set; }
-        public TargetType targetType { get; set; }
+        topImage = string.Empty;
+        bottomImage = string.Empty;
+        frontImage = string.Empty;
+        backImage = string.Empty;
+        leftImage = string.Empty;
+        rightImage = string.Empty;
+        borderText = string.Empty;
+        font = "Arial";
 
-        private string sThickness = "5";
-        private string sTargetType = "CDV";
-        private string sOrientation = "PORTRAIT";
-
-        public BaseBuilderCommandLine(string outputname) :
-            this(ExeName(), outputname)
-        { }
-        public BaseBuilderCommandLine(string exename, string outputname) :
-            base(exename, outputname)
-        {
-            topImage = string.Empty;
-            bottomImage = string.Empty;
-            frontImage = string.Empty;
-            backImage = string.Empty;
-            leftImage = string.Empty;
-            rightImage = string.Empty;
-            borderText = string.Empty;
-            font = "Arial";
-
-            Options = new OptionSet
+        Options = new OptionSet
             {
                 { "a|aboveimage=", "set the image for the top cover", i => topImage = i },
                 { "z|bottomimage=", "set the image for the bottom", i => bottomImage = i },
@@ -75,45 +75,45 @@ namespace Casasoft.CCDV
                 { "orientation=", $"orientation of the box: 'portrait' or 'landscape' (default '{sOrientation}')", t => sOrientation = t.ToUpper() },
                 { "sample", "generate sample images", s => useSampleImages = s != null },
             };
-            AddBaseOptions();
-        }
+        AddBaseOptions();
+    }
 
-        public override bool Parse(string[] args)
+    public override bool Parse(string[] args)
+    {
+        if (base.Parse(args)) return true;
+
+        thickness = GetIntParameter(sThickness, thickness,
+            $"Incorrect thickness value '{sThickness}'. Using default value.");
+
+        if (sTargetType == "CDV")
         {
-            if (base.Parse(args)) return true;
-
-            thickness = GetIntParameter(sThickness, thickness,
-                $"Incorrect thickness value '{sThickness}'. Using default value.");
-
-            if (sTargetType == "CDV")
-            {
-                targetType = TargetType.cdv;
-            }
-            else if (sTargetType == "CC")
-            {
-                targetType = TargetType.cc;
-            }
-            else
-            {
-                Console.Error.WriteLine($"Incorrect format value '{sTargetType}'. Using default value.");
-                targetType = TargetType.cdv;
-            }
-
-            if(sOrientation == "PORTRAIT")
-            {
-                isHorizontal = false;
-            }
-            else if (sOrientation == "LANDSCAPE")
-            {
-                isHorizontal = true;
-            }
-            else
-            {
-                Console.Error.WriteLine($"Incorrect orientation value '{sOrientation}'. Using default value.");
-                isHorizontal = false;
-            }
-
-            return false;
+            targetType = TargetType.cdv;
         }
+        else if (sTargetType == "CC")
+        {
+            targetType = TargetType.cc;
+        }
+        else
+        {
+            Console.Error.WriteLine($"Incorrect format value '{sTargetType}'. Using default value.");
+            targetType = TargetType.cdv;
+        }
+
+        if (sOrientation == "PORTRAIT")
+        {
+            isHorizontal = false;
+        }
+        else if (sOrientation == "LANDSCAPE")
+        {
+            isHorizontal = true;
+        }
+        else
+        {
+            Console.Error.WriteLine($"Incorrect orientation value '{sOrientation}'. Using default value.");
+            isHorizontal = false;
+        }
+
+        return false;
     }
 }
+
