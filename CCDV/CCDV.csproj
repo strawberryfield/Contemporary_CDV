@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="245705239_10159826503248033_8804108188460609381_n.jpg" />
+    <PackageReference Include="Magick.NET.SystemWindowsMedia" Version="4.0.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="245705239_10159826503248033_8804108188460609381_n.jpg" />
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

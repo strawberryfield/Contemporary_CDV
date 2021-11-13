@@ -19,6 +19,8 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.Engines;
+using ImageMagick;
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,19 +33,29 @@ namespace Casasoft.CCDV.UI;
 /// </summary>
 public partial class MontaggioDorsi : Window
 {
+    private MontaggioDorsiEngine engine;
+
     public MontaggioDorsi()
     {
         InitializeComponent();
+        engine = new MontaggioDorsiEngine();
     }
 
     private void filename1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        TextBox tb = sender as TextBox;
+        TextBox tb = (TextBox)sender;
         OpenFileDialog openFileDialog = new();
         openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*";
         openFileDialog.Title = "Immagine dorso";
         if (openFileDialog.ShowDialog() == true)
             tb.Text = openFileDialog.FileName;
+    }
 
+    private void btnUpdate_Click(object sender, RoutedEventArgs e)
+    {
+        engine.Dpi = 72;
+        engine.FilesList.Clear();
+        engine.FilesList.Add(filename1.Text);
+        image.Source = engine.GetResult(true).ToBitmapSource();
     }
 }

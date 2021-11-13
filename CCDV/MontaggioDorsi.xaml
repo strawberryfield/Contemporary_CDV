@@ -38,5 +38,6 @@ If not, see <http://www.gnu.org/licenses/>.
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Label x:Name="lblFilenames" Content="Immagini da caricare" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="230" FontSize="18" FontWeight="Bold" Panel.ZIndex="1"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
+        <Button x:Name="btnUpdate" Content="Aggiorna" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="230" Click="btnUpdate_Click"/>
     </Grid>
 </Window>
