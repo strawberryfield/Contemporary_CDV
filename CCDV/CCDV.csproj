@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Casasoft.CCDV.UI</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="245705239_10159826503248033_8804108188460609381_n.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="245705239_10159826503248033_8804108188460609381_n.jpg" />
+  </ItemGroup>
+
+</Project>

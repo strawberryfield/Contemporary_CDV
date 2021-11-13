@@ -1,0 +1,42 @@
+﻿<!--
+copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft
+http://strawberryfield.altervista.org 
+
+This file is part of Casasoft Contemporary Carte de Visite Tools
+https://github.com/strawberryfield/Contemporary_CDV
+
+Casasoft CCDV Tools is free software: 
+you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Casasoft CCDV Tools is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU AGPL v.3
+along with Casasoft CCDV Tools.  
+If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Window x:Class="Casasoft.CCDV.UI.MontaggioDorsi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Casasoft.CCDV.UI"
+        mc:Ignorable="d"
+        Title="MontaggioDorsi" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="filename1" HorizontalAlignment="Center" Margin="0,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename1_MouseDoubleClick"/>
+        <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+        <Label x:Name="lblFilenames" Content="Immagini da caricare" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="230" FontSize="18" FontWeight="Bold" Panel.ZIndex="1"/>
+        <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
+    </Grid>
+</Window>
