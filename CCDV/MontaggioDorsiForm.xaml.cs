@@ -22,6 +22,7 @@
 using Casasoft.CCDV.Engines;
 using System.Windows;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace Casasoft.CCDV.UI;
 
@@ -39,7 +40,7 @@ public partial class MontaggioDorsiForm : BaseForm
     protected override void makePreview()
     {
         base.makePreview();
-        engine.FilesList.Add(filename1.Text);
+        addAllFiles();
         image.Source = EngineResult();
     }
 }
