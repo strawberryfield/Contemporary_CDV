@@ -35,7 +35,7 @@ public partial class MainWindow : Window
 
     private void btnDorsi_Click(object sender, RoutedEventArgs e)
     {
-        var form = new MontaggioDorsi();
+        var form = new MontaggioDorsiForm();
         form.ShowDialog();
     }
 }

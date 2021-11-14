@@ -19,18 +19,27 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using ImageMagick;
-using System.Collections.Generic;
+using Casasoft.CCDV.Engines;
+using System.Windows;
+using System.Linq;
 
-namespace Casasoft.CCDV.Engines;
+namespace Casasoft.CCDV.UI;
 
-public interface IEngine
+/// <summary>
+/// Interaction logic for MontaggioDorsiForm.xaml
+/// </summary>
+public partial class MontaggioDorsiForm : BaseForm
 {
-    int Dpi { get; set; }
-    List<string> FilesList { get; set; }
-    MagickColor FillColor { get; set; }
-    MagickColor BorderColor { get; set; }
+    public MontaggioDorsiForm()
+    {
+        InitializeComponent();
+        engine = new MontaggioDorsiEngine();
+    }
 
-    MagickImage GetResult();
-    MagickImage GetResult(bool quiet);
+    protected override void makePreview()
+    {
+        base.makePreview();
+        engine.FilesList.Add(filename1.Text);
+        image.Source = EngineResult();
+    }
 }

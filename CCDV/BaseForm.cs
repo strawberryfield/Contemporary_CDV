@@ -25,37 +25,43 @@ using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Casasoft.CCDV.UI;
 
 /// <summary>
 /// Interaction logic for MontaggioDorsi.xaml
 /// </summary>
-public partial class MontaggioDorsi : Window
+public partial class BaseForm : Window
 {
-    private MontaggioDorsiEngine engine;
+    protected IEngine engine;
 
-    public MontaggioDorsi()
+    public BaseForm()
     {
-        InitializeComponent();
-        engine = new MontaggioDorsiEngine();
+        engine = new BaseEngine();
     }
 
-    private void filename1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    protected void filename_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         TextBox tb = (TextBox)sender;
         OpenFileDialog openFileDialog = new();
         openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*";
-        openFileDialog.Title = "Immagine dorso";
+        openFileDialog.Title = "Immagine";
         if (openFileDialog.ShowDialog() == true)
             tb.Text = openFileDialog.FileName;
     }
 
-    private void btnUpdate_Click(object sender, RoutedEventArgs e)
+    protected void btnUpdate_Click(object sender, RoutedEventArgs e)
     {
         engine.Dpi = 72;
         engine.FilesList.Clear();
-        engine.FilesList.Add(filename1.Text);
-        image.Source = engine.GetResult(true).ToBitmapSource();
+        makePreview();
     }
+
+    protected virtual void makePreview()
+    {
+
+    }
+
+    protected BitmapSource EngineResult() => engine.GetResult(true).ToBitmapSource();
 }
