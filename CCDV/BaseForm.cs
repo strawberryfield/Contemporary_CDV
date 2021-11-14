@@ -23,11 +23,11 @@ using Casasoft.CCDV.Engines;
 using ImageMagick;
 using Microsoft.Win32;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Casasoft.CCDV.UI;
 
@@ -41,6 +41,9 @@ public partial class BaseForm : Window
     public BaseForm()
     {
         engine = new BaseEngine();
+        bwAnteprima = new BackgroundWorker();
+        bwAnteprima.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
+        bwAnteprima.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwAnteprima_RunWorkerCompleted);
     }
 
     protected void filename_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -65,7 +68,31 @@ public partial class BaseForm : Window
 
     }
 
-    protected BitmapSource EngineResult() => engine.GetResult(true).ToBitmapSource();
+    private BackgroundWorker bwAnteprima;
+    private WaitForm waitForm;
+    private Image image;
+
+    protected void AggiornaAnteprima(Image img)
+    {
+        image = img;
+        bwAnteprima.RunWorkerAsync();
+        waitForm = new WaitForm();
+        waitForm.Owner = this;
+        waitForm.ShowDialog();
+    }
+
+    private void bwAnteprima_DoWork(object sender, DoWorkEventArgs e)
+    {
+        e.Result = engine.GetResult(true);
+    }
+
+    private void bwAnteprima_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+        MagickImage bm = (MagickImage)e.Result;
+        image.Source = bm.ToBitmapSource();
+        waitForm.Close();
+    }
+
 
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {

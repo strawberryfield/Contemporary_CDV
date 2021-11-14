@@ -20,9 +20,6 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.Engines;
-using System.Windows;
-using System.Linq;
-using System.Windows.Controls;
 
 namespace Casasoft.CCDV.UI;
 
@@ -31,7 +28,7 @@ namespace Casasoft.CCDV.UI;
 /// </summary>
 public partial class MontaggioDorsiForm : BaseForm
 {
-    public MontaggioDorsiForm()
+    public MontaggioDorsiForm() : base()
     {
         InitializeComponent();
         engine = new MontaggioDorsiEngine();
@@ -41,6 +38,7 @@ public partial class MontaggioDorsiForm : BaseForm
     {
         base.makePreview();
         addAllFiles();
-        image.Source = EngineResult();
+        AggiornaAnteprima(image);
     }
+
 }
