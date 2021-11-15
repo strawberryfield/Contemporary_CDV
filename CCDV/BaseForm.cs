@@ -56,6 +56,20 @@ public partial class BaseForm : Window
             tb.Text = openFileDialog.FileName;
     }
 
+    protected void filename_PreviewDragOver(object sender, DragEventArgs e)
+    {
+        e.Handled = true;
+    }
+
+    protected void filename_Drop(object sender, DragEventArgs e)
+    {
+        TextBox tb = (TextBox)sender;
+        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+        if (files != null && files.Length != 0)
+        {
+            tb.Text = files[0];
+        }
+    }
     protected void btnUpdate_Click(object sender, RoutedEventArgs e)
     {
         engine.Dpi = 72;

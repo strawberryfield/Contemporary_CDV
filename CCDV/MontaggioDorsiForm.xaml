@@ -35,16 +35,16 @@ If not, see <http://www.gnu.org/licenses/>.
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="filename1" HorizontalAlignment="Center" Margin="0,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick"/>
+        <TextBox x:Name="filename1" HorizontalAlignment="Center" Margin="0,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Label x:Name="lblFilenames" Content="Immagini da caricare" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="230" FontSize="18" FontWeight="Bold" Panel.ZIndex="1"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
         <Button x:Name="btnUpdate" Content="Aggiorna" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="230" Click="btnUpdate_Click"/>
-        <TextBox x:Name="filename2" HorizontalAlignment="Center" Margin="0,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick"/>
-        <TextBox x:Name="filename3" HorizontalAlignment="Center" Margin="0,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick"/>
-        <TextBox x:Name="filename4" HorizontalAlignment="Center" Margin="0,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick"/>
-        <TextBox x:Name="filename5" HorizontalAlignment="Center" Margin="0,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick"/>
-        <TextBox x:Name="filename6" HorizontalAlignment="Center" Margin="0,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick"/>
+        <TextBox x:Name="filename2" HorizontalAlignment="Center" Margin="0,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
+        <TextBox x:Name="filename3" HorizontalAlignment="Center" Margin="0,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
+        <TextBox x:Name="filename4" HorizontalAlignment="Center" Margin="0,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
+        <TextBox x:Name="filename5" HorizontalAlignment="Center" Margin="0,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
+        <TextBox x:Name="filename6" HorizontalAlignment="Center" Margin="0,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
     </Grid>
 
 </src:BaseForm>
