@@ -20,8 +20,6 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.Engines;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace Casasoft.CCDV.UI;
 
