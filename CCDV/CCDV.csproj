@@ -36,4 +36,15 @@
     </Compile>
   </ItemGroup>
 
+	<ItemGroup>
+		<Reference Include="ColorPIcker.dll">
+			<HintPath>..\libs\ColorPIcker.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.Xaml.Behaviors.dll">
+			<HintPath>..\libs\Microsoft.Xaml.Behaviors.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
 </Project>
