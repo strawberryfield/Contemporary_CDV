@@ -1,40 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <RootNamespace>Casasoft.CCDV.UI</RootNamespace>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Platforms>AnyCPU;x64</Platforms>
-    <IsPublishable>False</IsPublishable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<RootNamespace>Casasoft.CCDV.UI</RootNamespace>
+		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<Platforms>AnyCPU;x64</Platforms>
+		<IsPublishable>False</IsPublishable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="spinner.gif" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="spinner.gif" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Magick.NET.SystemWindowsMedia" Version="4.0.9" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Magick.NET.SystemWindowsMedia" Version="4.0.9" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Common\Common.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="spinner.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="spinner.gif">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="BaseForm.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="BaseForm.cs">
+			<SubType>Code</SubType>
+		</Compile>
+	</ItemGroup>
 
 	<ItemGroup>
 		<Reference Include="ColorPIcker.dll">
@@ -44,6 +44,11 @@
 	<ItemGroup>
 		<Reference Include="Microsoft.Xaml.Behaviors.dll">
 			<HintPath>..\libs\Microsoft.Xaml.Behaviors.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="XamlAnimatedGif.dll">
+			<HintPath>..\libs\XamlAnimatedGif.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 

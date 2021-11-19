@@ -26,6 +26,7 @@ If not, see <http://www.gnu.org/licenses/>.
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
         xmlns:local="clr-namespace:Casasoft.CCDV.UI"
         mc:Ignorable="d"
         Title="WaitForm" Height="89" Width="224" ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterOwner">
@@ -35,7 +36,7 @@ If not, see <http://www.gnu.org/licenses/>.
         <Label x:Name="lblProcessing" Content="Processing..." HorizontalAlignment="Left" Margin="79,10,0,0" VerticalAlignment="Top" FontSize="24" RenderTransformOrigin="0.504,0"/>
         <Label x:Name="lblPleaseWait" Content="Please Wait." HorizontalAlignment="Left" Margin="79,37,0,0" VerticalAlignment="Top" FontSize="24" HorizontalContentAlignment="Left"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="35,62,0,0" VerticalAlignment="Top" Width="100"/>
-        <MediaElement HorizontalAlignment="Left" Height="65" Margin="10,10,0,0" VerticalAlignment="Top" Width="64" Source="./spinner.gif" LoadedBehavior="Play"/>
+        <Image HorizontalAlignment="Left" Height="65" Margin="10,10,0,0" VerticalAlignment="Top" Width="64" gif:AnimationBehavior.SourceUri="spinner.gif"/>
 
     </Grid>
 </Window>
