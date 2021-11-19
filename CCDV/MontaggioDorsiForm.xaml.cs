@@ -42,4 +42,5 @@ public partial class MontaggioDorsiForm : BaseForm
         engine.BorderColor = ColorFromPicker(cpBorder);
         AggiornaAnteprima(image);
     }
+
 }

@@ -24,6 +24,7 @@ using ImageMagick;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -75,6 +76,12 @@ public partial class BaseForm : Window
         engine.Dpi = 72;
         engine.FilesList.Clear();
         makePreview();
+    }
+
+    protected void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+    {
+        Regex regex = new Regex("[^0-9]+");
+        e.Handled = regex.IsMatch(e.Text);
     }
 
     protected virtual void makePreview()
