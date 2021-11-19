@@ -38,6 +38,8 @@ public partial class MontaggioDorsiForm : BaseForm
     {
         base.makePreview();
         addAllFiles();
+        engine.FillColor = ColorFromPicker(cpFill);
+        engine.BorderColor = ColorFromPicker(cpBorder);
         AggiornaAnteprima(image);
     }
 }

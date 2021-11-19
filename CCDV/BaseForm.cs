@@ -133,4 +133,9 @@ public partial class BaseForm : Window
                 engine.FilesList.Add(tb.Text);
         }
     }
+
+    protected MagickColor ColorFromPicker(ColorPicker.PortableColorPicker cp) =>
+        new MagickColor((ushort)(cp.SelectedColor.R * 256),
+            (ushort)(cp.SelectedColor.G * 256),
+            (ushort)(cp.SelectedColor.B * 256));
 }
