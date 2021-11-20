@@ -27,6 +27,7 @@ If not, see <http://www.gnu.org/licenses/>.
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
         xmlns:local="clr-namespace:Casasoft.CCDV.UI"
         mc:Ignorable="d"
         Title="Montaggio Dorsi" Height="450" Width="800">
@@ -35,16 +36,16 @@ If not, see <http://www.gnu.org/licenses/>.
             <ColumnDefinition Width="250" MinWidth="250" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="filename1" HorizontalAlignment="Stretch" Margin="10,48,10,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Label x:Name="lblFilenames" Content="Immagini da caricare" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="230" FontSize="18" FontWeight="Bold" Panel.ZIndex="1"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
         <Button x:Name="btnUpdate" Content="Aggiorna Anteprima" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="230" Click="btnUpdate_Click"/>
-        <TextBox x:Name="filename2" HorizontalAlignment="Stretch" Margin="10,78 ,10,0"  TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
-        <TextBox x:Name="filename3" HorizontalAlignment="Stretch" Margin="10,108,10,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
-        <TextBox x:Name="filename4" HorizontalAlignment="Stretch" Margin="10,138,10,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
-        <TextBox x:Name="filename5" HorizontalAlignment="Stretch" Margin="10,168,10,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
-        <TextBox x:Name="filename6" HorizontalAlignment="Stretch" Margin="10,198,10,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
+        <casasoft:FileTextBox x:Name="filename1" HorizontalAlignment="Stretch" Margin="10,48,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+        <casasoft:FileTextBox x:Name="filename2" HorizontalAlignment="Stretch" Margin="10,78 ,10,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+        <casasoft:FileTextBox x:Name="filename3" HorizontalAlignment="Stretch" Margin="10,108,10,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+        <casasoft:FileTextBox x:Name="filename4" HorizontalAlignment="Stretch" Margin="10,138,10,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+        <casasoft:FileTextBox x:Name="filename5" HorizontalAlignment="Stretch" Margin="10,168,10,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+        <casasoft:FileTextBox x:Name="filename6" HorizontalAlignment="Stretch" Margin="10,198,10,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
         <local:CommonOptionsControl x:Name="commonOptions" HorizontalAlignment="Stretch" Margin="0,228,0,0" VerticalAlignment="Top" />
 

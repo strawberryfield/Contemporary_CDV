@@ -20,13 +20,12 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.Engines;
+using Casasoft.Xaml.Controls;
 using ImageMagick;
-using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Casasoft.CCDV.UI;
@@ -46,30 +45,6 @@ public partial class BaseForm : Window
         bwAnteprima.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwAnteprima_RunWorkerCompleted);
     }
 
-    protected void filename_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        TextBox tb = (TextBox)sender;
-        OpenFileDialog openFileDialog = new();
-        openFileDialog.Filter = "Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*";
-        openFileDialog.Title = "Immagine";
-        if (openFileDialog.ShowDialog() == true)
-            tb.Text = openFileDialog.FileName;
-    }
-
-    protected void filename_PreviewDragOver(object sender, DragEventArgs e)
-    {
-        e.Handled = true;
-    }
-
-    protected void filename_Drop(object sender, DragEventArgs e)
-    {
-        TextBox tb = (TextBox)sender;
-        string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-        if (files != null && files.Length != 0)
-        {
-            tb.Text = files[0];
-        }
-    }
     protected void btnUpdate_Click(object sender, RoutedEventArgs e)
     {
         engine.Dpi = 72;
@@ -126,13 +101,10 @@ public partial class BaseForm : Window
 
     protected void addAllFiles()
     {
-        foreach (var tb in FindVisualChildren<TextBox>(this))
+        foreach (var tb in FindVisualChildren<FileTextBox>(this))
         {
-            if (tb.Name.StartsWith("filename"))
-            {
-                if (!string.IsNullOrWhiteSpace(tb.Text))
-                    engine.FilesList.Add(tb.Text);
-            }
+            if (!string.IsNullOrWhiteSpace(tb.Value))
+                engine.FilesList.Add(tb.Value);
         }
     }
 
