@@ -27,8 +27,6 @@ If not, see <http://www.gnu.org/licenses/>.
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
-        xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
         xmlns:local="clr-namespace:Casasoft.CCDV.UI"
         mc:Ignorable="d"
         Title="Montaggio Dorsi" Height="450" Width="800">
@@ -48,12 +46,8 @@ If not, see <http://www.gnu.org/licenses/>.
         <TextBox x:Name="filename5" HorizontalAlignment="Stretch" Margin="10,168,10,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
         <TextBox x:Name="filename6" HorizontalAlignment="Stretch" Margin="10,198,10,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Panel.ZIndex="1" MouseDoubleClick="filename_MouseDoubleClick" Drop="filename_Drop" PreviewDragOver="filename_PreviewDragOver" Height="18"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
-        <colorpicker:PortableColorPicker x:Name="cpFill" VerticalAlignment="Top" Margin="10,228,10,0" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="White" />
-        <Label x:Name="lblFill" Content="Colore di riempimento" HorizontalAlignment="Left" Margin="60,222,0,0" VerticalAlignment="Top" Width="170"/>
-        <colorpicker:PortableColorPicker x:Name="cpBorder" VerticalAlignment="Top" Margin="10,258,0,0" HorizontalAlignment="Left" ShowAlpha="False" />
-        <Label x:Name="lblBorder" Content="Colore dei bordi" HorizontalAlignment="Left" Margin="60,252,0,0" VerticalAlignment="Top" Width="170"/>
-        <casasoft:NumericUpDown x:Name="txtDPI" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" Width="60" Value="300" MinValue="1"/>
-        <Label x:Name="lblDPI" Content="DPI" HorizontalAlignment="Left" Margin="70,281,0,0" VerticalAlignment="Top" Width="170"/>
+        <local:CommonOptionsControl x:Name="commonOptions" HorizontalAlignment="Stretch" Margin="0,228,0,0" VerticalAlignment="Top" />
+
     </Grid>
 
 </src:BaseForm>

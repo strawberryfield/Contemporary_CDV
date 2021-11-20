@@ -24,7 +24,6 @@ using ImageMagick;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -137,8 +136,4 @@ public partial class BaseForm : Window
         }
     }
 
-    protected MagickColor ColorFromPicker(ColorPicker.PortableColorPicker cp) =>
-        new MagickColor((ushort)(cp.SelectedColor.R * 256),
-            (ushort)(cp.SelectedColor.G * 256),
-            (ushort)(cp.SelectedColor.B * 256));
 }

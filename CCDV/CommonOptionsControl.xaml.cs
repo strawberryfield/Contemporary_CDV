@@ -19,28 +19,28 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using Casasoft.CCDV.Engines;
+using ImageMagick;
+using System.Windows.Controls;
 
 namespace Casasoft.CCDV.UI;
 
 /// <summary>
-/// Interaction logic for MontaggioDorsiForm.xaml
+/// Interaction logic for CommonOptionsControl.xaml
 /// </summary>
-public partial class MontaggioDorsiForm : BaseForm
+public partial class CommonOptionsControl : UserControl
 {
-    public MontaggioDorsiForm() : base()
+    public CommonOptionsControl()
     {
         InitializeComponent();
-        engine = new MontaggioDorsiEngine();
     }
 
-    protected override void makePreview()
-    {
-        base.makePreview();
-        addAllFiles();
-        engine.FillColor = commonOptions.FillColor;
-        engine.BorderColor = commonOptions.BorderColor;
-        AggiornaAnteprima(image);
-    }
+    public int DpiValue { get => txtDPI.Value; set => txtDPI.Value = value; }
 
+    private MagickColor ColorFromPicker(ColorPicker.PortableColorPicker cp) =>
+        new MagickColor((ushort)(cp.SelectedColor.R * 256),
+            (ushort)(cp.SelectedColor.G * 256),
+            (ushort)(cp.SelectedColor.B * 256));
+
+    public MagickColor BorderColor { get => ColorFromPicker(cpBorder); }
+    public MagickColor FillColor { get => ColorFromPicker(cpFill); }
 }
