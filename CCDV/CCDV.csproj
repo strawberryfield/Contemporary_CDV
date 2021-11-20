@@ -51,5 +51,10 @@
 			<HintPath>..\libs\XamlAnimatedGif.dll</HintPath>
 		</Reference>
 	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Casasoft.Xaml.Controls.dll">
+			<HintPath>..\libs\Casasoft.Xaml.Controls.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
 </Project>

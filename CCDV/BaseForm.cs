@@ -78,15 +78,8 @@ public partial class BaseForm : Window
         makePreview();
     }
 
-    protected void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-    {
-        Regex regex = new Regex("[^0-9]+");
-        e.Handled = regex.IsMatch(e.Text);
-    }
-
     protected virtual void makePreview()
     {
-
     }
 
     private BackgroundWorker bwAnteprima;
@@ -136,8 +129,11 @@ public partial class BaseForm : Window
     {
         foreach (var tb in FindVisualChildren<TextBox>(this))
         {
-            if (!string.IsNullOrWhiteSpace(tb.Text))
-                engine.FilesList.Add(tb.Text);
+            if (tb.Name.StartsWith("filename"))
+            {
+                if (!string.IsNullOrWhiteSpace(tb.Text))
+                    engine.FilesList.Add(tb.Text);
+            }
         }
     }
 
