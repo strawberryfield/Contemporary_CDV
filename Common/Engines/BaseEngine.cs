@@ -32,6 +32,7 @@ public class BaseEngine : IEngine
     public MagickColor BorderColor { get; set; }
 
     protected Formats fmt;
+    protected Images img;
 
     public BaseEngine()
     {
@@ -54,4 +55,7 @@ public class BaseEngine : IEngine
     public virtual MagickImage GetResult() => GetResult(false);
     public virtual MagickImage GetResult(bool quiet) => null;
 
+    public void SetImageParameters(MagickImage image) => fmt.SetImageParameters(image);
+
+    public void SetImageInfo(string i, string o, MagickImage image) => img.Info(i, o).Draw(image);
 }

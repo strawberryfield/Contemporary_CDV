@@ -22,6 +22,7 @@
 using Casasoft.CCDV.Engines;
 using Casasoft.Xaml.Controls;
 using ImageMagick;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
@@ -31,34 +32,55 @@ using System.Windows.Media;
 namespace Casasoft.CCDV.UI;
 
 /// <summary>
-/// Interaction logic for MontaggioDorsi.xaml
+/// Common interaction logic
 /// </summary>
 public partial class BaseForm : Window
 {
     protected IEngine engine;
 
+    private BackgroundWorker bwAnteprima;
+    private BackgroundWorker bwRender;
+    private WaitForm waitForm;
+    private Image image;
+
     public BaseForm()
     {
         engine = new BaseEngine();
+
         bwAnteprima = new BackgroundWorker();
         bwAnteprima.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
         bwAnteprima.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwAnteprima_RunWorkerCompleted);
+
+        bwRender = new BackgroundWorker();
+        bwRender.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
+        bwRender.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwRender_RunWorkerCompleted);
     }
 
     protected void btnUpdate_Click(object sender, RoutedEventArgs e)
     {
-        engine.Dpi = 72;
-        engine.FilesList.Clear();
-        makePreview();
+        doAnteprima();
     }
 
-    protected virtual void makePreview()
+    protected void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        engine.FilesList.Clear();
+        setEngineParameters();
+        bwRender.RunWorkerAsync();
+        waitForm = new WaitForm();
+        waitForm.Owner = this;
+        waitForm.ShowDialog();
+    }
+
+    protected virtual void setEngineParameters()
     {
     }
 
-    private BackgroundWorker bwAnteprima;
-    private WaitForm waitForm;
-    private Image image;
+    protected virtual void doAnteprima()
+    {
+        engine.FilesList.Clear();
+        setEngineParameters();
+        engine.Dpi = 72;
+    }
 
     protected void AggiornaAnteprima(Image img)
     {
@@ -81,6 +103,27 @@ public partial class BaseForm : Window
         waitForm.Close();
     }
 
+    private void bwRender_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+        MagickImage bm = (MagickImage)e.Result;
+        waitForm.Close();
+
+        SaveFileDialog sd = new();
+        sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+        sd.Title = "Salvataggio immagine";
+        sd.DefaultExt = "jpg";
+        sd.AddExtension = true;
+        sd.OverwritePrompt = true;
+        sd.ShowDialog();
+        if (!string.IsNullOrWhiteSpace(sd.FileName))
+        {
+            engine.SetImageInfo("Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n",
+                sd.FileName, bm);
+            engine.SetImageParameters(bm);
+            bm.Write(sd.FileName);
+        }
+
+    }
 
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {

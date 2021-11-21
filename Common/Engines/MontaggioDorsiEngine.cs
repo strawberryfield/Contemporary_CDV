@@ -36,7 +36,7 @@ public class MontaggioDorsiEngine : BaseEngine
 
     public override MagickImage GetResult(bool quiet)
     {
-        Images img = new(fmt);
+        img = new(fmt);
 
         MagickImage final = img.InCartha20x27_o();
         MagickImageCollection imagesV = new();

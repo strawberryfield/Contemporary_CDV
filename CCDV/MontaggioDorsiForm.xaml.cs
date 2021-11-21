@@ -34,13 +34,18 @@ public partial class MontaggioDorsiForm : BaseForm
         engine = new MontaggioDorsiEngine();
     }
 
-    protected override void makePreview()
+    protected override void setEngineParameters()
     {
-        base.makePreview();
+        base.setEngineParameters();
         addAllFiles();
         engine.FillColor = commonOptions.FillColor;
         engine.BorderColor = commonOptions.BorderColor;
-        AggiornaAnteprima(image);
+        engine.Dpi = commonOptions.DpiValue;
     }
 
+    protected override void doAnteprima()
+    {
+        base.doAnteprima();
+        AggiornaAnteprima(image);
+    }
 }
