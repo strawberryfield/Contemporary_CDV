@@ -19,29 +19,39 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.Engines;
 using System.Windows;
 
 namespace Casasoft.CCDV.UI;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Interaction logic for MontaggioFotoForm.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MontaggioFotoForm : BaseForm
 {
-    public MainWindow()
+    public MontaggioFotoForm() : base()
     {
         InitializeComponent();
+        engine = new MontaggioFotoEngine();
     }
 
-    private void btnDorsi_Click(object sender, RoutedEventArgs e)
+    protected override void setEngineParameters()
     {
-        MontaggioDorsiForm? form = new();
-        form.ShowDialog();
+        base.setEngineParameters();
+        addAllFiles();
+        MontaggioFotoEngine eng = (MontaggioFotoEngine)engine;
+        eng.FillColor = commonOptions.FillColor;
+        eng.BorderColor = commonOptions.BorderColor;
+        eng.Dpi = commonOptions.DpiValue;
+        eng.WithBorder = (bool)chkWithBorders.IsChecked;
+        eng.FullSize = (bool)chkFullSize.IsChecked; 
+        eng.Trim = (bool)chkTrim.IsChecked;       
     }
 
-    private void btnFoto_Click(object sender, RoutedEventArgs e)
+    protected override void doAnteprima()
     {
-        MontaggioFotoForm? form = new();
-        form.ShowDialog();
+        base.doAnteprima();
+        AggiornaAnteprima(image);
     }
+
 }

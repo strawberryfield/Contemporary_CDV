@@ -34,6 +34,8 @@ public interface IEngine
     MagickImage GetResult();
     MagickImage GetResult(bool quiet);
     void SetImageParameters(MagickImage image);
+    void SetImageInfo(string o, MagickImage image);
     void SetImageInfo(string i, string o, MagickImage image);
+    string WelcomeBannerText();
 
 }

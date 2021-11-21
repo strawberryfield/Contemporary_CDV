@@ -117,8 +117,7 @@ public partial class BaseForm : Window
         sd.ShowDialog();
         if (!string.IsNullOrWhiteSpace(sd.FileName))
         {
-            engine.SetImageInfo("Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n",
-                sd.FileName, bm);
+            engine.SetImageInfo(sd.FileName, bm);
             engine.SetImageParameters(bm);
             bm.Write(sd.FileName);
         }

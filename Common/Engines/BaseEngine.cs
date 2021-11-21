@@ -57,5 +57,8 @@ public class BaseEngine : IEngine
 
     public void SetImageParameters(MagickImage image) => fmt.SetImageParameters(image);
 
+    public void SetImageInfo(string o, MagickImage image) => img.Info(WelcomeBannerText(), o).Draw(image);
     public void SetImageInfo(string i, string o, MagickImage image) => img.Info(i, o).Draw(image);
+    public virtual string WelcomeBannerText() => 
+        "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
 }
