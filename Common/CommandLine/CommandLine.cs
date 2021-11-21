@@ -29,7 +29,7 @@ using System.Reflection;
 
 namespace Casasoft.CCDV;
 
-public class CommandLine
+public class CommandLine : ICommandLine
 {
     protected bool shouldShowHelp { get; set; }
     protected bool shouldShowColors { get; set; }

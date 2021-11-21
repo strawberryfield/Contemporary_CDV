@@ -43,7 +43,7 @@ public class BaseEngine : IEngine
         fmt = new Formats(Dpi);
     }
 
-    public BaseEngine(CommandLine par)
+    public BaseEngine(ICommandLine par)
     {
         Dpi = par.Dpi;
         FilesList = par.FilesList;

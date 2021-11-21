@@ -101,31 +101,3 @@ MagickImage Get(string filename)
     else
         return img1;
 }
-
-#region command line
-internal class MontaggioFotoCommandLine : CommandLine
-{
-    public bool FullSize { get; set; }
-    public bool WithBorder { get; set; }
-    public bool Trim { get; set; }
-
-    public MontaggioFotoCommandLine(string outputname) :
-    this(ExeName(), outputname)
-    { }
-    public MontaggioFotoCommandLine(string exename, string outputname) :
-        base(exename, outputname)
-    {
-        FullSize = false;
-        WithBorder = false;
-        Trim = false;
-
-        Options = new OptionSet
-            {
-                { "fullsize", "resize image to full format", o => FullSize = o != null },
-                { "withborder", "include border to full format", o => WithBorder = o != null },
-                { "trim", "trim white space", o => Trim = o != null },
-            };
-        AddBaseOptions();
-    }
-}
-#endregion

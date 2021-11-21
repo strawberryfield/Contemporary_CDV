@@ -36,6 +36,10 @@ public class MontaggioFotoEngine : BaseEngine
 
     public MontaggioFotoEngine(CommandLine par) : base(par)
     {
+        MontaggioFotoCommandLine p = (MontaggioFotoCommandLine)par;
+        FullSize = p.FullSize;
+        Trim = p.Trim;  
+        WithBorder = p.WithBorder;
     }
 
     public override MagickImage GetResult(bool quiet) => GetResult(quiet, 0);
