@@ -20,9 +20,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV;
+using Casasoft.CCDV.Engines;
 using ImageMagick;
-using Mono.Options;
-using System;
 
 #region command line
 MontaggioFotoCommandLine par = new("card");
@@ -33,71 +32,11 @@ par.ExpandWildcards();
 #endregion
 
 #region main
-Formats fmt = new(par.Dpi);
-Images img = new(fmt);
-
-for (int i = 0; i < par.FilesList.Count; i++)
+MontaggioFotoEngine engine = new(par);
+for (int i = 0; i < par.FilesList.Count; i += 2)
 {
-    MagickImage final = img.FineArt10x15_o();
-    MagickImage img1 = Get(par.FilesList[i]);
-
-    MagickImage img2;
-    i++;
-    if (i < par.FilesList.Count)
-    {
-        img2 = Get(par.FilesList[i]);
-    }
-    else
-    {
-        img2 = img.CDV_Internal_v();
-    }
-
-    final.Composite(HalfCard(img1), Gravity.West);
-    final.Composite(HalfCard(img2), Gravity.East);
-
-    fmt.SetImageParameters(final);
-    final.Write($"{par.OutputName}-{(i + 1) / 2,3:D3}.jpg");
+    MagickImage final = engine.GetResult(false, i);
+    engine.SetImageParameters(final);
+    final.Write($"{par.OutputName}-{i / 2 + 1,3:D3}.jpg");
 }
 #endregion
-
-Drawables BaseText()
-{
-    Drawables d = new Drawables();
-    d.FontPointSize(fmt.ToPixels(3) / 2)
-        .Font("Arial")
-        .FillColor(MagickColors.Black)
-        .TextAlignment(TextAlignment.Left)
-        .Gravity(Gravity.Northwest)
-        .Rotation(90);
-    return d;
-}
-
-MagickImage HalfCard(MagickImage image)
-{
-    image.BorderColor = par.BorderColor;
-    image.Border(1);
-    MagickImage half = new(MagickColors.White, fmt.FineArt10x15_o.Width / 2, fmt.FineArt10x15_o.Height);
-    half.Composite(image, Gravity.Center);
-    BaseText().Text(fmt.ToPixels(5), -half.Width + fmt.ToPixels(3), $"Source: {image.FileName}")
-        .Text(fmt.ToPixels(5), -fmt.ToPixels(3), par.WelcomeBannerText())
-        .Text(half.Height/2, -fmt.ToPixels(3), $"Run {DateTime.Now.ToString("R")}")
-        .Draw(half);
-    return half;
-}
-
-MagickImage Get(string filename)
-{
-    Console.WriteLine($"Processing: {filename}");
-    MagickImage img1 = Utils.RotateResizeAndFill(new(filename),
-        par.FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v,
-        par.FillColor);
-    if (par.Trim) img1.Trim();
-    if (par.WithBorder)
-    {
-        MagickImage img2 = img.CDV_Full_v(par.FillColor);
-        img2.Composite(img1, Gravity.Center);
-        return img2;
-    }
-    else
-        return img1;
-}

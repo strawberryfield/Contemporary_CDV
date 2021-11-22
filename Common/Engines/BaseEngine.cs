@@ -52,7 +52,7 @@ public class BaseEngine : IEngine
         fmt = new Formats(Dpi);
     }
 
-    public virtual MagickImage GetResult() => GetResult(false);
+    public MagickImage GetResult() => GetResult(false);
     public virtual MagickImage GetResult(bool quiet) => null;
 
     public void SetImageParameters(MagickImage image) => fmt.SetImageParameters(image);

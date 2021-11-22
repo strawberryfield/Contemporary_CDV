@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CCDV": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\foto\\bicingiro\\cesena\\P1*.jpg"
+    }
+  }
+}

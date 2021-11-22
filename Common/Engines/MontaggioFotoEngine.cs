@@ -38,7 +38,7 @@ public class MontaggioFotoEngine : BaseEngine
     {
         MontaggioFotoCommandLine p = (MontaggioFotoCommandLine)par;
         FullSize = p.FullSize;
-        Trim = p.Trim;  
+        Trim = p.Trim;
         WithBorder = p.WithBorder;
     }
 
@@ -47,13 +47,13 @@ public class MontaggioFotoEngine : BaseEngine
     {
         img = new(fmt);
         MagickImage final = img.FineArt10x15_o();
-        MagickImage img1 = Get(FilesList[i]);
+        MagickImage img1 = Get(FilesList[i], quiet);
 
         MagickImage img2;
         i++;
         if (i < FilesList.Count)
         {
-            img2 = Get(FilesList[i]);
+            img2 = Get(FilesList[i], quiet);
         }
         else
         {
@@ -90,9 +90,9 @@ public class MontaggioFotoEngine : BaseEngine
         return half;
     }
 
-    private MagickImage Get(string filename)
+    private MagickImage Get(string filename, bool quiet)
     {
-        Console.WriteLine($"Processing: {filename}");
+        if (!quiet) Console.WriteLine($"Processing: {filename}");
         MagickImage img1 = Utils.RotateResizeAndFill(new(filename),
             FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v,
             FillColor);

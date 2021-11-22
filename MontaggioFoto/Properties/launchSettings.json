@@ -2,10 +2,10 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "--fullsize --fillcolor=#808080 C:\\foto\\fq\\storia_noc2.png C:\\foto\\fq\\storia_ultimogiorno_cdv.jpg",
+      "commandLineArgs": "C:\\foto\\bicingiro\\cesena\\P1*.jpg",
       "environmentVariables": {
-        "CDV_DPI": "600",
-        "CDV_OUTPATH": "C:\\temp"
+        "CDV_OUTPATH": "C:\\temp",
+        "CDV_DPI": "600"
       }
     }
   }
