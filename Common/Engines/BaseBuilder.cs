@@ -24,7 +24,7 @@ using System.IO;
 
 namespace Casasoft.CCDV;
 
-public class BaseBuilder
+public class BaseBuilder : IBuilder
 {
     protected int spessore;
     protected Formats fmt;
