@@ -26,7 +26,7 @@ namespace Casasoft.CCDV;
 
 public class BaseBuilder : IBuilder
 {
-    protected int spessore;
+    public int spessore { get; set; }
     protected Formats fmt;
     protected BaseBuilderCommandLine par;
     protected MagickColor fillColor;

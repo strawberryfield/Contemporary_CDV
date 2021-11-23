@@ -19,21 +19,15 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using ImageMagick;
+namespace Casasoft.CCDV.UI;
 
-namespace Casasoft.CCDV;
-
-internal interface IBuilder
+/// <summary>
+/// Interaction logic for BoxBuilderForm.xaml
+/// </summary>
+public partial class BoxBuilderForm : BaseForm
 {
-    int spessore { get; set; }
-
-    void SetTopImage(string filename);
-    void SetBottomImage(string filename);
-    void SetLeftImage(string filename);
-    void SetRightImage(string filename);
-    void SetFrontImage(string filename);
-    void SetBackImage(string filename, bool isHorizontal = false);
-
-    void AddCuttingLines(MagickImage img);
-    void CreateTestImages();
+    public BoxBuilderForm()
+    {
+        InitializeComponent();
+    }
 }

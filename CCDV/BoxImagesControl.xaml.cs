@@ -19,21 +19,25 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using ImageMagick;
+using System.Windows.Controls;
 
-namespace Casasoft.CCDV;
+namespace Casasoft.CCDV.UI;
 
-internal interface IBuilder
+/// <summary>
+/// Interaction logic for BoxImagesControl.xaml
+/// </summary>
+public partial class BoxImagesControl : UserControl
 {
-    int spessore { get; set; }
+    public BoxImagesControl()
+    {
+        InitializeComponent();
+    }
 
-    void SetTopImage(string filename);
-    void SetBottomImage(string filename);
-    void SetLeftImage(string filename);
-    void SetRightImage(string filename);
-    void SetFrontImage(string filename);
-    void SetBackImage(string filename, bool isHorizontal = false);
+    public string FrontImage { get => txtFront.Value; set => txtFront.Value = value; }
+    public string BackImage { get => txtBack.Value; set => txtBack.Value = value; }
+    public string LeftImage { get => txtLeft.Value; set => txtLeft.Value = value; }
+    public string RightImage { get => txtRight.Value; set => txtRight.Value = value; }
+    public string TopImage { get => txtTop.Value; set => txtTop.Value = value; }
+    public string BottomImage { get => txtBottom.Value; set => txtBottom.Value = value; }
 
-    void AddCuttingLines(MagickImage img);
-    void CreateTestImages();
 }

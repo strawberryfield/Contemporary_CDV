@@ -44,4 +44,10 @@ public partial class MainWindow : Window
         MontaggioFotoForm? form = new();
         form.ShowDialog();
     }
+
+    private void btnScatola_Click(object sender, RoutedEventArgs e)
+    {
+        BoxBuilderForm form = new();
+        form.ShowDialog();
+    }
 }
