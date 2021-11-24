@@ -29,7 +29,7 @@ If not, see <http://www.gnu.org/licenses/>.
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Casasoft.CCDV.UI"
         mc:Ignorable="d"
-        Title="BoxBuilderForm" Height="600" Width="800">
+        Title="Creazione scatola" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="250" />
@@ -40,7 +40,8 @@ If not, see <http://www.gnu.org/licenses/>.
         <Button x:Name="btnUpdate" Content="Aggiorna Anteprima" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="230" Click="btnUpdate_Click"/>
         <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Center" Margin="0,0,0,40" VerticalAlignment="Bottom" Width="230" Click="btnSave_Click"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
-        <local:CommonOptionsControl x:Name="commonOptions" HorizontalAlignment="Stretch" Margin="0,300,0,0" VerticalAlignment="Top" />
-        <local:BoxImagesControl HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="250"/>
+        <local:CommonOptionsControl x:Name="commonOptions" HorizontalAlignment="Stretch" Margin="0,325,0,0" VerticalAlignment="Top" />
+        <local:BoxImagesControl HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
     </Grid>
 </src:BaseForm>

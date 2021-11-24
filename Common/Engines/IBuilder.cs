@@ -23,7 +23,7 @@ using ImageMagick;
 
 namespace Casasoft.CCDV;
 
-internal interface IBuilder
+public interface IBuilder
 {
     int spessore { get; set; }
 

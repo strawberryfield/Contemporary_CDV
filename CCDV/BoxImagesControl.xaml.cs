@@ -40,4 +40,7 @@ public partial class BoxImagesControl : UserControl
     public string TopImage { get => txtTop.Value; set => txtTop.Value = value; }
     public string BottomImage { get => txtBottom.Value; set => txtBottom.Value = value; }
 
+    public bool UseTestImages { get => (bool)chkTestImages.IsChecked; set => chkTestImages.IsChecked = value; }
+    public bool CutLines { get => (bool)chkCutLines.IsChecked; set => chkCutLines.IsChecked = value; }
+    public int Thickness { get => txtThickness.Value; set => txtThickness.Value = value; }
 }
