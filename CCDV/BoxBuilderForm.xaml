@@ -40,7 +40,7 @@ If not, see <http://www.gnu.org/licenses/>.
         <Button x:Name="btnUpdate" Content="Aggiorna Anteprima" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="230" Click="btnUpdate_Click"/>
         <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Center" Margin="0,0,0,40" VerticalAlignment="Bottom" Width="230" Click="btnSave_Click"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
-        <local:CommonOptionsControl x:Name="commonOptions" Margin="0,370,0,0" VerticalAlignment="Top" />
+        <local:CommonOptionsControl x:Name="commonOptions" Margin="0,411,0,0" VerticalAlignment="Top" />
         <local:BoxImagesControl x:Name="boxImages" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
     </Grid>

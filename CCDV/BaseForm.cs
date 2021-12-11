@@ -63,7 +63,6 @@ public partial class BaseForm : Window
 
     protected void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        engine.FilesList.Clear();
         setEngineParameters();
         bwRender.RunWorkerAsync();
         waitForm = new WaitForm();
@@ -73,11 +72,11 @@ public partial class BaseForm : Window
 
     protected virtual void setEngineParameters()
     {
+        engine.FilesList.Clear();
     }
 
     protected virtual void doAnteprima()
     {
-        engine.FilesList.Clear();
         setEngineParameters();
         engine.Dpi = 72;
     }

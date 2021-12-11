@@ -33,7 +33,12 @@ public class BaseBuilder : IBuilder
     public MagickColor borderColor { get; set; }
     public TargetType targetType { get; set; }
     public bool isHorizontal { get; set; } = false;
-    public string font { get; set; } = "Arial";
+    private string _font = "Arial";
+    public string font
+    {
+        get => _font;
+        set => _font = string.IsNullOrWhiteSpace(value) ? "Arial" : value;
+    }
     public string borderText { get; set; }
 
     protected MagickGeometry topFormat;
@@ -90,7 +95,7 @@ public class BaseBuilder : IBuilder
         this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType, parameters.isHorizontal)
     {
         par = parameters;
-        font = parameters.font; 
+        font = parameters.font;
         borderText = parameters.borderText;
 
         if (par.useSampleImages) CreateTestImages();
@@ -104,7 +109,7 @@ public class BaseBuilder : IBuilder
     }
     #endregion
 
-    protected virtual void makeEmptyImages()
+    public virtual void makeEmptyImages()
     {
         switch (targetType)
         {
