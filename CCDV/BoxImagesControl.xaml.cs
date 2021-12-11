@@ -43,4 +43,6 @@ public partial class BoxImagesControl : UserControl
     public bool UseTestImages { get => (bool)chkTestImages.IsChecked; set => chkTestImages.IsChecked = value; }
     public bool CutLines { get => (bool)chkCutLines.IsChecked; set => chkCutLines.IsChecked = value; }
     public int Thickness { get => txtThickness.Value; set => txtThickness.Value = value; }
+    public string BorderText { get => txtBorderText.Text; set => txtBorderText.Text = value; }
+
 }

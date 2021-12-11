@@ -27,12 +27,14 @@ namespace Casasoft.CCDV;
 public class BaseBuilder : IBuilder
 {
     public int spessore { get; set; }
-    protected Formats fmt;
+    public Formats fmt { get; set; }
     protected BaseBuilderCommandLine par;
-    protected MagickColor fillColor;
-    protected MagickColor borderColor;
-    protected TargetType targetType;
-    protected bool isHorizontal = false;
+    public MagickColor fillColor { get; set; }
+    public MagickColor borderColor { get; set; }
+    public TargetType targetType { get; set; }
+    public bool isHorizontal { get; set; } = false;
+    public string font { get; set; } = "Arial";
+    public string borderText { get; set; }
 
     protected MagickGeometry topFormat;
     protected MagickGeometry borderFormat;
@@ -88,6 +90,8 @@ public class BaseBuilder : IBuilder
         this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType, parameters.isHorizontal)
     {
         par = parameters;
+        font = parameters.font; 
+        borderText = parameters.borderText;
 
         if (par.useSampleImages) CreateTestImages();
 
@@ -140,9 +144,9 @@ public class BaseBuilder : IBuilder
     public void SetLeftImage(string filename)
     {
         leftImage = checkAndLoad(filename, leftImage);
-        if (!string.IsNullOrWhiteSpace(par.borderText))
+        if (!string.IsNullOrWhiteSpace(borderText))
         {
-            Utils.CenteredText(par.borderText, leftImage.Width / 2, leftImage, par.font, -90).Draw(leftImage);
+            Utils.CenteredText(borderText, leftImage.Width / 2, leftImage, font, -90).Draw(leftImage);
         }
     }
     public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);
@@ -174,23 +178,23 @@ public class BaseBuilder : IBuilder
     public virtual void CreateTestImages()
     {
         frontImage = new(MagickColors.LightGray, frontFormat.Width, frontFormat.Height);
-        Utils.CenteredText("Front", 120, frontFormat, par.font).Draw(frontImage);
+        Utils.CenteredText("Front", 120, frontFormat, font).Draw(frontImage);
 
         backImage = new(MagickColors.LightBlue, frontFormat.Width, frontFormat.Height);
-        Utils.CenteredText("Back", 120, frontFormat, par.font).Draw(backImage);
+        Utils.CenteredText("Back", 120, frontFormat, font).Draw(backImage);
 
         topImage = new(MagickColors.LightGreen, topFormat.Width, topFormat.Height);
-        Utils.CenteredText("Top", 30, topFormat, par.font).Draw(topImage);
+        Utils.CenteredText("Top", 30, topFormat, font).Draw(topImage);
 
         bottomImage = new(MagickColors.LightCoral, topFormat.Width, topFormat.Height);
-        Utils.CenteredText("Bottom", 30, topFormat, par.font).Draw(bottomImage);
+        Utils.CenteredText("Bottom", 30, topFormat, font).Draw(bottomImage);
 
         leftImage = new(MagickColors.LightYellow, borderFormat.Height, borderFormat.Width);
-        Utils.CenteredText("Left", 30, leftImage, par.font).Draw(leftImage);
+        Utils.CenteredText("Left", 30, leftImage, font).Draw(leftImage);
         leftImage.Rotate(90);
 
         rightImage = new(MagickColors.Linen, borderFormat.Height, borderFormat.Width);
-        Utils.CenteredText("Right", 30, rightImage, par.font).Draw(rightImage);
+        Utils.CenteredText("Right", 30, rightImage, font).Draw(rightImage);
         rightImage.Rotate(90);
     }
     #endregion

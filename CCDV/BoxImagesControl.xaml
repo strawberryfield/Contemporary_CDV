@@ -28,9 +28,8 @@ If not, see <http://www.gnu.org/licenses/>.
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
              xmlns:local="clr-namespace:Casasoft.CCDV.UI"
-             mc:Ignorable="d" 
-             d:DesignHeight="300"  >
-    <Grid Margin="0,0,0,-30">
+             mc:Ignorable="d" Height="379"  >
+    <Grid Height="360" VerticalAlignment="Top">
         <casasoft:FileTextBox x:Name="txtFront" Margin="10,23,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
         <Label Content="Immagine frontale" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="10,0,0,0"/>
         <casasoft:FileTextBox x:Name="txtBack" Margin="10,63,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
@@ -45,8 +44,10 @@ If not, see <http://www.gnu.org/licenses/>.
         <Label Content="Immagine inferiore" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="10,200,0,0"/>
         <CheckBox x:Name="chkTestImages" Content="Usa immagini di test" HorizontalAlignment="Left" Margin="10,255,10,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="chkCutLines" Content="Linee di taglio" HorizontalAlignment="Left" Margin="10,275,10,0" VerticalAlignment="Top"/>
-        <casasoft:NumericUpDown x:Name="txtThickness" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" Width="60" Value="5" MinValue="1"/>
+        <casasoft:NumericUpDown x:Name="txtThickness" HorizontalAlignment="Left" Margin="10,295,0,47" Panel.ZIndex="1" Width="60" Value="5" MinValue="1"/>
         <Label x:Name="lblThickness" Content="Spessore (mm)" HorizontalAlignment="Left" Margin="70,291,0,0" VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="txtBorderText" Margin="10,340,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Height="18"/>
+        <Label Content="Testo sul fianco" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="10,317,0,0"/>
 
     </Grid>
 </UserControl>

@@ -136,7 +136,7 @@ namespace Casasoft.CCDV
             base.CreateTestImages();
 
             Drawables draw = new();
-            if (!string.IsNullOrWhiteSpace(par.font)) draw.Font(par.font);
+            if (!string.IsNullOrWhiteSpace(font)) draw.Font(font);
             draw.StrokeColor(MagickColors.Black).FontPointSize(50)
                 .Text(frontImage.Width / 2, fmt.ToPixels(6), "Front top")
                 .Draw(frontImage);

@@ -28,15 +28,26 @@ using System.Threading.Tasks;
 
 namespace Casasoft.CCDV.Engines;
 
-public class BaseBuilderEngine : BaseEngine
+public class ScatolaEngine : BaseBuilderEngine
 {
-    public BaseBuilderEngine() : base()
+    public ScatolaEngine()
     {
+        Builder = new ScatolaBuilder();
     }
 
-    public BaseBuilderEngine(ICommandLine par) : base(par)
+    public ScatolaEngine(ICommandLine par) : base(par)
     {
+        Builder = new ScatolaBuilder((BaseBuilderCommandLine)par, fmt);
     }
 
-     public IBuilder Builder;
+    public override MagickImage GetResult(bool quiet)
+    {
+        Images img = new(fmt);
+        MagickImage output = img.InCartha20x27_o();
+        ScatolaBuilder sc = (ScatolaBuilder)Builder;
+        output.Composite(sc.Build(), Gravity.Center);
+        sc.AddCuttingLines(output);
+        
+        return output;
+    }
 }

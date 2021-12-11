@@ -26,6 +26,11 @@ namespace Casasoft.CCDV;
 public interface IBuilder
 {
     int spessore { get; set; }
+    Formats fmt { get; set; }
+    MagickColor fillColor { get; set; }
+    MagickColor borderColor { get; set; }
+    TargetType targetType { get; set; }
+    bool isHorizontal { get; set; }
 
     void SetTopImage(string filename);
     void SetBottomImage(string filename);
