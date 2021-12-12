@@ -27,11 +27,11 @@ If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Casasoft.CCDV.UI"
-             mc:Ignorable="d" MinWidth="120" VerticalContentAlignment="Top" VerticalAlignment="Top" Initialized="UserControl_Initialized" Height="90">
-    <Grid Height="90" VerticalAlignment="Top">
+             mc:Ignorable="d" MinWidth="200" VerticalContentAlignment="Top" VerticalAlignment="Top" Initialized="UserControl_Initialized" Height="65">
+    <Grid Height="65" VerticalAlignment="Top">
         <Label Content="Font" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="10,0,0,0"/>
         <ComboBox x:Name="txtFont" Margin="10,20,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Height="20"/>
         <CheckBox x:Name="chkBold" Content="Grassetto" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chkItalic" Content="Corsivo" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkItalic" Content="Corsivo" HorizontalAlignment="Left" Margin="110,50,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>
