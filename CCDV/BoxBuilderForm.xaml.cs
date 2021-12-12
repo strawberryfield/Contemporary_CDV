@@ -45,6 +45,7 @@ public partial class BoxBuilderForm : BaseForm
         builder.borderText = boxImages.BorderText;
         builder.font = boxImages.Font;
         builder.fontBold = boxImages.FontBold;
+        builder.fontItalic = boxImages.FontItalic;  
 
         builder.makeEmptyImages();
         if (boxImages.UseTestImages) builder.CreateTestImages();

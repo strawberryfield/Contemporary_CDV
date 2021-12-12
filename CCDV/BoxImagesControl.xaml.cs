@@ -39,12 +39,14 @@ public partial class BoxImagesControl : UserControl
     public string RightImage { get => txtRight.Value; set => txtRight.Value = value; }
     public string TopImage { get => txtTop.Value; set => txtTop.Value = value; }
     public string BottomImage { get => txtBottom.Value; set => txtBottom.Value = value; }
-    public string Font { get => ctrlFont.Font; set => ctrlFont.Font = value; }
-    public bool FontBold { get => ctrlFont.FontBold; set => ctrlFont.FontBold = value; }
 
     public bool UseTestImages { get => (bool)chkTestImages.IsChecked; set => chkTestImages.IsChecked = value; }
     public bool CutLines { get => (bool)chkCutLines.IsChecked; set => chkCutLines.IsChecked = value; }
     public int Thickness { get => txtThickness.Value; set => txtThickness.Value = value; }
     public string BorderText { get => txtBorderText.Text; set => txtBorderText.Text = value; }
+
+    public string Font { get => ctrlFont.Font; set => ctrlFont.Font = value; }
+    public bool FontBold { get => ctrlFont.FontBold; set => ctrlFont.FontBold = value; }
+    public bool FontItalic { get => ctrlFont.FontItalic; set => ctrlFont.FontItalic = value; }
 
 }

@@ -39,6 +39,9 @@ public class BaseBuilderCommandLine : CommandLine
     public bool useSampleImages { get; set; }
     public string borderText { get; set; }
     public string font { get; set; }
+    public bool fontBold { get; set; }
+    public bool fontItalic { get; set; }    
+
     public TargetType targetType { get; set; }
 
     private string sThickness = "5";
@@ -71,6 +74,8 @@ public class BaseBuilderCommandLine : CommandLine
                 { "t|thickness=", $"set the box thickness (default {sThickness}mm)", t => sThickness = t },
                 { "bordertext=", "text to print on left border", t => borderText = t },
                 { "font=", $"text font (default {font})", t => font = t },
+                { "fontbold", "use bold font weight", s => fontBold = s != null },
+                { "fontitalic", "use italic font style", s => fontItalic = s != null },
                 { "format=", $"size of the box: 'cdv' or 'cc' (default '{sTargetType}')", t => sTargetType = t.ToUpper() },
                 { "orientation=", $"orientation of the box: 'portrait' or 'landscape' (default '{sOrientation}')", t => sOrientation = t.ToUpper() },
                 { "sample", "generate sample images", s => useSampleImages = s != null },

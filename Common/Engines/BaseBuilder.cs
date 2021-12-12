@@ -33,6 +33,7 @@ public class BaseBuilder : IBuilder
     public MagickColor borderColor { get; set; }
     public TargetType targetType { get; set; }
     public bool isHorizontal { get; set; } = false;
+
     private string _font = "Arial";
     public string font
     {
@@ -40,7 +41,8 @@ public class BaseBuilder : IBuilder
         set => _font = string.IsNullOrWhiteSpace(value) ? "Arial" : value;
     }
     public bool fontBold { get; set; } = false;
-    
+    public bool fontItalic { get; set; } = false;
+
     public string borderText { get; set; }
 
     protected MagickGeometry topFormat;
@@ -98,6 +100,8 @@ public class BaseBuilder : IBuilder
     {
         par = parameters;
         font = parameters.font;
+        fontBold = parameters.fontBold;
+        fontItalic = parameters.fontItalic;
         borderText = parameters.borderText;
 
         if (par.useSampleImages) CreateTestImages();
@@ -153,7 +157,8 @@ public class BaseBuilder : IBuilder
         leftImage = checkAndLoad(filename, leftImage);
         if (!string.IsNullOrWhiteSpace(borderText))
         {
-            Utils.CenteredText(borderText, leftImage.Width / 2, leftImage, font, -90).Draw(leftImage);
+            Utils.CenteredText(borderText, leftImage.Width / 2, leftImage, font, -90, fontBold, fontItalic)
+                .Draw(leftImage);
         }
     }
     public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);
@@ -185,23 +190,23 @@ public class BaseBuilder : IBuilder
     public virtual void CreateTestImages()
     {
         frontImage = new(MagickColors.LightGray, frontFormat.Width, frontFormat.Height);
-        Utils.CenteredText("Front", 120, frontFormat, font, 0, fontBold).Draw(frontImage);
+        Utils.CenteredText("Front", 120, frontFormat, font, 0, fontBold, fontItalic).Draw(frontImage);
 
         backImage = new(MagickColors.LightBlue, frontFormat.Width, frontFormat.Height);
-        Utils.CenteredText("Back", 120, frontFormat, font, 0, fontBold).Draw(backImage);
+        Utils.CenteredText("Back", 120, frontFormat, font, 0, fontBold, fontItalic).Draw(backImage);
 
         topImage = new(MagickColors.LightGreen, topFormat.Width, topFormat.Height);
-        Utils.CenteredText("Top", 30, topFormat, font).Draw(topImage);
+        Utils.CenteredText("Top", 30, topFormat, font, 0, fontBold, fontItalic).Draw(topImage);
 
         bottomImage = new(MagickColors.LightCoral, topFormat.Width, topFormat.Height);
-        Utils.CenteredText("Bottom", 30, topFormat, font).Draw(bottomImage);
+        Utils.CenteredText("Bottom", 30, topFormat, font, 0, fontBold, fontItalic).Draw(bottomImage);
 
         leftImage = new(MagickColors.LightYellow, borderFormat.Height, borderFormat.Width);
-        Utils.CenteredText("Left", 30, leftImage, font).Draw(leftImage);
+        Utils.CenteredText("Left", 30, leftImage, font, 0, fontBold, fontItalic).Draw(leftImage);
         leftImage.Rotate(90);
 
         rightImage = new(MagickColors.Linen, borderFormat.Height, borderFormat.Width);
-        Utils.CenteredText("Right", 30, rightImage, font).Draw(rightImage);
+        Utils.CenteredText("Right", 30, rightImage, font, 0, fontBold, fontItalic).Draw(rightImage);
         rightImage.Rotate(90);
     }
     #endregion

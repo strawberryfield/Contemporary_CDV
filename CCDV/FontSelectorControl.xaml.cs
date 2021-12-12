@@ -46,5 +46,6 @@ public partial class FontSelectorControl : UserControl
 
     public string Font { get => txtFont.SelectedValue.ToString(); set => txtFont.SelectedValue = value; }
     public bool FontBold { get => (bool)chkBold.IsChecked; set => chkBold.IsChecked = value; }
+    public bool FontItalic { get => (bool)chkItalic.IsChecked; set => chkItalic.IsChecked = value; }
 
 }
