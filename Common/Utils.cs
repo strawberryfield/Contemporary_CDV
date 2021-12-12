@@ -66,11 +66,14 @@ namespace Casasoft.CCDV
         #endregion
 
         #region text
-        public static Drawables CenteredText(string text, int size, int width, int height, string font = "", int rotation = 0)
+        public static Drawables CenteredText(string text, int size, int width, int height, string font = "", int rotation = 0, bool fontBold = false)
         {
             Drawables draw = new();
             draw.Rotation(rotation);
-            if(!string.IsNullOrWhiteSpace(font)) draw.Font(font);
+            if(!string.IsNullOrWhiteSpace(font)) draw.Font(font,
+                FontStyleType.Normal, 
+                fontBold ? FontWeight.Bold : FontWeight.Normal,
+                FontStretch.Normal);
             draw.StrokeColor(MagickColors.Black).FontPointSize(size).TextAlignment(TextAlignment.Center);
             if (Math.Abs(rotation) != 90)
                 draw.Text(width / 2, height / 2, text);
@@ -80,10 +83,10 @@ namespace Casasoft.CCDV
             return draw;
         }
 
-        public static Drawables CenteredText(string text, int size, MagickGeometry fmt, string font = "", int rotation = 0) =>
-            CenteredText(text, size, fmt.Width, fmt.Height, font, rotation);
-        public static Drawables CenteredText(string text, int size, MagickImage fmt, string font = "", int rotation = 0) =>
-            CenteredText(text, size, fmt.Width, fmt.Height, font, rotation);
+        public static Drawables CenteredText(string text, int size, MagickGeometry fmt, string font = "", int rotation = 0, bool fontBold = false) =>
+            CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold);
+        public static Drawables CenteredText(string text, int size, MagickImage fmt, string font = "", int rotation = 0, bool fontBold = false) =>
+            CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold);
         #endregion
     }
 }

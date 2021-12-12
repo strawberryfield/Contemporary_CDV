@@ -44,6 +44,7 @@ public partial class BoxBuilderForm : BaseForm
         eng.Dpi = commonOptions.DpiValue;
         builder.borderText = boxImages.BorderText;
         builder.font = boxImages.Font;
+        builder.fontBold = boxImages.FontBold;
 
         builder.makeEmptyImages();
         if (boxImages.UseTestImages) builder.CreateTestImages();

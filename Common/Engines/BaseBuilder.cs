@@ -39,6 +39,8 @@ public class BaseBuilder : IBuilder
         get => _font;
         set => _font = string.IsNullOrWhiteSpace(value) ? "Arial" : value;
     }
+    public bool fontBold { get; set; } = false;
+    
     public string borderText { get; set; }
 
     protected MagickGeometry topFormat;
@@ -183,10 +185,10 @@ public class BaseBuilder : IBuilder
     public virtual void CreateTestImages()
     {
         frontImage = new(MagickColors.LightGray, frontFormat.Width, frontFormat.Height);
-        Utils.CenteredText("Front", 120, frontFormat, font).Draw(frontImage);
+        Utils.CenteredText("Front", 120, frontFormat, font, 0, fontBold).Draw(frontImage);
 
         backImage = new(MagickColors.LightBlue, frontFormat.Width, frontFormat.Height);
-        Utils.CenteredText("Back", 120, frontFormat, font).Draw(backImage);
+        Utils.CenteredText("Back", 120, frontFormat, font, 0, fontBold).Draw(backImage);
 
         topImage = new(MagickColors.LightGreen, topFormat.Width, topFormat.Height);
         Utils.CenteredText("Top", 30, topFormat, font).Draw(topImage);
