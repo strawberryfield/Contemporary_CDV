@@ -42,6 +42,7 @@ public partial class FontSelectorControl : UserControl
         {
             txtFont.Items.Add(item);
         }
+        txtFont.SelectedValue = "Arial";
     }
 
     public string Font { get => txtFont.SelectedValue.ToString(); set => txtFont.SelectedValue = value; }
