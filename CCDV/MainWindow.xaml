@@ -35,7 +35,7 @@ If not, see <http://www.gnu.org/licenses/>.
         <Button x:Name="btnDorsi" HorizontalAlignment="Left" Margin="24,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnDorsi_Click">
             <TextBlock TextAlignment="Center">Montaggio<LineBreak/>Dorsi</TextBlock>
         </Button>
-        <Button x:Name="btnCartellina" HorizontalAlignment="Left" Margin="176,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center">
+        <Button x:Name="btnCartellina" HorizontalAlignment="Left" Margin="176,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnCartellina_Click">
             <TextBlock TextAlignment="Center"><Run Text="Cartellina"/></TextBlock>
         </Button>
         <Button x:Name="btnScatola" HorizontalAlignment="Left" Margin="328,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Click="btnScatola_Click">

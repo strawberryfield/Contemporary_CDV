@@ -47,7 +47,13 @@ public partial class MainWindow : Window
 
     private void btnScatola_Click(object sender, RoutedEventArgs e)
     {
-        BoxBuilderForm form = new();
+        BoxBuilderForm form = new(BoxTypes.Box);
+        form.ShowDialog();
+    }
+
+    private void btnCartellina_Click(object sender, RoutedEventArgs e)
+    {
+        BoxBuilderForm form = new(BoxTypes.Folder);
         form.ShowDialog();
     }
 }

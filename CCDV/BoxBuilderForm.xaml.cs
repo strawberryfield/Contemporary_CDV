@@ -23,15 +23,32 @@ using Casasoft.CCDV.Engines;
 
 namespace Casasoft.CCDV.UI;
 
+public enum BoxTypes { Box, Folder}
+
 /// <summary>
 /// Interaction logic for BoxBuilderForm.xaml
 /// </summary>
 public partial class BoxBuilderForm : BaseForm
 {
-    public BoxBuilderForm() : base()
+    private BoxTypes boxType;
+
+    public BoxBuilderForm() : this(BoxTypes.Box) { }
+    public BoxBuilderForm(BoxTypes type) : base()
     {
         InitializeComponent();
-        engine = new ScatolaEngine();
+        boxType = type;
+        switch (type)
+        {
+            case BoxTypes.Box:
+                this.Title = "Creazione scatola";
+                engine = new ScatolaEngine();
+                break;
+            case BoxTypes.Folder:
+                this.Title = "Creazione cartellina";
+                break;
+            default:
+                break;
+        }
     }
 
     protected override void setEngineParameters()
