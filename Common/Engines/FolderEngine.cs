@@ -23,26 +23,27 @@ using ImageMagick;
 
 namespace Casasoft.CCDV.Engines;
 
-public class ScatolaEngine : BaseBuilderEngine
+public class FolderEngine : BaseBuilderEngine
 {
-    public ScatolaEngine()
+    public FolderEngine()
     {
-        Builder = new ScatolaBuilder();
+        Builder = new FolderBuilder();
     }
 
-    public ScatolaEngine(ICommandLine par) : base(par)
+    public FolderEngine(ICommandLine par) : base(par)
     {
-        Builder = new ScatolaBuilder((BaseBuilderCommandLine)par, fmt);
+        Builder = new FolderBuilder((BaseBuilderCommandLine)par, fmt);
     }
 
     public override MagickImage GetResult(bool quiet)
     {
         Images img = new(fmt);
         MagickImage output = img.InCartha20x27_o();
-        ScatolaBuilder sc = (ScatolaBuilder)Builder;
+        FolderBuilder sc = (FolderBuilder)Builder;
         output.Composite(sc.Build(), Gravity.Center);
         sc.AddCuttingLines(output);
-        
+
         return output;
     }
+
 }

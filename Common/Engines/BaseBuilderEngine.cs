@@ -19,16 +19,9 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using ImageMagick;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Casasoft.CCDV.Engines;
 
-public class BaseBuilderEngine : BaseEngine
+public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
 {
     public BaseBuilderEngine() : base()
     {
@@ -38,5 +31,5 @@ public class BaseBuilderEngine : BaseEngine
     {
     }
 
-     public IBuilder Builder;
+    public IBuilder Builder { get; set; }   
 }

@@ -45,6 +45,7 @@ public partial class BoxBuilderForm : BaseForm
                 break;
             case BoxTypes.Folder:
                 this.Title = "Creazione cartellina";
+                engine = new FolderEngine();
                 break;
             default:
                 break;
@@ -54,8 +55,8 @@ public partial class BoxBuilderForm : BaseForm
     protected override void setEngineParameters()
     {
         base.setEngineParameters();
-        ScatolaEngine eng = (ScatolaEngine)engine;
-        ScatolaBuilder builder = (ScatolaBuilder)eng.Builder;
+        IBaseBuilderEngine eng = (IBaseBuilderEngine)engine;
+        BaseBuilder builder = (BaseBuilder)eng.Builder;
         builder.fillColor = commonOptions.FillColor;
         builder.borderColor = commonOptions.BorderColor;
         eng.Dpi = commonOptions.DpiValue;
