@@ -9,7 +9,7 @@ Options:
       --fronttextcolor=VALUE front text color (default #000000)
       --fronttextborder=VALUE
                              front text border color (default #000000)
-      --mbcolor=VALUE        magnetic band color (default #8B4545)
+      --mbcolor=VALUE        magnetic band color (default #8B4513)
       --mbimage=VALUE        magnetic band overlay image
       --backimage=VALUE      image for back side
       --backtext=VALUE       pango markup for text on back side.

@@ -21,7 +21,6 @@
 
 using Casasoft.CCDV;
 using ImageMagick;
-using Mono.Options;
 using System;
 
 #region command line
@@ -153,65 +152,3 @@ void CutLines()
     draw.Line(final.Width - borderleft, 0, final.Width - borderleft, final.Height);
     draw.Draw(final);
 }
-
-#region custom command line parameters
-internal class CreditCardCommandLine : CommandLine
-{
-    public string FrontText { get; set; }
-    public string FrontTextFont { get; set; }
-    public MagickColor FrontTextColor { get; set; }
-    public MagickColor FrontTextBorder { get; set; }
-    public MagickColor MagneticBandColor { get; set; }
-    public string MagneticBandImage { get; set; }
-    public string BackImage { get; set; }
-    public string BackText { get; set; }
-
-    private string sFrontTextColor = MagickColors.Black.ToHexString();
-    private string sFrontTextBorder = MagickColors.Black.ToHexString();
-    private string sMagneticBandColor = MagickColors.SaddleBrown.ToHexString();
-
-    public CreditCardCommandLine(string outputname) :
-    this(ExeName(), outputname)
-    { }
-
-    public CreditCardCommandLine(string exename, string outputname) :
-        base(exename, outputname)
-    {
-        FrontText = string.Empty;
-        FrontTextFont = "Arial";
-        FrontTextColor = GetColor(sFrontTextColor);
-        FrontTextBorder = GetColor(sFrontTextBorder);
-        MagneticBandColor = GetColor(sMagneticBandColor);
-        MagneticBandImage = string.Empty;
-        BackImage = string.Empty;
-        BackText = string.Empty;
-
-        Options = new OptionSet
-            {
-                { "fronttext=", "text in front (Cardholder name)", o => FrontText = o  },
-                { "fronttextfont=", $"front text font (default '{FrontTextFont}')", o => FrontTextFont = o },
-                { "fronttextcolor=", $"front text color (default {sFrontTextColor})", o => sFrontTextColor = o },
-                { "fronttextborder=", $"front text border color (default {sFrontTextBorder})", o => sFrontTextBorder = o },
-                { "mbcolor=", $"magnetic band color (default {sMagneticBandColor})", o => sMagneticBandColor = o },
-                { "mbimage=", $"magnetic band overlay image", o => MagneticBandImage = o },
-                { "backimage=", "image for back side", o => BackImage = o },
-                { "backtext=", "pango markup for text on back side." +
-                    "\nText can be stored in a file instead of a string." +
-                    "The file must be referenced as '@filename'",
-                    o => BackText = GetFileParameter(o) },
-
-            };
-        AddBaseOptions();
-    }
-
-    public override bool Parse(string[] args)
-    {
-        if (base.Parse(args)) return true;
-
-        FrontTextColor = GetColor(sFrontTextColor);
-        FrontTextBorder = GetColor(sFrontTextBorder);
-        MagneticBandColor = GetColor(sMagneticBandColor);
-        return false;
-    }
-}
-#endregion

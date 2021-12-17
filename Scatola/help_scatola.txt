@@ -13,6 +13,8 @@ Options:
   -t, --thickness=VALUE      set the box thickness (default 5mm)
       --bordertext=VALUE     text to print on left border
       --font=VALUE           text font (default Arial)
+      --fontbold             use bold font weight
+      --fontitalic           use italic font style
       --format=VALUE         size of the box: 'cdv' or 'cc' (default 'CDV')
       --orientation=VALUE    orientation of the box: 'portrait' or 'landscape' (
                                default 'PORTRAIT')
