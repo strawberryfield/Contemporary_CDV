@@ -56,4 +56,10 @@ public partial class MainWindow : Window
         BoxBuilderForm form = new(BoxTypes.Folder);
         form.ShowDialog();
     }
+
+    private void btnCreditCards_Click(object sender, RoutedEventArgs e)
+    {
+        CreditCardForm form = new();
+        form.ShowDialog();
+    }
 }

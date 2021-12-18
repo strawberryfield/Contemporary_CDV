@@ -32,7 +32,7 @@ If not, see <http://www.gnu.org/licenses/>.
     <Grid x:Name="MainWindowBody" MinWidth="480" MinHeight="328" MaxWidth="480" MaxHeight="328">
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnDorsi" HorizontalAlignment="Left" Margin="24,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnDorsi_Click">
+        <Button x:Name="btnDorsi" HorizontalAlignment="Left" Margin="24,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnDorsi_Click" BorderThickness="0,0,0,0">
             <TextBlock TextAlignment="Center">Montaggio<LineBreak/>Dorsi</TextBlock>
         </Button>
         <Button x:Name="btnCartellina" HorizontalAlignment="Left" Margin="176,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnCartellina_Click">
@@ -44,7 +44,7 @@ If not, see <http://www.gnu.org/licenses/>.
         <Button x:Name="btnFoto" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnFoto_Click">
             <TextBlock TextAlignment="Center"><Run Text="Montaggio"/><LineBreak/><Run Text="Foto"/></TextBlock>
         </Button>
-        <Button x:Name="btnCreditCards" HorizontalAlignment="Left" Margin="176,176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center">
+        <Button x:Name="btnCreditCards" HorizontalAlignment="Left" Margin="176,176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnCreditCards_Click">
             <TextBlock TextAlignment="Center"><Run Text="Credit"/><LineBreak/><Run Text="Cards"/></TextBlock>
         </Button>
         <Button x:Name="btnScatola_Copy" HorizontalAlignment="Left" Margin="328,176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Grid.ColumnSpan="2">

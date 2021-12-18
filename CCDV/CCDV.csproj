@@ -31,7 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="BaseForm.cs">
+		<Compile Update="Forms\BaseForm.cs">
 			<SubType>Code</SubType>
 		</Compile>
 	</ItemGroup>
