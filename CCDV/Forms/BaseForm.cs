@@ -78,7 +78,7 @@ public partial class BaseForm : Window
     protected virtual void doAnteprima()
     {
         setEngineParameters();
-        engine.Dpi = 72;
+        engine.Dpi = 120;
     }
 
     protected void AggiornaAnteprima(Image img)

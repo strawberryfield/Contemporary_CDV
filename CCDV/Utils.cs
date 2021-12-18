@@ -20,22 +20,14 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
-using System.Windows.Controls;
 
 namespace Casasoft.CCDV.UI;
 
-/// <summary>
-/// Interaction logic for CommonOptionsControl.xaml
-/// </summary>
-public partial class CommonOptionsControl : UserControl
+public static class Utils
 {
-    public CommonOptionsControl()
-    {
-        InitializeComponent();
-    }
+    public static MagickColor ColorFromPicker(ColorPicker.PortableColorPicker cp) =>
+    new MagickColor((ushort)(cp.SelectedColor.R * 256),
+        (ushort)(cp.SelectedColor.G * 256),
+        (ushort)(cp.SelectedColor.B * 256));
 
-    public int DpiValue { get => txtDPI.Value; set => txtDPI.Value = value; }
-
-    public MagickColor BorderColor { get => Utils.ColorFromPicker(cpBorder); }
-    public MagickColor FillColor { get => Utils.ColorFromPicker(cpFill); }
 }

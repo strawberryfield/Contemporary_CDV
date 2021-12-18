@@ -26,7 +26,16 @@ namespace Casasoft.CCDV.Engines;
 
 public class BaseEngine : IEngine
 {
-    public int Dpi { get; set; }
+    private int _dpi;
+    public int Dpi
+    {
+        get => _dpi;
+        set
+        {
+            _dpi = value;
+            fmt = new(_dpi);
+        }
+    }
     public List<string> FilesList { get; set; }
     public MagickColor FillColor { get; set; }
     public MagickColor BorderColor { get; set; }
@@ -40,7 +49,6 @@ public class BaseEngine : IEngine
         FilesList = new List<string>();
         FillColor = MagickColors.White;
         BorderColor = MagickColors.Black;
-        fmt = new Formats(Dpi);
     }
 
     public BaseEngine(ICommandLine par)
@@ -49,7 +57,6 @@ public class BaseEngine : IEngine
         FilesList = par.FilesList;
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
-        fmt = new Formats(Dpi);
     }
 
     public MagickImage GetResult() => GetResult(false);
@@ -59,6 +66,6 @@ public class BaseEngine : IEngine
 
     public void SetImageInfo(string o, MagickImage image) => img.Info(WelcomeBannerText(), o).Draw(image);
     public void SetImageInfo(string i, string o, MagickImage image) => img.Info(i, o).Draw(image);
-    public virtual string WelcomeBannerText() => 
+    public virtual string WelcomeBannerText() =>
         "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
 }

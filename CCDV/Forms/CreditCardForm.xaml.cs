@@ -19,30 +19,45 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Casasoft.CCDV.Engines;
 
-namespace Casasoft.CCDV.UI
+namespace Casasoft.CCDV.UI;
+
+/// <summary>
+/// Interaction logic for CreditCardForm.xaml
+/// </summary>
+public partial class CreditCardForm : BaseForm
 {
-    /// <summary>
-    /// Interaction logic for CreditCardForm.xaml
-    /// </summary>
-    public partial class CreditCardForm : BaseForm
+    public CreditCardForm()
     {
-        public CreditCardForm()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        engine = new CreditCardEngine();
+    }
+
+    protected override void setEngineParameters()
+    {
+        base.setEngineParameters();
+        engine.FillColor = commonOptions.FillColor;
+        engine.BorderColor = commonOptions.BorderColor;
+        engine.Dpi = commonOptions.DpiValue;
+
+        CreditCardEngine eng = (CreditCardEngine)engine;
+        eng.FilesList.Clear();
+        eng.FilesList.Add(frontImage.Value);
+        eng.BackImage = backImage.Value;
+        eng.FrontText = frontText.Text;
+        eng.BackText = backText.Text;
+        eng.FrontTextFont = fontFront.Font;
+        eng.FrontTextColor = Utils.ColorFromPicker(cpFill);
+        eng.FrontTextBorder = Utils.ColorFromPicker(cpBorder);
+        eng.MagneticBandColor = Utils.ColorFromPicker(cpMB);
+        eng.MagneticBandImage = mbImage.Value;
+        eng.BackText = backText.Text;
+    }
+
+    protected override void doAnteprima()
+    {
+        setEngineParameters();
+        AggiornaAnteprima(image);
     }
 }

@@ -26,16 +26,16 @@ namespace Casasoft.CCDV.Engines;
 
 public class CreditCardEngine : BaseEngine
 {
-    private string BackImage;
-    private string FrontText;
-    private string FrontTextFont;
-    private MagickColor FrontTextBorder;
-    private MagickColor FrontTextColor;
-    private MagickColor MagneticBandColor;
-    private string MagneticBandImage;
-    private string BackText;
+    public string BackImage { get; set; }  
+    public string FrontText { get; set; }
+    public string FrontTextFont { get; set; }
+    public MagickColor FrontTextBorder { get; set; }
+    public MagickColor FrontTextColor { get; set; }
+    public MagickColor MagneticBandColor { get; set; }
+    public string MagneticBandImage { get; set; }
+    public string BackText { get; set; }
 
-    public CreditCardEngine()
+    public CreditCardEngine() : base()  
     {
     }
 
@@ -140,14 +140,17 @@ Source: {FilesList[0]}
 Run {DateTime.Now.ToString("R")}")
             .Draw(final);
 
-        draw = new();
-        draw.FillColor(MagickColors.Black)
-            .Font(FrontTextFont)
-            .FontPointSize(fmt.ToPixels(4))
-            .TextKerning(10)
-            .Gravity(Gravity.Northwest)
-            .Text(borderleft + fmt.ToPixels(4), bordertop - fmt.ToPixels(10), FrontText)
-            .Draw(final);
+        if (!string.IsNullOrWhiteSpace(FrontText))
+        {
+            draw = new();
+            draw.FillColor(MagickColors.Black)
+                .Font(FrontTextFont)
+                .FontPointSize(fmt.ToPixels(4))
+                .TextKerning(10)
+                .Gravity(Gravity.Northwest)
+                .Text(borderleft + fmt.ToPixels(4), bordertop - fmt.ToPixels(10), FrontText)
+                .Draw(final);
+        }
         fmt.SetImageParameters(final);
 
         return final;
