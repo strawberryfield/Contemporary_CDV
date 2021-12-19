@@ -8,8 +8,13 @@
 		<RootNamespace>Casasoft.CCDV.UI</RootNamespace>
 		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<Platforms>AnyCPU;x64</Platforms>
-		<IsPublishable>False</IsPublishable>
+		<Platforms>AnyCPU</Platforms>
+		<IsPublishable>True</IsPublishable>
+		<BaseOutputPath></BaseOutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<OutputPath>C:\projects\Contemporary_CDV\bin\GUI\build\</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
