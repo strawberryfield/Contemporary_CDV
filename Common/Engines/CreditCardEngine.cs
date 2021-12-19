@@ -28,9 +28,17 @@ public class CreditCardEngine : BaseEngine
 {
     public string BackImage { get; set; }  
     public string FrontText { get; set; }
-    public string FrontTextFont { get; set; }
+
+    private string _font = "Arial";
+    public string FrontTextFont
+    {
+        get => _font;
+        set => _font = string.IsNullOrWhiteSpace(value) ? "Arial" : value;
+    }
     public MagickColor FrontTextBorder { get; set; }
     public MagickColor FrontTextColor { get; set; }
+    public bool fontBold { get; set; } = false;
+    public bool fontItalic { get; set; } = false;
     public MagickColor MagneticBandColor { get; set; }
     public string MagneticBandImage { get; set; }
     public string BackText { get; set; }
@@ -47,6 +55,8 @@ public class CreditCardEngine : BaseEngine
         FrontTextFont = p.FrontTextFont;
         FrontTextBorder = p.FrontTextBorder;
         FrontTextColor = p.FrontTextColor;
+        fontBold = p.fontBold;  
+        fontItalic = p.fontItalic;
         MagneticBandColor = p.MagneticBandColor;
         MagneticBandImage = p.MagneticBandImage;
         BackText = p.BackText;
@@ -80,7 +90,8 @@ public class CreditCardEngine : BaseEngine
         if (!string.IsNullOrWhiteSpace(FrontText))
         {
             front.Settings.FontFamily = FrontTextFont;
-            front.Settings.FontWeight = FontWeight.Bold;
+            front.Settings.FontWeight = fontBold ? FontWeight.Bold : FontWeight.Normal;
+            front.Settings.FontStyle = fontItalic ? FontStyleType.Italic : FontStyleType.Normal;
             draw = new();
             draw.StrokeColor(FrontTextBorder)
                 .FillColor(FrontTextColor)

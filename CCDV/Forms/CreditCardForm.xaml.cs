@@ -50,9 +50,12 @@ public partial class CreditCardForm : BaseForm
         eng.FrontTextFont = fontFront.Font;
         eng.FrontTextColor = Utils.ColorFromPicker(cpFill);
         eng.FrontTextBorder = Utils.ColorFromPicker(cpBorder);
+        eng.fontBold = fontFront.FontBold;
+        eng.fontItalic = fontFront.FontItalic;
         eng.MagneticBandColor = Utils.ColorFromPicker(cpMB);
         eng.MagneticBandImage = mbImage.Value;
         eng.BackText = backText.Text;
+
     }
 
     protected override void doAnteprima()

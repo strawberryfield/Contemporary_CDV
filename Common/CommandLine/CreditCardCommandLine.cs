@@ -30,6 +30,8 @@ public class CreditCardCommandLine : CommandLine
     public string FrontTextFont { get; set; }
     public MagickColor FrontTextColor { get; set; }
     public MagickColor FrontTextBorder { get; set; }
+    public bool fontBold { get; set; }
+    public bool fontItalic { get; set; }
     public MagickColor MagneticBandColor { get; set; }
     public string MagneticBandImage { get; set; }
     public string BackImage { get; set; }
@@ -61,6 +63,8 @@ public class CreditCardCommandLine : CommandLine
                 { "fronttextfont=", $"front text font (default '{FrontTextFont}')", o => FrontTextFont = o },
                 { "fronttextcolor=", $"front text color (default {sFrontTextColor})", o => sFrontTextColor = o },
                 { "fronttextborder=", $"front text border color (default {sFrontTextBorder})", o => sFrontTextBorder = o },
+                { "fontbold", "use bold font weight", s => fontBold = s != null },
+                { "fontitalic", "use italic font style", s => fontItalic = s != null },
                 { "mbcolor=", $"magnetic band color (default {sMagneticBandColor})", o => sMagneticBandColor = o },
                 { "mbimage=", $"magnetic band overlay image", o => MagneticBandImage = o },
                 { "backimage=", "image for back side", o => BackImage = o },
