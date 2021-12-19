@@ -28,6 +28,7 @@ public static class Utils
     public static MagickColor ColorFromPicker(ColorPicker.PortableColorPicker cp) =>
     new MagickColor((ushort)(cp.SelectedColor.R * 256),
         (ushort)(cp.SelectedColor.G * 256),
-        (ushort)(cp.SelectedColor.B * 256));
+        (ushort)(cp.SelectedColor.B * 256),
+        (ushort)(cp.SelectedColor.A * 256));
 
 }
