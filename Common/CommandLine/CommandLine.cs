@@ -34,7 +34,9 @@ public class CommandLine : ICommandLine
     protected bool shouldShowHelp { get; set; }
     protected bool shouldShowColors { get; set; }
     protected bool shouldShowLicense { get; set; }
+    protected bool shouldShowMan { get; set; }
     protected string exeName { get; set; }
+    protected string exeDesc { get; set; }
     protected OptionSet baseOptions { get; set; }
     protected bool noBanner { get; set; }
     protected string outputDir { get; private set; }
@@ -58,12 +60,13 @@ public class CommandLine : ICommandLine
     #region constructors
     public static string ExeName() => Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
 
-    public CommandLine(string outputname) :
-        this(ExeName(), outputname)
+    public CommandLine(string outputname, string desc = "") :
+        this(ExeName(), outputname, desc)
     { }
-    public CommandLine(string exename, string outputname)
+    public CommandLine(string exename, string outputname, string desc = "")
     {
         exeName = exename;
+        exeDesc = desc;
         OutputName = outputname;
         Dpi = Convert.ToInt16(sDpi);
         sDpi = string.Empty;
@@ -84,6 +87,7 @@ public class CommandLine : ICommandLine
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+                { "man", "show the man page source and exit", h => shouldShowMan = h != null },
                 { "colors", "list available colors by name", h => shouldShowColors = h != null },
                 { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
             };
@@ -117,6 +121,12 @@ public class CommandLine : ICommandLine
             return true;
         }
 
+        if (shouldShowMan)
+        {
+            Console.WriteLine(PrintMan());
+            return true;
+        }
+
         if (!noBanner) WelcomeBanner();
 
         if (shouldShowHelp)
@@ -125,19 +135,9 @@ public class CommandLine : ICommandLine
             Console.WriteLine("\nOptions:");
             Options.WriteOptionDescriptions(Console.Out);
             Console.WriteLine();
-            Console.WriteLine(@$"Colors can be written in any of these formats:
-  #rgb
-  #rrggbb
-  #rrggbbaa
-  #rrrrggggbbbb
-  #rrrrggggbbbbaaaa
-  colorname    (use {exeName} --colors  to see all available colors)");
+            Console.WriteLine(ColorsSyntax);
             Console.WriteLine("\nEnvironment variables");
-            Console.WriteLine(@"The program can read values from these variables:
-  CDV_OUTPATH  Base path for output files
-  CDV_DPI      Resolution for output files
-  CDV_FILL     Color used to fill images
-  CDV_BORDER   Border color");
+            Console.WriteLine(EnvVarsHelp);
 
             return true;
         }
@@ -178,6 +178,86 @@ public class CommandLine : ICommandLine
         FillColor = GetColor(sFillColor);
         BorderColor = GetColor(sBorderColor);
         return false;
+    }
+
+    protected string ColorsSyntax => @$"Colors can be written in any of these formats:
+  #rgb
+  #rrggbb
+  #rrggbbaa
+  #rrrrggggbbbb
+  #rrrrggggbbbbaaaa
+  colorname    (use {exeName} --colors  to see all available colors)";
+
+    protected string EnvVarsHelp => @"The program can read values from these variables:
+  CDV_OUTPATH  Base path for output files
+  CDV_DPI      Resolution for output files
+  CDV_FILL     Color used to fill images
+  CDV_BORDER   Border color";
+
+    protected string PrintMan()
+    {
+        string ret = @$"% {exeName.ToUpper()}(1)
+% Roberto Ceccarelli - The Strawberry Field
+% Dec 2021
+
+# NAME
+{exeName} - {exeDesc}
+
+# SYNOPSIS
+**{exeName}** {Usage}
+
+# DESCRIPTION
+
+# OPTIONS
+";
+
+        StringWriter sw = new StringWriter();
+        Options.WriteOptionDescriptions(sw);
+        string[] opts = sw.ToString().Split(
+            new string[] { Environment.NewLine },
+            StringSplitOptions.None);
+        bool first = true;
+        foreach (string s in opts)
+        {
+            if (string.IsNullOrWhiteSpace(s)) continue;
+
+            string o = s.Substring(0, 29).Trim();
+            if(string.IsNullOrWhiteSpace(o))
+            {
+                ret += $"{s.Trim()}";
+            }
+            else
+            {
+                ret += (first ? "" : "\n\n") + $"**{o}**\n: {s.Substring(29).Trim()}";
+            }
+            first = false;
+        }
+
+        ret += $@"
+
+## COLORS
+{ColorsSyntax.Replace("\r", "  \r")}
+
+## ENVIRONMENT VARIABLES
+{EnvVarsHelp.Replace("\r", "  \r")}
+
+# COPYRIGHT
+Casasoft {exeName} is free software:  
+you can redistribute it and/or modify it  
+under the terms of the GNU Affero General Public License as published by  
+the Free Software Foundation, either version 3 of the License, or  
+(at your option) any later version.  
+
+You should have received a copy of the GNU AGPL v.3  
+along with Casasoft {exeName}.  
+If not, see <http://www.gnu.org/licenses/>.  
+
+# DISCLAIMER
+Casasoft CCDV Tools is distributed in the hope that it will be useful,  
+but WITHOUT ANY WARRANTY; without even the implied warranty of  
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
+See the GNU General Public License for more details.";
+        return ret;
     }
 
     protected void GetEnvVars()
