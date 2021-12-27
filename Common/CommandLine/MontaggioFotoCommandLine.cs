@@ -29,11 +29,11 @@ public class MontaggioFotoCommandLine : CommandLine
     public bool WithBorder { get; set; }
     public bool Trim { get; set; }
 
-    public MontaggioFotoCommandLine(string outputname) :
-    this(ExeName(), outputname)
+    public MontaggioFotoCommandLine(string outputname, string desc = "") :
+    this(ExeName(), outputname, desc)
     { }
-    public MontaggioFotoCommandLine(string exename, string outputname) :
-        base(exename, outputname)
+    public MontaggioFotoCommandLine(string exename, string outputname, string desc = "") :
+        base(exename, outputname, desc)
     {
         FullSize = false;
         WithBorder = false;

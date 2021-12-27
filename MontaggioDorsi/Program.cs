@@ -23,10 +23,17 @@ using Casasoft.CCDV;
 using Casasoft.CCDV.Engines;
 using ImageMagick;
 
+#region texts
+string desc = "Assembling six images over a 20x27 cm paper";
+string longDesc = @"This program gathers six images on a 20x27cm surface 
+that I print on a cardboard coated only on the side of the image.";
+#endregion
+
 #region command line
-CommandLine par = new("dorsi");
+CommandLine par = new("dorsi", desc);
 par.AddBaseOptions();
 par.Usage = "[options]* inputfile+";
+par.LongDesc = longDesc;
 if (par.Parse(args)) return;
 #endregion
 

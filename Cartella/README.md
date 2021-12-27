@@ -2,7 +2,7 @@
 
 # Cartella
 
-Utility per l'assemblaggio di una cartellina su un catoncino 20x27 cm
+Utility per l'assemblaggio di una cartellina su un cartoncino 20x27 cm
 
 Leggi la [documentazione sul sito «The Strawberry Field»](https://strawberryfield.altervista.org/carte_de_visite/creazione_cartellina.php)
 

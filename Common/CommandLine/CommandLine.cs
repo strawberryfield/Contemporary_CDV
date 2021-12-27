@@ -26,11 +26,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Casasoft.CCDV;
 
 public class CommandLine : ICommandLine
 {
+    #region internal properties
     protected bool shouldShowHelp { get; set; }
     protected bool shouldShowColors { get; set; }
     protected bool shouldShowLicense { get; set; }
@@ -40,8 +42,9 @@ public class CommandLine : ICommandLine
     protected OptionSet baseOptions { get; set; }
     protected bool noBanner { get; set; }
     protected string outputDir { get; private set; }
+    #endregion
 
-    #region properties
+    #region public properties
     public string OutputName { get; set; }
     public int Dpi { get; set; }
     public List<string> FilesList { get; set; }
@@ -49,6 +52,7 @@ public class CommandLine : ICommandLine
     public string Usage { get; set; }
     public MagickColor FillColor { get; set; }
     public MagickColor BorderColor { get; set; }
+    public string LongDesc { get; set; }
     #endregion
 
     #region defaults
@@ -93,12 +97,6 @@ public class CommandLine : ICommandLine
             };
     }
     #endregion
-
-    public virtual void WelcomeBanner() =>
-        Console.WriteLine(WelcomeBannerText());
-
-    public virtual string WelcomeBannerText() =>
-        $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
 
     public void AddBaseOptions()
     {
@@ -180,6 +178,13 @@ public class CommandLine : ICommandLine
         return false;
     }
 
+    #region texts
+    public virtual void WelcomeBanner() =>
+    Console.WriteLine(WelcomeBannerText());
+
+    public virtual string WelcomeBannerText() =>
+        $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
+
     protected string ColorsSyntax => @$"Colors can be written in any of these formats:
   #rgb
   #rrggbb
@@ -196,21 +201,23 @@ public class CommandLine : ICommandLine
 
     protected string PrintMan()
     {
-        string ret = @$"% {exeName.ToUpper()}(1)
-% Roberto Ceccarelli - The Strawberry Field
+        StringBuilder ret = new StringBuilder();
+        ret.AppendLine(@$"% {exeName.ToUpper()}(1)  
+% Roberto Ceccarelli - The Strawberry Field  
 % Dec 2021
 
 # NAME
 {exeName} - {exeDesc}
 
 # SYNOPSIS
-**{exeName}** {Usage}
+**{exeName}** {Usage}");
 
-# DESCRIPTION
+        if(!string.IsNullOrWhiteSpace(LongDesc))
+        {
+            ret.AppendLine($"\n# DESCRIPTION\n{LongDesc}");
+        }
 
-# OPTIONS
-";
-
+        ret.AppendLine("\n# OPTIONS");
         StringWriter sw = new StringWriter();
         Options.WriteOptionDescriptions(sw);
         string[] opts = sw.ToString().Split(
@@ -222,18 +229,19 @@ public class CommandLine : ICommandLine
             if (string.IsNullOrWhiteSpace(s)) continue;
 
             string o = s.Substring(0, 29).Trim();
-            if(string.IsNullOrWhiteSpace(o))
+            if (string.IsNullOrWhiteSpace(o))
             {
-                ret += $"{s.Trim()}";
+                ret.Append(s.Trim());
             }
             else
             {
-                ret += (first ? "" : "\n\n") + $"**{o}**\n: {s.Substring(29).Trim()}";
+                ret.Append(first ? "" : "\n\n");
+                ret.Append($"**{o}**\n: {s.Substring(29).Trim()}");
             }
             first = false;
         }
 
-        ret += $@"
+        ret.Append($@"
 
 ## COLORS
 {ColorsSyntax.Replace("\r", "  \r")}
@@ -256,10 +264,13 @@ If not, see <http://www.gnu.org/licenses/>.
 Casasoft CCDV Tools is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
-See the GNU General Public License for more details.";
-        return ret;
-    }
+See the GNU General Public License for more details.");
 
+        return ret.ToString();
+    }
+    #endregion
+
+    #region internal utils
     protected void GetEnvVars()
     {
         string eDpi = Environment.GetEnvironmentVariable("CDV_DPI");
@@ -373,4 +384,5 @@ See the GNU General Public License for more details.";
         FilesList.Clear();
         FilesList.AddRange(files);
     }
+    #endregion
 }

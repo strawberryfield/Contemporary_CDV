@@ -23,9 +23,16 @@ using Casasoft.CCDV;
 using Casasoft.CCDV.Engines;
 using ImageMagick;
 
+#region texts
+string desc = "Assembling two images over a 10x15 cm paper";
+string longDesc = @"This program gathers two images on a 10x15cm surface 
+that you can print on a paper of ypur choice.";
+#endregion
+
 #region command line
-MontaggioFotoCommandLine par = new("card");
+MontaggioFotoCommandLine par = new("card", desc);
 par.Usage = "[options]* inputfile+";
+par.LongDesc = longDesc;
 if (par.Parse(args)) return;
 
 par.ExpandWildcards();

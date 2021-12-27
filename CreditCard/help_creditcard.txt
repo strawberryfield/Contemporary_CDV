@@ -9,6 +9,8 @@ Options:
       --fronttextcolor=VALUE front text color (default #000000)
       --fronttextborder=VALUE
                              front text border color (default #000000)
+      --fontbold             use bold font weight
+      --fontitalic           use italic font style
       --mbcolor=VALUE        magnetic band color (default #8B4513)
       --mbimage=VALUE        magnetic band overlay image
       --backimage=VALUE      image for back side
@@ -23,6 +25,7 @@ Options:
   -o, --output=VALUE         set output dir/filename
       --nobanner             suppress the banner
   -h, --help                 show this message and exit
+      --man                  show the man page source and exit
       --colors               list available colors by name
       --license              show program license (AGPL 3.0)
 

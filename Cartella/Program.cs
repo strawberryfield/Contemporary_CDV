@@ -22,9 +22,17 @@
 using Casasoft.CCDV;
 using ImageMagick;
 
+#region texts
+string desc = "Folder builder using a 20x27 cm paper";
+string longDesc = @"This program allows you to create an exploded view of a folder case,
+without glued parts, for Carte de Visite.  
+It has dimensions 105x70mm with a thickness that can be changed by a parameter on the command line.";
+#endregion
+
 #region command line
-BaseBuilderCommandLine par = new("folder");
+BaseBuilderCommandLine par = new("folder", desc);
 par.Usage = "[options]*";
+par.LongDesc = longDesc;
 if (par.Parse(args)) return;
 #endregion
 

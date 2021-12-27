@@ -23,9 +23,16 @@ using Casasoft.CCDV;
 using Casasoft.CCDV.Engines;
 using ImageMagick;
 
+#region texts
+string desc = "Creates a credit card recto and verso.";
+string longDesc = @"This program allows you to create a credit card with recto and verso.   
+You can add a pseudo magnetic band, text on front and a more long text on the back.";
+#endregion
+
 #region command line
-CreditCardCommandLine par = new("cc");
+CreditCardCommandLine par = new("cc", desc);
 par.Usage = "[options]* inputfile";
+par.LongDesc = longDesc;
 if (par.Parse(args)) return;
 
 if (par.FilesList.Count <= 0) return;

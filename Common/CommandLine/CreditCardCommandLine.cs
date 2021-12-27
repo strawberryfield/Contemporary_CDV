@@ -41,12 +41,12 @@ public class CreditCardCommandLine : CommandLine
     private string sFrontTextBorder = MagickColors.Black.ToHexString();
     private string sMagneticBandColor = MagickColors.SaddleBrown.ToHexString();
 
-    public CreditCardCommandLine(string outputname) :
-    this(ExeName(), outputname)
+    public CreditCardCommandLine(string outputname, string desc = "") :
+    this(ExeName(), outputname, desc)
     { }
 
-    public CreditCardCommandLine(string exename, string outputname) :
-        base(exename, outputname)
+    public CreditCardCommandLine(string exename, string outputname, string desc = "") :
+        base(exename, outputname, desc)
     {
         FrontText = string.Empty;
         FrontTextFont = "Arial";

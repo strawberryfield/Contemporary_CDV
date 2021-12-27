@@ -48,11 +48,11 @@ public class BaseBuilderCommandLine : CommandLine
     private string sTargetType = "CDV";
     private string sOrientation = "PORTRAIT";
 
-    public BaseBuilderCommandLine(string outputname) :
-        this(ExeName(), outputname)
+    public BaseBuilderCommandLine(string outputname, string desc = "") :
+        this(ExeName(), outputname, desc)
     { }
-    public BaseBuilderCommandLine(string exename, string outputname) :
-        base(exename, outputname)
+    public BaseBuilderCommandLine(string exename, string outputname, string desc = "") :
+        base(exename, outputname, desc)
     {
         topImage = string.Empty;
         bottomImage = string.Empty;

@@ -34,6 +34,7 @@ public interface ICommandLine
     string Usage { get; set; }
     MagickColor FillColor { get; set; }
     MagickColor BorderColor { get; set; }
+    string LongDesc { get; set; }
 
     void WelcomeBanner();
     string WelcomeBannerText();
