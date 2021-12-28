@@ -23,47 +23,103 @@ using ImageMagick;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// This class handles all target formats
+/// converting sizes in mm to pixel using the specified dpi resolution
+/// </summary>
 public class Formats
 {
     private int _dpi;
     private double _inch = 25.4;
 
     #region constructors
+    /// <summary>
+    /// This constructor ser the resolution to 300 DPI
+    /// </summary>
     public Formats() : this(300) { }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="dpi">Resolution for conversion in pixels</param>
     public Formats(int dpi)
     {
         _dpi = dpi;
     }
     #endregion
 
+    /// <summary>
+    /// Converts mm to pixels
+    /// </summary>
+    /// <param name="mm">size to convert</param>
+    /// <returns>pixel at defined resolution</returns>
     public int ToPixels(int mm) => (int)(mm * _dpi / _inch);
+    
+    /// <summary>
+    /// Returns the resolution
+    /// </summary>
     public int DPI => _dpi;
 
     #region commercial formats
     /// <summary>
-    /// Photocity Digital print over paper
+    /// Photocity Digital print over 27x20cm paper
     /// </summary>
     /// <remarks>
     /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
     /// </remarks>
     public MagickGeometry InCartha20x27_o => new(ToPixels((int)(270 * 1.04)), ToPixels((int)(200 * 1.04)));
+    /// <summary>
+    /// Photocity Digital print over 20x27cm paper
+    /// </summary>
+    /// <remarks>
+    /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
+    /// </remarks>
     public MagickGeometry InCartha20x27_v => swap(InCartha20x27_o);
+    /// <summary>
+    /// 15x10cm paper
+    /// </summary>
     public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));
+    /// <summary>
+    /// 10x15cm paper
+    /// </summary>
     public MagickGeometry FineArt10x15_v => swap(FineArt10x15_o);
+    /// <summary>
+    /// 18x10cm paper
+    /// </summary>
     public MagickGeometry FineArt10x18_o => new(ToPixels(180), ToPixels(102));
+    /// <summary>
+    /// 10x18cm paper
+    /// </summary>
     public MagickGeometry FineArt10x18_v => swap(FineArt10x18_o);
     #endregion
 
     #region cdv
+    /// <summary>
+    /// Horizontal Carte de Visite, 100x64mm
+    /// </summary>
     public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
+    /// <summary>
+    /// Vertical Carte de Visite, 64x100mm
+    /// </summary>
     public MagickGeometry CDV_Full_v => swap(CDV_Full_o);
+    /// <summary>
+    /// Horizontal Carte de Visite reduced to leave a 5 mm border on any side
+    /// </summary>
     public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(54));
+    /// <summary>
+    /// Vertical Carte de Visite reduced to leave a 5 mm border on any side
+    /// </summary>
     public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
     #endregion
 
     #region credit card
+    /// <summary>
+    /// Horizontal credit card, 86x54mm
+    /// </summary>
     public MagickGeometry CC_o => new(ToPixels(86), ToPixels(54));
+    /// <summary>
+    /// Vertical credit card, 54x86mm
+    /// </summary>
     public MagickGeometry CC_v => swap(CC_o);
     #endregion
 
@@ -75,6 +131,10 @@ public class Formats
         return g;
     }
 
+    /// <summary>
+    /// Adds Exif infos to image
+    /// </summary>
+    /// <param name="img">image to process</param>
     public void SetImageParameters(MagickImage img)
     {
         img.Format = MagickFormat.Jpg;
