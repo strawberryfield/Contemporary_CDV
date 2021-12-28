@@ -25,6 +25,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="help_montaggiofoto.txt" />
+    <None Remove="man_MontaggioFoto.md" />
+    <None Remove="MontaggioFoto.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 

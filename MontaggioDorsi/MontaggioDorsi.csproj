@@ -25,6 +25,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="help_montaggiodorsi.txt" />
+    <None Remove="man_MontaggioDorsi.md" />
+    <None Remove="MontaggioDorsi.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.5.0" />
     <PackageReference Include="Mono.Options" Version="6.12.0.148" />
   </ItemGroup>

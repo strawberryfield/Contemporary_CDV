@@ -23,6 +23,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditCard", "CreditCard\Cr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CCDV", "CCDV\CCDV.csproj", "{C2E14325-615A-489C-BD7F-BCC0B16D34DC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{BE17CE64-B2C9-4987-A06A-B29A6BEE04B0}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Cartella.1 = docs\Cartella.1
+		docs\CreditCard.1 = docs\CreditCard.1
+		docs\help_cartella.txt = docs\help_cartella.txt
+		docs\help_creditcard.txt = docs\help_creditcard.txt
+		docs\help_montaggiodorsi.txt = docs\help_montaggiodorsi.txt
+		docs\help_montaggiofoto.txt = docs\help_montaggiofoto.txt
+		docs\help_scatola.txt = docs\help_scatola.txt
+		docs\index.md = docs\index.md
+		docs\man_Cartella.md = docs\man_Cartella.md
+		docs\man_CreditCard.md = docs\man_CreditCard.md
+		docs\man_MontaggioDorsi.md = docs\man_MontaggioDorsi.md
+		docs\man_MontaggioFoto.md = docs\man_MontaggioFoto.md
+		docs\man_Scatola.md = docs\man_Scatola.md
+		docs\MontaggioDorsi.1 = docs\MontaggioDorsi.1
+		docs\MontaggioFoto.1 = docs\MontaggioFoto.1
+		docs\Scatola.1 = docs\Scatola.1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

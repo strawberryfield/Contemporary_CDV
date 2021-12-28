@@ -25,6 +25,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="help_scatola.txt" />
+    <None Remove="man_Scatola.md" />
+    <None Remove="Scatola.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.5.0" />
     <PackageReference Include="Mono.Options" Version="6.12.0.148" />
   </ItemGroup>

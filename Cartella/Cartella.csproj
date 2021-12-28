@@ -24,6 +24,12 @@ Creazione di asrucci a cartellina</Description>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Cartella.1" />
+    <None Remove="help_cartella.txt" />
+    <None Remove="man_Cartella.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
