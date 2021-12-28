@@ -1,10 +1,10 @@
 # Casasoft Contemporary Carte de Visite tools documentation
 
-## [Main project readme](../README.md)
+## [Main project readme](https://github.com/strawberryfield/Contemporary_CDV/blob/master/README.md)
 
 ## MontaggioFoto
 
-- [readme](../MontaggioFoto/README.md)
+- [readme](https://raw.githubusercontent.com/strawberryfield/Contemporary_CDV/master/MontaggioFoto/README.md)
 - [sito web](https://strawberryfield.altervista.org/carte_de_visite/montaggio_foto.php)
 - [man page](man_MontaggioFoto.md)
 
