@@ -27,23 +27,38 @@ namespace Casasoft.CCDV;
 public static class Utils
 {
     #region image resize
+    /// <summary>
+    /// Rotates an image according to the given geometry
+    /// </summary>
+    /// <param name="img">image to rotate</param>
+    /// <param name="size">reference geometry</param>
+    /// <returns>rotated image</returns>
     public static MagickImage AutoRotate(MagickImage img, MagickGeometry size)
     {
+        MagickImage i = (MagickImage)img.Clone();
         if (size.Height > size.Width)
         {
             // output must be portrait
-            if (img.Height < img.Width)
-                img.Rotate(-90);
+            if (img.Height < img.Width) 
+                i.Rotate(-90);
         }
         else
         {
             // output must be landscape
             if (img.Height > img.Width)
-                img.Rotate(-90);
+                i.Rotate(-90);
         }
-        return img;
+        return i;
     }
 
+    /// <summary>
+    /// Resizes an image to the given geometry.<br/>
+    /// Empty space is filled with the given color
+    /// </summary>
+    /// <param name="img">Image to resize</param>
+    /// <param name="size">target size</param>
+    /// <param name="fill">color to fill the empty space</param>
+    /// <returns>Image resized and filled</returns>
     public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill)
     {
         MagickImage i = (MagickImage)img.Clone();
@@ -51,21 +66,76 @@ public static class Utils
         i.Extent(size, Gravity.Center, fill);
         return i;
     }
+    /// <summary>
+    /// Resizes an image to the given geometry.<br/>
+    /// Empty space is filled with white
+    /// </summary>
+    /// <param name="img">Image to resize</param>
+    /// <param name="size">target size</param>
+    /// <returns>Image resized and filled</returns>
     public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) =>
         ResizeAndFill(img, size, MagickColors.White);
 
+    /// <summary>
+    /// Resizes an image to the given geometry.<br/>
+    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
+    /// Empty space is filled with the given color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <param name="fill">fill color</param>
+    /// <returns>processed image</returns>
     public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill) =>
         ResizeAndFill(AutoRotate(img, size), size, fill);
+    /// <summary>
+    /// Resizes an image to the size of another image.<br/>
+    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
+    /// Empty space is filled with the given color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <param name="fill">fill color</param>
+    /// <returns>processed image</returns>
     public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, MagickColor fill) =>
         RotateResizeAndFill(img, new MagickGeometry(size.Width, size.Height), fill);
+    /// <summary>
+    /// Resizes an image to the given geometry.
+    /// Before resizing the image is rotated with <see cref="AutoRotate"/>
+    /// Empty space is filled with white color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <param name="fill">fill color</param>
+    /// <returns>processed image</returns>
     public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size) =>
         RotateResizeAndFill(img, size, MagickColors.White);
+    /// <summary>
+    /// Resizes an image to the size of another image.<br/>
+    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
+    /// Empty space is filled with white color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <param name="fill">fill color</param>
+    /// <returns>processed image</returns>
     public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) =>
         RotateResizeAndFill(img, size, MagickColors.White);
 
     #endregion
 
     #region text
+    /// <summary>
+    /// Renders text centered to the given size
+    /// </summary>
+    /// <param name="text">text to render</param>
+    /// <param name="size">font size</param>
+    /// <param name="width">render area width</param>
+    /// <param name="height">render area height</param>
+    /// <param name="font">font</param>
+    /// <param name="rotation">text rotation</param>
+    /// <param name="fontBold">use bold font (if available)</param>
+    /// <param name="fontItalic">use bold font (if available)</param>
+    /// <returns></returns>
     public static Drawables CenteredText(string text, int size, int width, int height,
         string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false)
     {
@@ -84,9 +154,31 @@ public static class Utils
         return draw;
     }
 
+    /// <summary>
+    /// Renders text centered to the given geometry
+    /// </summary>
+    /// <param name="text">text to render</param>
+    /// <param name="size">font size</param>
+    /// <param name="fmt">reference geometry</param>
+    /// <param name="font">font</param>
+    /// <param name="rotation">text rotation</param>
+    /// <param name="fontBold">use bold font (if available)</param>
+    /// <param name="fontItalic">use bold font (if available)</param>
+    /// <returns></returns>
     public static Drawables CenteredText(string text, int size, MagickGeometry fmt,
         string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false) =>
         CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
+    /// <summary>
+    /// Renders text centered to the given reference image
+    /// </summary>
+    /// <param name="text">text to render</param>
+    /// <param name="size">font size</param>
+    /// <param name="fmt">reference image</param>
+    /// <param name="font">font</param>
+    /// <param name="rotation">text rotation</param>
+    /// <param name="fontBold">use bold font (if available)</param>
+    /// <param name="fontItalic">use bold font (if available)</param>
+    /// <returns></returns>
     public static Drawables CenteredText(string text, int size, MagickImage fmt,
         string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false) =>
         CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
