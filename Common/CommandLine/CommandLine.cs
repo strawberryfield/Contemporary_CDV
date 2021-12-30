@@ -30,28 +30,82 @@ using System.Text;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// Base command line handling
+/// </summary>
 public class CommandLine : ICommandLine
 {
     #region internal properties
+    /// <summary>
+    /// true if help is requested
+    /// </summary>
     protected bool shouldShowHelp { get; set; }
+    /// <summary>
+    /// true if colors list is requested
+    /// </summary>
     protected bool shouldShowColors { get; set; }
+    /// <summary>
+    /// true if license is requested
+    /// </summary>
     protected bool shouldShowLicense { get; set; }
+    /// <summary>
+    /// true if man page is requested
+    /// </summary>
     protected bool shouldShowMan { get; set; }
+    /// <summary>
+    /// name of currently running assembly
+    /// </summary>
     protected string exeName { get; set; }
+    /// <summary>
+    /// brief program description
+    /// </summary>
     protected string exeDesc { get; set; }
+    /// <summary>
+    /// list of base MonoOptions options
+    /// </summary>
     protected OptionSet baseOptions { get; set; }
+    /// <summary>
+    /// true if banner suppression is requested
+    /// </summary>
     protected bool noBanner { get; set; }
+    /// <summary>
+    /// Output directory
+    /// </summary>
     protected string outputDir { get; private set; }
     #endregion
 
     #region public properties
+    /// <summary>
+    /// Output file name
+    /// </summary>
     public string OutputName { get; set; }
+    /// <summary>
+    /// Output resolution
+    /// </summary>
     public int Dpi { get; set; }
+    /// <summary>
+    /// Input files list
+    /// </summary>
     public List<string> FilesList { get; set; }
+    /// <summary>
+    /// MonoOptions options list
+    /// </summary>
     public OptionSet Options { get; set; }
+    /// <summary>
+    /// Usage example
+    /// </summary>
     public string Usage { get; set; }
+    /// <summary>
+    /// Color to fill images
+    /// </summary>
     public MagickColor FillColor { get; set; }
+    /// <summary>
+    /// Color to use for lines and borders
+    /// </summary>
     public MagickColor BorderColor { get; set; }
+    /// <summary>
+    /// Long description for man pages
+    /// </summary>
     public string LongDesc { get; set; }
     #endregion
 
@@ -62,11 +116,26 @@ public class CommandLine : ICommandLine
     #endregion
 
     #region constructors
+    /// <summary>
+    /// Gets the name of currently running assembly
+    /// </summary>
+    /// <returns></returns>
     public static string ExeName() => Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public CommandLine(string outputname, string desc = "") :
         this(ExeName(), outputname, desc)
     { }
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="exename">Name of the program exe</param>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public CommandLine(string exename, string outputname, string desc = "")
     {
         exeName = exename;
@@ -98,6 +167,9 @@ public class CommandLine : ICommandLine
     }
     #endregion
 
+    /// <summary>
+    /// Sets base options in derived classes
+    /// </summary>
     public void AddBaseOptions()
     {
         foreach (var opt in baseOptions)
@@ -106,6 +178,11 @@ public class CommandLine : ICommandLine
         }
     }
 
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="args">command line arguments</param>
+    /// <returns>true if nothing to (ie. help)</returns>
     public virtual bool Parse(string[] args)
     {
         try
@@ -179,12 +256,22 @@ public class CommandLine : ICommandLine
     }
 
     #region texts
+    /// <summary>
+    /// Prints the welcome banner
+    /// </summary>
     public virtual void WelcomeBanner() =>
     Console.WriteLine(WelcomeBannerText());
 
+    /// <summary>
+    /// Text for welcome banner
+    /// </summary>
+    /// <returns></returns>
     public virtual string WelcomeBannerText() =>
         $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
 
+    /// <summary>
+    /// Colors syntax help
+    /// </summary>
     protected string ColorsSyntax => @$"Colors can be written in any of these formats:
   #rgb
   #rrggbb
@@ -193,12 +280,19 @@ public class CommandLine : ICommandLine
   #rrrrggggbbbbaaaa
   colorname    (use {exeName} --colors  to see all available colors)";
 
+    /// <summary>
+    /// Environment varaibles help
+    /// </summary>
     protected string EnvVarsHelp => @"The program can read values from these variables:
   CDV_OUTPATH  Base path for output files
   CDV_DPI      Resolution for output files
   CDV_FILL     Color used to fill images
   CDV_BORDER   Border color";
 
+    /// <summary>
+    /// Text of man page in markdown format
+    /// </summary>
+    /// <returns></returns>
     protected string PrintMan()
     {
         StringBuilder ret = new StringBuilder();
@@ -271,6 +365,9 @@ See the GNU General Public License for more details.");
     #endregion
 
     #region internal utils
+    /// <summary>
+    /// Gets environment variables values
+    /// </summary>
     protected void GetEnvVars()
     {
         string eDpi = Environment.GetEnvironmentVariable("CDV_DPI");
@@ -286,6 +383,12 @@ See the GNU General Public License for more details.");
             sFillColor = eBorder;
     }
 
+    /// <summary>
+    /// Gets string from filename.<br/>
+    /// If the argument begins with '@' then the string is the name of the file containing the text
+    /// </summary>
+    /// <param name="p">parameter argument</param>
+    /// <returns></returns>
     protected string GetFileParameter(string p)
     {
         if (!string.IsNullOrWhiteSpace(p) && p[0] == '@')
@@ -316,6 +419,13 @@ See the GNU General Public License for more details.");
         }
     }
 
+    /// <summary>
+    /// Get integer value from string
+    /// </summary>
+    /// <param name="val">input string</param>
+    /// <param name="fallback">default value in case of parsing error</param>
+    /// <param name="message">error message</param>
+    /// <returns></returns>
     public static int GetIntParameter(string val, int fallback, string message)
     {
         int ret;
@@ -327,13 +437,22 @@ See the GNU General Public License for more details.");
         return ret;
     }
 
+    /// <summary>
+    /// sets the dpi value from command line string
+    /// </summary>
     protected void GetDPI()
     {
         if (!string.IsNullOrWhiteSpace(sDpi))
             Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
     }
 
+    /// <summary>
+    /// List of colors names
+    /// </summary>
     protected Dictionary<string, MagickColor> colorDictionary;
+    /// <summary>
+    /// Fills the list of colors names
+    /// </summary>
     protected void fillColorDictionary()
     {
         colorDictionary = new(StringComparer.OrdinalIgnoreCase);
@@ -344,6 +463,11 @@ See the GNU General Public License for more details.");
         }
     }
 
+    /// <summary>
+    /// Gets the color by a string
+    /// </summary>
+    /// <param name="color">name or components values</param>
+    /// <returns><see cref="MagickColor"/></returns>
     protected MagickColor GetColor(string color)
     {
         if (!string.IsNullOrWhiteSpace(color))
@@ -374,6 +498,9 @@ See the GNU General Public License for more details.");
         }
     }
 
+    /// <summary>
+    /// Windows shell does not expand wildcards
+    /// </summary>
     public void ExpandWildcards()
     {
         List<string> files = new();

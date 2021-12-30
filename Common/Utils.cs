@@ -24,6 +24,9 @@ using System;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// Collection of Image Magick utilities
+/// </summary>
 public static class Utils
 {
     #region image resize
@@ -105,7 +108,6 @@ public static class Utils
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
-    /// <param name="fill">fill color</param>
     /// <returns>processed image</returns>
     public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size) =>
         RotateResizeAndFill(img, size, MagickColors.White);
@@ -116,7 +118,6 @@ public static class Utils
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
-    /// <param name="fill">fill color</param>
     /// <returns>processed image</returns>
     public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) =>
         RotateResizeAndFill(img, size, MagickColors.White);

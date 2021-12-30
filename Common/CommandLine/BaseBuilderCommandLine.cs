@@ -48,9 +48,20 @@ public class BaseBuilderCommandLine : CommandLine
     private string sTargetType = "CDV";
     private string sOrientation = "PORTRAIT";
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public BaseBuilderCommandLine(string outputname, string desc = "") :
         this(ExeName(), outputname, desc)
     { }
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="exename">Name of the program exe</param>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public BaseBuilderCommandLine(string exename, string outputname, string desc = "") :
         base(exename, outputname, desc)
     {

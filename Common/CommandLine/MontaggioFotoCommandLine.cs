@@ -23,15 +23,38 @@ using Mono.Options;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// Command line management for MontaggioFoto
+/// </summary>
 public class MontaggioFotoCommandLine : CommandLine
 {
+    /// <summary>
+    /// true if images must fit the entire 100x64mm format
+    /// </summary>
     public bool FullSize { get; set; }
+    /// <summary>
+    /// true if images will fit the entire 100x64mm format with 5mm border on each side
+    /// </summary>
     public bool WithBorder { get; set; }
+    /// <summary>
+    /// true if white space around the images must be deleted
+    /// </summary>
     public bool Trim { get; set; }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public MontaggioFotoCommandLine(string outputname, string desc = "") :
     this(ExeName(), outputname, desc)
     { }
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="exename">Name of the program exe</param>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public MontaggioFotoCommandLine(string exename, string outputname, string desc = "") :
         base(exename, outputname, desc)
     {

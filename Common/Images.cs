@@ -30,6 +30,9 @@ namespace Casasoft.CCDV;
 /// </summary>
 public class Images
 {
+    /// <summary>
+    /// Options for images generation
+    /// </summary>
     protected Formats fmt;
 
     #region constructors

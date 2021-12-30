@@ -25,20 +25,65 @@ using System.Collections.Generic;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// Interface for command line handling
+/// </summary>
 public interface ICommandLine
 {
+    /// <summary>
+    /// Output file name
+    /// </summary>
     string OutputName { get; set; }
+    /// <summary>
+    /// Output resolution
+    /// </summary>
     int Dpi { get; set; }
+    /// <summary>
+    /// Input files list
+    /// </summary>
     List<string> FilesList { get; set; }
+    /// <summary>
+    /// MonoOptions options list
+    /// </summary>
     OptionSet Options { get; set; }
+    /// <summary>
+    /// Usage example
+    /// </summary>
     string Usage { get; set; }
+    /// <summary>
+    /// Color to fill images
+    /// </summary>
     MagickColor FillColor { get; set; }
+    /// <summary>
+    /// Color to use for lines and borders
+    /// </summary>
     MagickColor BorderColor { get; set; }
+    /// <summary>
+    /// Long description for man pages
+    /// </summary>
     string LongDesc { get; set; }
 
+    /// <summary>
+    /// Prints the welcome banner
+    /// </summary>
     void WelcomeBanner();
+    /// <summary>
+    /// Text for welcome banner
+    /// </summary>
+    /// <returns></returns>
     string WelcomeBannerText();
+    /// <summary>
+    /// Sets base options in derived classes
+    /// </summary>
     void AddBaseOptions();
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="args">command line arguments</param>
+    /// <returns>true if nothing to (ie. help)</returns>
     bool Parse(string[] args);
+    /// <summary>
+    /// Windows shell does not expand wildcards
+    /// </summary>
     void ExpandWildcards();
 }
