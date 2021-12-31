@@ -1,4 +1,4 @@
-﻿// copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft
+﻿// copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
 // http://strawberryfield.altervista.org 
 // 
 // This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -267,7 +267,7 @@ public class CommandLine : ICommandLine
     /// </summary>
     /// <returns></returns>
     public virtual string WelcomeBannerText() =>
-        $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
+        $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
 
     /// <summary>
     /// Colors syntax help
@@ -298,7 +298,7 @@ public class CommandLine : ICommandLine
         StringBuilder ret = new StringBuilder();
         ret.AppendLine(@$"% {exeName.ToUpper()}(1)  
 % Roberto Ceccarelli - The Strawberry Field  
-% Dec 2021
+% Jan 2022
 
 # NAME
 {exeName} - {exeDesc}

@@ -1,4 +1,4 @@
-﻿// copyright (c) 2020-2021 Roberto Ceccarelli - Casasoft
+﻿// copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
 // http://strawberryfield.altervista.org 
 // 
 // This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -67,5 +67,5 @@ public class BaseEngine : IEngine
     public void SetImageInfo(string o, MagickImage image) => img.Info(WelcomeBannerText(), o).Draw(image);
     public void SetImageInfo(string i, string o, MagickImage image) => img.Info(i, o).Draw(image);
     public virtual string WelcomeBannerText() =>
-        "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2021 Roberto Ceccarelli - Casasoft\n";
+        "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
 }
