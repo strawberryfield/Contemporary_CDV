@@ -218,6 +218,13 @@
             Windows shell does not expand wildcards
             </summary>
         </member>
+        <member name="M:Casasoft.CCDV.CommandLine.EscapeMarkdown(System.String)">
+            <summary>
+            Escape markdown special characters
+            </summary>
+            <param name="s">string to process</param>
+            <returns>escaped string</returns>
+        </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
             Interface for command line handling

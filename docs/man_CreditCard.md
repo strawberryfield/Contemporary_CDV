@@ -1,12 +1,12 @@
 % CREDITCARD(1)  
-% Roberto Ceccarelli - The Strawberry Field  
-% Dec 2021
+% Roberto Ceccarelli - Casasoft  
+% Jan 2022
 
 # NAME
 CreditCard - Creates a credit card recto and verso.
 
 # SYNOPSIS
-**CreditCard** [options]* inputfile
+**CreditCard** \[options\]\* inputfile
 
 # DESCRIPTION
 This program allows you to create a credit card with recto and verso.   
@@ -14,16 +14,16 @@ You can add a pseudo magnetic band, text on front and a more long text on the ba
 
 # OPTIONS
 **--fronttext=VALUE**
-: text in front (Cardholder name)
+: text in front \(Cardholder name\)
 
 **--fronttextfont=VALUE**
-: front text font (default 'Arial')
+: front text font \(default 'Arial'\)
 
 **--fronttextcolor=VALUE**
-: front text color (default #000000)
+: front text color \(default \#000000\)
 
 **--fronttextborder=VALUE**
-: front text border color (default #000000)
+: front text border color \(default \#000000\)
 
 **--fontbold**
 : use bold font weight
@@ -32,7 +32,7 @@ You can add a pseudo magnetic band, text on front and a more long text on the ba
 : use italic font style
 
 **--mbcolor=VALUE**
-: magnetic band color (default #8B4513)
+: magnetic band color \(default \#8B4513\)
 
 **--mbimage=VALUE**
 : magnetic band overlay image
@@ -44,13 +44,13 @@ You can add a pseudo magnetic band, text on front and a more long text on the ba
 : pango markup for text on back side.Text can be stored in a file instead of a string.The file must be referenced as '@filename'
 
 **--fillcolor=VALUE**
-: set the color used to fiil the images(default #FFFFFF)
+: set the color used to fiil the images\(default \#FFFFFF\)
 
 **--bordercolor=VALUE**
-: set the color used to border the images(default #000000)
+: set the color used to border the images\(default \#000000\)
 
 **--dpi=VALUE**
-: set output resolution (default 300)
+: set output resolution \(default 300\)
 
 **-o, --output=VALUE**
 : set output dir/filename
@@ -68,30 +68,30 @@ You can add a pseudo magnetic band, text on front and a more long text on the ba
 : list available colors by name
 
 **--license**
-: show program license (AGPL 3.0)
+: show program license \(AGPL 3.0\)
 
 ## COLORS
 Colors can be written in any of these formats:  
-  #rgb  
-  #rrggbb  
-  #rrggbbaa  
-  #rrrrggggbbbb  
-  #rrrrggggbbbbaaaa  
-  colorname    (use CreditCard --colors  to see all available colors)
+  \#rgb  
+  \#rrggbb  
+  \#rrggbbaa  
+  \#rrrrggggbbbb  
+  \#rrrrggggbbbbaaaa  
+  colorname    \(use CreditCard --colors  to see all available colors\)
 
 ## ENVIRONMENT VARIABLES
 The program can read values from these variables:  
-  CDV_OUTPATH  Base path for output files  
-  CDV_DPI      Resolution for output files  
-  CDV_FILL     Color used to fill images  
-  CDV_BORDER   Border color
+  CDV\_OUTPATH  Base path for output files  
+  CDV\_DPI      Resolution for output files  
+  CDV\_FILL     Color used to fill images  
+  CDV\_BORDER   Border color
 
 # COPYRIGHT
 Casasoft CreditCard is free software:  
 you can redistribute it and/or modify it  
 under the terms of the GNU Affero General Public License as published by  
 the Free Software Foundation, either version 3 of the License, or  
-(at your option) any later version.  
+\(at your option\) any later version.  
 
 You should have received a copy of the GNU AGPL v.3  
 along with Casasoft CreditCard.  

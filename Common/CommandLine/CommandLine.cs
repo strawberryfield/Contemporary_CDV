@@ -297,18 +297,18 @@ public class CommandLine : ICommandLine
     {
         StringBuilder ret = new StringBuilder();
         ret.AppendLine(@$"% {exeName.ToUpper()}(1)  
-% Roberto Ceccarelli - The Strawberry Field  
+% Roberto Ceccarelli - Casasoft  
 % Jan 2022
 
 # NAME
 {exeName} - {exeDesc}
 
 # SYNOPSIS
-**{exeName}** {Usage}");
+**{exeName}** {EscapeMarkdown(Usage)}");
 
-        if(!string.IsNullOrWhiteSpace(LongDesc))
+        if (!string.IsNullOrWhiteSpace(LongDesc))
         {
-            ret.AppendLine($"\n# DESCRIPTION\n{LongDesc}");
+            ret.AppendLine($"\n# DESCRIPTION\n{EscapeMarkdown(LongDesc)}");
         }
 
         ret.AppendLine("\n# OPTIONS");
@@ -325,12 +325,12 @@ public class CommandLine : ICommandLine
             string o = s.Substring(0, 29).Trim();
             if (string.IsNullOrWhiteSpace(o))
             {
-                ret.Append(s.Trim());
+                ret.Append(EscapeMarkdown(s.Trim()));
             }
             else
             {
                 ret.Append(first ? "" : "\n\n");
-                ret.Append($"**{o}**\n: {s.Substring(29).Trim()}");
+                ret.Append($"**{o}**\n: {EscapeMarkdown(s.Substring(29).Trim())}");
             }
             first = false;
         }
@@ -338,17 +338,17 @@ public class CommandLine : ICommandLine
         ret.Append($@"
 
 ## COLORS
-{ColorsSyntax.Replace("\r", "  \r")}
+{EscapeMarkdown(ColorsSyntax.Replace("\r", "  \r"))}
 
 ## ENVIRONMENT VARIABLES
-{EnvVarsHelp.Replace("\r", "  \r")}
+{EscapeMarkdown(EnvVarsHelp.Replace("\r", "  \r"))}
 
 # COPYRIGHT
 Casasoft {exeName} is free software:  
 you can redistribute it and/or modify it  
 under the terms of the GNU Affero General Public License as published by  
 the Free Software Foundation, either version 3 of the License, or  
-(at your option) any later version.  
+\(at your option\) any later version.  
 
 You should have received a copy of the GNU AGPL v.3  
 along with Casasoft {exeName}.  
@@ -511,5 +511,22 @@ See the GNU General Public License for more details.");
         FilesList.Clear();
         FilesList.AddRange(files);
     }
+
+    /// <summary>
+    /// Escape markdown special characters
+    /// </summary>
+    /// <param name="s">string to process</param>
+    /// <returns>escaped string</returns>
+    public string EscapeMarkdown(string s) =>
+        s.Replace("\\", "\\\\")
+        .Replace("#", "\\#")
+        .Replace("*", "\\*")
+        .Replace("_", "\\_")
+        .Replace("(", "\\(")
+        .Replace(")", "\\)")
+        .Replace("[", "\\[")
+        .Replace("]", "\\]")
+        .Replace("{", "\\{")
+        .Replace("}", "\\}");
     #endregion
 }
