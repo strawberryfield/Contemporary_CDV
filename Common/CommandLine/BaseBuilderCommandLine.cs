@@ -24,24 +24,82 @@ using System;
 
 namespace Casasoft.CCDV;
 
-public enum TargetType { cdv, cc }
+/// <summary>
+/// Available target formats
+/// </summary>
+public enum TargetType
+{
+    /// <summary>
+    /// Carte de viste 64x100mm
+    /// </summary>
+    cdv, 
+    /// <summary>
+    /// Credit card 86x54mm
+    /// </summary>
+    cc
+}
 
+/// <summary>
+/// Command line extensions for boxes and folders
+/// </summary>
 public class BaseBuilderCommandLine : CommandLine
 {
+    /// <summary>
+    /// Box thickness
+    /// </summary>
     public int thickness { get; set; }
+    /// <summary>
+    /// Image for top border
+    /// </summary>
     public string topImage { get; set; }
+    /// <summary>
+    /// Image for bottom border
+    /// </summary>
     public string bottomImage { get; set; }
+    /// <summary>
+    /// Front image
+    /// </summary>
     public string frontImage { get; set; }
+    /// <summary>
+    /// Back side image
+    /// </summary>
     public string backImage { get; set; }
+    /// <summary>
+    /// Image for left border
+    /// </summary>
     public string leftImage { get; set; }
+    /// <summary>
+    /// Image for right border
+    /// </summary>
     public string rightImage { get; set; }
+    /// <summary>
+    /// true if longer size is horizontal
+    /// </summary>
     public bool isHorizontal { get; set; }
+    /// <summary>
+    /// True if samples images will be created
+    /// </summary>
     public bool useSampleImages { get; set; }
+    /// <summary>
+    /// Text to print on left border
+    /// </summary>
     public string borderText { get; set; }
+    /// <summary>
+    /// fonst for text
+    /// </summary>
     public string font { get; set; }
+    /// <summary>
+    /// use font bold weight (if available)
+    /// </summary>
     public bool fontBold { get; set; }
-    public bool fontItalic { get; set; }    
+    /// <summary>
+    /// use font italic style  (if available)
+    /// </summary>
+    public bool fontItalic { get; set; }
 
+    /// <summary>
+    /// Size of box
+    /// </summary>
     public TargetType targetType { get; set; }
 
     private string sThickness = "5";
@@ -94,6 +152,11 @@ public class BaseBuilderCommandLine : CommandLine
         AddBaseOptions();
     }
 
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="args">command line arguments</param>
+    /// <returns>true if nothing to (ie. help)</returns>
     public override bool Parse(string[] args)
     {
         if (base.Parse(args)) return true;

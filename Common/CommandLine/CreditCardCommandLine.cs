@@ -24,27 +24,71 @@ using Mono.Options;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// Command line extensions for credit cards builder
+/// </summary>
 public class CreditCardCommandLine : CommandLine
 {
+    /// <summary>
+    /// Text to print on the front (like cardholder)
+    /// </summary>
     public string FrontText { get; set; }
+    /// <summary>
+    /// Front text font
+    /// </summary>
     public string FrontTextFont { get; set; }
+    /// <summary>
+    /// Front text fill color
+    /// </summary>
     public MagickColor FrontTextColor { get; set; }
+    /// <summary>
+    /// front text border color
+    /// </summary>
     public MagickColor FrontTextBorder { get; set; }
+    /// <summary>
+    /// use bold weight for front text (if available for font)
+    /// </summary>
     public bool fontBold { get; set; }
+    /// <summary>
+    /// use italic style for front text (if available for font)
+    /// </summary>
     public bool fontItalic { get; set; }
+    /// <summary>
+    /// Pseudo magnetic band color
+    /// </summary>
     public MagickColor MagneticBandColor { get; set; }
+    /// <summary>
+    /// Pseudo magnetic band image
+    /// </summary>
     public string MagneticBandImage { get; set; }
+    /// <summary>
+    /// backgroud image
+    /// </summary>
     public string BackImage { get; set; }
+    /// <summary>
+    /// text to put in the back side
+    /// </summary>
     public string BackText { get; set; }
 
     private string sFrontTextColor = MagickColors.Black.ToHexString();
     private string sFrontTextBorder = MagickColors.Black.ToHexString();
     private string sMagneticBandColor = MagickColors.SaddleBrown.ToHexString();
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public CreditCardCommandLine(string outputname, string desc = "") :
     this(ExeName(), outputname, desc)
     { }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="exename">Name of the program exe</param>
+    /// <param name="outputname">Default output file name</param>
+    /// <param name="desc">brief description of the program</param>
     public CreditCardCommandLine(string exename, string outputname, string desc = "") :
         base(exename, outputname, desc)
     {
@@ -77,6 +121,11 @@ public class CreditCardCommandLine : CommandLine
         AddBaseOptions();
     }
 
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="args">command line arguments</param>
+    /// <returns>true if nothing to (ie. help)</returns>
     public override bool Parse(string[] args)
     {
         if (base.Parse(args)) return true;

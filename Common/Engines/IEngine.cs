@@ -24,18 +24,61 @@ using System.Collections.Generic;
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Interface for various images managers
+/// </summary>
 public interface IEngine
 {
+    /// <summary>
+    /// Output resolution
+    /// </summary>
     int Dpi { get; set; }
+    /// <summary>
+    /// List of files to process
+    /// </summary>
     List<string> FilesList { get; set; }
+    /// <summary>
+    /// Color to fill empty spaces
+    /// </summary>
     MagickColor FillColor { get; set; }
+    /// <summary>
+    /// Color for lines and borders
+    /// </summary>
     MagickColor BorderColor { get; set; }
 
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <returns>Image to print</returns>
     MagickImage GetResult();
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet">suppress messages when running</param>
+    /// <returns>Image to print</returns>
     MagickImage GetResult(bool quiet);
+    /// <summary>
+    /// Writes exif infos on image
+    /// </summary>
+    /// <param name="image">image to process</param>
     void SetImageParameters(MagickImage image);
+    /// <summary>
+    /// Writes info text on images
+    /// </summary>
+    /// <param name="o">output related infos</param>
+    /// <param name="image">image to process</param>
     void SetImageInfo(string o, MagickImage image);
+    /// <summary>
+    /// Writes info text on images
+    /// </summary>
+    /// <param name="i">input related infos</param>
+    /// <param name="o">output related infos</param>
+    /// <param name="image">image to process</param>
     void SetImageInfo(string i, string o, MagickImage image);
+    /// <summary>
+    /// gets the program banner
+    /// </summary>
+    /// <returns></returns>
     string WelcomeBannerText();
 
 }

@@ -24,9 +24,15 @@ using System.Collections.Generic;
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Base class for various images managers
+/// </summary>
 public class BaseEngine : IEngine
 {
     private int _dpi;
+    /// <summary>
+    /// Output resolution
+    /// </summary>
     public int Dpi
     {
         get => _dpi;
@@ -36,13 +42,25 @@ public class BaseEngine : IEngine
             fmt = new(_dpi);
         }
     }
+    /// <summary>
+    /// List of files to process
+    /// </summary>
     public List<string> FilesList { get; set; }
+    /// <summary>
+    /// Color to fill empty spaces
+    /// </summary>
     public MagickColor FillColor { get; set; }
+    /// <summary>
+    /// Color for lines and borders
+    /// </summary>
     public MagickColor BorderColor { get; set; }
 
     protected Formats fmt;
     protected Images img;
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public BaseEngine()
     {
         Dpi = 300;
@@ -50,7 +68,10 @@ public class BaseEngine : IEngine
         FillColor = MagickColors.White;
         BorderColor = MagickColors.Black;
     }
-
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="par">Command line options</param>
     public BaseEngine(ICommandLine par)
     {
         Dpi = par.Dpi;
@@ -59,13 +80,41 @@ public class BaseEngine : IEngine
         BorderColor = par.BorderColor;
     }
 
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <returns>Image to print</returns>
     public MagickImage GetResult() => GetResult(false);
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet">suppress messages when running</param>
+    /// <returns>Image to print</returns>
     public virtual MagickImage GetResult(bool quiet) => null;
 
+    /// <summary>
+    /// Writes exif infos on image
+    /// </summary>
+    /// <param name="image">image to process</param>
     public void SetImageParameters(MagickImage image) => fmt.SetImageParameters(image);
 
+    /// <summary>
+    /// Writes info text on images
+    /// </summary>
+    /// <param name="o">output related infos</param>
+    /// <param name="image">image to process</param>
     public void SetImageInfo(string o, MagickImage image) => img.Info(WelcomeBannerText(), o).Draw(image);
+    /// <summary>
+    /// Writes info text on images
+    /// </summary>
+    /// <param name="i">input related infos</param>
+    /// <param name="o">output related infos</param>
+    /// <param name="image">image to process</param>
     public void SetImageInfo(string i, string o, MagickImage image) => img.Info(i, o).Draw(image);
+    /// <summary>
+    /// gets the program banner
+    /// </summary>
+    /// <returns></returns>
     public virtual string WelcomeBannerText() =>
         "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
 }
