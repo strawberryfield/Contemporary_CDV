@@ -15,10 +15,24 @@
 
 	<PropertyGroup>
 		<OutputPath>C:\projects\Contemporary_CDV\bin\GUI\build\</OutputPath>
+		<ApplicationIcon>CCDV.ico</ApplicationIcon>
+		<Authors>Roberto Ceccarelli - Casasoft</Authors>
+		<Product>Casasoft Contemporary Carte de Visite tools</Product>
+		<Description>Tools to create photographic Carte de Visite</Description>
+		<Copyright>copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft</Copyright>
+		<PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/strawberryfield/Contemporary_CDV</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseFile>C:\projects\Contemporary_CDV\LICENSE</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Remove="spinner.gif" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="CCDV.ico" />
 	</ItemGroup>
 
 	<ItemGroup>

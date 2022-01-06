@@ -4,6 +4,96 @@
         <name>Casasoft.CCDV.Common</name>
     </assembly>
     <members>
+        <member name="T:Casasoft.CCDV.TargetType">
+            <summary>
+            Available target formats
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.TargetType.cdv">
+            <summary>
+            Carte de viste 64x100mm
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.TargetType.cc">
+            <summary>
+            Credit card 86x54mm
+            </summary>
+        </member>
+        <member name="T:Casasoft.CCDV.BaseBuilderCommandLine">
+            <summary>
+            Command line extensions for boxes and folders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.thickness">
+            <summary>
+            Box thickness
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.topImage">
+            <summary>
+            Image for top border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.bottomImage">
+            <summary>
+            Image for bottom border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.frontImage">
+            <summary>
+            Front image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.backImage">
+            <summary>
+            Back side image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.leftImage">
+            <summary>
+            Image for left border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.rightImage">
+            <summary>
+            Image for right border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.isHorizontal">
+            <summary>
+            true if longer size is horizontal
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.useSampleImages">
+            <summary>
+            True if samples images will be created
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.borderText">
+            <summary>
+            Text to print on left border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.font">
+            <summary>
+            fonst for text
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.fontBold">
+            <summary>
+            use font bold weight (if available)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.fontItalic">
+            <summary>
+            use font italic style  (if available)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.targetType">
+            <summary>
+            Size of box
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.BaseBuilderCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -18,6 +108,13 @@
             <param name="exename">Name of the program exe</param>
             <param name="outputname">Default output file name</param>
             <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilderCommandLine.Parse(System.String[])">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="args">command line arguments</param>
+            <returns>true if nothing to (ie. help)</returns>
         </member>
         <member name="T:Casasoft.CCDV.CommandLine">
             <summary>
@@ -225,6 +322,83 @@
             <param name="s">string to process</param>
             <returns>escaped string</returns>
         </member>
+        <member name="T:Casasoft.CCDV.CreditCardCommandLine">
+            <summary>
+            Command line extensions for credit cards builder
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.FrontText">
+            <summary>
+            Text to print on the front (like cardholder)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.FrontTextFont">
+            <summary>
+            Front text font
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.FrontTextColor">
+            <summary>
+            Front text fill color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.FrontTextBorder">
+            <summary>
+            front text border color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.fontBold">
+            <summary>
+            use bold weight for front text (if available for font)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.fontItalic">
+            <summary>
+            use italic style for front text (if available for font)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.MagneticBandColor">
+            <summary>
+            Pseudo magnetic band color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.MagneticBandImage">
+            <summary>
+            Pseudo magnetic band image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.BackImage">
+            <summary>
+            backgroud image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.BackText">
+            <summary>
+            text to put in the back side
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.CreditCardCommandLine.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.CreditCardCommandLine.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="exename">Name of the program exe</param>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.CreditCardCommandLine.Parse(System.String[])">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="args">command line arguments</param>
+            <returns>true if nothing to (ie. help)</returns>
+        </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
             Interface for command line handling
@@ -332,6 +506,147 @@
             <param name="exename">Name of the program exe</param>
             <param name="outputname">Default output file name</param>
             <param name="desc">brief description of the program</param>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.BaseEngine">
+            <summary>
+            Base class for various images managers
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.Dpi">
+            <summary>
+            Output resolution
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.FilesList">
+            <summary>
+            List of files to process
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.FillColor">
+            <summary>
+            Color to fill empty spaces
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.BorderColor">
+            <summary>
+            Color for lines and borders
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor(Casasoft.CCDV.ICommandLine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par">Command line options</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetResult">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet">suppress messages when running</param>
+            <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageParameters(ImageMagick.MagickImage)">
+            <summary>
+            Writes exif infos on image
+            </summary>
+            <param name="image">image to process</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageInfo(System.String,ImageMagick.MagickImage)">
+            <summary>
+            Writes info text on images
+            </summary>
+            <param name="o">output related infos</param>
+            <param name="image">image to process</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageInfo(System.String,System.String,ImageMagick.MagickImage)">
+            <summary>
+            Writes info text on images
+            </summary>
+            <param name="i">input related infos</param>
+            <param name="o">output related infos</param>
+            <param name="image">image to process</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.WelcomeBannerText">
+            <summary>
+            gets the program banner
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.IEngine">
+            <summary>
+            Interface for various images managers
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.Dpi">
+            <summary>
+            Output resolution
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.FilesList">
+            <summary>
+            List of files to process
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.FillColor">
+            <summary>
+            Color to fill empty spaces
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.BorderColor">
+            <summary>
+            Color for lines and borders
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.GetResult">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet">suppress messages when running</param>
+            <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageParameters(ImageMagick.MagickImage)">
+            <summary>
+            Writes exif infos on image
+            </summary>
+            <param name="image">image to process</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageInfo(System.String,ImageMagick.MagickImage)">
+            <summary>
+            Writes info text on images
+            </summary>
+            <param name="o">output related infos</param>
+            <param name="image">image to process</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageInfo(System.String,System.String,ImageMagick.MagickImage)">
+            <summary>
+            Writes info text on images
+            </summary>
+            <param name="i">input related infos</param>
+            <param name="o">output related infos</param>
+            <param name="image">image to process</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.WelcomeBannerText">
+            <summary>
+            gets the program banner
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.Formats">
             <summary>
