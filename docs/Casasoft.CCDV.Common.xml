@@ -532,6 +532,21 @@
             Color for lines and borders
             </summary>
         </member>
+        <member name="F:Casasoft.CCDV.Engines.BaseEngine.fmt">
+            <summary>
+            Instance of formats handler
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.Engines.BaseEngine.img">
+            <summary>
+            Instance of images handler
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.Engines.BaseEngine.parameters">
+            <summary>
+            Class for json parameters handling
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
             <summary>
             Constructor
@@ -542,6 +557,18 @@
             Constructor
             </summary>
             <param name="par">Command line options</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="jsonparams">List of parameters in json format</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetResult">
             <summary>
@@ -645,6 +672,12 @@
         <member name="M:Casasoft.CCDV.Engines.IEngine.WelcomeBannerText">
             <summary>
             gets the program banner
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
             </summary>
             <returns></returns>
         </member>
@@ -958,6 +991,106 @@
             <param name="i">input description</param>
             <param name="o">output description</param>
             <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.JSON.CommonParameters">
+            <summary>
+            Common parameters list
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.FillColor">
+            <summary>
+            Color to fill images
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.BorderColor">
+            <summary>
+            Color to use for lines and borders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.Dpi">
+            <summary>
+            Output resolution
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.OutputName">
+            <summary>
+            Output file name
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontText">
+            <summary>
+            Text to print on the front (like cardholder)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontTextFont">
+            <summary>
+            Front text font
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontTextColor">
+            <summary>
+            Front text fill color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontTextBorder">
+            <summary>
+            front text border color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.fontBold">
+            <summary>
+            use bold weight for front text (if available for font)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.fontItalic">
+            <summary>
+            use italic style for front text (if available for font)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.MagneticBandColor">
+            <summary>
+            Pseudo magnetic band color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.MagneticBandImage">
+            <summary>
+            Pseudo magnetic band image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.BackImage">
+            <summary>
+            backgroud image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.BackText">
+            <summary>
+            text to put in the back side
+            </summary>
+        </member>
+        <member name="T:Casasoft.CCDV.JSON.IParameters">
+            <summary>
+            Common parameters list
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.FillColor">
+            <summary>
+            Color to fill images
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.BorderColor">
+            <summary>
+            Color to use for lines and borders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.Dpi">
+            <summary>
+            Output resolution
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.OutputName">
+            <summary>
+            Output file name
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.Properties.Resources">
             <summary>

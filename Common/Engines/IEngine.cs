@@ -81,4 +81,9 @@ public interface IEngine
     /// <returns></returns>
     string WelcomeBannerText();
 
+    /// <summary>
+    /// Returns the parameters in json format
+    /// </summary>
+    /// <returns></returns>
+    string GetJsonParams();
 }

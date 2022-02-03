@@ -19,6 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using ImageMagick;
 using System.Collections.Generic;
 
@@ -55,8 +56,18 @@ public class BaseEngine : IEngine
     /// </summary>
     public MagickColor BorderColor { get; set; }
 
+    /// <summary>
+    /// Instance of formats handler
+    /// </summary>
     protected Formats fmt;
+    /// <summary>
+    /// Instance of images handler
+    /// </summary>
     protected Images img;
+    /// <summary>
+    /// Class for json parameters handling
+    /// </summary>
+    protected IParameters parameters;
 
     /// <summary>
     /// Constructor
@@ -79,6 +90,20 @@ public class BaseEngine : IEngine
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
     }
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="jsonparams">List of parameters in json format</param>
+    public BaseEngine(IParameters jsonparams) : this()
+    {
+        parameters = jsonparams;
+    }
+
+    /// <summary>
+    /// Returns the parameters in json format
+    /// </summary>
+    /// <returns></returns>
+    public virtual string GetJsonParams() => string.Empty;
 
     /// <summary>
     /// Does the dirty work
