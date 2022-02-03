@@ -36,7 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Magick.NET.SystemWindowsMedia" Version="4.0.10" />
+		<PackageReference Include="Magick.NET.SystemWindowsMedia" Version="4.0.13" />
 	</ItemGroup>
 
 	<ItemGroup>
