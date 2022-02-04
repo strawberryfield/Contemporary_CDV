@@ -142,6 +142,8 @@ public class CreditCardEngine : BaseEngine
         p.fontItalic = fontItalic;
         p.MagneticBandImage = MagneticBandImage;
         p.MagneticBandColor = colors.GetColorString(MagneticBandColor);
+        p.BorderColor = colors.GetColorString(BorderColor);
+        p.FillColor = colors.GetColorString(FillColor);  
         p.Dpi = Dpi;
         p.FilesList = new();
         p.FilesList.Add(FilesList[0]);
@@ -167,6 +169,8 @@ public class CreditCardEngine : BaseEngine
         fontItalic = p.fontItalic;
         MagneticBandImage = p.MagneticBandImage;
         MagneticBandColor = colors.GetColor(p.MagneticBandColor);
+        BorderColor = colors.GetColor(p.BorderColor);
+        FillColor = colors.GetColor(p.FillColor);   
         Dpi = p.Dpi;
         FilesList.Clear();
         FilesList.AddRange(p.FilesList);

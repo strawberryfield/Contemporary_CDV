@@ -19,21 +19,45 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using ImageMagick;
 using System;
+using System.Text.Json;
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// MontaggioFoto engine
+/// </summary>
 public class MontaggioFotoEngine : BaseEngine
 {
+    #region properties
+    /// <summary>
+    /// Set if image has full CDV size (100x64mm)
+    /// </summary>
     public bool FullSize { get; set; } = false;
+    /// <summary>
+    /// Set if white border is removed
+    /// </summary>
     public bool Trim { get; set; } = false;
+    /// <summary>
+    /// Set if a border to full CDV size (100x64mm) is added
+    /// </summary>
     public bool WithBorder { get; set; } = false;
+    #endregion
 
+    #region constructors
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public MontaggioFotoEngine() : base()
     {
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="par"></param>
     public MontaggioFotoEngine(CommandLine par) : base(par)
     {
         MontaggioFotoCommandLine p = (MontaggioFotoCommandLine)par;
@@ -42,7 +66,67 @@ public class MontaggioFotoEngine : BaseEngine
         WithBorder = p.WithBorder;
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="jsonparams"></param>
+    public MontaggioFotoEngine(IParameters jsonparams) : base(jsonparams)
+    {
+    }
+    #endregion
+
+    #region json
+    /// <summary>
+    /// Returns the parameters in json format
+    /// </summary>
+    /// <returns></returns>
+    public override string GetJsonParams()
+    {
+        MontaggioFotoParameters p = (MontaggioFotoParameters)parameters;
+        p.FullSize = FullSize;
+        p.WithBorder = WithBorder;  
+        p.Trim = Trim;
+        p.BorderColor = colors.GetColorString(BorderColor);
+        p.FillColor = colors.GetColorString(FillColor);
+        p.Dpi = Dpi;
+        p.FilesList = new();
+        p.FilesList.AddRange(FilesList);
+        return JsonSerializer.Serialize(p);
+    }
+
+    /// <summary>
+    /// Sets the parameters from json formatted string
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(string json)
+    {
+        MontaggioFotoParameters p = JsonSerializer.Deserialize<MontaggioFotoParameters>(json);
+        parameters = p;
+
+        FullSize = p.FullSize;
+        WithBorder = p.WithBorder;
+        Trim = p.Trim;
+        BorderColor = colors.GetColor(p.BorderColor);
+        FillColor = colors.GetColor(p.FillColor);
+        Dpi = p.Dpi;
+        FilesList.Clear();
+        FilesList.AddRange(p.FilesList);
+    }
+    #endregion
+
+    #region build
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet"></param>
+    /// <returns></returns>
     public override MagickImage GetResult(bool quiet) => GetResult(quiet, 0);
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet"></param>
+    /// <param name="i"></param>
+    /// <returns></returns>
     public MagickImage GetResult(bool quiet, int i)
     {
         img = new(fmt);
@@ -106,5 +190,5 @@ public class MontaggioFotoEngine : BaseEngine
         else
             return img1;
     }
-
+    #endregion
 }

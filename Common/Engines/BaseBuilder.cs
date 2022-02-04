@@ -24,36 +24,78 @@ using System.IO;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// Common builder for boxes and folders
+/// </summary>
 public class BaseBuilder : IBuilder
 {
-    public int spessore { get; set; }
     public Formats fmt { get; set; }
     protected BaseBuilderCommandLine par;
     public MagickColor fillColor { get; set; }
     public MagickColor borderColor { get; set; }
+    /// <summary>
+    /// Thickness of the box (mm)
+    /// </summary>
+    public int spessore { get; set; }
+    /// <summary>
+    /// target box format
+    /// </summary>
     public TargetType targetType { get; set; }
+    /// <summary>
+    /// Set if box is landscape
+    /// </summary>
     public bool isHorizontal { get; set; } = false;
 
     private string _font = "Arial";
+    /// <summary>
+    /// Font for border text
+    /// </summary>
     public string font
     {
         get => _font;
         set => _font = string.IsNullOrWhiteSpace(value) ? "Arial" : value;
     }
+    /// <summary>
+    /// Prints text in bold if available
+    /// </summary>
     public bool fontBold { get; set; } = false;
+    /// <summary>
+    /// Prints text in italic if available
+    /// </summary>
     public bool fontItalic { get; set; } = false;
 
+    /// <summary>
+    /// Text to print on left border
+    /// </summary>
     public string borderText { get; set; }
 
     protected MagickGeometry topFormat;
     protected MagickGeometry borderFormat;
     protected MagickGeometry frontFormat;
 
+    /// <summary>
+    /// Image for top boder
+    /// </summary>
     protected MagickImage topImage;
+    /// <summary>
+    /// Image for bottom border
+    /// </summary>
     protected MagickImage bottomImage;
+    /// <summary>
+    /// Image for left border
+    /// </summary>
     protected MagickImage leftImage;
+    /// <summary>
+    /// Image for right border
+    /// </summary>
     protected MagickImage rightImage;
+    /// <summary>
+    /// image for front cover
+    /// </summary>
     protected MagickImage frontImage;
+    /// <summary>
+    /// image for back cover
+    /// </summary>
     protected MagickImage backImage;
 
 

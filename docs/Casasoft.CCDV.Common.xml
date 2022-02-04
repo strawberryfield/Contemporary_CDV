@@ -823,6 +823,111 @@
             </summary>
             <param name="json"></param>
         </member>
+        <member name="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine">
+            <summary>
+            Montaggio dorsi engine
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor(Casasoft.CCDV.CommandLine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="jsonparams"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.MontaggioFotoEngine">
+            <summary>
+            MontaggioFoto engine
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.FullSize">
+            <summary>
+            Set if image has full CDV size (100x64mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Trim">
+            <summary>
+            Set if white border is removed
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.WithBorder">
+            <summary>
+            Set if a border to full CDV size (100x64mm) is added
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor(Casasoft.CCDV.CommandLine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="jsonparams"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetResult(System.Boolean,System.Int32)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.Formats">
             <summary>
             This class handles all target formats
@@ -1164,6 +1269,11 @@
             Files to process
             </summary>
         </member>
+        <member name="T:Casasoft.CCDV.JSON.CreditCardParameters">
+            <summary>
+            Parameters for Credit Cards
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontText">
             <summary>
             Text to print on the front (like cardholder)
@@ -1245,6 +1355,26 @@
         <member name="P:Casasoft.CCDV.JSON.IParameters.FilesList">
             <summary>
             Files to process
+            </summary>
+        </member>
+        <member name="T:Casasoft.CCDV.JSON.MontaggioFotoParameters">
+            <summary>
+            Parameters for MontaggioFoto
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.FullSize">
+            <summary>
+            Set if image has full CDV size (100x64mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.Trim">
+            <summary>
+            Set if white border is removed
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.WithBorder">
+            <summary>
+            Set if a border to full CDV size (100x64mm) is added
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.Properties.Resources">

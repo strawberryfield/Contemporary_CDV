@@ -22,52 +22,74 @@
 namespace Casasoft.CCDV.JSON;
 
 /// <summary>
-/// Parameters for Credit Cards
+/// Parameters for box and folder builder
 /// </summary>
-public class CreditCardParameters : CommonParameters
+public class BaseBuilderParameters : CommonParameters
 {
     /// <summary>
-    /// Text to print on the front (like cardholder)
+    /// Image for top boder
     /// </summary>
-    public string FrontText { get; set; }
+    public string topImage { get; set; }
     /// <summary>
-    /// Front text font
+    /// Image for bottom border
     /// </summary>
-    public string FrontTextFont { get; set; }
+    public string bottomImage { get; set; }
     /// <summary>
-    /// Front text fill color
+    /// Image for left border
     /// </summary>
-    public string FrontTextColor { get; set; }
+    public string leftImage { get; set; }
     /// <summary>
-    /// front text border color
+    /// Image for right border
     /// </summary>
-    public string FrontTextBorder { get; set; }
+    public string rightImage { get; set; }
     /// <summary>
-    /// use bold weight for front text (if available for font)
+    /// image for front cover
+    /// </summary>
+    public string frontImage { get; set; }
+    /// <summary>
+    /// image for back cover
+    /// </summary>
+    public string backImage { get; set; }
+
+    /// <summary>
+    /// Prints text in bold if available
     /// </summary>
     public bool fontBold { get; set; }
     /// <summary>
-    /// use italic style for front text (if available for font)
+    /// Prints text in italic if available
     /// </summary>
     public bool fontItalic { get; set; }
     /// <summary>
-    /// Pseudo magnetic band color
+    /// Font for border text
     /// </summary>
-    public string MagneticBandColor { get; set; }
+    public string font { get; set; }
     /// <summary>
-    /// Pseudo magnetic band image
+    /// Text to print on left border
     /// </summary>
-    public string MagneticBandImage { get; set; }
+    public string borderText { get; set; }
+
     /// <summary>
-    /// backgroud image
+    /// Thickness of the box (mm)
     /// </summary>
-    public string BackImage { get; set; }
+    public int spessore { get; set; }
     /// <summary>
-    /// text to put in the back side
+    /// Set if box is landscape
+    /// </summary>
+    public bool isHorizontal { get; set; }
+    /// <summary>
+    /// target box format
     /// </summary>
     /// <remarks>
-    /// The text can be formatted with Pango markup
+    /// <para>Original data are in enum <see cref="TargetType"/> format</para>
+    /// <list type=">">
+    /// <item>0 - Carte de viste 64x100mm</item>
+    /// <item>1 - Credit card 86x54mm</item>
+    /// </list>
     /// </remarks>
-    public string BackText { get; set; }
+    public int targetFormat { get; set; }
 
+    /// <summary>
+    /// Set to generate sample images
+    /// </summary>
+    public bool useTestImages { get; set; }
 }

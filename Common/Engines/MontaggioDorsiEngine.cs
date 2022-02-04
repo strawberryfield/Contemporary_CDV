@@ -19,21 +19,82 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using ImageMagick;
 using System;
+using System.Text.Json;
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Montaggio dorsi engine
+/// </summary>
 public class MontaggioDorsiEngine : BaseEngine
 {
+    #region constructors
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public MontaggioDorsiEngine() : base()
     {
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="par"></param>
     public MontaggioDorsiEngine(CommandLine par) : base(par)
     {
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="jsonparams"></param>
+    public MontaggioDorsiEngine(IParameters jsonparams) : base(jsonparams)
+    {
+    }
+    #endregion
+
+    #region json
+    /// <summary>
+    /// Returns the parameters in json format
+    /// </summary>
+    /// <returns></returns>
+    public override string GetJsonParams()
+    {
+        CommonParameters p = (CommonParameters)parameters;
+        p.BorderColor = colors.GetColorString(BorderColor);
+        p.FillColor = colors.GetColorString(FillColor);
+        p.Dpi = Dpi;
+        p.FilesList = new();
+        p.FilesList.AddRange(FilesList);
+        return JsonSerializer.Serialize(p);
+    }
+
+    /// <summary>
+    /// Sets the parameters from json formatted string
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(string json)
+    {
+        CommonParameters p = JsonSerializer.Deserialize<CommonParameters>(json);
+        parameters = p;
+
+        BorderColor = colors.GetColor(p.BorderColor);
+        FillColor = colors.GetColor(p.FillColor);
+        Dpi = p.Dpi;
+        FilesList.Clear();
+        FilesList.AddRange(p.FilesList);
+    }
+    #endregion
+
+    #region build
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet"></param>
+    /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
         img = new(fmt);
@@ -91,4 +152,5 @@ public class MontaggioDorsiEngine : BaseEngine
 
         return final;
     }
+    #endregion
 }
