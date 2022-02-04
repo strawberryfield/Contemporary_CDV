@@ -41,7 +41,8 @@ If not, see <http://www.gnu.org/licenses/>.
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
         <local:CommonOptionsControl x:Name="commonOptions" Margin="0,0,0,75" VerticalAlignment="Bottom" />
         <Button x:Name="btnUpdate" Content="&#xE149;" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="20" Click="btnUpdate_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
-        <Button x:Name="btnSaveJson" Content="&#xE105;" HorizontalAlignment="Left" Margin="40,0,0,10" VerticalAlignment="Bottom" Width="20" Click="btnSaveJson_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
+        <Button x:Name="btnOpenJson" Content="1" HorizontalAlignment="Left" Margin="40,0,0,10" VerticalAlignment="Bottom" Width="20" Click="btnOpenJson_Click" FontFamily="Wingdings" Height="20" FontWeight="Bold"/>
+        <Button x:Name="btnSaveJson" Content="&#xE105;" HorizontalAlignment="Left" Margin="70,0,0,10" VerticalAlignment="Bottom" Width="20" Click="btnSaveJson_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
         <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="136" Click="btnSave_Click"/>
         <casasoft:FileTextBox x:Name="frontImage" Margin="10,24,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
         <Label Content="Immagine fronte" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>

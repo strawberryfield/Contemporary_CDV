@@ -36,6 +36,14 @@ public partial class CommonOptionsControl : UserControl
 
     public int DpiValue { get => txtDPI.Value; set => txtDPI.Value = value; }
 
-    public MagickColor BorderColor { get => Utils.ColorFromPicker(cpBorder); }
-    public MagickColor FillColor { get => Utils.ColorFromPicker(cpFill); }
+    public MagickColor BorderColor
+    {
+        get => Utils.ColorFromPicker(cpBorder);
+        set => cpBorder.SelectedColor = Utils.ColorFromMagick(value);
+    }
+    public MagickColor FillColor
+    {
+        get => Utils.ColorFromPicker(cpFill);
+        set => cpFill.SelectedColor = Utils.ColorFromMagick(value);
+    }
 }

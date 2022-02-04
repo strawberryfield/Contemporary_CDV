@@ -86,6 +86,25 @@ public partial class BaseForm : Window
         }
     }
 
+    protected void btnOpenJson_Click(object sender, RoutedEventArgs e)
+    {
+        OpenFileDialog sd = new();
+        sd.Filter = "json data file (*.json)|*.json|All files (*.*)|*.*";
+        sd.Title = "Apertura parametri immagine";
+        sd.DefaultExt = "json";
+        sd.AddExtension = true;
+        sd.ShowDialog();
+        if (!string.IsNullOrWhiteSpace(sd.FileName))
+        {
+            loadJson(File.ReadAllText(sd.FileName));
+        }
+    }
+
+    protected virtual void loadJson(string json)
+    {
+        engine.SetJsonParams(json);
+    }
+
     protected virtual void setEngineParameters()
     {
         engine.FilesList.Clear();

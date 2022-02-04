@@ -30,6 +30,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class BaseEngine : IEngine
 {
+    #region properties
     private int _dpi;
     /// <summary>
     /// Output resolution
@@ -72,7 +73,9 @@ public class BaseEngine : IEngine
     /// Colors conversion utilities
     /// </summary>
     protected Colors colors;
+    #endregion
 
+    #region constructors
     /// <summary>
     /// Constructor
     /// </summary>
@@ -105,13 +108,26 @@ public class BaseEngine : IEngine
         parameters = jsonparams;
         colors = new();
     }
+    #endregion
 
+    #region json
     /// <summary>
     /// Returns the parameters in json format
     /// </summary>
     /// <returns></returns>
     public virtual string GetJsonParams() => string.Empty;
 
+    /// <summary>
+    /// Sets the parameters from json formatted string
+    /// </summary>
+    /// <param name="json"></param>
+    public virtual void SetJsonParams(string json)
+    {
+
+    }
+    #endregion
+
+    #region build
     /// <summary>
     /// Does the dirty work
     /// </summary>
@@ -149,4 +165,5 @@ public class BaseEngine : IEngine
     /// <returns></returns>
     public virtual string WelcomeBannerText() =>
         "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
+    #endregion
 }

@@ -58,6 +58,27 @@ public partial class CreditCardForm : BaseForm
 
     }
 
+    protected override void loadJson(string json)
+    {
+        base.loadJson(json);
+        CreditCardEngine eng = (CreditCardEngine)engine;
+        frontImage.Value = eng.FilesList.Count > 0 ? eng.FilesList[0] : string.Empty;
+        backImage.Value = eng.BackImage;
+        frontText.Text = eng.FrontText;
+        backText.Text = eng.BackText;
+        fontFront.Font = eng.FrontTextFont;
+        cpFill.SelectedColor = Utils.ColorFromMagick(eng.FrontTextColor);
+        cpBorder.SelectedColor = Utils.ColorFromMagick(eng.FrontTextBorder);
+        fontFront.FontBold = eng.fontBold;
+        fontFront.FontItalic = eng.fontItalic;
+        cpMB.SelectedColor = Utils.ColorFromMagick(eng.MagneticBandColor);
+        mbImage.Value = eng.MagneticBandImage;
+        backText.Text = eng.BackText;
+        commonOptions.FillColor = eng.FillColor;
+        commonOptions.BorderColor = eng.BorderColor;
+        commonOptions.DpiValue = eng.Dpi;
+    }
+
     protected override void doAnteprima()
     {
         setEngineParameters();

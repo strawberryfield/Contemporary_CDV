@@ -62,6 +62,9 @@ internal class CreditCardParameters : CommonParameters
     /// <summary>
     /// text to put in the back side
     /// </summary>
+    /// <remarks>
+    /// The text can be formatted with Pango markup
+    /// </remarks>
     public string BackText { get; set; }
 
 }

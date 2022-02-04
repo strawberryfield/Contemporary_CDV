@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using System.Windows.Media;
 
 namespace Casasoft.CCDV.UI;
 
@@ -31,4 +32,13 @@ public static class Utils
         (ushort)(cp.SelectedColor.B * 256),
         (ushort)(cp.SelectedColor.A * 256));
 
+    public static Color ColorFromMagick(MagickColor magickColor)
+    {
+        Color ret = new();
+        ret.R = (byte)magickColor.R;
+        ret.G = (byte)magickColor.G;
+        ret.B = (byte)magickColor.B;
+        ret.A = (byte)magickColor.A;
+        return ret;
+    }
 }

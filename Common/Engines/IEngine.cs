@@ -86,4 +86,10 @@ public interface IEngine
     /// </summary>
     /// <returns></returns>
     string GetJsonParams();
+    /// <summary>
+    /// Sets the parameters from json formatted string
+    /// </summary>
+    /// <param name="json"></param>
+     void SetJsonParams(string json);
+
 }

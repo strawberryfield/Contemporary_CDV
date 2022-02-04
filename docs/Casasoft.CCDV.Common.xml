@@ -604,6 +604,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetResult">
             <summary>
             Does the dirty work
@@ -643,6 +649,102 @@
             gets the program banner
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.CreditCardEngine">
+            <summary>
+            Creates a credit card
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.BackImage">
+            <summary>
+            Image to put on the back side
+            </summary>
+            <remarks>
+            If not present it will use the front image blurred and lighted
+            </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.FrontText">
+            <summary>
+            Text to print on the front (like cardholder)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.FrontTextFont">
+            <summary>
+            Front text font
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.FrontTextBorder">
+            <summary>
+            front text border color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.FrontTextColor">
+            <summary>
+            Front text fill color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.fontBold">
+            <summary>
+            use bold weight for front text (if available for font)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.fontItalic">
+            <summary>
+            use italic style for front text (if available for font)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.MagneticBandColor">
+            <summary>
+            Pseudo magnetic band color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.MagneticBandImage">
+            <summary>
+            Pseudo magnetic band image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.BackText">
+            <summary>
+            text to put in the back side
+            </summary>
+            <remarks>
+            The text can be formatted with Pango markup
+            </remarks>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.#ctor(Casasoft.CCDV.ICommandLine)">
+            <summary>
+            Contructor
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="jsonparams"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Image to print</returns>
         </member>
         <member name="T:Casasoft.CCDV.Engines.IEngine">
             <summary>
@@ -714,6 +816,12 @@
             Returns the parameters in json format
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
         </member>
         <member name="T:Casasoft.CCDV.Formats">
             <summary>
@@ -1105,6 +1213,9 @@
             <summary>
             text to put in the back side
             </summary>
+            <remarks>
+            The text can be formatted with Pango markup
+            </remarks>
         </member>
         <member name="T:Casasoft.CCDV.JSON.IParameters">
             <summary>

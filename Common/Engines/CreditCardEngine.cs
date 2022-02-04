@@ -26,30 +26,79 @@ using System.Text.Json;
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Creates a credit card
+/// </summary>
 public class CreditCardEngine : BaseEngine
 {
-    public string BackImage { get; set; }  
+    #region properties
+    /// <summary>
+    /// Image to put on the back side
+    /// </summary>
+    /// <remarks>
+    /// If not present it will use the front image blurred and lighted
+    /// </remarks>
+    public string BackImage { get; set; }
+    /// <summary>
+    /// Text to print on the front (like cardholder)
+    /// </summary>
     public string FrontText { get; set; }
 
     private string _font = "Arial";
+    /// <summary>
+    /// Front text font
+    /// </summary>
     public string FrontTextFont
     {
         get => _font;
         set => _font = string.IsNullOrWhiteSpace(value) ? "Arial" : value;
     }
+    /// <summary>
+    /// front text border color
+    /// </summary>
     public MagickColor FrontTextBorder { get; set; }
+    /// <summary>
+    /// Front text fill color
+    /// </summary>
     public MagickColor FrontTextColor { get; set; }
+    /// <summary>
+    /// use bold weight for front text (if available for font)
+    /// </summary>
     public bool fontBold { get; set; } = false;
+    /// <summary>
+    /// use italic style for front text (if available for font)
+    /// </summary>
     public bool fontItalic { get; set; } = false;
+    /// <summary>
+    /// Pseudo magnetic band color
+    /// </summary>
     public MagickColor MagneticBandColor { get; set; }
+    /// <summary>
+    /// Pseudo magnetic band image
+    /// </summary>
     public string MagneticBandImage { get; set; }
+    /// <summary>
+    /// text to put in the back side
+    /// </summary>
+    /// <remarks>
+    /// The text can be formatted with Pango markup
+    /// </remarks>
     public string BackText { get; set; }
+    #endregion
 
-    public CreditCardEngine() : base()  
+    #region constructors
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public CreditCardEngine() : base()
     {
         parameters = new CreditCardParameters();
     }
 
+    /// <summary>
+    /// Contructor
+    /// </summary>
+    /// <param name="par"></param>
     public CreditCardEngine(ICommandLine par) : base(par)
     {
         CreditCardCommandLine p = (CreditCardCommandLine)par;
@@ -58,7 +107,7 @@ public class CreditCardEngine : BaseEngine
         FrontTextFont = p.FrontTextFont;
         FrontTextBorder = p.FrontTextBorder;
         FrontTextColor = p.FrontTextColor;
-        fontBold = p.fontBold;  
+        fontBold = p.fontBold;
         fontItalic = p.fontItalic;
         MagneticBandColor = p.MagneticBandColor;
         MagneticBandImage = p.MagneticBandImage;
@@ -66,10 +115,20 @@ public class CreditCardEngine : BaseEngine
         parameters = new CreditCardParameters();
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="jsonparams"></param>
     public CreditCardEngine(IParameters jsonparams) : base(jsonparams)
     {
     }
+    #endregion
 
+    #region json
+    /// <summary>
+    /// Returns the parameters in json format
+    /// </summary>
+    /// <returns></returns>
     public override string GetJsonParams()
     {
         CreditCardParameters p = (CreditCardParameters)parameters;
@@ -86,9 +145,39 @@ public class CreditCardEngine : BaseEngine
         p.Dpi = Dpi;
         p.FilesList = new();
         p.FilesList.Add(FilesList[0]);
-        return JsonSerializer.Serialize(p); 
+        return JsonSerializer.Serialize(p);
     }
 
+    /// <summary>
+    /// Sets the parameters from json formatted string
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(string json)
+    {
+        CreditCardParameters p = JsonSerializer.Deserialize<CreditCardParameters>(json);
+        parameters = p;
+
+        BackImage = p.BackImage;
+        BackText = p.BackText;
+        FrontText = p.FrontText;
+        FrontTextFont = p.FrontTextFont;
+        FrontTextColor = colors.GetColor(p.FrontTextColor);
+        FrontTextBorder = colors.GetColor(p.FrontTextBorder);
+        fontBold = p.fontBold;
+        fontItalic = p.fontItalic;
+        MagneticBandImage = p.MagneticBandImage;
+        MagneticBandColor = colors.GetColor(p.MagneticBandColor);
+        Dpi = p.Dpi;
+        FilesList.Clear();
+        FilesList.AddRange(p.FilesList);
+    }
+    #endregion
+
+    #region build
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <returns>Image to print</returns>
     public override MagickImage GetResult(bool quiet)
     {
         img = new(fmt);
@@ -216,5 +305,5 @@ Run {DateTime.Now.ToString("R")}")
         draw.Line(final.Width - borderleft, 0, final.Width - borderleft, final.Height);
         draw.Draw(final);
     }
-
+    #endregion
 }
