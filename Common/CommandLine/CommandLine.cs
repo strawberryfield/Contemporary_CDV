@@ -72,6 +72,10 @@ public class CommandLine : ICommandLine
     /// Output directory
     /// </summary>
     protected string outputDir { get; private set; }
+    /// <summary>
+    /// Colors conversion utilities
+    /// </summary>
+    protected Colors colors;
     #endregion
 
     #region public properties
@@ -149,7 +153,7 @@ public class CommandLine : ICommandLine
         FillColor = GetColor(sFillColor);
         BorderColor = GetColor(sBorderColor);
 
-        fillColorDictionary();
+        colors = new();
 
         Options = new();
         baseOptions = new OptionSet
@@ -220,7 +224,7 @@ public class CommandLine : ICommandLine
         if (shouldShowColors)
         {
             Console.WriteLine("Available colors are:");
-            foreach (var color in colorDictionary)
+            foreach (var color in colors.colorDictionary)
             {
                 Console.WriteLine("{0,-24}{1}", color.Key, color.Value.ToHexString());
             }
@@ -446,22 +450,6 @@ See the GNU General Public License for more details.");
             Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
     }
 
-    /// <summary>
-    /// List of colors names
-    /// </summary>
-    protected Dictionary<string, MagickColor> colorDictionary;
-    /// <summary>
-    /// Fills the list of colors names
-    /// </summary>
-    protected void fillColorDictionary()
-    {
-        colorDictionary = new(StringComparer.OrdinalIgnoreCase);
-        Type cl = typeof(MagickColors);
-        foreach (var color in cl.GetProperties())
-        {
-            colorDictionary.Add(color.Name, (MagickColor)color.GetValue(null));
-        }
-    }
 
     /// <summary>
     /// Gets the color by a string
@@ -470,32 +458,24 @@ See the GNU General Public License for more details.");
     /// <returns><see cref="MagickColor"/></returns>
     protected MagickColor GetColor(string color)
     {
+        MagickColor ret = MagickColors.Transparent;
         if (!string.IsNullOrWhiteSpace(color))
         {
-            if (color[0] == '#')
+            MagickColor r = colors.GetColor(color);
+            if (r != null)
             {
-                return new MagickColor(color);
+                ret = r;
             }
             else
             {
-                MagickColor ret;
-                if (colorDictionary.TryGetValue(color, out ret))
-                {
-                    return ret;
-                }
-                else
-                {
-                    Console.Error.WriteLine($"Unknown color '{color}'\nTry {exeName} --colors");
-                    return MagickColors.Transparent;
-                }
-
+                Console.Error.WriteLine($"Unknown color '{color}'\nTry {exeName} --colors");
             }
         }
         else
         {
             Console.Error.WriteLine("Invalid empty color");
-            return MagickColors.Transparent;
         }
+        return ret;
     }
 
     /// <summary>

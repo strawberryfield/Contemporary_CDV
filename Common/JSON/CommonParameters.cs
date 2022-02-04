@@ -19,6 +19,8 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
+
 namespace Casasoft.CCDV.JSON;
 
 /// <summary>
@@ -42,4 +44,8 @@ public class CommonParameters : IParameters
     /// Output file name
     /// </summary>
     public string OutputName { get; set; }
+    /// <summary>
+    /// Files to process
+    /// </summary>
+    public List<string> FilesList { get; set; }
 }

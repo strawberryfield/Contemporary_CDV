@@ -68,6 +68,10 @@ public class BaseEngine : IEngine
     /// Class for json parameters handling
     /// </summary>
     protected IParameters parameters;
+    /// <summary>
+    /// Colors conversion utilities
+    /// </summary>
+    protected Colors colors;
 
     /// <summary>
     /// Constructor
@@ -78,6 +82,7 @@ public class BaseEngine : IEngine
         FilesList = new List<string>();
         FillColor = MagickColors.White;
         BorderColor = MagickColors.Black;
+        colors = new();
     }
     /// <summary>
     /// Constructor
@@ -89,6 +94,7 @@ public class BaseEngine : IEngine
         FilesList = par.FilesList;
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
+        colors = new();
     }
     /// <summary>
     /// Constructor
@@ -97,6 +103,7 @@ public class BaseEngine : IEngine
     public BaseEngine(IParameters jsonparams) : this()
     {
         parameters = jsonparams;
+        colors = new();
     }
 
     /// <summary>

@@ -4,6 +4,40 @@
         <name>Casasoft.CCDV.Common</name>
     </assembly>
     <members>
+        <member name="T:Casasoft.CCDV.Colors">
+            <summary>
+            Colors conversion utilities
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.Colors.colorDictionary">
+            <summary>
+            List of colors names
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Colors.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Colors.fillColorDictionary">
+            <summary>
+            Fills the list of colors names
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Colors.GetColor(System.String)">
+            <summary>
+            Gets the color by a string
+            </summary>
+            <param name="color">name or components values</param>
+            <returns><see cref="T:ImageMagick.MagickColor"/></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Colors.GetColorString(ImageMagick.MagickColor)">
+            <summary>
+            Returns the string rappresentation of the given color
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.TargetType">
             <summary>
             Available target formats
@@ -166,6 +200,11 @@
             Output directory
             </summary>
         </member>
+        <member name="F:Casasoft.CCDV.CommandLine.colors">
+            <summary>
+            Colors conversion utilities
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.CommandLine.OutputName">
             <summary>
             Output file name
@@ -291,16 +330,6 @@
         <member name="M:Casasoft.CCDV.CommandLine.GetDPI">
             <summary>
             sets the dpi value from command line string
-            </summary>
-        </member>
-        <member name="F:Casasoft.CCDV.CommandLine.colorDictionary">
-            <summary>
-            List of colors names
-            </summary>
-        </member>
-        <member name="M:Casasoft.CCDV.CommandLine.fillColorDictionary">
-            <summary>
-            Fills the list of colors names
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.GetColor(System.String)">
@@ -545,6 +574,11 @@
         <member name="F:Casasoft.CCDV.Engines.BaseEngine.parameters">
             <summary>
             Class for json parameters handling
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.Engines.BaseEngine.colors">
+            <summary>
+            Colors conversion utilities
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
@@ -1017,6 +1051,11 @@
             Output file name
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.FilesList">
+            <summary>
+            Files to process
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontText">
             <summary>
             Text to print on the front (like cardholder)
@@ -1090,6 +1129,11 @@
         <member name="P:Casasoft.CCDV.JSON.IParameters.OutputName">
             <summary>
             Output file name
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.FilesList">
+            <summary>
+            Files to process
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.Properties.Resources">

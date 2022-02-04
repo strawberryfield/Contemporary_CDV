@@ -19,8 +19,10 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using ImageMagick;
 using System;
+using System.Text.Json;
 
 namespace Casasoft.CCDV.Engines;
 
@@ -45,6 +47,7 @@ public class CreditCardEngine : BaseEngine
 
     public CreditCardEngine() : base()  
     {
+        parameters = new CreditCardParameters();
     }
 
     public CreditCardEngine(ICommandLine par) : base(par)
@@ -60,6 +63,30 @@ public class CreditCardEngine : BaseEngine
         MagneticBandColor = p.MagneticBandColor;
         MagneticBandImage = p.MagneticBandImage;
         BackText = p.BackText;
+        parameters = new CreditCardParameters();
+    }
+
+    public CreditCardEngine(IParameters jsonparams) : base(jsonparams)
+    {
+    }
+
+    public override string GetJsonParams()
+    {
+        CreditCardParameters p = (CreditCardParameters)parameters;
+        p.BackImage = BackImage;
+        p.BackText = BackText;
+        p.FrontText = FrontText;
+        p.FrontTextFont = FrontTextFont;
+        p.FrontTextColor = colors.GetColorString(FrontTextColor);
+        p.FrontTextBorder = colors.GetColorString(FrontTextBorder);
+        p.fontBold = fontBold;
+        p.fontItalic = fontItalic;
+        p.MagneticBandImage = MagneticBandImage;
+        p.MagneticBandColor = colors.GetColorString(MagneticBandColor);
+        p.Dpi = Dpi;
+        p.FilesList = new();
+        p.FilesList.Add(FilesList[0]);
+        return JsonSerializer.Serialize(p); 
     }
 
     public override MagickImage GetResult(bool quiet)

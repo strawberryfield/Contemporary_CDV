@@ -25,6 +25,7 @@ using ImageMagick;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -61,13 +62,28 @@ public partial class BaseForm : Window
         doAnteprima();
     }
 
-    protected void btnSave_Click(object sender, System.Windows.RoutedEventArgs e)
+    protected void btnSave_Click(object sender, RoutedEventArgs e)
     {
         setEngineParameters();
         bwRender.RunWorkerAsync();
         waitForm = new WaitForm();
         waitForm.Owner = this;
         waitForm.ShowDialog();
+    }
+
+    protected void btnSaveJson_Click(object sender, RoutedEventArgs e)
+    {
+        SaveFileDialog sd = new();
+        sd.Filter = "json data file (*.json)|*.json|All files (*.*)|*.*";
+        sd.Title = "Salvataggio parametri immagine";
+        sd.DefaultExt = "json";
+        sd.AddExtension = true;
+        sd.OverwritePrompt = true;
+        sd.ShowDialog();
+        if (!string.IsNullOrWhiteSpace(sd.FileName))
+        {
+            File.WriteAllText(sd.FileName, engine.GetJsonParams());
+        }
     }
 
     protected virtual void setEngineParameters()
