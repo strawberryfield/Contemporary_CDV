@@ -106,6 +106,14 @@ public partial class BaseForm : Window
         engine.SetJsonParams(json);
     }
 
+    protected void addFile(int num, FileTextBox ftb)
+    {
+        if (engine.FilesList.Count >= num)
+        {
+            ftb.Value = engine.FilesList[num - 1];
+        }
+    }
+
     protected virtual void setEngineParameters()
     {
         engine.FilesList.Clear();
@@ -126,19 +134,19 @@ public partial class BaseForm : Window
         waitForm.ShowDialog();
     }
 
-    private void bwAnteprima_DoWork(object sender, DoWorkEventArgs e)
+    private void bwAnteprima_DoWork(object? sender, DoWorkEventArgs e)
     {
         e.Result = engine.GetResult(true);
     }
 
-    private void bwAnteprima_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    private void bwAnteprima_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         MagickImage bm = (MagickImage)e.Result;
         image.Source = bm.ToBitmapSource();
         waitForm.Close();
     }
 
-    private void bwRender_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    private void bwRender_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         MagickImage bm = (MagickImage)e.Result;
         waitForm.Close();

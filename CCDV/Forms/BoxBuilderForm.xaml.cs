@@ -20,10 +20,11 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.Engines;
+using Casasoft.CCDV.JSON;
 
 namespace Casasoft.CCDV.UI;
 
-public enum BoxTypes { Box, Folder}
+public enum BoxTypes { Box, Folder }
 
 /// <summary>
 /// Interaction logic for BoxBuilderForm.xaml
@@ -75,6 +76,29 @@ public partial class BoxBuilderForm : BaseForm
         builder.SetBottomImage(boxImages.BottomImage);
         builder.SetLeftImage(boxImages.LeftImage);
         builder.SetRightImage(boxImages.RightImage);
+    }
+
+    protected override void loadJson(string json)
+    {
+        base.loadJson(json);
+        BaseBuilderEngine eng = (BaseBuilderEngine)engine;
+        BaseBuilder builder = (BaseBuilder)eng.Builder;
+        commonOptions.FillColor = eng.FillColor;
+        commonOptions.BorderColor = eng.BorderColor;
+        commonOptions.DpiValue = eng.Dpi;
+
+        boxImages.BorderText = builder.borderText;
+        boxImages.Font = builder.font;
+        boxImages.FontBold = builder.fontBold;
+        boxImages.FontItalic = builder.fontItalic;
+        boxImages.isHorizontal = builder.isHorizontal;
+
+        boxImages.FrontImage = builder.frontImagePath;
+        boxImages.BackImage = builder.backImagePath;
+        boxImages.TopImage = builder.topImagePath;
+        boxImages.BottomImage = builder.bottomImagePath;
+        boxImages.LeftImage = builder.leftImagePath;
+        boxImages.RightImage = builder.rightImagePath;
     }
 
     protected override void doAnteprima()

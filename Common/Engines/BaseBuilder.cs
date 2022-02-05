@@ -73,6 +73,7 @@ public class BaseBuilder : IBuilder
     protected MagickGeometry borderFormat;
     protected MagickGeometry frontFormat;
 
+    #region images properties
     /// <summary>
     /// Image for top border
     /// </summary>
@@ -98,6 +99,31 @@ public class BaseBuilder : IBuilder
     /// </summary>
     protected MagickImage backImage;
 
+    /// <summary>
+    /// Image for top border
+    /// </summary>
+    public string topImagePath { get; private set; }
+    /// <summary>
+    /// Image for bottom border
+    /// </summary>
+    public string bottomImagePath { get; private set; }
+    /// <summary>
+    /// Image for left border
+    /// </summary>
+    public string leftImagePath { get; private set; }
+    /// <summary>
+    /// Image for right border
+    /// </summary>
+    public string rightImagePath { get; private set; }
+    /// <summary>
+    /// Image for front cover
+    /// </summary>
+    public string frontImagePath { get; private set; }
+    /// <summary>
+    /// Image for back cover
+    /// </summary>
+    public string backImagePath { get; private set; }
+    #endregion
 
     #region constructors
     public BaseBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
@@ -188,14 +214,38 @@ public class BaseBuilder : IBuilder
 
     }
 
+    #region set images
     protected MagickImage checkAndLoad(string filename, MagickImage template) =>
         (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename)) ?
         Utils.RotateResizeAndFill(new(filename), template, fillColor) : template;
 
-    public void SetTopImage(string filename) => topImage = checkAndLoad(filename, topImage);
-    public void SetBottomImage(string filename) => bottomImage = checkAndLoad(filename, bottomImage);
+    /// <summary>
+    /// Sets image for the top border
+    /// </summary>
+    /// <param name="filename"></param>
+    public void SetTopImage(string filename)
+    {
+        topImagePath = filename;
+        topImage = checkAndLoad(filename, topImage);
+    }
+
+    /// <summary>
+    /// Sets image for the bottom border
+    /// </summary>
+    /// <param name="filename"></param>
+    public void SetBottomImage(string filename)
+    {
+        bottomImagePath = filename;
+        bottomImage = checkAndLoad(filename, bottomImage);
+    }
+
+    /// <summary>
+    /// Sets image for the left border
+    /// </summary>
+    /// <param name="filename"></param>
     public void SetLeftImage(string filename)
     {
+        leftImagePath = filename;
         leftImage = checkAndLoad(filename, leftImage);
         if (!string.IsNullOrWhiteSpace(borderText))
         {
@@ -203,15 +253,44 @@ public class BaseBuilder : IBuilder
                 .Draw(leftImage);
         }
     }
-    public void SetRightImage(string filename) => rightImage = checkAndLoad(filename, rightImage);
-    public void SetFrontImage(string filename) => frontImage = checkAndLoad(filename, frontImage);
+
+    /// <summary>
+    /// Sets image for the right border
+    /// </summary>
+    /// <param name="filename"></param>
+    public void SetRightImage(string filename)
+    {
+        rightImagePath = filename;
+        rightImage = checkAndLoad(filename, rightImage);
+    }
+
+    /// <summary>
+    /// Sets image for the front cover
+    /// </summary>
+    /// <param name="filename"></param>
+    public void SetFrontImage(string filename)
+    {
+        frontImagePath = filename;
+        frontImage = checkAndLoad(filename, frontImage);
+    }
+
+    /// <summary>
+    /// Sets image for the back cover
+    /// </summary>
+    /// <param name="filename"></param>
     public void SetBackImage(string filename, bool isHorizontal = false)
     {
+        frontImagePath = filename;
         backImage = checkAndLoad(filename, backImage);
         if (isHorizontal)
             backImage.Rotate(180);
     }
+    #endregion
 
+    /// <summary>
+    /// Creates lines for cut
+    /// </summary>
+    /// <param name="img"></param>
     public void AddCuttingLines(MagickImage img)
     {
         MagickImage trim = (MagickImage)img.Clone();

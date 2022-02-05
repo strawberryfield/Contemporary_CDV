@@ -606,6 +606,78 @@
             image for back cover
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.topImagePath">
+            <summary>
+            Image for top border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.bottomImagePath">
+            <summary>
+            Image for bottom border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.leftImagePath">
+            <summary>
+            Image for left border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.rightImagePath">
+            <summary>
+            Image for right border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.frontImagePath">
+            <summary>
+            Image for front cover
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.backImagePath">
+            <summary>
+            Image for back cover
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.SetTopImage(System.String)">
+            <summary>
+            Sets image for the top border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.SetBottomImage(System.String)">
+            <summary>
+            Sets image for the bottom border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.SetLeftImage(System.String)">
+            <summary>
+            Sets image for the left border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.SetRightImage(System.String)">
+            <summary>
+            Sets image for the right border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.SetFrontImage(System.String)">
+            <summary>
+            Sets image for the front cover
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.SetBackImage(System.String,System.Boolean)">
+            <summary>
+            Sets image for the back cover
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.AddCuttingLines(ImageMagick.MagickImage)">
+            <summary>
+            Creates lines for cut
+            </summary>
+            <param name="img"></param>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.BaseBuilderEngine">
             <summary>
             Abstract class for folders and boxes builders

@@ -43,6 +43,22 @@ public partial class MontaggioDorsiForm : BaseForm
         engine.Dpi = commonOptions.DpiValue;
     }
 
+    protected override void loadJson(string json)
+    {
+        base.loadJson(json);
+        MontaggioDorsiEngine eng = (MontaggioDorsiEngine)engine;
+        commonOptions.FillColor = eng.FillColor;
+        commonOptions.BorderColor = eng.BorderColor;
+        commonOptions.DpiValue = eng.Dpi;
+
+        addFile(1, filename1);
+        addFile(2, filename2);
+        addFile(3, filename3);
+        addFile(4, filename4);
+        addFile(5, filename5);
+        addFile(6, filename6);
+    }
+
     protected override void doAnteprima()
     {
         base.doAnteprima();

@@ -19,6 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using ImageMagick;
 
 namespace Casasoft.CCDV.Engines;
@@ -34,6 +35,7 @@ public class FolderEngine : BaseBuilderEngine
     /// </summary>
     public FolderEngine()
     {
+        parameters = new BaseBuilderParameters();
         Builder = new FolderBuilder();
     }
 
@@ -43,6 +45,7 @@ public class FolderEngine : BaseBuilderEngine
     /// <param name="par"></param>
     public FolderEngine(ICommandLine par) : base(par)
     {
+        parameters = new BaseBuilderParameters();
         Builder = new FolderBuilder((BaseBuilderCommandLine)par, fmt);
     }
     #endregion

@@ -47,6 +47,21 @@ public partial class MontaggioFotoForm : BaseForm
         eng.Trim = (bool)chkTrim.IsChecked;       
     }
 
+    protected override void loadJson(string json)
+    {
+        base.loadJson(json);
+        MontaggioFotoEngine eng = (MontaggioFotoEngine)engine;
+        commonOptions.FillColor = eng.FillColor;
+        commonOptions.BorderColor = eng.BorderColor;
+        commonOptions.DpiValue = eng.Dpi;
+
+        chkWithBorders.IsChecked = eng.WithBorder;
+        chkFullSize.IsChecked = eng.FullSize;
+        chkTrim.IsChecked = eng.Trim;
+        addFile(1, filename1);
+        addFile(2, filename2);
+    }
+
     protected override void doAnteprima()
     {
         base.doAnteprima();

@@ -52,6 +52,7 @@ public class MontaggioFotoEngine : BaseEngine
     /// </summary>
     public MontaggioFotoEngine() : base()
     {
+        parameters = new MontaggioFotoParameters();
     }
 
     /// <summary>
@@ -60,6 +61,7 @@ public class MontaggioFotoEngine : BaseEngine
     /// <param name="par"></param>
     public MontaggioFotoEngine(CommandLine par) : base(par)
     {
+        parameters = new MontaggioFotoParameters();
         MontaggioFotoCommandLine p = (MontaggioFotoCommandLine)par;
         FullSize = p.FullSize;
         Trim = p.Trim;

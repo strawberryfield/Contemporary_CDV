@@ -49,5 +49,5 @@ public partial class BoxImagesControl : UserControl
     public bool FontItalic { get => ctrlFont.FontItalic; set => ctrlFont.FontItalic = value; }
 
     public TargetType TargetType { get => (bool)rbCDV.IsChecked ? TargetType.cdv : TargetType.cc; }
-    public bool isHorizontal { get => (bool)rbHorizontal.IsChecked; }
+    public bool isHorizontal { get => (bool)rbHorizontal.IsChecked; set => rbHorizontal.IsChecked = value; }
 }

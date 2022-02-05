@@ -37,6 +37,7 @@ public class MontaggioDorsiEngine : BaseEngine
     /// </summary>
     public MontaggioDorsiEngine() : base()
     {
+        parameters = new CommonParameters();
     }
 
     /// <summary>
@@ -45,6 +46,7 @@ public class MontaggioDorsiEngine : BaseEngine
     /// <param name="par"></param>
     public MontaggioDorsiEngine(CommandLine par) : base(par)
     {
+        parameters = new CommonParameters();
     }
     #endregion
 
