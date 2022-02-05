@@ -65,14 +65,6 @@ public class MontaggioFotoEngine : BaseEngine
         Trim = p.Trim;
         WithBorder = p.WithBorder;
     }
-
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="jsonparams"></param>
-    public MontaggioFotoEngine(IParameters jsonparams) : base(jsonparams)
-    {
-    }
     #endregion
 
     #region json
@@ -82,15 +74,11 @@ public class MontaggioFotoEngine : BaseEngine
     /// <returns></returns>
     public override string GetJsonParams()
     {
+        GetBaseJsonParams();
         MontaggioFotoParameters p = (MontaggioFotoParameters)parameters;
         p.FullSize = FullSize;
         p.WithBorder = WithBorder;  
         p.Trim = Trim;
-        p.BorderColor = colors.GetColorString(BorderColor);
-        p.FillColor = colors.GetColorString(FillColor);
-        p.Dpi = Dpi;
-        p.FilesList = new();
-        p.FilesList.AddRange(FilesList);
         return JsonSerializer.Serialize(p);
     }
 
@@ -102,15 +90,10 @@ public class MontaggioFotoEngine : BaseEngine
     {
         MontaggioFotoParameters p = JsonSerializer.Deserialize<MontaggioFotoParameters>(json);
         parameters = p;
-
+        SetBaseJsonParams();
         FullSize = p.FullSize;
         WithBorder = p.WithBorder;
         Trim = p.Trim;
-        BorderColor = colors.GetColor(p.BorderColor);
-        FillColor = colors.GetColor(p.FillColor);
-        Dpi = p.Dpi;
-        FilesList.Clear();
-        FilesList.AddRange(p.FilesList);
     }
     #endregion
 

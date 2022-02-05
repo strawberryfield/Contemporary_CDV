@@ -21,7 +21,13 @@
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Interface for common box and folder builders
+/// </summary>
 public interface IBaseBuilderEngine : IEngine
 {
+    /// <summary>
+    /// Common builder reference
+    /// </summary>
     IBuilder Builder { get; set; }
 }

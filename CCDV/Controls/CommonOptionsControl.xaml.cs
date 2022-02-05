@@ -39,11 +39,23 @@ public partial class CommonOptionsControl : UserControl
     public MagickColor BorderColor
     {
         get => Utils.ColorFromPicker(cpBorder);
-        set => cpBorder.SelectedColor = Utils.ColorFromMagick(value);
+        set
+        {
+            if (value != null)
+            {
+                cpBorder.SelectedColor = Utils.ColorFromMagick(value);
+            }
+        }
     }
     public MagickColor FillColor
     {
         get => Utils.ColorFromPicker(cpFill);
-        set => cpFill.SelectedColor = Utils.ColorFromMagick(value);
+        set
+        {
+            if (value != null)
+            {
+                cpFill.SelectedColor = Utils.ColorFromMagick(value);
+            }
+        }
     }
 }

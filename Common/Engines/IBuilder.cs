@@ -23,6 +23,9 @@ using ImageMagick;
 
 namespace Casasoft.CCDV;
 
+/// <summary>
+/// Interface for boxes and folders builder
+/// </summary>
 public interface IBuilder
 {
     int spessore { get; set; }

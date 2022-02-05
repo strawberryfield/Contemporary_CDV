@@ -536,6 +536,76 @@
             <param name="outputname">Default output file name</param>
             <param name="desc">brief description of the program</param>
         </member>
+        <member name="T:Casasoft.CCDV.BaseBuilder">
+            <summary>
+            Common builder for boxes and folders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.spessore">
+            <summary>
+            Thickness of the box (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.targetType">
+            <summary>
+            target box format
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.isHorizontal">
+            <summary>
+            Set if box is landscape
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.font">
+            <summary>
+            Font for border text
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.fontBold">
+            <summary>
+            Prints text in bold if available
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.fontItalic">
+            <summary>
+            Prints text in italic if available
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.borderText">
+            <summary>
+            Text to print on left border
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.topImage">
+            <summary>
+            Image for top border
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.bottomImage">
+            <summary>
+            Image for bottom border
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.leftImage">
+            <summary>
+            Image for left border
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.rightImage">
+            <summary>
+            Image for right border
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.frontImage">
+            <summary>
+            image for front cover
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.backImage">
+            <summary>
+            image for back cover
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.BaseEngine">
             <summary>
             Base class for various images managers
@@ -592,23 +662,27 @@
             </summary>
             <param name="par">Command line options</param>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="jsonparams">List of parameters in json format</param>
-        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetJsonParams">
             <summary>
             Returns the parameters in json format
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetBaseJsonParams">
+            <summary>
+            Sets the common parameters to serialize json format
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)">
             <summary>
             Sets the parameters from json formatted string
             </summary>
             <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetBaseJsonParams">
+            <summary>
+            Sets the common parameters from deserialized json
+            </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetResult">
             <summary>
@@ -722,12 +796,6 @@
             </summary>
             <param name="par"></param>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="jsonparams"></param>
-        </member>
         <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.GetJsonParams">
             <summary>
             Returns the parameters in json format
@@ -839,12 +907,6 @@
             </summary>
             <param name="par"></param>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="jsonparams"></param>
-        </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.GetJsonParams">
             <summary>
             Returns the parameters in json format
@@ -894,12 +956,6 @@
             Constructor
             </summary>
             <param name="par"></param>
-        </member>
-        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor(Casasoft.CCDV.JSON.IParameters)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="jsonparams"></param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetJsonParams">
             <summary>
@@ -1238,6 +1294,88 @@
             <param name="i">input description</param>
             <param name="o">output description</param>
             <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.JSON.BaseBuilderParameters">
+            <summary>
+            Parameters for box and folder builder
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.topImage">
+            <summary>
+            Image for top border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.bottomImage">
+            <summary>
+            Image for bottom border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.leftImage">
+            <summary>
+            Image for left border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.rightImage">
+            <summary>
+            Image for right border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.frontImage">
+            <summary>
+            image for front cover
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.backImage">
+            <summary>
+            image for back cover
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.fontBold">
+            <summary>
+            Prints text in bold if available
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.fontItalic">
+            <summary>
+            Prints text in italic if available
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.font">
+            <summary>
+            Font for border text
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.borderText">
+            <summary>
+            Text to print on left border
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.spessore">
+            <summary>
+            Thickness of the box (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.isHorizontal">
+            <summary>
+            Set if box is landscape
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.targetFormat">
+            <summary>
+            target box format
+            </summary>
+            <remarks>
+            <para>Original data are in enum <see cref="T:Casasoft.CCDV.TargetType"/> format</para>
+            <list type=">">
+            <item>0 - Carte de viste 64x100mm</item>
+            <item>1 - Credit card 86x54mm</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.useTestImages">
+            <summary>
+            Set to generate sample images
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.JSON.CommonParameters">
             <summary>

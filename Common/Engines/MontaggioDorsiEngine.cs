@@ -46,14 +46,6 @@ public class MontaggioDorsiEngine : BaseEngine
     public MontaggioDorsiEngine(CommandLine par) : base(par)
     {
     }
-
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="jsonparams"></param>
-    public MontaggioDorsiEngine(IParameters jsonparams) : base(jsonparams)
-    {
-    }
     #endregion
 
     #region json
@@ -63,12 +55,8 @@ public class MontaggioDorsiEngine : BaseEngine
     /// <returns></returns>
     public override string GetJsonParams()
     {
+        GetBaseJsonParams();
         CommonParameters p = (CommonParameters)parameters;
-        p.BorderColor = colors.GetColorString(BorderColor);
-        p.FillColor = colors.GetColorString(FillColor);
-        p.Dpi = Dpi;
-        p.FilesList = new();
-        p.FilesList.AddRange(FilesList);
         return JsonSerializer.Serialize(p);
     }
 
@@ -80,12 +68,7 @@ public class MontaggioDorsiEngine : BaseEngine
     {
         CommonParameters p = JsonSerializer.Deserialize<CommonParameters>(json);
         parameters = p;
-
-        BorderColor = colors.GetColor(p.BorderColor);
-        FillColor = colors.GetColor(p.FillColor);
-        Dpi = p.Dpi;
-        FilesList.Clear();
-        FilesList.AddRange(p.FilesList);
+        SetBaseJsonParams();
     }
     #endregion
 

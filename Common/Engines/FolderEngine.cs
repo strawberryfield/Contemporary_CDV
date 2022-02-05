@@ -23,18 +23,36 @@ using ImageMagick;
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Forder builder engine
+/// </summary>
 public class FolderEngine : BaseBuilderEngine
 {
+    #region constructors
+    /// <summary>
+    /// constructor
+    /// </summary>
     public FolderEngine()
     {
         Builder = new FolderBuilder();
     }
 
+    /// <summary>
+    /// constructor
+    /// </summary>
+    /// <param name="par"></param>
     public FolderEngine(ICommandLine par) : base(par)
     {
         Builder = new FolderBuilder((BaseBuilderCommandLine)par, fmt);
     }
+    #endregion
 
+    #region build
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet"></param>
+    /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
         Images img = new(fmt);
@@ -45,5 +63,5 @@ public class FolderEngine : BaseBuilderEngine
 
         return output;
     }
-
+    #endregion
 }

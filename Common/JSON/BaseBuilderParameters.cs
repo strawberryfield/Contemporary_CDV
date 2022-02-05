@@ -27,7 +27,7 @@ namespace Casasoft.CCDV.JSON;
 public class BaseBuilderParameters : CommonParameters
 {
     /// <summary>
-    /// Image for top boder
+    /// Image for top border
     /// </summary>
     public string topImage { get; set; }
     /// <summary>

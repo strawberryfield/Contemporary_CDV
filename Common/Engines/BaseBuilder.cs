@@ -74,7 +74,7 @@ public class BaseBuilder : IBuilder
     protected MagickGeometry frontFormat;
 
     /// <summary>
-    /// Image for top boder
+    /// Image for top border
     /// </summary>
     protected MagickImage topImage;
     /// <summary>

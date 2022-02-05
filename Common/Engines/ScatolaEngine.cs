@@ -23,18 +23,36 @@ using ImageMagick;
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Box Builder Engine
+/// </summary>
 public class ScatolaEngine : BaseBuilderEngine
 {
+    #region constructors
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public ScatolaEngine()
     {
         Builder = new ScatolaBuilder();
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="par"></param>
     public ScatolaEngine(ICommandLine par) : base(par)
     {
         Builder = new ScatolaBuilder((BaseBuilderCommandLine)par, fmt);
     }
+    #endregion
 
+    #region build
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet"></param>
+    /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
         Images img = new(fmt);
@@ -45,4 +63,5 @@ public class ScatolaEngine : BaseBuilderEngine
         
         return output;
     }
+    #endregion
 }

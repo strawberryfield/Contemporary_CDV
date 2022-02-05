@@ -21,15 +21,28 @@
 
 namespace Casasoft.CCDV.Engines;
 
+/// <summary>
+/// Abstract class for folders and boxes builders
+/// </summary>
 public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
 {
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public BaseBuilderEngine() : base()
     {
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="par"></param>
     public BaseBuilderEngine(ICommandLine par) : base(par)
     {
     }
 
+    /// <summary>
+    /// Common builder reference
+    /// </summary>
     public IBuilder Builder { get; set; }   
 }

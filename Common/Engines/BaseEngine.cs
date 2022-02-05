@@ -99,15 +99,6 @@ public class BaseEngine : IEngine
         BorderColor = par.BorderColor;
         colors = new();
     }
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="jsonparams">List of parameters in json format</param>
-    public BaseEngine(IParameters jsonparams) : this()
-    {
-        parameters = jsonparams;
-        colors = new();
-    }
     #endregion
 
     #region json
@@ -118,12 +109,35 @@ public class BaseEngine : IEngine
     public virtual string GetJsonParams() => string.Empty;
 
     /// <summary>
+    /// Sets the common parameters to serialize json format
+    /// </summary>
+    public void GetBaseJsonParams()
+    {
+        parameters.BorderColor = colors.GetColorString(BorderColor);
+        parameters.FillColor = colors.GetColorString(FillColor);
+        parameters.Dpi = Dpi;
+        parameters.FilesList = new();
+        parameters.FilesList.AddRange(FilesList);
+    }
+
+    /// <summary>
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
     public virtual void SetJsonParams(string json)
     {
+    }
 
+    /// <summary>
+    /// Sets the common parameters from deserialized json
+    /// </summary>
+    public void SetBaseJsonParams()
+    {
+        BorderColor = colors.GetColor(parameters.BorderColor);
+        FillColor = colors.GetColor(parameters.FillColor);
+        Dpi = parameters.Dpi;
+        FilesList.Clear();
+        FilesList.AddRange(parameters.FilesList);
     }
     #endregion
 

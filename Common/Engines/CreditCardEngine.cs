@@ -114,14 +114,6 @@ public class CreditCardEngine : BaseEngine
         BackText = p.BackText;
         parameters = new CreditCardParameters();
     }
-
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="jsonparams"></param>
-    public CreditCardEngine(IParameters jsonparams) : base(jsonparams)
-    {
-    }
     #endregion
 
     #region json
@@ -131,7 +123,9 @@ public class CreditCardEngine : BaseEngine
     /// <returns></returns>
     public override string GetJsonParams()
     {
+        GetBaseJsonParams();
         CreditCardParameters p = (CreditCardParameters)parameters;
+
         p.BackImage = BackImage;
         p.BackText = BackText;
         p.FrontText = FrontText;
@@ -142,11 +136,7 @@ public class CreditCardEngine : BaseEngine
         p.fontItalic = fontItalic;
         p.MagneticBandImage = MagneticBandImage;
         p.MagneticBandColor = colors.GetColorString(MagneticBandColor);
-        p.BorderColor = colors.GetColorString(BorderColor);
-        p.FillColor = colors.GetColorString(FillColor);  
-        p.Dpi = Dpi;
-        p.FilesList = new();
-        p.FilesList.Add(FilesList[0]);
+
         return JsonSerializer.Serialize(p);
     }
 
@@ -158,6 +148,7 @@ public class CreditCardEngine : BaseEngine
     {
         CreditCardParameters p = JsonSerializer.Deserialize<CreditCardParameters>(json);
         parameters = p;
+        SetBaseJsonParams();
 
         BackImage = p.BackImage;
         BackText = p.BackText;
@@ -169,11 +160,6 @@ public class CreditCardEngine : BaseEngine
         fontItalic = p.fontItalic;
         MagneticBandImage = p.MagneticBandImage;
         MagneticBandColor = colors.GetColor(p.MagneticBandColor);
-        BorderColor = colors.GetColor(p.BorderColor);
-        FillColor = colors.GetColor(p.FillColor);   
-        Dpi = p.Dpi;
-        FilesList.Clear();
-        FilesList.AddRange(p.FilesList);
     }
     #endregion
 
