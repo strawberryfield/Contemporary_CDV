@@ -23,6 +23,7 @@ using Casasoft.CCDV.Engines;
 using Casasoft.Xaml.Controls;
 using ImageMagick;
 using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -57,12 +58,12 @@ public partial class BaseForm : Window
         bwRender.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwRender_RunWorkerCompleted);
     }
 
-    protected void btnUpdate_Click(object sender, RoutedEventArgs e)
+    protected void btnUpdate_Click(object sender, EventArgs e)
     {
         doAnteprima();
     }
 
-    protected void btnSave_Click(object sender, RoutedEventArgs e)
+    protected void btnSave_Click(object sender, EventArgs e)
     {
         setEngineParameters();
         bwRender.RunWorkerAsync();
@@ -71,7 +72,7 @@ public partial class BaseForm : Window
         waitForm.ShowDialog();
     }
 
-    protected void btnSaveJson_Click(object sender, RoutedEventArgs e)
+    protected void btnSaveJson_Click(object sender, EventArgs e)
     {
         SaveFileDialog sd = new();
         sd.Filter = "json data file (*.json)|*.json|All files (*.*)|*.*";
@@ -86,7 +87,7 @@ public partial class BaseForm : Window
         }
     }
 
-    protected void btnOpenJson_Click(object sender, RoutedEventArgs e)
+    protected void btnOpenJson_Click(object sender, EventArgs e)
     {
         OpenFileDialog sd = new();
         sd.Filter = "json data file (*.json)|*.json|All files (*.*)|*.*";

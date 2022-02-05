@@ -37,11 +37,10 @@ If not, see <http://www.gnu.org/licenses/>.
         </Grid.ColumnDefinitions>
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
-        <Button x:Name="btnUpdate" Content="Aggiorna Anteprima" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Width="230" Click="btnUpdate_Click"/>
-        <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Center" Margin="0,0,0,40" VerticalAlignment="Bottom" Width="230" Click="btnSave_Click"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
         <local:CommonOptionsControl x:Name="commonOptions" Margin="0,454,0,0" VerticalAlignment="Top" />
         <local:BoxImagesControl x:Name="boxImages" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+        <local:CommonCommandsControl x:Name="ucCommands" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>
 
     </Grid>
 </src:BaseForm>

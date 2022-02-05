@@ -606,6 +606,27 @@
             image for back cover
             </summary>
         </member>
+        <member name="T:Casasoft.CCDV.Engines.BaseBuilderEngine">
+            <summary>
+            Abstract class for folders and boxes builders
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.#ctor(Casasoft.CCDV.ICommandLine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseBuilderEngine.Builder">
+            <summary>
+            Common builder reference
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.BaseEngine">
             <summary>
             Base class for various images managers
@@ -814,6 +835,39 @@
             </summary>
             <returns>Image to print</returns>
         </member>
+        <member name="T:Casasoft.CCDV.Engines.FolderEngine">
+            <summary>
+            Forder builder engine
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FolderEngine.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FolderEngine.#ctor(Casasoft.CCDV.ICommandLine)">
+            <summary>
+            constructor
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FolderEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.IBaseBuilderEngine">
+            <summary>
+            Interface for common box and folder builders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IBaseBuilderEngine.Builder">
+            <summary>
+            Common builder reference
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.IEngine">
             <summary>
             Interface for various images managers
@@ -983,6 +1037,34 @@
             <param name="quiet"></param>
             <param name="i"></param>
             <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.ScatolaEngine">
+            <summary>
+            Box Builder Engine
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.ScatolaEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.ScatolaEngine.#ctor(Casasoft.CCDV.ICommandLine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.ScatolaEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.IBuilder">
+            <summary>
+            Interface for boxes and folders builder
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.Formats">
             <summary>
