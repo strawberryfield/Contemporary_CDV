@@ -44,6 +44,7 @@ public enum TargetType
 /// </summary>
 public class BaseBuilderCommandLine : CommandLine
 {
+    #region properties
     /// <summary>
     /// Box thickness
     /// </summary>
@@ -105,6 +106,7 @@ public class BaseBuilderCommandLine : CommandLine
     private string sThickness = "5";
     private string sTargetType = "CDV";
     private string sOrientation = "PORTRAIT";
+    #endregion
 
     /// <summary>
     /// Constructor

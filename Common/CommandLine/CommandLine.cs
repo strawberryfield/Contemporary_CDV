@@ -142,6 +142,8 @@ public class CommandLine : ICommandLine
     /// <param name="desc">brief description of the program</param>
     public CommandLine(string exename, string outputname, string desc = "")
     {
+        colors = new();
+
         exeName = exename;
         exeDesc = desc;
         OutputName = outputname;
@@ -152,8 +154,6 @@ public class CommandLine : ICommandLine
         GetEnvVars();
         FillColor = GetColor(sFillColor);
         BorderColor = GetColor(sBorderColor);
-
-        colors = new();
 
         Options = new();
         baseOptions = new OptionSet
