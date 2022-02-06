@@ -40,7 +40,7 @@ public partial class BoxImagesControl : UserControl
     public string TopImage { get => txtTop.Value; set => txtTop.Value = value; }
     public string BottomImage { get => txtBottom.Value; set => txtBottom.Value = value; }
 
-    public bool UseTestImages { get => (bool)chkTestImages.IsChecked; set => chkTestImages.IsChecked = value; }
+    public bool UseTestImages { get => isChecked(chkTestImages); set => chkTestImages.IsChecked = value; }
     public int Thickness { get => txtThickness.Value; set => txtThickness.Value = value; }
     public string BorderText { get => txtBorderText.Text; set => txtBorderText.Text = value; }
 
@@ -48,6 +48,36 @@ public partial class BoxImagesControl : UserControl
     public bool FontBold { get => ctrlFont.FontBold; set => ctrlFont.FontBold = value; }
     public bool FontItalic { get => ctrlFont.FontItalic; set => ctrlFont.FontItalic = value; }
 
-    public TargetType TargetType { get => (bool)rbCDV.IsChecked ? TargetType.cdv : TargetType.cc; }
-    public bool isHorizontal { get => (bool)rbHorizontal.IsChecked; set => rbHorizontal.IsChecked = value; }
+    public TargetType TargetType
+    {
+        get => isChecked(rbCDV) ? TargetType.cdv : TargetType.cc;
+        set
+        {
+            rbCDV.IsChecked = value == TargetType.cdv;
+            rbCC.IsChecked = value == TargetType.cc;
+        }
+    }
+    public bool isHorizontal
+    {
+        get => isChecked(rbHorizontal);
+        set
+        {
+            rbHorizontal.IsChecked = value;
+            rbVertical.IsChecked = !value;
+        }
+    }
+
+    private bool isChecked(RadioButton rb)
+    {
+        bool ret = false;
+        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        return ret;
+    }
+
+    private bool isChecked(CheckBox rb)
+    {
+        bool ret = false;
+        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        return ret;
+    }
 }

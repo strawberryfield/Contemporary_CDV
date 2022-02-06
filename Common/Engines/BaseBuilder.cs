@@ -102,27 +102,27 @@ public class BaseBuilder : IBuilder
     /// <summary>
     /// Image for top border
     /// </summary>
-    public string topImagePath { get; private set; }
+    public string topImagePath { get; set; }
     /// <summary>
     /// Image for bottom border
     /// </summary>
-    public string bottomImagePath { get; private set; }
+    public string bottomImagePath { get; set; }
     /// <summary>
     /// Image for left border
     /// </summary>
-    public string leftImagePath { get; private set; }
+    public string leftImagePath { get; set; }
     /// <summary>
     /// Image for right border
     /// </summary>
-    public string rightImagePath { get; private set; }
+    public string rightImagePath { get; set; }
     /// <summary>
     /// Image for front cover
     /// </summary>
-    public string frontImagePath { get; private set; }
+    public string frontImagePath { get; set; }
     /// <summary>
     /// Image for back cover
     /// </summary>
-    public string backImagePath { get; private set; }
+    public string backImagePath { get; set; }
     #endregion
 
     #region constructors
@@ -280,7 +280,7 @@ public class BaseBuilder : IBuilder
     /// <param name="filename"></param>
     public void SetBackImage(string filename, bool isHorizontal = false)
     {
-        frontImagePath = filename;
+        backImagePath = filename;
         backImage = checkAndLoad(filename, backImage);
         if (isHorizontal)
             backImage.Rotate(180);

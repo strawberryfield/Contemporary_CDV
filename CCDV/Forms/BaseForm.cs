@@ -48,6 +48,8 @@ public partial class BaseForm : Window
     public BaseForm()
     {
         engine = new BaseEngine();
+        waitForm = new WaitForm();
+        image = new();
 
         bwAnteprima = new BackgroundWorker();
         bwAnteprima.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
@@ -141,30 +143,32 @@ public partial class BaseForm : Window
 
     private void bwAnteprima_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
-        MagickImage bm = (MagickImage)e.Result;
-        image.Source = bm.ToBitmapSource();
+        MagickImage? bm = (MagickImage?)e.Result;
+        if(bm != null) image.Source = bm.ToBitmapSource();
         waitForm.Close();
     }
 
     private void bwRender_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
-        MagickImage bm = (MagickImage)e.Result;
+        MagickImage? bm = (MagickImage?)e.Result;
         waitForm.Close();
 
-        SaveFileDialog sd = new();
-        sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
-        sd.Title = "Salvataggio immagine";
-        sd.DefaultExt = "jpg";
-        sd.AddExtension = true;
-        sd.OverwritePrompt = true;
-        sd.ShowDialog();
-        if (!string.IsNullOrWhiteSpace(sd.FileName))
+        if (bm != null)
         {
-            engine.SetImageInfo(sd.FileName, bm);
-            engine.SetImageParameters(bm);
-            bm.Write(sd.FileName);
+            SaveFileDialog sd = new();
+            sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+            sd.Title = "Salvataggio immagine";
+            sd.DefaultExt = "jpg";
+            sd.AddExtension = true;
+            sd.OverwritePrompt = true;
+            sd.ShowDialog();
+            if (!string.IsNullOrWhiteSpace(sd.FileName))
+            {
+                engine.SetImageInfo(sd.FileName, bm);
+                engine.SetImageParameters(bm);
+                bm.Write(sd.FileName);
+            }
         }
-
     }
 
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject

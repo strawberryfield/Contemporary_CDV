@@ -27,10 +27,10 @@ namespace Casasoft.CCDV.UI;
 public static class Utils
 {
     public static MagickColor ColorFromPicker(ColorPicker.PortableColorPicker cp) =>
-    new MagickColor((ushort)(cp.SelectedColor.R * 256),
-        (ushort)(cp.SelectedColor.G * 256),
-        (ushort)(cp.SelectedColor.B * 256),
-        (ushort)(cp.SelectedColor.A * 256));
+    new MagickColor((ushort)(cp.SelectedColor.R * 257),
+        (ushort)(cp.SelectedColor.G * 257),
+        (ushort)(cp.SelectedColor.B * 257),
+        (ushort)(cp.SelectedColor.A * 257));
 
     public static Color ColorFromMagick(MagickColor magickColor)
     {

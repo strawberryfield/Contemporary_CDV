@@ -92,6 +92,7 @@ public partial class BoxBuilderForm : BaseForm
         boxImages.FontBold = builder.fontBold;
         boxImages.FontItalic = builder.fontItalic;
         boxImages.isHorizontal = builder.isHorizontal;
+        boxImages.TargetType = builder.targetType;
 
         boxImages.FrontImage = builder.frontImagePath;
         boxImages.BackImage = builder.backImagePath;

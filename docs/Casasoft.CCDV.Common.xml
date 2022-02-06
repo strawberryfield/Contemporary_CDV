@@ -699,6 +699,18 @@
             Common builder reference
             </summary>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.BaseEngine">
             <summary>
             Base class for various images managers
