@@ -81,11 +81,11 @@ public class BaseEngine : IEngine
     /// </summary>
     public BaseEngine()
     {
+        colors = new();
         Dpi = 300;
         FilesList = new List<string>();
         FillColor = MagickColors.White;
         BorderColor = MagickColors.Black;
-        colors = new();
     }
     /// <summary>
     /// Constructor
@@ -93,11 +93,18 @@ public class BaseEngine : IEngine
     /// <param name="par">Command line options</param>
     public BaseEngine(ICommandLine par)
     {
-        Dpi = par.Dpi;
-        FilesList = par.FilesList;
-        FillColor = par.FillColor;
-        BorderColor = par.BorderColor;
         colors = new();
+        FilesList = new();
+        FilesList.AddRange(par.FilesList);
+
+        if (!string.IsNullOrWhiteSpace(par.JSON))
+        {
+            SetJsonParams(par.JSON);
+        }
+
+        Dpi = par.Dpi != 300 ? par.Dpi : Dpi;
+        FillColor = par.FillColor != MagickColors.White ? par.FillColor : FillColor;
+        BorderColor = par.BorderColor != MagickColors.Black ? par.BorderColor : BorderColor;
     }
     #endregion
 

@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioDorsi": {
       "commandName": "Project",
-      "commandLineArgs": "--dpi=600 C:\\foto\\bicingiro\\dorsi\\torino.jpg"
+      "commandLineArgs": "--dpi=120 --json=@C:\\foto\\creditcards\\source\\testdorsi.json"
     }
   }
 }

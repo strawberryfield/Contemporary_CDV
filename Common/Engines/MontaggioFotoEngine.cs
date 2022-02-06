@@ -63,9 +63,9 @@ public class MontaggioFotoEngine : BaseEngine
     {
         parameters = new MontaggioFotoParameters();
         MontaggioFotoCommandLine p = (MontaggioFotoCommandLine)par;
-        FullSize = p.FullSize;
-        Trim = p.Trim;
-        WithBorder = p.WithBorder;
+        FullSize = p.FullSize ? true : FullSize;
+        Trim = p.Trim ? true : Trim;
+        WithBorder = p.WithBorder ? true : WithBorder;
     }
     #endregion
 
