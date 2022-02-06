@@ -175,7 +175,7 @@ public class CommandLine : ICommandLine
                 { "json=", @"parameters in json format,
 use --helpjson for sample template
 Text can be stored in a file instead of a string
-The file must be referenced as '@filename'", 
+The file must be referenced as '@filename'",
                 o => JSON = GetFileParameter(o) },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
@@ -257,16 +257,7 @@ The file must be referenced as '@filename'",
 
         if (shouldShowLicense)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
-            {
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string result = reader.ReadToEnd();
-                    Console.WriteLine("This program is released under:\n");
-                    Console.WriteLine(result);
-                }
-            }
+            Console.WriteLine(Utils.GetLicense());
             return true;
         }
 
