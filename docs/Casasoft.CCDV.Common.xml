@@ -1591,6 +1591,11 @@
             Set to generate sample images
             </summary>
         </member>
+        <member name="M:Casasoft.CCDV.JSON.BaseBuilderParameters.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.JSON.CommonParameters">
             <summary>
             Common parameters list
@@ -1619,6 +1624,11 @@
         <member name="P:Casasoft.CCDV.JSON.CommonParameters.FilesList">
             <summary>
             Files to process
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.JSON.CommonParameters.#ctor">
+            <summary>
+            Default constructor
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.JSON.CreditCardParameters">
@@ -1679,6 +1689,11 @@
             The text can be formatted with Pango markup
             </remarks>
         </member>
+        <member name="M:Casasoft.CCDV.JSON.CreditCardParameters.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.JSON.IParameters">
             <summary>
             Common parameters list
@@ -1727,6 +1742,11 @@
         <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.WithBorder">
             <summary>
             Set if a border to full CDV size (100x64mm) is added
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.JSON.MontaggioFotoParameters.#ctor">
+            <summary>
+            Default constructor
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.Properties.Resources">

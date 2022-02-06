@@ -1,6 +1,6 @@
 % SCATOLA(1)  
 % Roberto Ceccarelli - Casasoft  
-% Jan 2022
+% Feb 2022
 
 # NAME
 Scatola - Box builder using a 20x27 cm paper
@@ -9,78 +9,115 @@ Scatola - Box builder using a 20x27 cm paper
 **Scatola** \[options\]\*
 
 # DESCRIPTION
-This program allows you to create an exploded view of a box case for Carte de Visite.   
+This program allows you to create an exploded view of a box case for Carte de Visite.     
 It has dimensions 105x70mm with a thickness that can be changed by a parameter on the command line.
 
 # OPTIONS
-**-a, --aboveimage=VALUE**
-: set the image for the top cover
+**-a, --aboveimage=VALUE** :  
+set the image for the top cover  
 
-**-z, --bottomimage=VALUE**
-: set the image for the bottom
 
-**-l, --leftimage=VALUE**
-: set the image for the left border
+**-z, --bottomimage=VALUE** :  
+set the image for the bottom  
 
-**-r, --rightimage=VALUE**
-: set the image for the right border
 
-**-f, --frontimage=VALUE**
-: set the image for the front
+**-l, --leftimage=VALUE** :  
+set the image for the left border  
 
-**-b, --backimage=VALUE**
-: set the image for the back
 
-**-t, --thickness=VALUE**
-: set the box thickness \(default 5mm\)
+**-r, --rightimage=VALUE** :  
+set the image for the right border  
 
-**--bordertext=VALUE**
-: text to print on left border
 
-**--font=VALUE**
-: text font \(default Arial\)
+**-f, --frontimage=VALUE** :  
+set the image for the front  
 
-**--fontbold**
-: use bold font weight
 
-**--fontitalic**
-: use italic font style
+**-b, --backimage=VALUE** :  
+set the image for the back  
 
-**--format=VALUE**
-: size of the box: 'cdv' or 'cc' \(default 'CDV'\)
 
-**--orientation=VALUE**
-: orientation of the box: 'portrait' or 'landscape' \(default 'PORTRAIT'\)
+**-t, --thickness=VALUE** :  
+set the box thickness \(default 5mm\)  
 
-**--sample**
-: generate sample images
 
-**--fillcolor=VALUE**
-: set the color used to fiil the images\(default \#FFFFFF\)
+**--bordertext=VALUE** :  
+text to print on left border  
 
-**--bordercolor=VALUE**
-: set the color used to border the images\(default \#000000\)
 
-**--dpi=VALUE**
-: set output resolution \(default 300\)
+**--font=VALUE** :  
+text font \(default Arial\)  
 
-**-o, --output=VALUE**
-: set output dir/filename
 
-**--nobanner**
-: suppress the banner
+**--fontbold** :  
+use bold font weight  
 
-**-h, --help**
-: show this message and exit
 
-**--man**
-: show the man page source and exit
+**--fontitalic** :  
+use italic font style  
 
-**--colors**
-: list available colors by name
 
-**--license**
-: show program license \(AGPL 3.0\)
+**--format=VALUE** :  
+size of the box: 'cdv' or 'cc' \(default 'CDV'\)  
+
+
+**--orientation=VALUE** :  
+orientation of the box: 'portrait' or 'landscape' \(  
+default 'PORTRAIT'\)  
+
+
+**--sample** :  
+generate sample images  
+
+
+**--fillcolor=VALUE** :  
+set the color used to fiil the images  
+\(default \#FFFFFF\)  
+
+
+**--bordercolor=VALUE** :  
+set the color used to border the images  
+\(default \#000000\)  
+
+
+**--dpi=VALUE** :  
+set output resolution \(default 300\)  
+
+
+**--json=VALUE** :  
+parameters in json format,  
+use --helpjson for sample template  
+Text can be stored in a file instead of a string  
+The file must be referenced as '@filename'  
+
+
+**-o, --output=VALUE** :  
+set output dir/filename  
+
+
+**--nobanner** :  
+suppress the banner  
+
+
+**-h, --help** :  
+show this message and exit  
+
+
+**--helpjson** :  
+show json parameters template  
+
+
+**--man** :  
+show the man page source and exit  
+
+
+**--colors** :  
+list available colors by name  
+
+
+**--license** :  
+show program license \(AGPL 3.0\)  
+
 
 ## COLORS
 Colors can be written in any of these formats:  
@@ -90,6 +127,32 @@ Colors can be written in any of these formats:
   \#rrrrggggbbbb  
   \#rrrrggggbbbbaaaa  
   colorname    \(use Scatola --colors  to see all available colors\)
+
+## JSON
+Parameters can also be passed with a json formatted string  
+using the following template:  
+
+\{  
+  "topImage": "",  
+  "bottomImage": "",  
+  "leftImage": "",  
+  "rightImage": "",  
+  "frontImage": "",  
+  "backImage": "",  
+  "fontBold": false,  
+  "fontItalic": false,  
+  "font": "Arial",  
+  "borderText": "",  
+  "spessore": 5,  
+  "isHorizontal": false,  
+  "targetFormat": 0,  
+  "useTestImages": false,  
+  "FillColor": "\#FFFFFF",  
+  "BorderColor": "\#000000",  
+  "Dpi": 300,  
+  "OutputName": null,  
+  "FilesList": \[\]  
+\}
 
 ## ENVIRONMENT VARIABLES
 The program can read values from these variables:  
@@ -110,7 +173,7 @@ along with Casasoft Scatola.
 If not, see <http://www.gnu.org/licenses/>.  
 
 # DISCLAIMER
-Casasoft CCDV Tools is distributed in the hope that it will be useful,  
+Casasoft Scatola is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
 See the GNU General Public License for more details.

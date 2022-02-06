@@ -29,27 +29,27 @@ public class BaseBuilderParameters : CommonParameters
     /// <summary>
     /// Image for top border
     /// </summary>
-    public string topImage { get; set; }
+    public string topImage { get; set; } = string.Empty;
     /// <summary>
     /// Image for bottom border
     /// </summary>
-    public string bottomImage { get; set; }
+    public string bottomImage { get; set; } = string.Empty;
     /// <summary>
     /// Image for left border
     /// </summary>
-    public string leftImage { get; set; }
+    public string leftImage { get; set; } = string.Empty;
     /// <summary>
     /// Image for right border
     /// </summary>
-    public string rightImage { get; set; }
+    public string rightImage { get; set; } = string.Empty;
     /// <summary>
     /// image for front cover
     /// </summary>
-    public string frontImage { get; set; }
+    public string frontImage { get; set; } = string.Empty;
     /// <summary>
     /// image for back cover
     /// </summary>
-    public string backImage { get; set; }
+    public string backImage { get; set; } = string.Empty;
 
     /// <summary>
     /// Prints text in bold if available
@@ -62,16 +62,16 @@ public class BaseBuilderParameters : CommonParameters
     /// <summary>
     /// Font for border text
     /// </summary>
-    public string font { get; set; }
+    public string font { get; set; } = "Arial";
     /// <summary>
     /// Text to print on left border
     /// </summary>
-    public string borderText { get; set; }
+    public string borderText { get; set; } = string.Empty;
 
     /// <summary>
     /// Thickness of the box (mm)
     /// </summary>
-    public int spessore { get; set; }
+    public int spessore { get; set; } = 5;
     /// <summary>
     /// Set if box is landscape
     /// </summary>
@@ -86,10 +86,17 @@ public class BaseBuilderParameters : CommonParameters
     /// <item>1 - Credit card 86x54mm</item>
     /// </list>
     /// </remarks>
-    public int targetFormat { get; set; }
+    public int targetFormat { get; set; } = (int)TargetType.cdv;
 
     /// <summary>
     /// Set to generate sample images
     /// </summary>
     public bool useTestImages { get; set; }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public BaseBuilderParameters() : base()
+    {
+    }
 }

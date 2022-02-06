@@ -31,15 +31,15 @@ public class CommonParameters : IParameters
     /// <summary>
     /// Color to fill images
     /// </summary>
-    public string FillColor { get; set; }
+    public string FillColor { get; set; } = "#FFFFFF";
     /// <summary>
     /// Color to use for lines and borders
     /// </summary>
-    public string BorderColor { get; set; }
+    public string BorderColor { get; set; } = "#000000";
     /// <summary>
     /// Output resolution
     /// </summary>
-    public int Dpi { get; set; }
+    public int Dpi { get; set; } = 300;
     /// <summary>
     /// Output file name
     /// </summary>
@@ -48,4 +48,12 @@ public class CommonParameters : IParameters
     /// Files to process
     /// </summary>
     public List<string> FilesList { get; set; }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public CommonParameters()
+    {
+        FilesList = new();
+    }
 }

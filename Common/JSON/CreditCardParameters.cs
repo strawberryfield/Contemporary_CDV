@@ -29,19 +29,19 @@ public class CreditCardParameters : CommonParameters
     /// <summary>
     /// Text to print on the front (like cardholder)
     /// </summary>
-    public string FrontText { get; set; }
+    public string FrontText { get; set; } = string.Empty;
     /// <summary>
     /// Front text font
     /// </summary>
-    public string FrontTextFont { get; set; }
+    public string FrontTextFont { get; set; } = "Arial";
     /// <summary>
     /// Front text fill color
     /// </summary>
-    public string FrontTextColor { get; set; }
+    public string FrontTextColor { get; set; } = "#FFFFFF";
     /// <summary>
     /// front text border color
     /// </summary>
-    public string FrontTextBorder { get; set; }
+    public string FrontTextBorder { get; set; } = "#000000";
     /// <summary>
     /// use bold weight for front text (if available for font)
     /// </summary>
@@ -53,21 +53,27 @@ public class CreditCardParameters : CommonParameters
     /// <summary>
     /// Pseudo magnetic band color
     /// </summary>
-    public string MagneticBandColor { get; set; }
+    public string MagneticBandColor { get; set; } = "#000000FF";
     /// <summary>
     /// Pseudo magnetic band image
     /// </summary>
-    public string MagneticBandImage { get; set; }
+    public string MagneticBandImage { get; set; } = string.Empty;
     /// <summary>
     /// backgroud image
     /// </summary>
-    public string BackImage { get; set; }
+    public string BackImage { get; set; } = string.Empty;
     /// <summary>
     /// text to put in the back side
     /// </summary>
     /// <remarks>
     /// The text can be formatted with Pango markup
     /// </remarks>
-    public string BackText { get; set; }
+    public string BackText { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public CreditCardParameters() : base()
+    {
+    }
 }

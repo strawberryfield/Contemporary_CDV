@@ -1,0 +1,26 @@
+Casasoft Contemporary Carte de Visite Cartella
+Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+
+Json parameters template for: Cartella
+
+{
+  "topImage": "",
+  "bottomImage": "",
+  "leftImage": "",
+  "rightImage": "",
+  "frontImage": "",
+  "backImage": "",
+  "fontBold": false,
+  "fontItalic": false,
+  "font": "Arial",
+  "borderText": "",
+  "spessore": 5,
+  "isHorizontal": false,
+  "targetFormat": 0,
+  "useTestImages": false,
+  "FillColor": "#FFFFFF",
+  "BorderColor": "#000000",
+  "Dpi": 300,
+  "OutputName": null,
+  "FilesList": []
+}

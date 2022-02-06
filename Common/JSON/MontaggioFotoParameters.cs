@@ -39,4 +39,10 @@ public class MontaggioFotoParameters : CommonParameters
     /// </summary>
     public bool WithBorder { get; set; }
 
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public MontaggioFotoParameters() : base()
+    {
+    }
 }

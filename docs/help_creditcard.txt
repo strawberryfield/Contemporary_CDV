@@ -14,17 +14,23 @@ Options:
       --mbcolor=VALUE        magnetic band color (default #8B4513)
       --mbimage=VALUE        magnetic band overlay image
       --backimage=VALUE      image for back side
-      --backtext=VALUE       pango markup for text on back side.
+      --backtext=VALUE       pango markup for text on back side.  
                                Text can be stored in a file instead of a string.
+                                 
                                The file must be referenced as '@filename'
       --fillcolor=VALUE      set the color used to fiil the images
                                (default #FFFFFF)
       --bordercolor=VALUE    set the color used to border the images
                                (default #000000)
       --dpi=VALUE            set output resolution (default 300)
+      --json=VALUE           parameters in json format,
+                               use --helpjson for sample template
+                               Text can be stored in a file instead of a string
+                               The file must be referenced as '@filename'
   -o, --output=VALUE         set output dir/filename
       --nobanner             suppress the banner
   -h, --help                 show this message and exit
+      --helpjson             show json parameters template
       --man                  show the man page source and exit
       --colors               list available colors by name
       --license              show program license (AGPL 3.0)

@@ -326,7 +326,7 @@ The file must be referenced as '@filename'",
         StringBuilder ret = new StringBuilder();
         ret.AppendLine(@$"% {exeName.ToUpper()}(1)  
 % Roberto Ceccarelli - Casasoft  
-% Jan 2022
+% Feb 2022
 
 # NAME
 {exeName} - {exeDesc}
@@ -353,12 +353,12 @@ The file must be referenced as '@filename'",
             string o = s.Substring(0, 29).Trim();
             if (string.IsNullOrWhiteSpace(o))
             {
-                ret.Append(EscapeMarkdown(s.Trim()));
+                ret.Append($"{EscapeMarkdown(s.Trim())}  \n");
             }
             else
             {
                 ret.Append(first ? "" : "\n\n");
-                ret.Append($"**{o}**\n: {EscapeMarkdown(s.Substring(29).Trim())}");
+                ret.Append($"**{o}** :  \n{EscapeMarkdown(s.Substring(29).Trim())}  \n");
             }
             first = false;
         }
@@ -389,7 +389,7 @@ along with Casasoft {exeName}.
 If not, see <http://www.gnu.org/licenses/>.  
 
 # DISCLAIMER
-Casasoft CCDV Tools is distributed in the hope that it will be useful,  
+Casasoft {exeName} is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
 See the GNU General Public License for more details.");

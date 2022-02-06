@@ -1,6 +1,6 @@
 % MONTAGGIOFOTO(1)  
 % Roberto Ceccarelli - Casasoft  
-% Jan 2022
+% Feb 2022
 
 # NAME
 MontaggioFoto - Assembling two images over a 10x15 cm paper
@@ -9,45 +9,70 @@ MontaggioFoto - Assembling two images over a 10x15 cm paper
 **MontaggioFoto** \[options\]\* inputfile+
 
 # DESCRIPTION
-This program gathers two images on a 10x15cm surface 
+This program gathers two images on a 10x15cm surface   
 that you can print on a paper of ypur choice.
 
 # OPTIONS
-**--fullsize**
-: resize image to full format
+**--fullsize** :  
+resize image to full format  
 
-**--withborder**
-: include border to full format
 
-**--trim**
-: trim white space
+**--withborder** :  
+include border to full format  
 
-**--fillcolor=VALUE**
-: set the color used to fiil the images\(default \#FFFFFF\)
 
-**--bordercolor=VALUE**
-: set the color used to border the images\(default \#000000\)
+**--trim** :  
+trim white space  
 
-**--dpi=VALUE**
-: set output resolution \(default 300\)
 
-**-o, --output=VALUE**
-: set output dir/filename
+**--fillcolor=VALUE** :  
+set the color used to fiil the images  
+\(default \#FFFFFF\)  
 
-**--nobanner**
-: suppress the banner
 
-**-h, --help**
-: show this message and exit
+**--bordercolor=VALUE** :  
+set the color used to border the images  
+\(default \#000000\)  
 
-**--man**
-: show the man page source and exit
 
-**--colors**
-: list available colors by name
+**--dpi=VALUE** :  
+set output resolution \(default 300\)  
 
-**--license**
-: show program license \(AGPL 3.0\)
+
+**--json=VALUE** :  
+parameters in json format,  
+use --helpjson for sample template  
+Text can be stored in a file instead of a string  
+The file must be referenced as '@filename'  
+
+
+**-o, --output=VALUE** :  
+set output dir/filename  
+
+
+**--nobanner** :  
+suppress the banner  
+
+
+**-h, --help** :  
+show this message and exit  
+
+
+**--helpjson** :  
+show json parameters template  
+
+
+**--man** :  
+show the man page source and exit  
+
+
+**--colors** :  
+list available colors by name  
+
+
+**--license** :  
+show program license \(AGPL 3.0\)  
+
 
 ## COLORS
 Colors can be written in any of these formats:  
@@ -57,6 +82,32 @@ Colors can be written in any of these formats:
   \#rrrrggggbbbb  
   \#rrrrggggbbbbaaaa  
   colorname    \(use MontaggioFoto --colors  to see all available colors\)
+
+## JSON
+Parameters can also be passed with a json formatted string  
+using the following template:  
+
+\{  
+  "topImage": "",  
+  "bottomImage": "",  
+  "leftImage": "",  
+  "rightImage": "",  
+  "frontImage": "",  
+  "backImage": "",  
+  "fontBold": false,  
+  "fontItalic": false,  
+  "font": "Arial",  
+  "borderText": "",  
+  "spessore": 5,  
+  "isHorizontal": false,  
+  "targetFormat": 0,  
+  "useTestImages": false,  
+  "FillColor": "\#FFFFFF",  
+  "BorderColor": "\#000000",  
+  "Dpi": 300,  
+  "OutputName": null,  
+  "FilesList": \[\]  
+\}
 
 ## ENVIRONMENT VARIABLES
 The program can read values from these variables:  
@@ -77,7 +128,7 @@ along with Casasoft MontaggioFoto.
 If not, see <http://www.gnu.org/licenses/>.  
 
 # DISCLAIMER
-Casasoft CCDV Tools is distributed in the hope that it will be useful,  
+Casasoft MontaggioFoto is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
 See the GNU General Public License for more details.

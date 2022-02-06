@@ -1,0 +1,22 @@
+Casasoft Contemporary Carte de Visite CreditCard
+Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+
+Json parameters template for: CreditCard
+
+{
+  "FrontText": "",
+  "FrontTextFont": "Arial",
+  "FrontTextColor": "#FFFFFF",
+  "FrontTextBorder": "#000000",
+  "fontBold": false,
+  "fontItalic": false,
+  "MagneticBandColor": "#000000FF",
+  "MagneticBandImage": "",
+  "BackImage": "",
+  "BackText": "",
+  "FillColor": "#FFFFFF",
+  "BorderColor": "#000000",
+  "Dpi": 300,
+  "OutputName": null,
+  "FilesList": []
+}

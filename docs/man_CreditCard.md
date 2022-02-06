@@ -1,6 +1,6 @@
 % CREDITCARD(1)  
 % Roberto Ceccarelli - Casasoft  
-% Jan 2022
+% Feb 2022
 
 # NAME
 CreditCard - Creates a credit card recto and verso.
@@ -9,66 +9,101 @@ CreditCard - Creates a credit card recto and verso.
 **CreditCard** \[options\]\* inputfile
 
 # DESCRIPTION
-This program allows you to create a credit card with recto and verso.   
+This program allows you to create a credit card with recto and verso.     
 You can add a pseudo magnetic band, text on front and a more long text on the back.
 
 # OPTIONS
-**--fronttext=VALUE**
-: text in front \(Cardholder name\)
+**--fronttext=VALUE** :  
+text in front \(Cardholder name\)  
 
-**--fronttextfont=VALUE**
-: front text font \(default 'Arial'\)
 
-**--fronttextcolor=VALUE**
-: front text color \(default \#000000\)
+**--fronttextfont=VALUE** :  
+front text font \(default 'Arial'\)  
 
-**--fronttextborder=VALUE**
-: front text border color \(default \#000000\)
 
-**--fontbold**
-: use bold font weight
+**--fronttextcolor=VALUE** :  
+front text color \(default \#000000\)  
 
-**--fontitalic**
-: use italic font style
 
-**--mbcolor=VALUE**
-: magnetic band color \(default \#8B4513\)
+**--fronttextborder=VALUE** :  
+  
+front text border color \(default \#000000\)  
 
-**--mbimage=VALUE**
-: magnetic band overlay image
 
-**--backimage=VALUE**
-: image for back side
+**--fontbold** :  
+use bold font weight  
 
-**--backtext=VALUE**
-: pango markup for text on back side.Text can be stored in a file instead of a string.The file must be referenced as '@filename'
 
-**--fillcolor=VALUE**
-: set the color used to fiil the images\(default \#FFFFFF\)
+**--fontitalic** :  
+use italic font style  
 
-**--bordercolor=VALUE**
-: set the color used to border the images\(default \#000000\)
 
-**--dpi=VALUE**
-: set output resolution \(default 300\)
+**--mbcolor=VALUE** :  
+magnetic band color \(default \#8B4513\)  
 
-**-o, --output=VALUE**
-: set output dir/filename
 
-**--nobanner**
-: suppress the banner
+**--mbimage=VALUE** :  
+magnetic band overlay image  
 
-**-h, --help**
-: show this message and exit
 
-**--man**
-: show the man page source and exit
+**--backimage=VALUE** :  
+image for back side  
 
-**--colors**
-: list available colors by name
 
-**--license**
-: show program license \(AGPL 3.0\)
+**--backtext=VALUE** :  
+pango markup for text on back side.  
+Text can be stored in a file instead of a string.  
+The file must be referenced as '@filename'  
+
+
+**--fillcolor=VALUE** :  
+set the color used to fiil the images  
+\(default \#FFFFFF\)  
+
+
+**--bordercolor=VALUE** :  
+set the color used to border the images  
+\(default \#000000\)  
+
+
+**--dpi=VALUE** :  
+set output resolution \(default 300\)  
+
+
+**--json=VALUE** :  
+parameters in json format,  
+use --helpjson for sample template  
+Text can be stored in a file instead of a string  
+The file must be referenced as '@filename'  
+
+
+**-o, --output=VALUE** :  
+set output dir/filename  
+
+
+**--nobanner** :  
+suppress the banner  
+
+
+**-h, --help** :  
+show this message and exit  
+
+
+**--helpjson** :  
+show json parameters template  
+
+
+**--man** :  
+show the man page source and exit  
+
+
+**--colors** :  
+list available colors by name  
+
+
+**--license** :  
+show program license \(AGPL 3.0\)  
+
 
 ## COLORS
 Colors can be written in any of these formats:  
@@ -78,6 +113,28 @@ Colors can be written in any of these formats:
   \#rrrrggggbbbb  
   \#rrrrggggbbbbaaaa  
   colorname    \(use CreditCard --colors  to see all available colors\)
+
+## JSON
+Parameters can also be passed with a json formatted string  
+using the following template:  
+
+\{  
+  "FrontText": "",  
+  "FrontTextFont": "Arial",  
+  "FrontTextColor": "\#FFFFFF",  
+  "FrontTextBorder": "\#000000",  
+  "fontBold": false,  
+  "fontItalic": false,  
+  "MagneticBandColor": "\#000000FF",  
+  "MagneticBandImage": "",  
+  "BackImage": "",  
+  "BackText": "",  
+  "FillColor": "\#FFFFFF",  
+  "BorderColor": "\#000000",  
+  "Dpi": 300,  
+  "OutputName": null,  
+  "FilesList": \[\]  
+\}
 
 ## ENVIRONMENT VARIABLES
 The program can read values from these variables:  
@@ -98,7 +155,7 @@ along with Casasoft CreditCard.
 If not, see <http://www.gnu.org/licenses/>.  
 
 # DISCLAIMER
-Casasoft CCDV Tools is distributed in the hope that it will be useful,  
+Casasoft CreditCard is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
 See the GNU General Public License for more details.
