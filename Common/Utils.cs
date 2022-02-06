@@ -21,6 +21,8 @@
 
 using ImageMagick;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace Casasoft.CCDV;
 
@@ -184,4 +186,20 @@ public static class Utils
         string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false) =>
         CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
     #endregion
+
+    /// <summary>
+    /// Returns the text of the license
+    /// </summary>
+    /// <returns></returns>
+    public static string GetLicense()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        using (Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
+        {
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+           }
+        }
+    }
 }

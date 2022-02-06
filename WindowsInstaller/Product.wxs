@@ -150,6 +150,7 @@ If not, see <http://www.gnu.org/licenses/>.
 				<File Source="$(var.binPathGUI)\CCDV.exe" />
 				<File Source="$(var.binPathGUI)\CCDV.runtimeconfig.json" />
 				<File Source="$(var.binPathGUI)\CCDV.deps.json" />
+				<File Source="$(var.binPathGUI)\CCDV.ico" />
 			</Component>
 			<Component Id="ColorPicker" Guid="{046CC50F-47EE-419E-86FA-FC0F03EC8317}">
 				<File Source="$(var.binPathGUI)\ColorPIcker.dll" KeyPath="yes" />

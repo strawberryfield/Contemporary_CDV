@@ -19,53 +19,33 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 
 namespace Casasoft.CCDV.UI;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Interaction logic for AboutWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class AboutWindow : Window
 {
-    public MainWindow()
+    public AboutWindow()
     {
         InitializeComponent();
+
+        txtLicense.Text = Casasoft.CCDV.Utils.GetLicense();
+        Logo.Source = this.Icon;
     }
 
-    private void btnDorsi_Click(object sender, RoutedEventArgs e)
+    private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
     {
-        MontaggioDorsiForm? form = new();
-        form.ShowDialog();
-    }
-
-    private void btnFoto_Click(object sender, RoutedEventArgs e)
-    {
-        MontaggioFotoForm? form = new();
-        form.ShowDialog();
-    }
-
-    private void btnScatola_Click(object sender, RoutedEventArgs e)
-    {
-        BoxBuilderForm form = new(BoxTypes.Box);
-        form.ShowDialog();
-    }
-
-    private void btnCartellina_Click(object sender, RoutedEventArgs e)
-    {
-        BoxBuilderForm form = new(BoxTypes.Folder);
-        form.ShowDialog();
-    }
-
-    private void btnCreditCards_Click(object sender, RoutedEventArgs e)
-    {
-        CreditCardForm form = new();
-        form.ShowDialog();
-    }
-
-    private void btnInfo_Click(object sender, RoutedEventArgs e)
-    {
-        AboutWindow form = new();
-        form.ShowDialog();
+        Process.Start(new ProcessStartInfo()
+        {
+            UseShellExecute = true,
+            FileName = e.Uri.AbsoluteUri,
+        });
+        e.Handled = true;
     }
 }

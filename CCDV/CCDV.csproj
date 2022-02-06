@@ -32,7 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="CCDV.ico" />
+	  <Content Include="CCDV.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>

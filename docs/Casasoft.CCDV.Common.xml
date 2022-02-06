@@ -1895,5 +1895,11 @@
             <param name="fontItalic">use bold font (if available)</param>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.Utils.GetLicense">
+            <summary>
+            Returns the text of the license
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>
