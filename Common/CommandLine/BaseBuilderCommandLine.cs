@@ -19,8 +19,10 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using Mono.Options;
 using System;
+using System.Text.Json;
 
 namespace Casasoft.CCDV;
 
@@ -196,5 +198,16 @@ public class BaseBuilderCommandLine : CommandLine
 
         return false;
     }
+
+    /// <summary>
+    /// Prints a json schema for pameters
+    /// </summary>
+    /// <returns></returns>
+    public override string JsonTemplate()
+    {
+        BaseBuilderParameters p = new();
+        return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
+    }
+
 }
 

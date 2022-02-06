@@ -30,6 +30,7 @@ namespace Casasoft.CCDV;
 /// </summary>
 public interface ICommandLine
 {
+    #region properties
     /// <summary>
     /// Output file name
     /// </summary>
@@ -62,7 +63,13 @@ public interface ICommandLine
     /// Long description for man pages
     /// </summary>
     string LongDesc { get; set; }
+    /// <summary>
+    /// Json formatted parameters
+    /// </summary>
+    string JSON { get; set; }
+    #endregion
 
+    #region methods
     /// <summary>
     /// Prints the welcome banner
     /// </summary>
@@ -86,4 +93,10 @@ public interface ICommandLine
     /// Windows shell does not expand wildcards
     /// </summary>
     void ExpandWildcards();
+    /// <summary>
+    /// Prints a json schema for pameters
+    /// </summary>
+    /// <returns></returns>
+    string JsonTemplate();
+    #endregion
 }

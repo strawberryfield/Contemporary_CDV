@@ -19,8 +19,10 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using ImageMagick;
 using Mono.Options;
+using System.Text.Json;
 
 namespace Casasoft.CCDV;
 
@@ -136,4 +138,13 @@ public class CreditCardCommandLine : CommandLine
         return false;
     }
 
+    /// <summary>
+    /// Prints a json schema for pameters
+    /// </summary>
+    /// <returns></returns>
+    public override string JsonTemplate()
+    {
+        CreditCardParameters p = new();
+        return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
+    }
 }

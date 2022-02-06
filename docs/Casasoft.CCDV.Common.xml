@@ -150,6 +150,12 @@
             <param name="args">command line arguments</param>
             <returns>true if nothing to (ie. help)</returns>
         </member>
+        <member name="M:Casasoft.CCDV.BaseBuilderCommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.CommandLine">
             <summary>
             Base command line handling
@@ -158,6 +164,11 @@
         <member name="P:Casasoft.CCDV.CommandLine.shouldShowHelp">
             <summary>
             true if help is requested
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CommandLine.shouldShowHelpJson">
+            <summary>
+            true if helpjson is requested
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.CommandLine.shouldShowColors">
@@ -245,6 +256,11 @@
             Long description for man pages
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CommandLine.JSON">
+            <summary>
+            Json formatted parameters
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.ExeName">
             <summary>
             Gets the name of currently running assembly
@@ -303,6 +319,15 @@
             <summary>
             Text of man page in markdown format
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.CommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <remarks>
+            Should be overridden in specialized classes
+            </remarks>
             <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.GetEnvVars">
@@ -428,6 +453,12 @@
             <param name="args">command line arguments</param>
             <returns>true if nothing to (ie. help)</returns>
         </member>
+        <member name="M:Casasoft.CCDV.CreditCardCommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
             Interface for command line handling
@@ -473,6 +504,11 @@
             Long description for man pages
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.ICommandLine.JSON">
+            <summary>
+            Json formatted parameters
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.ICommandLine.WelcomeBanner">
             <summary>
             Prints the welcome banner
@@ -500,6 +536,12 @@
             <summary>
             Windows shell does not expand wildcards
             </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.ICommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.MontaggioFotoCommandLine">
             <summary>
@@ -535,6 +577,12 @@
             <param name="exename">Name of the program exe</param>
             <param name="outputname">Default output file name</param>
             <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.BaseBuilder">
             <summary>

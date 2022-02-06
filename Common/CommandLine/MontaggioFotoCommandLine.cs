@@ -19,7 +19,9 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using Mono.Options;
+using System.Text.Json;
 
 namespace Casasoft.CCDV;
 
@@ -69,6 +71,16 @@ public class MontaggioFotoCommandLine : CommandLine
                 { "trim", "trim white space", o => Trim = o != null },
             };
         AddBaseOptions();
+    }
+
+    /// <summary>
+    /// Prints a json schema for pameters
+    /// </summary>
+    /// <returns></returns>
+    public override string JsonTemplate()
+    {
+        BaseBuilderParameters p = new();
+        return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
     }
 }
 

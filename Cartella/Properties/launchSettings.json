@@ -2,7 +2,7 @@
   "profiles": {
     "Cartella": {
       "commandName": "Project",
-      "commandLineArgs": "--sample"
+      "commandLineArgs": "--man"
     }
   }
 }

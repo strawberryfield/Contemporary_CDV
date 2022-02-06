@@ -19,6 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using ImageMagick;
 using Mono.Options;
 using System;
@@ -27,6 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 
 namespace Casasoft.CCDV;
 
@@ -40,6 +42,10 @@ public class CommandLine : ICommandLine
     /// true if help is requested
     /// </summary>
     protected bool shouldShowHelp { get; set; }
+    /// <summary>
+    /// true if helpjson is requested
+    /// </summary>
+    protected bool shouldShowHelpJson { get; set; }
     /// <summary>
     /// true if colors list is requested
     /// </summary>
@@ -111,6 +117,10 @@ public class CommandLine : ICommandLine
     /// Long description for man pages
     /// </summary>
     public string LongDesc { get; set; }
+    /// <summary>
+    /// Json formatted parameters
+    /// </summary>
+    public string JSON { get; set; }
     #endregion
 
     #region defaults
@@ -150,6 +160,7 @@ public class CommandLine : ICommandLine
         Dpi = Convert.ToInt16(sDpi);
         sDpi = string.Empty;
         shouldShowHelp = false;
+        shouldShowHelpJson = false;
         noBanner = false;
         GetEnvVars();
         FillColor = GetColor(sFillColor);
@@ -161,9 +172,15 @@ public class CommandLine : ICommandLine
                 { "fillcolor=", $"set the color used to fiil the images\n(default {sFillColor})", c => sFillColor = c },
                 { "bordercolor=", $"set the color used to border the images\n(default {sBorderColor})", c => sBorderColor = c },
                 { "dpi=", $"set output resolution (default {Dpi})", res => sDpi = res },
+                { "json=", @"parameters in json format,
+use --helpjson for sample template
+Text can be stored in a file instead of a string
+The file must be referenced as '@filename'", 
+                o => JSON = GetFileParameter(o) },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+                { "helpjson", "show json parameters template", h => shouldShowHelpJson = h != null },
                 { "man", "show the man page source and exit", h => shouldShowMan = h != null },
                 { "colors", "list available colors by name", h => shouldShowColors = h != null },
                 { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
@@ -218,6 +235,13 @@ public class CommandLine : ICommandLine
             Console.WriteLine("\nEnvironment variables");
             Console.WriteLine(EnvVarsHelp);
 
+            return true;
+        }
+
+        if (shouldShowHelpJson)
+        {
+            Console.WriteLine($"Json parameters template for: {exeName}\n");
+            Console.WriteLine(JsonTemplate());
             return true;
         }
 
@@ -342,10 +366,16 @@ public class CommandLine : ICommandLine
         ret.Append($@"
 
 ## COLORS
-{EscapeMarkdown(ColorsSyntax.Replace("\r", "  \r"))}
+{EscapeMarkdown(ColorsSyntax)}
+
+## JSON
+Parameters can also be passed with a json formatted string  
+using the following template:  
+
+{EscapeMarkdown(JsonTemplate())}
 
 ## ENVIRONMENT VARIABLES
-{EscapeMarkdown(EnvVarsHelp.Replace("\r", "  \r"))}
+{EscapeMarkdown(EnvVarsHelp)}
 
 # COPYRIGHT
 Casasoft {exeName} is free software:  
@@ -365,6 +395,19 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.");
 
         return ret.ToString();
+    }
+
+    /// <summary>
+    /// Prints a json schema for pameters
+    /// </summary>
+    /// <remarks>
+    /// Should be overridden in specialized classes
+    /// </remarks>
+    /// <returns></returns>
+    public virtual string JsonTemplate()
+    {
+        CommonParameters p = new();
+        return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
     }
     #endregion
 
@@ -498,7 +541,8 @@ See the GNU General Public License for more details.");
     /// <param name="s">string to process</param>
     /// <returns>escaped string</returns>
     public string EscapeMarkdown(string s) =>
-        s.Replace("\\", "\\\\")
+        s.Replace("\r", "  \r")
+        .Replace("\\", "\\\\")
         .Replace("#", "\\#")
         .Replace("*", "\\*")
         .Replace("_", "\\_")
