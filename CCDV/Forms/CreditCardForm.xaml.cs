@@ -46,7 +46,7 @@ public partial class CreditCardForm : BaseForm
         eng.FilesList.Add(frontImage.Value);
         eng.BackImage = backImage.Value;
         eng.FrontText = frontText.Text;
-        eng.BackText = backText.Text;
+        eng.BackText = backText.Value;
         eng.FrontTextFont = fontFront.Font;
         eng.FrontTextColor = Utils.ColorFromPicker(cpFill);
         eng.FrontTextBorder = Utils.ColorFromPicker(cpBorder);
@@ -54,8 +54,6 @@ public partial class CreditCardForm : BaseForm
         eng.fontItalic = fontFront.FontItalic;
         eng.MagneticBandColor = Utils.ColorFromPicker(cpMB);
         eng.MagneticBandImage = mbImage.Value;
-        eng.BackText = backText.Text;
-
     }
 
     protected override void loadJson(string json)
@@ -65,7 +63,7 @@ public partial class CreditCardForm : BaseForm
         frontImage.Value = eng.FilesList.Count > 0 ? eng.FilesList[0] : string.Empty;
         backImage.Value = eng.BackImage;
         frontText.Text = eng.FrontText;
-        backText.Text = eng.BackText;
+        backText.Value = eng.BackText;
         fontFront.Font = eng.FrontTextFont;
         cpFill.SelectedColor = Utils.ColorFromMagick(eng.FrontTextColor);
         cpBorder.SelectedColor = Utils.ColorFromMagick(eng.FrontTextBorder);
@@ -73,7 +71,6 @@ public partial class CreditCardForm : BaseForm
         fontFront.FontItalic = eng.fontItalic;
         cpMB.SelectedColor = Utils.ColorFromMagick(eng.MagneticBandColor);
         mbImage.Value = eng.MagneticBandImage;
-        backText.Text = eng.BackText;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
         commonOptions.DpiValue = eng.Dpi;
