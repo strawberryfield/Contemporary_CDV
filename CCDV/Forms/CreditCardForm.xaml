@@ -55,7 +55,7 @@ If not, see <http://www.gnu.org/licenses/>.
         <Label Content="Immagine banda magnetica" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
         <colorpicker:PortableColorPicker x:Name="cpMB" VerticalAlignment="Top" Margin="10,295,0,0" HorizontalAlignment="Left" SelectedColor="#FF653B11" />
         <Label x:Name="lblMB" Content="Colore banda magnetica" HorizontalAlignment="Left" Margin="60,291,0,0" VerticalAlignment="Top" Width="170"/>
-        <casasoft:TextEditor x:Name="backText" Margin="10,340,10,135"  VerticalAlignment="Stretch" Panel.ZIndex="1"/>
+        <casasoft:PangoTextEditor x:Name="backText" Margin="10,340,10,135"  VerticalAlignment="Stretch" Panel.ZIndex="1"/>
         <Label Content="Testo posteriore" HorizontalAlignment="Left" Margin="10,315,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
         <local:CommonCommandsControl x:Name="ucCommands" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>
 
