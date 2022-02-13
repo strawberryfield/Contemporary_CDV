@@ -183,7 +183,7 @@ public class CreditCardEngine : BaseEngine
         {
             rear = (MagickImage)front.Clone();
             rear.Blur(0, 10);
-            rear.Level(new Percentage(0), new Percentage(100), 3);
+            rear.Level(new Percentage(0), new Percentage(80), 3);
         }
         else
         {
@@ -230,9 +230,11 @@ public class CreditCardEngine : BaseEngine
         if (!string.IsNullOrWhiteSpace(BackText))
         {
             if (!quiet) Console.WriteLine("Rendering text");
-            MagickImage backText = new(BackText);
-            backText.ColorFuzz = new Percentage(20);
-            backText.Transparent(MagickColors.White);
+
+            MagickReadSettings settings = new();
+            settings.BackgroundColor = MagickColors.Transparent;
+
+            MagickImage backText = new(BackText, settings);
             backText.Flop();
             rear.Composite(backText, Gravity.South, new PointD(0, fmt.ToPixels(4)), CompositeOperator.Over);
         }
