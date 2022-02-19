@@ -48,6 +48,11 @@ public class CreditCardCommandLine : CommandLine
     /// </summary>
     public MagickColor FrontTextBorder { get; set; }
     /// <summary>
+    /// front text background color
+    /// </summary>
+    public MagickColor FrontTextBackground { get; set; }
+
+    /// <summary>
     /// use bold weight for front text (if available for font)
     /// </summary>
     public bool fontBold { get; set; }
@@ -74,6 +79,7 @@ public class CreditCardCommandLine : CommandLine
 
     private string sFrontTextColor = MagickColors.Black.ToHexString();
     private string sFrontTextBorder = MagickColors.Black.ToHexString();
+    private string sFrontTextBackground = MagickColors.None.ToHexString();
     private string sMagneticBandColor = MagickColors.SaddleBrown.ToHexString();
 
     /// <summary>
@@ -98,6 +104,7 @@ public class CreditCardCommandLine : CommandLine
         FrontTextFont = "Arial";
         FrontTextColor = GetColor(sFrontTextColor);
         FrontTextBorder = GetColor(sFrontTextBorder);
+        FrontTextBackground = GetColor(sFrontTextBackground);
         MagneticBandColor = GetColor(sMagneticBandColor);
         MagneticBandImage = string.Empty;
         BackImage = string.Empty;
@@ -109,6 +116,7 @@ public class CreditCardCommandLine : CommandLine
                 { "fronttextfont=", $"front text font (default '{FrontTextFont}')", o => FrontTextFont = o },
                 { "fronttextcolor=", $"front text color (default {sFrontTextColor})", o => sFrontTextColor = o },
                 { "fronttextborder=", $"front text border color (default {sFrontTextBorder})", o => sFrontTextBorder = o },
+                { "fronttextbackground=", $"front text background color (default {sFrontTextBackground})", o => sFrontTextBackground = o },
                 { "fontbold", "use bold font weight", s => fontBold = s != null },
                 { "fontitalic", "use italic font style", s => fontItalic = s != null },
                 { "mbcolor=", $"magnetic band color (default {sMagneticBandColor})", o => sMagneticBandColor = o },
@@ -134,6 +142,7 @@ The file must be referenced as '@filename'",
 
         FrontTextColor = GetColor(sFrontTextColor);
         FrontTextBorder = GetColor(sFrontTextBorder);
+        FrontTextBackground = GetColor(sFrontTextBackground);
         MagneticBandColor = GetColor(sMagneticBandColor);
         return false;
     }

@@ -39,6 +39,7 @@ public class CreditCardEngine : BaseEngine
     /// If not present it will use the front image blurred and lighted
     /// </remarks>
     public string BackImage { get; set; }
+
     /// <summary>
     /// Text to print on the front (like cardholder)
     /// </summary>
@@ -62,6 +63,10 @@ public class CreditCardEngine : BaseEngine
     /// </summary>
     public MagickColor FrontTextColor { get; set; }
     /// <summary>
+    /// Front text background fill color
+    /// </summary>
+    public MagickColor FrontTextBackground { get; set; }
+    /// <summary>
     /// use bold weight for front text (if available for font)
     /// </summary>
     public bool fontBold { get; set; } = false;
@@ -69,6 +74,7 @@ public class CreditCardEngine : BaseEngine
     /// use italic style for front text (if available for font)
     /// </summary>
     public bool fontItalic { get; set; } = false;
+
     /// <summary>
     /// Pseudo magnetic band color
     /// </summary>
@@ -77,6 +83,7 @@ public class CreditCardEngine : BaseEngine
     /// Pseudo magnetic band image
     /// </summary>
     public string MagneticBandImage { get; set; }
+
     /// <summary>
     /// text to put in the back side
     /// </summary>
@@ -107,6 +114,7 @@ public class CreditCardEngine : BaseEngine
         FrontTextFont = p.FrontTextFont;
         FrontTextBorder = p.FrontTextBorder;
         FrontTextColor = p.FrontTextColor;
+        FrontTextBackground = p.FrontTextBackground;
         fontBold = p.fontBold;
         fontItalic = p.fontItalic;
         MagneticBandColor = p.MagneticBandColor;
@@ -132,6 +140,7 @@ public class CreditCardEngine : BaseEngine
         p.FrontTextFont = FrontTextFont;
         p.FrontTextColor = colors.GetColorString(FrontTextColor);
         p.FrontTextBorder = colors.GetColorString(FrontTextBorder);
+        p.FrontTextBackground = colors.GetColorString(FrontTextBackground);
         p.fontBold = fontBold;
         p.fontItalic = fontItalic;
         p.MagneticBandImage = MagneticBandImage;
@@ -156,6 +165,7 @@ public class CreditCardEngine : BaseEngine
         FrontTextFont = p.FrontTextFont;
         FrontTextColor = colors.GetColor(p.FrontTextColor);
         FrontTextBorder = colors.GetColor(p.FrontTextBorder);
+        FrontTextBackground = colors.GetColor(p.FrontTextBackground);
         fontBold = p.fontBold;
         fontItalic = p.fontItalic;
         MagneticBandImage = p.MagneticBandImage;
@@ -198,13 +208,27 @@ public class CreditCardEngine : BaseEngine
             front.Settings.FontFamily = FrontTextFont;
             front.Settings.FontWeight = fontBold ? FontWeight.Bold : FontWeight.Normal;
             front.Settings.FontStyle = fontItalic ? FontStyleType.Italic : FontStyleType.Normal;
+            front.Settings.FontPointsize = fmt.ToPixels(4);
+            front.Settings.TextKerning = 10;
             draw = new();
+            if (FrontTextBackground != MagickColors.None)
+            {
+                // Rectangle behind text
+                Drawables drawBackground = new();
+                drawBackground.StrokeColor(FrontTextBackground)
+                    .FillColor(FrontTextBackground)
+                    .StrokeWidth(1)
+                    .StrokeAntialias(true);
+                var size = front.FontTypeMetrics(FrontText);
+                drawBackground.RoundRectangle(fmt.ToPixels(3), front.Height - fmt.ToPixels(8),
+                    size.TextWidth + fmt.ToPixels(5), front.Height - fmt.ToPixels(3),
+                    fmt.ToPixels(1), fmt.ToPixels(1));
+                drawBackground.Draw(front);
+            }
             draw.StrokeColor(FrontTextBorder)
                 .FillColor(FrontTextColor)
                 .StrokeAntialias(true)
-                .StrokeWidth(1)
-                .FontPointSize(fmt.ToPixels(4))
-                .TextKerning(10);
+                .StrokeWidth(1);
             draw.Text(fmt.ToPixels(4), front.Height - fmt.ToPixels(4), FrontText);
             draw.Draw(front);
         }

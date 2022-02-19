@@ -50,6 +50,7 @@ public partial class CreditCardForm : BaseForm
         eng.FrontTextFont = fontFront.Font;
         eng.FrontTextColor = Utils.ColorFromPicker(cpFill);
         eng.FrontTextBorder = Utils.ColorFromPicker(cpBorder);
+        eng.FrontTextBackground = Utils.ColorFromPicker(cpBackground);
         eng.fontBold = fontFront.FontBold;
         eng.fontItalic = fontFront.FontItalic;
         eng.MagneticBandColor = Utils.ColorFromPicker(cpMB);
@@ -67,6 +68,7 @@ public partial class CreditCardForm : BaseForm
         fontFront.Font = eng.FrontTextFont;
         cpFill.SelectedColor = Utils.ColorFromMagick(eng.FrontTextColor);
         cpBorder.SelectedColor = Utils.ColorFromMagick(eng.FrontTextBorder);
+        cpBackground.SelectedColor = Utils.ColorFromMagick(eng.FrontTextBackground);
         fontFront.FontBold = eng.fontBold;
         fontFront.FontItalic = eng.fontItalic;
         cpMB.SelectedColor = Utils.ColorFromMagick(eng.MagneticBandColor);

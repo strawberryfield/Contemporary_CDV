@@ -51,12 +51,14 @@ If not, see <http://www.gnu.org/licenses/>.
         <Label x:Name="lblFill" Content="Colore carattere" HorizontalAlignment="Left" Margin="60,191,0,0" VerticalAlignment="Top" Width="170"/>
         <colorpicker:PortableColorPicker x:Name="cpBorder" VerticalAlignment="Top" Margin="10,225,0,0" HorizontalAlignment="Left" ShowAlpha="False" RenderTransformOrigin="0.5,0.5" />
         <Label x:Name="lblBorder" Content="Bordo del carattere" HorizontalAlignment="Left" Margin="60,221,0,0" VerticalAlignment="Top" Width="170"/>
-        <casasoft:FileTextBox x:Name="mbImage" Margin="10,268,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
-        <Label Content="Immagine banda magnetica" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-        <colorpicker:PortableColorPicker x:Name="cpMB" VerticalAlignment="Top" Margin="10,295,0,0" HorizontalAlignment="Left" SelectedColor="#FF653B11" />
-        <Label x:Name="lblMB" Content="Colore banda magnetica" HorizontalAlignment="Left" Margin="60,291,0,0" VerticalAlignment="Top" Width="170"/>
-        <casasoft:PangoTextEditor x:Name="backText" Margin="10,340,10,135"  VerticalAlignment="Stretch" Panel.ZIndex="1"/>
-        <Label Content="Testo posteriore" HorizontalAlignment="Left" Margin="10,315,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
+        <colorpicker:PortableColorPicker x:Name="cpBackground" VerticalAlignment="Top" Margin="10,255,0,0" HorizontalAlignment="Left" ShowAlpha="True" SelectedColor="Transparent" RenderTransformOrigin="0.5,0.5" />
+        <Label x:Name="lblBackground" Content="Sfondo del carattere" HorizontalAlignment="Left" Margin="60,251,0,0" VerticalAlignment="Top" Width="170"/>
+        <casasoft:FileTextBox x:Name="mbImage" Margin="10,298,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+        <Label Content="Immagine banda magnetica" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
+        <colorpicker:PortableColorPicker x:Name="cpMB" VerticalAlignment="Top" Margin="10,325,0,0" HorizontalAlignment="Left" SelectedColor="#FF653B11" />
+        <Label x:Name="lblMB" Content="Colore banda magnetica" HorizontalAlignment="Left" Margin="60,321,0,0" VerticalAlignment="Top" Width="170"/>
+        <casasoft:PangoTextEditor x:Name="backText" Margin="10,370,10,135"  VerticalAlignment="Stretch" Panel.ZIndex="1"/>
+        <Label Content="Testo posteriore" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
         <local:CommonCommandsControl x:Name="ucCommands" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>
 
     </Grid>

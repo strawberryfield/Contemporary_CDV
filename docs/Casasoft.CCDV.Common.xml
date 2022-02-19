@@ -401,6 +401,11 @@
             front text border color
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CreditCardCommandLine.FrontTextBackground">
+            <summary>
+            front text background color
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.CreditCardCommandLine.fontBold">
             <summary>
             use bold weight for front text (if available for font)
@@ -908,6 +913,11 @@
         <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.FrontTextColor">
             <summary>
             Front text fill color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.FrontTextBackground">
+            <summary>
+            Front text background fill color
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.Engines.CreditCardEngine.fontBold">
@@ -1654,6 +1664,11 @@
         <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontTextBorder">
             <summary>
             front text border color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.FrontTextBackground">
+            <summary>
+            front text background color
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.JSON.CreditCardParameters.fontBold">

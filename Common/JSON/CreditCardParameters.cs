@@ -43,6 +43,10 @@ public class CreditCardParameters : CommonParameters
     /// </summary>
     public string FrontTextBorder { get; set; } = "#000000";
     /// <summary>
+    /// front text background color
+    /// </summary>
+    public string FrontTextBackground { get; set; } = "#00000000";
+    /// <summary>
     /// use bold weight for front text (if available for font)
     /// </summary>
     public bool fontBold { get; set; }
@@ -50,6 +54,7 @@ public class CreditCardParameters : CommonParameters
     /// use italic style for front text (if available for font)
     /// </summary>
     public bool fontItalic { get; set; }
+
     /// <summary>
     /// Pseudo magnetic band color
     /// </summary>
@@ -58,10 +63,12 @@ public class CreditCardParameters : CommonParameters
     /// Pseudo magnetic band image
     /// </summary>
     public string MagneticBandImage { get; set; } = string.Empty;
+
     /// <summary>
     /// backgroud image
     /// </summary>
     public string BackImage { get; set; } = string.Empty;
+
     /// <summary>
     /// text to put in the back side
     /// </summary>
