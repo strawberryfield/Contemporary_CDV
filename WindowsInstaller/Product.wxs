@@ -21,7 +21,8 @@ You should have received a copy of the GNU AGPL v.3
 along with Casasoft CCDV Tools.  
 If not, see <http://www.gnu.org/licenses/>.
 -->
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+	 xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	<Product Id="*" Name="Casasoft Contemporary Carte de Viste tools" Language="1033"
 			 Version="1.0.0.0" Manufacturer="Casasoft"
 			 UpgradeCode="3bf317e8-eb0d-4706-b499-31609f4ccfa0">
@@ -163,14 +164,66 @@ If not, see <http://www.gnu.org/licenses/>.
 			</Component>
 		</ComponentGroup>
 
+		<!-- Directory structure for start menu -->
 		<DirectoryRef Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="Casasoft CCDV tools"/>
+		</DirectoryRef>
+		
+		<!-- Shortcuts in start menu -->
+		<DirectoryRef Id="ApplicationProgramsFolder">
 			<Component Id="ApplicationShortcutStart" Guid="{7792B02D-643E-4D5E-B516-36C5F9FDC512}">
 				<Shortcut Id="ApplicationStartShortcut"
 					Name="CdV tools GUI"
 					Description="[ProductName] GUI"
 					Target="[INSTALLFOLDER]CCDV.exe"
 					WorkingDirectory="INSTALLFOLDER"/>
-				<RemoveFolder Id="ProgramMenuFolder" On="uninstall"/>
+				<Shortcut Id="CreditCardShortcut"
+					Name="Credit Cards builder"
+					Description="[ProductName] Credit Cards builder GUI"
+					Target="[INSTALLFOLDER]CCDV.exe"
+					Arguments="--tool=CreditCard"
+					WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="MontaggioFotoShortcut"
+					Name="Montaggio Foto"
+					Description="[ProductName] MontaggioFoto GUI"
+					Target="[INSTALLFOLDER]CCDV.exe"
+					Arguments="--tool=MontaggioFoto"
+					WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="MontaggioDorsiShortcut"
+					Name="Montaggio Dorsi"
+					Description="[ProductName] MontaggioDorsi GUI"
+					Target="[INSTALLFOLDER]CCDV.exe"
+					Arguments="--tool=MontaggioDorsi"
+					WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="ScatolaShortcut"
+					Name="Box builder"
+					Description="[ProductName] Box builder GUI"
+					Target="[INSTALLFOLDER]CCDV.exe"
+					Arguments="--tool=Scatola"
+					WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="CartellaShortcut"
+					Name="Folder builder"
+					Description="[ProductName] Folder builder GUI"
+					Target="[INSTALLFOLDER]CCDV.exe"
+					Arguments="--tool=Cartella"
+					WorkingDirectory="INSTALLFOLDER"/>
+
+				<!-- Internet links -->
+				<util:InternetShortcut Id="ProjectSiteShortcut"
+					Name="Contemporary CDV tools home page"
+					Target="https://strawberryfield.altervista.org/carte_de_visite/"/>
+				<util:InternetShortcut Id="ProjectSourceShortcut"
+					Name="Source code repository"
+					Target="https://github.com/strawberryfield/Contemporary_CDV"/>
+				
+				<!-- Uninstall shortcut -->
+				<Shortcut Id="UninstallProduct"
+						  Name="Uninstall CCDV tools"
+						  Target="[SystemFolder]msiexec.exe"
+						  Arguments="/x [ProductCode]"
+						  Description="Uninstalls My Application" />
+				
+				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
 				<RegistryValue
 					Root="HKCU"
 					Key="Software\!(bind.property.Manufacturer)\CCdV"
