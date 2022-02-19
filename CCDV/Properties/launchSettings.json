@@ -2,7 +2,7 @@
   "profiles": {
     "CCDV": {
       "commandName": "Project",
-      "commandLineArgs": "--man"
+      "commandLineArgs": "--tool=Creditcard"
     }
   }
 }

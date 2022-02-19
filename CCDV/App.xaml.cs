@@ -19,6 +19,11 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Mono.Options;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace Casasoft.CCDV.UI;
@@ -28,4 +33,126 @@ namespace Casasoft.CCDV.UI;
 /// </summary>
 public partial class App : Application
 {
+    public enum Tools { Menu, MontaggioFoto, MontaggioDorsi, Scatola, Cartella, CreditCard }
+
+    private Dictionary<Tools, string> tools = new()
+    {
+        { Tools.Menu, "Main menu form (default)" },
+        { Tools.MontaggioFoto, "Assembly of images on 10x15 cards" },
+        { Tools.MontaggioDorsi, "Assembly of photo support papers on 20x27 print" },
+        { Tools.Scatola, "Box kit on 20x27 print" },
+        { Tools.Cartella, "Folder kit on 20x27 print" },
+        { Tools.CreditCard, "Credit card kit on 10x15 card" }
+    };
+
+    /// <summary>
+    /// Gets the name of currently running assembly
+    /// </summary>
+    /// <returns></returns>
+    public static string ExeName => Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName);
+
+    private void Application_Startup(object sender, StartupEventArgs e)
+    {
+        string startupWindow = "menu";
+        bool shouldShowHelp = false;
+        bool shouldShowLicense = false;
+        List<string> extra = new();
+
+        var optionSet = new OptionSet
+        {
+            { "t|tool=", "start the specified tool",  w => startupWindow = w },
+            { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+            { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
+        };
+
+        try
+        {
+            extra = optionSet.Parse(e.Args);
+        }
+        catch (OptionException err)
+        {
+            AttachConsole(-1);
+            Console.WriteLine(WelcomeBannerText);
+            Console.Error.WriteLine($"{ExeName}: {err.Message}");
+            Console.Error.WriteLine($"Try '{ExeName} --help' for more informations.");
+            Shutdown();
+        }
+
+        if (shouldShowHelp)
+        {
+            AttachConsole(-1);
+            Console.WriteLine(WelcomeBannerText);
+            Console.WriteLine($"Usage: {ExeName} [options]");
+            Console.WriteLine("\nOptions:");
+            optionSet.WriteOptionDescriptions(Console.Out);
+            Console.WriteLine();
+
+            Console.WriteLine("Available tools are:");
+            foreach (var item in tools)
+            {
+                Console.WriteLine($" - {item.Key.ToString(),-18}{item.Value}");
+            }
+            Console.WriteLine("Tools names are case insensitive.");
+            Shutdown();
+        }
+
+        if (shouldShowLicense)
+        {
+            AttachConsole(-1);
+            Console.WriteLine(WelcomeBannerText);
+            Console.WriteLine(Casasoft.CCDV.Utils.GetLicense());
+            Shutdown();
+        }
+
+        object? startTool;
+        Tools startWindow = Tools.Menu;
+        if (Enum.TryParse(typeof(Tools), startupWindow, true, out startTool))
+        {
+            if(startTool != null)
+            {
+                startWindow = (Tools)startTool;
+            }
+        }
+
+        Window w;
+        switch (startWindow)
+        {
+            case Tools.Menu:
+                w = new MainWindow();
+                break;
+            case Tools.MontaggioFoto:
+                w = new MontaggioFotoForm();
+                break;
+            case Tools.MontaggioDorsi:
+                w = new MontaggioDorsiForm();
+                break;
+            case Tools.Scatola:
+                w = new BoxBuilderForm(BoxTypes.Box);
+                break;
+            case Tools.Cartella:
+                w = new BoxBuilderForm(BoxTypes.Folder);
+                break;
+            case Tools.CreditCard:
+                w = new CreditCardForm();
+                break;
+            default:
+                w = new MainWindow();
+                break;
+        }
+        w.Show();
+    }
+
+    /// <summary>
+    /// Text for welcome banner
+    /// </summary>
+    public static string WelcomeBannerText =>
+        $"\nCasasoft Contemporary Carte de Visite {ExeName}\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
+
+    /// <summary>
+    /// Attach console to process
+    /// </summary>
+    /// <param name="processId">-1 for current process</param>
+    /// <returns></returns>
+    [DllImport("Kernel32.dll")]
+    public static extern bool AttachConsole(int processId);
 }
