@@ -76,6 +76,7 @@ public partial class BaseForm : Window
 
     protected void btnSaveJson_Click(object sender, EventArgs e)
     {
+        setEngineParameters();
         SaveFileDialog sd = new();
         sd.Filter = "json data file (*.json)|*.json|All files (*.*)|*.*";
         sd.Title = "Salvataggio parametri immagine";
