@@ -39,27 +39,50 @@ If not, see <http://www.gnu.org/licenses/>.
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
-        <local:CommonOptionsControl x:Name="commonOptions" Margin="0,0,0,40" VerticalAlignment="Bottom" />
-        <casasoft:FileTextBox x:Name="frontImage" Margin="10,24,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
-        <Label Content="Immagine fronte" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-        <casasoft:FileTextBox x:Name="backImage" Margin="10,66,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
-        <Label Content="Immagine posteriore" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-        <TextBox x:Name="frontText" Margin="10,106,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" />
-        <Label Content="Testo fronte" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-        <local:FontSelectorControl x:Name="fontFront" HorizontalAlignment="Stretch" Margin="10,124,10,0" VerticalAlignment="Top"/>
-        <colorpicker:PortableColorPicker x:Name="cpFill" VerticalAlignment="Top" Margin="10,195,0,0" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="White" />
-        <Label x:Name="lblFill" Content="Colore carattere" HorizontalAlignment="Left" Margin="60,191,0,0" VerticalAlignment="Top" Width="170"/>
-        <colorpicker:PortableColorPicker x:Name="cpBorder" VerticalAlignment="Top" Margin="10,225,0,0" HorizontalAlignment="Left" ShowAlpha="False" RenderTransformOrigin="0.5,0.5" />
-        <Label x:Name="lblBorder" Content="Bordo del carattere" HorizontalAlignment="Left" Margin="60,221,0,0" VerticalAlignment="Top" Width="170"/>
-        <colorpicker:PortableColorPicker x:Name="cpBackground" VerticalAlignment="Top" Margin="10,255,0,0" HorizontalAlignment="Left" ShowAlpha="True" SelectedColor="Transparent" RenderTransformOrigin="0.5,0.5" />
-        <Label x:Name="lblBackground" Content="Sfondo del carattere" HorizontalAlignment="Left" Margin="60,251,0,0" VerticalAlignment="Top" Width="170"/>
-        <casasoft:FileTextBox x:Name="mbImage" Margin="10,298,10,0"  VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
-        <Label Content="Immagine banda magnetica" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-        <colorpicker:PortableColorPicker x:Name="cpMB" VerticalAlignment="Top" Margin="10,325,0,0" HorizontalAlignment="Left" SelectedColor="#FF653B11" />
-        <Label x:Name="lblMB" Content="Colore banda magnetica" HorizontalAlignment="Left" Margin="60,321,0,0" VerticalAlignment="Top" Width="170"/>
-        <casasoft:PangoTextEditor x:Name="backText" Margin="10,370,10,135"  VerticalAlignment="Stretch" Panel.ZIndex="1"/>
-        <Label Content="Testo posteriore" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-        <local:CommonCommandsControl x:Name="ucCommands" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>
-
+        <Grid Margin="10,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <Label Content="Immagine fronte" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
+                <casasoft:FileTextBox x:Name="frontImage" VerticalAlignment="Top" Margin="0,-3,0,0"  Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <Label Content="Immagine posteriore" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
+                <casasoft:FileTextBox x:Name="backImage" VerticalAlignment="Top" Margin="0,-3,0,0" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <Label Content="Testo fronte" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
+                <TextBox x:Name="frontText"  VerticalAlignment="Top" Margin="0,-3,0,0" Panel.ZIndex="1" Height="18" />
+                <local:FontSelectorControl x:Name="fontFront" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <colorpicker:PortableColorPicker x:Name="cpFill" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="White" />
+                    <Label x:Name="lblFill" Content="Colore carattere" HorizontalAlignment="Left" Margin="10,-4,0,0" VerticalAlignment="Top" Width="170"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <colorpicker:PortableColorPicker x:Name="cpBorder" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="False" RenderTransformOrigin="0.5,0.5" />
+                    <Label x:Name="lblBorder" Content="Bordo del carattere" HorizontalAlignment="Left" Margin="10,-4,0,0" VerticalAlignment="Top" Width="170"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <colorpicker:PortableColorPicker x:Name="cpBackground" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="True" SelectedColor="Transparent" RenderTransformOrigin="0.5,0.5" />
+                    <Label x:Name="lblBackground" Content="Sfondo del carattere" HorizontalAlignment="Left" Margin="10,-4,0,0" VerticalAlignment="Top" Width="170"/>
+                </StackPanel>
+                <Label Content="Immagine banda magnetica" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
+                <casasoft:FileTextBox x:Name="mbImage" VerticalAlignment="Top" Margin="0,-3,0,0" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <colorpicker:PortableColorPicker x:Name="cpMB" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedColor="#FF653B11" />
+                    <Label x:Name="lblMB" Content="Colore banda magnetica" HorizontalAlignment="Left" Margin="10,-4,0,0" VerticalAlignment="Top" Width="170"/>
+                </StackPanel>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Content="Testo posteriore" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
+                <casasoft:PangoTextEditor x:Name="backText" Grid.Row="1" VerticalAlignment="Stretch" Panel.ZIndex="1"/>
+            </Grid>
+            <local:CommonOptionsControl Grid.Row="2" x:Name="commonOptions" Margin="0,10,0,10" VerticalAlignment="Bottom" />
+            <local:CommonCommandsControl Grid.Row="3"  x:Name="ucCommands" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>
+        </Grid>
     </Grid>
 </src:BaseForm>
