@@ -30,14 +30,19 @@ If not, see <http://www.gnu.org/licenses/>.
              xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
              xmlns:local="clr-namespace:Casasoft.CCDV.UI"
              mc:Ignorable="d" 
-             d:DesignHeight="78" d:DesignWidth="250">
-    <Grid>
-        <colorpicker:PortableColorPicker x:Name="cpFill" VerticalAlignment="Top" Margin="10,0,10,0" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="White" />
-        <Label x:Name="lblFill" Content="Colore di riempimento" HorizontalAlignment="Left" Margin="60,-4,0,0" VerticalAlignment="Top" Width="170"/>
-        <colorpicker:PortableColorPicker x:Name="cpBorder" VerticalAlignment="Top" Margin="10,30,0,0" HorizontalAlignment="Left" ShowAlpha="False" RenderTransformOrigin="0.5,0.5" />
-        <Label x:Name="lblBorder" Content="Colore dei bordi" HorizontalAlignment="Left" Margin="60,26,0,0" VerticalAlignment="Top" Width="170"/>
-        <casasoft:NumericUpDown x:Name="txtDPI" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" Width="60" Value="300" MinValue="1"/>
-        <Label x:Name="lblDPI" Content="DPI" HorizontalAlignment="Left" Margin="70,56,0,0" VerticalAlignment="Top" Width="170"/>
-
-    </Grid>
+             d:DesignHeight="73" d:DesignWidth="250">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <colorpicker:PortableColorPicker x:Name="cpFill" VerticalAlignment="Top" Margin="10,0,0,0" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="White" />
+            <Label x:Name="lblFill" Content="Colore di riempimento" HorizontalAlignment="Left" Margin="10,-4,0,0" VerticalAlignment="Top" Width="170"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <colorpicker:PortableColorPicker x:Name="cpBorder" VerticalAlignment="Top" Margin="10,0,0,0" HorizontalAlignment="Left" ShowAlpha="False" RenderTransformOrigin="0.5,0.5" />
+            <Label x:Name="lblBorder" Content="Colore dei bordi" HorizontalAlignment="Left" Margin="10,-4,0,0" VerticalAlignment="Top" Width="170"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <casasoft:NumericUpDown x:Name="txtDPI" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" Width="60" Value="300" MinValue="1"/>
+            <Label x:Name="lblDPI" Content="DPI" HorizontalAlignment="Left" Margin="0,-4,0,0" VerticalAlignment="Top" Width="170"/>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

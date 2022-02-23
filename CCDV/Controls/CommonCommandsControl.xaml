@@ -29,10 +29,12 @@ If not, see <http://www.gnu.org/licenses/>.
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="250">
     <Grid>
-        <Button x:Name="btnUpdate" Content="&#xE149;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnUpdate_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
-        <Button x:Name="btnOpenJson" Content="1" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnOpenJson_Click" FontFamily="Wingdings" Height="20" FontWeight="Bold"/>
-        <Button x:Name="btnSaveJson" Content="&#xE105;" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnSaveJson_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="btnUpdate" Content="&#xE149;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnUpdate_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
+            <Button x:Name="btnOpenJson" Content="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnOpenJson_Click" FontFamily="Wingdings" Height="20" FontWeight="Bold"/>
+            <Button x:Name="btnSaveJson" Content="&#xE105;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnSaveJson_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
+        </StackPanel>
         <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="136" Click="btnSave_Click"/>
-
     </Grid>
+
 </UserControl>
