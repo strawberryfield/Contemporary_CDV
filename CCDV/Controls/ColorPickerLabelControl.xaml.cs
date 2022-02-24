@@ -21,29 +21,47 @@
 
 using ImageMagick;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Casasoft.CCDV.UI;
 
 /// <summary>
-/// Interaction logic for CommonOptionsControl.xaml
+/// Interaction logic for ColorPickerLabelControl.xaml
 /// </summary>
-public partial class CommonOptionsControl : UserControl
+public partial class ColorPickerLabelControl : UserControl
 {
-    public CommonOptionsControl()
+    public ColorPickerLabelControl()
     {
         InitializeComponent();
     }
 
-    public int DpiValue { get => txtDPI.Value; set => txtDPI.Value = value; }
-
-    public MagickColor BorderColor
+    public MagickColor IMColor
     {
-        get => cpBorder.IMColor;
-        set => cpBorder.IMColor = value;
+        get => Utils.ColorFromPicker(colorPicker);
+        set
+        {
+            if (value != null)
+            {
+                colorPicker.SelectedColor = Utils.ColorFromMagick(value);
+            }
+        }
     }
-    public MagickColor FillColor
+
+    public Color SelectedColor
     {
-        get => cpFill.IMColor;
-        set => cpFill.IMColor = value;  
+        get => colorPicker.SelectedColor;
+        set => colorPicker.SelectedColor = value;
+    }
+
+    public bool ShowAlpha
+    {
+        get => colorPicker.ShowAlpha;
+        set => colorPicker.ShowAlpha = value;
+    }
+
+    public string? Caption
+    {
+        get => label.Content.ToString();
+        set => label.Content = value;
     }
 }

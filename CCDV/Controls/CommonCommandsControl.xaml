@@ -27,14 +27,14 @@ If not, see <http://www.gnu.org/licenses/>.
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Casasoft.CCDV.UI"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="250">
+             d:DesignHeight="20" d:DesignWidth="230">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Button x:Name="btnUpdate" Content="&#xE149;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnUpdate_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
+            <Button x:Name="btnUpdate" Content="&#xE149;" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="20" Click="btnUpdate_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
             <Button x:Name="btnOpenJson" Content="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnOpenJson_Click" FontFamily="Wingdings" Height="20" FontWeight="Bold"/>
             <Button x:Name="btnSaveJson" Content="&#xE105;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnSaveJson_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
         </StackPanel>
-        <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Bottom" Width="136" Click="btnSave_Click"/>
+        <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="136" Click="btnSave_Click"/>
     </Grid>
 
 </UserControl>

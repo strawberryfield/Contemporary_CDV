@@ -48,12 +48,12 @@ public partial class CreditCardForm : BaseForm
         eng.FrontText = frontText.Text;
         eng.BackText = backText.Value;
         eng.FrontTextFont = fontFront.Font;
-        eng.FrontTextColor = Utils.ColorFromPicker(cpFill);
-        eng.FrontTextBorder = Utils.ColorFromPicker(cpBorder);
-        eng.FrontTextBackground = Utils.ColorFromPicker(cpBackground);
+        eng.FrontTextColor = cpFill.IMColor;
+        eng.FrontTextBorder = cpBorder.IMColor;
+        eng.FrontTextBackground = cpBackground.IMColor;
         eng.fontBold = fontFront.FontBold;
         eng.fontItalic = fontFront.FontItalic;
-        eng.MagneticBandColor = Utils.ColorFromPicker(cpMB);
+        eng.MagneticBandColor = cpMB.IMColor;
         eng.MagneticBandImage = mbImage.Value;
     }
 
@@ -66,12 +66,12 @@ public partial class CreditCardForm : BaseForm
         frontText.Text = eng.FrontText;
         backText.Value = eng.BackText;
         fontFront.Font = eng.FrontTextFont;
-        cpFill.SelectedColor = Utils.ColorFromMagick(eng.FrontTextColor);
-        cpBorder.SelectedColor = Utils.ColorFromMagick(eng.FrontTextBorder);
-        cpBackground.SelectedColor = Utils.ColorFromMagick(eng.FrontTextBackground);
+        cpFill.IMColor = eng.FrontTextColor;
+        cpBorder.IMColor = eng.FrontTextBorder;
+        cpBackground.IMColor = eng.FrontTextBackground;
         fontFront.FontBold = eng.fontBold;
         fontFront.FontItalic = eng.fontItalic;
-        cpMB.SelectedColor = Utils.ColorFromMagick(eng.MagneticBandColor);
+        cpMB.IMColor = eng.MagneticBandColor;
         mbImage.Value = eng.MagneticBandImage;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
