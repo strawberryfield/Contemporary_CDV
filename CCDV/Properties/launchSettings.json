@@ -1,8 +1,7 @@
 {
   "profiles": {
     "CCDV": {
-      "commandName": "Project",
-      "commandLineArgs": "--tool=Creditcard"
+      "commandName": "Project"
     }
   }
 }

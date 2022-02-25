@@ -26,7 +26,6 @@ If not, see <http://www.gnu.org/licenses/>.
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
         xmlns:local="clr-namespace:Casasoft.CCDV.UI"
         mc:Ignorable="d"
@@ -47,18 +46,15 @@ If not, see <http://www.gnu.org/licenses/>.
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel>
-                <Label Content="Immagine fronte" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-                <casasoft:FileTextBox x:Name="frontImage" VerticalAlignment="Top" Margin="0,-3,0,0"  Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
-                <Label Content="Immagine posteriore" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-                <casasoft:FileTextBox x:Name="backImage" VerticalAlignment="Top" Margin="0,-3,0,0" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <casasoft:FileTextBoxLabel x:Name="frontImage" Caption="Immagine fronte" Margin="0,3,0,0" VerticalAlignment="Top" Panel.ZIndex="1" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <casasoft:FileTextBoxLabel x:Name="backImage" Caption="Immagine posteriore" VerticalAlignment="Top" Panel.ZIndex="1" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
                 <Label Content="Testo fronte" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
                 <TextBox x:Name="frontText"  VerticalAlignment="Top" Margin="0,-3,0,0" Panel.ZIndex="1" Height="18" />
                 <local:FontSelectorControl x:Name="fontFront" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                 <local:ColorPickerLabelControl x:Name="cpFill" Caption="Colore carattere" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="White" />
                 <local:ColorPickerLabelControl x:Name="cpBorder" Caption="Bordo del carattere" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="False" RenderTransformOrigin="0.5,0.5" SelectedColor="Black" />
                 <local:ColorPickerLabelControl x:Name="cpBackground" Caption="Sfondo del carattere" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="True" SelectedColor="Transparent" RenderTransformOrigin="0.5,0.5" />
-                <Label Content="Immagine banda magnetica" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.263,-1.116"/>
-                <casasoft:FileTextBox x:Name="mbImage" VerticalAlignment="Top" Margin="0,-3,0,0" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <casasoft:FileTextBoxLabel x:Name="mbImage" Caption="Immagine banda magnetica" VerticalAlignment="Top" Margin="0,5,0,0" Panel.ZIndex="1" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
                 <local:ColorPickerLabelControl x:Name="cpMB" Caption="Colore banda magnetica" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedColor="#FF653B11" />
             </StackPanel>
             <Grid Grid.Row="1">

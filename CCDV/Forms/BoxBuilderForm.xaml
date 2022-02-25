@@ -38,9 +38,17 @@ If not, see <http://www.gnu.org/licenses/>.
         <Image x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
-        <local:CommonOptionsControl x:Name="commonOptions" Margin="0,454,0,0" VerticalAlignment="Top" />
-        <local:BoxImagesControl x:Name="boxImages" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-        <local:CommonCommandsControl x:Name="ucCommands" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>
-
+        <Grid Margin="10,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <local:BoxImagesControl x:Name="boxImages" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                <local:CommonOptionsControl x:Name="commonOptions" Margin="0,5,0,0" VerticalAlignment="Top" />
+            </StackPanel>
+            <local:CommonCommandsControl x:Name="ucCommands" Grid.Row="2" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>
+        </Grid>
     </Grid>
 </src:BaseForm>
