@@ -30,6 +30,11 @@ front text color \(default \#000000\)
 front text border color \(default \#000000\)  
 
 
+**--fronttextbackground=V** :  
+ALUE  
+front text background color \(default \#00000000\)  
+
+
 **--fontbold** :  
 use bold font weight  
 
@@ -123,6 +128,7 @@ using the following template:
   "FrontTextFont": "Arial",  
   "FrontTextColor": "\#FFFFFF",  
   "FrontTextBorder": "\#000000",  
+  "FrontTextBackground": "\#00000000",  
   "fontBold": false,  
   "fontItalic": false,  
   "MagneticBandColor": "\#000000FF",  

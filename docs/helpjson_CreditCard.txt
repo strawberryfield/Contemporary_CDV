@@ -8,6 +8,7 @@ Json parameters template for: CreditCard
   "FrontTextFont": "Arial",
   "FrontTextColor": "#FFFFFF",
   "FrontTextBorder": "#000000",
+  "FrontTextBackground": "#00000000",
   "fontBold": false,
   "fontItalic": false,
   "MagneticBandColor": "#000000FF",
