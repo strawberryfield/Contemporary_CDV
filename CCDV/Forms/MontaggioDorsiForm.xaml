@@ -36,7 +36,7 @@ If not, see <http://www.gnu.org/licenses/>.
             <ColumnDefinition Width="250" MinWidth="250" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <local:ImageViewerControl x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+        <casasoft:ImageViewer x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
         <Grid Margin="10,0,10,0">

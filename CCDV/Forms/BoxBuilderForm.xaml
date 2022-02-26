@@ -27,6 +27,7 @@ If not, see <http://www.gnu.org/licenses/>.
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
         xmlns:local="clr-namespace:Casasoft.CCDV.UI"
         mc:Ignorable="d"
         Title="Creazione scatola" Height="640" Width="800">
@@ -35,7 +36,7 @@ If not, see <http://www.gnu.org/licenses/>.
             <ColumnDefinition Width="250" MinWidth="250" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <local:ImageViewerControl x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+        <casasoft:ImageViewer x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
         <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
         <Grid Margin="10,0,10,0">
