@@ -21,6 +21,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Casasoft.CCDV.UI;
@@ -53,14 +54,20 @@ public partial class ImageViewerControl : UserControl
     private bool isFlipV = false;
 
     private int rotation = 0;
+    private double zoom = 1;
+
+    private Point origin = new(0, 0);
+    private Point start;
 
     private void ApplyTrans()
     {
         img.RenderTransformOrigin = new Point(0.5, 0.5);
         TransformGroup tg = new();
+        tg.Children.Add(new TranslateTransform(origin.X, origin.Y));
         if (isFlipH) tg.Children.Add(flipH);
         if (isFlipV) tg.Children.Add(flipV);
         if (rotation != 0) tg.Children.Add(new RotateTransform(rotation));
+        if (zoom != 1) tg.Children.Add(new ScaleTransform(zoom, zoom));
         img.RenderTransform = tg;
     }
     #endregion
@@ -86,11 +93,22 @@ public partial class ImageViewerControl : UserControl
         ApplyTrans();
     }
 
+    public void Zoom(double delta)
+    {
+        if (zoom + delta > .2)
+        {
+            zoom += delta;
+            ApplyTrans();
+        }
+    }
+
     public void Reset()
     {
         isFlipH = false;
         isFlipV = false;
         rotation = 0;
+        zoom = 1;
+        origin = new(0, 0);
         ApplyTrans();
     }
     #endregion
@@ -104,5 +122,34 @@ public partial class ImageViewerControl : UserControl
     private void MenuItem_R180_Click(object sender, System.Windows.RoutedEventArgs e) => Rotate(180);
 
     private void MenuItem_Reset_Click(object sender, System.Windows.RoutedEventArgs e) => Reset();
+
+    private void img_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        => Zoom(e.Delta > 0 ? .2 : -.2);
+
+    bool isMoving = false;
+    private void img_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        start = e.GetPosition(img);
+        this.Cursor = Cursors.Hand;
+        isMoving = true;
+    }
+
+    private void img_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        isMoving = false;
+        this.Cursor = Cursors.Arrow;
+    }
+
+    private void img_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        if (isMoving)
+        {
+            Vector v = start - e.GetPosition(img);
+            origin.X -= v.X;
+            origin.Y -= v.Y;
+            ApplyTrans();
+        }
+    }
     #endregion
+
 }
