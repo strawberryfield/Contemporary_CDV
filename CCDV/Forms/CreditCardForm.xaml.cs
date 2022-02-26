@@ -81,6 +81,6 @@ public partial class CreditCardForm : BaseForm
     protected override void doAnteprima()
     {
         setEngineParameters();
-        AggiornaAnteprima(image);
+        AggiornaAnteprima(image.Image);
     }
 }

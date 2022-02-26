@@ -105,7 +105,7 @@ public partial class BoxBuilderForm : BaseForm
     protected override void doAnteprima()
     {
         base.doAnteprima();
-        AggiornaAnteprima(image);
+        AggiornaAnteprima(image.Image);
     }
 
 }

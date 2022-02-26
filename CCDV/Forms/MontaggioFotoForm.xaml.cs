@@ -65,7 +65,7 @@ public partial class MontaggioFotoForm : BaseForm
     protected override void doAnteprima()
     {
         base.doAnteprima();
-        AggiornaAnteprima(image);
+        AggiornaAnteprima(image.Image);
     }
 
 }

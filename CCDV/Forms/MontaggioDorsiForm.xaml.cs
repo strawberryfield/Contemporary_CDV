@@ -62,6 +62,6 @@ public partial class MontaggioDorsiForm : BaseForm
     protected override void doAnteprima()
     {
         base.doAnteprima();
-        AggiornaAnteprima(image);
+        AggiornaAnteprima(image.Image);
     }
 }
