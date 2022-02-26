@@ -37,6 +37,7 @@ public partial class AboutWindow : Window
 
         txtLicense.Text = Casasoft.CCDV.Utils.GetLicense();
         Logo.Source = this.Icon;
+        lblVersion.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
     }
 
     private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

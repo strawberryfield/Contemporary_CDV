@@ -29,10 +29,10 @@ If not, see <http://www.gnu.org/licenses/>.
         mc:Ignorable="d"
         Title="About" Height="350" Width="500" Icon="/CCDV.ico">
     <Grid>
- 
+
         <Image x:Name="Logo" HorizontalAlignment="Left" Height="64" Margin="14,24,0,0" VerticalAlignment="Top" Width="64"/>
         <Label Content="Casasoft" HorizontalAlignment="Left" Margin="81,24,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" FontStyle="Italic"/>
-        <Label Content="Contemporary Carte de Visite tools" HorizontalAlignment="Left" Margin="81,50,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
+        <Label Content="Contemporary Carte de Visite tools" HorizontalAlignment="Left" Margin="81,39,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18"/>
         <Label Content="copyright © 2020-2022 Roberto Ceccarelli - Casasoft" HorizontalAlignment="Left" Margin="14,93,0,0" VerticalAlignment="Top"/>
         <Label Content="website:" HorizontalAlignment="Left" Margin="14,118,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
         <TextBlock x:Name="linkWebsiste" HorizontalAlignment="Left" Margin="18,137,0,0" VerticalAlignment="Top" Foreground="#FF0000C0">           
@@ -48,5 +48,6 @@ If not, see <http://www.gnu.org/licenses/>.
         </TextBlock>
         <Label Content="license:" HorizontalAlignment="Left" Margin="14,202,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
         <TextBox x:Name="txtLicense" Margin="20,225,20,10" TextWrapping="Wrap" Text="TextBox" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblVersion" Content="Version" HorizontalAlignment="Left" Margin="81,62,0,0" VerticalAlignment="Top" FontStyle="Italic"/>
     </Grid>
 </Window>
