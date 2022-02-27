@@ -79,7 +79,7 @@ public class MontaggioFotoCommandLine : CommandLine
     /// <returns></returns>
     public override string JsonTemplate()
     {
-        BaseBuilderParameters p = new();
+        MontaggioFotoParameters p = new();
         return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
     }
 }

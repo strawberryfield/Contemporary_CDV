@@ -88,20 +88,9 @@ Parameters can also be passed with a json formatted string
 using the following template:  
 
 \{  
-  "topImage": "",  
-  "bottomImage": "",  
-  "leftImage": "",  
-  "rightImage": "",  
-  "frontImage": "",  
-  "backImage": "",  
-  "fontBold": false,  
-  "fontItalic": false,  
-  "font": "Arial",  
-  "borderText": "",  
-  "spessore": 5,  
-  "isHorizontal": false,  
-  "targetFormat": 0,  
-  "useTestImages": false,  
+  "FullSize": false,  
+  "Trim": false,  
+  "WithBorder": false,  
   "FillColor": "\#FFFFFF",  
   "BorderColor": "\#000000",  
   "Dpi": 300,  
