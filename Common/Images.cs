@@ -80,6 +80,18 @@ public class Images
     /// <returns></returns>
     public MagickImage InCartha20x27_v(MagickColor c) => new(c, fmt.InCartha20x27_v.Width, fmt.InCartha20x27_v.Height);
     /// <summary>
+    /// Photocity Digital print over 15x20cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage InCartha15x20_o(MagickColor c) => new(c, fmt.InCartha15x20_o.Width, fmt.InCartha15x20_o.Height);
+    /// <summary>
+    /// Photocity Digital print over 20x27cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage InCartha15x20_v(MagickColor c) => new(c, fmt.InCartha15x20_v.Width, fmt.InCartha15x20_v.Height);
+    /// <summary>
     /// 15x10cm paper
     /// </summary>
     /// <param name="c">Background color</param>

@@ -54,7 +54,7 @@ public class Formats
     /// <param name="mm">size to convert</param>
     /// <returns>pixel at defined resolution</returns>
     public int ToPixels(int mm) => (int)(mm * _dpi / _inch);
-    
+
     /// <summary>
     /// Returns the resolution
     /// </summary>
@@ -75,6 +75,20 @@ public class Formats
     /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
     /// </remarks>
     public MagickGeometry InCartha20x27_v => swap(InCartha20x27_o);
+    /// <summary>
+    /// Photocity Digital print over 15x20cm paper
+    /// </summary>
+    /// <remarks>
+    /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
+    /// </remarks>
+    public MagickGeometry InCartha15x20_o => new(ToPixels((int)(200 * 1.03)), ToPixels((int)(150 * 1.03)));
+    /// <summary>
+    /// Photocity Digital print over 15x20cm paper
+    /// </summary>
+    /// <remarks>
+    /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
+    /// </remarks>
+    public MagickGeometry InCartha15x20_v => swap(InCartha15x20_o);
     /// <summary>
     /// 15x10cm paper
     /// </summary>
