@@ -548,6 +548,42 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.MontaggioDorsiCommandLine">
+            <summary>
+            Command line management for MontaggioDorsi
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.MontaggioDorsiCommandLine.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.MontaggioDorsiCommandLine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="exename">Name of the program exe</param>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.MontaggioFotoCommandLine">
             <summary>
             Command line management for MontaggioFoto
@@ -1253,6 +1289,22 @@
             In printing the service enlarges (an cuts!) the image, so I need to take care of this
             </remarks>
         </member>
+        <member name="P:Casasoft.CCDV.Formats.InCartha15x20_o">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>
+            In printing the service enlarges (an cuts!) the image, so I need to take care of this
+            </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.Formats.InCartha15x20_v">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>
+            In printing the service enlarges (an cuts!) the image, so I need to take care of this
+            </remarks>
+        </member>
         <member name="P:Casasoft.CCDV.Formats.FineArt10x15_o">
             <summary>
             15x10cm paper
@@ -1351,6 +1403,20 @@
             <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Images.InCartha20x27_v(ImageMagick.MagickColor)">
+            <summary>
+            Photocity Digital print over 20x27cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha15x20_o(ImageMagick.MagickColor)">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha15x20_v(ImageMagick.MagickColor)">
             <summary>
             Photocity Digital print over 20x27cm paper
             </summary>
@@ -1739,6 +1805,26 @@
             Files to process
             </summary>
         </member>
+        <member name="T:Casasoft.CCDV.JSON.MontaggioDorsiParameters">
+            <summary>
+            Parameters for MontaggioDorsi
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioDorsiParameters.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioDorsiParameters.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.JSON.MontaggioDorsiParameters.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.JSON.MontaggioFotoParameters">
             <summary>
             Parameters for MontaggioFoto
@@ -1762,6 +1848,31 @@
         <member name="M:Casasoft.CCDV.JSON.MontaggioFotoParameters.#ctor">
             <summary>
             Default constructor
+            </summary>
+        </member>
+        <member name="T:Casasoft.CCDV.PaperFormats">
+            <summary>
+            Commercial paper formats
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.PaperFormats.Small">
+            <summary>
+            10x15 cm
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.PaperFormats.Medium">
+            <summary>
+            15x20 cm
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.PaperFormats.Large">
+            <summary>
+            20x27 cm
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.PaperFormats.Panorama">
+            <summary>
+            10x18 cm
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.Properties.Resources">

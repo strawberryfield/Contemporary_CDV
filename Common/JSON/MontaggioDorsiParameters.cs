@@ -19,26 +19,44 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using Casasoft.CCDV;
-using Casasoft.CCDV.Engines;
-using ImageMagick;
+using System.Text.Json.Serialization;
 
-#region texts
-string desc = "Assembling six images over a 20x27 cm paper";
-string longDesc = @"This program gathers six images on a 20x27cm surface 
-that I print on a cardboard coated only on the side of the image.";
-#endregion
+namespace Casasoft.CCDV.JSON;
 
-#region command line
-MontaggioDorsiCommandLine par = new("dorsi", desc);
-par.AddBaseOptions();
-par.Usage = "[options]* inputfile+";
-par.LongDesc = longDesc;
-if (par.Parse(args)) return;
-#endregion
+/// <summary>
+/// Parameters for MontaggioDorsi
+/// </summary>
+public class MontaggioDorsiParameters : CommonParameters
+{
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public string Paper { get; set; }
 
-MontaggioDorsiEngine engine = new(par);
-MagickImage final = engine.GetResult();
-engine.SetImageInfo(par.WelcomeBannerText(), $"{par.OutputName}.jpg", final);
-engine.SetImageParameters(final);
-final.Write($"{par.OutputName}.jpg");
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    [JsonIgnore]
+    public PaperFormats PaperFormat
+    {
+        get
+        {
+            PaperFormats ret = PaperFormats.Large;
+            if(!string.IsNullOrEmpty(Paper))
+            {
+                if(Paper.ToUpper() == "MEDIUM")
+                {
+                    ret = PaperFormats.Medium;
+                }
+            }
+            return ret;
+        }
+    }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public MontaggioDorsiParameters()
+    {
+    }
+}

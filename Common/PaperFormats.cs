@@ -19,26 +19,27 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using Casasoft.CCDV;
-using Casasoft.CCDV.Engines;
-using ImageMagick;
+namespace Casasoft.CCDV;
 
-#region texts
-string desc = "Assembling six images over a 20x27 cm paper";
-string longDesc = @"This program gathers six images on a 20x27cm surface 
-that I print on a cardboard coated only on the side of the image.";
-#endregion
-
-#region command line
-MontaggioDorsiCommandLine par = new("dorsi", desc);
-par.AddBaseOptions();
-par.Usage = "[options]* inputfile+";
-par.LongDesc = longDesc;
-if (par.Parse(args)) return;
-#endregion
-
-MontaggioDorsiEngine engine = new(par);
-MagickImage final = engine.GetResult();
-engine.SetImageInfo(par.WelcomeBannerText(), $"{par.OutputName}.jpg", final);
-engine.SetImageParameters(final);
-final.Write($"{par.OutputName}.jpg");
+/// <summary>
+/// Commercial paper formats
+/// </summary>
+public enum PaperFormats
+{
+    /// <summary>
+    /// 10x15 cm
+    /// </summary>
+    Small,
+    /// <summary>
+    /// 15x20 cm
+    /// </summary>
+    Medium,
+    /// <summary>
+    /// 20x27 cm
+    /// </summary>
+    Large,
+    /// <summary>
+    /// 10x18 cm
+    /// </summary>
+    Panorama
+}
