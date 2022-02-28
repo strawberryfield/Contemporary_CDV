@@ -125,7 +125,7 @@ public partial class BaseForm : Window
     protected virtual void doAnteprima()
     {
         setEngineParameters();
-//        engine.Dpi = 120;
+        //        engine.Dpi = 120;
     }
 
     protected void AggiornaAnteprima(Image img)
@@ -145,7 +145,7 @@ public partial class BaseForm : Window
     private void bwAnteprima_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         MagickImage? bm = (MagickImage?)e.Result;
-        if(bm != null) image.Source = bm.ToBitmapSource();
+        if (bm != null) image.Source = bm.ToBitmapSource();
         waitForm.Close();
     }
 
@@ -198,4 +198,17 @@ public partial class BaseForm : Window
         }
     }
 
+    protected bool isChecked(RadioButton rb)
+    {
+        bool ret = false;
+        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        return ret;
+    }
+
+    protected bool isChecked(CheckBox rb)
+    {
+        bool ret = false;
+        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        return ret;
+    }
 }

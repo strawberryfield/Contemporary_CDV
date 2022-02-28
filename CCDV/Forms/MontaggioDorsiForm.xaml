@@ -53,6 +53,10 @@ If not, see <http://www.gnu.org/licenses/>.
                 <casasoft:FileTextBox x:Name="filename4" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
                 <casasoft:FileTextBox x:Name="filename5" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
                 <casasoft:FileTextBox x:Name="filename6" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <RadioButton x:Name="rbLarge" Content="20x27" HorizontalAlignment="Left" Width="110" VerticalAlignment="Top" IsChecked="True" GroupName="targetFormat"/>
+                    <RadioButton x:Name="rbMedium" Content="15x20" HorizontalAlignment="Left"  VerticalAlignment="Top" GroupName="targetFormat"/>
+                </StackPanel>
                 <local:CommonOptionsControl x:Name="commonOptions" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" />
             </StackPanel>
             <local:CommonCommandsControl x:Name="ucCommands" Grid.Row="2" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click"/>

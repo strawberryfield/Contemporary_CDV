@@ -28,6 +28,16 @@ namespace Casasoft.CCDV.UI;
 /// </summary>
 public partial class MontaggioDorsiForm : BaseForm
 {
+    public PaperFormats PaperFormat
+    {
+        get => isChecked(rbMedium) ? PaperFormats.Medium : PaperFormats.Large;
+        set
+        {
+            rbMedium.IsChecked = value == PaperFormats.Medium;
+            rbLarge.IsChecked = value == PaperFormats.Large;
+        }
+    }
+
     public MontaggioDorsiForm() : base()
     {
         InitializeComponent();
@@ -37,10 +47,13 @@ public partial class MontaggioDorsiForm : BaseForm
     protected override void setEngineParameters()
     {
         base.setEngineParameters();
+        MontaggioDorsiEngine eng = (MontaggioDorsiEngine)engine;
         addAllFiles();
-        engine.FillColor = commonOptions.FillColor;
-        engine.BorderColor = commonOptions.BorderColor;
-        engine.Dpi = commonOptions.DpiValue;
+        eng.FillColor = commonOptions.FillColor;
+        eng.BorderColor = commonOptions.BorderColor;
+        eng.Dpi = commonOptions.DpiValue;
+        eng.PaperFormat = PaperFormat;
+        
     }
 
     protected override void loadJson(string json)
@@ -50,6 +63,7 @@ public partial class MontaggioDorsiForm : BaseForm
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
         commonOptions.DpiValue = eng.Dpi;
+        PaperFormat = eng.PaperFormat;
 
         addFile(1, filename1);
         addFile(2, filename2);
