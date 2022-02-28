@@ -1128,6 +1128,11 @@
             Montaggio dorsi engine
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioDorsiEngine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">
             <summary>
             Constructor
@@ -1461,6 +1466,20 @@
         <member name="M:Casasoft.CCDV.Images.InCartha20x27_v">
             <summary>
             Photocity Digital print over 20x27cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha15x20_o">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha15x20_v">
+            <summary>
+            Photocity Digital print over 15x20cm paper
             </summary>
             <remarks>White background</remarks>
             <returns></returns>

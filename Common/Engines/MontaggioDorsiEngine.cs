@@ -31,13 +31,18 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class MontaggioDorsiEngine : BaseEngine
 {
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public PaperFormats PaperFormat { get; set; }
+
     #region constructors
     /// <summary>
     /// Constructor
     /// </summary>
     public MontaggioDorsiEngine() : base()
     {
-        parameters = new CommonParameters();
+        parameters = new MontaggioDorsiParameters();
     }
 
     /// <summary>
@@ -46,7 +51,9 @@ public class MontaggioDorsiEngine : BaseEngine
     /// <param name="par"></param>
     public MontaggioDorsiEngine(CommandLine par) : base(par)
     {
-        parameters = new CommonParameters();
+        parameters = new MontaggioDorsiParameters();
+        MontaggioDorsiCommandLine p = (MontaggioDorsiCommandLine)par;
+        PaperFormat = p.PaperFormat;
     }
     #endregion
 
@@ -58,7 +65,8 @@ public class MontaggioDorsiEngine : BaseEngine
     public override string GetJsonParams()
     {
         GetBaseJsonParams();
-        CommonParameters p = (CommonParameters)parameters;
+        MontaggioDorsiParameters p = (MontaggioDorsiParameters)parameters;
+        p.PaperFormat = PaperFormat;
         return JsonSerializer.Serialize(p);
     }
 
@@ -68,9 +76,10 @@ public class MontaggioDorsiEngine : BaseEngine
     /// <param name="json"></param>
     public override void SetJsonParams(string json)
     {
-        CommonParameters p = JsonSerializer.Deserialize<CommonParameters>(json);
+        MontaggioDorsiParameters p = JsonSerializer.Deserialize<MontaggioDorsiParameters>(json);
         parameters = p;
         SetBaseJsonParams();
+        PaperFormat = p.PaperFormat;
     }
     #endregion
 
@@ -84,7 +93,7 @@ public class MontaggioDorsiEngine : BaseEngine
     {
         img = new(fmt);
 
-        MagickImage final = img.InCartha20x27_o();
+        MagickImage final = PaperFormat == PaperFormats.Medium ? img.InCartha15x20_o() : img.InCartha20x27_o();
         MagickImageCollection imagesV = new();
         MagickImageCollection imagesO = new();
 
@@ -92,48 +101,97 @@ public class MontaggioDorsiEngine : BaseEngine
         if (FilesList.Count == 0)
         {
             MagickImage dorsoOrig = img.CDV_Full_v();
-            for (int i = 0; i < 4; i++) imagesV.Add(dorsoOrig.Clone());
-            dorsoOrig.Rotate(90);
-            for (int i = 0; i < 2; i++) imagesO.Add(dorsoOrig.Clone());
+            if (PaperFormat == PaperFormats.Medium)
+            {
+                for (int i = 0; i < 3; i++) imagesV.Add(dorsoOrig.Clone());
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++) imagesV.Add(dorsoOrig.Clone());
+                dorsoOrig.Rotate(90);
+                for (int i = 0; i < 2; i++) imagesO.Add(dorsoOrig.Clone());
+            }
         }
         else
         {
             int nImg = 0;
-            for (int i = 0; i < 4; i++)
+            if (PaperFormat == PaperFormats.Medium)
             {
-                Console.WriteLine($"Processing: {FilesList[nImg]}");
-                MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(FilesList[nImg]), fmt.CDV_Full_v, FillColor);
-                dorso.BorderColor = BorderColor;
-                dorso.Border(1);
-                imagesV.Add(dorso);
+                for (int i = 0; i < 3; i++)
+                {
+                    Console.WriteLine($"Processing: {FilesList[nImg]}");
+                    MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(FilesList[nImg]), fmt.CDV_Full_v, FillColor);
+                    dorso.BorderColor = BorderColor;
+                    dorso.Border(1);
+                    imagesV.Add(dorso);
 
-                nImg++;
-                if (nImg >= FilesList.Count) nImg = 0;
+                    nImg++;
+                    if (nImg >= FilesList.Count) nImg = 0;
+                }
             }
-
-            for (int i = 0; i < 2; i++)
+            else
             {
-                if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
-                MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(FilesList[nImg]), fmt.CDV_Full_o, FillColor);
-                dorso.BorderColor = BorderColor;
-                dorso.Border(1);
-                imagesO.Add(dorso);
+                for (int i = 0; i < 4; i++)
+                {
+                    Console.WriteLine($"Processing: {FilesList[nImg]}");
+                    MagickImage dorso = Utils.RotateResizeAndFill(
+                        new MagickImage(FilesList[nImg]), fmt.CDV_Full_v, FillColor);
+                    dorso.BorderColor = BorderColor;
+                    dorso.Border(1);
+                    imagesV.Add(dorso);
 
-                nImg++;
-                if (nImg >= FilesList.Count) nImg = 0;
+                    nImg++;
+                    if (nImg >= FilesList.Count) nImg = 0;
+                }
+
+                for (int i = 0; i < 2; i++)
+                {
+                    if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
+                    MagickImage dorso = Utils.RotateResizeAndFill(
+                        new MagickImage(FilesList[nImg]), fmt.CDV_Full_o, FillColor);
+                    dorso.BorderColor = BorderColor;
+                    dorso.Border(1);
+                    imagesO.Add(dorso);
+
+                    nImg++;
+                    if (nImg >= FilesList.Count) nImg = 0;
+                }
             }
         }
 
         // Margini di taglio
         Drawables draw = new();
         draw.StrokeColor(BorderColor).StrokeWidth(1);
-        draw.Line(0, fmt.ToPixels(10), final.Width, fmt.ToPixels(10));
-        draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height, final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height);
-        draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width, final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width);
+        if (PaperFormat == PaperFormats.Medium)
+        {
+            int top = (final.Height - fmt.CDV_Full_v.Height) / 2;
+            int left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
+
+            draw.Line(0, top, final.Width, top);
+            draw.Line(0, final.Height - top, final.Width, final.Height - top);
+            draw.Line(left, 0, left, final.Height);
+            draw.Line(final.Width - left, 0, final.Width - left, final.Height);
+        }
+        else
+        {
+            draw.Line(0, fmt.ToPixels(10), final.Width, fmt.ToPixels(10));
+            draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height,
+                final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height);
+            draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width,
+                final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width);
+        }
         draw.Draw(final);
 
-        final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
-        final.Composite(imagesO.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
+        if (PaperFormat == PaperFormats.Medium)
+        {
+            final.Composite(imagesV.AppendHorizontally(), Gravity.Center, new PointD(0, 0));
+        }
+        else
+        {
+            final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
+            final.Composite(imagesO.AppendHorizontally(), Gravity.North, 
+                new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
+        }
 
         return final;
     }

@@ -51,6 +51,7 @@ public class MontaggioDorsiParameters : CommonParameters
             }
             return ret;
         }
+        set => Paper = value.ToString();
     }
 
     /// <summary>

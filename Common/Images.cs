@@ -129,6 +129,18 @@ public class Images
     /// <returns></returns>
     public MagickImage InCartha20x27_v() => InCartha20x27_v(MagickColors.White);
     /// <summary>
+    /// Photocity Digital print over 15x20cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage InCartha15x20_o() => InCartha15x20_o(MagickColors.White);
+    /// <summary>
+    /// Photocity Digital print over 15x20cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage InCartha15x20_v() => InCartha15x20_v(MagickColors.White);
+    /// <summary>
     /// 15x10cm paper
     /// </summary>
     /// <remarks>White background</remarks>
