@@ -131,6 +131,7 @@ public partial class BaseForm : Window
     protected void AggiornaAnteprima(Image img)
     {
         image = img;
+        image.Source = null;
         bwAnteprima.RunWorkerAsync();
         waitForm = new WaitForm();
         waitForm.Owner = this;
