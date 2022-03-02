@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using System;
 using System.Windows.Controls;
 
 namespace Casasoft.CCDV.UI;
@@ -34,7 +35,11 @@ public partial class CommonOptionsControl : UserControl
         InitializeComponent();
     }
 
-    public int DpiValue { get => txtDPI.Value; set => txtDPI.Value = value; }
+    public int DpiValue
+    {
+        get => txtDPI.Value; 
+        set => txtDPI.Value = value;
+    }
 
     public MagickColor BorderColor
     {
@@ -44,6 +49,12 @@ public partial class CommonOptionsControl : UserControl
     public MagickColor FillColor
     {
         get => cpFill.IMColor;
-        set => cpFill.IMColor = value;  
+        set => cpFill.IMColor = value;
+    }
+
+    private void MenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        MenuItem mi = (MenuItem)sender;
+        txtDPI.Value = Convert.ToInt16(mi.Header);
     }
 }

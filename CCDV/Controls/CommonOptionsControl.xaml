@@ -33,7 +33,16 @@ If not, see <http://www.gnu.org/licenses/>.
         <local:ColorPickerLabelControl x:Name="cpFill" Caption="Colore di riempimento" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="White" />
         <local:ColorPickerLabelControl x:Name="cpBorder" Caption="Colore dei bordi" VerticalAlignment="Top" HorizontalAlignment="Left" ShowAlpha="False" SelectedColor="Black" RenderTransformOrigin="0.5,0.5" />
         <StackPanel Orientation="Horizontal" >
-            <casasoft:NumericUpDown x:Name="txtDPI" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" Width="60" Value="300" MinValue="1"/>
+            <casasoft:NumericUpDown x:Name="txtDPI" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" Width="60" Value="300" MinValue="1">
+                <casasoft:NumericUpDown.TBContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="72" Click="MenuItem_Click"/>
+                        <MenuItem Header="150" Click="MenuItem_Click"/>
+                        <MenuItem Header="300" Click="MenuItem_Click"/>
+                        <MenuItem Header="600" Click="MenuItem_Click"/>
+                    </ContextMenu>
+                </casasoft:NumericUpDown.TBContextMenu>
+            </casasoft:NumericUpDown>
             <Label x:Name="lblDPI" Content ="DPI" HorizontalAlignment="Left" Margin="0,-4,0,0" VerticalAlignment="Top"/>
         </StackPanel>
     </StackPanel>
