@@ -2040,6 +2040,22 @@
             <param name="fontItalic">use bold font (if available)</param>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.Utils.HLine(ImageMagick.Drawables,System.Int32,System.Int32)">
+            <summary>
+            Draws an horizontal line from 0 to width
+            </summary>
+            <param name="draw"></param>
+            <param name="h">Distance from top border</param>
+            <param name="width"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Utils.VLine(ImageMagick.Drawables,System.Int32,System.Int32)">
+            <summary>
+            Draws a vertical line from 0 to height
+            </summary>
+            <param name="draw"></param>
+            <param name="l">Distance from left border</param>
+            <param name="height"></param>
+        </member>
         <member name="M:Casasoft.CCDV.Utils.GetLicense">
             <summary>
             Returns the text of the license

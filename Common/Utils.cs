@@ -187,6 +187,23 @@ public static class Utils
         CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
     #endregion
 
+    #region lines
+    /// <summary>
+    /// Draws an horizontal line from 0 to width
+    /// </summary>
+    /// <param name="draw"></param>
+    /// <param name="h">Distance from top border</param>
+    /// <param name="width"></param>
+    public static void HLine(Drawables draw, int h, int width) => draw.Line(0, h, width, h);
+    /// <summary>
+    /// Draws a vertical line from 0 to height
+    /// </summary>
+    /// <param name="draw"></param>
+    /// <param name="l">Distance from left border</param>
+    /// <param name="height"></param>
+    public static void VLine(Drawables draw, int l, int height) => draw.Line(l, 0, l, height);
+    #endregion
+
     /// <summary>
     /// Returns the text of the license
     /// </summary>

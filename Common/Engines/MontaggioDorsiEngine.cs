@@ -117,45 +117,12 @@ public class MontaggioDorsiEngine : BaseEngine
             int nImg = 0;
             if (PaperFormat == PaperFormats.Medium)
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    Console.WriteLine($"Processing: {FilesList[nImg]}");
-                    MagickImage dorso = Utils.RotateResizeAndFill(new MagickImage(FilesList[nImg]), fmt.CDV_Full_v, FillColor);
-                    dorso.BorderColor = BorderColor;
-                    dorso.Border(1);
-                    imagesV.Add(dorso);
-
-                    nImg++;
-                    if (nImg >= FilesList.Count) nImg = 0;
-                }
+                _ = LoadImages(3, nImg, imagesV, quiet, fmt.CDV_Full_v);
             }
             else
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    Console.WriteLine($"Processing: {FilesList[nImg]}");
-                    MagickImage dorso = Utils.RotateResizeAndFill(
-                        new MagickImage(FilesList[nImg]), fmt.CDV_Full_v, FillColor);
-                    dorso.BorderColor = BorderColor;
-                    dorso.Border(1);
-                    imagesV.Add(dorso);
-
-                    nImg++;
-                    if (nImg >= FilesList.Count) nImg = 0;
-                }
-
-                for (int i = 0; i < 2; i++)
-                {
-                    if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
-                    MagickImage dorso = Utils.RotateResizeAndFill(
-                        new MagickImage(FilesList[nImg]), fmt.CDV_Full_o, FillColor);
-                    dorso.BorderColor = BorderColor;
-                    dorso.Border(1);
-                    imagesO.Add(dorso);
-
-                    nImg++;
-                    if (nImg >= FilesList.Count) nImg = 0;
-                }
+                nImg = LoadImages(4, nImg, imagesV, quiet, fmt.CDV_Full_v);
+                _ = LoadImages(2, nImg, imagesO, quiet, fmt.CDV_Full_o);
             }
         }
 
@@ -167,18 +134,19 @@ public class MontaggioDorsiEngine : BaseEngine
             int top = (final.Height - fmt.CDV_Full_v.Height) / 2;
             int left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
 
-            draw.Line(0, top, final.Width, top);
-            draw.Line(0, final.Height - top, final.Width, final.Height - top);
-            draw.Line(left, 0, left, final.Height);
-            draw.Line(final.Width - left, 0, final.Width - left, final.Height);
+            Utils.HLine(draw, top, final.Width);
+            Utils.HLine(draw, final.Height - top, final.Width);
+            Utils.VLine(draw, left, final.Height);
+            Utils.VLine(draw, final.Width - left, final.Height);
         }
         else
         {
-            draw.Line(0, fmt.ToPixels(10), final.Width, fmt.ToPixels(10));
-            draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height,
-                final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height);
-            draw.Line(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width,
-                final.Width, fmt.ToPixels(10) + fmt.CDV_Full_v.Height + fmt.CDV_Full_v.Width);
+            int h = fmt.ToPixels(10);
+            Utils.HLine(draw, h, final.Width);
+            h += fmt.CDV_Full_v.Height;
+            Utils.HLine(draw, h, final.Width);
+            h += fmt.CDV_Full_v.Width;
+            Utils.HLine(draw, h, final.Width);
         }
         draw.Draw(final);
 
@@ -189,11 +157,33 @@ public class MontaggioDorsiEngine : BaseEngine
         else
         {
             final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
-            final.Composite(imagesO.AppendHorizontally(), Gravity.North, 
+            final.Composite(imagesO.AppendHorizontally(), Gravity.North,
                 new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
         }
 
         return final;
     }
+
+    #region functions
+    private int LoadImages(int n, int counter, MagickImageCollection dest, bool quiet, MagickGeometry orientation)
+    {
+        int nImg = counter;
+        for (int i = 0; i < n; i++)
+        {
+            if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
+            MagickImage dorso = Utils.RotateResizeAndFill(
+                new MagickImage(FilesList[nImg]), orientation, FillColor);
+            dorso.BorderColor = BorderColor;
+            dorso.Border(1);
+            dest.Add(dorso);
+
+            nImg++;
+            if (nImg >= FilesList.Count) nImg = 0;
+        }
+        return nImg;
+    }
+
+    #endregion
+
     #endregion
 }
