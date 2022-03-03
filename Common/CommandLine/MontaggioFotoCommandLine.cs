@@ -42,6 +42,11 @@ public class MontaggioFotoCommandLine : CommandLine
     /// true if white space around the images must be deleted
     /// </summary>
     public bool Trim { get; set; }
+    /// <summary>
+    /// Blank border around the image
+    /// </summary>
+    public int Padding { get; set; }
+    private string sPadding = "0";
 
     /// <summary>
     /// Constructor
@@ -69,8 +74,24 @@ public class MontaggioFotoCommandLine : CommandLine
                 { "fullsize", "resize image to full format", o => FullSize = o != null },
                 { "withborder", "include border to full format", o => WithBorder = o != null },
                 { "trim", "trim white space", o => Trim = o != null },
+                { "p|padding=", "blank border around the image", s => sPadding = s }
             };
         AddBaseOptions();
+    }
+
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="args">command line arguments</param>
+    /// <returns>true if nothing to (ie. help)</returns>
+    public override bool Parse(string[] args)
+    {
+        if (base.Parse(args)) return true;
+
+        Padding = GetIntParameter(sPadding, Padding,
+            $"Incorrect padding value '{sPadding}'. Using default value.");
+
+        return false;
     }
 
     /// <summary>

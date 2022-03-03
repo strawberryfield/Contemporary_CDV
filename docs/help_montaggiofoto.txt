@@ -7,6 +7,7 @@ Options:
       --fullsize             resize image to full format
       --withborder           include border to full format
       --trim                 trim white space
+  -p, --padding=VALUE        blank border around the image
       --fillcolor=VALUE      set the color used to fiil the images
                                (default #FFFFFF)
       --bordercolor=VALUE    set the color used to border the images

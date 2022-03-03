@@ -42,9 +42,10 @@ public partial class MontaggioFotoForm : BaseForm
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
         eng.Dpi = commonOptions.DpiValue;
-        eng.WithBorder = (bool)chkWithBorders.IsChecked;
-        eng.FullSize = (bool)chkFullSize.IsChecked; 
-        eng.Trim = (bool)chkTrim.IsChecked;       
+        eng.WithBorder = isChecked(chkWithBorders);
+        eng.FullSize = isChecked(chkFullSize);
+        eng.Trim = isChecked(chkTrim);
+        eng.Padding = txtPadding.Value;
     }
 
     protected override void loadJson(string json)
@@ -58,6 +59,7 @@ public partial class MontaggioFotoForm : BaseForm
         chkWithBorders.IsChecked = eng.WithBorder;
         chkFullSize.IsChecked = eng.FullSize;
         chkTrim.IsChecked = eng.Trim;
+        txtPadding.Value = eng.Padding;
         addFile(1, filename1);
         addFile(2, filename2);
     }

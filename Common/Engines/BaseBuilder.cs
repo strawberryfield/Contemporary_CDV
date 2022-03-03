@@ -278,6 +278,7 @@ public class BaseBuilder : IBuilder
     /// Sets image for the back cover
     /// </summary>
     /// <param name="filename"></param>
+    /// <param name="isHorizontal"></param>
     public void SetBackImage(string filename, bool isHorizontal = false)
     {
         backImagePath = filename;

@@ -604,6 +604,11 @@
             true if white space around the images must be deleted
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.MontaggioFotoCommandLine.Padding">
+            <summary>
+            Blank border around the image
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -618,6 +623,13 @@
             <param name="exename">Name of the program exe</param>
             <param name="outputname">Default output file name</param>
             <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.Parse(System.String[])">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="args">command line arguments</param>
+            <returns>true if nothing to (ie. help)</returns>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.JsonTemplate">
             <summary>
@@ -760,6 +772,7 @@
             Sets image for the back cover
             </summary>
             <param name="filename"></param>
+            <param name="isHorizontal"></param>
         </member>
         <member name="M:Casasoft.CCDV.BaseBuilder.AddCuttingLines(ImageMagick.MagickImage)">
             <summary>
@@ -1183,6 +1196,11 @@
             Set if a border to full CDV size (100x64mm) is added
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Padding">
+            <summary>
+            Blank border around the image
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor">
             <summary>
             Constructor
@@ -1596,6 +1614,23 @@
             <remarks>White background</remarks>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.Images.Padded(ImageMagick.MagickColor,ImageMagick.MagickGeometry,System.Int32)">
+            <summary>
+            Creates an image with a border around
+            </summary>
+            <param name="c">fill color</param>
+            <param name="baseSize"></param>
+            <param name="Padding">border size in mm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.Padded(ImageMagick.MagickGeometry,System.Int32)">
+            <summary>
+            Creates an image with a border around
+            </summary>
+            <param name="baseSize"></param>
+            <param name="Padding">border size in mm</param>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.Images.Info(System.String,System.String)">
             <summary>
             Draws infos on the image
@@ -1862,6 +1897,11 @@
         <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.WithBorder">
             <summary>
             Set if a border to full CDV size (100x64mm) is added
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.Padding">
+            <summary>
+            Blank border around the image
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.JSON.MontaggioFotoParameters.#ctor">

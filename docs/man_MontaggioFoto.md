@@ -25,6 +25,10 @@ include border to full format
 trim white space  
 
 
+**-p, --padding=VALUE** :  
+blank border around the image  
+
+
 **--fillcolor=VALUE** :  
 set the color used to fiil the images  
 \(default \#FFFFFF\)  
@@ -91,6 +95,7 @@ using the following template:
   "FullSize": false,  
   "Trim": false,  
   "WithBorder": false,  
+  "Padding": 0,  
   "FillColor": "\#FFFFFF",  
   "BorderColor": "\#000000",  
   "Dpi": 300,  

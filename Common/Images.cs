@@ -247,6 +247,29 @@ public class Images
 
     #endregion
 
+    #region padded images
+    /// <summary>
+    /// Creates an image with a border around
+    /// </summary>
+    /// <param name="c">fill color</param>
+    /// <param name="baseSize"></param>
+    /// <param name="Padding">border size in mm</param>
+    /// <returns></returns>
+    public MagickImage Padded(MagickColor c, MagickGeometry baseSize, int Padding)
+    {
+        int pad = fmt.ToPixels(Padding) * 2;
+        return new MagickImage(c, baseSize.Width + pad, baseSize.Height + pad);
+    }
+    /// <summary>
+    /// Creates an image with a border around
+    /// </summary>
+    /// <param name="baseSize"></param>
+    /// <param name="Padding">border size in mm</param>
+    /// <returns></returns>
+    public MagickImage Padded(MagickGeometry baseSize, int Padding)
+        => Padded(MagickColors.White, baseSize, Padding);
+    #endregion
+
     /// <summary>
     /// Draws infos on the image
     /// </summary>

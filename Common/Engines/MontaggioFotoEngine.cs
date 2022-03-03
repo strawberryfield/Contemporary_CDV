@@ -44,6 +44,10 @@ public class MontaggioFotoEngine : BaseEngine
     /// Set if a border to full CDV size (100x64mm) is added
     /// </summary>
     public bool WithBorder { get; set; } = false;
+    /// <summary>
+    /// Blank border around the image
+    /// </summary>
+    public int Padding { get; set; } = 0;
     #endregion
 
     #region constructors
@@ -66,6 +70,7 @@ public class MontaggioFotoEngine : BaseEngine
         FullSize = p.FullSize ? true : FullSize;
         Trim = p.Trim ? true : Trim;
         WithBorder = p.WithBorder ? true : WithBorder;
+        Padding = p.Padding;
     }
     #endregion
 
@@ -79,8 +84,9 @@ public class MontaggioFotoEngine : BaseEngine
         GetBaseJsonParams();
         MontaggioFotoParameters p = (MontaggioFotoParameters)parameters;
         p.FullSize = FullSize;
-        p.WithBorder = WithBorder;  
+        p.WithBorder = WithBorder;
         p.Trim = Trim;
+        p.Padding = Padding;
         return JsonSerializer.Serialize(p);
     }
 
@@ -96,6 +102,7 @@ public class MontaggioFotoEngine : BaseEngine
         FullSize = p.FullSize;
         WithBorder = p.WithBorder;
         Trim = p.Trim;
+        Padding = p.Padding;
     }
     #endregion
 
@@ -165,15 +172,29 @@ public class MontaggioFotoEngine : BaseEngine
         MagickImage img1 = Utils.RotateResizeAndFill(new(filename),
             FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v,
             FillColor);
+
         if (Trim) img1.Trim();
+
         if (WithBorder)
         {
             MagickImage img2 = img.CDV_Full_v(FillColor);
             img2.Composite(img1, Gravity.Center);
             return img2;
         }
-        else
-            return img1;
+
+        if (Padding > 0)
+        {
+            MagickGeometry size = fmt.CDV_Internal_v;
+            if (Trim)
+            {
+                size = new MagickGeometry(img1.Width, img1.Height);
+            }
+            MagickImage img2 = img.Padded(FillColor, size, Padding);
+            img2.Composite(img1, Gravity.Center);
+            return img2;
+        }
+
+        return img1;
     }
     #endregion
 }

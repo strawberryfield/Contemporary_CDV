@@ -38,6 +38,10 @@ public class MontaggioFotoParameters : CommonParameters
     /// Set if a border to full CDV size (100x64mm) is added
     /// </summary>
     public bool WithBorder { get; set; }
+    /// <summary>
+    /// Blank border around the image
+    /// </summary>
+    public int Padding { get; set; } = 0;
 
     /// <summary>
     /// Default constructor
