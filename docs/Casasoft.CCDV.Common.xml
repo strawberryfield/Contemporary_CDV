@@ -128,6 +128,16 @@
             Size of box
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilderCommandLine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.BaseBuilderCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -677,6 +687,11 @@
             Text to print on left border
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="F:Casasoft.CCDV.BaseBuilder.topImage">
             <summary>
             Image for top border
@@ -779,6 +794,12 @@
             Creates lines for cut
             </summary>
             <param name="img"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.GetOutputImage">
+            <summary>
+            Returns empty final image
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.Engines.BaseBuilderEngine">
             <summary>
@@ -1267,6 +1288,17 @@
             Interface for boxes and folders builder
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.IBuilder.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.GetOutputImage">
+            <summary>
+            Returns empty final image
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.Formats">
             <summary>
             This class handles all target formats
@@ -1719,6 +1751,16 @@
         <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.useTestImages">
             <summary>
             Set to generate sample images
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.BaseBuilderParameters.PaperFormat">
+            <summary>
+            Output paper size
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.JSON.BaseBuilderParameters.#ctor">

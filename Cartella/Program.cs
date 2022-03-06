@@ -39,14 +39,15 @@ if (par.Parse(args)) return;
 #region main
 Formats fmt = new(par.Dpi);
 Images img = new(fmt);
-MagickImage output = img.InCartha20x27_o();
-//MagickImage output = img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg");
 FolderBuilder sc = new(par, fmt);
-MagickImage result = sc.Build();
+MagickImage output = sc.GetOutputImage();
 
-output.Composite(result, Gravity.Center);
+output.Composite(sc.Build(), Gravity.Center);
 sc.AddCuttingLines(output);
-img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg").Draw(output);
+if (sc.PaperFormat == PaperFormats.Large)
+{
+    img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg").Draw(output);
+}
 fmt.SetImageParameters(output);
 output.Write($"{par.OutputName}.jpg");
 #endregion

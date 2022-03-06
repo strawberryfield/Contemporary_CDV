@@ -69,6 +69,11 @@ public class BaseBuilder : IBuilder
     /// </summary>
     public string borderText { get; set; }
 
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public PaperFormats PaperFormat { get; set; }
+
     protected MagickGeometry topFormat;
     protected MagickGeometry borderFormat;
     protected MagickGeometry frontFormat;
@@ -306,6 +311,23 @@ public class BaseBuilder : IBuilder
         d.Line(h_offset, 0, h_offset, img.Height - v_offset);
         d.Line(img.Width - h_offset, 0, img.Width - h_offset, img.Height);
         d.Draw(img);
+    }
+
+    /// <summary>
+    /// Returns empty final image
+    /// </summary>
+    /// <returns></returns>
+    public MagickImage GetOutputImage()
+    {
+        Images img = new(fmt);
+        if (PaperFormat == PaperFormats.Medium)
+        {
+            return img.InCartha15x20_o();
+        }
+        else
+        {
+            return img.InCartha20x27_o();
+        }
     }
 
     #region test

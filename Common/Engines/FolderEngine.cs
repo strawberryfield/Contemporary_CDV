@@ -58,8 +58,7 @@ public class FolderEngine : BaseBuilderEngine
     /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
-        Images img = new(fmt);
-        MagickImage output = img.InCartha20x27_o();
+        MagickImage output = Builder.GetOutputImage();
         FolderBuilder sc = (FolderBuilder)Builder;
         output.Composite(sc.Build(), Gravity.Center);
         sc.AddCuttingLines(output);

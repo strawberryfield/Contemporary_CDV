@@ -44,4 +44,14 @@ public interface IBuilder
 
     void AddCuttingLines(MagickImage img);
     void CreateTestImages();
+
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    PaperFormats PaperFormat { get; set; }
+    /// <summary>
+    /// Returns empty final image
+    /// </summary>
+    /// <returns></returns>
+    MagickImage GetOutputImage();
 }

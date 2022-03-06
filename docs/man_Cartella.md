@@ -67,6 +67,12 @@ orientation of the box: 'portrait' or 'landscape' \(
 default 'PORTRAIT'\)  
 
 
+**--paper=VALUE** :  
+Output paper size:  
+Large \(default\) 20x27cm  
+Medium 15x20cm  
+
+
 **--sample** :  
 generate sample images  
 
@@ -148,6 +154,7 @@ using the following template:
   "isHorizontal": false,  
   "targetFormat": 0,  
   "useTestImages": false,  
+  "Paper": null,  
   "FillColor": "\#FFFFFF",  
   "BorderColor": "\#000000",  
   "Dpi": 300,  

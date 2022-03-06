@@ -29,7 +29,7 @@ If not, see <http://www.gnu.org/licenses/>.
              xmlns:local="clr-namespace:Casasoft.CCDV.UI"
              mc:Ignorable="d" >
     <StackPanel Orientation="Horizontal">
-        <RadioButton x:Name="rbLarge" Content="20x27" HorizontalAlignment="Left" Width="110" VerticalAlignment="Top" IsChecked="True" GroupName="targetFormat"/>
-        <RadioButton x:Name="rbMedium" Content="15x20" HorizontalAlignment="Left"  VerticalAlignment="Top" GroupName="targetFormat"/>
+        <RadioButton x:Name="rbLarge" Content="20x27" HorizontalAlignment="Left" Width="110" VerticalAlignment="Top" IsChecked="True" GroupName="paperFormat"/>
+        <RadioButton x:Name="rbMedium" Content="15x20" HorizontalAlignment="Left"  VerticalAlignment="Top" GroupName="paperFormat"/>
     </StackPanel>
 </UserControl>

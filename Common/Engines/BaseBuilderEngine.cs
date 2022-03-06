@@ -73,6 +73,7 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
         p.fontItalic = builder.fontItalic;
         p.isHorizontal = builder.isHorizontal;
         p.targetFormat = (int)builder.targetType;
+        p.PaperFormat = builder.PaperFormat;
 
         return JsonSerializer.Serialize(p);
     }
@@ -104,6 +105,7 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
         builder.bottomImagePath = p.bottomImage;
         builder.leftImagePath = p.leftImage;
         builder.rightImagePath = p.rightImage;
+        builder.PaperFormat = p.PaperFormat;    
     }
     #endregion
 

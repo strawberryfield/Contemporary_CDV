@@ -18,6 +18,9 @@ Options:
       --format=VALUE         size of the box: 'cdv' or 'cc' (default 'CDV')
       --orientation=VALUE    orientation of the box: 'portrait' or 'landscape' (
                                default 'PORTRAIT')
+      --paper=VALUE          Output paper size:
+                               Large (default) 20x27cm
+                               Medium 15x20cm
       --sample               generate sample images
       --fillcolor=VALUE      set the color used to fiil the images
                                (default #FFFFFF)

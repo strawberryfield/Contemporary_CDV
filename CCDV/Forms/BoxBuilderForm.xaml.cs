@@ -67,6 +67,7 @@ public partial class BoxBuilderForm : BaseForm
         builder.fontItalic = boxImages.FontItalic;
         builder.isHorizontal = boxImages.isHorizontal;
         builder.targetType = boxImages.TargetType;
+        builder.PaperFormat = paperFormat.PaperFormat;
 
         builder.makeEmptyImages();
         if (boxImages.UseTestImages) builder.CreateTestImages();
@@ -93,6 +94,7 @@ public partial class BoxBuilderForm : BaseForm
         boxImages.FontItalic = builder.fontItalic;
         boxImages.isHorizontal = builder.isHorizontal;
         boxImages.TargetType = builder.targetType;
+        paperFormat.PaperFormat = builder.PaperFormat;
 
         boxImages.FrontImage = builder.frontImagePath;
         boxImages.BackImage = builder.backImagePath;

@@ -18,6 +18,7 @@ Json parameters template for: Scatola
   "isHorizontal": false,
   "targetFormat": 0,
   "useTestImages": false,
+  "Paper": null,
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",
   "Dpi": 300,
