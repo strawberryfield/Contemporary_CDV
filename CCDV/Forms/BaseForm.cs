@@ -199,14 +199,14 @@ public partial class BaseForm : Window
         }
     }
 
-    protected bool isChecked(RadioButton rb)
+    public static bool isChecked(RadioButton rb)
     {
         bool ret = false;
         if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
         return ret;
     }
 
-    protected bool isChecked(CheckBox rb)
+    public static bool isChecked(CheckBox rb)
     {
         bool ret = false;
         if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
