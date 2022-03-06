@@ -41,18 +41,7 @@ public class MontaggioDorsiCommandLine : CommandLine
     /// </summary>
     public PaperFormats PaperFormat
     {
-        get
-        {
-            PaperFormats ret = PaperFormats.Large;
-            if (!string.IsNullOrEmpty(Paper))
-            {
-                if (Paper.ToUpper() == "MEDIUM")
-                {
-                    ret = PaperFormats.Medium;
-                }
-            }
-            return ret;
-        }
+        get => Utils.GetThickFormat(Paper);
     }
 
     /// <summary>

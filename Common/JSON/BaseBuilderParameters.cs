@@ -19,6 +19,8 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using System.Text.Json.Serialization;
+
 namespace Casasoft.CCDV.JSON;
 
 /// <summary>
@@ -92,6 +94,21 @@ public class BaseBuilderParameters : CommonParameters
     /// Set to generate sample images
     /// </summary>
     public bool useTestImages { get; set; }
+
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public string Paper { get; set; }
+
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    [JsonIgnore]
+    public PaperFormats PaperFormat
+    {
+        get => Utils.GetThickFormat(Paper);
+        set => Paper = value.ToString();
+    }
 
     /// <summary>
     /// Default constructor

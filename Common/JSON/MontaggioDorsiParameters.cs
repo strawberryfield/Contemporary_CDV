@@ -39,18 +39,7 @@ public class MontaggioDorsiParameters : CommonParameters
     [JsonIgnore]
     public PaperFormats PaperFormat
     {
-        get
-        {
-            PaperFormats ret = PaperFormats.Large;
-            if(!string.IsNullOrEmpty(Paper))
-            {
-                if(Paper.ToUpper() == "MEDIUM")
-                {
-                    ret = PaperFormats.Medium;
-                }
-            }
-            return ret;
-        }
+        get => Utils.GetThickFormat(Paper);
         set => Paper = value.ToString();
     }
 

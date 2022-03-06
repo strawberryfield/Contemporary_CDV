@@ -204,6 +204,21 @@ public static class Utils
     public static void VLine(Drawables draw, int l, int height) => draw.Line(l, 0, l, height);
     #endregion
 
+    #region paper formats
+    public static PaperFormats GetThickFormat(string Paper)
+    {
+        PaperFormats ret = PaperFormats.Large;
+        if (!string.IsNullOrEmpty(Paper))
+        {
+            if (Paper.ToUpper() == "MEDIUM")
+            {
+                ret = PaperFormats.Medium;
+            }
+        }
+        return ret;
+    }
+    #endregion
+
     /// <summary>
     /// Returns the text of the license
     /// </summary>
