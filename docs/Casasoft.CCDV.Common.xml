@@ -2008,6 +2008,34 @@
             cooperation with the commu [rest of string was truncated]&quot;;.
              </summary>
         </member>
+        <member name="T:Casasoft.CCDV.Scripting.Compiler">
+            <summary>
+            c# scripts compiler
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.Compile(System.String)">
+            <summary>
+            Compile the source code to a memory stream
+            </summary>
+            <param name="sourceCode"></param>
+            <returns>null if any compilation error</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.Run(System.IO.MemoryStream,System.String,System.String,System.Object[])">
+            <summary>
+            Execute the code
+            </summary>
+            <param name="code">Memory stream with compiled code</param>
+            <param name="ClassName">Fully qualified class name</param>
+            <param name="Method">Method to execute</param>
+            <param name="args">Array of arguments</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.FromTrustedPlatformAssembly(System.String)">
+            <summary>
+            Gets the dll complete path
+            </summary>
+            <param name="shortDllName"></param>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.Utils">
             <summary>
             Collection of Image Magick utilities
