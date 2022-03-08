@@ -95,12 +95,15 @@ public static class Compiler
     {
         // create instance of the desired class and call the desired function
         Type type = assembly.GetType(ClassName);
-        object obj = Activator.CreateInstance(type);
-        type.InvokeMember(Method,
-            BindingFlags.Default | BindingFlags.InvokeMethod,
-            null,
-            obj,
-            args);
+        if (type.GetMethod(Method) != null)
+        {
+            object obj = Activator.CreateInstance(type);
+            type.InvokeMember(Method,
+                BindingFlags.Default | BindingFlags.InvokeMethod,
+                null,
+                obj,
+                args);
+        }
     }
 
     /// <summary>

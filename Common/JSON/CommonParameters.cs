@@ -45,6 +45,10 @@ public class CommonParameters : IParameters
     /// </summary>
     public string OutputName { get; set; }
     /// <summary>
+    /// c# script for custom processing
+    /// </summary>
+    public string Script { get; set; }
+    /// <summary>
     /// Files to process
     /// </summary>
     public List<string> FilesList { get; set; }

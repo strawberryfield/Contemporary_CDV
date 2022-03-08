@@ -67,6 +67,10 @@ public interface ICommandLine
     /// Json formatted parameters
     /// </summary>
     string JSON { get; set; }
+    /// <summary>
+    /// c# script for custom processing
+    /// </summary>
+    string Script { get; set; } 
     #endregion
 
     #region methods

@@ -20,8 +20,10 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Casasoft.CCDV.Engines;
 
@@ -73,6 +75,32 @@ public class BaseEngine : IEngine
     /// Colors conversion utilities
     /// </summary>
     protected Colors colors;
+
+    private string _script;
+    /// <summary>
+    /// c# script for custom processing
+    /// </summary>
+    public string Script
+    {
+        get => _script;
+        set
+        {
+            _script = value;
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                CustomCode = ScriptingClass.Compile(value);
+            }
+        }
+    }
+    /// <summary>
+    /// compiled script for custom processing
+    /// </summary>
+    public Assembly CustomCode { get; set; }
+    /// <summary>
+    /// Class that handles user scripts
+    /// </summary>
+    public IScripting ScriptingClass { get; set; }
+
     #endregion
 
     #region constructors

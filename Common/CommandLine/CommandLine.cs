@@ -121,6 +121,10 @@ public class CommandLine : ICommandLine
     /// Json formatted parameters
     /// </summary>
     public string JSON { get; set; }
+    /// <summary>
+    /// c# script for custom processing
+    /// </summary>
+    public string Script { get; set; }
     #endregion
 
     #region defaults
@@ -177,6 +181,11 @@ use --helpjson for sample template
 Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
                 o => JSON = GetFileParameter(o) },
+                { "script=", @"c# script for custom processing,
+use --helpscript for sample template
+Text can be stored in a file instead of a string
+The file must be referenced as '@filename'",
+                o => Script = GetFileParameter(o) },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },

@@ -24,10 +24,26 @@ using System.Reflection;
 
 namespace Casasoft.CCDV.Scripting;
 
-internal interface IScripting
+/// <summary>
+/// Interface for scripting handler classes
+/// </summary>
+public interface IScripting
 {
+    /// <summary>
+    /// json unserialized parameters
+    /// </summary>
     IParameters Parameters { get; set; }
 
+    /// <summary>
+    /// Adds namespaces and class declaration to script
+    /// </summary>
+    /// <param name="script"></param>
+    /// <returns></returns>
     string WrapScript(string script);
+    /// <summary>
+    /// Builds in-memory assembly
+    /// </summary>
+    /// <param name="script"></param>
+    /// <returns></returns>
     Assembly Compile(string script);
 }
