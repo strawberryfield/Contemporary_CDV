@@ -49,11 +49,13 @@ public static class Compiler
         string assemblyName = Path.GetRandomFileName();
         MetadataReference[] references = new MetadataReference[]
         {
-                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
-                MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Runtime.dll")),
-                MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Console.dll")),
-                MetadataReference.CreateFromFile("Magick.NET-Q16-AnyCPU.dll")
+            MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Runtime.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Console.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("netstandard.dll")),
+            MetadataReference.CreateFromFile("Magick.NET-Q16-AnyCPU.dll"),
+            MetadataReference.CreateFromFile("Casasoft.CCDV.Common.dll")
         };
 
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
@@ -97,7 +99,7 @@ public static class Compiler
     public static void Run(Assembly assembly, string ClassName, string Method, object[] args, IEngine eng)
     {
         // create instance of the desired class and call the desired function
-        Type type = assembly.GetType(ClassName);
+        Type type = assembly.GetType($"Casasoft.CCDV.Scripts.{ClassName}");
         if (type.GetMethod(Method) != null)
         {
             object obj = Activator.CreateInstance(type, new object[] { eng });

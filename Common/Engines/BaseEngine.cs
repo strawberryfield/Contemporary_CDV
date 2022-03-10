@@ -131,8 +131,8 @@ public class BaseEngine : IEngine
         }
 
         Dpi = par.Dpi != 300 ? par.Dpi : Dpi;
-        FillColor = par.FillColor != MagickColors.White ? par.FillColor : FillColor;
-        BorderColor = par.BorderColor != MagickColors.Black ? par.BorderColor : BorderColor;
+        FillColor = par.FillColor;
+        BorderColor = par.BorderColor;
     }
     #endregion
 
