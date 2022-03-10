@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\foto\\bicingiro\\cesena\\P1*.jpg",
+      "commandLineArgs": "--script=@C:\\projects\\Contemporary_CDV\\Test\\AddLabel.cs C:\\foto\\bicingiro\\cesena\\P1*.jpg",
       "environmentVariables": {
         "CDV_OUTPATH": "C:\\temp",
         "CDV_DPI": "600"

@@ -42,6 +42,8 @@ namespace Casasoft.CCDV.Scripts;
 
 public class UserScript
 {{
+private MontaggioFotoEngine engine;
+public UserScript(IEngine eng) => engine = (MontaggioFotoEngine)eng;
 {script}
 }}
 ";

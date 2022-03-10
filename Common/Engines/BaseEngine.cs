@@ -62,11 +62,11 @@ public class BaseEngine : IEngine
     /// <summary>
     /// Instance of formats handler
     /// </summary>
-    protected Formats fmt;
+    public Formats fmt;
     /// <summary>
     /// Instance of images handler
     /// </summary>
-    protected Images img;
+    public Images img;
     /// <summary>
     /// Class for json parameters handling
     /// </summary>
@@ -151,6 +151,7 @@ public class BaseEngine : IEngine
         parameters.BorderColor = colors.GetColorString(BorderColor);
         parameters.FillColor = colors.GetColorString(FillColor);
         parameters.Dpi = Dpi;
+        parameters.Script = Script;
         parameters.FilesList = new();
         parameters.FilesList.AddRange(FilesList);
     }

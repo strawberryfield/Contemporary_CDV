@@ -19,6 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.Engines;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
@@ -51,7 +52,8 @@ public static class Compiler
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
                 MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Runtime.dll")),
-                MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Console.dll"))
+                MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Console.dll")),
+                MetadataReference.CreateFromFile("Magick.NET-Q16-AnyCPU.dll")
         };
 
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
@@ -91,13 +93,14 @@ public static class Compiler
     /// <param name="ClassName">Fully qualified class name</param>
     /// <param name="Method">Method to execute</param>
     /// <param name="args">Array of arguments</param>
-    public static void Run(Assembly assembly, string ClassName, string Method, object[] args)
+    /// <param name="eng">Engine passed to constructor</param>
+    public static void Run(Assembly assembly, string ClassName, string Method, object[] args, IEngine eng)
     {
         // create instance of the desired class and call the desired function
         Type type = assembly.GetType(ClassName);
         if (type.GetMethod(Method) != null)
         {
-            object obj = Activator.CreateInstance(type);
+            object obj = Activator.CreateInstance(type, new object[] { eng });
             type.InvokeMember(Method,
                 BindingFlags.Default | BindingFlags.InvokeMethod,
                 null,

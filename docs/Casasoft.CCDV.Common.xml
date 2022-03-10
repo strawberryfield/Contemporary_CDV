@@ -271,6 +271,11 @@
             Json formatted parameters
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CommandLine.Script">
+            <summary>
+            c# script for custom processing
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.ExeName">
             <summary>
             Gets the name of currently running assembly
@@ -522,6 +527,11 @@
         <member name="P:Casasoft.CCDV.ICommandLine.JSON">
             <summary>
             Json formatted parameters
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ICommandLine.Script">
+            <summary>
+            c# script for custom processing
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.ICommandLine.WelcomeBanner">
@@ -879,6 +889,21 @@
             Colors conversion utilities
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.Script">
+            <summary>
+            c# script for custom processing
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.CustomCode">
+            <summary>
+            compiled script for custom processing
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.ScriptingClass">
+            <summary>
+            Class that handles user scripts
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
             <summary>
             Constructor
@@ -1103,6 +1128,21 @@
         <member name="P:Casasoft.CCDV.Engines.IEngine.BorderColor">
             <summary>
             Color for lines and borders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.Script">
+            <summary>
+            c# script for custom processing
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.CustomCode">
+            <summary>
+            compiled script for custom processing
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.ScriptingClass">
+            <summary>
+            Class that handles user scripts
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.IEngine.GetResult">
@@ -1793,6 +1833,11 @@
             Output file name
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.Script">
+            <summary>
+            c# script for custom processing
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.JSON.CommonParameters.FilesList">
             <summary>
             Files to process
@@ -1894,6 +1939,11 @@
         <member name="P:Casasoft.CCDV.JSON.IParameters.OutputName">
             <summary>
             Output file name
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.Script">
+            <summary>
+            c# script for custom processing
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.JSON.IParameters.FilesList">
@@ -2015,25 +2065,50 @@
         </member>
         <member name="M:Casasoft.CCDV.Scripting.Compiler.Compile(System.String)">
             <summary>
-            Compile the source code to a memory stream
+            Compile the source code to a memory assembly
             </summary>
             <param name="sourceCode"></param>
             <returns>null if any compilation error</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Scripting.Compiler.Run(System.IO.MemoryStream,System.String,System.String,System.Object[])">
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.Run(System.Reflection.Assembly,System.String,System.String,System.Object[],Casasoft.CCDV.Engines.IEngine)">
             <summary>
             Execute the code
             </summary>
-            <param name="code">Memory stream with compiled code</param>
+            <param name="assembly">Memory assembly with compiled code</param>
             <param name="ClassName">Fully qualified class name</param>
             <param name="Method">Method to execute</param>
             <param name="args">Array of arguments</param>
+            <param name="eng">Engine passed to constructor</param>
         </member>
         <member name="M:Casasoft.CCDV.Scripting.Compiler.FromTrustedPlatformAssembly(System.String)">
             <summary>
             Gets the dll complete path
             </summary>
             <param name="shortDllName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.Scripting.IScripting">
+            <summary>
+            Interface for scripting handler classes
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Scripting.IScripting.Parameters">
+            <summary>
+            json unserialized parameters
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.IScripting.WrapScript(System.String)">
+            <summary>
+            Adds namespaces and class declaration to script
+            </summary>
+            <param name="script"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.IScripting.Compile(System.String)">
+            <summary>
+            Builds in-memory assembly
+            </summary>
+            <param name="script"></param>
             <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.Utils">
