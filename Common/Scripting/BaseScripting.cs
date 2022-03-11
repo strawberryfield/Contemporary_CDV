@@ -22,6 +22,8 @@ internal class BaseScripting : IScripting
 {
     public IParameters Parameters { get; set; }
 
+    public string Template => string.Empty;
+
     public virtual string WrapScript(string script) => script;
     public virtual Assembly Compile(string script) => Compiler.Compile(WrapScript(script));
 }

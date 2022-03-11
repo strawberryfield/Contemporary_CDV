@@ -1,7 +1,7 @@
 ﻿// Sample script for MontaggioFoto
 
-public void ProcessOnLoad(MagickImage image)
+public MagickImage ProcessOnLoad(MagickImage image)
 {
     string filename = image.FileName;
-    image = Utils.RotateResizeAndFill(image, engine.fmt.CDV_Internal_v, engine.FillColor);
+    return Utils.RotateResizeAndFill(image, engine.fmt.CDV_Internal_v, engine.FillColor);
 }

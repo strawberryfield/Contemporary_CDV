@@ -46,4 +46,9 @@ public interface IScripting
     /// <param name="script"></param>
     /// <returns></returns>
     Assembly Compile(string script);
+
+    /// <summary>
+    /// Template for scriptable methods
+    /// </summary>
+    string Template { get; }
 }

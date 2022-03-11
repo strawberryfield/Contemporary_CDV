@@ -26,7 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
@@ -46,6 +45,10 @@ public class CommandLine : ICommandLine
     /// true if helpjson is requested
     /// </summary>
     protected bool shouldShowHelpJson { get; set; }
+    /// <summary>
+    /// true if helpscript is requested
+    /// </summary>
+    protected bool shouldShowHelpScript { get; set; }
     /// <summary>
     /// true if colors list is requested
     /// </summary>
@@ -108,11 +111,11 @@ public class CommandLine : ICommandLine
     /// <summary>
     /// Color to fill images
     /// </summary>
-    public MagickColor FillColor { get; set; }
+    public MagickColor FillColor { get; set; } 
     /// <summary>
     /// Color to use for lines and borders
     /// </summary>
-    public MagickColor BorderColor { get; set; }
+    public MagickColor BorderColor { get; set; } 
     /// <summary>
     /// Long description for man pages
     /// </summary>
@@ -190,6 +193,7 @@ The file must be referenced as '@filename'",
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
                 { "helpjson", "show json parameters template", h => shouldShowHelpJson = h != null },
+                { "helpscript", "show script template", h => shouldShowHelpScript = h != null },
                 { "man", "show the man page source and exit", h => shouldShowMan = h != null },
                 { "colors", "list available colors by name", h => shouldShowColors = h != null },
                 { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
@@ -251,6 +255,14 @@ The file must be referenced as '@filename'",
         {
             Console.WriteLine($"Json parameters template for: {exeName}\n");
             Console.WriteLine(JsonTemplate());
+            return true;
+        }
+
+        if (shouldShowHelpScript)
+        {
+            Console.WriteLine("-----");
+            Console.WriteLine(ScriptTemplate());
+            Console.WriteLine("-----");
             return true;
         }
 
@@ -326,7 +338,7 @@ The file must be referenced as '@filename'",
         StringBuilder ret = new StringBuilder();
         ret.AppendLine(@$"% {exeName.ToUpper()}(1)  
 % Roberto Ceccarelli - Casasoft  
-% Feb 2022
+% March 2022
 
 # NAME
 {exeName} - {exeDesc}
@@ -372,10 +384,32 @@ The file must be referenced as '@filename'",
 Parameters can also be passed with a json formatted string  
 using the following template:  
 
-{EscapeMarkdown(JsonTemplate())}
+~~~
+{JsonTemplate()}
+~~~
 
 ## ENVIRONMENT VARIABLES
 {EscapeMarkdown(EnvVarsHelp)}
+
+# SCRIPTING
+You can add custom c# code, compiled at runtime, with the --script parameter.
+You can call a property *engine* that exposes all the parameters passed
+to the main program.
+
+The following using are declared:  
+~~~
+using Casasoft.CCDV;
+using Casasoft.CCDV.Engines;
+using Casasoft.CCDV.JSON;
+using ImageMagick;
+using System;
+~~~
+
+These are the signatures of the scriptable methods:
+
+~~~
+{ScriptTemplate()}
+~~~
 
 # COPYRIGHT
 Casasoft {exeName} is free software:  
@@ -398,7 +432,7 @@ See the GNU General Public License for more details.");
     }
 
     /// <summary>
-    /// Prints a json schema for pameters
+    /// Prints a json schema for parameters
     /// </summary>
     /// <remarks>
     /// Should be overridden in specialized classes
@@ -409,6 +443,15 @@ See the GNU General Public License for more details.");
         CommonParameters p = new();
         return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
     }
+
+    /// <summary>
+    /// Prints a script template
+    /// </summary>
+    /// <remarks>
+    /// Should be overridden in specialized classes
+    /// </remarks>
+    /// <returns></returns>
+    public virtual string ScriptTemplate() => $"// Script template for {exeName}\n";
     #endregion
 
     #region internal utils

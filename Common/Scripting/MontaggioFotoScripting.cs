@@ -19,12 +19,6 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Casasoft.CCDV.Scripting;
 
 internal class MontaggioFotoScripting : BaseScripting
@@ -48,4 +42,13 @@ public UserScript(IEngine eng) => engine = (MontaggioFotoEngine)eng;
 }}
 ";
     }
+
+    public new string Template => @"
+/// <summary>
+/// Preprocesses the loaded image
+/// </summary>
+/// <param name=""image"">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoad(MagickImage image) { }";
+
 }

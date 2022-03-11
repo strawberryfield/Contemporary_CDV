@@ -98,9 +98,14 @@ public interface ICommandLine
     /// </summary>
     void ExpandWildcards();
     /// <summary>
-    /// Prints a json schema for pameters
+    /// Prints a json schema for parameters
     /// </summary>
     /// <returns></returns>
     string JsonTemplate();
+    /// <summary>
+    /// Prints a script template
+    /// </summary>
+    /// <returns></returns>
+    string ScriptTemplate();
     #endregion
 }

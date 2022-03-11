@@ -32,7 +32,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class MontaggioFotoEngine : BaseEngine
 {
-    #region properties
+     #region properties
     /// <summary>
     /// Set if image has full CDV size (100x64mm)
     /// </summary>
@@ -178,7 +178,7 @@ public class MontaggioFotoEngine : BaseEngine
 
         if(CustomCode != null)
         {
-            Compiler.Run(CustomCode, "UserScript", "ProcessOnLoad", 
+            image = (MagickImage)Compiler.Run(CustomCode, "UserScript", "ProcessOnLoad", 
                 new object[] { image }, this);
         }
 

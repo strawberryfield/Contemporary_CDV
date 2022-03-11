@@ -95,8 +95,8 @@ If not, see <http://www.gnu.org/licenses/>.
 				<File Source="$(var.binPath)\Mono.Options.dll" KeyPath="yes" />
 			</Component>
 			<Component Id="Microsoft" Guid="{15CE51A9-8828-495A-9D97-AA2E329E6A0E}">
-				<!--<File Source="$(var.binPath)\Microsoft.Win32.SystemEvents.dll" />
-				<File Source="$(var.binPath)\System.Drawing.Common.dll" />-->
+				<File Source="$(var.binPath)\Microsoft.CodeAnalysis.CSharp.dll" />
+				<File Source="$(var.binPath)\Microsoft.CodeAnalysis.dll" />
 				<File Source="$(var.binPathGUI)\Microsoft.Xaml.Behaviors.dll" KeyPath="yes" />
 			</Component>
 			<Component Id="CCDVcommon" Guid="{5694235F-2C0E-4CDC-98E6-8EF3C8CE82A2}">

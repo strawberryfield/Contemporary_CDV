@@ -181,6 +181,11 @@
             true if helpjson is requested
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CommandLine.shouldShowHelpScript">
+            <summary>
+            true if helpscript is requested
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.CommandLine.shouldShowColors">
             <summary>
             true if colors list is requested
@@ -338,7 +343,16 @@
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.JsonTemplate">
             <summary>
-            Prints a json schema for pameters
+            Prints a json schema for parameters
+            </summary>
+            <remarks>
+            Should be overridden in specialized classes
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.CommandLine.ScriptTemplate">
+            <summary>
+            Prints a script template
             </summary>
             <remarks>
             Should be overridden in specialized classes
@@ -564,7 +578,13 @@
         </member>
         <member name="M:Casasoft.CCDV.ICommandLine.JsonTemplate">
             <summary>
-            Prints a json schema for pameters
+            Prints a json schema for parameters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.ICommandLine.ScriptTemplate">
+            <summary>
+            Prints a script template
             </summary>
             <returns></returns>
         </member>
@@ -653,7 +673,13 @@
         </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.JsonTemplate">
             <summary>
-            Prints a json schema for pameters
+            Prints a json schema for parameters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ScriptTemplate">
+            <summary>
+            Prints a script template
             </summary>
             <returns></returns>
         </member>
@@ -2110,6 +2136,11 @@
             </summary>
             <param name="script"></param>
             <returns></returns>
+        </member>
+        <member name="P:Casasoft.CCDV.Scripting.IScripting.Template">
+            <summary>
+            Template for scriptable methods
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.Utils">
             <summary>

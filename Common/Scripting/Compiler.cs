@@ -96,19 +96,20 @@ public static class Compiler
     /// <param name="Method">Method to execute</param>
     /// <param name="args">Array of arguments</param>
     /// <param name="eng">Engine passed to constructor</param>
-    public static void Run(Assembly assembly, string ClassName, string Method, object[] args, IEngine eng)
+    public static object Run(Assembly assembly, string ClassName, string Method, object[] args, IEngine eng)
     {
         // create instance of the desired class and call the desired function
         Type type = assembly.GetType($"Casasoft.CCDV.Scripts.{ClassName}");
         if (type.GetMethod(Method) != null)
         {
             object obj = Activator.CreateInstance(type, new object[] { eng });
-            type.InvokeMember(Method,
+            return type.InvokeMember(Method,
                 BindingFlags.Default | BindingFlags.InvokeMethod,
                 null,
                 obj,
                 args);
         }
+        else return null;
     }
 
     /// <summary>
