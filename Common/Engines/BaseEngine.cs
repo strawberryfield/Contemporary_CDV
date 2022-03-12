@@ -134,7 +134,7 @@ public class BaseEngine : IEngine
             SetJsonParams(par.JSON);
         }
 
-        Dpi = par.Dpi != 300 ? par.Dpi : Dpi;
+        Dpi = par.Dpi;
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
     }

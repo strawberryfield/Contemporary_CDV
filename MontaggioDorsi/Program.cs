@@ -31,10 +31,11 @@ that I print on a cardboard coated only on the side of the image.";
 
 #region command line
 MontaggioDorsiCommandLine par = new("dorsi", desc);
-par.AddBaseOptions();
 par.Usage = "[options]* inputfile+";
 par.LongDesc = longDesc;
 if (par.Parse(args)) return;
+
+par.ExpandWildcards();
 #endregion
 
 MontaggioDorsiEngine engine = new(par);

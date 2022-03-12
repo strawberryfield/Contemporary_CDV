@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System;
 using System.Text.Json;
@@ -43,6 +44,7 @@ public class MontaggioDorsiEngine : BaseEngine
     public MontaggioDorsiEngine() : base()
     {
         parameters = new MontaggioDorsiParameters();
+        ScriptingClass = new MontaggioDorsiScripting();
     }
 
     /// <summary>
@@ -54,6 +56,8 @@ public class MontaggioDorsiEngine : BaseEngine
         parameters = new MontaggioDorsiParameters();
         MontaggioDorsiCommandLine p = (MontaggioDorsiCommandLine)par;
         PaperFormat = p.PaperFormat;
+        ScriptingClass = new MontaggioDorsiScripting();
+        Script = p.Script;
     }
     #endregion
 
@@ -91,6 +95,11 @@ public class MontaggioDorsiEngine : BaseEngine
     /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
+        if (CustomCode != null)
+        {
+            ScriptInstance = Compiler.New(CustomCode, this);
+        }
+
         img = new(fmt);
 
         MagickImage final = PaperFormat == PaperFormats.Medium ? img.InCartha15x20_o() : img.InCartha20x27_o();
@@ -171,8 +180,15 @@ public class MontaggioDorsiEngine : BaseEngine
         for (int i = 0; i < n; i++)
         {
             if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
-            MagickImage dorso = Utils.RotateResizeAndFill(
-                new MagickImage(FilesList[nImg]), orientation, FillColor);
+
+            MagickImage image = new(FilesList[nImg]);
+
+            if (ScriptInstance != null)
+            {
+                image = (MagickImage)Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
+            }
+
+            MagickImage dorso = Utils.RotateResizeAndFill(image, orientation, FillColor);
             dorso.BorderColor = BorderColor;
             dorso.Border(1);
             dest.Add(dorso);
