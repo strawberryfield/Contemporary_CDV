@@ -109,6 +109,12 @@ The file must be referenced as `\[at]filename'
 .PD
 set output dir/filename
 .PP
+\f[B]\[en]tag=VALUE\f[R] :
+.PD 0
+.P
+.PD
+extra info for user scripts
+.PP
 \f[B]\[en]nobanner\f[R] :
 .PD 0
 .P
@@ -197,6 +203,7 @@ using the following template:
   \[dq]Dpi\[dq]: 300,
   \[dq]OutputName\[dq]: null,
   \[dq]Script\[dq]: null,
+  \[dq]Tag\[dq]: null,
   \[dq]FilesList\[dq]: []
 }
 \f[R]
@@ -231,23 +238,28 @@ The following using are declared:
 .PD 0
 .P
 .PD
-\[ti]\[ti]\[ti] using Casasoft.CCDV; using Casasoft.CCDV.Engines; using
-Casasoft.CCDV.JSON; using ImageMagick; using System; \[ti]\[ti]\[ti]
+\[ti]\[ti]\[ti]
 .PP
-These are the signatures of the scriptable methods:
+using Casasoft.CCDV; using Casasoft.CCDV.Engines; using
+Casasoft.CCDV.JSON; using ImageMagick; using System; using
+System.Collections.Generic; using System.IO;
 .IP
 .nf
 \f[C]
-// Script template for MontaggioFoto
-
-/// <summary>
-/// Preprocesses the loaded image
-/// </summary>
-/// <param name=\[dq]image\[dq]>The loaded image</param>
-/// <returns>The Processed image</returns>
-public MagickImage ProcessOnLoad(MagickImage image) { }
+These are the signatures of the scriptable methods:
 \f[R]
 .fi
+.PP
+// Script template for MontaggioFoto
+///
+/// Custom class initialization ///
+.PP
+private void Init() { }
+///
+/// Preprocesses the loaded image ///
+.PP
+/// The loaded image /// The Processed image public MagickImage
+ProcessOnLoad(MagickImage image) => image; \[ti]\[ti]\[ti]
 .SH COPYRIGHT
 .PP
 Casasoft MontaggioFoto is free software:

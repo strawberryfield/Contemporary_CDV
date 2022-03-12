@@ -109,6 +109,10 @@ The file must be referenced as '@filename'
 set output dir/filename  
 
 
+**--tag=VALUE** :  
+extra info for user scripts  
+
+
 **--nobanner** :  
 suppress the banner  
 
@@ -172,6 +176,7 @@ using the following template:
   "Dpi": 300,
   "OutputName": null,
   "Script": null,
+  "Tag": null,
   "FilesList": []
 }
 ~~~
@@ -190,17 +195,26 @@ to the main program.
 
 The following using are declared:  
 ~~~
+
 using Casasoft.CCDV;
 using Casasoft.CCDV.Engines;
 using Casasoft.CCDV.JSON;
 using ImageMagick;
 using System;
+using System.Collections.Generic;
+using System.IO;
+
 ~~~
 
 These are the signatures of the scriptable methods:
 
 ~~~
 // Script template for Cartella
+
+/// <summary>
+/// Custom class initialization
+/// </summary>
+private void Init() { }
 
 ~~~
 

@@ -1,0 +1,12 @@
+Casasoft Contemporary Carte de Visite Scatola
+Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+
+-----
+// Script template for Scatola
+
+/// <summary>
+/// Custom class initialization
+/// </summary>
+private void Init() { }
+
+-----

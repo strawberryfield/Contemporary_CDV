@@ -189,6 +189,12 @@ The file must be referenced as `\[at]filename'
 .PD
 set output dir/filename
 .PP
+\f[B]\[en]tag=VALUE\f[R] :
+.PD 0
+.P
+.PD
+extra info for user scripts
+.PP
 \f[B]\[en]nobanner\f[R] :
 .PD 0
 .P
@@ -288,6 +294,7 @@ using the following template:
   \[dq]Dpi\[dq]: 300,
   \[dq]OutputName\[dq]: null,
   \[dq]Script\[dq]: null,
+  \[dq]Tag\[dq]: null,
   \[dq]FilesList\[dq]: []
 }
 \f[R]
@@ -322,16 +329,25 @@ The following using are declared:
 .PD 0
 .P
 .PD
-\[ti]\[ti]\[ti] using Casasoft.CCDV; using Casasoft.CCDV.Engines; using
-Casasoft.CCDV.JSON; using ImageMagick; using System; \[ti]\[ti]\[ti]
+\[ti]\[ti]\[ti]
 .PP
-These are the signatures of the scriptable methods:
+using Casasoft.CCDV; using Casasoft.CCDV.Engines; using
+Casasoft.CCDV.JSON; using ImageMagick; using System; using
+System.Collections.Generic; using System.IO;
 .IP
 .nf
 \f[C]
-// Script template for Scatola
+These are the signatures of the scriptable methods:
 \f[R]
 .fi
+.PP
+// Script template for Scatola
+///
+/// Custom class initialization ///
+.PP
+private void Init() { }
+.PP
+\[ti]\[ti]\[ti]
 .SH COPYRIGHT
 .PP
 Casasoft Scatola is free software:

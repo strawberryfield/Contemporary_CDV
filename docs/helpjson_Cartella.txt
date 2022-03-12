@@ -24,5 +24,6 @@ Json parameters template for: Cartella
   "Dpi": 300,
   "OutputName": null,
   "Script": null,
+  "Tag": null,
   "FilesList": []
 }

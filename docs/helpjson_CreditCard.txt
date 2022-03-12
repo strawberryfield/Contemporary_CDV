@@ -20,5 +20,6 @@ Json parameters template for: CreditCard
   "Dpi": 300,
   "OutputName": null,
   "Script": null,
+  "Tag": null,
   "FilesList": []
 }

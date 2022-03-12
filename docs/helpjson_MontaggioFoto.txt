@@ -13,5 +13,6 @@ Json parameters template for: MontaggioFoto
   "Dpi": 300,
   "OutputName": null,
   "Script": null,
+  "Tag": null,
   "FilesList": []
 }
