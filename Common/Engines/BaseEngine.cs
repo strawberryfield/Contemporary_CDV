@@ -58,6 +58,10 @@ public class BaseEngine : IEngine
     /// Color for lines and borders
     /// </summary>
     public MagickColor BorderColor { get; set; }
+    /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    public string Tag { get; set; }
 
     /// <summary>
     /// Instance of formats handler
@@ -118,6 +122,7 @@ public class BaseEngine : IEngine
         FilesList = new List<string>();
         FillColor = MagickColors.White;
         BorderColor = MagickColors.Black;
+        Tag = string.Empty;
     }
     /// <summary>
     /// Constructor
@@ -137,6 +142,7 @@ public class BaseEngine : IEngine
         Dpi = par.Dpi;
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
+        Tag = par.Tag;
     }
     #endregion
 
@@ -156,6 +162,7 @@ public class BaseEngine : IEngine
         parameters.FillColor = colors.GetColorString(FillColor);
         parameters.Dpi = Dpi;
         parameters.Script = Script;
+        parameters.Tag = Tag;
         parameters.FilesList = new();
         parameters.FilesList.AddRange(FilesList);
     }
@@ -176,6 +183,7 @@ public class BaseEngine : IEngine
         BorderColor = colors.GetColor(parameters.BorderColor);
         FillColor = colors.GetColor(parameters.FillColor);
         Dpi = parameters.Dpi;
+        Tag = parameters.Tag;
         FilesList.Clear();
         FilesList.AddRange(parameters.FilesList);
     }

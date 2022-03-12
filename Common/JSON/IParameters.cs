@@ -49,6 +49,10 @@ public interface IParameters
     /// </summary>
     string Script { get; set; }
     /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    string Tag { get; set; }
+    /// <summary>
     /// Files to process
     /// </summary>
     List<string> FilesList { get; set; }

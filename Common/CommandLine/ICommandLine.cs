@@ -70,7 +70,11 @@ public interface ICommandLine
     /// <summary>
     /// c# script for custom processing
     /// </summary>
-    string Script { get; set; } 
+    string Script { get; set; }
+    /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    string Tag { get; set; }
     #endregion
 
     #region methods

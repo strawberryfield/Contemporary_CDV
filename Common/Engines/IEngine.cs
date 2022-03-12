@@ -48,6 +48,10 @@ public interface IEngine
     /// </summary>
     MagickColor BorderColor { get; set; }
     /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    string Tag { get; set; }
+    /// <summary>
     /// c# script for custom processing
     /// </summary>
     string Script { get; set; }

@@ -49,6 +49,10 @@ public class CommonParameters : IParameters
     /// </summary>
     public string Script { get; set; }
     /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    public string Tag { get; set; }
+    /// <summary>
     /// Files to process
     /// </summary>
     public List<string> FilesList { get; set; }

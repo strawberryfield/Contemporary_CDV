@@ -128,6 +128,10 @@ public class CommandLine : ICommandLine
     /// c# script for custom processing
     /// </summary>
     public string Script { get; set; }
+    /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    public string Tag { get; set; }
     #endregion
 
     #region defaults
@@ -190,6 +194,7 @@ Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
                 o => Script = GetFileParameter(o) },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
+                { "tag=", "extra info for user scripts", o => Tag = GetFileParameter(o) },
                 { "nobanner", "suppress the banner", h => noBanner = h != null },
                 { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
                 { "helpjson", "show json parameters template", h => shouldShowHelpJson = h != null },
