@@ -47,6 +47,10 @@ public static class Compiler
 
         // define other necessary objects for compilation
         string assemblyName = Path.GetRandomFileName();
+
+        string ExeFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+        string WorkPath = System.IO.Path.GetDirectoryName(ExeFilePath);
+
         MetadataReference[] references = new MetadataReference[]
         {
             MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
@@ -56,9 +60,9 @@ public static class Compiler
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Collections.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Memory.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("netstandard.dll")),
-            MetadataReference.CreateFromFile("Magick.NET-Q16-AnyCPU.dll"),
-            MetadataReference.CreateFromFile("Magick.NET.Core.dll"),
-            MetadataReference.CreateFromFile("Casasoft.CCDV.Common.dll")
+            MetadataReference.CreateFromFile(Path.Combine(WorkPath, "Magick.NET-Q16-AnyCPU.dll")),
+            MetadataReference.CreateFromFile(Path.Combine(WorkPath, "Magick.NET.Core.dll")),
+            MetadataReference.CreateFromFile(Path.Combine(WorkPath, "Casasoft.CCDV.Common.dll"))
         };
 
         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);

@@ -44,9 +44,10 @@ public class UserScript
     public UserScript(IEngine eng) 
     {{
         engine = ({engine})eng;
-        if (this.GetType().GetMethod(""Init"") != null) Init();
+        System.Reflection.MethodInfo m = this.GetType().GetMethod(""Init"");
+        if (m != null) m.Invoke(this, new object[] {{}});
     }}
-{script}
+{ script}
 }}";
     public virtual string WrapScript(string script) => WrapScript(script, "BaseEngine");
 
