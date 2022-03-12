@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using Mono.Options;
 using System.Text.Json;
 
@@ -95,13 +96,23 @@ public class MontaggioFotoCommandLine : CommandLine
     }
 
     /// <summary>
-    /// Prints a json schema for pameters
+    /// Prints a json schema for parameters
     /// </summary>
     /// <returns></returns>
     public override string JsonTemplate()
     {
         MontaggioFotoParameters p = new();
         return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
+    }
+
+    /// <summary>
+    /// Prints a script template
+    /// </summary>
+    /// <returns></returns>
+    public override string ScriptTemplate()
+    {
+        MontaggioFotoScripting sc = new();
+        return base.ScriptTemplate() + sc.Template();
     }
 }
 

@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System;
 using System.Text.Json;
@@ -57,6 +58,7 @@ public class MontaggioFotoEngine : BaseEngine
     public MontaggioFotoEngine() : base()
     {
         parameters = new MontaggioFotoParameters();
+        ScriptingClass = new MontaggioFotoScripting();
     }
 
     /// <summary>
@@ -71,6 +73,8 @@ public class MontaggioFotoEngine : BaseEngine
         Trim = p.Trim ? true : Trim;
         WithBorder = p.WithBorder ? true : WithBorder;
         Padding = p.Padding;
+        ScriptingClass = new MontaggioFotoScripting();
+        Script = p.Script;
     }
     #endregion
 
@@ -103,6 +107,7 @@ public class MontaggioFotoEngine : BaseEngine
         WithBorder = p.WithBorder;
         Trim = p.Trim;
         Padding = p.Padding;
+        Script = p.Script;
     }
     #endregion
 
@@ -121,6 +126,11 @@ public class MontaggioFotoEngine : BaseEngine
     /// <returns></returns>
     public MagickImage GetResult(bool quiet, int i)
     {
+        if (CustomCode != null)
+        {
+            ScriptInstance = Compiler.New(CustomCode, this);
+        }
+
         img = new(fmt);
         MagickImage final = img.FineArt10x15_o();
         MagickImage img1 = Get(FilesList[i], quiet);
@@ -169,7 +179,14 @@ public class MontaggioFotoEngine : BaseEngine
     private MagickImage Get(string filename, bool quiet)
     {
         if (!quiet) Console.WriteLine($"Processing: {filename}");
-        MagickImage img1 = Utils.RotateResizeAndFill(new(filename),
+        MagickImage image = new(filename);
+
+        if (ScriptInstance != null)
+        {
+            image = (MagickImage)Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
+        }
+
+        MagickImage img1 = Utils.RotateResizeAndFill(image,
             FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v,
             FillColor);
 

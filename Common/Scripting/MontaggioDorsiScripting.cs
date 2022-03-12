@@ -19,41 +19,18 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+namespace Casasoft.CCDV.Scripting;
 
-namespace Casasoft.CCDV.JSON;
-
-/// <summary>
-/// Common parameters list
-/// </summary>
-public interface IParameters
+internal class MontaggioDorsiScripting : BaseScripting
 {
-    /// <summary>
-    /// Color to fill images
-    /// </summary>
-    string FillColor { get; set; }
-    /// <summary>
-    /// Color to use for lines and borders
-    /// </summary>
-    string BorderColor { get; set; }
-    /// <summary>
-    /// Output resolution
-    /// </summary>
-    int Dpi { get; set; }
-    /// <summary>
-    /// Output file name
-    /// </summary>
-    string OutputName { get; set; }
-    /// <summary>
-    /// c# script for custom processing
-    /// </summary>
-    string Script { get; set; }
-    /// <summary>
-    /// Extra info for user scripting
-    /// </summary>
-    string Tag { get; set; }
-    /// <summary>
-    /// Files to process
-    /// </summary>
-    List<string> FilesList { get; set; }
+    public override string WrapScript(string script) => base.WrapScript(script, "MontaggioDorsiEngine");
+
+    public override string Template() => base.Template() + @"
+/// <summary>
+/// Preprocesses the loaded image
+/// </summary>
+/// <param name=""image"">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoad(MagickImage image) => image;";
+
 }

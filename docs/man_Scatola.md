@@ -1,6 +1,6 @@
 % SCATOLA(1)  
 % Roberto Ceccarelli - Casasoft  
-% Feb 2022
+% March 2022
 
 # NAME
 Scatola - Box builder using a 20x27 cm paper
@@ -97,6 +97,13 @@ Text can be stored in a file instead of a string
 The file must be referenced as '@filename'  
 
 
+**--script=VALUE** :  
+c\# script for custom processing,  
+use --helpscript for sample template  
+Text can be stored in a file instead of a string  
+The file must be referenced as '@filename'  
+
+
 **-o, --output=VALUE** :  
 set output dir/filename  
 
@@ -111,6 +118,10 @@ show this message and exit
 
 **--helpjson** :  
 show json parameters template  
+
+
+**--helpscript** :  
+show script template  
 
 
 **--man** :  
@@ -138,28 +149,31 @@ Colors can be written in any of these formats:
 Parameters can also be passed with a json formatted string  
 using the following template:  
 
-\{  
-  "topImage": "",  
-  "bottomImage": "",  
-  "leftImage": "",  
-  "rightImage": "",  
-  "frontImage": "",  
-  "backImage": "",  
-  "fontBold": false,  
-  "fontItalic": false,  
-  "font": "Arial",  
-  "borderText": "",  
-  "spessore": 5,  
-  "isHorizontal": false,  
-  "targetFormat": 0,  
-  "useTestImages": false,  
-  "Paper": null,  
-  "FillColor": "\#FFFFFF",  
-  "BorderColor": "\#000000",  
-  "Dpi": 300,  
-  "OutputName": null,  
-  "FilesList": \[\]  
-\}
+~~~
+{
+  "topImage": "",
+  "bottomImage": "",
+  "leftImage": "",
+  "rightImage": "",
+  "frontImage": "",
+  "backImage": "",
+  "fontBold": false,
+  "fontItalic": false,
+  "font": "Arial",
+  "borderText": "",
+  "spessore": 5,
+  "isHorizontal": false,
+  "targetFormat": 0,
+  "useTestImages": false,
+  "Paper": null,
+  "FillColor": "#FFFFFF",
+  "BorderColor": "#000000",
+  "Dpi": 300,
+  "OutputName": null,
+  "Script": null,
+  "FilesList": []
+}
+~~~
 
 ## ENVIRONMENT VARIABLES
 The program can read values from these variables:  
@@ -167,6 +181,27 @@ The program can read values from these variables:
   CDV\_DPI      Resolution for output files  
   CDV\_FILL     Color used to fill images  
   CDV\_BORDER   Border color
+
+# SCRIPTING
+You can add custom c# code, compiled at runtime, with the --script parameter.
+You can call a property *engine* that exposes all the parameters passed
+to the main program.
+
+The following using are declared:  
+~~~
+using Casasoft.CCDV;
+using Casasoft.CCDV.Engines;
+using Casasoft.CCDV.JSON;
+using ImageMagick;
+using System;
+~~~
+
+These are the signatures of the scriptable methods:
+
+~~~
+// Script template for Scatola
+
+~~~
 
 # COPYRIGHT
 Casasoft Scatola is free software:  

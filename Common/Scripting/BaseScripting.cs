@@ -19,41 +19,37 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using Casasoft.CCDV.JSON;
+using System.Reflection;
 
-namespace Casasoft.CCDV.JSON;
+namespace Casasoft.CCDV.Scripting;
 
-/// <summary>
-/// Common parameters list
-/// </summary>
-public interface IParameters
+internal class BaseScripting : IScripting
 {
-    /// <summary>
-    /// Color to fill images
-    /// </summary>
-    string FillColor { get; set; }
-    /// <summary>
-    /// Color to use for lines and borders
-    /// </summary>
-    string BorderColor { get; set; }
-    /// <summary>
-    /// Output resolution
-    /// </summary>
-    int Dpi { get; set; }
-    /// <summary>
-    /// Output file name
-    /// </summary>
-    string OutputName { get; set; }
-    /// <summary>
-    /// c# script for custom processing
-    /// </summary>
-    string Script { get; set; }
-    /// <summary>
-    /// Extra info for user scripting
-    /// </summary>
-    string Tag { get; set; }
-    /// <summary>
-    /// Files to process
-    /// </summary>
-    List<string> FilesList { get; set; }
+    public IParameters Parameters { get; set; }
+
+    public virtual string Template() => @"
+/// <summary>
+/// Custom class initialization
+/// </summary>
+private void Init() { }
+";
+
+    public virtual string WrapScript(string script, string engine) => $@"{Compiler.Usings}
+namespace Casasoft.CCDV.Scripts;
+
+public class UserScript
+{{
+    private {engine} engine;
+    public UserScript(IEngine eng) 
+    {{
+        engine = ({engine})eng;
+        System.Reflection.MethodInfo m = this.GetType().GetMethod(""Init"");
+        if (m != null) m.Invoke(this, new object[] {{}});
+    }}
+{ script}
+}}";
+    public virtual string WrapScript(string script) => WrapScript(script, "BaseEngine");
+
+    public virtual Assembly Compile(string script) => Compiler.Compile(WrapScript(script));
 }

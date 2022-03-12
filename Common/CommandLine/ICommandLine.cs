@@ -67,6 +67,14 @@ public interface ICommandLine
     /// Json formatted parameters
     /// </summary>
     string JSON { get; set; }
+    /// <summary>
+    /// c# script for custom processing
+    /// </summary>
+    string Script { get; set; }
+    /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    string Tag { get; set; }
     #endregion
 
     #region methods
@@ -94,9 +102,14 @@ public interface ICommandLine
     /// </summary>
     void ExpandWildcards();
     /// <summary>
-    /// Prints a json schema for pameters
+    /// Prints a json schema for parameters
     /// </summary>
     /// <returns></returns>
     string JsonTemplate();
+    /// <summary>
+    /// Prints a script template
+    /// </summary>
+    /// <returns></returns>
+    string ScriptTemplate();
     #endregion
 }

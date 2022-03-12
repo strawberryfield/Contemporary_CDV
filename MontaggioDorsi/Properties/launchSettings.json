@@ -2,7 +2,10 @@
   "profiles": {
     "MontaggioDorsi": {
       "commandName": "Project",
-      "commandLineArgs": "--dpi=120 --json=@C:\\foto\\creditcards\\source\\testdorsi.json"
+      "commandLineArgs": "--script=@C:\\projects\\Contemporary_CDV\\Test\\AddLabel.cs  C:\\projects\\Contemporary_CDV\\Test\\cdv*.jpg",
+      "environmentVariables": {
+        "CDV_OUTPATH": "C:\\temp"
+      }
     }
   }
 }

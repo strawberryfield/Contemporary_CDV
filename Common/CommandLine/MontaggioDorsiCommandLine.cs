@@ -20,9 +20,9 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using Mono.Options;
 using System.Text.Json;
-
 
 namespace Casasoft.CCDV;
 
@@ -79,5 +79,15 @@ public class MontaggioDorsiCommandLine : CommandLine
     {
         MontaggioDorsiParameters p = new();
         return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
+    }
+
+    /// <summary>
+    /// Prints a script template
+    /// </summary>
+    /// <returns></returns>
+    public override string ScriptTemplate()
+    {
+        MontaggioDorsiScripting sc = new();
+        return base.ScriptTemplate() + sc.Template();
     }
 }

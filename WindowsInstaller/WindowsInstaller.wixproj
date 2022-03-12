@@ -73,6 +73,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".editorconfig" />
     <Content Include="banner.bmp" />
     <Content Include="dialog.bmp" />
     <Content Include="LICENSE.rtf" />

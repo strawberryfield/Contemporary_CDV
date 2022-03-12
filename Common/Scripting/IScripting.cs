@@ -19,49 +19,43 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using Casasoft.CCDV.JSON;
+using System.Reflection;
 
-namespace Casasoft.CCDV.JSON;
+namespace Casasoft.CCDV.Scripting;
 
 /// <summary>
-/// Common parameters list
+/// Interface for scripting handler classes
 /// </summary>
-public class CommonParameters : IParameters
+public interface IScripting
 {
     /// <summary>
-    /// Color to fill images
+    /// json unserialized parameters
     /// </summary>
-    public string FillColor { get; set; } = "#FFFFFF";
-    /// <summary>
-    /// Color to use for lines and borders
-    /// </summary>
-    public string BorderColor { get; set; } = "#000000";
-    /// <summary>
-    /// Output resolution
-    /// </summary>
-    public int Dpi { get; set; } = 300;
-    /// <summary>
-    /// Output file name
-    /// </summary>
-    public string OutputName { get; set; }
-    /// <summary>
-    /// c# script for custom processing
-    /// </summary>
-    public string Script { get; set; }
-    /// <summary>
-    /// Extra info for user scripting
-    /// </summary>
-    public string Tag { get; set; }
-    /// <summary>
-    /// Files to process
-    /// </summary>
-    public List<string> FilesList { get; set; }
+    IParameters Parameters { get; set; }
 
     /// <summary>
-    /// Default constructor
+    /// Adds namespaces and class declaration to script
     /// </summary>
-    public CommonParameters()
-    {
-        FilesList = new();
-    }
+    /// <param name="script"></param>
+    /// <returns></returns>
+    string WrapScript(string script);
+    /// <summary>
+    /// Adds namespaces and class declaration to script
+    /// </summary>
+    /// <param name="script"></param>
+    /// <param name="engine">Engine name for casting</param>
+    /// <returns></returns>
+    string WrapScript(string script, string engine);
+    /// <summary>
+    /// Builds in-memory assembly
+    /// </summary>
+    /// <param name="script"></param>
+    /// <returns></returns>
+    Assembly Compile(string script);
+
+    /// <summary>
+    /// Template for scriptable methods
+    /// </summary>
+    string Template();
 }

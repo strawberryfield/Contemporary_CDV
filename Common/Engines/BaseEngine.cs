@@ -20,8 +20,10 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Casasoft.CCDV.Engines;
 
@@ -56,15 +58,19 @@ public class BaseEngine : IEngine
     /// Color for lines and borders
     /// </summary>
     public MagickColor BorderColor { get; set; }
+    /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    public string Tag { get; set; }
 
     /// <summary>
     /// Instance of formats handler
     /// </summary>
-    protected Formats fmt;
+    public Formats fmt;
     /// <summary>
     /// Instance of images handler
     /// </summary>
-    protected Images img;
+    public Images img;
     /// <summary>
     /// Class for json parameters handling
     /// </summary>
@@ -73,6 +79,36 @@ public class BaseEngine : IEngine
     /// Colors conversion utilities
     /// </summary>
     protected Colors colors;
+
+    private string _script;
+    /// <summary>
+    /// c# script for custom processing
+    /// </summary>
+    public string Script
+    {
+        get => _script;
+        set
+        {
+            _script = value;
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                CustomCode = ScriptingClass.Compile(value);
+            }
+        }
+    }
+    /// <summary>
+    /// compiled script for custom processing
+    /// </summary>
+    public Assembly CustomCode { get; set; }
+    /// <summary>
+    /// Class that handles user scripts
+    /// </summary>
+    public IScripting ScriptingClass { get; set; }
+    /// <summary>
+    /// Storage for the instantiated Script object
+    /// </summary>
+    protected object ScriptInstance { get; set; }   
+
     #endregion
 
     #region constructors
@@ -86,6 +122,7 @@ public class BaseEngine : IEngine
         FilesList = new List<string>();
         FillColor = MagickColors.White;
         BorderColor = MagickColors.Black;
+        Tag = string.Empty;
     }
     /// <summary>
     /// Constructor
@@ -102,9 +139,10 @@ public class BaseEngine : IEngine
             SetJsonParams(par.JSON);
         }
 
-        Dpi = par.Dpi != 300 ? par.Dpi : Dpi;
-        FillColor = par.FillColor != MagickColors.White ? par.FillColor : FillColor;
-        BorderColor = par.BorderColor != MagickColors.Black ? par.BorderColor : BorderColor;
+        Dpi = par.Dpi;
+        FillColor = par.FillColor;
+        BorderColor = par.BorderColor;
+        Tag = par.Tag;
     }
     #endregion
 
@@ -123,6 +161,8 @@ public class BaseEngine : IEngine
         parameters.BorderColor = colors.GetColorString(BorderColor);
         parameters.FillColor = colors.GetColorString(FillColor);
         parameters.Dpi = Dpi;
+        parameters.Script = Script;
+        parameters.Tag = Tag;
         parameters.FilesList = new();
         parameters.FilesList.AddRange(FilesList);
     }
@@ -143,6 +183,7 @@ public class BaseEngine : IEngine
         BorderColor = colors.GetColor(parameters.BorderColor);
         FillColor = colors.GetColor(parameters.FillColor);
         Dpi = parameters.Dpi;
+        Tag = parameters.Tag;
         FilesList.Clear();
         FilesList.AddRange(parameters.FilesList);
     }

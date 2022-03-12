@@ -19,8 +19,10 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Casasoft.CCDV.Engines;
 
@@ -45,6 +47,22 @@ public interface IEngine
     /// Color for lines and borders
     /// </summary>
     MagickColor BorderColor { get; set; }
+    /// <summary>
+    /// Extra info for user scripting
+    /// </summary>
+    string Tag { get; set; }
+    /// <summary>
+    /// c# script for custom processing
+    /// </summary>
+    string Script { get; set; }
+    /// <summary>
+    /// compiled script for custom processing
+    /// </summary>
+    Assembly CustomCode { get; set; }
+    /// <summary>
+    /// Class that handles user scripts
+    /// </summary>
+    IScripting ScriptingClass { get; set; }
 
     /// <summary>
     /// Does the dirty work

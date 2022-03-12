@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System;
 using System.Text.Json;
@@ -100,6 +101,7 @@ public class CreditCardEngine : BaseEngine
     public CreditCardEngine() : base()
     {
         parameters = new CreditCardParameters();
+        ScriptingClass = new CreditCardScripting();
     }
 
     /// <summary>
@@ -120,6 +122,8 @@ public class CreditCardEngine : BaseEngine
         MagneticBandColor = p.MagneticBandColor;
         MagneticBandImage = p.MagneticBandImage;
         BackText = p.BackText;
+        ScriptingClass = new CreditCardScripting();
+        Script = p.Script;
         parameters = new CreditCardParameters();
     }
     #endregion

@@ -23,5 +23,6 @@ Json parameters template for: Cartella
   "BorderColor": "#000000",
   "Dpi": 300,
   "OutputName": null,
+  "Script": null,
   "FilesList": []
 }

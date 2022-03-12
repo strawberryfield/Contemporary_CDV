@@ -17,10 +17,15 @@ Options:
                                use --helpjson for sample template
                                Text can be stored in a file instead of a string
                                The file must be referenced as '@filename'
+      --script=VALUE         c# script for custom processing,
+                               use --helpscript for sample template
+                               Text can be stored in a file instead of a string
+                               The file must be referenced as '@filename'
   -o, --output=VALUE         set output dir/filename
       --nobanner             suppress the banner
   -h, --help                 show this message and exit
       --helpjson             show json parameters template
+      --helpscript           show script template
       --man                  show the man page source and exit
       --colors               list available colors by name
       --license              show program license (AGPL 3.0)
