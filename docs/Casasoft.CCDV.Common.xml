@@ -624,6 +624,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.ScriptTemplate">
+            <summary>
+            Prints a script template
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.MontaggioFotoCommandLine">
             <summary>
             Command line management for MontaggioFoto
@@ -928,6 +934,11 @@
         <member name="P:Casasoft.CCDV.Engines.BaseEngine.ScriptingClass">
             <summary>
             Class that handles user scripts
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.ScriptInstance">
+            <summary>
+            Storage for the instantiated Script object
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
@@ -2106,6 +2117,15 @@
             <param name="args">Array of arguments</param>
             <param name="eng">Engine passed to constructor</param>
         </member>
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.Run(System.Object,System.String,System.Object[])">
+            <summary>
+            Executes a method of an istanced object
+            </summary>
+            <param name="obj">instance</param>
+            <param name="Method">Method to execute</param>
+            <param name="args">Array of arguments</param>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.Scripting.Compiler.Run(System.Reflection.Assembly,System.String,System.Object[],Casasoft.CCDV.Engines.IEngine)">
             <summary>
             Execute the code in the Casasoft.CCDV.Scripts.UserScript class
@@ -2114,6 +2134,23 @@
             <param name="Method">Method to execute</param>
             <param name="args">Array of arguments</param>
             <param name="eng">Engine passed to constructor</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.New(System.Reflection.Assembly,System.String,Casasoft.CCDV.Engines.IEngine)">
+            <summary>
+            Creates an istance of the class
+            </summary>
+            <param name="assembly">Memory assembly with compiled code</param>
+            <param name="ClassName">Fully qualified class name</param>
+            <param name="eng">Engine passed to constructor</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.New(System.Reflection.Assembly,Casasoft.CCDV.Engines.IEngine)">
+            <summary>
+            Creates an istance of the Casasoft.CCDV.Scripts.UserScript class
+            </summary>
+            <param name="assembly">Memory assembly with compiled code</param>
+            <param name="eng">Engine passed to constructor</param>
+            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Scripting.Compiler.FromTrustedPlatformAssembly(System.String)">
             <summary>

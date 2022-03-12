@@ -32,7 +32,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class MontaggioFotoEngine : BaseEngine
 {
-     #region properties
+    #region properties
     /// <summary>
     /// Set if image has full CDV size (100x64mm)
     /// </summary>
@@ -126,6 +126,11 @@ public class MontaggioFotoEngine : BaseEngine
     /// <returns></returns>
     public MagickImage GetResult(bool quiet, int i)
     {
+        if (CustomCode != null)
+        {
+            ScriptInstance = Compiler.New(CustomCode, this);
+        }
+
         img = new(fmt);
         MagickImage final = img.FineArt10x15_o();
         MagickImage img1 = Get(FilesList[i], quiet);
@@ -176,10 +181,9 @@ public class MontaggioFotoEngine : BaseEngine
         if (!quiet) Console.WriteLine($"Processing: {filename}");
         MagickImage image = new(filename);
 
-        if(CustomCode != null)
+        if (ScriptInstance != null)
         {
-            image = (MagickImage)Compiler.Run(CustomCode, "ProcessOnLoad",
-                new object[] { image }, this);
+            image = (MagickImage)Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
         }
 
         MagickImage img1 = Utils.RotateResizeAndFill(image,

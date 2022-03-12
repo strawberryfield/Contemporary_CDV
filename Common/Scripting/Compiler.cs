@@ -103,7 +103,7 @@ public static class Compiler
     {
         // create instance of the desired class and call the desired function
         Type type = assembly.GetType(ClassName);
-        if (type.GetMethod(Method) != null)
+        if (type != null && type.GetMethod(Method) != null)
         {
             object obj = Activator.CreateInstance(type, new object[] { eng });
             return type.InvokeMember(Method,
@@ -116,6 +116,23 @@ public static class Compiler
     }
 
     /// <summary>
+    /// Executes a method of an istanced object
+    /// </summary>
+    /// <param name="obj">instance</param>
+    /// <param name="Method">Method to execute</param>
+    /// <param name="args">Array of arguments</param>
+    /// <returns></returns>
+    public static object Run(object obj, string Method, object[] args)
+    {
+        Type type = obj.GetType();
+        return type.InvokeMember(Method,
+            BindingFlags.Default | BindingFlags.InvokeMethod,
+            null,
+            obj,
+            args);
+    }
+
+    /// <summary>
     /// Execute the code in the Casasoft.CCDV.Scripts.UserScript class
     /// </summary>
     /// <param name="assembly">Memory assembly with compiled code</param>
@@ -124,6 +141,32 @@ public static class Compiler
     /// <param name="eng">Engine passed to constructor</param>
     public static object Run(Assembly assembly, string Method, object[] args, IEngine eng) =>
         Run(assembly, "Casasoft.CCDV.Scripts.UserScript", Method, args, eng);
+
+    /// <summary>
+    /// Creates an istance of the class
+    /// </summary>
+    /// <param name="assembly">Memory assembly with compiled code</param>
+    /// <param name="ClassName">Fully qualified class name</param>
+    /// <param name="eng">Engine passed to constructor</param>
+    /// <returns></returns>
+    public static object New(Assembly assembly, string ClassName, IEngine eng)
+    {
+        Type type = assembly.GetType(ClassName);
+        if (type != null)
+        {
+            return Activator.CreateInstance(type, new object[] { eng });
+        }
+        else return null;
+    }
+
+    /// <summary>
+    /// Creates an istance of the Casasoft.CCDV.Scripts.UserScript class
+    /// </summary>
+    /// <param name="assembly">Memory assembly with compiled code</param>
+    /// <param name="eng">Engine passed to constructor</param>
+    /// <returns></returns>
+    public static object New(Assembly assembly, IEngine eng) =>
+        New(assembly, "Casasoft.CCDV.Scripts.UserScript", eng);
 
     /// <summary>
     /// Gets the dll complete path

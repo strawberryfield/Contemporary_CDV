@@ -100,6 +100,10 @@ public class BaseEngine : IEngine
     /// Class that handles user scripts
     /// </summary>
     public IScripting ScriptingClass { get; set; }
+    /// <summary>
+    /// Storage for the instantiated Script object
+    /// </summary>
+    protected object ScriptInstance { get; set; }   
 
     #endregion
 
