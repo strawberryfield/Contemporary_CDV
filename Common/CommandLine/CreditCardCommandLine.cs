@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using Mono.Options;
 using System.Text.Json;
@@ -155,5 +156,15 @@ The file must be referenced as '@filename'",
     {
         CreditCardParameters p = new();
         return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
+    }
+
+    /// <summary>
+    /// Prints a script template
+    /// </summary>
+    /// <returns></returns>
+    public override string ScriptTemplate()
+    {
+        CreditCardScripting sc = new();
+        return base.ScriptTemplate() + sc.Template();
     }
 }

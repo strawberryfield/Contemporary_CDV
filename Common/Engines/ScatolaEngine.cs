@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 
 namespace Casasoft.CCDV.Engines;
@@ -37,6 +38,7 @@ public class ScatolaEngine : BaseBuilderEngine
     {
         parameters = new BaseBuilderParameters();
         Builder = new ScatolaBuilder();
+        ScriptingClass = new BaseBuilderScripting();
     }
 
     /// <summary>
@@ -47,6 +49,8 @@ public class ScatolaEngine : BaseBuilderEngine
     {
         parameters = new BaseBuilderParameters();
         Builder = new ScatolaBuilder((BaseBuilderCommandLine)par, fmt);
+        ScriptingClass = new BaseBuilderScripting();
+        Script = parameters.Script;
     }
     #endregion
 
