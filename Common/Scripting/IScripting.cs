@@ -41,6 +41,13 @@ public interface IScripting
     /// <returns></returns>
     string WrapScript(string script);
     /// <summary>
+    /// Adds namespaces and class declaration to script
+    /// </summary>
+    /// <param name="script"></param>
+    /// <param name="engine">Engine name for casting</param>
+    /// <returns></returns>
+    string WrapScript(string script, string engine);
+    /// <summary>
     /// Builds in-memory assembly
     /// </summary>
     /// <param name="script"></param>
@@ -50,5 +57,5 @@ public interface IScripting
     /// <summary>
     /// Template for scriptable methods
     /// </summary>
-    string Template { get; }
+    string Template();
 }

@@ -281,6 +281,11 @@
             c# script for custom processing
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CommandLine.Tag">
+            <summary>
+            Extra info for user scripting
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.ExeName">
             <summary>
             Gets the name of currently running assembly
@@ -546,6 +551,11 @@
         <member name="P:Casasoft.CCDV.ICommandLine.Script">
             <summary>
             c# script for custom processing
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ICommandLine.Tag">
+            <summary>
+            Extra info for user scripting
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.ICommandLine.WelcomeBanner">
@@ -901,6 +911,11 @@
             Color for lines and borders
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.Tag">
+            <summary>
+            Extra info for user scripting
+            </summary>
+        </member>
         <member name="F:Casasoft.CCDV.Engines.BaseEngine.fmt">
             <summary>
             Instance of formats handler
@@ -1165,6 +1180,11 @@
         <member name="P:Casasoft.CCDV.Engines.IEngine.BorderColor">
             <summary>
             Color for lines and borders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.Tag">
+            <summary>
+            Extra info for user scripting
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.Engines.IEngine.Script">
@@ -1875,6 +1895,11 @@
             c# script for custom processing
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.Tag">
+            <summary>
+            Extra info for user scripting
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.JSON.CommonParameters.FilesList">
             <summary>
             Files to process
@@ -1981,6 +2006,11 @@
         <member name="P:Casasoft.CCDV.JSON.IParameters.Script">
             <summary>
             c# script for custom processing
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.Tag">
+            <summary>
+            Extra info for user scripting
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.JSON.IParameters.FilesList">
@@ -2181,6 +2211,14 @@
             <param name="script"></param>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.Scripting.IScripting.WrapScript(System.String,System.String)">
+            <summary>
+            Adds namespaces and class declaration to script
+            </summary>
+            <param name="script"></param>
+            <param name="engine">Engine name for casting</param>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.Scripting.IScripting.Compile(System.String)">
             <summary>
             Builds in-memory assembly
@@ -2188,7 +2226,7 @@
             <param name="script"></param>
             <returns></returns>
         </member>
-        <member name="P:Casasoft.CCDV.Scripting.IScripting.Template">
+        <member name="M:Casasoft.CCDV.Scripting.IScripting.Template">
             <summary>
             Template for scriptable methods
             </summary>

@@ -1,4 +1,10 @@
-﻿// Casasoft CCDV Tools is free software: 
+﻿// copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+// http://strawberryfield.altervista.org 
+// 
+// This file is part of Casasoft Contemporary Carte de Visite Tools
+// https://github.com/strawberryfield/Contemporary_CDV
+// 
+// Casasoft CCDV Tools is free software: 
 // you can redistribute it and/or modify it
 // under the terms of the GNU Affero General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -22,15 +28,27 @@ internal class BaseScripting : IScripting
 {
     public IParameters Parameters { get; set; }
 
-    public string Template => string.Empty;
+    public virtual string Template() => @"
+/// <summary>
+/// Custom class initialization
+/// </summary>
+private void Init() { }
+";
 
-    public virtual string WrapScript(string script) => $@"{Compiler.Usings}
+    public virtual string WrapScript(string script, string engine) => $@"{Compiler.Usings}
 namespace Casasoft.CCDV.Scripts;
 
 public class UserScript
 {{
+    private {engine} engine;
+    public UserScript(IEngine eng) 
+    {{
+        engine = ({engine})eng;
+        if (this.GetType().GetMethod(""Init"") != null) Init();
+    }}
 {script}
 }}";
+    public virtual string WrapScript(string script) => WrapScript(script, "BaseEngine");
 
     public virtual Assembly Compile(string script) => Compiler.Compile(WrapScript(script));
 }

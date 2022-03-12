@@ -112,7 +112,7 @@ public class MontaggioFotoCommandLine : CommandLine
     public override string ScriptTemplate()
     {
         MontaggioFotoScripting sc = new();
-        return base.ScriptTemplate() + sc.Template;
+        return base.ScriptTemplate() + sc.Template();
     }
 }
 

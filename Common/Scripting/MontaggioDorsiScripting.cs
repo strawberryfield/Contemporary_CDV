@@ -23,18 +23,14 @@ namespace Casasoft.CCDV.Scripting;
 
 internal class MontaggioDorsiScripting : BaseScripting
 {
-    public override string WrapScript(string script) => base.WrapScript($@"
-private MontaggioDorsiEngine engine;
-public UserScript(IEngine eng) => engine = (MontaggioDorsiEngine)eng;
-{script}");
+    public override string WrapScript(string script) => base.WrapScript(script, "MontaggioDorsiEngine");
 
-
-    public new string Template => @"
+    public override string Template() => base.Template() + @"
 /// <summary>
 /// Preprocesses the loaded image
 /// </summary>
 /// <param name=""image"">The loaded image</param>
 /// <returns>The Processed image</returns>
-public MagickImage ProcessOnLoad(MagickImage image) { }";
+public MagickImage ProcessOnLoad(MagickImage image) => image;";
 
 }

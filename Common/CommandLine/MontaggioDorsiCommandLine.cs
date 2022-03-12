@@ -88,6 +88,6 @@ public class MontaggioDorsiCommandLine : CommandLine
     public override string ScriptTemplate()
     {
         MontaggioDorsiScripting sc = new();
-        return base.ScriptTemplate() + sc.Template;
+        return base.ScriptTemplate() + sc.Template();
     }
 }
