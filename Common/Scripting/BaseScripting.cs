@@ -24,6 +24,13 @@ internal class BaseScripting : IScripting
 
     public string Template => string.Empty;
 
-    public virtual string WrapScript(string script) => script;
+    public virtual string WrapScript(string script) => $@"{Compiler.Usings}
+namespace Casasoft.CCDV.Scripts;
+
+public class UserScript
+{{
+{script}
+}}";
+
     public virtual Assembly Compile(string script) => Compiler.Compile(WrapScript(script));
 }

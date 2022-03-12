@@ -2106,12 +2106,26 @@
             <param name="args">Array of arguments</param>
             <param name="eng">Engine passed to constructor</param>
         </member>
+        <member name="M:Casasoft.CCDV.Scripting.Compiler.Run(System.Reflection.Assembly,System.String,System.Object[],Casasoft.CCDV.Engines.IEngine)">
+            <summary>
+            Execute the code in the Casasoft.CCDV.Scripts.UserScript class
+            </summary>
+            <param name="assembly">Memory assembly with compiled code</param>
+            <param name="Method">Method to execute</param>
+            <param name="args">Array of arguments</param>
+            <param name="eng">Engine passed to constructor</param>
+        </member>
         <member name="M:Casasoft.CCDV.Scripting.Compiler.FromTrustedPlatformAssembly(System.String)">
             <summary>
             Gets the dll complete path
             </summary>
             <param name="shortDllName"></param>
             <returns></returns>
+        </member>
+        <member name="P:Casasoft.CCDV.Scripting.Compiler.Usings">
+            <summary>
+            Using declarations to be included in scripts
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.Scripting.IScripting">
             <summary>

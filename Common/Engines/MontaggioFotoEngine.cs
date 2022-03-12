@@ -178,7 +178,7 @@ public class MontaggioFotoEngine : BaseEngine
 
         if(CustomCode != null)
         {
-            image = (MagickImage)Compiler.Run(CustomCode, "UserScript", "ProcessOnLoad", 
+            image = (MagickImage)Compiler.Run(CustomCode, "ProcessOnLoad",
                 new object[] { image }, this);
         }
 

@@ -53,8 +53,11 @@ public static class Compiler
             MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Runtime.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Console.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Collections.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Memory.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("netstandard.dll")),
             MetadataReference.CreateFromFile("Magick.NET-Q16-AnyCPU.dll"),
+            MetadataReference.CreateFromFile("Magick.NET.Core.dll"),
             MetadataReference.CreateFromFile("Casasoft.CCDV.Common.dll")
         };
 
@@ -99,7 +102,7 @@ public static class Compiler
     public static object Run(Assembly assembly, string ClassName, string Method, object[] args, IEngine eng)
     {
         // create instance of the desired class and call the desired function
-        Type type = assembly.GetType($"Casasoft.CCDV.Scripts.{ClassName}");
+        Type type = assembly.GetType(ClassName);
         if (type.GetMethod(Method) != null)
         {
             object obj = Activator.CreateInstance(type, new object[] { eng });
@@ -113,6 +116,16 @@ public static class Compiler
     }
 
     /// <summary>
+    /// Execute the code in the Casasoft.CCDV.Scripts.UserScript class
+    /// </summary>
+    /// <param name="assembly">Memory assembly with compiled code</param>
+    /// <param name="Method">Method to execute</param>
+    /// <param name="args">Array of arguments</param>
+    /// <param name="eng">Engine passed to constructor</param>
+    public static object Run(Assembly assembly, string Method, object[] args, IEngine eng) =>
+        Run(assembly, "Casasoft.CCDV.Scripts.UserScript", Method, args, eng);
+
+    /// <summary>
     /// Gets the dll complete path
     /// </summary>
     /// <param name="shortDllName"></param>
@@ -123,4 +136,19 @@ public static class Compiler
         var dlls = dllString.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         return dlls.Single(d => d.Contains(shortDllName, StringComparison.OrdinalIgnoreCase));
     }
+
+    /// <summary>
+    /// Using declarations to be included in scripts
+    /// </summary>
+    public static string Usings => @"
+using Casasoft.CCDV;
+using Casasoft.CCDV.Engines;
+using Casasoft.CCDV.JSON;
+using ImageMagick;
+using System;
+using System.Collections.Generic;
+using System.IO;
+";
+
+
 }

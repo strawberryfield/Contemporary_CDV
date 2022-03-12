@@ -23,25 +23,11 @@ namespace Casasoft.CCDV.Scripting;
 
 internal class MontaggioFotoScripting : BaseScripting
 {
-    public override string WrapScript(string script)
-    {
-        return $@"
-using Casasoft.CCDV;
-using Casasoft.CCDV.Engines;
-using Casasoft.CCDV.JSON;
-using ImageMagick;
-using System;
-
-namespace Casasoft.CCDV.Scripts;
-
-public class UserScript
-{{
+    public override string WrapScript(string script) => base.WrapScript($@"
 private MontaggioFotoEngine engine;
 public UserScript(IEngine eng) => engine = (MontaggioFotoEngine)eng;
-{script}
-}}
-";
-    }
+{script}");
+
 
     public new string Template => @"
 /// <summary>

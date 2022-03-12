@@ -398,11 +398,7 @@ to the main program.
 
 The following using are declared:  
 ~~~
-using Casasoft.CCDV;
-using Casasoft.CCDV.Engines;
-using Casasoft.CCDV.JSON;
-using ImageMagick;
-using System;
+{Scripting.Compiler.Usings}
 ~~~
 
 These are the signatures of the scriptable methods:
