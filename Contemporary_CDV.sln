@@ -55,10 +55,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9D6B5EF5-A
 	ProjectSection(SolutionItems) = preProject
 		Test\AddLabel.cmd = Test\AddLabel.cmd
 		Test\AddLabel.cs = Test\AddLabel.cs
+		Test\author.txt = Test\author.txt
 		Test\cdv_o.jpg = Test\cdv_o.jpg
 		Test\cdv_v.jpg = Test\cdv_v.jpg
 		Test\dorso_o.jpg = Test\dorso_o.jpg
 		Test\dorso_v.jpg = Test\dorso_v.jpg
+		Test\Numbers.cmd = Test\Numbers.cmd
+		Test\Numbers.cs = Test\Numbers.cs
 		Test\README.md = Test\README.md
 	EndProjectSection
 EndProject

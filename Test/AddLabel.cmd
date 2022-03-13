@@ -7,5 +7,5 @@ set samples=%projectdir%Test\
 %bin%MontaggioFoto --dpi=600 ^
  --script=@%samples%AddLabel.cs ^
  --fullsize ^
- --output=%samples%AddLabel.jpg ^
+ --output=%samples%AddLabel ^
  %samples%cdv*.jpg 
