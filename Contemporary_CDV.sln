@@ -55,6 +55,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9D6B5EF5-A
 	ProjectSection(SolutionItems) = preProject
 		Test\AddLabel.cmd = Test\AddLabel.cmd
 		Test\AddLabel.cs = Test\AddLabel.cs
+		Test\cdv_o.jpg = Test\cdv_o.jpg
+		Test\cdv_v.jpg = Test\cdv_v.jpg
+		Test\dorso_o.jpg = Test\dorso_o.jpg
+		Test\dorso_v.jpg = Test\dorso_v.jpg
+		Test\README.md = Test\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build_tools", "build_tools", "{12ACBDB8-675B-4A68-9193-AEB50583D79F}"
+	ProjectSection(SolutionItems) = preProject
+		build_tools\builddeb.sh = build_tools\builddeb.sh
+		build_tools\buildhelp.cmd = build_tools\buildhelp.cmd
+		build_tools\pack.sh = build_tools\pack.sh
+		build_tools\publish.cmd = build_tools\publish.cmd
+		build_tools\README.md = build_tools\README.md
 	EndProjectSection
 EndProject
 Global
