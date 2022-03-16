@@ -32,7 +32,7 @@ internal class BaseScripting : IScripting
 /// <summary>
 /// Custom class initialization
 /// </summary>
-private void Init() { }
+public void Init() { }
 ";
 
     public virtual string WrapScript(string script, string engine) => $@"{Compiler.Usings}
