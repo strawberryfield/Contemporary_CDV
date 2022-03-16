@@ -1,4 +1,4 @@
-﻿// copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+// copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
 // http://strawberryfield.altervista.org 
 // 
 // This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -19,9 +19,9 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-int counter = 1;
+int counter = 0;
 
-private void Init()
+public void Init()
 {
     counter = Convert.ToInt16(engine.Tag);
 }
@@ -43,8 +43,8 @@ public MagickImage ProcessOnLoad(MagickImage image)
 
     // Compose the images
     image = engine.img.CDV_Full_o();
-    image.Composite(number, Gravity.East, new PointD(0, engine.fmt.ToPixels(3)));
-    image.Composite(text, Gravity.Center, CompositeOperator.Over);
+    image.Composite(number, Gravity.East,  CompositeOperator.Over);
+    image.Composite(text, Gravity.Southwest, new PointD(engine.fmt.ToPixels(5), engine.fmt.ToPixels(5)), CompositeOperator.Over);
 
     counter++;
     return image;
