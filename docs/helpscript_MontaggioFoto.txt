@@ -7,7 +7,7 @@ Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
 /// <summary>
 /// Custom class initialization
 /// </summary>
-private void Init() { }
+public void Init() { }
 
 /// <summary>
 /// Preprocesses the loaded image

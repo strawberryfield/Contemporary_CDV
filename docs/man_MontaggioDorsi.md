@@ -142,7 +142,7 @@ These are the signatures of the scriptable methods:
 /// <summary>
 /// Custom class initialization
 /// </summary>
-private void Init() { }
+public void Init() { }
 
 /// <summary>
 /// Preprocesses the loaded image
