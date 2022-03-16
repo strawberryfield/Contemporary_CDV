@@ -45,7 +45,7 @@ public class UserScript
     {{
         engine = ({engine})eng;
         System.Reflection.MethodInfo m = this.GetType().GetMethod(""Init"");
-        if (m != null) m.Invoke(this, new object[] {{}});
+        if (m != null) m.Invoke(this, null);
     }}
 { script}
 }}";
