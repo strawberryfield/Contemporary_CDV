@@ -2,7 +2,7 @@
   "profiles": {
     "Cartella": {
       "commandName": "Project",
-      "commandLineArgs": "--man"
+      "commandLineArgs": "--dpi=600 --format=cc --paper=medium -f=\"C:\\foto\\creditcards\\source\\fq.jpg\" -b=\"C:\\foto\\creditcards\\backcover.jpg\" --bordertext=\"FOTOGRAFIE\" --font=\"OCR-A\""
     }
   }
 }

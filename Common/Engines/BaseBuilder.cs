@@ -176,6 +176,7 @@ public class BaseBuilder : IBuilder
         fontBold = parameters.fontBold;
         fontItalic = parameters.fontItalic;
         borderText = parameters.borderText;
+        PaperFormat = parameters.PaperFormat;   
 
         if (par.useSampleImages) CreateTestImages();
 
