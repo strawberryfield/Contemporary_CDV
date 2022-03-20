@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.JSON;
+using ImageMagick;
 using System.Text.Json;
 
 namespace Casasoft.CCDV.Engines;
@@ -59,7 +60,7 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
         GetBaseJsonParams();
         BaseBuilderParameters p = (BaseBuilderParameters)parameters;
         BaseBuilder builder = (BaseBuilder)Builder;
-        
+
         p.frontImage = builder.frontImagePath;
         p.backImage = builder.backImagePath;
         p.topImage = builder.topImagePath;
@@ -105,8 +106,18 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
         builder.bottomImagePath = p.bottomImage;
         builder.leftImagePath = p.leftImage;
         builder.rightImagePath = p.rightImage;
-        builder.PaperFormat = p.PaperFormat;    
+        builder.PaperFormat = p.PaperFormat;
     }
     #endregion
+
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <returns>Image to print</returns>
+    public override MagickImage GetResult(bool quiet)
+    {
+        img = new(fmt);
+        return base.GetResult(quiet);
+    }
 
 }

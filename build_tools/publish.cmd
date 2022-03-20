@@ -33,7 +33,7 @@ set candle="%wix%candle.exe"
 set light="%wix%light.exe"
 set WixUtils="%wix%WixUtilExtension.dll"
 
-set version=22.03.13
+set version=22.03.20
  
 @del /S /Q %build%
 @del /Q %bin%%pkgname%*.*

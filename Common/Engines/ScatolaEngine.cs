@@ -62,6 +62,7 @@ public class ScatolaEngine : BaseBuilderEngine
     /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
+        _ = base.GetResult(quiet);
         MagickImage output = Builder.GetOutputImage();
         ScatolaBuilder sc = (ScatolaBuilder)Builder;
         output.Composite(sc.Build(), Gravity.Center);

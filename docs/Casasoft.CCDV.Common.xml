@@ -898,6 +898,12 @@
             </summary>
             <param name="json"></param>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.GetResult(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Image to print</returns>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.BaseEngine">
             <summary>
             Base class for various images managers

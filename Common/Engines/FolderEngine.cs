@@ -62,6 +62,7 @@ public class FolderEngine : BaseBuilderEngine
     /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
+        _ = base.GetResult(quiet);
         MagickImage output = Builder.GetOutputImage();
         FolderBuilder sc = (FolderBuilder)Builder;
         output.Composite(sc.Build(), Gravity.Center);
