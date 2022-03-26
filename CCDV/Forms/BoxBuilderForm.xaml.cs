@@ -68,6 +68,7 @@ public partial class BoxBuilderForm : BaseForm
         builder.isHorizontal = boxImages.isHorizontal;
         builder.targetType = boxImages.TargetType;
         builder.PaperFormat = paperFormat.PaperFormat;
+        builder.Thickness = boxImages.Thickness;
 
         builder.makeEmptyImages();
         if (boxImages.UseTestImages) builder.CreateTestImages();
@@ -95,6 +96,7 @@ public partial class BoxBuilderForm : BaseForm
         boxImages.isHorizontal = builder.isHorizontal;
         boxImages.TargetType = builder.targetType;
         paperFormat.PaperFormat = builder.PaperFormat;
+        boxImages.Thickness = builder.Thickness;
 
         boxImages.FrontImage = builder.frontImagePath;
         boxImages.BackImage = builder.backImagePath;

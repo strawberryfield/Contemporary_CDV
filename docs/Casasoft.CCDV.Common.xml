@@ -716,7 +716,7 @@
             Common builder for boxes and folders
             </summary>
         </member>
-        <member name="P:Casasoft.CCDV.BaseBuilder.spessore">
+        <member name="P:Casasoft.CCDV.BaseBuilder.Thickness">
             <summary>
             Thickness of the box (mm)
             </summary>

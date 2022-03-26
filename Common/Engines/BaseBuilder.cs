@@ -33,10 +33,16 @@ public class BaseBuilder : IBuilder
     protected BaseBuilderCommandLine par;
     public MagickColor fillColor { get; set; }
     public MagickColor borderColor { get; set; }
+
+    protected int spessore;
     /// <summary>
     /// Thickness of the box (mm)
     /// </summary>
-    public int spessore { get; set; }
+    public int Thickness
+    {
+        get => spessore / fmt.ToPixels(1); 
+        set => spessore = fmt.ToPixels(value);
+    }
     /// <summary>
     /// target box format
     /// </summary>
@@ -176,7 +182,7 @@ public class BaseBuilder : IBuilder
         fontBold = parameters.fontBold;
         fontItalic = parameters.fontItalic;
         borderText = parameters.borderText;
-        PaperFormat = parameters.PaperFormat;   
+        PaperFormat = parameters.PaperFormat;
 
         if (par.useSampleImages) CreateTestImages();
 

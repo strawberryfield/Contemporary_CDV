@@ -28,7 +28,7 @@ namespace Casasoft.CCDV;
 /// </summary>
 public interface IBuilder
 {
-    int spessore { get; set; }
+    int Thickness { get; set; }
     Formats fmt { get; set; }
     MagickColor fillColor { get; set; }
     MagickColor borderColor { get; set; }

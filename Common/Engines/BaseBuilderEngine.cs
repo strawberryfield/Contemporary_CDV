@@ -75,6 +75,7 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
         p.isHorizontal = builder.isHorizontal;
         p.targetFormat = (int)builder.targetType;
         p.PaperFormat = builder.PaperFormat;
+        p.spessore = builder.Thickness;
 
         return JsonSerializer.Serialize(p);
     }
@@ -99,6 +100,7 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
         builder.fontItalic = p.fontItalic;
         builder.isHorizontal = p.isHorizontal;
         builder.targetType = (TargetType)p.targetFormat;
+        builder.Thickness = p.spessore;
 
         builder.frontImagePath = p.frontImage;
         builder.backImagePath = p.backImage;
