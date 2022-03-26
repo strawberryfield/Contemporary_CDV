@@ -174,8 +174,8 @@ e relativi accessori; a differenza dei tools per DVD video questi sono scritti i
 utilizzando la [libreria Magick.NET](https://github.com/dlemstra/Magick.NET) che incorpora
 già ImageMagick e quindi non necessita di una installazione separata.
 
-I programmi compilati possono funzionare su Windows 10, Mac OSX e Linux (solo su processori x86);
-purtroppo non è disponibile la versione della libreria per processori ARM e dunque
+I programmi compilati possono funzionare su Windows 10, Mac OSX e Linux, 
+anche su processori ARM a 64 bit e dunque
 non si possono eseguire su computer in formato "carte de visite" come il
 [Raspberry Pi](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
 

@@ -49,7 +49,7 @@ prg=CreditCard
 sed -i s_${prg}_/usr/share/ccdv/${prg}_g ${prg}
 
 mkdir runtimes
-cp -r $origin/bin/publish/runtimes/linux* runtimes
+cp -r $origin/bin/publish/runtimes/linux-x64 runtimes
 
 cd ~/$workdir
 mkdir -p usr/bin
@@ -78,3 +78,25 @@ stdbuf -o0 -i0 -e0 echo "Description: Casasoft Contemporary Carte de Visite tool
 cd ~
 dpkg-deb --build --root-owner-group ${workdir}
 cp ${workdir}.deb $origin/bin/
+
+arch=arm64
+workarm=${package}_${version}_${arch}
+
+mv ${workdir} ${workarm}
+cd $workarm
+cd usr/share/ccdv
+rm -r runtimes/*
+cp -r $origin/bin/publish/runtimes/linux-arm64 runtimes
+
+cd ~/$workarm
+stdbuf -o0 -i0 -e0 echo "Package: $package" >DEBIAN/control
+stdbuf -o0 -i0 -e0 echo "Version: $version" >>DEBIAN/control
+stdbuf -o0 -i0 -e0 echo "Architecture: $arch" >>DEBIAN/control
+stdbuf -o0 -i0 -e0 echo "Section: contrib/graphics" >>DEBIAN/control
+stdbuf -o0 -i0 -e0 echo "Maintainer: <Roberto Ceccarelli> strawberryfield@altervista.org" >>DEBIAN/control
+stdbuf -o0 -i0 -e0 echo "Homepage: https://strawberryfield.altervista.org/carte_de_visite" >>DEBIAN/control
+stdbuf -o0 -i0 -e0 echo "Description: Casasoft Contemporary Carte de Visite tools" >>DEBIAN/control
+
+cd ~
+dpkg-deb --build --root-owner-group ${workarm}
+cp ${workarm}.deb $origin/bin/
