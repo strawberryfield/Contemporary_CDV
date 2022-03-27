@@ -40,6 +40,8 @@ public partial class CreditCardForm : BaseForm
         engine.FillColor = commonOptions.FillColor;
         engine.BorderColor = commonOptions.BorderColor;
         engine.Dpi = commonOptions.DpiValue;
+        engine.Script = commonOptions.Script;
+        engine.Tag = commonOptions.ScriptTag;
 
         CreditCardEngine eng = (CreditCardEngine)engine;
         eng.FilesList.Clear();
@@ -76,6 +78,7 @@ public partial class CreditCardForm : BaseForm
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
         commonOptions.DpiValue = eng.Dpi;
+        commonOptions.ScriptTag = eng.Tag;
     }
 
     protected override void doAnteprima()

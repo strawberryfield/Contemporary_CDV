@@ -42,6 +42,8 @@ public partial class MontaggioFotoForm : BaseForm
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
         eng.Dpi = commonOptions.DpiValue;
+        eng.Script = commonOptions.Script;
+        eng.Tag = commonOptions.ScriptTag;
         eng.WithBorder = isChecked(chkWithBorders);
         eng.FullSize = isChecked(chkFullSize);
         eng.Trim = isChecked(chkTrim);
@@ -55,6 +57,7 @@ public partial class MontaggioFotoForm : BaseForm
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
         commonOptions.DpiValue = eng.Dpi;
+        commonOptions.ScriptTag = eng.Tag;
 
         chkWithBorders.IsChecked = eng.WithBorder;
         chkFullSize.IsChecked = eng.FullSize;

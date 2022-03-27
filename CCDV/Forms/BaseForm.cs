@@ -192,10 +192,15 @@ public partial class BaseForm : Window
 
     protected void addAllFiles()
     {
-        foreach (var tb in FindVisualChildren<FileTextBox>(this))
+        foreach (FileTextBox? tb in FindVisualChildren<FileTextBox>(this))
         {
             if (!string.IsNullOrWhiteSpace(tb.Value))
-                engine.FilesList.Add(tb.Value);
+            {
+                if(tb.OpenFileDialogTitle != "Script")
+                {
+                    engine.FilesList.Add(tb.Value);
+                }
+            }
         }
     }
 

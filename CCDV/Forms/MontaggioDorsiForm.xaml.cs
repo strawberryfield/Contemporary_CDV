@@ -42,6 +42,8 @@ public partial class MontaggioDorsiForm : BaseForm
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
         eng.Dpi = commonOptions.DpiValue;
+        eng.Script = commonOptions.Script;
+        eng.Tag = commonOptions.ScriptTag;
         eng.PaperFormat = paperFormat.PaperFormat;
         
     }
@@ -53,6 +55,7 @@ public partial class MontaggioDorsiForm : BaseForm
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
         commonOptions.DpiValue = eng.Dpi;
+        commonOptions.ScriptTag = eng.Tag;
         paperFormat.PaperFormat = eng.PaperFormat;
 
         addFile(1, filename1);

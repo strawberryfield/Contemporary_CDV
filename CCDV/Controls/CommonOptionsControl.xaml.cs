@@ -21,6 +21,7 @@
 
 using ImageMagick;
 using System;
+using System.IO;
 using System.Windows.Controls;
 
 namespace Casasoft.CCDV.UI;
@@ -50,6 +51,25 @@ public partial class CommonOptionsControl : UserControl
     {
         get => cpFill.IMColor;
         set => cpFill.IMColor = value;
+    }
+
+    public string ScriptTag
+    {
+        get => txtTag.Text;
+        set => txtTag.Text = value;
+    }
+
+    public string Script
+    {
+        get
+        {
+            string ret = string.Empty;
+            if(!string.IsNullOrWhiteSpace(txtScript.Value))
+            {
+                ret = File.ReadAllText(txtScript.Value);
+            }
+            return ret;
+        }
     }
 
     private void MenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
