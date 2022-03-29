@@ -78,3 +78,5 @@ popd
 %light% -out %bin%%pkgname%_%version%.msi ^
  %bin%build\product.wixobj ^
  -ext WixUIExtension -ext %WixUtils%
+ 
+dotnet pack %repo%Templates\ScriptTestTemplatesPack.csproj -p:PackageVersion=%version% 

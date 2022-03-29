@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>22.03.29</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <PackageId>Casasoft.CCDV.Script.Templates</PackageId>
     <Title>Casasoft CCDV Script test templates</Title>
     <Authors>Roberto Ceccarelli - Casasoft</Authors>
