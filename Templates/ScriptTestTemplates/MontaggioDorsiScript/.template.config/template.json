@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Roberto Ceccarelli - Casasoft",
+  "classifications": [ "Common", "Console", "CasasoftCCDV" ],
+  "identity": "Casasoft.CCDV.MontaggioDorsiScriptTest",
+  "name": "Casasoft CCDV: Test project for MontaggioDorsi scripts",
+  "shortName": "MontaggioDorsiScriptTest",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}

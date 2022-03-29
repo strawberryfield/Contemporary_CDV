@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>22.03.29</PackageVersion>
+    <PackageId>Casasoft.CCDV.Script.Templates</PackageId>
+    <Title>Casasoft CCDV Script test templates</Title>
+    <Authors>Roberto Ceccarelli - Casasoft</Authors>
+    <Description>Templates to develop and test scripts for Contemporary Carte de Viste tools.</Description>
+    <PackageTags>dotnet-new;templates;casasoft;contemporarycartedevisite</PackageTags>
+
+    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128;NU5100</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="ScriptTestTemplates\**\*" Exclude="ScriptTestTemplates\**\bin\**;ScriptTestTemplates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+</Project>
+
