@@ -15,6 +15,7 @@
 
     <RepositoryUrl>https://github.com/strawberryfield/Contemporary_CDV/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+	<PackageIcon>CCDV-128.png</PackageIcon>
     
     <PackageTags>dotnet-new;templates;casasoft;contemporarycartedevisite</PackageTags>
 
@@ -36,6 +37,12 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\CCDV-128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

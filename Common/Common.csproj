@@ -17,6 +17,8 @@
     <SignAssembly>false</SignAssembly>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	<DocumentationFile>C:\projects\Contemporary_CDV\docs\Casasoft.CCDV.Common.xml</DocumentationFile>
+	<PackageIcon>CCDV-128.png</PackageIcon>
+	<PackageTags>ImageMagick;csharpscript;casasoft;contemporarycartedevisite</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -58,6 +60,13 @@
 
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\CCDV-128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
