@@ -19,6 +19,7 @@
 	<DocumentationFile>C:\projects\Contemporary_CDV\docs\Casasoft.CCDV.Common.xml</DocumentationFile>
 	<PackageIcon>CCDV-128.png</PackageIcon>
 	<PackageTags>ImageMagick;csharpscript;casasoft;contemporarycartedevisite</PackageTags>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -64,6 +65,13 @@
 
   <ItemGroup>
     <None Include="..\CCDV-128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
