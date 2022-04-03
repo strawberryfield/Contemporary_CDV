@@ -184,9 +184,16 @@ public class CreditCardEngine : BaseEngine
     /// <returns>Image to print</returns>
     public override MagickImage GetResult(bool quiet)
     {
-        img = new(fmt);
-
         MagickImage final = img.FineArt10x15_v();
+        if (ScriptInstance != null)
+        {
+            var f = Compiler.Run(ScriptInstance, "OutputImage", null);
+            if (f != null)
+            {
+                final = (MagickImage)f;
+            }
+        }
+
         MagickImage front = Get(FilesList[0], quiet);
         int bordertop = final.Height / 2 - front.Height;
         int borderleft = (final.Width - front.Width) / 2;

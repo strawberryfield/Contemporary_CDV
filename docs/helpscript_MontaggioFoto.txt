@@ -10,6 +10,12 @@ Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
 public void Init() { }
 
 /// <summary>
+/// Image for final output
+/// </summary>
+/// <returns></returns>
+public MagickImage OutputImage() => null;
+
+/// <summary>
 /// Preprocesses the loaded image
 /// </summary>
 /// <param name="image">The loaded image</param>

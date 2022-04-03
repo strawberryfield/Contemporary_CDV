@@ -33,6 +33,12 @@ internal class BaseScripting : IScripting
 /// Custom class initialization
 /// </summary>
 public void Init() { }
+
+/// <summary>
+/// Image for final output
+/// </summary>
+/// <returns></returns>
+public MagickImage OutputImage() => null;
 ";
 
     public virtual string WrapScript(string script, string engine) => $@"{Compiler.Usings}

@@ -95,14 +95,18 @@ public class MontaggioDorsiEngine : BaseEngine
     /// <returns></returns>
     public override MagickImage GetResult(bool quiet)
     {
-        if (CustomCode != null)
-        {
-            ScriptInstance = Compiler.New(CustomCode, this);
-        }
-
-        img = new(fmt);
+        _ = base.GetResult(quiet);
 
         MagickImage final = PaperFormat == PaperFormats.Medium ? img.InCartha15x20_o() : img.InCartha20x27_o();
+        if (ScriptInstance != null)
+        {
+            var f = Compiler.Run(ScriptInstance, "OutputImage", null);
+            if(f != null)
+            {
+                final = (MagickImage)f;
+            }
+        }
+
         MagickImageCollection imagesV = new();
         MagickImageCollection imagesO = new();
 
@@ -185,7 +189,11 @@ public class MontaggioDorsiEngine : BaseEngine
 
             if (ScriptInstance != null)
             {
-                image = (MagickImage)Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
+                var im = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
+                if (im != null)
+                {
+                    image = (MagickImage)im;
+                }
             }
 
             MagickImage dorso = Utils.RotateResizeAndFill(image, orientation, FillColor);

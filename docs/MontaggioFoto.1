@@ -114,6 +114,14 @@ set output dir/filename
 .P
 .PD
 extra info for user scripts
+.PD 0
+.P
+.PD
+Text can be stored in a file instead of a string
+.PD 0
+.P
+.PD
+The file must be referenced as `\[at]filename'
 .PP
 \f[B]\[en]nobanner\f[R] :
 .PD 0
@@ -255,6 +263,10 @@ These are the signatures of the scriptable methods:
 /// Custom class initialization ///
 .PP
 public void Init() { }
+///
+/// Image for final output ///
+.PP
+/// public MagickImage OutputImage() => null;
 ///
 /// Preprocesses the loaded image ///
 .PP

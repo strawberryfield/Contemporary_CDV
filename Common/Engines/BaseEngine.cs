@@ -44,6 +44,7 @@ public class BaseEngine : IEngine
         {
             _dpi = value;
             fmt = new(_dpi);
+            img = new(fmt);
         }
     }
     /// <summary>
@@ -107,7 +108,7 @@ public class BaseEngine : IEngine
     /// <summary>
     /// Storage for the instantiated Script object
     /// </summary>
-    protected object ScriptInstance { get; set; }   
+    protected object ScriptInstance { get; set; }
 
     #endregion
 
@@ -200,7 +201,14 @@ public class BaseEngine : IEngine
     /// </summary>
     /// <param name="quiet">suppress messages when running</param>
     /// <returns>Image to print</returns>
-    public virtual MagickImage GetResult(bool quiet) => null;
+    public virtual MagickImage GetResult(bool quiet)
+    {
+        if (CustomCode != null)
+        {
+            ScriptInstance = Compiler.New(CustomCode, this);
+        }
+        return null;
+    }
 
     /// <summary>
     /// Writes exif infos on image

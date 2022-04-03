@@ -129,11 +129,17 @@ public static class Compiler
     public static object Run(object obj, string Method, object[] args)
     {
         Type type = obj.GetType();
-        return type.InvokeMember(Method,
+        if (type != null && type.GetMethod(Method) != null)
+        {
+
+            return type.InvokeMember(Method,
             BindingFlags.Default | BindingFlags.InvokeMethod,
             null,
             obj,
             args);
+        }
+        else
+            return null;
     }
 
     /// <summary>

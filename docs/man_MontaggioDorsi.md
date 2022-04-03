@@ -53,6 +53,8 @@ set output dir/filename
 
 **--tag=VALUE** :  
 extra info for user scripts  
+Text can be stored in a file instead of a string  
+The file must be referenced as '@filename'  
 
 
 **--nobanner** :  
@@ -143,6 +145,12 @@ These are the signatures of the scriptable methods:
 /// Custom class initialization
 /// </summary>
 public void Init() { }
+
+/// <summary>
+/// Image for final output
+/// </summary>
+/// <returns></returns>
+public MagickImage OutputImage() => null;
 
 /// <summary>
 /// Preprocesses the loaded image

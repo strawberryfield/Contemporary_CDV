@@ -35,6 +35,8 @@ Options:
                                The file must be referenced as '@filename'
   -o, --output=VALUE         set output dir/filename
       --tag=VALUE            extra info for user scripts
+                               Text can be stored in a file instead of a string
+                               The file must be referenced as '@filename'
       --nobanner             suppress the banner
   -h, --help                 show this message and exit
       --helpjson             show json parameters template

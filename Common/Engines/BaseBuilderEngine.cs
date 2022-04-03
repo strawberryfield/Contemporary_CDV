@@ -116,10 +116,6 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
     /// Does the dirty work
     /// </summary>
     /// <returns>Image to print</returns>
-    public override MagickImage GetResult(bool quiet)
-    {
-        img = new(fmt);
-        return base.GetResult(quiet);
-    }
+    public override MagickImage GetResult(bool quiet) => base.GetResult(quiet);
 
 }
