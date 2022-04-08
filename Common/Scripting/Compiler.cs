@@ -55,9 +55,15 @@ public static class Compiler
         {
             MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Linq.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Linq.Expressions.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Linq.Queryable.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Core.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Runtime.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Runtime.Loader.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Console.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Collections.dll")),
+            MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Collections.Concurrent.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("System.Memory.dll")),
             MetadataReference.CreateFromFile(FromTrustedPlatformAssembly("netstandard.dll")),
             MetadataReference.CreateFromFile(Path.Combine(WorkPath, "Magick.NET-Q16-AnyCPU.dll")),
@@ -201,6 +207,7 @@ using ImageMagick;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 ";
 
 

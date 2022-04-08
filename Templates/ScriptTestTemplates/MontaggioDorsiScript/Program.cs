@@ -9,6 +9,7 @@ using ImageMagick;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 MontaggioDorsiEngine eng = new();
 UserScript user = new(eng);
