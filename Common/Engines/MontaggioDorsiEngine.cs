@@ -97,7 +97,24 @@ public class MontaggioDorsiEngine : BaseEngine
     {
         _ = base.GetResult(quiet);
 
-        MagickImage final = PaperFormat == PaperFormats.Medium ? img.InCartha15x20_o() : img.InCartha20x27_o();
+        MagickImage final;
+        switch (PaperFormat)
+        {
+            case PaperFormats.Medium:
+                final = img.InCartha15x20_o();
+                break;
+            case PaperFormats.Large:
+                final = img.InCartha20x27_o();
+                break;
+            case PaperFormats.A4:
+                final = img.A4_o();
+                break;
+            default:
+                final = img.InCartha20x27_o();
+                PaperFormat = PaperFormats.Large;
+                break;
+        }
+
         if (ScriptInstance != null)
         {
             var f = Compiler.Run(ScriptInstance, "OutputImage", null);
@@ -114,28 +131,38 @@ public class MontaggioDorsiEngine : BaseEngine
         if (FilesList.Count == 0)
         {
             MagickImage dorsoOrig = img.CDV_Full_v();
-            if (PaperFormat == PaperFormats.Medium)
+            switch (PaperFormat)
             {
-                for (int i = 0; i < 3; i++) imagesV.Add(dorsoOrig.Clone());
-            }
-            else
-            {
-                for (int i = 0; i < 4; i++) imagesV.Add(dorsoOrig.Clone());
-                dorsoOrig.Rotate(90);
-                for (int i = 0; i < 2; i++) imagesO.Add(dorsoOrig.Clone());
+                case PaperFormats.Medium:
+                    for (int i = 0; i < 3; i++) imagesV.Add(dorsoOrig.Clone());
+                    break;
+                case PaperFormats.Large:
+                    for (int i = 0; i < 4; i++) imagesV.Add(dorsoOrig.Clone());
+                    dorsoOrig.Rotate(90);
+                    for (int i = 0; i < 2; i++) imagesO.Add(dorsoOrig.Clone());
+                    break;
+                case PaperFormats.A4:
+                    for (int i = 0; i < 4; i++) imagesV.Add(dorsoOrig.Clone());
+                    for (int i = 0; i < 4; i++) imagesO.Add(dorsoOrig.Clone());
+                    break;
             }
         }
         else
         {
             int nImg = 0;
-            if (PaperFormat == PaperFormats.Medium)
+            switch (PaperFormat)
             {
-                _ = LoadImages(3, nImg, imagesV, quiet, fmt.CDV_Full_v);
-            }
-            else
-            {
-                nImg = LoadImages(4, nImg, imagesV, quiet, fmt.CDV_Full_v);
-                _ = LoadImages(2, nImg, imagesO, quiet, fmt.CDV_Full_o);
+                case PaperFormats.Medium:
+                    _ = LoadImages(3, nImg, imagesV, quiet, fmt.CDV_Full_v);
+                    break;
+                case PaperFormats.Large:
+                    nImg = LoadImages(4, nImg, imagesV, quiet, fmt.CDV_Full_v);
+                    _ = LoadImages(2, nImg, imagesO, quiet, fmt.CDV_Full_o);
+                    break;
+                case PaperFormats.A4:
+                    nImg = LoadImages(4, nImg, imagesV, quiet, fmt.CDV_Full_v);
+                    _ = LoadImages(4, nImg, imagesO, quiet, fmt.CDV_Full_v);
+                    break;
             }
         }
 
@@ -154,24 +181,30 @@ public class MontaggioDorsiEngine : BaseEngine
         }
         else
         {
-            int h = fmt.ToPixels(10);
+            int h = fmt.ToPixels(PaperFormat == PaperFormats.A4 ? 5 : 10);
             Utils.HLine(draw, h, final.Width);
             h += fmt.CDV_Full_v.Height;
             Utils.HLine(draw, h, final.Width);
-            h += fmt.CDV_Full_v.Width;
+            h +=  PaperFormat == PaperFormats.A4 ? fmt.CDV_Full_v.Height : fmt.CDV_Full_v.Width;
             Utils.HLine(draw, h, final.Width);
         }
         draw.Draw(final);
 
-        if (PaperFormat == PaperFormats.Medium)
+        switch (PaperFormat)
         {
-            final.Composite(imagesV.AppendHorizontally(), Gravity.Center, new PointD(0, 0));
-        }
-        else
-        {
-            final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
-            final.Composite(imagesO.AppendHorizontally(), Gravity.North,
-                new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
+            case PaperFormats.Medium:
+                final.Composite(imagesV.AppendHorizontally(), Gravity.Center, new PointD(0, 0));
+                break;
+            case PaperFormats.Large:
+                final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
+                final.Composite(imagesO.AppendHorizontally(), Gravity.North,
+                    new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
+                break;
+            case PaperFormats.A4:
+                final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(5)));
+                final.Composite(imagesO.AppendHorizontally(), Gravity.North,
+                    new PointD(0, fmt.ToPixels(5) + fmt.CDV_Full_v.Height - 1));
+                break;
         }
 
         return final;

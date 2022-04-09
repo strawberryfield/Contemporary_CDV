@@ -44,7 +44,7 @@ MagickImage output = sc.GetOutputImage();
 
 output.Composite(sc.Build(), Gravity.Center);
 sc.AddCuttingLines(output);
-if (sc.PaperFormat == PaperFormats.Large)
+if (sc.PaperFormat is PaperFormats.Large or PaperFormats.A4)
 {
     img.Info(par.WelcomeBannerText(), $"{par.OutputName}.jpg").Draw(output);
 }
