@@ -107,6 +107,17 @@ public class Formats
     public MagickGeometry FineArt10x18_v => swap(FineArt10x18_o);
     #endregion
 
+    #region ISO formats
+    /// <summary>
+    /// 15x10cm paper
+    /// </summary>
+    public MagickGeometry A4_o => new(ToPixels(297), ToPixels(210));
+    /// <summary>
+    /// 10x15cm paper
+    /// </summary>
+    public MagickGeometry A4_v => swap(A4_o);
+    #endregion
+
     #region cdv
     /// <summary>
     /// Horizontal Carte de Visite, 100x64mm
@@ -137,7 +148,7 @@ public class Formats
     public MagickGeometry CC_v => swap(CC_o);
     #endregion
 
-    private MagickGeometry swap(MagickGeometry g)
+    private static MagickGeometry swap(MagickGeometry g)
     {
         int tmp = g.Width;
         g.Width = g.Height;

@@ -35,11 +35,18 @@ public partial class ThickPaperSelectorControl : UserControl
 
     public PaperFormats PaperFormat
     {
-        get => BaseForm.isChecked(rbMedium) ? PaperFormats.Medium : PaperFormats.Large;
+        get
+        {
+            PaperFormats ret = PaperFormats.Large;
+            if (BaseForm.isChecked(rbMedium)) ret = PaperFormats.Medium;
+            if (BaseForm.isChecked(rbA4)) ret = PaperFormats.A4;
+            return ret;
+        }
         set
         {
             rbMedium.IsChecked = value == PaperFormats.Medium;
             rbLarge.IsChecked = value == PaperFormats.Large;
+            rbA4.IsChecked = value == PaperFormats.A4;
         }
     }
 }

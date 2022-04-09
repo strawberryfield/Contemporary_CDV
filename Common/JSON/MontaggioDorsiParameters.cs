@@ -39,7 +39,7 @@ public class MontaggioDorsiParameters : CommonParameters
     [JsonIgnore]
     public PaperFormats PaperFormat
     {
-        get => Utils.GetThickFormat(Paper);
+        get => Utils.GetPaperFormat(Paper);
         set => Paper = value.ToString();
     }
 

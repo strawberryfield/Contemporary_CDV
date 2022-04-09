@@ -106,7 +106,7 @@ public class BaseBuilderParameters : CommonParameters
     [JsonIgnore]
     public PaperFormats PaperFormat
     {
-        get => Utils.GetThickFormat(Paper);
+        get => Utils.GetPaperFormat(Paper);
         set => Paper = value.ToString();
     }
 

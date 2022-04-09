@@ -1495,6 +1495,16 @@
             10x18cm paper
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Formats.A4_o">
+            <summary>
+            15x10cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Formats.A4_v">
+            <summary>
+            10x15cm paper
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.Formats.CDV_Full_o">
             <summary>
             Horizontal Carte de Visite, 100x64mm
@@ -1673,6 +1683,34 @@
         <member name="M:Casasoft.CCDV.Images.FineArt10x18_v">
             <summary>
             10x18cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.A4_o(ImageMagick.MagickColor)">
+            <summary>
+            ISO A4 297x210 mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.A4_v(ImageMagick.MagickColor)">
+            <summary>
+            ISO A4 210x297 mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.A4_o">
+            <summary>
+            ISO A4 297x210 mm
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.A4_v">
+            <summary>
+            ISO A4 210x297 mm
             </summary>
             <remarks>White background</remarks>
             <returns></returns>
@@ -2111,6 +2149,11 @@
             10x18 cm
             </summary>
         </member>
+        <member name="F:Casasoft.CCDV.PaperFormats.A4">
+            <summary>
+            ISO A4 210x297
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -2378,6 +2421,13 @@
             <param name="draw"></param>
             <param name="l">Distance from left border</param>
             <param name="height"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Utils.GetPaperFormat(System.String)">
+            <summary>
+            Gets the format of the paper from its name
+            </summary>
+            <param name="Paper"></param>
+            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Utils.GetLicense">
             <summary>

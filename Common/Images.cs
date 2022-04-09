@@ -166,6 +166,34 @@ public class Images
     public MagickImage FineArt10x18_v() => FineArt10x18_v(MagickColors.White);
     #endregion
 
+    #region ISO formats
+    /// <summary>
+    /// ISO A4 297x210 mm
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage A4_o(MagickColor c) => new(c, fmt.A4_o.Width, fmt.A4_o.Height);
+    /// <summary>
+    /// ISO A4 210x297 mm
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage A4_v(MagickColor c) => new(c, fmt.A4_v.Width, fmt.A4_v.Height);
+
+    /// <summary>
+    /// ISO A4 297x210 mm
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage A4_o() => A4_o(MagickColors.White);
+    /// <summary>
+    /// ISO A4 210x297 mm
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage A4_v() => A4_v(MagickColors.White);
+    #endregion
+
     #region cdv
     /// <summary>
     /// Horizontal Carte de Visite, 100x64mm

@@ -205,7 +205,12 @@ public static class Utils
     #endregion
 
     #region paper formats
-    public static PaperFormats GetThickFormat(string Paper)
+    /// <summary>
+    /// Gets the format of the paper from its name
+    /// </summary>
+    /// <param name="Paper"></param>
+    /// <returns></returns>
+    public static PaperFormats GetPaperFormat(string Paper)
     {
         PaperFormats ret = PaperFormats.Large;
         if (!string.IsNullOrEmpty(Paper))
@@ -213,6 +218,10 @@ public static class Utils
             if (Paper.ToUpper() == "MEDIUM")
             {
                 ret = PaperFormats.Medium;
+            }
+            if (Paper.ToUpper() == "A4")
+            {
+                ret = PaperFormats.A4;
             }
         }
         return ret;

@@ -41,7 +41,7 @@ public class MontaggioDorsiCommandLine : CommandLine
     /// </summary>
     public PaperFormats PaperFormat
     {
-        get => Utils.GetThickFormat(Paper);
+        get => Utils.GetPaperFormat(Paper);
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ public class MontaggioDorsiCommandLine : CommandLine
 
         Options = new OptionSet
             {
-                { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm", o => Paper = o  },
+                { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm", o => Paper = o  },
             };
         AddBaseOptions();
     }

@@ -41,5 +41,9 @@ public enum PaperFormats
     /// <summary>
     /// 10x18 cm
     /// </summary>
-    Panorama
+    Panorama,
+    /// <summary>
+    /// ISO A4 210x297
+    /// </summary>
+    A4
 }
