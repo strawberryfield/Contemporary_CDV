@@ -33,7 +33,7 @@ set candle="%wix%candle.exe"
 set light="%wix%light.exe"
 set WixUtils="%wix%WixUtilExtension.dll"
 
-set version=22.04.03
+set version=22.04.10
  
 @del /S /Q %build%
 @del /Q %bin%%pkgname%*.*
@@ -57,6 +57,7 @@ copy %repo%LICENSE .
 copy %repo%README.md .
 copy %repo%Linux.md .
 %winrar% a -r -m5 -s ..\%pkgname%_%version%.rar *.*
+%winrar% k ..\%pkgname%_%version%.rar 
 popd
 bash ./pack.sh %version%
 bash ./builddeb.sh %version%
@@ -68,7 +69,13 @@ dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained 
 
 pushd .
 cd %build%
+rmdir /s /q runtimes\linux-arm64
+rmdir /s /q runtimes\linux-x64
+rmdir /s /q runtimes\linux-musl-x64
+rmdir /s /q runtimes\osx-x64
+rmdir /s /q man
 %winrar% a -r -m5 -s ..\%pkgname%_wGUI_%version%.rar *.*
+%winrar% k ..\%pkgname%_wGUI_%version%.rar
 popd
 
 %candle% %repo%WindowsInstaller\Product.wxs ^
