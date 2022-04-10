@@ -21,6 +21,7 @@ Options:
       --paper=VALUE          Output paper size:
                                Large (default) 20x27cm
                                Medium 15x20cm
+                               A4 210x297mm
       --sample               generate sample images
       --fillcolor=VALUE      set the color used to fiil the images
                                (default #FFFFFF)

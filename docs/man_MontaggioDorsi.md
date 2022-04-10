@@ -17,6 +17,7 @@ that I print on a cardboard coated only on the side of the image.
 Output paper size:  
 Large \(default\) 20x27cm  
 Medium 15x20cm  
+A4 210x297mm  
 
 
 **--fillcolor=VALUE** :  
@@ -133,6 +134,7 @@ using ImageMagick;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 ~~~
 

@@ -40,6 +40,7 @@ par.ExpandWildcards();
 
 MontaggioDorsiEngine engine = new(par);
 MagickImage final = engine.GetResult();
-engine.SetImageInfo(par.WelcomeBannerText(), $"{par.OutputName}.jpg", final);
+if (engine.PaperFormat == PaperFormats.Large) 
+    engine.SetImageInfo(par.WelcomeBannerText(), $"{par.OutputName}.jpg", final);
 engine.SetImageParameters(final);
 final.Write($"{par.OutputName}.jpg");

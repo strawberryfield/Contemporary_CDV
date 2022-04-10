@@ -71,6 +71,7 @@ default 'PORTRAIT'\)
 Output paper size:  
 Large \(default\) 20x27cm  
 Medium 15x20cm  
+A4 210x297mm  
 
 
 **--sample** :  
@@ -205,6 +206,7 @@ using ImageMagick;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 ~~~
 
