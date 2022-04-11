@@ -132,6 +132,10 @@ public class CommandLine : ICommandLine
     /// Extra info for user scripting
     /// </summary>
     public string Tag { get; set; }
+    /// <summary>
+    /// Output filename extension
+    /// </summary>
+    public string Extension { get; set; }
     #endregion
 
     #region defaults
@@ -176,6 +180,7 @@ public class CommandLine : ICommandLine
         GetEnvVars();
         FillColor = GetColor(sFillColor);
         BorderColor = GetColor(sBorderColor);
+        Extension = "jpg";
 
         Options = new();
         baseOptions = new OptionSet
@@ -194,6 +199,7 @@ Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
                 o => Script = GetFileParameter(o) },
                 { "o|output=", "set output dir/filename", o => OutputName = o },
+                { "extension=", $"file extension for uutput file (default '{Extension}')", e => Extension = e },
                 { "tag=", @"extra info for user scripts
 Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",

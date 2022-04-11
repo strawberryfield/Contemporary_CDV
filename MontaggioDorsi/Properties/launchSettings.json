@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioDorsi": {
       "commandName": "Project",
-      "commandLineArgs": "-o c:\\foto\\route71\\selezionate\\passepartout\\pp1 --dpi=600 --paper=medium --script=@c:\\foto\\route71\\selezionate\\passepartout.cs    c:\\foto\\route71\\selezionate\\P2960131.jpg  c:\\foto\\route71\\selezionate\\P2960138.jpg",
+      "commandLineArgs": "--extension=pdf --dpi=600 --paper=A4    c:\\foto\\route71\\selezionate\\P2960131.jpg  c:\\foto\\route71\\selezionate\\P2960138.jpg",
       "environmentVariables": {
         "CDV_OUTPATH": "C:\\temp"
       }

@@ -292,6 +292,11 @@
             Extra info for user scripting
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CommandLine.Extension">
+            <summary>
+            Output filename extension
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.ExeName">
             <summary>
             Gets the name of currently running assembly
@@ -568,6 +573,11 @@
         <member name="P:Casasoft.CCDV.ICommandLine.Tag">
             <summary>
             Extra info for user scripting
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ICommandLine.Extension">
+            <summary>
+            Output filename extension
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.ICommandLine.WelcomeBanner">
@@ -1535,9 +1545,16 @@
             Vertical credit card, 54x86mm
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.Formats.SetImageParameters(ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Formats.SetImageParameters(ImageMagick.MagickImage,System.String)">
             <summary>
             Adds Exif infos to image
+            </summary>
+            <param name="img">image to process</param>
+            <param name="ext">extension (file format)</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Formats.SetImageParameters(ImageMagick.MagickImage)">
+            <summary>
+            Adds Exif infos to jpg image
             </summary>
             <param name="img">image to process</param>
         </member>

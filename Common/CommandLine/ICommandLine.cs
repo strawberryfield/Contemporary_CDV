@@ -75,6 +75,10 @@ public interface ICommandLine
     /// Extra info for user scripting
     /// </summary>
     string Tag { get; set; }
+    /// <summary>
+    /// Output filename extension
+    /// </summary>
+    string Extension { get; set; }  
     #endregion
 
     #region methods

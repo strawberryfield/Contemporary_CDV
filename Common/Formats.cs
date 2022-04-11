@@ -160,17 +160,28 @@ public class Formats
     /// Adds Exif infos to image
     /// </summary>
     /// <param name="img">image to process</param>
-    public void SetImageParameters(MagickImage img)
+    /// <param name="ext">extension (file format)</param>
+    public void SetImageParameters(MagickImage img, string ext)
     {
-        img.Format = MagickFormat.Jpg;
         img.Quality = 95;
         img.Density = new Density(_dpi);
         img.ColorSpace = ColorSpace.sRGB;
 
-        ExifProfile exif = new();
-        exif.SetValue(ExifTag.Make, "Casasoft");
-        exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");
-        exif.SetValue(ExifTag.Software, "Casasoft Contemporary Carte de Visite Tools");
-        img.SetProfile(exif);
+        if (ext == "jpg")
+        {
+            img.Format = MagickFormat.Jpg;
+
+            ExifProfile exif = new();
+            exif.SetValue(ExifTag.Make, "Casasoft");
+            exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");
+            exif.SetValue(ExifTag.Software, "Casasoft Contemporary Carte de Visite Tools");
+            img.SetProfile(exif);
+        }
     }
+
+    /// <summary>
+    /// Adds Exif infos to jpg image
+    /// </summary>
+    /// <param name="img">image to process</param>
+    public void SetImageParameters(MagickImage img) => SetImageParameters(img, "jpg");
 }
