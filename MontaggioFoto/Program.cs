@@ -43,7 +43,7 @@ MontaggioFotoEngine engine = new(par);
 for (int i = 0; i < par.FilesList.Count; i += 2)
 {
     MagickImage final = engine.GetResult(false, i);
-    engine.SetImageParameters(final);
-    final.Write($"{par.OutputName}-{i / 2 + 1,3:D3}.jpg");
+    engine.fmt.SetImageParameters(final, par.Extension);
+    final.Write($"{par.OutputName}-{i / 2 + 1,3:D3}.{par.Extension}");
 }
 #endregion

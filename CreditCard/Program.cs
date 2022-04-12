@@ -40,4 +40,4 @@ if (par.FilesList.Count <= 0) return;
 
 CreditCardEngine engine = new(par);
 MagickImage final = engine.GetResult();
-final.Write($"{par.OutputName}.jpg");
+final.Write($"{par.OutputName}.{par.Extension}");
