@@ -38,6 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Casasoft.Xaml.Controls" Version="22.4.13" />
 		<PackageReference Include="Magick.NET.SystemWindowsMedia" Version="5.0.0" />
 	</ItemGroup>
 
@@ -70,11 +71,6 @@
 	<ItemGroup>
 		<Reference Include="XamlAnimatedGif.dll">
 			<HintPath>..\libs\XamlAnimatedGif.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="Casasoft.Xaml.Controls.dll">
-			<HintPath>..\libs\Casasoft.Xaml.Controls.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 
