@@ -40,7 +40,7 @@ public partial class ColorPickerLabelControl : UserControl
         get => Utils.ColorFromPicker(colorPicker);
         set
         {
-            if (value != null)
+            if (value is not null)
             {
                 colorPicker.SelectedColor = Utils.ColorFromMagick(value);
             }

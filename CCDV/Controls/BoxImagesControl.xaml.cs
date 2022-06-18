@@ -70,14 +70,14 @@ public partial class BoxImagesControl : UserControl
     private bool isChecked(RadioButton rb)
     {
         bool ret = false;
-        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        if (rb.IsChecked is not null) ret = (bool)rb.IsChecked;
         return ret;
     }
 
     private bool isChecked(CheckBox rb)
     {
         bool ret = false;
-        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        if (rb.IsChecked is not null) ret = (bool)rb.IsChecked;
         return ret;
     }
 }

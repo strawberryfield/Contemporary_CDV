@@ -113,7 +113,7 @@ public static class Compiler
     {
         // create instance of the desired class and call the desired function
         Type type = assembly.GetType(ClassName);
-        if (type != null && type.GetMethod(Method) != null)
+        if (type is not null && type.GetMethod(Method) is not null)
         {
             object obj = Activator.CreateInstance(type, new object[] { eng });
             return type.InvokeMember(Method,
@@ -135,7 +135,7 @@ public static class Compiler
     public static object Run(object obj, string Method, object[] args)
     {
         Type type = obj.GetType();
-        if (type != null && type.GetMethod(Method) != null)
+        if (type is not null && type.GetMethod(Method) is not null)
         {
 
             return type.InvokeMember(Method,
@@ -168,7 +168,7 @@ public static class Compiler
     public static object New(Assembly assembly, string ClassName, IEngine eng)
     {
         Type type = assembly.GetType(ClassName);
-        if (type != null)
+        if (type is not null)
         {
             return Activator.CreateInstance(type, new object[] { eng });
         }
