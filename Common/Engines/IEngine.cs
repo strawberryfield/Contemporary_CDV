@@ -47,6 +47,16 @@ public interface IEngine
     /// Color for lines and borders
     /// </summary>
     MagickColor BorderColor { get; set; }
+
+    /// <summary>
+    /// Output file name
+    /// </summary>
+    string OutputName { get; set; }
+    /// <summary>
+    /// Output file name extension
+    /// </summary>
+    string Extension { get; set; }
+
     /// <summary>
     /// Extra info for user scripting
     /// </summary>

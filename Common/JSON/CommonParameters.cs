@@ -43,7 +43,11 @@ public class CommonParameters : IParameters
     /// <summary>
     /// Output file name
     /// </summary>
-    public string OutputName { get; set; }
+    public string OutputName { get; set; } = string.Empty;
+    /// <summary>
+    /// Output file name extension
+    /// </summary>
+    public string Extension { get; set; } = "jpg";
     /// <summary>
     /// c# script for custom processing
     /// </summary>

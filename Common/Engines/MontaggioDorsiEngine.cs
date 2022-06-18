@@ -45,6 +45,7 @@ public class MontaggioDorsiEngine : BaseEngine
     {
         parameters = new MontaggioDorsiParameters();
         ScriptingClass = new MontaggioDorsiScripting();
+        OutputName = "dorsi";
     }
 
     /// <summary>
@@ -207,6 +208,10 @@ public class MontaggioDorsiEngine : BaseEngine
                 break;
         }
 
+        if (PaperFormat == PaperFormats.Large)
+        {
+            SetImageInfo(WelcomeBannerText(), $"{OutputName}.{Extension}", final);
+        }
         return final;
     }
 

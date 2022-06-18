@@ -939,6 +939,16 @@
             Color for lines and borders
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.OutputName">
+            <summary>
+            Output file name
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.Extension">
+            <summary>
+            Output file name extension
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.Engines.BaseEngine.Tag">
             <summary>
             Extra info for user scripting
@@ -1208,6 +1218,16 @@
         <member name="P:Casasoft.CCDV.Engines.IEngine.BorderColor">
             <summary>
             Color for lines and borders
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.OutputName">
+            <summary>
+            Output file name
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.Extension">
+            <summary>
+            Output file name extension
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.Engines.IEngine.Tag">
@@ -1963,6 +1983,11 @@
             Output file name
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.JSON.CommonParameters.Extension">
+            <summary>
+            Output file name extension
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.JSON.CommonParameters.Script">
             <summary>
             c# script for custom processing
@@ -2074,6 +2099,11 @@
         <member name="P:Casasoft.CCDV.JSON.IParameters.OutputName">
             <summary>
             Output file name
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IParameters.Extension">
+            <summary>
+            Output file name extension
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.JSON.IParameters.Script">

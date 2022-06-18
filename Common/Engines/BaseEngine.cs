@@ -60,6 +60,14 @@ public class BaseEngine : IEngine
     /// </summary>
     public MagickColor BorderColor { get; set; }
     /// <summary>
+    /// Output file name
+    /// </summary>
+    public string OutputName { get; set; } = string.Empty;
+    /// <summary>
+    /// Output file name extension
+    /// </summary>
+    public string Extension { get; set; } = "jpg";
+    /// <summary>
     /// Extra info for user scripting
     /// </summary>
     public string Tag { get; set; }
@@ -144,6 +152,8 @@ public class BaseEngine : IEngine
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
         Tag = par.Tag;
+        OutputName = par.OutputName;
+        Extension = par.Extension;
     }
     #endregion
 

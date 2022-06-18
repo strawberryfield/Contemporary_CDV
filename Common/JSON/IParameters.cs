@@ -45,6 +45,10 @@ public interface IParameters
     /// </summary>
     string OutputName { get; set; }
     /// <summary>
+    /// Output file name extension
+    /// </summary>
+    string Extension { get; set; }
+    /// <summary>
     /// c# script for custom processing
     /// </summary>
     string Script { get; set; }
