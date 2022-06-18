@@ -129,10 +129,10 @@ public class MontaggioFotoEngine : BaseEngine
         _ = base.GetResult(quiet);
 
         MagickImage final = img.FineArt10x15_o();
-        if (ScriptInstance != null)
+        if (ScriptInstance is not null)
         {
             var f = Compiler.Run(ScriptInstance, "OutputImage", null);
-            if (f != null)
+            if (f is not null)
             {
                 final = (MagickImage)f;
             }
@@ -140,18 +140,21 @@ public class MontaggioFotoEngine : BaseEngine
 
         MagickImage img1 = Get(FilesList[i], quiet);
         MagickImage img2;
+        string name1 = FilesList[i];
+        string name2 = string.Empty;    
         i++;
         if (i < FilesList.Count)
         {
             img2 = Get(FilesList[i], quiet);
+            name2 = FilesList[i];   
         }
         else
         {
             img2 = img.CDV_Internal_v();
         }
 
-        final.Composite(HalfCard(img1), Gravity.West);
-        final.Composite(HalfCard(img2), Gravity.East);
+        final.Composite(HalfCard(img1, name1), Gravity.West);
+        final.Composite(HalfCard(img2, name2), Gravity.East);
         return final;
     }
 
@@ -167,13 +170,13 @@ public class MontaggioFotoEngine : BaseEngine
         return d;
     }
 
-    private MagickImage HalfCard(MagickImage image)
+    private MagickImage HalfCard(MagickImage image, string filename)
     {
         image.BorderColor = BorderColor;
         image.Border(1);
         MagickImage half = new(MagickColors.White, fmt.FineArt10x15_o.Width / 2, fmt.FineArt10x15_o.Height);
         half.Composite(image, Gravity.Center);
-        BaseText().Text(fmt.ToPixels(5), -half.Width + fmt.ToPixels(3), $"Source: {image.FileName}")
+        BaseText().Text(fmt.ToPixels(5), -half.Width + fmt.ToPixels(3), $"Source: {filename}")
             .Text(fmt.ToPixels(5), -fmt.ToPixels(3), WelcomeBannerText())
             .Text(half.Height / 2, -fmt.ToPixels(3), $"Run {DateTime.Now.ToString("R")}")
             .Draw(half);
@@ -185,10 +188,10 @@ public class MontaggioFotoEngine : BaseEngine
         if (!quiet) Console.WriteLine($"Processing: {filename}");
         MagickImage image = new(filename);
 
-        if (ScriptInstance != null)
+        if (ScriptInstance is not null)
         {
             var i = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
-            if(i != null)
+            if(i is not null)
             {
                 image = (MagickImage)i;
             }
@@ -219,6 +222,7 @@ public class MontaggioFotoEngine : BaseEngine
             return img2;
         }
 
+        img1.Label = filename;
         return img1;
     }
     #endregion

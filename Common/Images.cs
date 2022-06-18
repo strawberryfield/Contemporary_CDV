@@ -322,8 +322,8 @@ public class Images
                 break;
             case PaperFormats.Medium:
                 center = fmt.InCartha15x20_o.Width / 2;
-                h = fmt.InCartha15x20_o.Height / 2 + fmt.CDV_Full_v.Height / 2 + fmt.ToPixels(5);
-                d.Text(center - fmt.CDV_Full_v.Width * 3 / 2 + fmt.ToPixels(10), h, $"{i}Run {DateTime.Now:R}")
+                h = fmt.InCartha15x20_o.Height / 2 + fmt.CDV_Full_v.Height / 2 + fmt.ToPixels(10);
+                d.Text(center - fmt.CDV_Full_v.Width * 3 / 2 + fmt.ToPixels(5), h, $"{i}Run {DateTime.Now:R}")
                    .Text(center, h, $"DPI: {fmt.DPI}\nOutput: {o}");
                 break;
             case PaperFormats.Large:
