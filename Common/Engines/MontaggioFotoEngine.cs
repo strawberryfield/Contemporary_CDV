@@ -222,7 +222,6 @@ public class MontaggioFotoEngine : BaseEngine
             return img2;
         }
 
-        img1.Label = filename;
         return img1;
     }
     #endregion
