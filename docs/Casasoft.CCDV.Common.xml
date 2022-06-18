@@ -1046,20 +1046,22 @@
             </summary>
             <param name="image">image to process</param>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageInfo(System.String,ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageInfo(System.String,ImageMagick.MagickImage,Casasoft.CCDV.PaperFormats)">
             <summary>
             Writes info text on images
             </summary>
             <param name="o">output related infos</param>
             <param name="image">image to process</param>
+            <param name="p">output format</param>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageInfo(System.String,System.String,ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageInfo(System.String,System.String,ImageMagick.MagickImage,Casasoft.CCDV.PaperFormats)">
             <summary>
             Writes info text on images
             </summary>
             <param name="i">input related infos</param>
             <param name="o">output related infos</param>
             <param name="image">image to process</param>
+            <param name="p">output format</param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.WelcomeBannerText">
             <summary>
@@ -1269,20 +1271,22 @@
             </summary>
             <param name="image">image to process</param>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageInfo(System.String,ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageInfo(System.String,ImageMagick.MagickImage,Casasoft.CCDV.PaperFormats)">
             <summary>
             Writes info text on images
             </summary>
             <param name="o">output related infos</param>
             <param name="image">image to process</param>
+            <param name="p">output format</param>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageInfo(System.String,System.String,ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageInfo(System.String,System.String,ImageMagick.MagickImage,Casasoft.CCDV.PaperFormats)">
             <summary>
             Writes info text on images
             </summary>
             <param name="i">input related infos</param>
             <param name="o">output related infos</param>
             <param name="image">image to process</param>
+            <param name="p">output format</param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.IEngine.WelcomeBannerText">
             <summary>
@@ -1853,12 +1857,13 @@
             <param name="Padding">border size in mm</param>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.Images.Info(System.String,System.String)">
+        <member name="M:Casasoft.CCDV.Images.Info(System.String,System.String,Casasoft.CCDV.PaperFormats)">
             <summary>
             Draws infos on the image
             </summary>
             <param name="i">input description</param>
             <param name="o">output description</param>
+            <param name="p">output format</param>
             <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.JSON.BaseBuilderParameters">

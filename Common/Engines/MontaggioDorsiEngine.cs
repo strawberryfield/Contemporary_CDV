@@ -116,10 +116,10 @@ public class MontaggioDorsiEngine : BaseEngine
                 break;
         }
 
-        if (ScriptInstance != null)
+        if (ScriptInstance is not null)
         {
             var f = Compiler.Run(ScriptInstance, "OutputImage", null);
-            if(f != null)
+            if(f is not null)
             {
                 final = (MagickImage)f;
             }
@@ -208,9 +208,9 @@ public class MontaggioDorsiEngine : BaseEngine
                 break;
         }
 
-        if (PaperFormat == PaperFormats.Large)
+        if (PaperFormat == PaperFormats.Large || PaperFormat == PaperFormats.Medium)
         {
-            SetImageInfo(WelcomeBannerText(), $"{OutputName}.{Extension}", final);
+            SetImageInfo(WelcomeBannerText(), $"{OutputName}.{Extension}", final, PaperFormat);
         }
         return final;
     }
@@ -225,10 +225,10 @@ public class MontaggioDorsiEngine : BaseEngine
 
             MagickImage image = new(FilesList[nImg]);
 
-            if (ScriptInstance != null)
+            if (ScriptInstance is not null)
             {
                 var im = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
-                if (im != null)
+                if (im is not null)
                 {
                     image = (MagickImage)im;
                 }

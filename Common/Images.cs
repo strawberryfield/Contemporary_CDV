@@ -303,8 +303,9 @@ public class Images
     /// </summary>
     /// <param name="i">input description</param>
     /// <param name="o">output description</param>
+    /// <param name="p">output format</param>
     /// <returns></returns>
-    public Drawables Info(string i, string o)
+    public Drawables Info(string i, string o, PaperFormats p = PaperFormats.Large)
     {
         Drawables d = new Drawables();
 
@@ -313,9 +314,30 @@ public class Images
             .FillColor(MagickColors.Black)
             .TextAlignment(TextAlignment.Left);
 
-        d.Text(fmt.ToPixels(10), fmt.ToPixels(185), $"{i}Run {DateTime.Now.ToString("R")}")
-            .Text(fmt.InCartha20x27_o.Width / 2, fmt.ToPixels(185), $"DPI: {fmt.DPI}\nOutput: {o}");
-
+        int center;
+        int h;
+        switch (p)
+        {
+            case PaperFormats.Small:
+                break;
+            case PaperFormats.Medium:
+                center = fmt.InCartha15x20_o.Width / 2;
+                h = fmt.InCartha15x20_o.Height / 2 + fmt.CDV_Full_v.Height / 2 + fmt.ToPixels(5);
+                d.Text(center - fmt.CDV_Full_v.Width * 3 / 2 + fmt.ToPixels(10), h, $"{i}Run {DateTime.Now:R}")
+                   .Text(center, h, $"DPI: {fmt.DPI}\nOutput: {o}");
+                break;
+            case PaperFormats.Large:
+                h = fmt.ToPixels(185);
+                d.Text(fmt.ToPixels(10), h, $"{i}Run {DateTime.Now:R}")
+                    .Text(fmt.InCartha20x27_o.Width / 2, h, $"DPI: {fmt.DPI}\nOutput: {o}");
+                break;
+            case PaperFormats.Panorama:
+                break;
+            case PaperFormats.A4:
+                break;
+            default:
+                break;
+        }
         return d;
     }
 

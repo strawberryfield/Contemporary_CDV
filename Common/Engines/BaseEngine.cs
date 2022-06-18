@@ -213,7 +213,7 @@ public class BaseEngine : IEngine
     /// <returns>Image to print</returns>
     public virtual MagickImage GetResult(bool quiet)
     {
-        if (CustomCode != null)
+        if (CustomCode is not null)
         {
             ScriptInstance = Compiler.New(CustomCode, this);
         }
@@ -231,14 +231,18 @@ public class BaseEngine : IEngine
     /// </summary>
     /// <param name="o">output related infos</param>
     /// <param name="image">image to process</param>
-    public void SetImageInfo(string o, MagickImage image) => img.Info(WelcomeBannerText(), o).Draw(image);
+    /// <param name="p">output format</param>
+    public void SetImageInfo(string o, MagickImage image, PaperFormats p = PaperFormats.Large)
+        => img.Info(WelcomeBannerText(), o, p).Draw(image);
     /// <summary>
     /// Writes info text on images
     /// </summary>
     /// <param name="i">input related infos</param>
     /// <param name="o">output related infos</param>
     /// <param name="image">image to process</param>
-    public void SetImageInfo(string i, string o, MagickImage image) => img.Info(i, o).Draw(image);
+    /// <param name="p">output format</param>
+    public void SetImageInfo(string i, string o, MagickImage image, PaperFormats p = PaperFormats.Large)
+        => img.Info(i, o, p).Draw(image);
     /// <summary>
     /// gets the program banner
     /// </summary>

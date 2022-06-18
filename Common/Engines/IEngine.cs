@@ -95,14 +95,16 @@ public interface IEngine
     /// </summary>
     /// <param name="o">output related infos</param>
     /// <param name="image">image to process</param>
-    void SetImageInfo(string o, MagickImage image);
+    /// <param name="p">output format</param>
+    void SetImageInfo(string o, MagickImage image, PaperFormats p = PaperFormats.Large);
     /// <summary>
     /// Writes info text on images
     /// </summary>
     /// <param name="i">input related infos</param>
     /// <param name="o">output related infos</param>
     /// <param name="image">image to process</param>
-    void SetImageInfo(string i, string o, MagickImage image);
+    /// <param name="p">output format</param>
+    void SetImageInfo(string i, string o, MagickImage image, PaperFormats p = PaperFormats.Large);
     /// <summary>
     /// gets the program banner
     /// </summary>

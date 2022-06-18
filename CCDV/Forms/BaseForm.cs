@@ -146,7 +146,7 @@ public partial class BaseForm : Window
     private void bwAnteprima_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
         MagickImage? bm = (MagickImage?)e.Result;
-        if (bm != null) image.Source = bm.ToBitmapSource();
+        if (bm is not null) image.Source = bm.ToBitmapSource();
         waitForm.Close();
     }
 
@@ -155,7 +155,7 @@ public partial class BaseForm : Window
         MagickImage? bm = (MagickImage?)e.Result;
         waitForm.Close();
 
-        if (bm != null)
+        if (bm is not null)
         {
             SaveFileDialog sd = new();
             sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
@@ -175,14 +175,14 @@ public partial class BaseForm : Window
 
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {
-        if (depObj == null)
+        if (depObj is null)
             yield return null;
 
         for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
         {
             var child = VisualTreeHelper.GetChild(depObj, i);
 
-            if (child != null && child is T)
+            if (child is not null && child is T)
                 yield return (T)child;
 
             foreach (T childOfChild in FindVisualChildren<T>(child))
@@ -207,14 +207,14 @@ public partial class BaseForm : Window
     public static bool isChecked(RadioButton rb)
     {
         bool ret = false;
-        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        if (rb.IsChecked is not null) ret = (bool)rb.IsChecked;
         return ret;
     }
 
     public static bool isChecked(CheckBox rb)
     {
         bool ret = false;
-        if (rb.IsChecked != null) ret = (bool)rb.IsChecked;
+        if (rb.IsChecked is not null) ret = (bool)rb.IsChecked;
         return ret;
     }
 }
