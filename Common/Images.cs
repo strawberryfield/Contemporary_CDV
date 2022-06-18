@@ -327,13 +327,12 @@ public class Images
                    .Text(center, h, $"DPI: {fmt.DPI}\nOutput: {o}");
                 break;
             case PaperFormats.Large:
+            case PaperFormats.A4:
                 h = fmt.ToPixels(185);
                 d.Text(fmt.ToPixels(10), h, $"{i}Run {DateTime.Now:R}")
                     .Text(fmt.InCartha20x27_o.Width / 2, h, $"DPI: {fmt.DPI}\nOutput: {o}");
                 break;
             case PaperFormats.Panorama:
-                break;
-            case PaperFormats.A4:
                 break;
             default:
                 break;

@@ -42,7 +42,15 @@ public interface IBuilder
     void SetFrontImage(string filename);
     void SetBackImage(string filename, bool isHorizontal = false);
 
+    /// <summary>
+    /// adds lines to help in cutting images
+    /// </summary>
+    /// <param name="img"></param>
     void AddCuttingLines(MagickImage img);
+
+    /// <summary>
+    /// Set of images for testing
+    /// </summary>
     void CreateTestImages();
 
     /// <summary>

@@ -44,10 +44,7 @@ MagickImage output = sc.GetOutputImage();
 
 output.Composite(sc.Build(), Gravity.Center);
 sc.AddCuttingLines(output);
-if (sc.PaperFormat is PaperFormats.Large or PaperFormats.A4)
-{
-    img.Info(par.WelcomeBannerText(), $"{par.OutputName}.{par.Extension}").Draw(output);
-}
+
 fmt.SetImageParameters(output, par.Extension);
 output.Write($"{par.OutputName}.{par.Extension}");
 #endregion

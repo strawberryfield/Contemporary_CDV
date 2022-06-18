@@ -875,6 +875,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.CreateTestImages">
+            <summary>
+            Set of images for testing
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.BaseBuilderEngine">
             <summary>
             Abstract class for folders and boxes builders
@@ -1432,9 +1437,25 @@
             <param name="quiet"></param>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.CreateTestImages">
+            <summary>
+            Set of images for testing
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.IBuilder">
             <summary>
             Interface for boxes and folders builder
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.AddCuttingLines(ImageMagick.MagickImage)">
+            <summary>
+            adds lines to help in cutting images
+            </summary>
+            <param name="img"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.CreateTestImages">
+            <summary>
+            Set of images for testing
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.IBuilder.PaperFormat">
@@ -1447,6 +1468,11 @@
             Returns empty final image
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.CreateTestImages">
+            <summary>
+            Set of images for testing
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.Formats">
             <summary>

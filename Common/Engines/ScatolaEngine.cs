@@ -39,6 +39,7 @@ public class ScatolaEngine : BaseBuilderEngine
         parameters = new BaseBuilderParameters();
         Builder = new ScatolaBuilder();
         ScriptingClass = new BaseBuilderScripting();
+        OutputName = "box";
     }
 
     /// <summary>
@@ -67,7 +68,11 @@ public class ScatolaEngine : BaseBuilderEngine
         ScatolaBuilder sc = (ScatolaBuilder)Builder;
         output.Composite(sc.Build(), Gravity.Center);
         sc.AddCuttingLines(output);
-        
+        if (sc.PaperFormat is PaperFormats.Large or PaperFormats.A4)
+        {
+            img.Info(WelcomeBannerText(), $"{OutputName}.{Extension}").Draw(output);
+        }
+
         return output;
     }
     #endregion

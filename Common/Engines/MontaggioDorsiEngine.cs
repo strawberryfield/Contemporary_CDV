@@ -208,7 +208,7 @@ public class MontaggioDorsiEngine : BaseEngine
                 break;
         }
 
-        if (PaperFormat == PaperFormats.Large || PaperFormat == PaperFormats.Medium)
+        if (PaperFormat is PaperFormats.Large or PaperFormats.Medium)
         {
             SetImageInfo(WelcomeBannerText(), $"{OutputName}.{Extension}", final, PaperFormat);
         }

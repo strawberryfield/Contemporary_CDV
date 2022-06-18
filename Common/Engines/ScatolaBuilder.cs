@@ -131,6 +131,9 @@ public class ScatolaBuilder : BaseBuilder
         (Drawables)d.Line(0, h - 1, 0, 0).Line(w - 1, h - 1, w - 1, 0).Line(0, 0, w - 1, 0);
 
     #region test
+    /// <summary>
+    /// Set of images for testing
+    /// </summary>
     public override void CreateTestImages()
     {
         base.CreateTestImages();

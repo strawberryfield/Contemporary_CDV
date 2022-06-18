@@ -558,7 +558,7 @@ See the GNU General Public License for more details.");
         if (!string.IsNullOrWhiteSpace(color))
         {
             MagickColor r = colors.GetColor(color);
-            if (r != null)
+            if (r is not null)
             {
                 ret = r;
             }

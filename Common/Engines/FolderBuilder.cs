@@ -145,6 +145,9 @@ namespace Casasoft.CCDV
             (Drawables)d.Line(0, h - 1, h, 0).Line(w - 1, h - 1, w - h, 0).Line(h, 0, w - h, 0);
 
         #region test
+        /// <summary>
+        /// Set of images for testing
+        /// </summary>
         public override void CreateTestImages()
         {
             base.CreateTestImages();

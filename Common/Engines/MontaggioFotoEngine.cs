@@ -178,7 +178,7 @@ public class MontaggioFotoEngine : BaseEngine
         half.Composite(image, Gravity.Center);
         BaseText().Text(fmt.ToPixels(5), -half.Width + fmt.ToPixels(3), $"Source: {filename}")
             .Text(fmt.ToPixels(5), -fmt.ToPixels(3), WelcomeBannerText())
-            .Text(half.Height / 2, -fmt.ToPixels(3), $"Run {DateTime.Now.ToString("R")}")
+            .Text(half.Height / 2, -fmt.ToPixels(3), $"Run {DateTime.Now:R}")
             .Draw(half);
         return half;
     }

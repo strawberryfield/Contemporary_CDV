@@ -39,6 +39,7 @@ public class FolderEngine : BaseBuilderEngine
         parameters = new BaseBuilderParameters();
         Builder = new FolderBuilder();
         ScriptingClass = new BaseBuilderScripting();
+        OutputName = "folder";
     }
 
     /// <summary>
@@ -67,6 +68,10 @@ public class FolderEngine : BaseBuilderEngine
         FolderBuilder sc = (FolderBuilder)Builder;
         output.Composite(sc.Build(), Gravity.Center);
         sc.AddCuttingLines(output);
+        if (sc.PaperFormat is PaperFormats.Large or PaperFormats.A4)
+        {
+            img.Info(WelcomeBannerText(), $"{OutputName}.{Extension}").Draw(output);
+        }
 
         return output;
     }

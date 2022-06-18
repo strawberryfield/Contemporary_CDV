@@ -338,6 +338,9 @@ public class BaseBuilder : IBuilder
     }
 
     #region test
+    /// <summary>
+    /// Set of images for testing
+    /// </summary>
     public virtual void CreateTestImages()
     {
         frontImage = new(MagickColors.LightGray, frontFormat.Width, frontFormat.Height);
