@@ -170,7 +170,7 @@ ed in un [tutorial sul mio sito](https://strawberryfield.altervista.org/creare_d
 
 In questo repository sono presenti i sorgenti dei tools per la creazione delle carte de viste
 e relativi accessori; a differenza dei tools per DVD video questi sono scritti in 
-[C# 9](https://docs.microsoft.com/it-it/dotnet/csharp/whats-new/csharp-9)
+[C# 10](https://docs.microsoft.com/it-it/dotnet/csharp/whats-new/csharp-10)
 utilizzando la [libreria Magick.NET](https://github.com/dlemstra/Magick.NET) che incorpora
 già ImageMagick e quindi non necessita di una installazione separata.
 
@@ -179,7 +179,8 @@ anche su processori ARM a 64 bit e dunque
 non si possono eseguire su computer in formato "carte de visite" come il
 [Raspberry Pi](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
 
-
+Sul mio sito sono disponibili [i manuali utente](https://strawberryfield.altervista.org/carte_de_visite/manuali_utente.php) ed 
+una più esaustiva [documentazione del codice sorgente](https://strawberryfield.altervista.org/carte_de_visite/sorgente_commentato.php).
 ### Bibliografia
 
 [Roberto Ceccarelli - Creare DVD video da codice](https://strawberryfield.altervista.org/cp/10.pdf)
