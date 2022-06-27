@@ -42,11 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.2.0" />
-    <PackageReference Include="Mono.Options" Version="6.12.0.148" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="MontaggioFoto">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
