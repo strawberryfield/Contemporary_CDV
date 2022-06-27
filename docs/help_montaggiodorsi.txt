@@ -8,7 +8,7 @@ Options:
                                Large (default) 20x27cm
                                Medium 15x20cm
                                A4 210x297mm
-      --fillcolor=VALUE      set the color used to fiil the images
+      --fillcolor=VALUE      set the color used to fill the images
                                (default #FFFFFF)
       --bordercolor=VALUE    set the color used to border the images
                                (default #000000)
@@ -22,6 +22,7 @@ Options:
                                Text can be stored in a file instead of a string
                                The file must be referenced as '@filename'
   -o, --output=VALUE         set output dir/filename
+      --extension=VALUE      file extension for output file (default 'jpg')
       --tag=VALUE            extra info for user scripts
                                Text can be stored in a file instead of a string
                                The file must be referenced as '@filename'

@@ -30,7 +30,7 @@ blank border around the image
 
 
 **--fillcolor=VALUE** :  
-set the color used to fiil the images  
+set the color used to fill the images  
 \(default \#FFFFFF\)  
 
 
@@ -59,6 +59,10 @@ The file must be referenced as '@filename'
 
 **-o, --output=VALUE** :  
 set output dir/filename  
+
+
+**--extension=VALUE** :  
+file extension for output file \(default 'jpg'\)  
 
 
 **--tag=VALUE** :  
@@ -117,7 +121,8 @@ using the following template:
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",
   "Dpi": 300,
-  "OutputName": null,
+  "OutputName": "",
+  "Extension": "jpg",
   "Script": null,
   "Tag": null,
   "FilesList": []

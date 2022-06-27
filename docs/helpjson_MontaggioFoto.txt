@@ -11,7 +11,8 @@ Json parameters template for: MontaggioFoto
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",
   "Dpi": 300,
-  "OutputName": null,
+  "OutputName": "",
+  "Extension": "jpg",
   "Script": null,
   "Tag": null,
   "FilesList": []
