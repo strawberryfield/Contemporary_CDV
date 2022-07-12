@@ -53,8 +53,9 @@ public class UserScript
         System.Reflection.MethodInfo m = this.GetType().GetMethod(""Init"");
         if (m != null) m.Invoke(this, null);
     }}
-{ script}
+{script}
 }}";
+
     public virtual string WrapScript(string script) => WrapScript(script, "BaseEngine");
 
     public virtual Assembly Compile(string script) => Compiler.Compile(WrapScript(script));

@@ -1,0 +1,8 @@
+﻿public class MyClassTests
+{
+  public void Test1()
+  {
+    var instance = new MyClass();
+    Assert.AreEqual(5, instance.Sum(2, 3));
+  }
+}

@@ -41,46 +41,57 @@ public class CommandLine : ICommandLine
     /// true if help is requested
     /// </summary>
     protected bool shouldShowHelp { get; set; }
+
     /// <summary>
     /// true if helpjson is requested
     /// </summary>
     protected bool shouldShowHelpJson { get; set; }
+
     /// <summary>
     /// true if helpscript is requested
     /// </summary>
     protected bool shouldShowHelpScript { get; set; }
+
     /// <summary>
     /// true if colors list is requested
     /// </summary>
     protected bool shouldShowColors { get; set; }
+
     /// <summary>
     /// true if license is requested
     /// </summary>
     protected bool shouldShowLicense { get; set; }
+
     /// <summary>
     /// true if man page is requested
     /// </summary>
     protected bool shouldShowMan { get; set; }
+
     /// <summary>
     /// name of currently running assembly
     /// </summary>
     protected string exeName { get; set; }
+
     /// <summary>
     /// brief program description
     /// </summary>
     protected string exeDesc { get; set; }
+
     /// <summary>
     /// list of base MonoOptions options
     /// </summary>
     protected OptionSet baseOptions { get; set; }
+
     /// <summary>
     /// true if banner suppression is requested
     /// </summary>
     protected bool noBanner { get; set; }
+
     /// <summary>
     /// Output directory
     /// </summary>
     protected string outputDir { get; private set; }
+
     /// <summary>
     /// Colors conversion utilities
     /// </summary>
@@ -92,46 +103,57 @@ public class CommandLine : ICommandLine
     /// Output file name
     /// </summary>
     public string OutputName { get; set; }
+
     /// <summary>
     /// Output resolution
     /// </summary>
     public int Dpi { get; set; }
+
     /// <summary>
     /// Input files list
     /// </summary>
     public List<string> FilesList { get; set; }
+
     /// <summary>
     /// MonoOptions options list
     /// </summary>
     public OptionSet Options { get; set; }
+
     /// <summary>
     /// Usage example
     /// </summary>
     public string Usage { get; set; }
+
     /// <summary>
     /// Color to fill images
     /// </summary>
-    public MagickColor FillColor { get; set; } 
+    public MagickColor FillColor { get; set; }
+
     /// <summary>
     /// Color to use for lines and borders
     /// </summary>
-    public MagickColor BorderColor { get; set; } 
+    public MagickColor BorderColor { get; set; }
+
     /// <summary>
     /// Long description for man pages
     /// </summary>
     public string LongDesc { get; set; }
+
     /// <summary>
     /// Json formatted parameters
     /// </summary>
     public string JSON { get; set; }
+
     /// <summary>
     /// c# script for custom processing
     /// </summary>
     public string Script { get; set; }
+
     /// <summary>
     /// Extra info for user scripting
     /// </summary>
     public string Tag { get; set; }
+
     /// <summary>
     /// Output filename extension
     /// </summary>
@@ -156,9 +178,10 @@ public class CommandLine : ICommandLine
     /// </summary>
     /// <param name="outputname">Default output file name</param>
     /// <param name="desc">brief description of the program</param>
-    public CommandLine(string outputname, string desc = "") :
-        this(ExeName(), outputname, desc)
-    { }
+    public CommandLine(string outputname, string desc = "") : this(ExeName(), outputname, desc)
+    {
+    }
+
     /// <summary>
     /// Constructor
     /// </summary>
@@ -184,34 +207,47 @@ public class CommandLine : ICommandLine
 
         Options = new();
         baseOptions = new OptionSet
+        {
+            { "fillcolor=", $"set the color used to fill the images\n(default {sFillColor})", c => sFillColor = c },
             {
-                { "fillcolor=", $"set the color used to fill the images\n(default {sFillColor})", c => sFillColor = c },
-                { "bordercolor=", $"set the color used to border the images\n(default {sBorderColor})", c => sBorderColor = c },
-                { "dpi=", $"set output resolution (default {Dpi})", res => sDpi = res },
-                { "json=", @"parameters in json format,
+                "bordercolor=",
+                $"set the color used to border the images\n(default {sBorderColor})",
+                c => sBorderColor = c
+            },
+            { "dpi=", $"set output resolution (default {Dpi})", res => sDpi = res },
+            {
+                "json=",
+                @"parameters in json format,
 use --helpjson for sample template
 Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
-                o => JSON = GetFileParameter(o) },
-                { "script=", @"c# script for custom processing,
+                o => JSON = GetFileParameter(o)
+            },
+            {
+                "script=",
+                @"c# script for custom processing,
 use --helpscript for sample template
 Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
-                o => Script = GetFileParameter(o) },
-                { "o|output=", "set output dir/filename", o => OutputName = o },
-                { "extension=", $"file extension for output file (default '{Extension}')", e => Extension = e },
-                { "tag=", @"extra info for user scripts
+                o => Script = GetFileParameter(o)
+            },
+            { "o|output=", "set output dir/filename", o => OutputName = o },
+            { "extension=", $"file extension for output file (default '{Extension}')", e => Extension = e },
+            {
+                "tag=",
+                @"extra info for user scripts
 Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
-                o => Tag = GetFileParameter(o) },
-                { "nobanner", "suppress the banner", h => noBanner = h != null },
-                { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
-                { "helpjson", "show json parameters template", h => shouldShowHelpJson = h != null },
-                { "helpscript", "show script template", h => shouldShowHelpScript = h != null },
-                { "man", "show the man page source and exit", h => shouldShowMan = h != null },
-                { "colors", "list available colors by name", h => shouldShowColors = h != null },
-                { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
-            };
+                o => Tag = GetFileParameter(o)
+            },
+            { "nobanner", "suppress the banner", h => noBanner = h != null },
+            { "h|help", "show this message and exit", h => shouldShowHelp = h != null },
+            { "helpjson", "show json parameters template", h => shouldShowHelpJson = h != null },
+            { "helpscript", "show script template", h => shouldShowHelpScript = h != null },
+            { "man", "show the man page source and exit", h => shouldShowMan = h != null },
+            { "colors", "list available colors by name", h => shouldShowColors = h != null },
+            { "license", "show program license (AGPL 3.0)", h => shouldShowLicense = h != null }
+        };
     }
     #endregion
 
@@ -250,7 +286,8 @@ The file must be referenced as '@filename'",
             return true;
         }
 
-        if (!noBanner) WelcomeBanner();
+        if (!noBanner)
+            WelcomeBanner();
 
         if (shouldShowHelp)
         {
@@ -313,15 +350,13 @@ The file must be referenced as '@filename'",
     /// <summary>
     /// Prints the welcome banner
     /// </summary>
-    public virtual void WelcomeBanner() =>
-    Console.WriteLine(WelcomeBannerText());
+    public virtual void WelcomeBanner() => Console.WriteLine(WelcomeBannerText());
 
     /// <summary>
     /// Text for welcome banner
     /// </summary>
     /// <returns></returns>
-    public virtual string WelcomeBannerText() =>
-        $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
+    public virtual string WelcomeBannerText() => $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
 
     /// <summary>
     /// Colors syntax help
@@ -350,7 +385,8 @@ The file must be referenced as '@filename'",
     protected string PrintMan()
     {
         StringBuilder ret = new StringBuilder();
-        ret.AppendLine(@$"% {exeName.ToUpper()}(1)  
+        ret.AppendLine(
+            @$"% {exeName.ToUpper()}(1)  
 % Roberto Ceccarelli - Casasoft  
 % March 2022
 
@@ -368,13 +404,12 @@ The file must be referenced as '@filename'",
         ret.AppendLine("\n# OPTIONS");
         StringWriter sw = new StringWriter();
         Options.WriteOptionDescriptions(sw);
-        string[] opts = sw.ToString().Split(
-            new string[] { Environment.NewLine },
-            StringSplitOptions.None);
+        string[] opts = sw.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
         bool first = true;
         foreach (string s in opts)
         {
-            if (string.IsNullOrWhiteSpace(s)) continue;
+            if (string.IsNullOrWhiteSpace(s))
+                continue;
 
             string o = s.Substring(0, 29).Trim();
             if (string.IsNullOrWhiteSpace(o))
@@ -383,13 +418,14 @@ The file must be referenced as '@filename'",
             }
             else
             {
-                ret.Append(first ? "" : "\n\n");
+                ret.Append(first ? string.Empty : "\n\n");
                 ret.Append($"**{o}** :  \n{EscapeMarkdown(s.Substring(29).Trim())}  \n");
             }
             first = false;
         }
 
-        ret.Append($@"
+        ret.Append(
+            $@"
 
 ## COLORS
 {EscapeMarkdown(ColorsSyntax)}
@@ -484,8 +520,8 @@ See the GNU General Public License for more details.");
     }
 
     /// <summary>
-    /// Gets string from filename.<br/>
-    /// If the argument begins with '@' then the string is the name of the file containing the text
+    /// Gets string from filename.<br/> If the argument begins with '@' then the string is the name of the file
+    /// containing the text
     /// </summary>
     /// <param name="p">parameter argument</param>
     /// <returns></returns>
@@ -593,8 +629,7 @@ See the GNU General Public License for more details.");
     /// </summary>
     /// <param name="s">string to process</param>
     /// <returns>escaped string</returns>
-    public string EscapeMarkdown(string s) =>
-        s.Replace("\r", "  \r")
+    public string EscapeMarkdown(string s) => s.Replace("\r", "  \r")
         .Replace("\\", "\\\\")
         .Replace("#", "\\#")
         .Replace("*", "\\*")
