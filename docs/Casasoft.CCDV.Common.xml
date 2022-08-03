@@ -382,8 +382,8 @@
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.GetFileParameter(System.String)">
             <summary>
-            Gets string from filename.<br/>
-            If the argument begins with '@' then the string is the name of the file containing the text
+            Gets string from filename.<br/> If the argument begins with '@' then the string is the name of the file
+            containing the text
             </summary>
             <param name="p">parameter argument</param>
             <returns></returns>

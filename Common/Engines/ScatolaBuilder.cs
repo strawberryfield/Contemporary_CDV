@@ -94,20 +94,20 @@ public class ScatolaBuilder : BaseBuilder
         FrontWithBottom.Rotate(180);
 
         FrontWithBottom.Composite(frontImage, Gravity.North);
-        FrontWithBottom.Composite(bottomImage, Gravity.South, new PointD(0, fold));
+        FrontWithBottom.Composite(bottomImage, Gravity.South, 0, fold);
         BackWithTop.Composite(backImage, Gravity.South);
         topImage.Rotate(180);
-        BackWithTop.Composite(topImage, Gravity.North, new PointD(0, fold));
+        BackWithTop.Composite(topImage, Gravity.North, 0, fold);
         MagickImage frontTopImage = (MagickImage)frontImage.Clone();
         frontTopImage.Crop(frontFormat.Width - 2, fold, Gravity.North);
         frontTopImage.Rotate(180);
-        BackWithTop.Composite(frontTopImage, Gravity.North, new PointD(0, 1));
+        BackWithTop.Composite(frontTopImage, Gravity.North, 0, 1);
 
         // Assembliamo le immagini
-        ret.Composite(BackWithTop, Gravity.Northwest, new PointD(1, 0));
-        ret.Composite(LeftBorderWithExtra, Gravity.West, new PointD(1 + frontFormat.Width, 0));
-        ret.Composite(FrontWithBottom, Gravity.Southwest, new PointD(1 + frontFormat.Width + borderFormat.Width, 0));
-        ret.Composite(RightBorderWithExtra, Gravity.West, new PointD(1 + frontFormat.Width * 2 + borderFormat.Width, 0));
+        ret.Composite(BackWithTop, Gravity.Northwest, 1, 0);
+        ret.Composite(LeftBorderWithExtra, Gravity.West, 1 + frontFormat.Width, 0);
+        ret.Composite(FrontWithBottom, Gravity.Southwest, 1 + frontFormat.Width + borderFormat.Width, 0);
+        ret.Composite(RightBorderWithExtra, Gravity.West, 1 + frontFormat.Width * 2 + borderFormat.Width, 0);
 
         // Margini di taglio
         draw = new();

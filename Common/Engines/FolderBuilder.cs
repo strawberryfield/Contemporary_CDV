@@ -77,8 +77,8 @@ namespace Casasoft.CCDV
             cap(draw, frontFormat.Width, fold).Draw(BackWithTop);
 
             BackWithTop.Composite(backImage, Gravity.Center);
-            BackWithTop.Composite(topImage, Gravity.North, new PointD(0, fold));
-            BackWithTop.Composite(bottomImage, Gravity.South, new PointD(0, fold));
+            BackWithTop.Composite(topImage, Gravity.North, 0, fold);
+            BackWithTop.Composite(bottomImage, Gravity.South, 0, fold);
 
             // Clip di chiusura
             MagickImage BackClip = (MagickImage)backImage.Clone();
@@ -93,15 +93,15 @@ namespace Casasoft.CCDV
             // Assembliamo le immagini
             PointD start = new(1, 0);
             start = new(start.X + fold, start.Y);
-            ret.Composite(rightImage, Gravity.West, start);
+            ret.Composite(rightImage, Gravity.West, (int)start.X, (int)start.Y);
             start = new(start.X + borderFormat.Width, start.Y);
-            ret.Composite(BackWithTop, Gravity.West, start);
+            ret.Composite(BackWithTop, Gravity.West, (int)start.X, (int)start.Y);
             start = new(start.X + frontFormat.Width, start.Y);
-            ret.Composite(leftImage, Gravity.West, start);
+            ret.Composite(leftImage, Gravity.West, (int)start.X, (int)start.Y);
             start = new(start.X + borderFormat.Width, start.Y);
-            ret.Composite(frontImage, Gravity.West, start);
+            ret.Composite(frontImage, Gravity.West, (int)start.X, (int)start.Y);
             start = new(start.X + frontFormat.Width, start.Y);
-            ret.Composite(Clip, Gravity.West, start);
+            ret.Composite(Clip, Gravity.West, (int)start.X, (int)start.Y);
 
             // Margini di taglio
             draw = new();

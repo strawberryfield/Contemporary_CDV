@@ -229,7 +229,7 @@ public class CreditCardEngine : BaseEngine
                 drawBackground.StrokeColor(FrontTextBackground)
                     .FillColor(FrontTextBackground)
                     .StrokeWidth(1)
-                    .StrokeAntialias(true);
+                    .EnableStrokeAntialias();
                 var size = front.FontTypeMetrics(FrontText);
                 drawBackground.RoundRectangle(fmt.ToPixels(3), front.Height - fmt.ToPixels(8),
                     size.TextWidth + fmt.ToPixels(5), front.Height - fmt.ToPixels(3),
@@ -238,7 +238,7 @@ public class CreditCardEngine : BaseEngine
             }
             draw.StrokeColor(FrontTextBorder)
                 .FillColor(FrontTextColor)
-                .StrokeAntialias(true)
+                .EnableStrokeAntialias()
                 .StrokeWidth(1);
             draw.Text(fmt.ToPixels(4), front.Height - fmt.ToPixels(4), FrontText);
             draw.Draw(front);
@@ -258,7 +258,7 @@ public class CreditCardEngine : BaseEngine
                 new MagickGeometry(rear.Width, fmt.ToPixels(12)),
                 MagickColors.Transparent);
             overlay.Flop();
-            rear.Composite(overlay, Gravity.North, new PointD(0, fmt.ToPixels(4)), CompositeOperator.Over);
+            rear.Composite(overlay, Gravity.North, 0, fmt.ToPixels(4), CompositeOperator.Over);
         }
 
         // Back text
@@ -271,7 +271,7 @@ public class CreditCardEngine : BaseEngine
 
             MagickImage backText = new(BackText, settings);
             backText.Flop();
-            rear.Composite(backText, Gravity.South, new PointD(0, fmt.ToPixels(4)), CompositeOperator.Over);
+            rear.Composite(backText, Gravity.South, 0, fmt.ToPixels(4), CompositeOperator.Over);
         }
 
         // Final assembly

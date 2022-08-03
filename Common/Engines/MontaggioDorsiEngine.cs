@@ -194,17 +194,17 @@ public class MontaggioDorsiEngine : BaseEngine
         switch (PaperFormat)
         {
             case PaperFormats.Medium:
-                final.Composite(imagesV.AppendHorizontally(), Gravity.Center, new PointD(0, 0));
+                final.Composite(imagesV.AppendHorizontally(), Gravity.Center, 0, 0);
                 break;
             case PaperFormats.Large:
-                final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(10)));
+                final.Composite(imagesV.AppendHorizontally(), Gravity.North, 0, fmt.ToPixels(10));
                 final.Composite(imagesO.AppendHorizontally(), Gravity.North,
-                    new PointD(0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
+                    0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1);
                 break;
             case PaperFormats.A4:
-                final.Composite(imagesV.AppendHorizontally(), Gravity.North, new PointD(0, fmt.ToPixels(5)));
+                final.Composite(imagesV.AppendHorizontally(), Gravity.North, 0, fmt.ToPixels(5));
                 final.Composite(imagesO.AppendHorizontally(), Gravity.North,
-                    new PointD(0, fmt.ToPixels(5) + fmt.CDV_Full_v.Height - 1));
+                    0, fmt.ToPixels(5) + fmt.CDV_Full_v.Height - 1);
                 break;
         }
 
