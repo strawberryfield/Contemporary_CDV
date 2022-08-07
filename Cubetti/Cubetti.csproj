@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Casasoft.CCDV</RootNamespace>
+    <Authors>Roberto Ceccarelli - Casasoft</Authors>
+    <Product>Casasoft Contemporary Carte de Visite Tools</Product>
+    <Description>Strumenti di manipolazione delle immagini per la creazione di Carte de Visite contemporanee</Description>
+    <Copyright>copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft</Copyright>
+    <PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/strawberryfield/Contemporary_CDV/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>C:\projects\Contemporary_CDV\LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+</Project>
