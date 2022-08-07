@@ -13,12 +13,27 @@
     <PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>
     <RepositoryUrl>https://github.com/strawberryfield/Contemporary_CDV/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseFile>C:\projects\Contemporary_CDV\LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\projects\Contemporary_CDV\bin\build\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>C:\projects\Contemporary_CDV\bin\build\</OutputPath>
+  </PropertyGroup>
+
+ <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

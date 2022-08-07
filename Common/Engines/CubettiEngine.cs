@@ -116,7 +116,62 @@ public class CubettiEngine : BaseEngine
     public List<MagickImage> GetResults(bool quiet)
     {
         List<MagickImage> final = new();
+
+        // Compute grid size
+        int sizeX = fmt.ToPixels(Columns * Size);
+        int sizeY = fmt.ToPixels(Rows * Size);
+        MagickGeometry sourceFormat = new(sizeX, sizeY);
+
+        MagickImage[] sources = new MagickImage[6];
+
+        for (int i = 0; i <6; i++)
+        {
+            sources[i] = Utils.RotateResizeAndFill(new(FilesList[i]),
+            sourceFormat,
+            FillColor);
+        }
+
+        int faceSize = fmt.ToPixels(Size);
+        List<MagickImage[]> faces = new();
+        for (int row = 0; row < Rows; row++)
+        {
+            int startY = fmt.ToPixels(row * Size);
+            for (int col = 0; col < Columns; col++)
+            {
+                MagickImage[] face = new MagickImage[6];
+                int startX = fmt.ToPixels(col * Size);
+
+                for (int i = 0; i < 6; i++)
+                {
+                    face[i] = (MagickImage)sources[i].Clone();
+                    face[i].Crop(new MagickGeometry(startX, startY, faceSize, faceSize), Gravity.Northwest);
+                    face[i].RePage();
+                }
+                faces.Add(face);
+            }
+        }
+
+        foreach(MagickImage[] face in faces)
+        {
+            MagickImageCollection img2 = new();
+            img2.Add(AssemblyPartialCube(face, 0));
+            img2.Add(AssemblyPartialCube(face, 3));
+
+            MagickImage image = img.InCartha15x20_o();
+            image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
+            final.Add(image);
+        }
         return final;
+    }
+
+    private MagickImage AssemblyPartialCube(MagickImage[] face, int start)
+    {
+        MagickImageCollection img3 = new();
+        for(int i = 0; i < 3; i++)
+        {
+            img3.Add(face[i+start]);
+        }
+        return (MagickImage)img3.AppendHorizontally();
     }
     #endregion
 

@@ -46,18 +46,17 @@ public class CubettiCommandLine : CommandLine
     public int Size { get; set; }
 
     private string sRows = "2";
-    private string sColumns = "3";  
-    private string sSize = "50"; 
+    private string sColumns = "3";
+    private string sSize = "50";
 
     /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="outputname">Default output file name</param>
     /// <param name="desc">brief description of the program</param>
-    public CubettiCommandLine(string outputname, string desc) : base(outputname, desc)
-    {
+    public CubettiCommandLine(string outputname, string desc) : this(ExeName(), outputname, desc)
+    { }
 
-    }
 
     /// <summary>
     /// Constructor
