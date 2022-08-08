@@ -47,6 +47,10 @@ public class CubettiEngine : BaseEngine
     /// </summary>
     public int Size { get; set; } = 50;
     /// <summary>
+    /// True if samples images will be created
+    /// </summary>
+    public bool useSampleImages { get; set; }
+    /// <summary>
     /// Output paper size
     /// </summary>
     public PaperFormats PaperFormat { get; set; }
@@ -74,6 +78,7 @@ public class CubettiEngine : BaseEngine
         Size = p.Size;
 
         PaperFormat = p.PaperFormat;
+        useSampleImages = p.useSampleImages;
         ScriptingClass = new CubettiScripting();
         Script = p.Script;
         parameters = new CubettiParameters();
@@ -129,21 +134,30 @@ public class CubettiEngine : BaseEngine
         int sizeX = fmt.ToPixels(Columns * Size);
         int sizeY = fmt.ToPixels(Rows * Size);
         MagickGeometry sourceFormat = new(sizeX, sizeY);
+        faceSize = fmt.ToPixels(Size);
 
         MagickImage[] sources = new MagickImage[6];
 
         // Load images
-        for (int i = 0; i < 6; i++)
+        if (useSampleImages)
         {
-            if (!quiet) Console.WriteLine($"Reading: {FilesList[i]}");
+            sources = Samples();
+        }
+        else
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (!quiet) Console.WriteLine($"Reading: {FilesList[i]}");
 
-            sources[i] = Utils.RotateResizeAndFill(new(FilesList[i]),
-            sourceFormat,
-            FillColor);
+                sources[i] = Utils.RotateResizeAndFill(new(FilesList[i]),
+                sourceFormat,
+                FillColor);
+            }
         }
 
         // Split images
-        faceSize = fmt.ToPixels(Size);
+        if (!quiet) Console.Write("Splitting:  ");
+
         List<MagickImage[]> faces = new();
         for (int row = 0; row < Rows; row++)
         {
@@ -155,13 +169,18 @@ public class CubettiEngine : BaseEngine
 
                 for (int i = 0; i < 6; i++)
                 {
+                    if (!quiet) Console.Write(".");
+
                     face[i] = (MagickImage)sources[i].Clone();
                     face[i].Crop(new MagickGeometry(startX, startY, faceSize, faceSize), Gravity.Northwest);
                     face[i].RePage();
+                    face[i].BorderColor = BorderColor;
+                    face[i].Border(1);
                 }
                 faces.Add(face);
             }
         }
+        if (!quiet) Console.WriteLine();
 
         // Clips
         BuildClips(20);
@@ -217,7 +236,7 @@ public class CubettiEngine : BaseEngine
             }
         }
 
-        return final;   
+        return final;
     }
 
     private MagickImage AssemblyPartialCube(MagickImage[] face, int start)
@@ -262,7 +281,7 @@ public class CubettiEngine : BaseEngine
         TopClip.Rotate(90);
 
         EmptyClip = new(MagickColors.White, faceSize, clipSize);
-        MagickImage ClipFiller = new(MagickColors.White, clipSize,clipSize);    
+        MagickImage ClipFiller = new(MagickColors.White, clipSize, clipSize);
 
         MagickImageCollection strip = new();
         strip.Add(ClipFiller);
@@ -282,4 +301,30 @@ public class CubettiEngine : BaseEngine
 
     #endregion
 
+    #region samples
+    private MagickImage[] Samples()
+    {
+        MagickImage[] ret = new MagickImage[6];
+
+        for (int i = 0; i < 6; i++)
+        {
+            ret[i] = new MagickImage();
+            MagickImageCollection RowStrips = new();
+            for (int row = 0; row < Rows; row++)
+            {
+                MagickImageCollection ColStrip = new();
+                for (int col = 0; col < Columns; col++)
+                {
+                    MagickImage tile = new(MagickColors.White, faceSize, faceSize);
+                    Utils.CenteredText(((char)('A' + i)).ToString(), faceSize / 2, faceSize, faceSize).Draw(tile);
+
+                    ColStrip.Add(tile);
+                }
+                RowStrips.Add(ColStrip.AppendHorizontally());
+            }
+            ret[i] = (MagickImage)RowStrips.AppendVertically();
+        }
+        return ret;
+    }
+    #endregion
 }

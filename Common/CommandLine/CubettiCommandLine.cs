@@ -21,7 +21,6 @@
 
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
-using ImageMagick;
 using Mono.Options;
 using System.Text.Json;
 
@@ -44,6 +43,11 @@ public class CubettiCommandLine : CommandLine
     /// Size of any cube (mm)
     /// </summary>
     public int Size { get; set; }
+
+    /// <summary>
+    /// True if samples images will be created
+    /// </summary>
+    public bool useSampleImages { get; set; }
 
     /// <summary>
     /// Output paper size
@@ -87,6 +91,7 @@ public class CubettiCommandLine : CommandLine
                 { "c|columns=", $"set the number of columns of the output matrix (default {sRows})", t => sColumns = t },
                 { "s|size=", $"set the size of each cube (default {sSize}mm)", t => sSize = t },
                 { "paper=", "Output paper size:\nLarge 20x27cm\nMedium (default) 15x20cm\nA4 210x297mm", o => Paper = o  },
+                { "sample", "generate sample images", s => useSampleImages = s != null },
             };
         AddBaseOptions();
     }
