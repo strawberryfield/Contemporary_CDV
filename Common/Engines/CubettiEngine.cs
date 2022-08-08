@@ -338,6 +338,13 @@ public class CubettiEngine : BaseEngine
                 {
                     MagickImage tile = new(MagickColors.White, faceSize, faceSize);
                     Utils.CenteredText(((char)('A' + i)).ToString(), faceSize / 2, faceSize, faceSize).Draw(tile);
+                    Drawables draw = new();
+                    draw.FontPointSize(faceSize / 5)
+                        .Font("Arial")
+                        .FillColor(MagickColors.Black)
+                        .Gravity(Gravity.South)
+                        .Text(0, faceSize / 10, $"r={row+1},c={col+1}")
+                        .Draw(tile);
 
                     ColStrip.Add(tile);
                 }
