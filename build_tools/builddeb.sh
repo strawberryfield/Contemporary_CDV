@@ -47,6 +47,8 @@ prg=MontaggioFoto
 sed -i s_${prg}_/usr/share/ccdv/${prg}_g ${prg}
 prg=CreditCard
 sed -i s_${prg}_/usr/share/ccdv/${prg}_g ${prg}
+prg=Cubetti
+sed -i s_${prg}_/usr/share/ccdv/${prg}_g ${prg}
 
 mkdir runtimes
 cp -r $origin/bin/publish/runtimes/linux-x64 runtimes
@@ -59,6 +61,7 @@ ln -s ../share/ccdv/Scatola .
 ln -s ../share/ccdv/MontaggioFoto .
 ln -s ../share/ccdv/MontaggioDorsi .
 ln -s ../share/ccdv/CreditCard .
+ln -s ../share/ccdv/Cubetti .
 
 cd ~/$workdir
 mkdir -p usr/share/man/man1

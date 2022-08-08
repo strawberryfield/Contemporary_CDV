@@ -1,22 +1,27 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <RootNamespace>Casasoft.CCDV</RootNamespace>
     <Authors>Roberto Ceccarelli - Casasoft</Authors>
     <Product>Casasoft Contemporary Carte de Visite Tools</Product>
     <Description>Strumenti di manipolazione delle immagini per la creazione di Carte de Visite contemporanee</Description>
     <Copyright>copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft</Copyright>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>
     <RepositoryUrl>https://github.com/strawberryfield/Contemporary_CDV/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>C:\projects\Contemporary_CDV\bin\build\</OutputPath>
   </PropertyGroup>
 
@@ -24,27 +29,10 @@
     <OutputPath>C:\projects\Contemporary_CDV\bin\build\</OutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="help_montaggiodorsi.txt" />
-    <None Remove="man_MontaggioDorsi.md" />
-    <None Remove="MontaggioDorsi.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
+ <ItemGroup>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="MontaggioDorsi">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

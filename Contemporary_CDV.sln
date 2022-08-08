@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C29A7BC8-93EC-4EAB-A044-952FE23D041C}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		LICENSE = LICENSE
 		Linux.md = Linux.md
 		README.md = README.md
@@ -28,19 +29,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{BE17CE64-B
 	ProjectSection(SolutionItems) = preProject
 		docs\Cartella.1 = docs\Cartella.1
 		docs\CreditCard.1 = docs\CreditCard.1
-		docs\help_cartella.txt = docs\help_cartella.txt
-		docs\help_creditcard.txt = docs\help_creditcard.txt
-		docs\help_montaggiodorsi.txt = docs\help_montaggiodorsi.txt
-		docs\help_montaggiofoto.txt = docs\help_montaggiofoto.txt
-		docs\help_scatola.txt = docs\help_scatola.txt
+		docs\Cubetti.1 = docs\Cubetti.1
 		docs\helpjson_Cartella.txt = docs\helpjson_Cartella.txt
 		docs\helpjson_CreditCard.txt = docs\helpjson_CreditCard.txt
+		docs\helpjson_Cubetti.txt = docs\helpjson_Cubetti.txt
 		docs\helpjson_MontaggioDorsi.txt = docs\helpjson_MontaggioDorsi.txt
 		docs\helpjson_MontaggioFoto.txt = docs\helpjson_MontaggioFoto.txt
 		docs\helpjson_Scatola.txt = docs\helpjson_Scatola.txt
+		docs\helpscript_Cubetti.txt = docs\helpscript_Cubetti.txt
+		docs\help_cartella.txt = docs\help_cartella.txt
+		docs\help_creditcard.txt = docs\help_creditcard.txt
+		docs\help_Cubetti.txt = docs\help_Cubetti.txt
+		docs\help_montaggiodorsi.txt = docs\help_montaggiodorsi.txt
+		docs\help_montaggiofoto.txt = docs\help_montaggiofoto.txt
+		docs\help_scatola.txt = docs\help_scatola.txt
 		docs\index.md = docs\index.md
 		docs\man_Cartella.md = docs\man_Cartella.md
 		docs\man_CreditCard.md = docs\man_CreditCard.md
+		docs\man_Cubetti.md = docs\man_Cubetti.md
 		docs\man_MontaggioDorsi.md = docs\man_MontaggioDorsi.md
 		docs\man_MontaggioFoto.md = docs\man_MontaggioFoto.md
 		docs\man_Scatola.md = docs\man_Scatola.md
@@ -73,6 +79,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build_tools", "build_tools"
 		build_tools\publish.cmd = build_tools\publish.cmd
 		build_tools\README.md = build_tools\README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cubetti", "Cubetti\Cubetti.csproj", "{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +189,18 @@ Global
 		{D1091528-75F5-4E8A-A081-80409EB09361}.Release|x64.Build.0 = Release|x86
 		{D1091528-75F5-4E8A-A081-80409EB09361}.Release|x86.ActiveCfg = Release|x86
 		{D1091528-75F5-4E8A-A081-80409EB09361}.Release|x86.Build.0 = Release|x86
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Debug|x64.Build.0 = Debug|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Debug|x86.Build.0 = Debug|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Release|x64.ActiveCfg = Release|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Release|x64.Build.0 = Release|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

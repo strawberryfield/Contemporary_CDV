@@ -47,6 +47,8 @@ set prj=MontaggioFoto
 @dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained %repo%%prj%\%prj%.csproj
 set prj=Scatola
 @dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained %repo%%prj%\%prj%.csproj
+set prj=Cubetti
+@dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained %repo%%prj%\%prj%.csproj
 
 @echo off
 pushd .

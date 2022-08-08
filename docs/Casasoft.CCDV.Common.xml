@@ -515,6 +515,75 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.CubettiCommandLine">
+            <summary>
+            CommandLine manager for Cubetti
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.Rows">
+            <summary>
+            Number of rows to generate
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.Columns">
+            <summary>
+            Number of Columns to generate
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.Size">
+            <summary>
+            Size of any cube (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.useSampleImages">
+            <summary>
+            True if samples images will be created
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.CubettiCommandLine.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.CubettiCommandLine.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="exename">Name of the program exe</param>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.CubettiCommandLine.Parse(System.String[])">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="args">command line arguments</param>
+            <returns>true if nothing to (ie. help)</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.CubettiCommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.CubettiCommandLine.ScriptTemplate">
+            <summary>
+            Prints a script template
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
             Interface for command line handling
@@ -1168,6 +1237,71 @@
             Does the dirty work
             </summary>
             <returns>Image to print</returns>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.CubettiEngine">
+            <summary>
+            Creates a matrix of cubes with 6 images
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.Rows">
+            <summary>
+            Number of rows to generate
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.Columns">
+            <summary>
+            Number of Columns to generate
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.Size">
+            <summary>
+            Size of any cube (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.useSampleImages">
+            <summary>
+            True if samples images will be created
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.#ctor(Casasoft.CCDV.ICommandLine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par">Command line options</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.GetResults(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.AddCuttingLines(ImageMagick.MagickImage)">
+            <summary>
+            Creates lines for cut
+            </summary>
+            <param name="img"></param>
         </member>
         <member name="T:Casasoft.CCDV.Engines.FolderEngine">
             <summary>
@@ -2107,6 +2241,41 @@
             Default constructor
             </summary>
         </member>
+        <member name="T:Casasoft.CCDV.JSON.CubettiParameters">
+            <summary>
+            Json structure for Cubetti
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CubettiParameters.Rows">
+            <summary>
+            Number of rows to generate
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CubettiParameters.Columns">
+            <summary>
+            Number of Columns to generate
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CubettiParameters.Size">
+            <summary>
+            Size of any cube (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CubettiParameters.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CubettiParameters.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.JSON.CubettiParameters.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.JSON.IParameters">
             <summary>
             Common parameters list
@@ -2331,6 +2500,11 @@
         <member name="P:Casasoft.CCDV.Scripting.Compiler.Usings">
             <summary>
             Using declarations to be included in scripts
+            </summary>
+        </member>
+        <member name="T:Casasoft.CCDV.Scripting.CubettiScripting">
+            <summary>
+            Scripting host for cubetti
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.Scripting.IScripting">
