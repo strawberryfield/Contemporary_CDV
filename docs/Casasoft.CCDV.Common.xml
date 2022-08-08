@@ -1297,6 +1297,12 @@
             </summary>
             <returns>Image to print</returns>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.AddCuttingLines(ImageMagick.MagickImage)">
+            <summary>
+            Creates lines for cut
+            </summary>
+            <param name="img"></param>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.FolderEngine">
             <summary>
             Forder builder engine

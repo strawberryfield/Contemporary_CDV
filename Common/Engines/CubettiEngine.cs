@@ -200,6 +200,7 @@ public class CubettiEngine : BaseEngine
 
             MagickImage image = OutputPaper();
             image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
+            AddCuttingLines(image);
             final.Add(image);
         }
 
@@ -249,6 +250,26 @@ public class CubettiEngine : BaseEngine
         }
         img3.Add(RightClip);
         return (MagickImage)img3.AppendHorizontally();
+    }
+
+    /// <summary>
+    /// Creates lines for cut
+    /// </summary>
+    /// <param name="img"></param>
+    public void AddCuttingLines(MagickImage img)
+    {
+        MagickImage trim = (MagickImage)img.Clone();
+        trim.Trim();
+        int h_offset = (img.Width - trim.Width) / 2;
+        int v_offset = (img.Height - trim.Height) / 2;
+
+        Drawables d = new();
+        d.StrokeColor(BorderColor).StrokeWidth(1);
+        d.Line(0, v_offset, img.Width, v_offset);
+        d.Line(0, img.Height - v_offset, img.Width, img.Height - v_offset);
+        d.Line(h_offset, 0, h_offset, img.Height - v_offset);
+        d.Line(img.Width - h_offset, 0, img.Width - h_offset, img.Height);
+        d.Draw(img);
     }
 
     #region clips
