@@ -535,6 +535,16 @@
             Size of any cube (mm)
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CubettiCommandLine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CubettiCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -1241,6 +1251,11 @@
         <member name="P:Casasoft.CCDV.Engines.CubettiEngine.Size">
             <summary>
             Size of any cube (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.PaperFormat">
+            <summary>
+            Output paper size
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.CubettiEngine.#ctor">
@@ -2228,6 +2243,16 @@
         <member name="P:Casasoft.CCDV.JSON.CubettiParameters.Size">
             <summary>
             Size of any cube (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CubettiParameters.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.CubettiParameters.PaperFormat">
+            <summary>
+            Output paper size
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.JSON.CubettiParameters.#ctor">

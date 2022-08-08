@@ -19,11 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Casasoft.CCDV.JSON;
 
@@ -44,6 +40,21 @@ public class CubettiParameters : CommonParameters
     /// Size of any cube (mm)
     /// </summary>
     public int Size { get; set; } = 50;
+
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public string Paper { get; set; }
+
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    [JsonIgnore]
+    public PaperFormats PaperFormat
+    {
+        get => Utils.GetPaperFormat(Paper);
+        set => Paper = value.ToString();
+    }
 
     /// <summary>
     /// Default constructor

@@ -33,7 +33,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class CubettiEngine : BaseEngine
 {
-    #region
+    #region properties
     /// <summary>
     /// Number of rows to generate
     /// </summary>
@@ -46,6 +46,10 @@ public class CubettiEngine : BaseEngine
     /// Size of any cube (mm)
     /// </summary>
     public int Size { get; set; } = 50;
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public PaperFormats PaperFormat { get; set; }
     #endregion
 
     #region constructors
@@ -69,6 +73,7 @@ public class CubettiEngine : BaseEngine
         Columns = p.Columns;
         Size = p.Size;
 
+        PaperFormat = p.PaperFormat;
         ScriptingClass = new CubettiScripting();
         Script = p.Script;
         parameters = new CubettiParameters();
@@ -87,6 +92,7 @@ public class CubettiEngine : BaseEngine
         p.Rows = Rows;
         p.Columns = Columns;
         p.Size = Size;
+        p.PaperFormat = PaperFormat;
 
         return JsonSerializer.Serialize(p);
     }
@@ -104,7 +110,7 @@ public class CubettiEngine : BaseEngine
         Rows = p.Rows;
         Columns = p.Columns;
         Size = p.Size;
-
+        PaperFormat = p.PaperFormat;
     }
     #endregion
 
@@ -173,13 +179,45 @@ public class CubettiEngine : BaseEngine
             img2.Add(BottomClipStrip);
             img2.Add(AssemblyPartialCube(face, 3));
 
-            MagickImage image = img.InCartha15x20_o();
+            MagickImage image = OutputPaper();
             image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
             final.Add(image);
         }
 
         if (!quiet) Console.WriteLine();
         return final;
+    }
+
+    private MagickImage OutputPaper()
+    {
+        MagickImage final;
+        switch (PaperFormat)
+        {
+            case PaperFormats.Medium:
+                final = img.InCartha15x20_o();
+                break;
+            case PaperFormats.Large:
+                final = img.InCartha20x27_o();
+                break;
+            case PaperFormats.A4:
+                final = img.A4_o();
+                break;
+            default:
+                final = img.InCartha15x20_o();
+                PaperFormat = PaperFormats.Medium;
+                break;
+        }
+
+        if (ScriptInstance is not null)
+        {
+            var f = Compiler.Run(ScriptInstance, "OutputImage", null);
+            if (f is not null)
+            {
+                final = (MagickImage)f;
+            }
+        }
+
+        return final;   
     }
 
     private MagickImage AssemblyPartialCube(MagickImage[] face, int start)

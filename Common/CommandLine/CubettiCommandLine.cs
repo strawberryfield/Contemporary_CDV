@@ -45,6 +45,19 @@ public class CubettiCommandLine : CommandLine
     /// </summary>
     public int Size { get; set; }
 
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public string Paper { get; set; }
+
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public PaperFormats PaperFormat
+    {
+        get => Utils.GetPaperFormat(Paper);
+    }
+
     private string sRows = "2";
     private string sColumns = "3";
     private string sSize = "50";
@@ -66,11 +79,14 @@ public class CubettiCommandLine : CommandLine
     /// <param name="desc">brief description of the program</param>
     public CubettiCommandLine(string exename, string outputname, string desc) : base(exename, outputname, desc)
     {
+        Paper = string.Empty;
+
         Options = new OptionSet
             {
                 { "r|rows=", $"set the number of rows of the output matrix (default {sRows})", t => sRows = t },
                 { "c|columns=", $"set the number of columns of the output matrix (default {sRows})", t => sColumns = t },
                 { "s|size=", $"set the size of each cube (default {sSize}mm)", t => sSize = t },
+                { "paper=", "Output paper size:\nLarge 20x27cm\nMedium (default) 15x20cm\nA4 210x297mm", o => Paper = o  },
             };
         AddBaseOptions();
     }
