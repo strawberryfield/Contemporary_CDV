@@ -2674,11 +2674,12 @@
             <param name="l">Distance from left border</param>
             <param name="height"></param>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.GetPaperFormat(System.String)">
+        <member name="M:Casasoft.CCDV.Utils.GetPaperFormat(System.String,Casasoft.CCDV.PaperFormats)">
             <summary>
             Gets the format of the paper from its name
             </summary>
             <param name="Paper"></param>
+            <param name="def">Default paper format</param>
             <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Utils.GetLicense">

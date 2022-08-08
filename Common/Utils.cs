@@ -209,10 +209,11 @@ public static class Utils
     /// Gets the format of the paper from its name
     /// </summary>
     /// <param name="Paper"></param>
+    /// <param name="def">Default paper format</param>
     /// <returns></returns>
-    public static PaperFormats GetPaperFormat(string Paper)
+    public static PaperFormats GetPaperFormat(string Paper, PaperFormats def = PaperFormats.Large)
     {
-        PaperFormats ret = PaperFormats.Large;
+        PaperFormats ret = def;
         if (!string.IsNullOrEmpty(Paper))
         {
             if (Paper.ToUpper() == "MEDIUM")
@@ -222,6 +223,10 @@ public static class Utils
             if (Paper.ToUpper() == "A4")
             {
                 ret = PaperFormats.A4;
+            }
+            if (Paper.ToUpper() == "LARGE")
+            {
+                ret = PaperFormats.Large;
             }
         }
         return ret;

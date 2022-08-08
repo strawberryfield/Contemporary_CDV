@@ -59,7 +59,7 @@ public class CubettiCommandLine : CommandLine
     /// </summary>
     public PaperFormats PaperFormat
     {
-        get => Utils.GetPaperFormat(Paper);
+        get => Utils.GetPaperFormat(Paper, PaperFormats.Medium);
     }
 
     private string sRows = "2";
