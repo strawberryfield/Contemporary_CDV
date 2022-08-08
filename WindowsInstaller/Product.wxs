@@ -141,6 +141,12 @@ If not, see <http://www.gnu.org/licenses/>.
 				<File Source="$(var.binPath)\CreditCard.runtimeconfig.json" />
 				<File Source="$(var.binPath)\CreditCard.deps.json" />
 			</Component>
+			<Component Id="Cubetti" Guid="{3F4EC383-17A3-42D3-BF72-3D30980BC8AB}">
+				<File Source="$(var.binPath)\Cubetti.dll" KeyPath="yes" />
+				<File Source="$(var.binPath)\Cubetti.exe" />
+				<File Source="$(var.binPath)\Cubetti.runtimeconfig.json" />
+				<File Source="$(var.binPath)\Cubetti.deps.json" />
+			</Component>
 			<!-- Creates entry in Path environment variable -->
 			<Component Id="Path" Guid="{6ED4FDB5-2D7E-411B-A59A-A5A6C0D31556}">
 				<CreateFolder/>

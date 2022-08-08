@@ -1,0 +1,56 @@
+Casasoft Contemporary Carte de Visite Cubetti
+Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+
+Usage: Cubetti [options]* inputfiles
+
+Options:
+  -r, --rows=VALUE           set the number of rows of the output matrix (
+                               default 2)
+  -c, --columns=VALUE        set the number of columns of the output matrix (
+                               default 2)
+  -s, --size=VALUE           set the size of each cube (default 50mm)
+      --paper=VALUE          Output paper size:
+                               Large 20x27cm
+                               Medium (default) 15x20cm
+                               A4 210x297mm
+      --sample               generate sample images
+      --fillcolor=VALUE      set the color used to fill the images
+                               (default #FFFFFF)
+      --bordercolor=VALUE    set the color used to border the images
+                               (default #000000)
+      --dpi=VALUE            set output resolution (default 300)
+      --json=VALUE           parameters in json format,
+                               use --helpjson for sample template
+                               Text can be stored in a file instead of a string
+                               The file must be referenced as '@filename'
+      --script=VALUE         c# script for custom processing,
+                               use --helpscript for sample template
+                               Text can be stored in a file instead of a string
+                               The file must be referenced as '@filename'
+  -o, --output=VALUE         set output dir/filename
+      --extension=VALUE      file extension for output file (default 'jpg')
+      --tag=VALUE            extra info for user scripts
+                               Text can be stored in a file instead of a string
+                               The file must be referenced as '@filename'
+      --nobanner             suppress the banner
+  -h, --help                 show this message and exit
+      --helpjson             show json parameters template
+      --helpscript           show script template
+      --man                  show the man page source and exit
+      --colors               list available colors by name
+      --license              show program license (AGPL 3.0)
+
+Colors can be written in any of these formats:
+  #rgb
+  #rrggbb
+  #rrggbbaa
+  #rrrrggggbbbb
+  #rrrrggggbbbbaaaa
+  colorname    (use Cubetti --colors  to see all available colors)
+
+Environment variables
+The program can read values from these variables:
+  CDV_OUTPATH  Base path for output files
+  CDV_DPI      Resolution for output files
+  CDV_FILL     Color used to fill images
+  CDV_BORDER   Border color

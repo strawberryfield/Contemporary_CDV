@@ -1,0 +1,19 @@
+Casasoft Contemporary Carte de Visite Cubetti
+Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+
+Json parameters template for: Cubetti
+
+{
+  "Rows": 2,
+  "Columns": 3,
+  "Size": 50,
+  "Paper": null,
+  "FillColor": "#FFFFFF",
+  "BorderColor": "#000000",
+  "Dpi": 300,
+  "OutputName": "",
+  "Extension": "jpg",
+  "Script": null,
+  "Tag": null,
+  "FilesList": []
+}

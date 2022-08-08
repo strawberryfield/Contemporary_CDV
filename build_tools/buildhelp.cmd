@@ -40,6 +40,9 @@ set prg=Cartella
 set prg=CreditCard
 @call :CREATE
 
+set prg=Cubetti
+@call :CREATE
+
 goto :END
 
 :CREATE
