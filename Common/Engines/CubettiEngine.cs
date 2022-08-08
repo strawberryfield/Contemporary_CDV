@@ -66,7 +66,7 @@ public class CubettiEngine : BaseEngine
     {
         CubettiCommandLine p = (CubettiCommandLine)par;
         Rows = p.Rows;
-        Columns = p.Columns;    
+        Columns = p.Columns;
         Size = p.Size;
 
         ScriptingClass = new CubettiScripting();
@@ -109,6 +109,8 @@ public class CubettiEngine : BaseEngine
     #endregion
 
     #region build
+    private int faceSize;
+
     /// <summary>
     /// Does the dirty work
     /// </summary>
@@ -124,14 +126,18 @@ public class CubettiEngine : BaseEngine
 
         MagickImage[] sources = new MagickImage[6];
 
-        for (int i = 0; i <6; i++)
+        // Load images
+        for (int i = 0; i < 6; i++)
         {
+            if (!quiet) Console.WriteLine($"Reading: {FilesList[i]}");
+
             sources[i] = Utils.RotateResizeAndFill(new(FilesList[i]),
             sourceFormat,
             FillColor);
         }
 
-        int faceSize = fmt.ToPixels(Size);
+        // Split images
+        faceSize = fmt.ToPixels(Size);
         List<MagickImage[]> faces = new();
         for (int row = 0; row < Rows; row++)
         {
@@ -151,28 +157,91 @@ public class CubettiEngine : BaseEngine
             }
         }
 
-        foreach(MagickImage[] face in faces)
+        // Clips
+        BuildClips(20);
+
+        // Cubes assembling
+        if (!quiet) Console.Write("Generating: ");
+
+        foreach (MagickImage[] face in faces)
         {
+            if (!quiet) Console.Write("#");
+
             MagickImageCollection img2 = new();
+            img2.Add(TopClipStrip);
             img2.Add(AssemblyPartialCube(face, 0));
+            img2.Add(BottomClipStrip);
             img2.Add(AssemblyPartialCube(face, 3));
 
             MagickImage image = img.InCartha15x20_o();
             image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
             final.Add(image);
         }
+
+        if (!quiet) Console.WriteLine();
         return final;
     }
 
     private MagickImage AssemblyPartialCube(MagickImage[] face, int start)
     {
         MagickImageCollection img3 = new();
-        for(int i = 0; i < 3; i++)
+        img3.Add(LeftClip);
+        for (int i = 0; i < 3; i++)
         {
-            img3.Add(face[i+start]);
+            img3.Add(face[i + start]);
         }
+        img3.Add(RightClip);
         return (MagickImage)img3.AppendHorizontally();
     }
+
+    #region clips
+    private int clipSize;
+    private MagickImage RightClip;
+    private MagickImage LeftClip;
+    private MagickImage BottomClip;
+    private MagickImage TopClip;
+    private MagickImage EmptyClip;
+    private MagickImage TopClipStrip;
+    private MagickImage BottomClipStrip;
+
+    private void BuildClips(int size)
+    {
+        clipSize = fmt.ToPixels(size);
+        RightClip = new(MagickColors.White, clipSize, faceSize);
+
+        Drawables d = new();
+        d.StrokeColor(BorderColor).StrokeWidth(1);
+        d.Line(0, 0, clipSize - 1, clipSize / 2);
+        d.Line(clipSize - 1, clipSize / 2, clipSize - 1, faceSize - clipSize / 2);
+        d.Line(clipSize - 1, faceSize - clipSize / 2, 0, faceSize);
+        d.Draw(RightClip);
+
+        LeftClip = (MagickImage)RightClip.Clone();
+        LeftClip.Rotate(180);
+        BottomClip = (MagickImage)RightClip.Clone();
+        BottomClip.Rotate(90);
+        TopClip = (MagickImage)LeftClip.Clone();
+        TopClip.Rotate(90);
+
+        EmptyClip = new(MagickColors.White, faceSize, clipSize);
+        MagickImage ClipFiller = new(MagickColors.White, clipSize,clipSize);    
+
+        MagickImageCollection strip = new();
+        strip.Add(ClipFiller);
+        strip.Add(BottomClip);
+        strip.Add(EmptyClip);
+        strip.Add(BottomClip.Clone());
+        BottomClipStrip = (MagickImage)strip.AppendHorizontally();
+
+        strip = new();
+        strip.Add(ClipFiller);
+        strip.Add(TopClip);
+        strip.Add(EmptyClip);
+        strip.Add(TopClip.Clone());
+        TopClipStrip = (MagickImage)strip.AppendHorizontally();
+    }
+    #endregion
+
     #endregion
 
 }
