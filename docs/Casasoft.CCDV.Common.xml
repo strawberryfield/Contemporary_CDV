@@ -1068,6 +1068,11 @@
             Storage for the instantiated Script object
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.CommandLine">
+            <summary>
+            Pointer to the command line (if any)
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
             <summary>
             Constructor
@@ -1297,11 +1302,12 @@
             </summary>
             <returns>Image to print</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.AddCuttingLines(ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.AddCuttingLines(ImageMagick.MagickImage,System.Int32)">
             <summary>
             Creates lines for cut
             </summary>
             <param name="img"></param>
+            <param name="i">Current image number</param>
         </member>
         <member name="T:Casasoft.CCDV.Engines.FolderEngine">
             <summary>
@@ -1389,6 +1395,11 @@
         <member name="P:Casasoft.CCDV.Engines.IEngine.ScriptingClass">
             <summary>
             Class that handles user scripts
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.CommandLine">
+            <summary>
+            Pointer to the command line (if any)
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.IEngine.GetResult">

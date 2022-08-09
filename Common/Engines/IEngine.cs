@@ -31,6 +31,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public interface IEngine
 {
+    #region properties
     /// <summary>
     /// Output resolution
     /// </summary>
@@ -73,7 +74,13 @@ public interface IEngine
     /// Class that handles user scripts
     /// </summary>
     IScripting ScriptingClass { get; set; }
+    /// <summary>
+    /// Pointer to the command line (if any)
+    /// </summary>
+    ICommandLine CommandLine { get; set; }
+    #endregion
 
+    #region methods
     /// <summary>
     /// Does the dirty work
     /// </summary>
@@ -120,6 +127,6 @@ public interface IEngine
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
-     void SetJsonParams(string json);
-
+    void SetJsonParams(string json);
+    #endregion
 }

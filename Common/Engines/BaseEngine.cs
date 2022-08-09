@@ -117,6 +117,10 @@ public class BaseEngine : IEngine
     /// Storage for the instantiated Script object
     /// </summary>
     protected object ScriptInstance { get; set; }
+    /// <summary>
+    /// Pointer to the command line (if any)
+    /// </summary>
+    public ICommandLine CommandLine { get; set; }
 
     #endregion
 
@@ -132,6 +136,7 @@ public class BaseEngine : IEngine
         FillColor = MagickColors.White;
         BorderColor = MagickColors.Black;
         Tag = string.Empty;
+        CommandLine = null;
     }
     /// <summary>
     /// Constructor
@@ -154,6 +159,7 @@ public class BaseEngine : IEngine
         Tag = par.Tag;
         OutputName = par.OutputName;
         Extension = par.Extension;
+        CommandLine = par;
     }
     #endregion
 
@@ -247,7 +253,8 @@ public class BaseEngine : IEngine
     /// gets the program banner
     /// </summary>
     /// <returns></returns>
-    public virtual string WelcomeBannerText() =>
-        "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n";
+    public virtual string WelcomeBannerText() => CommandLine is null ?
+        "Casasoft Contemporary Carte de Visite GUI\nCopyright (c) 2020-2022 Roberto Ceccarelli - Casasoft\n" :
+        CommandLine.WelcomeBannerText();
     #endregion
 }

@@ -38,18 +38,22 @@ public class CubettiEngine : BaseEngine
     /// Number of rows to generate
     /// </summary>
     public int Rows { get; set; } = 2;
+
     /// <summary>
     /// Number of Columns to generate
     /// </summary>
     public int Columns { get; set; } = 3;
+
     /// <summary>
     /// Size of any cube (mm)
     /// </summary>
     public int Size { get; set; } = 50;
+
     /// <summary>
     /// True if samples images will be created
     /// </summary>
     public bool useSampleImages { get; set; }
+
     /// <summary>
     /// Output paper size
     /// </summary>
@@ -82,6 +86,7 @@ public class CubettiEngine : BaseEngine
         ScriptingClass = new CubettiScripting();
         Script = p.Script;
         parameters = new CubettiParameters();
+        parameters.OutputName = p.OutputName;
     }
     #endregion
 
@@ -147,16 +152,16 @@ public class CubettiEngine : BaseEngine
         {
             for (int i = 0; i < 6; i++)
             {
-                if (!quiet) Console.WriteLine($"Reading: {FilesList[i]}");
+                if (!quiet)
+                    Console.WriteLine($"Reading: {FilesList[i]}");
 
-                sources[i] = Utils.RotateResizeAndFill(new(FilesList[i]),
-                sourceFormat,
-                FillColor);
+                sources[i] = Utils.RotateResizeAndFill(new(FilesList[i]), sourceFormat, FillColor);
             }
         }
 
         // Split images
-        if (!quiet) Console.Write("Splitting:  ");
+        if (!quiet)
+            Console.Write("Splitting:  ");
 
         List<MagickImage[]> faces = new();
         for (int row = 0; row < Rows; row++)
@@ -169,7 +174,8 @@ public class CubettiEngine : BaseEngine
 
                 for (int i = 0; i < 6; i++)
                 {
-                    if (!quiet) Console.Write(".");
+                    if (!quiet)
+                        Console.Write(".");
 
                     face[i] = (MagickImage)sources[i].Clone();
                     face[i].Crop(new MagickGeometry(startX, startY, faceSize, faceSize), Gravity.Northwest);
@@ -180,18 +186,23 @@ public class CubettiEngine : BaseEngine
                 faces.Add(face);
             }
         }
-        if (!quiet) Console.WriteLine();
+        if (!quiet)
+            Console.WriteLine();
 
         // Clips
         BuildClips(20);
 
         // Cubes assembling
-        if (!quiet) Console.Write("Generating: ");
+        if (!quiet)
+            Console.Write("Generating: ");
 
+        int cnt = 0;
         foreach (MagickImage[] face in faces)
         {
-            if (!quiet) Console.Write("#");
+            if (!quiet)
+                Console.Write("#");
 
+            cnt++;
             MagickImageCollection img2 = new();
             img2.Add(TopClipStrip);
             img2.Add(AssemblyPartialCube(face, 0));
@@ -200,11 +211,12 @@ public class CubettiEngine : BaseEngine
 
             MagickImage image = OutputPaper();
             image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
-            AddCuttingLines(image);
+            AddCuttingLines(image, cnt);
             final.Add(image);
         }
 
-        if (!quiet) Console.WriteLine();
+        if (!quiet)
+            Console.WriteLine();
         return final;
     }
 
@@ -256,7 +268,8 @@ public class CubettiEngine : BaseEngine
     /// Creates lines for cut
     /// </summary>
     /// <param name="img"></param>
-    public void AddCuttingLines(MagickImage img)
+    /// <param name="i">Current image number</param>
+    public void AddCuttingLines(MagickImage img, int i)
     {
         MagickImage trim = (MagickImage)img.Clone();
         trim.Trim();
@@ -267,32 +280,52 @@ public class CubettiEngine : BaseEngine
         d.StrokeColor(BorderColor).StrokeWidth(1);
         d.Line(0, v_offset, img.Width, v_offset);
         d.Line(0, img.Height - v_offset, img.Width, img.Height - v_offset);
+        d.Line(0, img.Height - v_offset - faceSize, img.Width, img.Height - v_offset - faceSize);
         d.Line(h_offset, 0, h_offset, img.Height - v_offset);
         d.Line(img.Width - h_offset, 0, img.Width - h_offset, img.Height);
         d.Draw(img);
+
+        d = new();
+        d.FontPointSize(fmt.ToPixels(3))
+        .Font("Arial")
+        .FillColor(MagickColors.Black)
+        .Gravity(Gravity.Northwest)
+        .Text(h_offset + fmt.ToPixels(5), fmt.ToPixels(2), $"{parameters.OutputName} {i} of {Rows * Columns}")
+        .Draw(img);
+
+        d = new();
+        d.FontPointSize(fmt.ToPixels(2))
+        .Font("Arial")
+        .FillColor(MagickColors.Black)
+        .Gravity(Gravity.Northwest)
+        .Text(fmt.ToPixels(5), img.Height - v_offset, $"{WelcomeBannerText()}")
+        .Draw(img);
+
     }
 
     #region clips
     private int clipSize;
-    private MagickImage RightClip;
-    private MagickImage LeftClip;
-    private MagickImage BottomClip;
-    private MagickImage TopClip;
-    private MagickImage EmptyClip;
     private MagickImage TopClipStrip;
     private MagickImage BottomClipStrip;
+    private MagickImage RightClip;
+    private MagickImage LeftClip;
 
     private void BuildClips(int size)
     {
+        MagickImage BottomClip;
+        MagickImage TopClip;
+        MagickImage NoseClip;
+        MagickImage EmptyClip;
+
         clipSize = fmt.ToPixels(size);
         RightClip = new(MagickColors.White, clipSize, faceSize);
 
         Drawables d = new();
-        d.StrokeColor(BorderColor).StrokeWidth(1);
-        d.Line(0, 0, clipSize - 1, clipSize / 2);
-        d.Line(clipSize - 1, clipSize / 2, clipSize - 1, faceSize - clipSize / 2);
-        d.Line(clipSize - 1, faceSize - clipSize / 2, 0, faceSize);
-        d.Draw(RightClip);
+        d.StrokeColor(BorderColor).StrokeWidth(1)
+        .Line(0, 0, clipSize - 1, clipSize / 2)
+        .Line(clipSize - 1, clipSize / 2, clipSize - 1, faceSize - clipSize / 2)
+        .Line(clipSize - 1, faceSize - clipSize / 2, 0, faceSize)
+        .Draw(RightClip);
 
         LeftClip = (MagickImage)RightClip.Clone();
         LeftClip.Rotate(180);
@@ -304,10 +337,20 @@ public class CubettiEngine : BaseEngine
         EmptyClip = new(MagickColors.White, faceSize, clipSize);
         MagickImage ClipFiller = new(MagickColors.White, clipSize, clipSize);
 
+        NoseClip = (MagickImage)EmptyClip.Clone();
+        int noseLeft = faceSize / 2 - clipSize / 2;
+        int noseRight = faceSize / 2 + clipSize / 2;
+        d = new();
+        d.StrokeColor(BorderColor).StrokeWidth(1)
+        .Line(noseLeft, 0, noseLeft, clipSize - 1)
+        .Line(noseRight, 0, noseRight, clipSize - 1)
+        .Line(noseLeft, clipSize - 1, noseRight, clipSize - 1)
+        .Draw(NoseClip);
+
         MagickImageCollection strip = new();
         strip.Add(ClipFiller);
         strip.Add(BottomClip);
-        strip.Add(EmptyClip);
+        strip.Add(NoseClip);
         strip.Add(BottomClip.Clone());
         BottomClipStrip = (MagickImage)strip.AppendHorizontally();
 
@@ -317,6 +360,7 @@ public class CubettiEngine : BaseEngine
         strip.Add(EmptyClip);
         strip.Add(TopClip.Clone());
         TopClipStrip = (MagickImage)strip.AppendHorizontally();
+        
     }
     #endregion
 
@@ -343,7 +387,7 @@ public class CubettiEngine : BaseEngine
                         .Font("Arial")
                         .FillColor(MagickColors.Black)
                         .Gravity(Gravity.South)
-                        .Text(0, faceSize / 10, $"r={row+1},c={col+1}")
+                        .Text(0, faceSize / 10, $"r={row + 1},c={col + 1}")
                         .Draw(tile);
 
                     ColStrip.Add(tile);
