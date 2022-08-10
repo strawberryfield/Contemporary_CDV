@@ -11,18 +11,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-MontaggioFotoEngine eng = new();
+CubettiEngine eng = new();
 UserScript user = new(eng);
 
 user.ProcessOnLoad(new MagickImage());
 
 public class UserScript
 {
-    private MontaggioFotoEngine engine;
+    private CubettiEngine engine;
 
     public UserScript(IEngine eng)
     {
-        engine = (MontaggioFotoEngine)eng;
+        engine = (CubettiEngine)eng;
         System.Reflection.MethodInfo m = this.GetType().GetMethod("Init");
         if (m is not null) m.Invoke(this, null);
     }
@@ -33,13 +33,6 @@ public class UserScript
     /// Custom class initialization
     /// </summary>
     public void Init() { }
-
-    /// <summary>
-    /// Preprocesses the loaded image
-    /// </summary>
-    /// <param name=""image"">The loaded image</param>
-    /// <returns>The Processed image</returns>
-    public MagickImage ProcessOnLoad(MagickImage image) => image;
 
     /// <summary>
     /// Image for final output

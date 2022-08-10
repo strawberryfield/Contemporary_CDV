@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Roberto Ceccarelli - Casasoft",
+  "classifications": [ "Common", "Console", "CasasoftCCDV" ],
+  "identity": "Casasoft.CCDV.ScriptTest.Cubetti",
+  "name": "Casasoft CCDV: Test project for Cubetti scripts",
+  "shortName": "CubettiScriptTest",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+   },
+  "sourceName": "Cubetti.Script1",
+  "defaultName": "CubettiScript1"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Roberto Ceccarelli - Casasoft",
+  "classifications": [ "Common", "Console", "CasasoftCCDV" ],
+  "identity": "Casasoft.CCDV.ScriptTest.CreditCard",
+  "name": "Casasoft CCDV: Test project for CreditCard scripts",
+  "shortName": "CreditCardScriptTest",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+   },
+  "sourceName": "CreditCard.Script1",
+  "defaultName": "CreditCardScript1"
+}

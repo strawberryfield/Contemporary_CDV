@@ -129,6 +129,8 @@ Base command line class
 **Scatola** and **Cartella** command line handling
 - *CreditCardCommandLine*  
 **CreditCard** command line handling
+- *CubettiCommandLine*  
+**Cubetti** command line handling
 - *MontaggioDorsiCommandLine*  
 **MontaggioDorsi** command line handling
 - *MontaggioFotoCommandLine*  
@@ -146,6 +148,8 @@ Class with the parameters common to all tools
 **Scatola** and **Cartella** parameters
 - *CreditCardParameters*  
 **CreditCard** parameters
+- *CubettiParameters*  
+**Cubetti** parameters
 - *MontaggioDorsiParameters*  
 **MontaggioDorsi** parameters
 - *MontaggioFotoParameters*  
@@ -166,6 +170,8 @@ Common engines class
 Common wrapper for **Scatola** and **Cartella** builders
 - *CreditCardEngine*  
 **CreditCard** core engine
+- *CubettiEngine*  
+**Cubetti** core engine
 - *FolderEngine*  
 **Cartella** builder wrapper
 - *MontaggioDorsiEngine*  
@@ -201,6 +207,8 @@ The base script wrapping
 The script wrapping for **Scatola** and **Cartella**
 - *CreditCardScripting*  
 The script wrapping for **CreditCard**
+- *CubettiScripting*  
+The script wrapping for **Cubetti**
 - *MontaggioDorsiScripting*  
 The script wrapping for **MontaggioDorsi**
 - *MontaggioFotoScripting*  
@@ -220,7 +228,7 @@ The library is compiled for .net 6.0
 
 The following packages are required:
 
-- Microsoft.CodeAnalysis.Common Version=4.1.0
-- Magick.NET-Q16-AnyCPU Version=11.0.0
-- Microsoft.CodeAnalysis.CSharp Version=4.1.0
-- Mono.Options Version=6.12.0.14
+- Microsoft.CodeAnalysis.Common Version=4.2.0
+- Magick.NET-Q16-AnyCPU Version=12.0.0
+- Microsoft.CodeAnalysis.CSharp Version=4.2.0
+- Mono.Options Version=6.12.0.148

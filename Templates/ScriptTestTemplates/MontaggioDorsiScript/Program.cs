@@ -19,15 +19,20 @@ user.ProcessOnLoad(new MagickImage());
 public class UserScript
 {
     private MontaggioDorsiEngine engine;
-	
-    public UserScript(IEngine eng) 
+
+    public UserScript(IEngine eng)
     {
         engine = (MontaggioDorsiEngine)eng;
         System.Reflection.MethodInfo m = this.GetType().GetMethod("Init");
-        if (m != null) m.Invoke(this, null);
+        if (m is not null) m.Invoke(this, null);
     }
 
     // vvv --- put you script here --- vvv
+
+    /// <summary>
+    /// Custom class initialization
+    /// </summary>
+    public void Init() { }
 
     /// <summary>
     /// Preprocesses the loaded image
@@ -35,6 +40,12 @@ public class UserScript
     /// <param name=""image"">The loaded image</param>
     /// <returns>The Processed image</returns>
     public MagickImage ProcessOnLoad(MagickImage image) => image;
+
+    /// <summary>
+    /// Image for final output
+    /// </summary>
+    /// <returns></returns>
+    public MagickImage OutputImage() => null;
 
     // ^^^ --- script ends here --- ^^^
 
