@@ -212,6 +212,7 @@ public class CubettiEngine : BaseEngine
             MagickImage image = OutputPaper();
             image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
             AddCuttingLines(image, cnt);
+            fmt.SetImageParameters(image);
             final.Add(image);
         }
 
