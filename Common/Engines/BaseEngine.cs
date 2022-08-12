@@ -227,6 +227,48 @@ public class BaseEngine : IEngine
     }
 
     /// <summary>
+    /// Gets the output image
+    /// </summary>
+    /// <param name="paper">Format of output image <see cref="PaperFormats"/></param>
+    /// <returns></returns>
+    public MagickImage GetOutputPaper(PaperFormats paper)
+    {
+        MagickImage final;
+        switch (paper)
+        {
+            case PaperFormats.Medium:
+                final = img.InCartha15x20_o();
+                break;
+            case PaperFormats.Large:
+                final = img.InCartha20x27_o();
+                break;
+            case PaperFormats.A4:
+                final = img.A4_o();
+                break;
+            case PaperFormats.Small:
+                final = img.FineArt10x15_o();
+                break;
+            case PaperFormats.Panorama:
+                final = img.FineArt10x18_o();
+                break;
+            default:
+                final = new();
+                break;
+        }
+
+        if (ScriptInstance is not null)
+        {
+            var f = Compiler.Run(ScriptInstance, "OutputImage", null);
+            if (f is not null)
+            {
+                final = (MagickImage)f;
+            }
+        }
+
+        return final;
+
+    }
+    /// <summary>
     /// Writes exif infos on image
     /// </summary>
     /// <param name="image">image to process</param>

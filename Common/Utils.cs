@@ -228,6 +228,14 @@ public static class Utils
             {
                 ret = PaperFormats.Large;
             }
+            if (Paper.ToUpper() == "SMALL")
+            {
+                ret = PaperFormats.Small;
+            }
+            if (Paper.ToUpper() == "PANORAMA")
+            {
+                ret = PaperFormats.Panorama;
+            }
         }
         return ret;
     }

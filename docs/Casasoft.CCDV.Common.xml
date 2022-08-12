@@ -1119,6 +1119,13 @@
             <param name="quiet">suppress messages when running</param>
             <returns>Image to print</returns>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetOutputPaper(Casasoft.CCDV.PaperFormats)">
+            <summary>
+            Gets the output image
+            </summary>
+            <param name="paper">Format of output image <see cref="T:Casasoft.CCDV.PaperFormats"/></param>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageParameters(ImageMagick.MagickImage)">
             <summary>
             Writes exif infos on image

@@ -64,8 +64,8 @@ public class ScatolaEngine : BaseBuilderEngine
     public override MagickImage GetResult(bool quiet)
     {
         _ = base.GetResult(quiet);
-        MagickImage output = Builder.GetOutputImage();
         ScatolaBuilder sc = (ScatolaBuilder)Builder;
+        MagickImage output = GetOutputPaper(sc.PaperFormat);
         output.Composite(sc.Build(), Gravity.Center);
         sc.AddCuttingLines(output);
         if (sc.PaperFormat is PaperFormats.Large or PaperFormats.A4)
