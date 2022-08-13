@@ -28,18 +28,66 @@ namespace Casasoft.CCDV;
 /// </summary>
 public interface IBuilder
 {
+    /// <summary>
+    /// Thickness of the box (mm)
+    /// </summary>
     int Thickness { get; set; }
+    /// <summary>
+    /// Reference to formats
+    /// </summary>
     Formats fmt { get; set; }
+    /// <summary>
+    /// Fill color
+    /// </summary>
     MagickColor fillColor { get; set; }
+    /// <summary>
+    /// Border color
+    /// </summary>
     MagickColor borderColor { get; set; }
+    /// <summary>
+    /// target box format
+    /// </summary>
     TargetType targetType { get; set; }
+    /// <summary>
+    /// Set if box is landscape
+    /// </summary>
     bool isHorizontal { get; set; }
 
+    /// <summary>
+    /// Sets image for the top border
+    /// </summary>
+    /// <param name="filename"></param>
     void SetTopImage(string filename);
+
+    /// <summary>
+    /// Sets image for the bottom border
+    /// </summary>
+    /// <param name="filename"></param>
     void SetBottomImage(string filename);
+
+    /// <summary>
+    /// Sets image for the left border
+    /// </summary>
+    /// <param name="filename"></param>
     void SetLeftImage(string filename);
+
+    /// <summary>
+    /// Sets image for the right border
+    /// </summary>
+    /// <param name="filename"></param>
     void SetRightImage(string filename);
+
+    /// <summary>
+    /// Sets image for the front cover
+    /// </summary>
+    /// <param name="filename"></param>
     void SetFrontImage(string filename);
+
+    /// <summary>
+    /// Sets image for the back cover
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <param name="isHorizontal"></param>
     void SetBackImage(string filename, bool isHorizontal = false);
 
     /// <summary>
