@@ -128,25 +128,17 @@ public class MontaggioFotoEngine : BaseEngine
     {
         _ = base.GetResult(quiet);
 
-        MagickImage final = img.FineArt10x15_o();
-        if (ScriptInstance is not null)
-        {
-            var f = Compiler.Run(ScriptInstance, "OutputImage", null);
-            if (f is not null)
-            {
-                final = (MagickImage)f;
-            }
-        }
+        MagickImage final = GetOutputPaper(PaperFormat);
 
         MagickImage img1 = Get(FilesList[i], quiet);
         MagickImage img2;
         string name1 = FilesList[i];
-        string name2 = string.Empty;    
+        string name2 = string.Empty;
         i++;
         if (i < FilesList.Count)
         {
             img2 = Get(FilesList[i], quiet);
-            name2 = FilesList[i];   
+            name2 = FilesList[i];
         }
         else
         {
@@ -191,7 +183,7 @@ public class MontaggioFotoEngine : BaseEngine
         if (ScriptInstance is not null)
         {
             var i = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
-            if(i is not null)
+            if (i is not null)
             {
                 image = (MagickImage)i;
             }

@@ -78,6 +78,10 @@ public interface IEngine
     /// Pointer to the command line (if any)
     /// </summary>
     ICommandLine CommandLine { get; set; }
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    PaperFormats PaperFormat { get; set; }
     #endregion
 
     #region methods

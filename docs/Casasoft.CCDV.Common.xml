@@ -1073,6 +1073,11 @@
             Pointer to the command line (if any)
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
             <summary>
             Constructor
@@ -1275,11 +1280,6 @@
             True if samples images will be created
             </summary>
         </member>
-        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.PaperFormat">
-            <summary>
-            Output paper size
-            </summary>
-        </member>
         <member name="M:Casasoft.CCDV.Engines.CubettiEngine.#ctor">
             <summary>
             Constructor
@@ -1409,6 +1409,11 @@
             Pointer to the command line (if any)
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.IEngine.GetResult">
             <summary>
             Does the dirty work
@@ -1466,11 +1471,6 @@
         <member name="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine">
             <summary>
             Montaggio dorsi engine
-            </summary>
-        </member>
-        <member name="P:Casasoft.CCDV.Engines.MontaggioDorsiEngine.PaperFormat">
-            <summary>
-            Output paper size
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">

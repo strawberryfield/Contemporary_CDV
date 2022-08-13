@@ -53,11 +53,6 @@ public class CubettiEngine : BaseEngine
     /// True if samples images will be created
     /// </summary>
     public bool useSampleImages { get; set; }
-
-    /// <summary>
-    /// Output paper size
-    /// </summary>
-    public PaperFormats PaperFormat { get; set; }
     #endregion
 
     #region constructors
@@ -329,7 +324,7 @@ public class CubettiEngine : BaseEngine
         strip.Add(EmptyClip);
         strip.Add(TopClip.Clone());
         TopClipStrip = (MagickImage)strip.AppendHorizontally();
-        
+
     }
     #endregion
 

@@ -121,6 +121,10 @@ public class BaseEngine : IEngine
     /// Pointer to the command line (if any)
     /// </summary>
     public ICommandLine CommandLine { get; set; }
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    public PaperFormats PaperFormat { get; set; }
 
     #endregion
 
@@ -137,6 +141,7 @@ public class BaseEngine : IEngine
         BorderColor = MagickColors.Black;
         Tag = string.Empty;
         CommandLine = null;
+        PaperFormat = PaperFormats.Small;
     }
     /// <summary>
     /// Constructor
@@ -147,6 +152,7 @@ public class BaseEngine : IEngine
         colors = new();
         FilesList = new();
         FilesList.AddRange(par.FilesList);
+        PaperFormat = PaperFormats.Small;
 
         if (!string.IsNullOrWhiteSpace(par.JSON))
         {

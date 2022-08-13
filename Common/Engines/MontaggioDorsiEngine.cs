@@ -32,12 +32,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class MontaggioDorsiEngine : BaseEngine
 {
-    /// <summary>
-    /// Output paper size
-    /// </summary>
-    public PaperFormats PaperFormat { get; set; }
-
-    #region constructors
+     #region constructors
     /// <summary>
     /// Constructor
     /// </summary>
