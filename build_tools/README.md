@@ -4,7 +4,7 @@
 
 Tools for building help and binaries
 
-These scripts generate output for Windows and Linux, but are designed to run under Windows 10 with Ubuntu 20.04 in wsl2.
+These scripts generate output for Windows and Linux, but are designed to run under Windows 10 with Ubuntu 22.04 in wsl2.
 
 Other required tools are:
 
@@ -32,6 +32,8 @@ Unpack and run binaries in rar format with GUI (only for Windows)
 Windows installer package
 - **ccdv_*yy.mm.dd*_amd64.deb**  
 Debian/Ubuntu installer package
+- **ccdv_*yy.mm.dd*_arm64.deb**  
+Debian/Ubuntu installer package for 64 bit arm architecture
 
 
 

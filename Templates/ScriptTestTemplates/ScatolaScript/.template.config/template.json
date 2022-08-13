@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Roberto Ceccarelli - Casasoft",
+  "classifications": [ "Common", "Console", "CasasoftCCDV" ],
+  "identity": "Casasoft.CCDV.ScriptTest.Scatola",
+  "name": "Casasoft CCDV: Test project for Scatola scripts",
+  "shortName": "ScatolaScriptTest",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+   },
+  "sourceName": "Scatola.Script1",
+  "defaultName": "ScatolaScript1"
+}

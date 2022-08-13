@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Roberto Ceccarelli - Casasoft",
+  "classifications": [ "Common", "Console", "CasasoftCCDV" ],
+  "identity": "Casasoft.CCDV.ScriptTest.Folder",
+  "name": "Casasoft CCDV: Test project for Folder scripts",
+  "shortName": "FolderScriptTest",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+   },
+  "sourceName": "Folder.Script1",
+  "defaultName": "FolderScript1"
+}

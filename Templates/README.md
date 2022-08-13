@@ -13,6 +13,10 @@ The projects are:
 Project to develop scripts for MontaggioDorsi
 - *MontaggioFotoScriptTest*  
 Project to develop scripts for MontaggioFoto
+- *ScatolaScriptTest*  
+Project to develop scripts for Scatola
+- *FolderScriptTest*  
+Project to develop scripts for Cartella
 - *CreditCardScriptTest*  
 Project to develop scripts for CreditCard
 - *CubettiScriptTest*  
