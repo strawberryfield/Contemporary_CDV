@@ -44,7 +44,7 @@ public MagickImage ProcessOnLoad(MagickImage image)
     // Compose the images
     image = engine.img.CDV_Full_o();
     image.Composite(number, Gravity.East,  CompositeOperator.Over);
-    image.Composite(text, Gravity.Southwest, new PointD(engine.fmt.ToPixels(5), engine.fmt.ToPixels(5)), CompositeOperator.Over);
+    image.Composite(text, Gravity.Southwest, engine.fmt.ToPixels(5), engine.fmt.ToPixels(5), CompositeOperator.Over);
 
     counter++;
     return image;
