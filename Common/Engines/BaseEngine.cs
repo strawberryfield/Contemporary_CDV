@@ -272,7 +272,7 @@ public class BaseEngine : IEngine
     /// Writes exif infos on image
     /// </summary>
     /// <param name="image">image to process</param>
-    public void SetImageParameters(MagickImage image) => fmt.SetImageParameters(image);
+    public void SetImageParameters(MagickImage image) => fmt.SetImageParameters(image, parameters.Extension);
 
     /// <summary>
     /// Writes info text on images

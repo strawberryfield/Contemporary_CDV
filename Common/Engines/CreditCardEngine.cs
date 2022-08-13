@@ -305,7 +305,7 @@ Run {DateTime.Now.ToString("R")}")
                 .Text(borderleft + fmt.ToPixels(4), bordertop - fmt.ToPixels(10), FrontText)
                 .Draw(final);
         }
-        fmt.SetImageParameters(final);
+        fmt.SetImageParameters(final, parameters.Extension);
 
         return final;
     }

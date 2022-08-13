@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV;
+using Casasoft.CCDV.Engines;
 using ImageMagick;
 
 #region texts
@@ -36,14 +37,8 @@ if (par.Parse(args)) return;
 #endregion
 
 #region main
-Formats fmt = new(par.Dpi);
-Images img = new(fmt);
-ScatolaBuilder sc = new(par, fmt);
-MagickImage output = sc.GetOutputImage();
-
-output.Composite(sc.Build(), Gravity.Center);
-sc.AddCuttingLines(output);
-
-fmt.SetImageParameters(output, par.Extension);
+ScatolaEngine engine = new(par);
+MagickImage output = engine.GetResult();
+engine.SetImageParameters(output);
 output.Write($"{par.OutputName}.{par.Extension}");
 #endregion
