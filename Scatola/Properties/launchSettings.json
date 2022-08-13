@@ -2,7 +2,7 @@
   "profiles": {
     "Scatola": {
       "commandName": "Project",
-      "commandLineArgs": "--colors"
+      "commandLineArgs": "--sample"
     }
   }
 }

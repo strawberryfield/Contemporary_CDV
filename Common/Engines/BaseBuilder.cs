@@ -29,11 +29,27 @@ namespace Casasoft.CCDV;
 /// </summary>
 public class BaseBuilder : IBuilder
 {
+    #region properties
+    /// <summary>
+    /// Reference to formats
+    /// </summary>
     public Formats fmt { get; set; }
+    /// <summary>
+    /// Reference to command line
+    /// </summary>
     protected BaseBuilderCommandLine par;
+    /// <summary>
+    /// Fill color
+    /// </summary>
     public MagickColor fillColor { get; set; }
+    /// <summary>
+    /// Border color
+    /// </summary>
     public MagickColor borderColor { get; set; }
 
+    /// <summary>
+    /// Box thickness in pixels
+    /// </summary>
     protected int spessore;
     /// <summary>
     /// Thickness of the box (mm)
@@ -79,13 +95,23 @@ public class BaseBuilder : IBuilder
     /// Output paper size
     /// </summary>
     public PaperFormats PaperFormat { get; set; }
-
-    protected MagickGeometry topFormat;
-    protected MagickGeometry borderFormat;
-    protected MagickGeometry frontFormat;
+    #endregion
 
     #region images properties
     /// <summary>
+    /// Geometry for top and bottom images
+    /// </summary>
+    protected MagickGeometry topFormat;
+    /// <summary>
+    /// Geometry for borders imagees
+    /// </summary>
+    protected MagickGeometry borderFormat;
+    /// <summary>
+    /// Geometry for front and back images
+    /// </summary>
+    protected MagickGeometry frontFormat;
+
+   /// <summary>
     /// Image for top border
     /// </summary>
     protected MagickImage topImage;
@@ -137,18 +163,49 @@ public class BaseBuilder : IBuilder
     #endregion
 
     #region constructors
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="Spessore"></param>
+    /// <param name="dpi"></param>
+    /// <param name="targetype"></param>
+    /// <param name="isHor"></param>
     public BaseBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
        this(Spessore, new Formats(dpi), targetype, isHor)
     { }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="Spessore"></param>
+    /// <param name="formats"></param>
+    /// <param name="targetype"></param>
+    /// <param name="isHor"></param>
     public BaseBuilder(int Spessore, Formats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
        this(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
     { }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="Spessore"></param>
+    /// <param name="dpi"></param>
+    /// <param name="fillcolor"></param>
+    /// <param name="targetype"></param>
+    /// <param name="isHor"></param>
     public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
        this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype, isHor)
     { }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="Spessore"></param>
+    /// <param name="dpi"></param>
+    /// <param name="fillcolor"></param>
+    /// <param name="bordercolor"></param>
+    /// <param name="targetype"></param>
+    /// <param name="isHor"></param>
     public BaseBuilder(int Spessore,
         int dpi,
         MagickColor fillcolor,
@@ -158,6 +215,15 @@ public class BaseBuilder : IBuilder
        this(Spessore, new Formats(dpi), fillcolor, bordercolor, targetype, isHor)
     { }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="Spessore"></param>
+    /// <param name="formats"></param>
+    /// <param name="fillcolor"></param>
+    /// <param name="bordercolor"></param>
+    /// <param name="targetype"></param>
+    /// <param name="isHor"></param>
     public BaseBuilder(int Spessore,
         Formats formats,
         MagickColor fillcolor,
@@ -174,6 +240,11 @@ public class BaseBuilder : IBuilder
         makeEmptyImages();
     }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="parameters"></param>
+    /// <param name="formats"></param>
     public BaseBuilder(BaseBuilderCommandLine parameters, Formats formats) :
         this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType, parameters.isHorizontal)
     {
@@ -195,6 +266,9 @@ public class BaseBuilder : IBuilder
     }
     #endregion
 
+    /// <summary>
+    /// Creates empty images
+    /// </summary>
     public virtual void makeEmptyImages()
     {
         switch (targetType)
@@ -227,6 +301,12 @@ public class BaseBuilder : IBuilder
     }
 
     #region set images
+    /// <summary>
+    /// Loads an image, if the file is not found returns a template
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <param name="template"></param>
+    /// <returns></returns>
     protected MagickImage checkAndLoad(string filename, MagickImage template) =>
         (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename)) ?
         Utils.RotateResizeAndFill(new(filename), template, fillColor) : template;

@@ -23,19 +23,53 @@ using ImageMagick;
 
 namespace Casasoft.CCDV
 {
+    /// <summary>
+    /// Builds a folder
+    /// </summary>
     public class FolderBuilder : BaseBuilder
     {
 
         #region constructors
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Spessore"></param>
+        /// <param name="dpi"></param>
+        /// <param name="targetype"></param>
+        /// <param name="isHor"></param>
         public FolderBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
            base(Spessore, new Formats(dpi), targetype, isHor)
         { }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Spessore"></param>
+        /// <param name="formats"></param>
+        /// <param name="targetype"></param>
+        /// <param name="isHor"></param>
         public FolderBuilder(int Spessore, Formats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
            base(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
         { }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Spessore"></param>
+        /// <param name="dpi"></param>
+        /// <param name="fillcolor"></param>
+        /// <param name="targetype"></param>
+        /// <param name="isHor"></param>
         public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
           base(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype, isHor)
         { }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Spessore"></param>
+        /// <param name="dpi"></param>
+        /// <param name="fillcolor"></param>
+        /// <param name="bordercolor"></param>
+        /// <param name="targetype"></param>
+        /// <param name="isHor"></param>
         public FolderBuilder(int Spessore,
             int dpi,
             MagickColor fillcolor,
@@ -45,6 +79,15 @@ namespace Casasoft.CCDV
            base(Spessore, new Formats(dpi), fillcolor, bordercolor, targetype, isHor)
         { }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Spessore"></param>
+        /// <param name="formats"></param>
+        /// <param name="fillcolor"></param>
+        /// <param name="bordercolor"></param>
+        /// <param name="targetype"></param>
+        /// <param name="isHor"></param>
         public FolderBuilder(int Spessore,
             Formats formats,
             MagickColor fillcolor,
@@ -54,12 +97,20 @@ namespace Casasoft.CCDV
            base(Spessore, formats, fillcolor, bordercolor, targetype, isHor)
         { }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="par"></param>
+        /// <param name="formats"></param>
         public FolderBuilder(BaseBuilderCommandLine par, Formats formats) :
            base(par, formats)
         { }
         #endregion
 
-
+        /// <summary>
+        /// Does the dirty work
+        /// </summary>
+        /// <returns></returns>
         public MagickImage Build()
         {
             int fold = fmt.ToPixels(10);

@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV;
+using Casasoft.CCDV.Engines;
 using ImageMagick;
 
 #region texts
@@ -37,14 +38,9 @@ if (par.Parse(args)) return;
 #endregion
 
 #region main
-Formats fmt = new(par.Dpi);
-Images img = new(fmt);
-FolderBuilder sc = new(par, fmt);
-MagickImage output = sc.GetOutputImage();
+FolderEngine engine = new(par);
+MagickImage output = engine.GetResult();
+engine.SetImageParameters(output);
 
-output.Composite(sc.Build(), Gravity.Center);
-sc.AddCuttingLines(output);
-
-fmt.SetImageParameters(output, par.Extension);
 output.Write($"{par.OutputName}.{par.Extension}");
 #endregion

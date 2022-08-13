@@ -53,11 +53,6 @@ public class CubettiEngine : BaseEngine
     /// True if samples images will be created
     /// </summary>
     public bool useSampleImages { get; set; }
-
-    /// <summary>
-    /// Output paper size
-    /// </summary>
-    public PaperFormats PaperFormat { get; set; }
     #endregion
 
     #region constructors
@@ -209,47 +204,15 @@ public class CubettiEngine : BaseEngine
             img2.Add(BottomClipStrip);
             img2.Add(AssemblyPartialCube(face, 3));
 
-            MagickImage image = OutputPaper();
+            MagickImage image = GetOutputPaper(PaperFormat);
             image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
             AddCuttingLines(image, cnt);
-            fmt.SetImageParameters(image);
+            fmt.SetImageParameters(image, parameters.Extension);
             final.Add(image);
         }
 
         if (!quiet)
             Console.WriteLine();
-        return final;
-    }
-
-    private MagickImage OutputPaper()
-    {
-        MagickImage final;
-        switch (PaperFormat)
-        {
-            case PaperFormats.Medium:
-                final = img.InCartha15x20_o();
-                break;
-            case PaperFormats.Large:
-                final = img.InCartha20x27_o();
-                break;
-            case PaperFormats.A4:
-                final = img.A4_o();
-                break;
-            default:
-                final = img.InCartha15x20_o();
-                PaperFormat = PaperFormats.Medium;
-                break;
-        }
-
-        if (ScriptInstance is not null)
-        {
-            var f = Compiler.Run(ScriptInstance, "OutputImage", null);
-            if (f is not null)
-            {
-                final = (MagickImage)f;
-            }
-        }
-
         return final;
     }
 
@@ -361,7 +324,7 @@ public class CubettiEngine : BaseEngine
         strip.Add(EmptyClip);
         strip.Add(TopClip.Clone());
         TopClipStrip = (MagickImage)strip.AppendHorizontally();
-        
+
     }
     #endregion
 

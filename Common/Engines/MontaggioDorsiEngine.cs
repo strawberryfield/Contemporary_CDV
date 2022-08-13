@@ -32,12 +32,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class MontaggioDorsiEngine : BaseEngine
 {
-    /// <summary>
-    /// Output paper size
-    /// </summary>
-    public PaperFormats PaperFormat { get; set; }
-
-    #region constructors
+     #region constructors
     /// <summary>
     /// Constructor
     /// </summary>
@@ -98,32 +93,7 @@ public class MontaggioDorsiEngine : BaseEngine
     {
         _ = base.GetResult(quiet);
 
-        MagickImage final;
-        switch (PaperFormat)
-        {
-            case PaperFormats.Medium:
-                final = img.InCartha15x20_o();
-                break;
-            case PaperFormats.Large:
-                final = img.InCartha20x27_o();
-                break;
-            case PaperFormats.A4:
-                final = img.A4_o();
-                break;
-            default:
-                final = img.InCartha20x27_o();
-                PaperFormat = PaperFormats.Large;
-                break;
-        }
-
-        if (ScriptInstance is not null)
-        {
-            var f = Compiler.Run(ScriptInstance, "OutputImage", null);
-            if(f is not null)
-            {
-                final = (MagickImage)f;
-            }
-        }
+        MagickImage final = GetOutputPaper(PaperFormat);
 
         MagickImageCollection imagesV = new();
         MagickImageCollection imagesO = new();

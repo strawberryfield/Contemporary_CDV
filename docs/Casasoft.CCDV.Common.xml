@@ -795,6 +795,31 @@
             Common builder for boxes and folders
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.fmt">
+            <summary>
+            Reference to formats
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.par">
+            <summary>
+            Reference to command line
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.fillColor">
+            <summary>
+            Fill color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.borderColor">
+            <summary>
+            Border color
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.spessore">
+            <summary>
+            Box thickness in pixels
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.BaseBuilder.Thickness">
             <summary>
             Thickness of the box (mm)
@@ -833,6 +858,21 @@
         <member name="P:Casasoft.CCDV.BaseBuilder.PaperFormat">
             <summary>
             Output paper size
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.topFormat">
+            <summary>
+            Geometry for top and bottom images
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.borderFormat">
+            <summary>
+            Geometry for borders imagees
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.BaseBuilder.frontFormat">
+            <summary>
+            Geometry for front and back images
             </summary>
         </member>
         <member name="F:Casasoft.CCDV.BaseBuilder.topImage">
@@ -894,6 +934,76 @@
             <summary>
             Image for back cover
             </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,System.Int32,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="formats"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="fillcolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="fillcolor"></param>
+            <param name="bordercolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="formats"></param>
+            <param name="fillcolor"></param>
+            <param name="bordercolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.Formats)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parameters"></param>
+            <param name="formats"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.makeEmptyImages">
+            <summary>
+            Creates empty images
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.checkAndLoad(System.String,ImageMagick.MagickImage)">
+            <summary>
+            Loads an image, if the file is not found returns a template
+            </summary>
+            <param name="filename"></param>
+            <param name="template"></param>
+            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.BaseBuilder.SetTopImage(System.String)">
             <summary>
@@ -1073,6 +1183,11 @@
             Pointer to the command line (if any)
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor">
             <summary>
             Constructor
@@ -1118,6 +1233,13 @@
             </summary>
             <param name="quiet">suppress messages when running</param>
             <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetOutputPaper(Casasoft.CCDV.PaperFormats)">
+            <summary>
+            Gets the output image
+            </summary>
+            <param name="paper">Format of output image <see cref="T:Casasoft.CCDV.PaperFormats"/></param>
+            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetImageParameters(ImageMagick.MagickImage)">
             <summary>
@@ -1268,11 +1390,6 @@
             True if samples images will be created
             </summary>
         </member>
-        <member name="P:Casasoft.CCDV.Engines.CubettiEngine.PaperFormat">
-            <summary>
-            Output paper size
-            </summary>
-        </member>
         <member name="M:Casasoft.CCDV.Engines.CubettiEngine.#ctor">
             <summary>
             Constructor
@@ -1402,6 +1519,11 @@
             Pointer to the command line (if any)
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.IEngine.GetResult">
             <summary>
             Does the dirty work
@@ -1459,11 +1581,6 @@
         <member name="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine">
             <summary>
             Montaggio dorsi engine
-            </summary>
-        </member>
-        <member name="P:Casasoft.CCDV.Engines.MontaggioDorsiEngine.PaperFormat">
-            <summary>
-            Output paper size
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">
@@ -1582,6 +1699,74 @@
             <param name="quiet"></param>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.FolderBuilder">
+            <summary>
+            Builds a folder
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,System.Int32,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="formats"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="fillcolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="fillcolor"></param>
+            <param name="bordercolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="formats"></param>
+            <param name="fillcolor"></param>
+            <param name="bordercolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.Formats)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par"></param>
+            <param name="formats"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.FolderBuilder.Build">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.FolderBuilder.CreateTestImages">
             <summary>
             Set of images for testing
@@ -1591,6 +1776,73 @@
             <summary>
             Interface for boxes and folders builder
             </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IBuilder.Thickness">
+            <summary>
+            Thickness of the box (mm)
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IBuilder.fmt">
+            <summary>
+            Reference to formats
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IBuilder.fillColor">
+            <summary>
+            Fill color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IBuilder.borderColor">
+            <summary>
+            Border color
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IBuilder.targetType">
+            <summary>
+            target box format
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IBuilder.isHorizontal">
+            <summary>
+            Set if box is landscape
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.SetTopImage(System.String)">
+            <summary>
+            Sets image for the top border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.SetBottomImage(System.String)">
+            <summary>
+            Sets image for the bottom border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.SetLeftImage(System.String)">
+            <summary>
+            Sets image for the left border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.SetRightImage(System.String)">
+            <summary>
+            Sets image for the right border
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.SetFrontImage(System.String)">
+            <summary>
+            Sets image for the front cover
+            </summary>
+            <param name="filename"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.IBuilder.SetBackImage(System.String,System.Boolean)">
+            <summary>
+            Sets image for the back cover
+            </summary>
+            <param name="filename"></param>
+            <param name="isHorizontal"></param>
         </member>
         <member name="M:Casasoft.CCDV.IBuilder.AddCuttingLines(ImageMagick.MagickImage)">
             <summary>
@@ -1611,6 +1863,74 @@
         <member name="M:Casasoft.CCDV.IBuilder.GetOutputImage">
             <summary>
             Returns empty final image
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.ScatolaBuilder">
+            <summary>
+            Builds a box
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,System.Int32,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="formats"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="fillcolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="dpi"></param>
+            <param name="fillcolor"></param>
+            <param name="bordercolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Spessore"></param>
+            <param name="formats"></param>
+            <param name="fillcolor"></param>
+            <param name="bordercolor"></param>
+            <param name="targetype"></param>
+            <param name="isHor"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.Formats)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par"></param>
+            <param name="formats"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.Build">
+            <summary>
+            Does the dirty work
             </summary>
             <returns></returns>
         </member>
