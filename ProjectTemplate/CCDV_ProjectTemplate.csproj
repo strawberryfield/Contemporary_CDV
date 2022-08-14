@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>Casasoft.CCDV.ProjectTemplate</PackageId>
+    <Title>Casasoft CCDV Project Template</Title>
+    <Authors>Roberto Ceccarelli - Casasoft</Authors>
+    <Description>Templates to develop command line tools using the Contemporary Carte de Viste toolkit.</Description>
+	<Product>Casasoft Contemporary Carte de Visite Tools</Product>
+    <Copyright>copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/strawberryfield/Contemporary_CDV/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+	<PackageIcon>CCDV-128.png</PackageIcon>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+    
+    <PackageTags>dotnet-new;templates;casasoft;contemporarycartedevisite</PackageTags>
+
+    <TargetFramework>net6.0</TargetFramework>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128;NU5100</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="CCDV_App1\**" Exclude="CCDV_App1\bin\**;CCDV_App1\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\CCDV-128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
+

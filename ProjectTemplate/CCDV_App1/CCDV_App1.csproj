@@ -11,4 +11,10 @@
     <PackageReference Include="Casasoft.CCDV.Common" Version="22.8.14" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="CCDV_App1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

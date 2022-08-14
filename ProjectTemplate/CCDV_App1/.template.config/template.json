@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Roberto Ceccarelli - Casasoft",
+  "classifications": [ "Common", "Console", "CasasoftCCDV" ],
+  "identity": "Casasoft.CCDV.ProjectTemplate",
+  "name": "Casasoft CCDV: Project template for console application",
+  "shortName": "CCDVProjectTemplate",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+   },
+  "sourceName": "CCDV_App1",
+  "defaultName": "CCDV_App1"
+}
