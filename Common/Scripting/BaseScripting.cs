@@ -24,10 +24,20 @@ using System.Reflection;
 
 namespace Casasoft.CCDV.Scripting;
 
-internal class BaseScripting : IScripting
+/// <summary>
+/// Common script handling
+/// </summary>
+public class BaseScripting : IScripting
 {
+    /// <summary>
+    /// Reference to json parameters
+    /// </summary>
     public IParameters Parameters { get; set; }
 
+    /// <summary>
+    /// Template to be shown with --helpscript in <see cref="CommandLine"/>
+    /// </summary>
+    /// <returns></returns>
     public virtual string Template() => @"
 /// <summary>
 /// Custom class initialization
@@ -41,6 +51,12 @@ public void Init() { }
 public MagickImage OutputImage() => null;
 ";
 
+    /// <summary>
+    /// Script wrapping before execution
+    /// </summary>
+    /// <param name="script"></param>
+    /// <param name="engine"></param>
+    /// <returns></returns>
     public virtual string WrapScript(string script, string engine) => $@"{Compiler.Usings}
 namespace Casasoft.CCDV.Scripts;
 
@@ -56,7 +72,17 @@ public class UserScript
 {script}
 }}";
 
+    /// <summary>
+    /// Script wrapping before execution
+    /// </summary>
+    /// <param name="script"></param>
+    /// <returns></returns>
     public virtual string WrapScript(string script) => WrapScript(script, "BaseEngine");
 
+    /// <summary>
+    /// Run-time compilation
+    /// </summary>
+    /// <param name="script"></param>
+    /// <returns></returns>
     public virtual Assembly Compile(string script) => Compiler.Compile(WrapScript(script));
 }

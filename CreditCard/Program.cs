@@ -30,9 +30,11 @@ You can add a pseudo magnetic band, text on front and a more long text on the ba
 #endregion
 
 #region command line
-CreditCardCommandLine par = new("cc", desc);
-par.Usage = "[options]* inputfile";
-par.LongDesc = longDesc;
+CreditCardCommandLine par = new("cc", desc)
+{
+    Usage = "[options]* inputfile",
+    LongDesc = longDesc
+};
 if (par.Parse(args)) return;
 
 if (par.FilesList.Count <= 0) return;

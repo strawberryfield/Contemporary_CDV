@@ -30,9 +30,11 @@ that you can print on a paper of ypur choice.";
 #endregion
 
 #region command line
-MontaggioFotoCommandLine par = new("card", desc);
-par.Usage = "[options]* inputfile+";
-par.LongDesc = longDesc;
+MontaggioFotoCommandLine par = new("card", desc)
+{
+    Usage = "[options]* inputfile+",
+    LongDesc = longDesc
+};
 if (par.Parse(args)) return;
 
 par.ExpandWildcards();

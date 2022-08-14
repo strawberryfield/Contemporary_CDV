@@ -30,9 +30,11 @@ that I print on a cardboard coated only on the side of the image.";
 #endregion
 
 #region command line
-MontaggioDorsiCommandLine par = new("dorsi", desc);
-par.Usage = "[options]* inputfile+";
-par.LongDesc = longDesc;
+MontaggioDorsiCommandLine par = new("dorsi", desc)
+{
+    Usage = "[options]* inputfile+",
+    LongDesc = longDesc
+};
 if (par.Parse(args)) return;
 
 par.ExpandWildcards();

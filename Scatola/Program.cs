@@ -30,9 +30,11 @@ It has dimensions 105x70mm with a thickness that can be changed by a parameter o
 #endregion
 
 #region command line
-BaseBuilderCommandLine par = new("box", desc);
-par.Usage = "[options]*";
-par.LongDesc = longDesc;
+BaseBuilderCommandLine par = new("box", desc)
+{
+    Usage = "[options]*",
+    LongDesc = longDesc
+};
 if (par.Parse(args)) return;
 #endregion
 

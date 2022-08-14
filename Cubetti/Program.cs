@@ -30,11 +30,12 @@ Each face of the cube has a portion of one of the six images.";
 #endregion
 
 #region command line
-CubettiCommandLine par = new("cubes", desc);
-par.Usage = "[options]* inputfiles";
-par.LongDesc = longDesc;
+CubettiCommandLine par = new("cubes", desc)
+{
+    Usage = "[options]* inputfiles",
+    LongDesc = longDesc
+};
 if (par.Parse(args)) return;
-
 if (par.FilesList.Count < 6) return;
 #endregion
 
