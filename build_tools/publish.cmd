@@ -89,3 +89,4 @@ popd
  -ext WixUIExtension -ext %WixUtils%
  
 dotnet pack %repo%Templates\ScriptTestTemplatesPack.csproj -p:PackageVersion=%version% 
+dotnet pack %repo%ProjectTemplate\CCDV_ProjectTemplate.csproj -p:PackageVersion=%version% 
