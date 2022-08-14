@@ -2764,6 +2764,44 @@
             cooperation with the commu [rest of string was truncated]&quot;;.
              </summary>
         </member>
+        <member name="T:Casasoft.CCDV.Scripting.BaseScripting">
+            <summary>
+            Common script handling
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Scripting.BaseScripting.Parameters">
+            <summary>
+            Reference to json parameters
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.BaseScripting.Template">
+            <summary>
+            Template to be shown with --helpscript in <see cref="T:Casasoft.CCDV.CommandLine"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.BaseScripting.WrapScript(System.String,System.String)">
+            <summary>
+            Script wrapping before execution
+            </summary>
+            <param name="script"></param>
+            <param name="engine"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.BaseScripting.WrapScript(System.String)">
+            <summary>
+            Script wrapping before execution
+            </summary>
+            <param name="script"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Scripting.BaseScripting.Compile(System.String)">
+            <summary>
+            Run-time compilation
+            </summary>
+            <param name="script"></param>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.Scripting.Compiler">
             <summary>
             c# scripts compiler
