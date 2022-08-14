@@ -2,16 +2,53 @@
 // https://github.com/strawberryfield/Contemporary_CDV
 
 using Casasoft.CCDV;
+using Casasoft.CCDV.JSON;
+using Mono.Options;
+using System.Text.Json;
 
 namespace CCDV_App1;
 
 internal class CommandLineClass : CommandLine
 {
-    public CommandLineClass(string outputname, string desc = "") : base(outputname, desc)
+    public CommandLineClass(string outputname, string desc = "") :
+        this(ExeName(), outputname, desc)
     {
     }
 
     public CommandLineClass(string exename, string outputname, string desc = "") : base(exename, outputname, desc)
     {
+        Options = new OptionSet
+        {
+            // Add your options here
+        };
+        AddBaseOptions();
     }
+
+    /// <summary>
+    /// Text for welcome banner
+    /// </summary>
+    /// <returns></returns>
+    public override string WelcomeBannerText() => $"Your program name\nYour copyright notice\n";
+
+    #region templates
+    /// <summary>
+    /// Prints a json schema for parameters
+    /// </summary>
+    /// <returns></returns>
+    public override string JsonTemplate()
+    {
+        ParametersClass p = new();
+        return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
+    }
+
+    /// <summary>
+    /// Prints a script template
+    /// </summary>
+    /// <returns></returns>
+    public override string ScriptTemplate()
+    {
+        ScriptingClass sc = new();
+        return base.ScriptTemplate() + sc.Template();
+    }
+    #endregion
 }

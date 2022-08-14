@@ -17,8 +17,6 @@ CommandLineClass par = new("outfilename", desc)
     LongDesc = longDesc
 };
 if (par.Parse(args)) return;
-
-par.ExpandWildcards();
 #endregion
 
 EngineClass engine = new(par);

@@ -6,6 +6,13 @@ see the my site [«The Strawberry Field»](https://strawberryfield.altervista.or
 
 # Casasoft Contemporary Carte de Visite Tools SDK
 
+This template builds a C# console application project based on the 
+Casasoft Contemporary Carte de Visite Toolkit.
+
+Will be created classes for the command line handling, JSON parameters, C# user scripting and the core engine.
+
+A bash script for running the program in Unix / Linux environment is enclosed.
+
 ## Installation
 
 To install the templates from the command line type:
