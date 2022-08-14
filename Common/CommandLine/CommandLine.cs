@@ -208,23 +208,24 @@ public class CommandLine : ICommandLine
         Options = new();
         baseOptions = new OptionSet
         {
-            { "fillcolor=", $"set the color used to fill the images\n(default {sFillColor})", c => sFillColor = c },
-            {
-                "bordercolor=",
+            { "fillcolor=",
+                          $"set the color used to fill the images\n(default {sFillColor})",
+                          c => sFillColor = c },
+            { "bordercolor=",
                 $"set the color used to border the images\n(default {sBorderColor})",
                 c => sBorderColor = c
             },
-            { "dpi=", $"set output resolution (default {Dpi})", res => sDpi = res },
-            {
-                "json=",
+            { "dpi=", 
+                          $"set output resolution (default {Dpi})", 
+                          res => sDpi = res },
+            { "json=",
                 @"parameters in json format,
 use --helpjson for sample template
 Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
                 o => JSON = GetFileParameter(o)
             },
-            {
-                "script=",
+            { "script=",
                 @"c# script for custom processing,
 use --helpscript for sample template
 Text can be stored in a file instead of a string
@@ -233,8 +234,7 @@ The file must be referenced as '@filename'",
             },
             { "o|output=", "set output dir/filename", o => OutputName = o },
             { "extension=", $"file extension for output file (default '{Extension}')", e => Extension = e },
-            {
-                "tag=",
+            { "tag=",
                 @"extra info for user scripts
 Text can be stored in a file instead of a string
 The file must be referenced as '@filename'",
