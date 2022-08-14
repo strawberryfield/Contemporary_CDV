@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Casasoft.CCDV.Common" Version="22.8.9" />
+    <PackageReference Include="Casasoft.CCDV.Common" Version="22.8.14" />
   </ItemGroup>
 
 </Project>
