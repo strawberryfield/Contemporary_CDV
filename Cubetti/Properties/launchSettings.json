@@ -2,7 +2,7 @@
   "profiles": {
     "Cubetti": {
       "commandName": "Project",
-      "commandLineArgs": "--columns=4 --rows=3 C:\\foto\\2022\\dozza\\bicingiro\\eremo_s_alberico.jpg C:\\foto\\2022\\dozza\\bicingiro\\cesenatico.jpg C:\\foto\\2022\\dozza\\bicingiro\\pallanza_v.jpg C:\\foto\\2022\\dozza\\bicingiro\\rimini_v.jpg C:\\foto\\2022\\dozza\\bicingiro\\cesena.jpg C:\\foto\\2022\\dozza\\bicingiro\\casere.jpg"
+      "commandLineArgs": "--rows=3 --columns=4 --tag=21 --script=@C:\\foto\\2022\\dozza\\collettiva\\AddQR.cs  --output=C:\\foto\\2022\\dozza\\collettiva\\render\\cubetto  C:\\foto\\2022\\dozza\\collettiva\\brunico.jpg  C:\\foto\\2022\\dozza\\collettiva\\castel_rigone.jpg  C:\\foto\\2022\\dozza\\collettiva\\cesenatico.jpg  C:\\foto\\2022\\dozza\\collettiva\\milano.jpg  C:\\foto\\2022\\dozza\\collettiva\\pinarella.jpg  C:\\foto\\2022\\dozza\\collettiva\\valle_aurina.jpg"
     }
   }
 }
