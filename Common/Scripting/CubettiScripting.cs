@@ -28,5 +28,5 @@ internal class CubettiScripting : BaseScripting
 {
     public override string WrapScript(string script) => base.WrapScript(script, "CubettiEngine");
 
-    public override string Template() => base.Template();
+    public override string Template() => base.Template() + ProcessOnLoadTemplate;
 }

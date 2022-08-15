@@ -25,6 +25,7 @@ using ImageMagick;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Casasoft.CCDV.Engines;
 
@@ -150,7 +151,17 @@ public class CubettiEngine : BaseEngine
                 if (!quiet)
                     Console.WriteLine($"Reading: {FilesList[i]}");
 
-                sources[i] = Utils.RotateResizeAndFill(new(FilesList[i]), sourceFormat, FillColor);
+                MagickImage image = new(FilesList[i]);
+                if (ScriptInstance is not null)
+                {
+                    var img = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
+                    if (img is not null)
+                    {
+                        image = (MagickImage)img;
+                    }
+                }
+
+                sources[i] = Utils.RotateResizeAndFill(image, sourceFormat, FillColor);
             }
         }
 

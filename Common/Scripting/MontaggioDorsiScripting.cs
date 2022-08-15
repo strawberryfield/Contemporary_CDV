@@ -25,12 +25,5 @@ internal class MontaggioDorsiScripting : BaseScripting
 {
     public override string WrapScript(string script) => base.WrapScript(script, "MontaggioDorsiEngine");
 
-    public override string Template() => base.Template() + @"
-/// <summary>
-/// Preprocesses the loaded image
-/// </summary>
-/// <param name=""image"">The loaded image</param>
-/// <returns>The Processed image</returns>
-public MagickImage ProcessOnLoad(MagickImage image) => image;";
-
+    public override string Template() => base.Template() + ProcessOnLoadTemplate;
 }

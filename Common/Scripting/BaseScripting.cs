@@ -52,6 +52,17 @@ public MagickImage OutputImage() => null;
 ";
 
     /// <summary>
+    /// Template for ProcessOnLoad method
+    /// </summary>
+    public string ProcessOnLoadTemplate => @"
+/// <summary>
+/// Preprocesses the loaded image
+/// </summary>
+/// <param name=""image"">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoad(MagickImage image) => image;";
+
+    /// <summary>
     /// Script wrapping before execution
     /// </summary>
     /// <param name="script"></param>
