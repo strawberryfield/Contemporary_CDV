@@ -6,12 +6,15 @@ see the my site [«The Strawberry Field»](https://strawberryfield.altervista.or
 
 # Casasoft Contemporary Carte de Visite Tools SDK
 
+![The tutorial cover](https://strawberryfield.altervista.org/carte_de_visite/foto/stazione_servizio_biciclette.jpg)  
 This template builds a C# console application project based on the 
 Casasoft Contemporary Carte de Visite Toolkit.
 
 Will be created classes for the command line handling, JSON parameters, C# user scripting and the core engine.
 
 A bash script for running the program in Unix / Linux environment is enclosed.
+
+A more [detailed tutorial](https://strawberryfield.altervista.org/carte_de_visite/csharp_console_project_template.php) (in italian language) is avalailable on [my web site](https://strawberryfield.altervista.org)
 
 ## Installation
 
