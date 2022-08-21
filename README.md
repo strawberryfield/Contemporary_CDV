@@ -181,6 +181,10 @@ non si possono eseguire su computer in formato "carte de visite" come il
 
 Sul mio sito sono disponibili [i manuali utente](https://strawberryfield.altervista.org/carte_de_visite/manuali_utente.php) ed 
 una più esaustiva [documentazione del codice sorgente](https://strawberryfield.altervista.org/carte_de_visite/sorgente_commentato.php).
+
+E' in distribuzione su Nuget un pacchetto con il [template per creare nuovi tools](https://www.nuget.org/packages/Casasoft.CCDV.ProjectTemplate),
+mentre sul mio sito è disponibile [un dettagliato tutorial sul suo utilizzo](https://strawberryfield.altervista.org/carte_de_visite/csharp_console_project_template.php) 
+
 ### Bibliografia
 
 [Roberto Ceccarelli - Creare DVD video da codice](https://strawberryfield.altervista.org/cp/10.pdf)
