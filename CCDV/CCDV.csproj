@@ -39,7 +39,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Casasoft.Xaml.Controls" Version="22.4.13" />
-		<PackageReference Include="Magick.NET.SystemWindowsMedia" Version="6.0.1" />
+		<PackageReference Include="Magick.NET.SystemWindowsMedia" Version="6.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
