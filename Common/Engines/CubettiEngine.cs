@@ -25,7 +25,6 @@ using ImageMagick;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Casasoft.CCDV.Engines;
 

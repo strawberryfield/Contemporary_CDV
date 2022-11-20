@@ -584,6 +584,53 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.FlexagonCommandLine">
+            <summary>
+            Command line extensions for flexagons builder
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.FlexagonCommandLine.Faces">
+            <summary>
+            Number of faces of the flexagons
+            </summary>
+            <remarks>
+            Valid numbers are 3, 4 or 6
+            </remarks>
+        </member>
+        <member name="M:Casasoft.CCDV.FlexagonCommandLine.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.FlexagonCommandLine.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="exename">Name of the program exe</param>
+            <param name="outputname">Default output file name</param>
+            <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.FlexagonCommandLine.Parse(System.String[])">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="args">command line arguments</param>
+            <returns>true if nothing to (ie. help)</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.FlexagonCommandLine.JsonTemplate">
+            <summary>
+            Prints a json schema for pameters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.FlexagonCommandLine.ScriptTemplate">
+            <summary>
+            Prints a script template
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
             Interface for command line handling
@@ -1425,6 +1472,42 @@
             </summary>
             <param name="img"></param>
             <param name="i">Current image number</param>
+        </member>
+        <member name="T:Casasoft.CCDV.Engines.FlexagonEngine">
+            <summary>
+            Generates a Tetra Flexagon with 3, 4 or 6 faces
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.FlexagonEngine.Faces">
+            <summary>
+            Number of faces of the flexagons
+            </summary>
+            <remarks>
+            Valid numbers are 3, 4 or 6
+            </remarks>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.#ctor(Casasoft.CCDV.ICommandLine)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="par">Command line options</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.GetJsonParams">
+            <summary>
+            Returns the parameters in json format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.SetJsonParams(System.String)">
+            <summary>
+            Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
         </member>
         <member name="T:Casasoft.CCDV.Engines.FolderEngine">
             <summary>
@@ -2607,6 +2690,24 @@
             Default constructor
             </summary>
         </member>
+        <member name="T:Casasoft.CCDV.JSON.FlexagonParameters">
+            <summary>
+            Json structure for Flexagon
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.FlexagonParameters.Faces">
+            <summary>
+            Number of faces of the flexagons
+            </summary>
+            <remarks>
+            Valid numbers are 3, 4 or 6
+            </remarks>
+        </member>
+        <member name="M:Casasoft.CCDV.JSON.FlexagonParameters.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
         <member name="T:Casasoft.CCDV.JSON.IParameters">
             <summary>
             Common parameters list
@@ -2877,6 +2978,11 @@
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.Scripting.CubettiScripting">
+            <summary>
+            Scripting host for cubetti
+            </summary>
+        </member>
+        <member name="T:Casasoft.CCDV.Scripting.FlexagonScripting">
             <summary>
             Scripting host for cubetti
             </summary>
