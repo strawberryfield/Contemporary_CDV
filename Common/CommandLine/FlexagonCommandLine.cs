@@ -41,6 +41,11 @@ public class FlexagonCommandLine : CommandLine
     /// </remarks>
     public int Faces { get; set; }
 
+    /// <summary>
+    /// True if samples images will be created
+    /// </summary>
+    public bool useSampleImages { get; set; }
+
     private string sFaces = "3";
 
     /// <summary>
@@ -63,6 +68,7 @@ public class FlexagonCommandLine : CommandLine
         Options = new OptionSet
             {
                 { "f|faces=", $"number of faces of the flexagaon (3,4 or 6; default {sFaces})", t => sFaces = t },
+                { "sample", "generate sample images", s => useSampleImages = s != null },
             };
         AddBaseOptions();
     }

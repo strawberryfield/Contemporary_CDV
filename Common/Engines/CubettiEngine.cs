@@ -125,7 +125,7 @@ public class CubettiEngine : BaseEngine
     /// <summary>
     /// Does the dirty work
     /// </summary>
-    /// <returns>Image to print</returns>
+    /// <returns>Images to print</returns>
     public List<MagickImage> GetResults(bool quiet)
     {
         _ = GetResult(quiet);

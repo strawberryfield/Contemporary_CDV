@@ -34,6 +34,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class FlexagonEngine : BaseEngine
 {
+    #region properties
     /// <summary>
     /// Number of faces of the flexagons
     /// </summary>
@@ -41,6 +42,12 @@ public class FlexagonEngine : BaseEngine
     /// Valid numbers are 3, 4 or 6
     /// </remarks>
     public int Faces { get; set; } = 3;
+
+    /// <summary>
+    /// True if samples images will be created
+    /// </summary>
+    public bool useSampleImages { get; set; }
+    #endregion
 
     #region constructors
     /// <summary>
@@ -60,6 +67,7 @@ public class FlexagonEngine : BaseEngine
     {
         FlexagonCommandLine p = (FlexagonCommandLine)par;
         Faces = p.Faces;
+        useSampleImages = p.useSampleImages;
 
         ScriptingClass = new FlexagonScripting();
         Script = p.Script;
@@ -96,4 +104,82 @@ public class FlexagonEngine : BaseEngine
     }
     #endregion
 
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <returns>Images to print</returns>
+    public List<MagickImage> GetResults(bool quiet)
+    {
+        _ = GetResult(quiet);
+        List<MagickImage> final = new();
+
+        MagickImage[] sources = new MagickImage[Faces];
+
+        // Load images
+        if (useSampleImages)
+        {
+            sources = Samples();
+        }
+        else
+        {
+            for (int i = 0; i < Faces; i++)
+            {
+                if (!quiet)
+                    Console.WriteLine($"Reading: {FilesList[i]}");
+
+                MagickImage image = new(FilesList[i]);
+                if (ScriptInstance is not null)
+                {
+                    var img = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
+                    if (img is not null)
+                    {
+                        image = (MagickImage)img;
+                    }
+                }
+
+                sources[i] = Utils.RotateResizeAndFill(image, fmt.CDV_Full_v, FillColor);
+            }
+        }
+
+        return final;
+    }
+
+    #region samples
+    private MagickImage[] Samples()
+    {
+        MagickImage[] ret = new MagickImage[Faces];
+
+        int Rows = Faces == 4 ? 3 : 2;
+        int Columns = 2;
+        int tileX = fmt.CDV_Full_v.X / Columns;
+        int tileY = fmt.CDV_Full_v.Y / Rows;
+
+        for (int i = 0; i < Faces; i++)
+        {
+            ret[i] = new MagickImage();
+            MagickImageCollection RowStrips = new();
+            for (int row = 0; row < Rows; row++)
+            {
+                MagickImageCollection ColStrip = new();
+                for (int col = 0; col < Columns; col++)
+                {
+                    MagickImage tile = new(MagickColors.White, tileX, tileY);
+                    Utils.CenteredText(((char)('A' + i)).ToString(), tileY / 2, tileX, tileY).Draw(tile);
+                    Drawables draw = new();
+                    draw.FontPointSize(tileY / 5)
+                        .Font("Arial")
+                        .FillColor(MagickColors.Black)
+                        .Gravity(Gravity.South)
+                        .Text(0, tileY / 10, $"r={row + 1},c={col + 1}")
+                        .Draw(tile);
+
+                    ColStrip.Add(tile);
+                }
+                RowStrips.Add(ColStrip.AppendHorizontally());
+            }
+            ret[i] = (MagickImage)RowStrips.AppendVertically();
+        }
+        return ret;
+    }
+    #endregion
 }

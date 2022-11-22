@@ -35,6 +35,11 @@ public class FlexagonParameters : CommonParameters
     public int Faces { get; set; } = 3;
 
     /// <summary>
+    /// True if samples images will be created
+    /// </summary>
+    public bool useSampleImages { get; set; }
+
+    /// <summary>
     /// Default constructor
     /// </summary>
     public FlexagonParameters() : base()
