@@ -21,6 +21,7 @@
 
 using ImageMagick;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -254,6 +255,22 @@ public static class Utils
             {
                 return reader.ReadToEnd();
            }
+        }
+    }
+
+    /// <summary>
+    /// Outputs a list of images
+    /// </summary>
+    /// <param name="final">The list of images</param>
+    /// <param name="par">Command line object to retrieve files names</param>
+    public static void WriteImages(List<MagickImage> final, ICommandLine par)
+    {
+        int max = final.Count;
+        int i = 0;
+        foreach (MagickImage image in final)
+        {
+            i++;
+            image.Write($"{par.OutputName}-{i}of{max}.{par.Extension}");
         }
     }
 }

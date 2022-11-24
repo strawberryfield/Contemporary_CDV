@@ -21,7 +21,6 @@
 
 using Casasoft.CCDV;
 using Casasoft.CCDV.Engines;
-using ImageMagick;
 
 #region texts
 string desc = "Creates a cube matrix with 6 photos.";
@@ -36,16 +35,12 @@ CubettiCommandLine par = new("cubes", desc)
     LongDesc = longDesc
 };
 if (par.Parse(args)) return;
-if (par.FilesList.Count < 6) return;
+if (par.FilesList.Count < 6)
+{
+    Console.Error.WriteLine("Not enough images.");
+    return;
+}
 #endregion
 
 CubettiEngine engine = new(par);
-List<MagickImage> final = engine.GetResults(false);
-
-int max = final.Count;
-int i = 0;
-foreach (MagickImage image in final)
-{
-    i++;
-    image.Write($"{par.OutputName}-{i}of{max}.{par.Extension}");
-}
+Utils.WriteImages(engine.GetResults(false), par);

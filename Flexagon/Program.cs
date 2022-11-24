@@ -21,7 +21,6 @@
 
 using Casasoft.CCDV;
 using Casasoft.CCDV.Engines;
-using ImageMagick;
 
 #region texts
 string desc = "Creates a flexagon with 3, 4 or 6 photos.";
@@ -44,3 +43,4 @@ if (par.FilesList.Count < par.Faces)
 #endregion
 
 FlexagonEngine engine = new(par);
+Utils.WriteImages(engine.GetResults(false), par);

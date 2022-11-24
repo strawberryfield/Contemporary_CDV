@@ -597,6 +597,11 @@
             Valid numbers are 3, 4 or 6
             </remarks>
         </member>
+        <member name="P:Casasoft.CCDV.FlexagonCommandLine.useSampleImages">
+            <summary>
+            True if samples images will be created
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.FlexagonCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -1464,7 +1469,7 @@
             <summary>
             Does the dirty work
             </summary>
-            <returns>Image to print</returns>
+            <returns>Images to print</returns>
         </member>
         <member name="M:Casasoft.CCDV.Engines.CubettiEngine.AddCuttingLines(ImageMagick.MagickImage,System.Int32)">
             <summary>
@@ -1485,6 +1490,11 @@
             <remarks>
             Valid numbers are 3, 4 or 6
             </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.FlexagonEngine.useSampleImages">
+            <summary>
+            True if samples images will be created
+            </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.#ctor">
             <summary>
@@ -1508,6 +1518,12 @@
             Sets the parameters from json formatted string
             </summary>
             <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.GetResults(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Images to print</returns>
         </member>
         <member name="T:Casasoft.CCDV.Engines.FolderEngine">
             <summary>
@@ -2703,6 +2719,11 @@
             Valid numbers are 3, 4 or 6
             </remarks>
         </member>
+        <member name="P:Casasoft.CCDV.JSON.FlexagonParameters.useSampleImages">
+            <summary>
+            True if samples images will be created
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.JSON.FlexagonParameters.#ctor">
             <summary>
             Default constructor
@@ -3167,6 +3188,13 @@
             Returns the text of the license
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Utils.WriteImages(System.Collections.Generic.List{ImageMagick.MagickImage},Casasoft.CCDV.ICommandLine)">
+            <summary>
+            Outputs a list of images
+            </summary>
+            <param name="final">The list of images</param>
+            <param name="par">Command line object to retrieve files names</param>
         </member>
     </members>
 </doc>

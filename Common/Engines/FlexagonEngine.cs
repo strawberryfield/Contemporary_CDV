@@ -41,12 +41,32 @@ public class FlexagonEngine : BaseEngine
     /// <remarks>
     /// Valid numbers are 3, 4 or 6
     /// </remarks>
-    public int Faces { get; set; } = 3;
+    public int Faces
+    {
+        get => _faces;
+        set
+        {
+            _faces = value;
+            Rows = Faces == 4 ? 3 : 2;
+            Columns = 2;
+            tileX = fmt.CDV_Full_v.X / Columns;
+            tileY = fmt.CDV_Full_v.Y / Rows;
+        }
+    }
 
     /// <summary>
     /// True if samples images will be created
     /// </summary>
     public bool useSampleImages { get; set; }
+    #endregion
+
+    #region private properties
+    int _faces;
+
+    int Rows;
+    int Columns;
+    int tileX;
+    int tileY;
     #endregion
 
     #region constructors
@@ -57,6 +77,7 @@ public class FlexagonEngine : BaseEngine
     {
         parameters = new FlexagonParameters();
         ScriptingClass = new FlexagonScripting();
+        Faces = 3;
     }
 
     /// <summary>
@@ -148,11 +169,6 @@ public class FlexagonEngine : BaseEngine
     private MagickImage[] Samples()
     {
         MagickImage[] ret = new MagickImage[Faces];
-
-        int Rows = Faces == 4 ? 3 : 2;
-        int Columns = 2;
-        int tileX = fmt.CDV_Full_v.X / Columns;
-        int tileY = fmt.CDV_Full_v.Y / Rows;
 
         for (int i = 0; i < Faces; i++)
         {
