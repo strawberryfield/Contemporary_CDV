@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Flexagon": {
+      "commandName": "Project",
+      "commandLineArgs": "--sample --faces=3"
+    }
+  }
+}

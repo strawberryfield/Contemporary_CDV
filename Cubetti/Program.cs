@@ -35,7 +35,7 @@ CubettiCommandLine par = new("cubes", desc)
     LongDesc = longDesc
 };
 if (par.Parse(args)) return;
-if (par.FilesList.Count < 6)
+if (par.FilesList.Count < 6 && !par.useSampleImages)
 {
     Console.Error.WriteLine("Not enough images.");
     return;

@@ -35,7 +35,7 @@ FlexagonCommandLine par = new("flexagon", desc)
     LongDesc = longDesc
 };
 if (par.Parse(args)) return;
-if (par.FilesList.Count < par.Faces)
+if (par.FilesList.Count < par.Faces && !par.useSampleImages)
 {
     Console.Error.WriteLine("Not enough images.");
     return;
