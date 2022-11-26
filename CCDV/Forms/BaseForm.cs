@@ -42,6 +42,7 @@ public partial class BaseForm : Window
 
     private BackgroundWorker bwAnteprima;
     private BackgroundWorker bwRender;
+    private BackgroundWorker bwPrint;
     private WaitForm waitForm;
     private Image image;
 
@@ -58,11 +59,24 @@ public partial class BaseForm : Window
         bwRender = new BackgroundWorker();
         bwRender.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
         bwRender.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwRender_RunWorkerCompleted);
+
+        bwPrint = new BackgroundWorker();
+        bwPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
+        bwPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwPrint_RunWorkerCompleted);
     }
 
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         doAnteprima();
+    }
+
+    protected void btnPrint_Click(object sender, EventArgs e)
+    {
+        setEngineParameters();
+        bwPrint.RunWorkerAsync();
+        waitForm = new WaitForm();
+        waitForm.Owner = this;
+        waitForm.ShowDialog();
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -173,6 +187,31 @@ public partial class BaseForm : Window
         }
     }
 
+    private void bwPrint_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+    {
+        MagickImage? bm = (MagickImage?)e.Result;
+        waitForm.Close();
+
+        if (bm is not null)
+        {
+            DrawingVisual vis = new DrawingVisual();
+            using (DrawingContext dc = vis.RenderOpen())
+            {
+                dc.DrawImage(bm.ToBitmapSource(), new Rect
+                {
+                    Width = bm.Width / engine.Dpi * 96,
+                    Height = bm.Height / engine.Dpi * 96
+                });
+            }
+
+            PrintDialog pd = new();
+            if (pd.ShowDialog() == true)
+            {
+                pd.PrintVisual(vis, "Print Image");
+            }
+        }
+    }
+
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {
         if (depObj is null)
@@ -196,7 +235,7 @@ public partial class BaseForm : Window
         {
             if (!string.IsNullOrWhiteSpace(tb.Value))
             {
-                if(tb.OpenFileDialogTitle != "Script")
+                if (tb.OpenFileDialogTitle != "Script")
                 {
                     engine.FilesList.Add(tb.Value);
                 }

@@ -33,8 +33,9 @@ If not, see <http://www.gnu.org/licenses/>.
             <Button x:Name="btnUpdate" Content="&#xE149;" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="20" Click="btnUpdate_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
             <Button x:Name="btnOpenJson" Content="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnOpenJson_Click" FontFamily="Wingdings" Height="20" FontWeight="Bold"/>
             <Button x:Name="btnSaveJson" Content="&#xE105;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnSaveJson_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
+            <Button x:Name="btnPrint" Content="&#xE749;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnPrint_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
         </StackPanel>
-        <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="136" Click="btnSave_Click"/>
+        <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="110" Click="btnSave_Click" Margin="120,0,0,0"/>
     </Grid>
 
 </UserControl>
