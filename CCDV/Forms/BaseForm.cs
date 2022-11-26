@@ -40,10 +40,10 @@ public partial class BaseForm : Window
 {
     protected IEngine engine;
 
-    private BackgroundWorker bwAnteprima;
-    private BackgroundWorker bwRender;
-    private BackgroundWorker bwPrint;
-    private WaitForm waitForm;
+    protected BackgroundWorker bwAnteprima;
+    protected BackgroundWorker bwRender;
+    protected BackgroundWorker bwPrint;
+    protected WaitForm waitForm;
     private Image image;
 
     public BaseForm()
