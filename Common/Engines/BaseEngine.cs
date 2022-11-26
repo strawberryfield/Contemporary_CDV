@@ -233,6 +233,25 @@ public class BaseEngine : IEngine
     }
 
     /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <returns>Images list to print</returns>
+    public List<MagickImage> GetResults() => GetResults(false);
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet">suppress messages when running</param>
+    /// <returns>Images list to print</returns>
+    public virtual List<MagickImage> GetResults(bool quiet)
+    {
+        if (CustomCode is not null)
+        {
+            ScriptInstance = Compiler.New(CustomCode, this);
+        }
+        return null;
+    }
+
+    /// <summary>
     /// Gets the output image
     /// </summary>
     /// <param name="paper">Format of output image <see cref="PaperFormats"/></param>

@@ -131,9 +131,9 @@ public class FlexagonEngine : BaseEngine
     /// Does the dirty work
     /// </summary>
     /// <returns>Images to print</returns>
-    public List<MagickImage> GetResults(bool quiet)
+    public override List<MagickImage> GetResults(bool quiet)
     {
-        _ = GetResult(quiet);
+        _ = base.GetResults(quiet);
         MagickImage[] sources = new MagickImage[Faces];
 
         // Load images
