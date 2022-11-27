@@ -21,24 +21,42 @@ along with Casasoft CCDV Tools.
 If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<src:BaseForm x:Class="Casasoft.CCDV.UI.MontaggioFotoForm"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:src="clr-namespace:Casasoft.CCDV.UI"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
-        xmlns:local="clr-namespace:Casasoft.CCDV.UI"
-        mc:Ignorable="d"
-        Title="Montaggio Foto" Height="450" Width="800">
+<src:BaseForm
+    x:Class="Casasoft.CCDV.UI.MontaggioFotoForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Casasoft.CCDV.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:src="clr-namespace:Casasoft.CCDV.UI"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d"
+    Title="Montaggio Foto">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="250" />
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <casasoft:ImageViewer x:Name="image" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
-        <Rectangle x:Name="col1background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="#FFE7E8EC"/>
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center" Width="5" Height="100"/>
+        <casasoft:ImageViewer
+            x:Name="image"
+            Grid.Column="1"
+            Margin="0,0,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" />
+        <Rectangle
+            x:Name="col1background"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Fill="#FFE7E8EC" />
+        <GridSplitter
+            Grid.Column="1"
+            Width="5"
+            Height="100"
+            Margin="0,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" />
         <Grid Margin="10,0,10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -46,19 +64,85 @@ If not, see <http://www.gnu.org/licenses/>.
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel>
-                <Label x:Name="lblFilenames" Content="Immagini da caricare" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="230" FontSize="18" FontWeight="Bold" Panel.ZIndex="1"/>
-                <casasoft:FileTextBox x:Name="filename1" HorizontalAlignment="Stretch"   VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
-                <casasoft:FileTextBox x:Name="filename2" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
-                <CheckBox x:Name="chkFullSize" Content="Full size (100x64)" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top"/>
-                <CheckBox x:Name="chkTrim" Content="Trim" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top"/>
-                <CheckBox x:Name="chkWithBorders" Content="Con bordi" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top"/>
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <casasoft:NumericUpDown x:Name="txtPadding" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" Width="60" Value="0" MinValue="0"/>
-                    <Label x:Name="lblPadding" Content ="Padding" HorizontalAlignment="Left" Margin="0,-4,0,0" VerticalAlignment="Top"/>
+                <Label
+                    x:Name="lblFilenames"
+                    Width="230"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    Content="Immagini da caricare"
+                    FontSize="18"
+                    FontWeight="Bold" />
+                <casasoft:FileTextBox
+                    x:Name="filename1"
+                    Height="18"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <casasoft:FileTextBox
+                    x:Name="filename2"
+                    Height="18"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <CheckBox
+                    x:Name="chkFullSize"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Full size (100x64)" />
+                <CheckBox
+                    x:Name="chkTrim"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Trim" />
+                <CheckBox
+                    x:Name="chkWithBorders"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Con bordi" />
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                    <casasoft:NumericUpDown
+                        x:Name="txtPadding"
+                        Width="60"
+                        Height="18"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Value="0"
+                        MinValue="0" />
+                    <Label
+                        x:Name="lblPadding"
+                        Margin="0,-4,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content ="Padding" />
                 </StackPanel>
-                <local:CommonOptionsControl x:Name="commonOptions" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" />
+                <local:CommonOptionsControl
+                    x:Name="commonOptions"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top" />
             </StackPanel>
-            <local:CommonCommandsControl x:Name="ucCommands" Grid.Row="2" HorizontalAlignment="Stretch" Margin="0,0,0,10" VerticalAlignment="Bottom" DoOpenJson="btnOpenJson_Click" DoSave="btnSave_Click" DoSaveJson="btnSaveJson_Click" DoUpdate="btnUpdate_Click" DoPrint="btnPrint_Click"/>
+            <local:CommonCommandsControl
+                x:Name="ucCommands"
+                Grid.Row="2"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom"
+                DoOpenJson="btnOpenJson_Click"
+                DoPrint="btnPrint_Click"
+                DoSave="btnSave_Click"
+                DoSaveJson="btnSaveJson_Click"
+                DoUpdate="btnUpdate_Click" />
         </Grid>
     </Grid>
 </src:BaseForm>

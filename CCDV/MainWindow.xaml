@@ -21,40 +21,176 @@ along with Casasoft CCDV Tools.
 If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<Window x:Class="Casasoft.CCDV.UI.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Casasoft.CCDV.UI"
-        mc:Ignorable="d"
-        Title="Casasoft Contemporary Carte de Visite" Height="360" Width="640">
-    <Grid x:Name="MainWindowBody" MinWidth="620" MinHeight="328" MaxWidth="620" MaxHeight="328" HorizontalAlignment="Left" Width="630">
-        <Grid.ColumnDefinitions>
-        </Grid.ColumnDefinitions>
-        <Button x:Name="btnDorsi" HorizontalAlignment="Left" Margin="24,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnDorsi_Click" BorderThickness="0,0,0,0">
-            <TextBlock TextAlignment="Center">Montaggio<LineBreak/>Dorsi</TextBlock>
+<Window
+    x:Class="Casasoft.CCDV.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Casasoft.CCDV.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="640"
+    Height="360"
+    mc:Ignorable="d"
+    Title="Casasoft Contemporary Carte de Visite">
+    <Grid
+        x:Name="MainWindowBody"
+        Width="630"
+        MinWidth="620"
+        MinHeight="328"
+        MaxWidth="620"
+        MaxHeight="328"
+        HorizontalAlignment="Left">
+        <Grid.ColumnDefinitions />
+        <Button
+            x:Name="btnDorsi"
+            Width="128"
+            Height="128"
+            Margin="24,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnDorsi_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">                Montaggio
+
+                <LineBreak />                Dorsi
+            </TextBlock>
         </Button>
-        <Button x:Name="btnCartellina" HorizontalAlignment="Left" Margin="176,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnCartellina_Click" BorderThickness="0,0,0,0">
-            <TextBlock TextAlignment="Center"><Run Text="Cartellina"/></TextBlock>
+        <Button
+            x:Name="btnCartellina"
+            Width="128"
+            Height="128"
+            Margin="176,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnCartellina_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">
+                <Run Text="Cartellina" />
+            </TextBlock>
         </Button>
-        <Button x:Name="btnScatola" HorizontalAlignment="Left" Margin="328,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Click="btnScatola_Click" BorderThickness="0,0,0,0">
-            <TextBlock TextAlignment="Center"><Run Text="Scatola"/></TextBlock>
+        <Button
+            x:Name="btnScatola"
+            Grid.ColumnSpan="2"
+            Width="128"
+            Height="128"
+            Margin="328,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnScatola_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">
+                <Run Text="Scatola" />
+            </TextBlock>
         </Button>
-        <Button x:Name="btnFoto" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnFoto_Click" BorderThickness="0,0,0,0">
-            <TextBlock TextAlignment="Center"><Run Text="Montaggio"/><LineBreak/><Run Text="Foto"/></TextBlock>
+        <Button
+            x:Name="btnFoto"
+            Width="128"
+            Height="128"
+            Margin="24,176,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnFoto_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">
+                <Run Text="Montaggio" />
+                <LineBreak />
+                <Run Text="Foto" />
+            </TextBlock>
         </Button>
-        <Button x:Name="btnCreditCards" HorizontalAlignment="Left" Margin="176,176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnCreditCards_Click" BorderThickness="0,0,0,0">
-            <TextBlock TextAlignment="Center"><Run Text="Credit"/><LineBreak/><Run Text="Cards"/></TextBlock>
+        <Button
+            x:Name="btnCreditCards"
+            Width="128"
+            Height="128"
+            Margin="176,176,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnCreditCards_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">
+                <Run Text="Credit" />
+                <LineBreak />
+                <Run Text="Cards" />
+            </TextBlock>
         </Button>
-        <Button x:Name="btnInfo" HorizontalAlignment="Left" Margin="480,24,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Grid.ColumnSpan="2" BorderThickness="0,0,0,0" Click="btnInfo_Click">
-            <TextBlock TextAlignment="Center"><Run Text="Info"/></TextBlock>
+        <Button
+            x:Name="btnInfo"
+            Grid.ColumnSpan="2"
+            Width="128"
+            Height="128"
+            Margin="480,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnInfo_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">
+                <Run Text="Info" />
+            </TextBlock>
         </Button>
-        <Button x:Name="btnCubetti" HorizontalAlignment="Left" Margin="328, 176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" Click="btnCubetti_Click"  BorderThickness="0,0,0,0">
-            <TextBlock TextAlignment="Center"><Run Text="Cubetti"/></TextBlock>
+        <Button
+            x:Name="btnCubetti"
+            Width="128"
+            Height="128"
+            Margin="328, 176,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnCubetti_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">
+                <Run Text="Cubetti" />
+            </TextBlock>
         </Button>
-        <Button x:Name="btnFlexagon" HorizontalAlignment="Left" Margin="480,176,0,0" VerticalAlignment="Top" Width="128" Height="128" FontSize="20" FontWeight="Bold" VerticalContentAlignment="Center" UseLayoutRounding="False" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0" Click="btnFlexagon_Click">
-            <TextBlock TextAlignment="Center"><Run Text="Flexagon"/></TextBlock>
+        <Button
+            x:Name="btnFlexagon"
+            Width="128"
+            Height="128"
+            Margin="480,176,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            BorderThickness="0,0,0,0"
+            Click="btnFlexagon_Click"
+            FontSize="20"
+            FontWeight="Bold"
+            UseLayoutRounding="False">
+            <TextBlock TextAlignment="Center">
+                <Run Text="Flexagon" />
+            </TextBlock>
         </Button>
 
     </Grid>

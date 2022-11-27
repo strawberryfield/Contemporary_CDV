@@ -20,22 +20,70 @@ You should have received a copy of the GNU AGPL v.3
 along with Casasoft CCDV Tools.  
 If not, see <http://www.gnu.org/licenses/>.
 -->
-<UserControl x:Class="Casasoft.CCDV.UI.CommonCommandsControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Casasoft.CCDV.UI"
-             mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="230">
+<UserControl
+    x:Class="Casasoft.CCDV.UI.CommonCommandsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Casasoft.CCDV.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="20"
+    d:DesignWidth="230">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Button x:Name="btnUpdate" Content="&#xE149;" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="20" Click="btnUpdate_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
-            <Button x:Name="btnOpenJson" Content="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnOpenJson_Click" FontFamily="Wingdings" Height="20" FontWeight="Bold"/>
-            <Button x:Name="btnSaveJson" Content="&#xE105;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnSaveJson_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
-            <Button x:Name="btnPrint" Content="&#xE749;" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Bottom" Width="20" Click="btnPrint_Click" FontFamily="Segoe MDL2 Assets" Height="20" FontWeight="Bold"/>
+            <Button
+                x:Name="btnUpdate"
+                Width="20"
+                Height="20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="btnUpdate_Click"
+                Content="&#xE149;"
+                FontFamily="Segoe MDL2 Assets"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnOpenJson"
+                Width="20"
+                Height="20"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="btnOpenJson_Click"
+                Content="1"
+                FontFamily="Wingdings"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnSaveJson"
+                Width="20"
+                Height="20"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="btnSaveJson_Click"
+                Content="&#xE105;"
+                FontFamily="Segoe MDL2 Assets"
+                FontWeight="Bold" />
+            <Button
+                x:Name="btnPrint"
+                Width="20"
+                Height="20"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="btnPrint_Click"
+                Content="&#xE749;"
+                FontFamily="Segoe MDL2 Assets"
+                FontWeight="Bold" />
         </StackPanel>
-        <Button x:Name="btnSave" Content="Salva elaborazione" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="110" Click="btnSave_Click" Margin="120,0,0,0"/>
+        <Button
+            x:Name="btnSave"
+            Width="110"
+            Margin="120,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Click="btnSave_Click"
+            Content="Salva elaborazione" />
     </Grid>
 
 </UserControl>
