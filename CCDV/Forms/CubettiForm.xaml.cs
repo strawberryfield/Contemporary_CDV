@@ -70,4 +70,11 @@ public partial class CubettiForm : BaseMultipageForm
         addFile(5, filename5);
         addFile(6, filename6);
     }
+
+    protected override void doAnteprima()
+    {
+        base.doAnteprima();
+        AggiornaAnteprima(image.Image);
+    }
+
 }

@@ -22,6 +22,7 @@
 using Casasoft.CCDV.Engines;
 using Casasoft.Xaml.Controls;
 using ImageMagick;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -40,5 +41,99 @@ public partial class BaseMultipageForm : BaseForm
         engine = new BaseEngine();
         waitForm = new WaitForm();
 
+        bwAnteprima = new BackgroundWorker();
+        bwAnteprima.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
+        bwAnteprima.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwAnteprima_RunWorkerCompleted);
+
+        bwRender = new BackgroundWorker();
+        bwRender.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
+        bwRender.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwRender_RunWorkerCompleted);
+
+        bwPrint = new BackgroundWorker();
+        bwPrint.DoWork += new System.ComponentModel.DoWorkEventHandler(bwAnteprima_DoWork);
+        bwPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwPrint_RunWorkerCompleted);
     }
+
+    #region backgroudworkers
+    private void bwAnteprima_DoWork(object? sender, DoWorkEventArgs e)
+    {
+        e.Result = engine.GetResults(true);
+    }
+
+    private void bwAnteprima_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+    {
+        List<MagickImage>? bm = (List<MagickImage>?)e.Result;
+        if (bm is not null)
+        {
+            image.Source = bm[0].ToBitmapSource();
+        }
+        waitForm.Close();
+    }
+
+    private void bwRender_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+    {
+        List<MagickImage>? bm = (List<MagickImage>?)e.Result;
+        waitForm.Close();
+
+        if (bm is not null)
+        {
+            SaveFileDialog sd = new();
+            sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+            sd.Title = "Salvataggio immagine";
+            sd.DefaultExt = "jpg";
+            sd.AddExtension = true;
+            sd.OverwritePrompt = true;
+            sd.ShowDialog();
+            if (!string.IsNullOrWhiteSpace(sd.FileName))
+            {
+                string ext = Path.GetExtension(sd.FileName);
+                string basename = Path.Combine(
+                    Path.GetDirectoryName(sd.FileName),
+                    Path.GetFileNameWithoutExtension(sd.FileName));
+
+                int max = bm.Count;
+                int i = 0;
+                foreach (MagickImage img in bm)
+                {
+                    i++;
+                    string filename = $"{basename}-{i}of{max}{ext}";
+                    engine.SetImageInfo(filename, img);
+                    engine.SetImageParameters(img);
+                    img.Write(filename);
+                }
+            }
+        }
+    }
+
+    private void bwPrint_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
+    {
+        List<MagickImage>? bm = (List<MagickImage>?)e.Result;
+        waitForm.Close();
+
+        if (bm is not null)
+        {
+            PrintDialog pd = new();
+            if (pd.ShowDialog() == true)
+            {
+                int max = bm.Count;
+                int i = 0;
+
+                foreach (MagickImage img in bm)
+                {
+                    DrawingVisual vis = new();
+                    using (DrawingContext dc = vis.RenderOpen())
+                    {
+                        dc.DrawImage(img.ToBitmapSource(), new Rect
+                        {
+                            Width = img.Width / engine.Dpi * 96,
+                            Height = img.Height / engine.Dpi * 96
+                        });
+                    }
+                    i++;
+                    pd.PrintVisual(vis, $"Print Image {i} of {max}");
+                }
+            }
+        }
+    }
+    #endregion
 }

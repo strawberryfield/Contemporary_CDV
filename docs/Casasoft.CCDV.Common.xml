@@ -1286,6 +1286,19 @@
             <param name="quiet">suppress messages when running</param>
             <returns>Image to print</returns>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetResults">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Images list to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetResults(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet">suppress messages when running</param>
+            <returns>Images list to print</returns>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetOutputPaper(Casasoft.CCDV.PaperFormats)">
             <summary>
             Gets the output image
@@ -1635,6 +1648,19 @@
             </summary>
             <param name="quiet">suppress messages when running</param>
             <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.GetResults">
+            <summary>
+            Does the dirty work
+            </summary>
+            <returns>Images list to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.GetResults(System.Boolean)">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="quiet">suppress messages when running</param>
+            <returns>Images list to print</returns>
         </member>
         <member name="M:Casasoft.CCDV.Engines.IEngine.SetImageParameters(ImageMagick.MagickImage)">
             <summary>
