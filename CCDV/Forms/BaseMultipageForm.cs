@@ -36,6 +36,8 @@ namespace Casasoft.CCDV.UI;
 
 public partial class BaseMultipageForm : BaseForm
 {
+    protected List<MagickImage>? bm;
+
     public BaseMultipageForm()
     {
         engine = new BaseEngine();
@@ -62,7 +64,7 @@ public partial class BaseMultipageForm : BaseForm
 
     private void bwAnteprima_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
-        List<MagickImage>? bm = (List<MagickImage>?)e.Result;
+        bm = (List<MagickImage>?)e.Result;
         if (bm is not null)
         {
             image.Source = bm[0].ToBitmapSource();
@@ -72,18 +74,12 @@ public partial class BaseMultipageForm : BaseForm
 
     private void bwRender_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
-        List<MagickImage>? bm = (List<MagickImage>?)e.Result;
+        bm = (List<MagickImage>?)e.Result;
         waitForm.Close();
 
         if (bm is not null)
         {
-            SaveFileDialog sd = new();
-            sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
-            sd.Title = "Salvataggio immagine";
-            sd.DefaultExt = "jpg";
-            sd.AddExtension = true;
-            sd.OverwritePrompt = true;
-            sd.ShowDialog();
+            SaveFileDialog sd = SaveDialog();
             if (!string.IsNullOrWhiteSpace(sd.FileName))
             {
                 string ext = Path.GetExtension(sd.FileName);
@@ -107,7 +103,7 @@ public partial class BaseMultipageForm : BaseForm
 
     private void bwPrint_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
     {
-        List<MagickImage>? bm = (List<MagickImage>?)e.Result;
+        bm = (List<MagickImage>?)e.Result;
         waitForm.Close();
 
         if (bm is not null)

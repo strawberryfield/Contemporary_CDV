@@ -154,6 +154,19 @@ public partial class BaseForm : Window
         waitForm.ShowDialog();
     }
 
+    protected SaveFileDialog SaveDialog()
+    {
+        SaveFileDialog sd = new();
+        sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+        sd.Title = "Salvataggio immagine";
+        sd.DefaultExt = "jpg";
+        sd.AddExtension = true;
+        sd.OverwritePrompt = true;
+        sd.ShowDialog();
+        return sd;
+    }
+
+
     #region backgroundworkers
     private void bwAnteprima_DoWork(object? sender, DoWorkEventArgs e)
     {
@@ -174,13 +187,7 @@ public partial class BaseForm : Window
 
         if (bm is not null)
         {
-            SaveFileDialog sd = new();
-            sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
-            sd.Title = "Salvataggio immagine";
-            sd.DefaultExt = "jpg";
-            sd.AddExtension = true;
-            sd.OverwritePrompt = true;
-            sd.ShowDialog();
+            SaveFileDialog sd = SaveDialog();
             if (!string.IsNullOrWhiteSpace(sd.FileName))
             {
                 engine.SetImageInfo(sd.FileName, bm);

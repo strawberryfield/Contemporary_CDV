@@ -38,6 +38,7 @@ public partial class CubettiForm : BaseMultipageForm
     {
         base.setEngineParameters();
         CubettiEngine eng = (CubettiEngine)engine;
+        eng.useSampleImages = isChecked(chkTestImages);
         addAllFiles();
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
@@ -62,6 +63,7 @@ public partial class CubettiForm : BaseMultipageForm
         txtRows.Value = eng.Rows;
         txtCols.Value = eng.Columns;
         txtSize.Value = eng.Size;
+        chkTestImages.IsChecked = eng.useSampleImages;
 
         addFile(1, filename1);
         addFile(2, filename2);

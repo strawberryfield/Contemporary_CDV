@@ -29,7 +29,7 @@ If not, see <http://www.gnu.org/licenses/>.
         xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
         xmlns:local="clr-namespace:Casasoft.CCDV.UI"
         mc:Ignorable="d"
-        Title="Cubetti" Height="480" Width="800">
+        Title="Cubetti" Height="500" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="250" />
@@ -52,6 +52,7 @@ If not, see <http://www.gnu.org/licenses/>.
                 <casasoft:FileTextBox x:Name="filename4" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
                 <casasoft:FileTextBox x:Name="filename5" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
                 <casasoft:FileTextBox x:Name="filename6" HorizontalAlignment="Stretch" Margin="0,5,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Height="18" OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*" OpenFileDialogTitle="Immagine"/>
+                <CheckBox x:Name="chkTestImages" Content="Usa immagini di test" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top"/>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <casasoft:NumericUpDown x:Name="txtRows" HorizontalAlignment="Left" Panel.ZIndex="1" Width="60" Value="3" MinValue="1" Height="18" VerticalAlignment="Top"/>
                     <Label x:Name="lblRows" Content="Righe" HorizontalAlignment="Left" Margin="10,-3,0,0" VerticalAlignment="Top" Width="170"/>
