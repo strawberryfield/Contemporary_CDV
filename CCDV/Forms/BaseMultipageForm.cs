@@ -20,11 +20,8 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using Casasoft.CCDV.Engines;
-using Casasoft.Xaml.Controls;
 using ImageMagick;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Win32;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -37,6 +34,7 @@ namespace Casasoft.CCDV.UI;
 public partial class BaseMultipageForm : BaseForm
 {
     protected List<MagickImage>? bm;
+    protected int CurrentPreview = 0;
 
     public BaseMultipageForm()
     {
@@ -56,6 +54,44 @@ public partial class BaseMultipageForm : BaseForm
         bwPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwPrint_RunWorkerCompleted);
     }
 
+    #region events handlers
+    protected void MultipagePreviewBarControl_GoStart(object sender, System.EventArgs e)
+    {
+        if (bm is not null)
+        {
+            CurrentPreview = 0;
+            image.Source = bm[CurrentPreview].ToBitmapSource();
+        }
+    }
+
+    protected void MultipagePreviewBarControl_GoBack(object sender, System.EventArgs e)
+    {
+        if (bm is not null && CurrentPreview > 0)
+        {
+            CurrentPreview--;
+            image.Source = bm[CurrentPreview].ToBitmapSource();
+        }
+    }
+
+    protected void MultipagePreviewBarControl_GoNext(object sender, System.EventArgs e)
+    {
+        if (bm is not null && CurrentPreview < bm.Count - 1)
+        {
+            CurrentPreview++;
+            image.Source = bm[CurrentPreview].ToBitmapSource();
+        }
+    }
+
+    protected void MultipagePreviewBarControl_GoEnd(object sender, System.EventArgs e)
+    {
+        if (bm is not null)
+        {
+            CurrentPreview = bm.Count - 1;
+            image.Source = bm[CurrentPreview].ToBitmapSource();
+        }
+    }
+    #endregion
+
     #region backgroudworkers
     private void bwAnteprima_DoWork(object? sender, DoWorkEventArgs e)
     {
@@ -68,6 +104,7 @@ public partial class BaseMultipageForm : BaseForm
         if (bm is not null)
         {
             image.Source = bm[0].ToBitmapSource();
+            CurrentPreview = 0;
         }
         waitForm.Close();
     }
