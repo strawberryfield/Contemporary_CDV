@@ -64,6 +64,8 @@ public partial class MontaggioDorsiForm : BaseForm
         addFile(4, filename4);
         addFile(5, filename5);
         addFile(6, filename6);
+        addFile(7, filename7);
+        addFile(8, filename8);
     }
 
     protected override void doAnteprima()
