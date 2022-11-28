@@ -33,7 +33,7 @@ namespace Casasoft.CCDV.UI;
 /// </summary>
 public partial class App : Application
 {
-    public enum Tools { Menu, MontaggioFoto, MontaggioDorsi, Scatola, Cartella, CreditCard }
+    public enum Tools { Menu, MontaggioFoto, MontaggioDorsi, Scatola, Cartella, CreditCard, Cubetti, Flexagon }
 
     private Dictionary<Tools, string> tools = new()
     {
@@ -42,7 +42,9 @@ public partial class App : Application
         { Tools.MontaggioDorsi, "Assembly of photo support papers on 20x27 print" },
         { Tools.Scatola, "Box kit on 20x27 print" },
         { Tools.Cartella, "Folder kit on 20x27 print" },
-        { Tools.CreditCard, "Credit card kit on 10x15 card" }
+        { Tools.CreditCard, "Credit card kit on 10x15 card" },
+        { Tools.Cubetti, "Cubes puzzle" },
+        { Tools.Flexagon, "CDV Size TetraFlexagons" }
     };
 
     /// <summary>
@@ -134,6 +136,12 @@ public partial class App : Application
                 break;
             case Tools.CreditCard:
                 w = new CreditCardForm();
+                break;
+            case Tools.Cubetti:
+                w = new CubettiForm();
+                break;
+            case Tools.Flexagon:
+                w = new FlexagonForm();
                 break;
             default:
                 w = new MainWindow();
