@@ -43,11 +43,9 @@ If not, see <http://www.gnu.org/licenses/>.
             Grid.Column="1"
             Margin="0,0,0,0"
             HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Panel.ZIndex="1" />
+            VerticalAlignment="Stretch" />
         <Rectangle
             x:Name="col1background"
-            Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Fill="#FFE7E8EC" />
