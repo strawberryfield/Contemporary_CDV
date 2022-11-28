@@ -68,4 +68,16 @@ public partial class MainWindow : Window
         AboutWindow form = new();
         form.ShowDialog();
     }
+
+    private void btnFlexagon_Click(object sender, RoutedEventArgs e)
+    {
+        FlexagonForm form = new();
+        form.ShowDialog();
+    }
+
+    private void btnCubetti_Click(object sender, RoutedEventArgs e)
+    {
+        CubettiForm form = new();
+        form.ShowDialog();
+    }
 }

@@ -20,9 +20,8 @@ You should have received a copy of the GNU AGPL v.3
 along with Casasoft CCDV Tools.  
 If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<src:BaseForm
-    x:Class="Casasoft.CCDV.UI.MontaggioDorsiForm"
+<src:BaseMultipageForm
+    x:Class="Casasoft.CCDV.UI.CubettiForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
@@ -31,9 +30,9 @@ If not, see <http://www.gnu.org/licenses/>.
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:src="clr-namespace:Casasoft.CCDV.UI"
     Width="800"
-    Height="450"
+    Height="500"
     mc:Ignorable="d"
-    Title="Montaggio Dorsi">
+    Title="Cubetti">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="250" />
@@ -50,6 +49,16 @@ If not, see <http://www.gnu.org/licenses/>.
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Fill="#FFE7E8EC" />
+        <local:MultipagePreviewBarControl
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Panel.ZIndex="2"
+            GoBack="MultipagePreviewBarControl_GoBack"
+            GoEnd="MultipagePreviewBarControl_GoEnd"
+            GoNext="MultipagePreviewBarControl_GoNext"
+            GoStart="MultipagePreviewBarControl_GoStart" />
         <GridSplitter
             Grid.Column="1"
             Width="5"
@@ -127,24 +136,66 @@ If not, see <http://www.gnu.org/licenses/>.
                     Panel.ZIndex="1"
                     OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
                     OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename7"
-                    Height="18"
+                <CheckBox
+                    x:Name="chkTestImages"
                     Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename8"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
+                    Content="Usa immagini di test" />
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                    <casasoft:NumericUpDown
+                        x:Name="txtRows"
+                        Width="60"
+                        Height="18"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Value="3"
+                        MinValue="1" />
+                    <Label
+                        x:Name="lblRows"
+                        Width="170"
+                        Margin="10,-3,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Righe" />
+                </StackPanel>
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                    <casasoft:NumericUpDown
+                        x:Name="txtCols"
+                        Width="60"
+                        Height="18"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Value="4"
+                        MinValue="1" />
+                    <Label
+                        x:Name="lblColss"
+                        Width="170"
+                        Margin="10,-3,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Colonne" />
+                </StackPanel>
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                    <casasoft:NumericUpDown
+                        x:Name="txtSize"
+                        Width="60"
+                        Height="18"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Value="40"
+                        MinValue="1" />
+                    <Label
+                        x:Name="lblSize"
+                        Width="170"
+                        Margin="10,-3,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Dimensione cubo (mm)" />
+                </StackPanel>
                 <local:ThickPaperSelectorControl x:Name="paperFormat" Margin="0,5,0,0" />
                 <local:CommonOptionsControl
                     x:Name="commonOptions"
@@ -165,5 +216,4 @@ If not, see <http://www.gnu.org/licenses/>.
                 DoUpdate="btnUpdate_Click" />
         </Grid>
     </Grid>
-
-</src:BaseForm>
+</src:BaseMultipageForm>

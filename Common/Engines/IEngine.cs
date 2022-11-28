@@ -97,6 +97,17 @@ public interface IEngine
     /// <returns>Image to print</returns>
     MagickImage GetResult(bool quiet);
     /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <returns>Images list to print</returns>
+    List<MagickImage> GetResults();
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="quiet">suppress messages when running</param>
+    /// <returns>Images list to print</returns>
+    List<MagickImage> GetResults(bool quiet);
+    /// <summary>
     /// Writes exif infos on image
     /// </summary>
     /// <param name="image">image to process</param>

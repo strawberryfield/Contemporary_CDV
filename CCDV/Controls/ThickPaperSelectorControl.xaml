@@ -21,16 +21,35 @@ along with Casasoft CCDV Tools.
 If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<UserControl x:Class="Casasoft.CCDV.UI.ThickPaperSelectorControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Casasoft.CCDV.UI"
-             mc:Ignorable="d" >
+<UserControl
+    x:Class="Casasoft.CCDV.UI.ThickPaperSelectorControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Casasoft.CCDV.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
     <StackPanel Orientation="Horizontal">
-        <RadioButton x:Name="rbLarge" Content="20x27" HorizontalAlignment="Left" Width="70" VerticalAlignment="Top" IsChecked="True" GroupName="paperFormat"/>
-        <RadioButton x:Name="rbMedium" Content="15x20" HorizontalAlignment="Left" Width="70" VerticalAlignment="Top" GroupName="paperFormat"/>
-        <RadioButton x:Name="rbA4" Content="A4" HorizontalAlignment="Left"  VerticalAlignment="Top" GroupName="paperFormat"/>
+        <RadioButton
+            x:Name="rbLarge"
+            Width="70"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="20x27"
+            GroupName="paperFormat"
+            IsChecked="True" />
+        <RadioButton
+            x:Name="rbMedium"
+            Width="70"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="15x20"
+            GroupName="paperFormat" />
+        <RadioButton
+            x:Name="rbA4"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="A4"
+            GroupName="paperFormat" />
     </StackPanel>
 </UserControl>

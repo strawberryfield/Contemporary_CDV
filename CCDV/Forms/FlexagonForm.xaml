@@ -20,8 +20,8 @@ You should have received a copy of the GNU AGPL v.3
 along with Casasoft CCDV Tools.  
 If not, see <http://www.gnu.org/licenses/>.
 -->
-<src:BaseForm
-    x:Class="Casasoft.CCDV.UI.CreditCardForm"
+<src:BaseMultipageForm
+    x:Class="Casasoft.CCDV.UI.FlexagonForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:casasoft="clr-namespace:Casasoft.Xaml.Controls;assembly=Casasoft.Xaml.Controls"
@@ -30,9 +30,9 @@ If not, see <http://www.gnu.org/licenses/>.
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:src="clr-namespace:Casasoft.CCDV.UI"
     Width="800"
-    Height="600"
+    Height="500"
     mc:Ignorable="d"
-    Title="Credit Card">
+    Title="Flexagon">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="250" />
@@ -49,6 +49,16 @@ If not, see <http://www.gnu.org/licenses/>.
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Fill="#FFE7E8EC" />
+        <local:MultipagePreviewBarControl
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Panel.ZIndex="2"
+            GoBack="MultipagePreviewBarControl_GoBack"
+            GoEnd="MultipagePreviewBarControl_GoEnd"
+            GoNext="MultipagePreviewBarControl_GoNext"
+            GoStart="MultipagePreviewBarControl_GoStart" />
         <GridSplitter
             Grid.Column="1"
             Width="5"
@@ -61,104 +71,109 @@ If not, see <http://www.gnu.org/licenses/>.
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel>
-                <casasoft:FileTextBoxLabel
-                    x:Name="frontImage"
-                    Margin="0,3,0,0"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    Caption="Immagine fronte"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBoxLabel
-                    x:Name="backImage"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    Caption="Immagine posteriore"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
                 <Label
+                    x:Name="lblFilenames"
+                    Width="230"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    Content="Immagini da caricare"
+                    FontSize="18"
+                    FontWeight="Bold" />
+                <casasoft:FileTextBox
+                    x:Name="filename1"
+                    Height="18"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <casasoft:FileTextBox
+                    x:Name="filename2"
+                    Height="18"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <casasoft:FileTextBox
+                    x:Name="filename3"
+                    Height="18"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <casasoft:FileTextBox
+                    x:Name="filename4"
+                    Height="18"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <casasoft:FileTextBox
+                    x:Name="filename5"
+                    Height="18"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <casasoft:FileTextBox
+                    x:Name="filename6"
+                    Height="18"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Panel.ZIndex="1"
+                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                    OpenFileDialogTitle="Immagine" />
+                <CheckBox
+                    x:Name="chkTestImages"
+                    Margin="0,5,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Content="Testo fronte"
-                    RenderTransformOrigin="0.263,-1.116" />
-                <TextBox
-                    x:Name="frontText"
-                    Height="18"
-                    Margin="0,-3,0,0"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1" />
-                <local:FontSelectorControl
-                    x:Name="fontFront"
+                    Content="Usa immagini di test" />
+                <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
+                    <RadioButton
+                        x:Name="rb3"
+                        Width="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="3 Faces"
+                        GroupName="faces"
+                        IsChecked="True" />
+                    <RadioButton
+                        x:Name="rb4"
+                        Width="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="4 faces"
+                        GroupName="faces" />
+                    <RadioButton
+                        x:Name="rb6"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="6 faces"
+                        GroupName="faces" />
+                </StackPanel>
+                <local:CommonOptionsControl
+                    x:Name="commonOptions"
+                    Margin="0,5,0,0"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Top" />
-                <local:ColorPickerLabelControl
-                    x:Name="cpFill"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Caption="Colore carattere"
-                    SelectedColor="White"
-                    ShowAlpha="False" />
-                <local:ColorPickerLabelControl
-                    x:Name="cpBorder"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Caption="Bordo del carattere"
-                    RenderTransformOrigin="0.5,0.5"
-                    SelectedColor="Black"
-                    ShowAlpha="False" />
-                <local:ColorPickerLabelControl
-                    x:Name="cpBackground"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Caption="Sfondo del carattere"
-                    RenderTransformOrigin="0.5,0.5"
-                    SelectedColor="Transparent"
-                    ShowAlpha="True" />
-                <casasoft:FileTextBoxLabel
-                    x:Name="mbImage"
-                    Margin="0,5,0,0"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    Caption="Immagine banda magnetica"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <local:ColorPickerLabelControl
-                    x:Name="cpMB"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Caption="Colore banda magnetica"
-                    SelectedColor="#FF653B11"
-                    ShowAlpha="True" />
             </StackPanel>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Label
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Content="Testo posteriore"
-                    RenderTransformOrigin="0.263,-1.116" />
-                <casasoft:PangoTextEditor
-                    x:Name="backText"
-                    Grid.Row="1"
-                    VerticalAlignment="Stretch"
-                    Panel.ZIndex="1" />
-            </Grid>
-            <local:CommonOptionsControl
-                x:Name="commonOptions"
-                Grid.Row="2"
-                Margin="0,10,0,10"
-                VerticalAlignment="Bottom" />
             <local:CommonCommandsControl
                 x:Name="ucCommands"
-                Grid.Row="3"
+                Grid.Row="2"
                 Margin="0,0,0,10"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Bottom"
@@ -169,4 +184,4 @@ If not, see <http://www.gnu.org/licenses/>.
                 DoUpdate="btnUpdate_Click" />
         </Grid>
     </Grid>
-</src:BaseForm>
+</src:BaseMultipageForm>

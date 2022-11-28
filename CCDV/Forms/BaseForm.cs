@@ -40,11 +40,11 @@ public partial class BaseForm : Window
 {
     protected IEngine engine;
 
-    private BackgroundWorker bwAnteprima;
-    private BackgroundWorker bwRender;
-    private BackgroundWorker bwPrint;
-    private WaitForm waitForm;
-    private Image image;
+    protected BackgroundWorker bwAnteprima;
+    protected BackgroundWorker bwRender;
+    protected BackgroundWorker bwPrint;
+    protected WaitForm waitForm;
+    protected Image image;
 
     public BaseForm()
     {
@@ -65,6 +65,7 @@ public partial class BaseForm : Window
         bwPrint.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bwPrint_RunWorkerCompleted);
     }
 
+    #region events
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         doAnteprima();
@@ -117,6 +118,7 @@ public partial class BaseForm : Window
             loadJson(File.ReadAllText(sd.FileName));
         }
     }
+    #endregion
 
     protected virtual void loadJson(string json)
     {
@@ -152,6 +154,20 @@ public partial class BaseForm : Window
         waitForm.ShowDialog();
     }
 
+    protected SaveFileDialog SaveDialog()
+    {
+        SaveFileDialog sd = new();
+        sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+        sd.Title = "Salvataggio immagine";
+        sd.DefaultExt = "jpg";
+        sd.AddExtension = true;
+        sd.OverwritePrompt = true;
+        sd.ShowDialog();
+        return sd;
+    }
+
+
+    #region backgroundworkers
     private void bwAnteprima_DoWork(object? sender, DoWorkEventArgs e)
     {
         e.Result = engine.GetResult(true);
@@ -171,13 +187,7 @@ public partial class BaseForm : Window
 
         if (bm is not null)
         {
-            SaveFileDialog sd = new();
-            sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
-            sd.Title = "Salvataggio immagine";
-            sd.DefaultExt = "jpg";
-            sd.AddExtension = true;
-            sd.OverwritePrompt = true;
-            sd.ShowDialog();
+            SaveFileDialog sd = SaveDialog();
             if (!string.IsNullOrWhiteSpace(sd.FileName))
             {
                 engine.SetImageInfo(sd.FileName, bm);
@@ -194,23 +204,24 @@ public partial class BaseForm : Window
 
         if (bm is not null)
         {
-            DrawingVisual vis = new DrawingVisual();
-            using (DrawingContext dc = vis.RenderOpen())
-            {
-                dc.DrawImage(bm.ToBitmapSource(), new Rect
-                {
-                    Width = bm.Width / engine.Dpi * 96,
-                    Height = bm.Height / engine.Dpi * 96
-                });
-            }
-
             PrintDialog pd = new();
             if (pd.ShowDialog() == true)
             {
+                DrawingVisual vis = new();
+                using (DrawingContext dc = vis.RenderOpen())
+                {
+                    dc.DrawImage(bm.ToBitmapSource(), new Rect
+                    {
+                        Width = bm.Width / engine.Dpi * 96,
+                        Height = bm.Height / engine.Dpi * 96
+                    });
+                }
+
                 pd.PrintVisual(vis, "Print Image");
             }
         }
     }
+    #endregion
 
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {
