@@ -24,9 +24,7 @@ using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Casasoft.CCDV.Engines;
 
@@ -264,6 +262,67 @@ public class FlexagonEngine : BaseEngine
     {
         List<MagickImage> final = new();
 
+        // Recto
+        MagickImageCollection ColStrip = new();
+        MagickImageCollection RowStrip = new()
+        {
+            tiles[0, 0, 0],
+            tiles[0, 0, 1],
+            tiles[1, 0, 0],
+            tiles[2, 0, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[2, 1, 0],
+            tiles[1, 1, 1],
+            tiles[0, 1, 0],
+            tiles[0, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[0, 2, 0],
+            tiles[0, 2, 1],
+            tiles[1, 2, 0],
+            tiles[2, 2, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        MagickImage print = img.FineArt10x15_o();
+        print.Composite(ColStrip.AppendVertically(), Gravity.Center, 0, 0);
+        final.Add(print);
+
+        // Verso
+        ColStrip = new();
+        RowStrip = new()
+        {
+            tiles[3, 0, 0],
+            tiles[3, 0, 1],
+            tiles[2, 0, 0],
+            tiles[1, 0, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[1, 1, 0],
+            tiles[2, 1, 1],
+            tiles[3, 1, 0],
+            tiles[3, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[3, 2, 0],
+            tiles[3, 2, 1],
+            tiles[2, 2, 0],
+            tiles[1, 2, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        print = img.FineArt10x15_o();
+        print.Composite(ColStrip.AppendVertically(), Gravity.Center, 0, 0);
+        final.Add(print);
+
+        // return data
         return final;
     }
 
@@ -271,6 +330,7 @@ public class FlexagonEngine : BaseEngine
     {
         List<MagickImage> final = new();
 
+        // return data
         return final;
     }
 
