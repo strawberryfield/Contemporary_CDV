@@ -195,12 +195,17 @@ public class FlexagonEngine : BaseEngine
         return final;
     }
 
-    private List<MagickImage> TriTetraFlexagon(MagickImage[,,] tiles)
+    private MagickImage EmptyTile()
     {
-        List<MagickImage> final = new();
         MagickImage empty = new(FillColor, tileX, tileY);
         empty.BorderColor = BorderColor;
         empty.Border(1);
+        return empty;
+    }
+    private List<MagickImage> TriTetraFlexagon(MagickImage[,,] tiles)
+    {
+        List<MagickImage> final = new();
+        MagickImage empty = EmptyTile();
 
         // Recto
         MagickImageCollection ColStrip = new();
@@ -329,6 +334,85 @@ public class FlexagonEngine : BaseEngine
     private List<MagickImage> HexaTetraFlexagon(MagickImage[,,] tiles)
     {
         List<MagickImage> final = new();
+        MagickImage empty = EmptyTile();
+
+        // Recto
+        MagickImageCollection ColStrip = new();
+        MagickImageCollection RowStrip = new()
+        {
+            tiles[3, 0, 0],
+            tiles[4, 0, 1],
+            tiles[5, 0, 0],
+            tiles[5, 0, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[3, 1, 0],
+            empty.Clone(),
+            empty.Clone(),
+            tiles[2, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[2, 1, 0],
+            empty.Clone(),
+            empty.Clone(),
+            tiles[3, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[5, 1, 0],
+            tiles[5, 1, 1],
+            tiles[4, 1, 0],
+            tiles[3, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+
+        MagickImage print = img.InCartha15x20_v();
+        print.Composite(ColStrip.AppendVertically(), Gravity.Center, 0, 0);
+        final.Add(print);
+
+        // Verso
+        ColStrip = new();
+        RowStrip = new()
+        {
+            tiles[4, 0, 0],
+            tiles[1, 0, 1],
+            tiles[0, 0, 0],
+            tiles[2, 0, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[0, 1, 0],
+            empty.Clone(),
+            empty.Clone(),
+            tiles[1, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[1, 1, 0],
+            empty.Clone(),
+            empty.Clone(),
+            tiles[0, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+        RowStrip = new()
+        {
+            tiles[2, 1, 0],
+            tiles[0, 1, 1],
+            tiles[1, 1, 0],
+            tiles[4, 1, 1],
+        };
+        ColStrip.Add(RowStrip.AppendHorizontally());
+
+        print = img.InCartha15x20_v();
+        print.Composite(ColStrip.AppendVertically(), Gravity.Center, 0, 0);
+        final.Add(print);
 
         // return data
         return final;
