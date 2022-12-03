@@ -56,11 +56,12 @@ public partial class BoxBuilderForm : BaseForm
     protected override void setEngineParameters()
     {
         base.setEngineParameters();
-        IBaseBuilderEngine eng = (IBaseBuilderEngine)engine;
+        BaseBuilderEngine eng = (BaseBuilderEngine)engine;
         BaseBuilder builder = (BaseBuilder)eng.Builder;
         builder.fillColor = commonOptions.FillColor;
         builder.borderColor = commonOptions.BorderColor;
         eng.Dpi = commonOptions.DpiValue;
+        builder.fmt = eng.fmt;
         builder.borderText = boxImages.BorderText;
         builder.font = boxImages.Font;
         builder.fontBold = boxImages.FontBold;
