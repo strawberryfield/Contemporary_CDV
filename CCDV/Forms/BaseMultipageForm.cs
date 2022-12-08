@@ -25,6 +25,7 @@ using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Printing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -151,9 +152,13 @@ public partial class BaseMultipageForm : BaseForm
                 int max = bm.Count;
                 int i = 0;
 
-                foreach (MagickImage img in bm)
+                pd.PrintTicket.PageMediaSize = new(PageMediaSizeName.ISOA4);
+                pd.PrintTicket.PageOrientation = bm[0].Width > bm[0].Height ? PageOrientation.Landscape : PageOrientation.Portrait;
+
+                foreach (MagickImage im in bm)
                 {
                     DrawingVisual vis = new();
+                    MagickImage img = A4Canvas(im);
                     using (DrawingContext dc = vis.RenderOpen())
                     {
                         dc.DrawImage(img.ToBitmapSource(), new Rect

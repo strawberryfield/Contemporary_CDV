@@ -27,6 +27,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Printing;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -204,6 +206,7 @@ public partial class BaseForm : Window
 
         if (bm is not null)
         {
+            bm = A4Canvas(bm);
             PrintDialog pd = new();
             if (pd.ShowDialog() == true)
             {
@@ -216,12 +219,21 @@ public partial class BaseForm : Window
                         Height = bm.Height / engine.Dpi * 96
                     });
                 }
-
+                pd.PrintTicket.PageMediaSize = new(PageMediaSizeName.ISOA4);
+                pd.PrintTicket.PageOrientation = bm.Width > bm.Height ? PageOrientation.Landscape : PageOrientation.Portrait;  
                 pd.PrintVisual(vis, "Print Image");
             }
         }
     }
     #endregion
+
+    protected MagickImage A4Canvas(MagickImage image)
+    {
+        Images img = new(engine.Dpi);
+        MagickImage Canvas = image.Width > image.Height ? img.A4_o() : img.A4_v();
+        Canvas.Composite(image, Gravity.Center);
+        return Canvas;
+    }
 
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {
