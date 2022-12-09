@@ -220,7 +220,9 @@ public partial class BaseForm : Window
                     });
                 }
                 pd.PrintTicket.PageMediaSize = new(PageMediaSizeName.ISOA4);
-                pd.PrintTicket.PageOrientation = bm.Width > bm.Height ? PageOrientation.Landscape : PageOrientation.Portrait;  
+                pd.PrintTicket.PageOrientation = bm.Width > bm.Height ? PageOrientation.Landscape : PageOrientation.Portrait;
+                pd.PrintTicket.PageBorderless = PageBorderless.Borderless;
+
                 pd.PrintVisual(vis, "Print Image");
             }
         }

@@ -154,6 +154,7 @@ public partial class BaseMultipageForm : BaseForm
 
                 pd.PrintTicket.PageMediaSize = new(PageMediaSizeName.ISOA4);
                 pd.PrintTicket.PageOrientation = bm[0].Width > bm[0].Height ? PageOrientation.Landscape : PageOrientation.Portrait;
+                pd.PrintTicket.PageBorderless = PageBorderless.Borderless;
 
                 foreach (MagickImage im in bm)
                 {
