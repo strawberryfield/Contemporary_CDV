@@ -41,28 +41,13 @@ public partial class CommonCommandsControl : UserControl
     public event EventHandler? DoOpenJson;
     public event EventHandler? DoPrint;
 
-    private void btnUpdate_Click(object sender, RoutedEventArgs e)
-    {
-        DoUpdate?.Invoke(this, e);
-    }
+    private void btnUpdate_Click(object sender, RoutedEventArgs e) => DoUpdate?.Invoke(this, e);
 
-    private void btnSave_Click(object sender, RoutedEventArgs e)
-    {
-        DoSave?.Invoke(this, e);
-    }
+    private void btnSave_Click(object sender, RoutedEventArgs e) => DoSave?.Invoke(this, e);
 
-    private void btnSaveJson_Click(object sender, RoutedEventArgs e)
-    {
-        DoSaveJson?.Invoke(this, e);
-    }
+    private void btnSaveJson_Click(object sender, RoutedEventArgs e) => DoSaveJson?.Invoke(this, e);
 
-    private void btnOpenJson_Click(object sender, RoutedEventArgs e)
-    {
-        DoOpenJson?.Invoke(this, e);
-    }
+    private void btnOpenJson_Click(object sender, RoutedEventArgs e) => DoOpenJson?.Invoke(this, e);
 
-    private void btnPrint_Click(object sender, RoutedEventArgs e)
-    {
-        DoPrint?.Invoke(this, e);
-    }
+    private void btnPrint_Click(object sender, RoutedEventArgs e) => DoPrint?.Invoke(this, e);
 }

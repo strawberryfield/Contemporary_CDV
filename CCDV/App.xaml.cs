@@ -116,37 +116,18 @@ public partial class App : Application
             }
         }
 
-        Window w;
-        switch (startWindow)
+        Window w = startWindow switch
         {
-            case Tools.Menu:
-                w = new MainWindow();
-                break;
-            case Tools.MontaggioFoto:
-                w = new MontaggioFotoForm();
-                break;
-            case Tools.MontaggioDorsi:
-                w = new MontaggioDorsiForm();
-                break;
-            case Tools.Scatola:
-                w = new BoxBuilderForm(BoxTypes.Box);
-                break;
-            case Tools.Cartella:
-                w = new BoxBuilderForm(BoxTypes.Folder);
-                break;
-            case Tools.CreditCard:
-                w = new CreditCardForm();
-                break;
-            case Tools.Cubetti:
-                w = new CubettiForm();
-                break;
-            case Tools.Flexagon:
-                w = new FlexagonForm();
-                break;
-            default:
-                w = new MainWindow();
-                break;
-        }
+            Tools.Menu => new MainWindow(),
+            Tools.MontaggioFoto => new MontaggioFotoForm(),
+            Tools.MontaggioDorsi => new MontaggioDorsiForm(),
+            Tools.Scatola => new BoxBuilderForm(BoxTypes.Box),
+            Tools.Cartella => new BoxBuilderForm(BoxTypes.Folder),
+            Tools.CreditCard => new CreditCardForm(),
+            Tools.Cubetti => new CubettiForm(),
+            Tools.Flexagon => new FlexagonForm(),
+            _ => new MainWindow(),
+        };
         w.Show();
     }
 

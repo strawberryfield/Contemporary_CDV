@@ -62,7 +62,7 @@ public partial class FlexagonForm : BaseMultipageForm
         eng.Dpi = commonOptions.DpiValue;
         eng.Script = commonOptions.Script;
         eng.Tag = commonOptions.ScriptTag;
-        eng.Faces = Faces;  
+        eng.Faces = Faces;
     }
 
     protected override void loadJson(string json)
@@ -74,7 +74,7 @@ public partial class FlexagonForm : BaseMultipageForm
         commonOptions.DpiValue = eng.Dpi;
         commonOptions.ScriptTag = eng.Tag;
         chkTestImages.IsChecked = eng.useSampleImages;
-        Faces= eng.Faces;
+        Faces = eng.Faces;
 
         addFile(1, filename1);
         addFile(2, filename2);

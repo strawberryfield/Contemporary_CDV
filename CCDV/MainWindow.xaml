@@ -55,9 +55,10 @@ If not, see <http://www.gnu.org/licenses/>.
             FontSize="20"
             FontWeight="Bold"
             UseLayoutRounding="False">
-            <TextBlock TextAlignment="Center">                Montaggio
-
-                <LineBreak />                Dorsi
+            <TextBlock TextAlignment="Center">
+                <Run Text="Montaggio" />
+                <LineBreak />
+                <Run Text="Dorsi" />
             </TextBlock>
         </Button>
         <Button

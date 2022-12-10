@@ -2,7 +2,7 @@
 
 # Windows GUI
 
-Gui per tutti i programmi ad eccezione di Cubetti
+Gui per tutti i programmi 
 
 Leggi la [documentazione sul sito «The Strawberry Field»](https://strawberryfield.altervista.org/carte_de_visite/gui.php)  
 

@@ -40,23 +40,11 @@ public partial class MultipagePreviewBarControl : UserControl
     public event EventHandler? GoNext;
     public event EventHandler? GoEnd;
 
-    private void btnStart_Click(object sender, RoutedEventArgs e)
-    {
-        GoStart?.Invoke(this, e);
-    }
+    private void btnStart_Click(object sender, RoutedEventArgs e) => GoStart?.Invoke(this, e);
 
-    private void btnBack_Click(object sender, RoutedEventArgs e)
-    {
-        GoBack?.Invoke(this, e);
-    }
+    private void btnBack_Click(object sender, RoutedEventArgs e) => GoBack?.Invoke(this, e);
 
-    private void btnNext_Click(object sender, RoutedEventArgs e)
-    {
-        GoNext?.Invoke(this, e);
-    }
+    private void btnNext_Click(object sender, RoutedEventArgs e) => GoNext?.Invoke(this, e);
 
-    private void btnEnd_Click(object sender, RoutedEventArgs e)
-    {
-        GoEnd?.Invoke(this, e);
-    }
+    private void btnEnd_Click(object sender, RoutedEventArgs e) => GoEnd?.Invoke(this, e);
 }

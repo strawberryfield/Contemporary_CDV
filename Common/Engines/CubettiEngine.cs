@@ -209,11 +209,13 @@ public class CubettiEngine : BaseEngine
                 Console.Write("#");
 
             cnt++;
-            MagickImageCollection img2 = new();
-            img2.Add(TopClipStrip);
-            img2.Add(AssemblyPartialCube(face, 0));
-            img2.Add(BottomClipStrip);
-            img2.Add(AssemblyPartialCube(face, 3));
+            MagickImageCollection img2 = new()
+            {
+                TopClipStrip,
+                AssemblyPartialCube(face, 0),
+                BottomClipStrip,
+                AssemblyPartialCube(face, 3)
+            };
 
             MagickImage image = GetOutputPaper(PaperFormat);
             image.Composite(img2.AppendVertically(), Gravity.Center, 0, 0);
@@ -323,18 +325,22 @@ public class CubettiEngine : BaseEngine
             .Line(noseLeft, clipSize - 1, noseRight, clipSize - 1)
             .Draw(NoseClip);
 
-        MagickImageCollection strip = new();
-        strip.Add(ClipFiller);
-        strip.Add(BottomClip);
-        strip.Add(NoseClip);
-        strip.Add(BottomClip.Clone());
+        MagickImageCollection strip = new()
+        {
+            ClipFiller,
+            BottomClip,
+            NoseClip,
+            BottomClip.Clone()
+        };
         BottomClipStrip = (MagickImage)strip.AppendHorizontally();
 
-        strip = new();
-        strip.Add(ClipFiller);
-        strip.Add(TopClip);
-        strip.Add(EmptyClip);
-        strip.Add(TopClip.Clone());
+        strip = new()
+        {
+            ClipFiller,
+            TopClip,
+            EmptyClip,
+            TopClip.Clone()
+        };
         TopClipStrip = (MagickImage)strip.AppendHorizontally();
     }
     #endregion

@@ -124,6 +124,7 @@ public partial class BaseForm : Window
     }
     #endregion
 
+    #region engine interface
     protected virtual void loadJson(string json)
     {
         engine.SetJsonParams(json);
@@ -157,19 +158,7 @@ public partial class BaseForm : Window
         waitForm.Owner = this;
         waitForm.ShowDialog();
     }
-
-    protected SaveFileDialog SaveDialog()
-    {
-        SaveFileDialog sd = new();
-        sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
-        sd.Title = "Salvataggio immagine";
-        sd.DefaultExt = "jpg";
-        sd.AddExtension = true;
-        sd.OverwritePrompt = true;
-        sd.ShowDialog();
-        return sd;
-    }
-
+    #endregion
 
     #region backgroundworkers
     private void bwAnteprima_DoWork(object? sender, DoWorkEventArgs e)
@@ -282,6 +271,19 @@ public partial class BaseForm : Window
     }
     #endregion
 
+    #region gui
+    protected SaveFileDialog SaveDialog()
+    {
+        SaveFileDialog sd = new();
+        sd.Filter = "jpeg Image (*.jpg;*.jpeg)|*.jpg;*.jpeg|All files (*.*)|*.*";
+        sd.Title = "Salvataggio immagine";
+        sd.DefaultExt = "jpg";
+        sd.AddExtension = true;
+        sd.OverwritePrompt = true;
+        sd.ShowDialog();
+        return sd;
+    }
+
     public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
     {
         if (depObj is null)
@@ -326,4 +328,5 @@ public partial class BaseForm : Window
         if (rb.IsChecked is not null) ret = (bool)rb.IsChecked;
         return ret;
     }
+    #endregion
 }
