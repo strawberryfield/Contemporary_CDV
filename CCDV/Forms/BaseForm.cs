@@ -28,15 +28,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Printing;
-using System.Reflection.Metadata;
-using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
 
 namespace Casasoft.CCDV.UI;
 
@@ -211,7 +208,6 @@ public partial class BaseForm : Window
 
         if (bm is not null)
         {
-            //           bm = A4Canvas(bm);
             PrintDialog pd = new();
             if (pd.ShowDialog() == true)
             {
@@ -223,17 +219,6 @@ public partial class BaseForm : Window
                 FixedPage page = NewFixedPage(doc);
                 AddImage(page, bm);
                 AddPage(doc, page);
-                //DrawingVisual vis = new();
-                //using (DrawingContext dc = vis.RenderOpen())
-                //{
-                //    dc.DrawImage(bm.ToBitmapSource(), new Rect
-                //    {
-                //        Width = bm.Width / engine.Dpi * 96,
-                //        Height = bm.Height / engine.Dpi * 96
-                //    });
-                //}
-
-                //                pd.PrintVisual(vis, "Print Image");
                 pd.PrintDocument(doc.DocumentPaginator, "Print Image");
             }
         }
@@ -250,31 +235,40 @@ public partial class BaseForm : Window
 
     protected FixedPage NewFixedPage(FixedDocument doc)
     {
-        FixedPage ret = new();
-        ret.Width = doc.DocumentPaginator.PageSize.Width;
-        ret.Height = doc.DocumentPaginator.PageSize.Height;
+        FixedPage ret = new()
+        {
+            Width = doc.DocumentPaginator.PageSize.Width,
+            Height = doc.DocumentPaginator.PageSize.Height,
+            Margin = new Thickness(0)
+        };
         return ret;
     }
 
     protected void AddImage(FixedPage page, MagickImage img)
     {
-        BitmapSource bitImage = img.ToBitmapSource();
-        Grid grid = new();
+        BitmapSource bitImage = A4Canvas(img).ToBitmapSource();
+        Grid grid = new Grid
+        {
+            Width = page.Width,
+            Height = page.Height,
+            Margin = new(0),
+        };
         grid.Children.Add(new Image
         {
             Source = bitImage,
-            Width = img.Width / engine.Dpi * 96,
-            Height = img.Height / engine.Dpi * 96,
+            Width = page.Width,
+            Height = page.Height,
             Stretch = Stretch.Uniform,
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center,
+            Margin = new(0),
         });
         page.Children.Add(grid);
     }
 
     protected void AddPage(FixedDocument doc, FixedPage page)
     {
-        PageContent pageContent = new PageContent();
+        PageContent pageContent = new PageContent { Margin = new(0) };
         ((IAddChild)pageContent).AddChild(page);
         doc.Pages.Add(pageContent);
     }

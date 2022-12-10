@@ -26,10 +26,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Printing;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Media;
 
 namespace Casasoft.CCDV.UI;
 
@@ -150,9 +148,6 @@ public partial class BaseMultipageForm : BaseForm
             PrintDialog pd = new();
             if (pd.ShowDialog() == true)
             {
-                int max = bm.Count;
-                int i = 0;
-
                 pd.PrintTicket.PageMediaSize = new(PageMediaSizeName.ISOA4);
                 pd.PrintTicket.PageOrientation = bm[0].Width > bm[0].Height ? PageOrientation.Landscape : PageOrientation.Portrait;
                 pd.PrintTicket.PageBorderless = PageBorderless.Borderless;
@@ -160,18 +155,6 @@ public partial class BaseMultipageForm : BaseForm
 
                 foreach (MagickImage im in bm)
                 {
-                    //DrawingVisual vis = new();
-                    //MagickImage img = A4Canvas(im);
-                    //using (DrawingContext dc = vis.RenderOpen())
-                    //{
-                    //    dc.DrawImage(img.ToBitmapSource(), new Rect
-                    //    {
-                    //        Width = img.Width / engine.Dpi * 96,
-                    //        Height = img.Height / engine.Dpi * 96
-                    //    });
-                    //}
-                    i++;
-                    //                    pd.PrintVisual(vis, $"Print Image {i} of {max}");
                     FixedPage page = NewFixedPage(doc);
                     AddImage(page, im);
                     AddPage(doc, page);
