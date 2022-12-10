@@ -147,6 +147,12 @@ If not, see <http://www.gnu.org/licenses/>.
 				<File Source="$(var.binPath)\Cubetti.runtimeconfig.json" />
 				<File Source="$(var.binPath)\Cubetti.deps.json" />
 			</Component>
+			<Component Id="Flexagon" Guid="{9DCAE7C7-7CED-424E-A760-8968E56A2647}">
+				<File Source="$(var.binPath)\Flexagon.dll" KeyPath="yes" />
+				<File Source="$(var.binPath)\Flexagon.exe" />
+				<File Source="$(var.binPath)\Flexagon.runtimeconfig.json" />
+				<File Source="$(var.binPath)\Flexagon.deps.json" />
+			</Component>
 			<!-- Creates entry in Path environment variable -->
 			<Component Id="Path" Guid="{6ED4FDB5-2D7E-411B-A59A-A5A6C0D31556}">
 				<CreateFolder/>
@@ -215,6 +221,18 @@ If not, see <http://www.gnu.org/licenses/>.
 					Description="[ProductName] Folder builder GUI"
 					Target="[INSTALLFOLDER]CCDV.exe"
 					Arguments="--tool=Cartella"
+					WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="CubettiShortcut"
+					Name="Cubetti builder"
+					Description="[ProductName] Cubetti builder GUI"
+					Target="[INSTALLFOLDER]CCDV.exe"
+					Arguments="--tool=Cubetti"
+					WorkingDirectory="INSTALLFOLDER"/>
+				<Shortcut Id="FlexagonShortcut"
+					Name="Flexagon builder"
+					Description="[ProductName] Flexagon builder GUI"
+					Target="[INSTALLFOLDER]CCDV.exe"
+					Arguments="--tool=Flexagon"
 					WorkingDirectory="INSTALLFOLDER"/>
 
 				<!-- Internet links -->
