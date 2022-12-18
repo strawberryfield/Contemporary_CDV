@@ -43,6 +43,9 @@ set prg=CreditCard
 set prg=Cubetti
 @call :CREATE
 
+set prg=Flexagon
+@call :CREATE
+
 goto :END
 
 :CREATE

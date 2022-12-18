@@ -33,7 +33,7 @@ set candle="%wix%candle.exe"
 set light="%wix%light.exe"
 set WixUtils="%wix%WixUtilExtension.dll"
 
-set version=22.08.14
+set version=22.12.18
  
 @del /S /Q %build%
 @del /Q %bin%%pkgname%*.*
@@ -48,6 +48,8 @@ set prj=MontaggioFoto
 set prj=Scatola
 @dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained %repo%%prj%\%prj%.csproj
 set prj=Cubetti
+@dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained %repo%%prj%\%prj%.csproj
+set prj=Flexagon
 @dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained %repo%%prj%\%prj%.csproj
 
 @echo off

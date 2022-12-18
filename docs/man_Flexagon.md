@@ -1,37 +1,21 @@
-% CUBETTI(1)  
+% FLEXAGON(1)  
 % Roberto Ceccarelli - Casasoft  
 % March 2022
 
 # NAME
-Cubetti - Creates a cube matrix with 6 photos.
+Flexagon - Creates a flexagon with 3, 4 or 6 photos.
 
 # SYNOPSIS
-**Cubetti** \[options\]\* inputfiles
+**Flexagon** \[options\]\* inputfiles
 
 # DESCRIPTION
-This program allows you to create a cube matrix with 6 photos.     
-Each face of the cube has a portion of one of the six images.
+This program allows you to create a flexagon with 3, 4 or 6 photos.     
+Each face of the flexagon has one of the supplied images.
 
 # OPTIONS
-**-r, --rows=VALUE** :  
-set the number of rows of the output matrix \(  
-default 2\)  
-
-
-**-c, --columns=VALUE** :  
-set the number of columns of the output matrix \(  
-default 2\)  
-
-
-**-s, --size=VALUE** :  
-set the size of each cube \(default 50mm\)  
-
-
-**--paper=VALUE** :  
-Output paper size:  
-Large 20x27cm  
-Medium \(default\) 15x20cm  
-A4 210x297mm  
+**-f, --faces=VALUE** :  
+number of faces of the flexagaon \(3,4 or 6;  
+default 3\)  
 
 
 **--sample** :  
@@ -115,7 +99,7 @@ Colors can be written in any of these formats:
   \#rrggbbaa  
   \#rrrrggggbbbb  
   \#rrrrggggbbbbaaaa  
-  colorname    \(use Cubetti --colors  to see all available colors\)
+  colorname    \(use Flexagon --colors  to see all available colors\)
 
 ## JSON
 Parameters can also be passed with a json formatted string  
@@ -123,10 +107,8 @@ using the following template:
 
 ~~~
 {
-  "Rows": 2,
-  "Columns": 3,
-  "Size": 50,
-  "Paper": null,
+  "Faces": 3,
+  "useSampleImages": false,
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",
   "Dpi": 300,
@@ -167,7 +149,7 @@ using System.Linq;
 These are the signatures of the scriptable methods:
 
 ~~~
-// Script template for Cubetti
+// Script template for Flexagon
 
 /// <summary>
 /// Custom class initialization
@@ -189,18 +171,18 @@ public MagickImage ProcessOnLoad(MagickImage image) => image;
 ~~~
 
 # COPYRIGHT
-Casasoft Cubetti is free software:  
+Casasoft Flexagon is free software:  
 you can redistribute it and/or modify it  
 under the terms of the GNU Affero General Public License as published by  
 the Free Software Foundation, either version 3 of the License, or  
 \(at your option\) any later version.  
 
 You should have received a copy of the GNU AGPL v.3  
-along with Casasoft Cubetti.  
+along with Casasoft Flexagon.  
 If not, see <http://www.gnu.org/licenses/>.  
 
 # DISCLAIMER
-Casasoft Cubetti is distributed in the hope that it will be useful,  
+Casasoft Flexagon is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
 See the GNU General Public License for more details.
