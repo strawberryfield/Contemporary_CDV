@@ -84,9 +84,18 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
-    public override void SetJsonParams(string json)
+    public override void SetJsonParams(string json) =>
+        SetJsonParams(JsonSerializer.Deserialize<BaseBuilderParameters>(json));
+
+    /// <summary>
+    /// Sets the parameters from json deserialized object
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(IParameters json) =>
+        SetJsonParams((BaseBuilderParameters)json);
+
+    private void SetJsonParams(BaseBuilderParameters p)
     {
-        BaseBuilderParameters p = JsonSerializer.Deserialize<BaseBuilderParameters>(json);
         parameters = p;
         SetBaseJsonParams();
 

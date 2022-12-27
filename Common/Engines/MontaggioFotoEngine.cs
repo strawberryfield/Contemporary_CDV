@@ -98,10 +98,19 @@ public class MontaggioFotoEngine : BaseEngine
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
-    public override void SetJsonParams(string json)
+    public override void SetJsonParams(string json) =>
+        SetJsonParams(JsonSerializer.Deserialize<MontaggioFotoParameters>(json));
+
+    /// <summary>
+    /// Sets the parameters from json deserialized object
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(IParameters json) =>
+        SetJsonParams((MontaggioFotoParameters)json);
+
+    private void SetJsonParams(MontaggioFotoParameters p)
     {
-        MontaggioFotoParameters p = JsonSerializer.Deserialize<MontaggioFotoParameters>(json);
-        parameters = p;
+       parameters = p;
         SetBaseJsonParams();
         FullSize = p.FullSize;
         WithBorder = p.WithBorder;

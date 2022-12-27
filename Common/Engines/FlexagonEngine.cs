@@ -114,9 +114,18 @@ public class FlexagonEngine : BaseEngine
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
-    public override void SetJsonParams(string json)
+    public override void SetJsonParams(string json) =>
+        SetJsonParams(JsonSerializer.Deserialize<FlexagonParameters>(json));
+
+    /// <summary>
+    /// Sets the parameters from json deserialized object
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(IParameters json) =>
+        SetJsonParams((FlexagonParameters)json);
+
+    private void SetJsonParams(FlexagonParameters p)
     {
-        FlexagonParameters p = JsonSerializer.Deserialize<FlexagonParameters>(json);
         parameters = p;
         SetBaseJsonParams();
 
@@ -226,7 +235,7 @@ public class FlexagonEngine : BaseEngine
             tiles[1, 1, 0],
             tiles[2, 1, 0],
             tiles[2, 1, 1]
-        };    
+        };
         ColStrip.Add(RowStrip.AppendHorizontally());
 
         MagickImage print = img.FineArt10x18_o();

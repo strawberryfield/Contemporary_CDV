@@ -32,7 +32,7 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class MontaggioDorsiEngine : BaseEngine
 {
-     #region constructors
+    #region constructors
     /// <summary>
     /// Constructor
     /// </summary>
@@ -74,9 +74,18 @@ public class MontaggioDorsiEngine : BaseEngine
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
-    public override void SetJsonParams(string json)
+    public override void SetJsonParams(string json) =>
+        SetJsonParams(JsonSerializer.Deserialize<MontaggioDorsiParameters>(json));
+
+    /// <summary>
+    /// Sets the parameters from json deserialized object
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(IParameters json) =>
+        SetJsonParams((MontaggioDorsiParameters)json);
+
+    private void SetJsonParams(MontaggioDorsiParameters p)
     {
-        MontaggioDorsiParameters p = JsonSerializer.Deserialize<MontaggioDorsiParameters>(json);
         parameters = p;
         SetBaseJsonParams();
         PaperFormat = p.PaperFormat;
@@ -156,7 +165,7 @@ public class MontaggioDorsiEngine : BaseEngine
             Utils.HLine(draw, h, final.Width);
             h += fmt.CDV_Full_v.Height;
             Utils.HLine(draw, h, final.Width);
-            h +=  PaperFormat == PaperFormats.A4 ? fmt.CDV_Full_v.Height : fmt.CDV_Full_v.Width;
+            h += PaperFormat == PaperFormats.A4 ? fmt.CDV_Full_v.Height : fmt.CDV_Full_v.Width;
             Utils.HLine(draw, h, final.Width);
         }
         draw.Draw(final);

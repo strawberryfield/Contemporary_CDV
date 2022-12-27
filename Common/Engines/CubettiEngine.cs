@@ -106,9 +106,18 @@ public class CubettiEngine : BaseEngine
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
-    public override void SetJsonParams(string json)
+    public override void SetJsonParams(string json) =>
+        SetJsonParams(JsonSerializer.Deserialize<CubettiParameters>(json));
+
+    /// <summary>
+    /// Sets the parameters from json deserialized object
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(IParameters json) =>
+        SetJsonParams((CubettiParameters)json);
+
+    private void SetJsonParams(CubettiParameters p)
     {
-        CubettiParameters p = JsonSerializer.Deserialize<CubettiParameters>(json);
         parameters = p;
         SetBaseJsonParams();
 

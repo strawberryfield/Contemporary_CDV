@@ -199,6 +199,14 @@ public class BaseEngine : IEngine
     }
 
     /// <summary>
+    /// Sets the parameters from json desarialized object
+    /// </summary>
+    /// <param name="json"></param>
+    public virtual void SetJsonParams(IParameters json)
+    {
+    }
+
+    /// <summary>
     /// Sets the common parameters from deserialized json
     /// </summary>
     public void SetBaseJsonParams()

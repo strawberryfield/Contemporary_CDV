@@ -1144,6 +1144,12 @@
             </summary>
             <param name="json"></param>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json deserialized object
+            </summary>
+            <param name="json"></param>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.GetResult(System.Boolean)">
             <summary>
             Does the dirty work
@@ -1265,6 +1271,12 @@
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)">
             <summary>
             Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json desarialized object
             </summary>
             <param name="json"></param>
         </member>
@@ -1424,6 +1436,12 @@
             </summary>
             <param name="json"></param>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json deserialized object
+            </summary>
+            <param name="json"></param>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.CreditCardEngine.GetResult(System.Boolean)">
             <summary>
             Does the dirty work
@@ -1478,6 +1496,12 @@
             </summary>
             <param name="json"></param>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.CubettiEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json deserialized object
+            </summary>
+            <param name="json"></param>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.CubettiEngine.GetResults(System.Boolean)">
             <summary>
             Does the dirty work
@@ -1529,6 +1553,12 @@
         <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.SetJsonParams(System.String)">
             <summary>
             Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.FlexagonEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json deserialized object
             </summary>
             <param name="json"></param>
         </member>
@@ -1703,6 +1733,12 @@
             </summary>
             <param name="json"></param>
         </member>
+        <member name="M:Casasoft.CCDV.Engines.IEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json desarialized object
+            </summary>
+            <param name="json"></param>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine">
             <summary>
             Montaggio dorsi engine
@@ -1728,6 +1764,12 @@
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.SetJsonParams(System.String)">
             <summary>
             Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json deserialized object
             </summary>
             <param name="json"></param>
         </member>
@@ -1783,6 +1825,12 @@
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.SetJsonParams(System.String)">
             <summary>
             Sets the parameters from json formatted string
+            </summary>
+            <param name="json"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
+            <summary>
+            Sets the parameters from json deserialized object
             </summary>
             <param name="json"></param>
         </member>

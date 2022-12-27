@@ -131,6 +131,8 @@ Base command line class
 **CreditCard** command line handling
 - *CubettiCommandLine*  
 **Cubetti** command line handling
+- *FlexagonCommandLine*  
+**Flexagon** command line handling
 - *MontaggioDorsiCommandLine*  
 **MontaggioDorsi** command line handling
 - *MontaggioFotoCommandLine*  
@@ -150,6 +152,8 @@ Class with the parameters common to all tools
 **CreditCard** parameters
 - *CubettiParameters*  
 **Cubetti** parameters
+- *FlexagonParameters*  
+**Flexagon** parameters
 - *MontaggioDorsiParameters*  
 **MontaggioDorsi** parameters
 - *MontaggioFotoParameters*  
@@ -172,6 +176,8 @@ Common wrapper for **Scatola** and **Cartella** builders
 **CreditCard** core engine
 - *CubettiEngine*  
 **Cubetti** core engine
+- *FlexagonEngine*  
+**Flexagon** core engine
 - *FolderEngine*  
 **Cartella** builder wrapper
 - *MontaggioDorsiEngine*  
@@ -209,6 +215,8 @@ The script wrapping for **Scatola** and **Cartella**
 The script wrapping for **CreditCard**
 - *CubettiScripting*  
 The script wrapping for **Cubetti**
+- *FlexagonScripting*  
+The script wrapping for **Flexagon**
 - *MontaggioDorsiScripting*  
 The script wrapping for **MontaggioDorsi**
 - *MontaggioFotoScripting*  
@@ -228,7 +236,9 @@ The library is compiled for .net 6.0
 
 The following packages are required:
 
-- Microsoft.CodeAnalysis.Common Version=4.2.0
-- Magick.NET-Q16-AnyCPU Version=12.0.0
-- Microsoft.CodeAnalysis.CSharp Version=4.2.0
-- Mono.Options Version=6.12.0.148
+- Microsoft.CodeAnalysis.Common Version >= 4.4.0
+- Magick.NET-Q16-AnyCPU Version >= 12.2.2
+- Magick.NET.SystemWindowsMedia >= 6.1.3
+- Microsoft.CodeAnalysis.CSharp Version >= 4.4.0
+- Mono.Options Version >= 6.12.0.148
+- Casasoft.Xaml.Controls >= 22.4.13

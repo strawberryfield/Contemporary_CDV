@@ -19,6 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System.Collections.Generic;
@@ -143,5 +144,10 @@ public interface IEngine
     /// </summary>
     /// <param name="json"></param>
     void SetJsonParams(string json);
-    #endregion
+    /// <summary>
+    /// Sets the parameters from json desarialized object
+    /// </summary>
+    /// <param name="json"></param>
+    void SetJsonParams(IParameters json);
+   #endregion
 }

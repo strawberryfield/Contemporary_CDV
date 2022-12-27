@@ -157,9 +157,18 @@ public class CreditCardEngine : BaseEngine
     /// Sets the parameters from json formatted string
     /// </summary>
     /// <param name="json"></param>
-    public override void SetJsonParams(string json)
+    public override void SetJsonParams(string json) =>
+        SetJsonParams(JsonSerializer.Deserialize<CreditCardParameters>(json));
+
+    /// <summary>
+    /// Sets the parameters from json deserialized object
+    /// </summary>
+    /// <param name="json"></param>
+    public override void SetJsonParams(IParameters json) =>
+        SetJsonParams((CreditCardParameters)json);
+
+    private void SetJsonParams(CreditCardParameters p)
     {
-        CreditCardParameters p = JsonSerializer.Deserialize<CreditCardParameters>(json);
         parameters = p;
         SetBaseJsonParams();
 
