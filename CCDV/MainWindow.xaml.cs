@@ -1,4 +1,4 @@
-﻿// copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+﻿// copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
 // http://strawberryfield.altervista.org 
 // 
 // This file is part of Casasoft Contemporary Carte de Visite Tools

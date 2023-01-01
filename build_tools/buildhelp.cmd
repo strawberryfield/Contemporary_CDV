@@ -1,5 +1,5 @@
 @echo off
-rem copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+rem copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
 rem http://strawberryfield.altervista.org 
 rem 
 rem This file is part of Casasoft Contemporary Carte de Visite Tools

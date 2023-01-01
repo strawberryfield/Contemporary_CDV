@@ -32,7 +32,7 @@
 - [sito web](https://strawberryfield.altervista.org/carte_de_visite/creazione_creditcards.php)
 - [man page](man_CreditCard.md)
 
-## CreditCard
+## Cubetti
 
 - [readme](https://github.com/strawberryfield/Contemporary_CDV/blob/master/Cubetti/README.md)
 - [sito web](https://strawberryfield.altervista.org/carte_de_visite/puzzle_cubetti.php)

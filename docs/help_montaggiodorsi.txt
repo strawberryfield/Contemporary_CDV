@@ -1,5 +1,5 @@
 Casasoft Contemporary Carte de Visite MontaggioDorsi
-Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+Copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
 
 Usage: MontaggioDorsi [options]* inputfile+
 

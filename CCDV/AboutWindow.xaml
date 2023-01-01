@@ -1,5 +1,5 @@
 ﻿<!--
-copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
 http://strawberryfield.altervista.org 
 
 This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -60,7 +60,7 @@ If not, see <http://www.gnu.org/licenses/>.
             Margin="14,93,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="copyright © 2020-2022 Roberto Ceccarelli - Casasoft" />
+            Content="copyright © 2020-2023 Roberto Ceccarelli - Casasoft" />
         <Label
             Margin="14,118,0,0"
             HorizontalAlignment="Left"

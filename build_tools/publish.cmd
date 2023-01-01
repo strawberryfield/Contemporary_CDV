@@ -1,5 +1,5 @@
 @echo off
-rem copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+rem copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
 rem http://strawberryfield.altervista.org 
 rem 
 rem This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -33,7 +33,7 @@ set candle="%wix%candle.exe"
 set light="%wix%light.exe"
 set WixUtils="%wix%WixUtilExtension.dll"
 
-set version=22.12.27
+set version=23.01.01
  
 @del /S /Q %build%
 @del /Q %bin%%pkgname%*.*
