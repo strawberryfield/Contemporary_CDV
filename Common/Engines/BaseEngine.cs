@@ -233,7 +233,7 @@ public class BaseEngine : IEngine
     /// <returns>Image to print</returns>
     public virtual MagickImage GetResult(bool quiet)
     {
-        if (CustomCode is not null)
+        if (CustomCode is not null && ScriptInstance is null)
         {
             ScriptInstance = Compiler.New(CustomCode, this);
         }
