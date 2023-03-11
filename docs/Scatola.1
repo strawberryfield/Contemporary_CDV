@@ -369,6 +369,36 @@ public void Init() { }
 /// Image for final output ///
 .PP
 /// public MagickImage OutputImage() => null;
+///
+/// Preprocesses the loaded image for Front ///
+.PP
+/// The loaded image /// The Processed image public MagickImage
+ProcessOnLoadFront(MagickImage image) => image;
+///
+/// Preprocesses the loaded image for Back ///
+.PP
+/// The loaded image /// The Processed image public MagickImage
+ProcessOnLoadBack(MagickImage image) => image;
+///
+/// Preprocesses the loaded image for Top ///
+.PP
+/// The loaded image /// The Processed image public MagickImage
+ProcessOnLoadTop(MagickImage image) => image;
+///
+/// Preprocesses the loaded image for Bottom ///
+.PP
+/// The loaded image /// The Processed image public MagickImage
+ProcessOnLoadBottom(MagickImage image) => image;
+///
+/// Preprocesses the loaded image for Left ///
+.PP
+/// The loaded image /// The Processed image public MagickImage
+ProcessOnLoadLeft(MagickImage image) => image;
+///
+/// Preprocesses the loaded image for Right ///
+.PP
+/// The loaded image /// The Processed image public MagickImage
+ProcessOnLoadRight(MagickImage image) => image;
 .PP
 \[ti]\[ti]\[ti]
 .SH COPYRIGHT

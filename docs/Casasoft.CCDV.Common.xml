@@ -912,6 +912,11 @@
             Output paper size
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.BaseBuilder.ScriptInstance">
+            <summary>
+            Storage for the instantiated Script object
+            </summary>
+        </member>
         <member name="F:Casasoft.CCDV.BaseBuilder.topFormat">
             <summary>
             Geometry for top and bottom images
@@ -1049,12 +1054,13 @@
             Creates empty images
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.checkAndLoad(System.String,ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.checkAndLoad(System.String,ImageMagick.MagickImage,System.String)">
             <summary>
             Loads an image, if the file is not found returns a template
             </summary>
-            <param name="filename"></param>
-            <param name="template"></param>
+            <param name="filename">file to load</param>
+            <param name="template">image template to use as default</param>
+            <param name="name">name of associated script method</param>
             <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.BaseBuilder.SetTopImage(System.String)">
@@ -1978,6 +1984,11 @@
         <member name="P:Casasoft.CCDV.IBuilder.isHorizontal">
             <summary>
             Set if box is landscape
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IBuilder.ScriptInstance">
+            <summary>
+            Storage for the instantiated Script object
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.IBuilder.SetTopImage(System.String)">

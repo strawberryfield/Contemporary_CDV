@@ -25,5 +25,17 @@ internal class BaseBuilderScripting : BaseScripting
 {
     public override string WrapScript(string script) => base.WrapScript(script, "BaseBuilderEngine");
 
-    public override string Template() => base.Template();
+    public override string Template() => base.Template() +
+        OnLoad("Front") + OnLoad("Back") +
+        OnLoad("Top") + OnLoad("Bottom") +
+        OnLoad("Left") + OnLoad("Right");
+
+    private string OnLoad(string name) => $@"
+/// <summary> 
+/// Preprocesses the loaded image for {name}
+/// </summary>
+/// <param name=""image"">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoad{name}(MagickImage image) => image;
+";
 }

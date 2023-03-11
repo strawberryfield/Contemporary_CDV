@@ -15,4 +15,46 @@ public void Init() { }
 /// <returns></returns>
 public MagickImage OutputImage() => null;
 
+/// <summary> 
+/// Preprocesses the loaded image for Front
+/// </summary>
+/// <param name="image">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoadFront(MagickImage image) => image;
+
+/// <summary> 
+/// Preprocesses the loaded image for Back
+/// </summary>
+/// <param name="image">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoadBack(MagickImage image) => image;
+
+/// <summary> 
+/// Preprocesses the loaded image for Top
+/// </summary>
+/// <param name="image">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoadTop(MagickImage image) => image;
+
+/// <summary> 
+/// Preprocesses the loaded image for Bottom
+/// </summary>
+/// <param name="image">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoadBottom(MagickImage image) => image;
+
+/// <summary> 
+/// Preprocesses the loaded image for Left
+/// </summary>
+/// <param name="image">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoadLeft(MagickImage image) => image;
+
+/// <summary> 
+/// Preprocesses the loaded image for Right
+/// </summary>
+/// <param name="image">The loaded image</param>
+/// <returns>The Processed image</returns>
+public MagickImage ProcessOnLoadRight(MagickImage image) => image;
+
 -----

@@ -19,6 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using System.IO;
 
@@ -95,6 +96,12 @@ public class BaseBuilder : IBuilder
     /// Output paper size
     /// </summary>
     public PaperFormats PaperFormat { get; set; }
+
+    /// <summary>
+    /// Storage for the instantiated Script object
+    /// </summary>
+    public object ScriptInstance { get; set; }
+
     #endregion
 
     #region images properties
@@ -304,12 +311,31 @@ public class BaseBuilder : IBuilder
     /// <summary>
     /// Loads an image, if the file is not found returns a template
     /// </summary>
-    /// <param name="filename"></param>
-    /// <param name="template"></param>
+    /// <param name="filename">file to load</param>
+    /// <param name="template">image template to use as default</param>
+    /// <param name="name">name of associated script method</param>
     /// <returns></returns>
-    protected MagickImage checkAndLoad(string filename, MagickImage template) =>
-        (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename)) ?
-        Utils.RotateResizeAndFill(new(filename), template, fillColor) : template;
+    protected MagickImage checkAndLoad(string filename, MagickImage template, string name)
+    {
+        if (!string.IsNullOrWhiteSpace(filename) && File.Exists(filename))
+        {
+            MagickImage image = new MagickImage(filename);
+
+            if (ScriptInstance is not null)
+            {
+                var im = Compiler.Run(ScriptInstance, $"ProcessOnLoad{name}", new object[] { image });
+                if (im is not null)
+                {
+                    image = (MagickImage)im;
+                }
+            }
+            return Utils.RotateResizeAndFill(image, template, fillColor);
+        }
+        else
+        {
+            return template;
+        }
+    }
 
     /// <summary>
     /// Sets image for the top border
@@ -318,7 +344,7 @@ public class BaseBuilder : IBuilder
     public void SetTopImage(string filename)
     {
         topImagePath = filename;
-        topImage = checkAndLoad(filename, topImage);
+        topImage = checkAndLoad(filename, topImage, "Top");
     }
 
     /// <summary>
@@ -328,7 +354,7 @@ public class BaseBuilder : IBuilder
     public void SetBottomImage(string filename)
     {
         bottomImagePath = filename;
-        bottomImage = checkAndLoad(filename, bottomImage);
+        bottomImage = checkAndLoad(filename, bottomImage, "Bottom");
     }
 
     /// <summary>
@@ -338,7 +364,7 @@ public class BaseBuilder : IBuilder
     public void SetLeftImage(string filename)
     {
         leftImagePath = filename;
-        leftImage = checkAndLoad(filename, leftImage);
+        leftImage = checkAndLoad(filename, leftImage, "Left");
         if (!string.IsNullOrWhiteSpace(borderText))
         {
             Utils.CenteredText(borderText, leftImage.Width / 2, leftImage, font, -90, fontBold, fontItalic)
@@ -353,7 +379,7 @@ public class BaseBuilder : IBuilder
     public void SetRightImage(string filename)
     {
         rightImagePath = filename;
-        rightImage = checkAndLoad(filename, rightImage);
+        rightImage = checkAndLoad(filename, rightImage, "Right");
     }
 
     /// <summary>
@@ -363,7 +389,7 @@ public class BaseBuilder : IBuilder
     public void SetFrontImage(string filename)
     {
         frontImagePath = filename;
-        frontImage = checkAndLoad(filename, frontImage);
+        frontImage = checkAndLoad(filename, frontImage, "Front");
     }
 
     /// <summary>
@@ -374,7 +400,7 @@ public class BaseBuilder : IBuilder
     public void SetBackImage(string filename, bool isHorizontal = false)
     {
         backImagePath = filename;
-        backImage = checkAndLoad(filename, backImage);
+        backImage = checkAndLoad(filename, backImage, "Back");
         if (isHorizontal)
             backImage.Rotate(180);
     }

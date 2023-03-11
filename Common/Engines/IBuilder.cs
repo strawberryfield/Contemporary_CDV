@@ -52,7 +52,10 @@ public interface IBuilder
     /// Set if box is landscape
     /// </summary>
     bool isHorizontal { get; set; }
-
+    /// <summary>
+    /// Storage for the instantiated Script object
+    /// </summary>
+    object ScriptInstance { get; set; }
     /// <summary>
     /// Sets image for the top border
     /// </summary>
