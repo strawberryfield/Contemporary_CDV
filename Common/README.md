@@ -236,9 +236,9 @@ The library is compiled for .net 6.0
 
 The following packages are required:
 
-- Microsoft.CodeAnalysis.Common Version >= 4.4.0
-- Magick.NET-Q16-AnyCPU Version >= 12.2.2
+- Microsoft.CodeAnalysis.Common Version >= 4.5.0
+- Magick.NET-Q16-AnyCPU Version >= 12.3.0
 - Magick.NET.SystemWindowsMedia >= 6.1.3
-- Microsoft.CodeAnalysis.CSharp Version >= 4.4.0
+- Microsoft.CodeAnalysis.CSharp Version >= 4.5.0
 - Mono.Options Version >= 6.12.0.148
 - Casasoft.Xaml.Controls >= 22.4.13
