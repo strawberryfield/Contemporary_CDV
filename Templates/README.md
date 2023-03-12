@@ -6,7 +6,7 @@ see the my site [«The Strawberry Field»](https://strawberryfield.altervista.or
 
 # Casasoft Contemporary Carte de Visite Tools Script SDK
 
-In this package are enclosed 4 c# console projects to help
+In this package are enclosed 6 c# console projects to help
 in scripts development and testing  
 The projects are:
 - *MontaggioDorsiScriptTest*  
