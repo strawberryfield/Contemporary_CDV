@@ -8,7 +8,7 @@
     <Authors>Roberto Ceccarelli - Casasoft</Authors>
     <Description>Templates to develop and test scripts for Contemporary Carte de Viste tools.</Description>
 	<Product>Casasoft Contemporary Carte de Visite Tools</Product>
-    <Copyright>copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft</Copyright>
+    <Copyright>copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://strawberryfield.altervista.org/carte_de_visite/index.php</PackageProjectUrl>

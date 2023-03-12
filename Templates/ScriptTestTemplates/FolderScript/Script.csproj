@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Casasoft.CCDV.Common" Version="22.8.9" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.0.1" />
+    <PackageReference Include="Casasoft.CCDV.Common" Version="23.3.12" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.3.0" />
   </ItemGroup>
   
 </Project>
