@@ -1,7 +1,9 @@
 {
   "profiles": {
     "CCDV": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "cc.jpg",
+      "workingDirectory": "C:\\projects\\Contemporary_CDV\\bin\\build\\net6.0"
     }
   }
 }
