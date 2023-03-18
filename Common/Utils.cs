@@ -350,11 +350,23 @@ public static class Utils
             string prefix = filename.Substring(0, pos);
             if (Prefixes.Contains(prefix))
             {
-                if (geometry is null)
+                geometry ??= new MagickGeometry(256, 256);
+                MagickReadSettings settings = new()
                 {
-                    geometry = new MagickGeometry(256, 256);
-                }
-                ret = new(filename, geometry.Width, geometry.Height);
+                    BackgroundColor = MagickColors.Transparent,
+                    Height = geometry.Height,
+                    Width = geometry.Width
+                };
+
+                if(filename.Length > pos + 2)
+                {
+                    string argument = filename.Substring(pos + 1);
+                    if (argument[0] == '@')
+                    {
+                        filename = $"{prefix}:{File.ReadAllText(argument.Substring(1))}";
+                    }
+                } 
+                ret = new(filename, settings);
             }
             else
             {
