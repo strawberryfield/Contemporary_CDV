@@ -187,7 +187,7 @@ public class MontaggioFotoEngine : BaseEngine
     private MagickImage Get(string filename, bool quiet)
     {
         if (!quiet) Console.WriteLine($"Processing: {filename}");
-        MagickImage image = new(filename);
+        MagickImage image = Utils.GetImage(filename, fmt.CDV_Internal_v);
 
         if (ScriptInstance is not null)
         {

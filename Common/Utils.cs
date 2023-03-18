@@ -45,7 +45,7 @@ public static class Utils
         if (size.Height > size.Width)
         {
             // output must be portrait
-            if (img.Height < img.Width) 
+            if (img.Height < img.Width)
                 i.Rotate(-90);
         }
         else
@@ -58,8 +58,7 @@ public static class Utils
     }
 
     /// <summary>
-    /// Resizes an image to the given geometry.<br/>
-    /// Empty space is filled with the given color
+    /// Resizes an image to the given geometry.<br/> Empty space is filled with the given color
     /// </summary>
     /// <param name="img">Image to resize</param>
     /// <param name="size">target size</param>
@@ -72,59 +71,67 @@ public static class Utils
         i.Extent(size, Gravity.Center, fill);
         return i;
     }
+
     /// <summary>
-    /// Resizes an image to the given geometry.<br/>
-    /// Empty space is filled with white
+    /// Resizes an image to the given geometry.<br/> Empty space is filled with white
     /// </summary>
     /// <param name="img">Image to resize</param>
     /// <param name="size">target size</param>
     /// <returns>Image resized and filled</returns>
-    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) =>
-        ResizeAndFill(img, size, MagickColors.White);
+    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) => ResizeAndFill(
+        img,
+        size,
+        MagickColors.White);
 
     /// <summary>
-    /// Resizes an image to the given geometry.<br/>
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
-    /// Empty space is filled with the given color.
+    /// Resizes an image to the given geometry.<br/> Before resizing the image is rotated with <see
+    /// cref="AutoRotate"/>.<br/> Empty space is filled with the given color.
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
     /// <param name="fill">fill color</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill) =>
-        ResizeAndFill(AutoRotate(img, size), size, fill);
+    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill) => ResizeAndFill(
+        AutoRotate(img, size),
+        size,
+        fill);
+
     /// <summary>
-    /// Resizes an image to the size of another image.<br/>
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
-    /// Empty space is filled with the given color.
+    /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
+    /// cref="AutoRotate"/>.<br/> Empty space is filled with the given color.
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
     /// <param name="fill">fill color</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, MagickColor fill) =>
-        RotateResizeAndFill(img, new MagickGeometry(size.Width, size.Height), fill);
-    /// <summary>
-    /// Resizes an image to the given geometry.
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>
-    /// Empty space is filled with white color.
-    /// </summary>
-    /// <param name="img">Image to process</param>
-    /// <param name="size">reference size and orientation</param>
-    /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size) =>
-        RotateResizeAndFill(img, size, MagickColors.White);
-    /// <summary>
-    /// Resizes an image to the size of another image.<br/>
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
-    /// Empty space is filled with white color.
-    /// </summary>
-    /// <param name="img">Image to process</param>
-    /// <param name="size">reference size and orientation</param>
-    /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) =>
-        RotateResizeAndFill(img, size, MagickColors.White);
+    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, MagickColor fill) => RotateResizeAndFill(
+        img,
+        new MagickGeometry(size.Width, size.Height),
+        fill);
 
+    /// <summary>
+    /// Resizes an image to the given geometry. Before resizing the image is rotated with <see cref="AutoRotate"/> Empty
+    /// space is filled with white color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <returns>processed image</returns>
+    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size) => RotateResizeAndFill(
+        img,
+        size,
+        MagickColors.White);
+
+    /// <summary>
+    /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
+    /// cref="AutoRotate"/>.<br/> Empty space is filled with white color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <returns>processed image</returns>
+    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) => RotateResizeAndFill(
+        img,
+        size,
+        MagickColors.White);
     #endregion
 
     #region text
@@ -140,15 +147,24 @@ public static class Utils
     /// <param name="fontBold">use bold font (if available)</param>
     /// <param name="fontItalic">use bold font (if available)</param>
     /// <returns></returns>
-    public static Drawables CenteredText(string text, int size, int width, int height,
-        string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false)
+    public static Drawables CenteredText(
+        string text,
+        int size,
+        int width,
+        int height,
+        string font = "",
+        int rotation = 0,
+        bool fontBold = false,
+        bool fontItalic = false)
     {
         Drawables draw = new();
         draw.Rotation(rotation);
-        if (!string.IsNullOrWhiteSpace(font)) draw.Font(font,
-             fontItalic ? FontStyleType.Italic : FontStyleType.Normal,
-             fontBold ? FontWeight.Bold : FontWeight.Normal,
-             FontStretch.Normal);
+        if (!string.IsNullOrWhiteSpace(font))
+            draw.Font(
+                font,
+                fontItalic ? FontStyleType.Italic : FontStyleType.Normal,
+                fontBold ? FontWeight.Bold : FontWeight.Normal,
+                FontStretch.Normal);
         draw.StrokeColor(MagickColors.Black).FontPointSize(size).TextAlignment(TextAlignment.Center);
         if (Math.Abs(rotation) != 90)
             draw.Text(width / 2, height / 2, text);
@@ -169,9 +185,23 @@ public static class Utils
     /// <param name="fontBold">use bold font (if available)</param>
     /// <param name="fontItalic">use bold font (if available)</param>
     /// <returns></returns>
-    public static Drawables CenteredText(string text, int size, MagickGeometry fmt,
-        string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false) =>
-        CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
+    public static Drawables CenteredText(
+        string text,
+        int size,
+        MagickGeometry fmt,
+        string font = "",
+        int rotation = 0,
+        bool fontBold = false,
+        bool fontItalic = false) => CenteredText(
+        text,
+        size,
+        fmt.Width,
+        fmt.Height,
+        font,
+        rotation,
+        fontBold,
+        fontItalic);
+
     /// <summary>
     /// Renders text centered to the given reference image
     /// </summary>
@@ -183,9 +213,22 @@ public static class Utils
     /// <param name="fontBold">use bold font (if available)</param>
     /// <param name="fontItalic">use bold font (if available)</param>
     /// <returns></returns>
-    public static Drawables CenteredText(string text, int size, MagickImage fmt,
-        string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false) =>
-        CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
+    public static Drawables CenteredText(
+        string text,
+        int size,
+        MagickImage fmt,
+        string font = "",
+        int rotation = 0,
+        bool fontBold = false,
+        bool fontItalic = false) => CenteredText(
+        text,
+        size,
+        fmt.Width,
+        fmt.Height,
+        font,
+        rotation,
+        fontBold,
+        fontItalic);
     #endregion
 
     #region lines
@@ -196,6 +239,7 @@ public static class Utils
     /// <param name="h">Distance from top border</param>
     /// <param name="width"></param>
     public static void HLine(Drawables draw, int h, int width) => draw.Line(0, h, width, h);
+
     /// <summary>
     /// Draws a vertical line from 0 to height
     /// </summary>
@@ -254,7 +298,7 @@ public static class Utils
             using (StreamReader reader = new StreamReader(stream))
             {
                 return reader.ReadToEnd();
-           }
+            }
         }
     }
 
@@ -273,4 +317,55 @@ public static class Utils
             image.Write($"{par.OutputName}-{i}of{max}.{par.Extension}");
         }
     }
+
+    #region image reading
+    /// <summary>
+    /// Available ImageMagick prefixes
+    /// </summary>
+    public static List<string> Prefixes => new()
+    {
+        "xc",
+        "gradient",
+        "radial-gradient",
+        "plasma",
+        "tile",
+        "label",
+        "caption",
+        "pango",
+        "pattern"
+    };
+
+    /// <summary>
+    /// Open image from file or embedded canvas
+    /// </summary>
+    /// <param name="filename">Filename or canvas description</param>
+    /// <param name="geometry">geometry of resulting image</param>
+    /// <returns></returns>
+    public static MagickImage GetImage(string filename, MagickGeometry geometry = null)
+    {
+        MagickImage ret = null;
+        if (filename.Contains(':'))
+        {
+            int pos = filename.IndexOf(':');
+            string prefix = filename.Substring(0, pos);
+            if (Prefixes.Contains(prefix))
+            {
+                if (geometry is null)
+                {
+                    geometry = new MagickGeometry(256, 256);
+                }
+                ret = new(filename, geometry.Width, geometry.Height);
+            }
+            else
+            {
+                ret = new(filename);
+            }
+        }
+        else
+        {
+            ret = new(filename);
+        }
+        return ret;
+    }
+    #endregion
 }

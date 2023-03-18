@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "*.jpg",
+      "commandLineArgs": "plasma:white \"label:The Strawberry Field\"",
       "workingDirectory": "C:\\projects\\Contemporary_CDV\\bin\\build\\net6.0"
     }
   }
