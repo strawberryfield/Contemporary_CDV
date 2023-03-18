@@ -340,8 +340,9 @@ public static class Utils
     /// </summary>
     /// <param name="filename">Filename or canvas description</param>
     /// <param name="geometry">geometry of resulting image</param>
+    /// <param name="gravity"></param>
     /// <returns></returns>
-    public static MagickImage GetImage(string filename, MagickGeometry geometry = null)
+    public static MagickImage GetImage(string filename, MagickGeometry geometry = null, Gravity gravity = Gravity.Center)
     {
         MagickImage ret = null;
         if (filename.Contains(':'))
@@ -355,7 +356,8 @@ public static class Utils
                 {
                     BackgroundColor = MagickColors.Transparent,
                     Height = geometry.Height,
-                    Width = geometry.Width
+                    Width = geometry.Width,
+                    TextGravity = gravity
                 };
 
                 if(filename.Length > pos + 2)

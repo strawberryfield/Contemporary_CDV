@@ -421,6 +421,19 @@
             <param name="s">string to process</param>
             <returns>escaped string</returns>
         </member>
+        <member name="M:Casasoft.CCDV.CommandLine.GetGravity(System.String)">
+            <summary>
+            Get the ImageMagick Gravity
+            </summary>
+            <param name="gravity">Gravity string</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.CommandLine.GravityDesc">
+            <summary>
+            Descriptive values for gravity
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.CreditCardCommandLine">
             <summary>
             Command line extensions for credit cards builder
@@ -806,6 +819,11 @@
         <member name="P:Casasoft.CCDV.MontaggioFotoCommandLine.Padding">
             <summary>
             Blank border around the image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.MontaggioFotoCommandLine.CanvasGravity">
+            <summary>
+            Canvas gravity
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.#ctor(System.String,System.String)">
@@ -1809,6 +1827,11 @@
         <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Padding">
             <summary>
             Blank border around the image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.CanvasGravity">
+            <summary>
+            Canvas gravity
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor">
@@ -3280,12 +3303,13 @@
             Available ImageMagick prefixes
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.GetImage(System.String,ImageMagick.MagickGeometry)">
+        <member name="M:Casasoft.CCDV.Utils.GetImage(System.String,ImageMagick.MagickGeometry,ImageMagick.Gravity)">
             <summary>
             Open image from file or embedded canvas
             </summary>
             <param name="filename">Filename or canvas description</param>
             <param name="geometry">geometry of resulting image</param>
+            <param name="gravity"></param>
             <returns></returns>
         </member>
     </members>

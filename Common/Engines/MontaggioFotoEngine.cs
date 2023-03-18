@@ -49,6 +49,11 @@ public class MontaggioFotoEngine : BaseEngine
     /// Blank border around the image
     /// </summary>
     public int Padding { get; set; } = 0;
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; } = Gravity.Center;
+
     #endregion
 
     #region constructors

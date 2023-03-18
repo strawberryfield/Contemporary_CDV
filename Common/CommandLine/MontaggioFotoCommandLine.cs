@@ -21,6 +21,7 @@
 
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
+using ImageMagick;
 using Mono.Options;
 using System.Text.Json;
 
@@ -48,6 +49,11 @@ public class MontaggioFotoCommandLine : CommandLine
     /// </summary>
     public int Padding { get; set; }
     private string sPadding = "0";
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; }
+    private string sGravity = "CENTER";
 
     /// <summary>
     /// Constructor
@@ -75,7 +81,8 @@ public class MontaggioFotoCommandLine : CommandLine
                 { "fullsize", "resize image to full format", o => FullSize = o != null },
                 { "withborder", "include border to full format", o => WithBorder = o != null },
                 { "trim", "trim white space", o => Trim = o != null },
-                { "p|padding=", "blank border around the image", s => sPadding = s }
+                { "p|padding=", "blank border around the image", s => sPadding = s },
+                { "gravity=", $"canvas gravity, {GravityDesc()}", s => sGravity = s }
             };
         AddBaseOptions();
     }
@@ -91,7 +98,7 @@ public class MontaggioFotoCommandLine : CommandLine
 
         Padding = GetIntParameter(sPadding, Padding,
             $"Incorrect padding value '{sPadding}'. Using default value.");
-
+        CanvasGravity = GetGravity(sGravity);
         return false;
     }
 

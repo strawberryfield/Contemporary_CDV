@@ -256,7 +256,7 @@ The file must be referenced as '@filename'",
     /// </summary>
     public void AddBaseOptions()
     {
-        foreach(var opt in baseOptions)
+        foreach (var opt in baseOptions)
         {
             Options.Add(opt);
         }
@@ -272,23 +272,24 @@ The file must be referenced as '@filename'",
         try
         {
             FilesList = Options.Parse(args);
-        } catch(OptionException e)
+        }
+        catch (OptionException e)
         {
             Console.Error.WriteLine($"{exeName}: {e.Message}");
             Console.Error.WriteLine($"Try '{exeName} --help' for more informations.");
             return true;
         }
 
-        if(shouldShowMan)
+        if (shouldShowMan)
         {
             Console.WriteLine(PrintMan());
             return true;
         }
 
-        if(!noBanner)
+        if (!noBanner)
             WelcomeBanner();
 
-        if(shouldShowHelp)
+        if (shouldShowHelp)
         {
             Console.WriteLine($"Usage: {exeName} {Usage}");
             Console.WriteLine("\nOptions:");
@@ -301,14 +302,14 @@ The file must be referenced as '@filename'",
             return true;
         }
 
-        if(shouldShowHelpJson)
+        if (shouldShowHelpJson)
         {
             Console.WriteLine($"Json parameters template for: {exeName}\n");
             Console.WriteLine(JsonTemplate());
             return true;
         }
 
-        if(shouldShowHelpScript)
+        if (shouldShowHelpScript)
         {
             Console.WriteLine("-----");
             Console.WriteLine(ScriptTemplate());
@@ -316,26 +317,26 @@ The file must be referenced as '@filename'",
             return true;
         }
 
-        if(shouldShowColors)
+        if (shouldShowColors)
         {
             Console.WriteLine("Available colors are:");
-            foreach(var color in colors.colorDictionary)
+            foreach (var color in colors.colorDictionary)
             {
                 Console.WriteLine("{0,-24}{1}", color.Key, color.Value.ToHexString());
             }
             return true;
         }
 
-        if(shouldShowLicense)
+        if (shouldShowLicense)
         {
             Console.WriteLine(Utils.GetLicense());
             return true;
         }
 
-        if(!Path.IsPathRooted(OutputName))
+        if (!Path.IsPathRooted(OutputName))
         {
             outputDir = Environment.GetEnvironmentVariable("CDV_OUTPATH");
-            if(!string.IsNullOrWhiteSpace(outputDir))
+            if (!string.IsNullOrWhiteSpace(outputDir))
                 OutputName = Path.Combine(outputDir, OutputName);
         }
 
@@ -395,7 +396,7 @@ The file must be referenced as '@filename'",
 # SYNOPSIS
 **{exeName}** {EscapeMarkdown(Usage)}");
 
-        if(!string.IsNullOrWhiteSpace(LongDesc))
+        if (!string.IsNullOrWhiteSpace(LongDesc))
         {
             ret.AppendLine($"\n# DESCRIPTION\n{EscapeMarkdown(LongDesc)}");
         }
@@ -405,16 +406,17 @@ The file must be referenced as '@filename'",
         Options.WriteOptionDescriptions(sw);
         string[] opts = sw.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
         bool first = true;
-        foreach(string s in opts)
+        foreach (string s in opts)
         {
-            if(string.IsNullOrWhiteSpace(s))
+            if (string.IsNullOrWhiteSpace(s))
                 continue;
 
             string o = s.Substring(0, 29).Trim();
-            if(string.IsNullOrWhiteSpace(o))
+            if (string.IsNullOrWhiteSpace(o))
             {
                 ret.Append($"{EscapeMarkdown(s.Trim())}  \n");
-            } else
+            }
+            else
             {
                 ret.Append(first ? string.Empty : "\n\n");
                 ret.Append($"**{o}** :  \n{EscapeMarkdown(s.Substring(29).Trim())}  \n");
@@ -505,15 +507,15 @@ See the GNU General Public License for more details.");
     protected void GetEnvVars()
     {
         string eDpi = Environment.GetEnvironmentVariable("CDV_DPI");
-        if(!string.IsNullOrWhiteSpace(eDpi))
+        if (!string.IsNullOrWhiteSpace(eDpi))
             Dpi = GetIntParameter(eDpi, Dpi, "Incorrect CDV_DPI environment variable value '{0}'.");
 
         string eFill = Environment.GetEnvironmentVariable("CDV_FILL");
-        if(!string.IsNullOrWhiteSpace(eFill))
+        if (!string.IsNullOrWhiteSpace(eFill))
             sFillColor = eFill;
 
         string eBorder = Environment.GetEnvironmentVariable("CDV_BORDER");
-        if(!string.IsNullOrWhiteSpace(eBorder))
+        if (!string.IsNullOrWhiteSpace(eBorder))
             sFillColor = eBorder;
     }
 
@@ -525,26 +527,29 @@ See the GNU General Public License for more details.");
     /// <returns></returns>
     protected string GetFileParameter(string p)
     {
-        if(!string.IsNullOrWhiteSpace(p) && p[0] == '@')
+        if (!string.IsNullOrWhiteSpace(p) && p[0] == '@')
         {
             string ret = string.Empty;
             int l = p.Length;
-            if(l < 2)
+            if (l < 2)
             {
                 Console.Error.WriteLine("Missing filename for '@' parameter");
-            } else
+            }
+            else
             {
                 string filename = p.Substring(1);
-                if(File.Exists(filename))
+                if (File.Exists(filename))
                 {
                     ret = File.ReadAllText(filename);
-                } else
+                }
+                else
                 {
                     Console.Error.WriteLine($"File '{filename}' not found.");
                 }
             }
             return ret;
-        } else
+        }
+        else
         {
             return p;
         }
@@ -560,7 +565,7 @@ See the GNU General Public License for more details.");
     public static int GetIntParameter(string val, int fallback, string message)
     {
         int ret;
-        if(!Int32.TryParse(val, out ret))
+        if (!Int32.TryParse(val, out ret))
         {
             Console.Error.WriteLine(string.Format(message, val));
             ret = fallback;
@@ -573,7 +578,7 @@ See the GNU General Public License for more details.");
     /// </summary>
     protected void GetDPI()
     {
-        if(!string.IsNullOrWhiteSpace(sDpi))
+        if (!string.IsNullOrWhiteSpace(sDpi))
             Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
     }
 
@@ -586,17 +591,19 @@ See the GNU General Public License for more details.");
     protected MagickColor GetColor(string color)
     {
         MagickColor ret = MagickColors.Transparent;
-        if(!string.IsNullOrWhiteSpace(color))
+        if (!string.IsNullOrWhiteSpace(color))
         {
             MagickColor r = colors.GetColor(color);
-            if(r is not null)
+            if (r is not null)
             {
                 ret = r;
-            } else
+            }
+            else
             {
                 Console.Error.WriteLine($"Unknown color '{color}'\nTry {exeName} --colors");
             }
-        } else
+        }
+        else
         {
             Console.Error.WriteLine("Invalid empty color");
         }
@@ -609,12 +616,12 @@ See the GNU General Public License for more details.");
     public void ExpandWildcards()
     {
         List<string> files = new();
-        foreach(string filename in FilesList)
+        foreach (string filename in FilesList)
         {
-            if(filename.Contains('*') || filename.Contains('?'))
+            if (filename.Contains('*') || filename.Contains('?'))
             {
                 string path = Path.GetDirectoryName(filename);
-                if(string.IsNullOrWhiteSpace(path))
+                if (string.IsNullOrWhiteSpace(path))
                 {
                     path = ".";
                 }
@@ -645,5 +652,37 @@ See the GNU General Public License for more details.");
         .Replace("]", "\\]")
         .Replace("{", "\\{")
         .Replace("}", "\\}");
+    #endregion
+
+    #region gravity
+    /// <summary>
+    /// Get the ImageMagick Gravity
+    /// </summary>
+    /// <param name="gravity">Gravity string</param>
+    /// <returns></returns>
+    protected static Gravity GetGravity(string gravity)
+    {
+        Gravity ret;
+        if (!Enum.TryParse(gravity, true, out ret))
+        {
+            ret = Gravity.Center;
+        }
+        return ret;
+    }
+
+    /// <summary>
+    /// Descriptive values for gravity
+    /// </summary>
+    /// <returns></returns>
+    protected static string GravityDesc()
+    {
+        StringBuilder sb = new();
+        sb.AppendLine("valid values are:");
+        foreach (var s in Enum.GetValues(typeof(Gravity)).Cast<Gravity>())
+        {
+            sb.AppendLine(s.ToString());
+        }
+        return sb.ToString();
+    }
     #endregion
 }
