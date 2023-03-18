@@ -2,11 +2,8 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "--script=@C:\\projects\\Contemporary_CDV\\Test\\AddLabel.cs --fullsize C:\\projects\\Contemporary_CDV\\Test\\cdv*.jpg",
-      "environmentVariables": {
-        "CDV_OUTPATH": "C:\\temp",
-        "CDV_DPI": "600"
-      }
+      "commandLineArgs": "*.jpg",
+      "workingDirectory": "C:\\projects\\Contemporary_CDV\\bin\\build\\net6.0"
     }
   }
 }
