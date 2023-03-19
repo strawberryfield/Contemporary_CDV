@@ -63,12 +63,16 @@ public static class Utils
     /// <param name="img">Image to resize</param>
     /// <param name="size">target size</param>
     /// <param name="fill">color to fill the empty space</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>Image resized and filled</returns>
-    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill)
+    public static MagickImage ResizeAndFill(MagickImage img,
+        MagickGeometry size,
+        MagickColor fill,
+        Gravity gravity = Gravity.Center)
     {
         MagickImage i = (MagickImage)img.Clone();
         i.Resize(size);
-        i.Extent(size, Gravity.Center, fill);
+        i.Extent(size, gravity, fill);
         return i;
     }
 
@@ -77,11 +81,15 @@ public static class Utils
     /// </summary>
     /// <param name="img">Image to resize</param>
     /// <param name="size">target size</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>Image resized and filled</returns>
-    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) => ResizeAndFill(
+    public static MagickImage ResizeAndFill(MagickImage img,
+        MagickGeometry size,
+        Gravity gravity = Gravity.Center) => ResizeAndFill(
         img,
         size,
-        MagickColors.White);
+        MagickColors.White,
+        gravity);
 
     /// <summary>
     /// Resizes an image to the given geometry.<br/> Before resizing the image is rotated with <see
@@ -90,11 +98,16 @@ public static class Utils
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
     /// <param name="fill">fill color</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill) => ResizeAndFill(
+    public static MagickImage RotateResizeAndFill(MagickImage img,
+        MagickGeometry size,
+        MagickColor fill,
+        Gravity gravity = Gravity.Center) => ResizeAndFill(
         AutoRotate(img, size),
         size,
-        fill);
+        fill,
+        gravity);
 
     /// <summary>
     /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
@@ -103,11 +116,16 @@ public static class Utils
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
     /// <param name="fill">fill color</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, MagickColor fill) => RotateResizeAndFill(
+    public static MagickImage RotateResizeAndFill(MagickImage img,
+        MagickImage size,
+        MagickColor fill,
+        Gravity gravity = Gravity.Center) => RotateResizeAndFill(
         img,
         new MagickGeometry(size.Width, size.Height),
-        fill);
+        fill,
+        gravity);
 
     /// <summary>
     /// Resizes an image to the given geometry. Before resizing the image is rotated with <see cref="AutoRotate"/> Empty
@@ -115,11 +133,15 @@ public static class Utils
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size) => RotateResizeAndFill(
+    public static MagickImage RotateResizeAndFill(MagickImage img,
+        MagickGeometry size,
+        Gravity gravity = Gravity.Center) => RotateResizeAndFill(
         img,
         size,
-        MagickColors.White);
+        MagickColors.White,
+        gravity);
 
     /// <summary>
     /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
@@ -127,11 +149,15 @@ public static class Utils
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) => RotateResizeAndFill(
+    public static MagickImage RotateResizeAndFill(MagickImage img,
+        MagickImage size,
+        Gravity gravity = Gravity.Center) => RotateResizeAndFill(
         img,
         size,
-        MagickColors.White);
+        MagickColors.White,
+        gravity);
     #endregion
 
     #region text
@@ -348,27 +374,32 @@ public static class Utils
         if (filename.Contains(':'))
         {
             int pos = filename.IndexOf(':');
-            string prefix = filename.Substring(0, pos);
+            string prefix = filename.Substring(0, pos).ToLower();
             if (Prefixes.Contains(prefix))
             {
                 geometry ??= new MagickGeometry(256, 256);
                 MagickReadSettings settings = new()
                 {
                     BackgroundColor = MagickColors.Transparent,
-                    Height = geometry.Height,
+                    Height = prefix == "pango" ? 0 : geometry.Height,
                     Width = geometry.Width,
                     TextGravity = gravity
                 };
 
-                if(filename.Length > pos + 2)
+                if (filename.Length > pos + 2)
                 {
                     string argument = filename.Substring(pos + 1);
                     if (argument[0] == '@')
                     {
                         filename = $"{prefix}:{File.ReadAllText(argument.Substring(1))}";
                     }
-                } 
+                }
                 ret = new(filename, settings);
+
+                if (prefix == "pango")
+                {
+                    ret = ResizeAndFill(ret, geometry, MagickColors.Transparent, gravity);
+                }
             }
             else
             {

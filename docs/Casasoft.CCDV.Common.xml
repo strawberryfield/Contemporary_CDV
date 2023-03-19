@@ -3166,24 +3166,26 @@
             <param name="size">reference geometry</param>
             <returns>rotated image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor)">
+        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor,ImageMagick.Gravity)">
             <summary>
             Resizes an image to the given geometry.<br/> Empty space is filled with the given color
             </summary>
             <param name="img">Image to resize</param>
             <param name="size">target size</param>
             <param name="fill">color to fill the empty space</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>Image resized and filled</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry)">
+        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.Gravity)">
             <summary>
             Resizes an image to the given geometry.<br/> Empty space is filled with white
             </summary>
             <param name="img">Image to resize</param>
             <param name="size">target size</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>Image resized and filled</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor,ImageMagick.Gravity)">
             <summary>
             Resizes an image to the given geometry.<br/> Before resizing the image is rotated with <see
             cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/> Empty space is filled with the given color.
@@ -3191,9 +3193,10 @@
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
             <param name="fill">fill color</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage,ImageMagick.MagickColor)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage,ImageMagick.MagickColor,ImageMagick.Gravity)">
             <summary>
             Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
             cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/> Empty space is filled with the given color.
@@ -3201,24 +3204,27 @@
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
             <param name="fill">fill color</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.Gravity)">
             <summary>
             Resizes an image to the given geometry. Before resizing the image is rotated with <see cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/> Empty
             space is filled with white color.
             </summary>
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage,ImageMagick.Gravity)">
             <summary>
             Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
             cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/> Empty space is filled with white color.
             </summary>
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
         <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Boolean,System.Boolean)">
