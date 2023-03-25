@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "--fillcolor=lightgray --withborder=5 C:\\projects\\Contemporary_CDV\\Test\\cdv_v.jpg pango:@C:\\projects\\Contemporary_CDV\\Test\\pango.txt",
+      "commandLineArgs": "--fillcolor=lightgray --gravity=east --withborder=5 C:\\projects\\Contemporary_CDV\\Test\\cdv_v.jpg pango:@C:\\projects\\Contemporary_CDV\\Test\\pango.txt",
       "workingDirectory": "C:\\projects\\Contemporary_CDV\\bin\\build\\net6.0"
     }
   }

@@ -42,16 +42,15 @@ public static class Utils
     public static MagickImage AutoRotate(MagickImage img, MagickGeometry size)
     {
         MagickImage i = (MagickImage)img.Clone();
-        if (size.Height > size.Width)
+        if(size.Height > size.Width)
         {
             // output must be portrait
-            if (img.Height < img.Width)
+            if(img.Height < img.Width)
                 i.Rotate(-90);
-        }
-        else
+        } else
         {
             // output must be landscape
-            if (img.Height > img.Width)
+            if(img.Height > img.Width)
                 i.Rotate(-90);
         }
         return i;
@@ -65,7 +64,8 @@ public static class Utils
     /// <param name="fill">color to fill the empty space</param>
     /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>Image resized and filled</returns>
-    public static MagickImage ResizeAndFill(MagickImage img,
+    public static MagickImage ResizeAndFill(
+        MagickImage img,
         MagickGeometry size,
         MagickColor fill,
         Gravity gravity = Gravity.Center)
@@ -83,9 +83,7 @@ public static class Utils
     /// <param name="size">target size</param>
     /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>Image resized and filled</returns>
-    public static MagickImage ResizeAndFill(MagickImage img,
-        MagickGeometry size,
-        Gravity gravity = Gravity.Center) => ResizeAndFill(
+    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size, Gravity gravity = Gravity.Center) => ResizeAndFill(
         img,
         size,
         MagickColors.White,
@@ -100,14 +98,11 @@ public static class Utils
     /// <param name="fill">fill color</param>
     /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img,
+    public static MagickImage RotateResizeAndFill(
+        MagickImage img,
         MagickGeometry size,
         MagickColor fill,
-        Gravity gravity = Gravity.Center) => ResizeAndFill(
-        AutoRotate(img, size),
-        size,
-        fill,
-        gravity);
+        Gravity gravity = Gravity.Center) => ResizeAndFill(AutoRotate(img, size), size, fill, gravity);
 
     /// <summary>
     /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
@@ -118,7 +113,8 @@ public static class Utils
     /// <param name="fill">fill color</param>
     /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img,
+    public static MagickImage RotateResizeAndFill(
+        MagickImage img,
         MagickImage size,
         MagickColor fill,
         Gravity gravity = Gravity.Center) => RotateResizeAndFill(
@@ -135,13 +131,10 @@ public static class Utils
     /// <param name="size">reference size and orientation</param>
     /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img,
+    public static MagickImage RotateResizeAndFill(
+        MagickImage img,
         MagickGeometry size,
-        Gravity gravity = Gravity.Center) => RotateResizeAndFill(
-        img,
-        size,
-        MagickColors.White,
-        gravity);
+        Gravity gravity = Gravity.Center) => RotateResizeAndFill(img, size, MagickColors.White, gravity);
 
     /// <summary>
     /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
@@ -151,9 +144,7 @@ public static class Utils
     /// <param name="size">reference size and orientation</param>
     /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img,
-        MagickImage size,
-        Gravity gravity = Gravity.Center) => RotateResizeAndFill(
+    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, Gravity gravity = Gravity.Center) => RotateResizeAndFill(
         img,
         size,
         MagickColors.White,
@@ -185,14 +176,14 @@ public static class Utils
     {
         Drawables draw = new();
         draw.Rotation(rotation);
-        if (!string.IsNullOrWhiteSpace(font))
+        if(!string.IsNullOrWhiteSpace(font))
             draw.Font(
                 font,
                 fontItalic ? FontStyleType.Italic : FontStyleType.Normal,
                 fontBold ? FontWeight.Bold : FontWeight.Normal,
                 FontStretch.Normal);
         draw.StrokeColor(MagickColors.Black).FontPointSize(size).TextAlignment(TextAlignment.Center);
-        if (Math.Abs(rotation) != 90)
+        if(Math.Abs(rotation) != 90)
             draw.Text(width / 2, height / 2, text);
         else
             draw.Text(Math.Sign(rotation) * height / 2, width / 2, text);
@@ -285,25 +276,25 @@ public static class Utils
     public static PaperFormats GetPaperFormat(string Paper, PaperFormats def = PaperFormats.Large)
     {
         PaperFormats ret = def;
-        if (!string.IsNullOrEmpty(Paper))
+        if(!string.IsNullOrEmpty(Paper))
         {
-            if (Paper.ToUpper() == "MEDIUM")
+            if(Paper.ToUpper() == "MEDIUM")
             {
                 ret = PaperFormats.Medium;
             }
-            if (Paper.ToUpper() == "A4")
+            if(Paper.ToUpper() == "A4")
             {
                 ret = PaperFormats.A4;
             }
-            if (Paper.ToUpper() == "LARGE")
+            if(Paper.ToUpper() == "LARGE")
             {
                 ret = PaperFormats.Large;
             }
-            if (Paper.ToUpper() == "SMALL")
+            if(Paper.ToUpper() == "SMALL")
             {
                 ret = PaperFormats.Small;
             }
-            if (Paper.ToUpper() == "PANORAMA")
+            if(Paper.ToUpper() == "PANORAMA")
             {
                 ret = PaperFormats.Panorama;
             }
@@ -319,9 +310,9 @@ public static class Utils
     public static string GetLicense()
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using (Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
+        using(Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
         {
-            using (StreamReader reader = new StreamReader(stream))
+            using(StreamReader reader = new StreamReader(stream))
             {
                 return reader.ReadToEnd();
             }
@@ -337,7 +328,7 @@ public static class Utils
     {
         int max = final.Count;
         int i = 0;
-        foreach (MagickImage image in final)
+        foreach(MagickImage image in final)
         {
             i++;
             image.Write($"{par.OutputName}-{i}of{max}.{par.Extension}");
@@ -368,45 +359,71 @@ public static class Utils
     /// <param name="geometry">geometry of resulting image</param>
     /// <param name="gravity"></param>
     /// <returns></returns>
-    public static MagickImage GetImage(string filename, MagickGeometry geometry = null, Gravity gravity = Gravity.Center)
+    public static MagickImage GetImage(
+        string filename,
+        MagickGeometry geometry = null,
+        Gravity gravity = Gravity.Center)
     {
         MagickImage ret = null;
-        if (filename.Contains(':'))
+        if(filename.Contains(':'))
         {
             int pos = filename.IndexOf(':');
             string prefix = filename.Substring(0, pos).ToLower();
-            if (Prefixes.Contains(prefix))
+            if(Prefixes.Contains(prefix))
             {
                 geometry ??= new MagickGeometry(256, 256);
+                Gravity textGravity = gravity;
+                if(prefix == "pango")
+                {
+                    switch(gravity)
+                    {
+                        case Gravity.Northwest:
+                        case Gravity.West:
+                        case Gravity.Southwest:
+                            textGravity = Gravity.East;
+                            break;
+                        case Gravity.North:
+                        case Gravity.South:
+                        case Gravity.Center:
+                            textGravity = Gravity.Center;
+                            break;
+                        case Gravity.Northeast:
+                        case Gravity.East:
+                        case Gravity.Southeast:
+                            textGravity = Gravity.West;
+                            break;
+                        default:
+                            textGravity = Gravity.Undefined;
+                            break;
+                    }
+                }
                 MagickReadSettings settings = new()
                 {
                     BackgroundColor = MagickColors.Transparent,
                     Height = prefix == "pango" ? 0 : geometry.Height,
                     Width = geometry.Width,
-                    TextGravity = gravity
+                    TextGravity = textGravity
                 };
 
-                if (filename.Length > pos + 2)
+                if(filename.Length > pos + 2)
                 {
                     string argument = filename.Substring(pos + 1);
-                    if (argument[0] == '@')
+                    if(argument[0] == '@')
                     {
                         filename = $"{prefix}:{File.ReadAllText(argument.Substring(1))}";
                     }
                 }
                 ret = new(filename, settings);
 
-                if (prefix == "pango")
+                if(prefix == "pango")
                 {
                     ret = ResizeAndFill(ret, geometry, MagickColors.Transparent, gravity);
                 }
-            }
-            else
+            } else
             {
                 ret = new(filename);
             }
-        }
-        else
+        } else
         {
             ret = new(filename);
         }
