@@ -109,7 +109,7 @@ public class MontaggioFotoCommandLine : CommandLine
     protected override void ExtraHelp()
     {
         Console.WriteLine("\nBuilt-in images and renders");
-        Console.WriteLine(BuiltInHelp);
+        Console.WriteLine(ImageMagickHelp.BuiltInHelp);
     }
 
     /// <summary>
@@ -117,7 +117,7 @@ public class MontaggioFotoCommandLine : CommandLine
     /// </summary>
     protected override string ExtraMan() => @$"
 # BUILT-IN IMAGES AND RENDERS
-{BuiltInMan}
+{ImageMagickHelp.BuiltInMan}
 ";
 
     /// <summary>

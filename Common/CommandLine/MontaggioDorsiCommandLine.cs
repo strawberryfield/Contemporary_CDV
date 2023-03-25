@@ -99,7 +99,7 @@ public class MontaggioDorsiCommandLine : CommandLine
     protected override void ExtraHelp()
     {
         Console.WriteLine("\nBuilt-in images and renders");
-        Console.Write(BuiltInHelp);
+        Console.Write(ImageMagickHelp.BuiltInHelp);
     }
 
     /// <summary>
@@ -107,7 +107,7 @@ public class MontaggioDorsiCommandLine : CommandLine
     /// </summary>
     protected override string ExtraMan() =>  @$"
 # BUILT-IN IMAGES AND RENDERS
-{BuiltInMan}
+{ImageMagickHelp.BuiltInMan}
 ";
 
     /// <summary>

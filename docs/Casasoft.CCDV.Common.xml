@@ -361,16 +361,6 @@
             Environment varaibles help
             </summary>
         </member>
-        <member name="P:Casasoft.CCDV.CommandLine.BuiltIn">
-            <summary>
-            Imagemagick built-in templates
-            </summary>
-        </member>
-        <member name="P:Casasoft.CCDV.CommandLine.BuiltInMan">
-            <summary>
-            Imagemagick built-in templates formatted in Markdown
-            </summary>
-        </member>
         <member name="M:Casasoft.CCDV.CommandLine.PrintMan">
             <summary>
             Text of man page in markdown format
@@ -433,13 +423,6 @@
             <summary>
             Windows shell does not expand wildcards
             </summary>
-        </member>
-        <member name="M:Casasoft.CCDV.CommandLine.EscapeMarkdown(System.String)">
-            <summary>
-            Escape markdown special characters
-            </summary>
-            <param name="s">string to process</param>
-            <returns>escaped string</returns>
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.GetGravity(System.String)">
             <summary>
@@ -669,6 +652,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.HelpUtils">
+            <summary>
+            Utilities for command line help
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.EscapeMarkdown(System.String)">
+            <summary>
+            Escape markdown special characters
+            </summary>
+            <param name="s">string to process</param>
+            <returns>escaped string</returns>
+        </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
             Interface for command line handling
@@ -771,6 +766,27 @@
         <member name="M:Casasoft.CCDV.ICommandLine.ScriptTemplate">
             <summary>
             Prints a script template
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.ImageMagickHelp">
+            <summary>
+            Texts for help of ImageMagick options
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ImageMagickHelp.BuiltInHelp">
+            <summary>
+            Imagemagick built-in templates
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ImageMagickHelp.BuiltInMan">
+            <summary>
+            Imagemagick built-in templates formatted in Markdown
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.ImageMagickHelp.GravityDesc">
+            <summary>
+            Descriptive values for gravity
             </summary>
             <returns></returns>
         </member>
@@ -891,6 +907,11 @@
             <returns>true if nothing to (ie. help)</returns>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ExtraHelp">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ExtraMan">
             <summary>
             Adds help for built-in images and canvases
             </summary>

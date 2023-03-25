@@ -392,69 +392,6 @@ The file must be referenced as '@filename'",
   CDV_BORDER   Border color";
 
     /// <summary>
-    /// Imagemagick built-in templates
-    /// </summary>
-    protected string BuiltInHelp
-    {
-        get
-        {
-            StringBuilder sb = new();
-            sb.AppendLine("Instead of a filename you can use the following built-in templates:");
-            foreach(builtin item in builtins)
-            {
-                sb.Append("  ");
-                sb.Append(item.syntax.PadRight(32));
-                string[] rdesc = item.desc.Split('\n');
-                sb.AppendLine(rdesc[0]);
-                for(int i = 1; i < rdesc.Length; i++)
-                {
-                    sb.Append(new string(' ', 36));
-                    sb.AppendLine(rdesc[i]);
-                }
-            }
-            sb.AppendLine();
-            sb.AppendLine("The parameters can be stored in a file instead of a string.");
-            sb.AppendLine("The file must be referenced as '@filename'");
-            return sb.ToString();
-        }
-    }
-
-    /// <summary>
-    /// Imagemagick built-in templates formatted in Markdown
-    /// </summary>
-    protected string BuiltInMan
-    {
-        get
-        {
-            StringBuilder sb = new();
-            sb.AppendLine("Instead of a filename you can use the following built-in templates:\n");
-            foreach (builtin item in builtins)
-            {
-                sb.AppendLine($"**{EscapeMarkdown(item.syntax)}** :  ");
-                sb.AppendLine(EscapeMarkdown(item.desc));
-                sb.AppendLine("\n");
-
-            }
-            sb.AppendLine();
-            sb.AppendLine("The parameters can be stored in a file instead of a string.  ");
-            sb.AppendLine("The file must be referenced as '@filename'");
-            return sb.ToString();
-        }
-    }
-
-    private record builtin(string syntax, string desc);
-    private List<builtin> builtins = new() {
-        new("xc:color","Fill the image with the specified color"),
-        new("gradient:color1-color2","Fill the image with linear gradient\nfrom color1 to color2,\nif colors are omitted is white to black"),
-        new("radial-gradient:color1-color2","Radial gradient as above"),
-        new("plasma:color1-color2","Plasma gradient from color1 to color2,\nif colors are omitted is black to black"),
-        new("plasma:fractal","Creates a random plasma"),
-        new("label:text","Render the plain text with no word-wrap"),
-        new("caption:text","Render the plain text with auto word-wrap"),
-        new("pango:text","Render the text with pango markup")
-    };
-
-    /// <summary>
     /// Text of man page in markdown format
     /// </summary>
     /// <returns></returns>
@@ -470,11 +407,11 @@ The file must be referenced as '@filename'",
 {exeName} - {exeDesc}
 
 # SYNOPSIS
-**{exeName}** {EscapeMarkdown(Usage)}");
+**{exeName}** {HelpUtils.EscapeMarkdown(Usage)}");
 
         if (!string.IsNullOrWhiteSpace(LongDesc))
         {
-            ret.AppendLine($"\n# DESCRIPTION\n{EscapeMarkdown(LongDesc)}");
+            ret.AppendLine($"\n# DESCRIPTION\n{HelpUtils.EscapeMarkdown(LongDesc)}");
         }
 
         ret.AppendLine("\n# OPTIONS");
@@ -490,12 +427,12 @@ The file must be referenced as '@filename'",
             string o = s.Substring(0, 29).Trim();
             if (string.IsNullOrWhiteSpace(o))
             {
-                ret.Append($"{EscapeMarkdown(s.Trim())}  \n");
+                ret.Append($"{HelpUtils.EscapeMarkdown(s.Trim())}  \n");
             }
             else
             {
                 ret.Append(first ? string.Empty : "\n\n");
-                ret.Append($"**{o}** :  \n{EscapeMarkdown(s.Substring(29).Trim())}  \n");
+                ret.Append($"**{o}** :  \n{HelpUtils.EscapeMarkdown(s.Substring(29).Trim())}  \n");
             }
             first = false;
         }
@@ -504,7 +441,7 @@ The file must be referenced as '@filename'",
             $@"
 
 ## COLORS
-{EscapeMarkdown(ColorsSyntax)}
+{HelpUtils.EscapeMarkdown(ColorsSyntax)}
 
 ## JSON
 Parameters can also be passed with a json formatted string  
@@ -515,7 +452,7 @@ using the following template:
 ~~~
 
 ## ENVIRONMENT VARIABLES
-{EscapeMarkdown(EnvVarsHelp)}
+{HelpUtils.EscapeMarkdown(EnvVarsHelp)}
 
 # SCRIPTING
 You can add custom c# code, compiled at runtime, with the --script parameter.
@@ -712,23 +649,6 @@ See the GNU General Public License for more details.");
         FilesList.Clear();
         FilesList.AddRange(files);
     }
-
-    /// <summary>
-    /// Escape markdown special characters
-    /// </summary>
-    /// <param name="s">string to process</param>
-    /// <returns>escaped string</returns>
-    public string EscapeMarkdown(string s) => s.Replace("\r", "  \r")
-        .Replace("\\", "\\\\")
-        .Replace("#", "\\#")
-        .Replace("*", "\\*")
-        .Replace("_", "\\_")
-        .Replace("(", "\\(")
-        .Replace(")", "\\)")
-        .Replace("[", "\\[")
-        .Replace("]", "\\]")
-        .Replace("{", "\\{")
-        .Replace("}", "\\}");
     #endregion
 
     #region gravity
