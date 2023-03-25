@@ -769,6 +769,11 @@
             Output paper size
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.MontaggioDorsiCommandLine.CanvasGravity">
+            <summary>
+            Canvas gravity
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -783,6 +788,13 @@
             <param name="exename">Name of the program exe</param>
             <param name="outputname">Default output file name</param>
             <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.Parse(System.String[])">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="args">command line arguments</param>
+            <returns>true if nothing to (ie. help)</returns>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.JsonTemplate">
             <summary>
@@ -1766,6 +1778,11 @@
         <member name="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine">
             <summary>
             Montaggio dorsi engine
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioDorsiEngine.CanvasGravity">
+            <summary>
+            Canvas gravity
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">
@@ -2897,6 +2914,11 @@
             Output paper size
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioDorsiParameters.CanvasGravity">
+            <summary>
+            Canvas gravity
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.JSON.MontaggioDorsiParameters.#ctor">
             <summary>
             Default constructor
@@ -2925,6 +2947,11 @@
         <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.Padding">
             <summary>
             Blank border around the image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.CanvasGravity">
+            <summary>
+            Canvas gravity
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.JSON.MontaggioFotoParameters.#ctor">

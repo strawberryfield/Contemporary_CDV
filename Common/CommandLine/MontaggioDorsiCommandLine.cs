@@ -21,6 +21,7 @@
 
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
+using ImageMagick;
 using Mono.Options;
 using System.Text.Json;
 
@@ -45,6 +46,12 @@ public class MontaggioDorsiCommandLine : CommandLine
     }
 
     /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; }
+    private string sGravity = "CENTER";
+
+    /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="outputname">Default output file name</param>
@@ -67,8 +74,22 @@ public class MontaggioDorsiCommandLine : CommandLine
         Options = new OptionSet
             {
                 { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm", o => Paper = o  },
+                { "gravity=", $"canvas gravity, {GravityDesc()}", s => sGravity = s }
             };
         AddBaseOptions();
+    }
+
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="args">command line arguments</param>
+    /// <returns>true if nothing to (ie. help)</returns>
+    public override bool Parse(string[] args)
+    {
+        if (base.Parse(args)) return true;
+
+        CanvasGravity = GetGravity(sGravity);
+        return false;
     }
 
     /// <summary>

@@ -2,10 +2,7 @@
   "profiles": {
     "MontaggioDorsi": {
       "commandName": "Project",
-      "commandLineArgs": "--extension=pdf --dpi=600 --paper=A4    c:\\foto\\route71\\selezionate\\P2960131.jpg  c:\\foto\\route71\\selezionate\\P2960138.jpg",
-      "environmentVariables": {
-        "CDV_OUTPATH": "C:\\temp"
-      }
+      "commandLineArgs": "--gravity=center --fillcolor=#f0f0f0 xc:red plasma:white-white gradient: pango:@C:\\projects\\Contemporary_CDV\\Test\\pango.txt label:@C:\\projects\\Contemporary_CDV\\Test\\readme.md radial-gradient:blue-yellow"
     }
   }
 }
