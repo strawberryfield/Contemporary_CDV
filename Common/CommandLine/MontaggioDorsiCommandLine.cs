@@ -22,7 +22,9 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Mono.Options;
+using System;
 using System.Text.Json;
 
 namespace Casasoft.CCDV;
@@ -91,6 +93,23 @@ public class MontaggioDorsiCommandLine : CommandLine
         CanvasGravity = GetGravity(sGravity);
         return false;
     }
+
+    /// <summary>
+    /// Adds help for built-in images and canvases
+    /// </summary>
+    protected override void ExtraHelp()
+    {
+        Console.WriteLine("\nBuilt-in images and renders");
+        Console.WriteLine(BuiltIn);
+    }
+
+    /// <summary>
+    /// Adds help for built-in images and canvases
+    /// </summary>
+    protected override string ExtraMan() =>  @$"
+# BUILT-IN IMAGES AND RENDERS
+{EscapeMarkdown(BuiltIn)}
+";
 
     /// <summary>
     /// Prints a json schema for pameters

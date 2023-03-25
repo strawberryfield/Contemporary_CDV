@@ -298,6 +298,7 @@ The file must be referenced as '@filename'",
             Console.WriteLine(ColorsSyntax);
             Console.WriteLine("\nEnvironment variables");
             Console.WriteLine(EnvVarsHelp);
+            ExtraHelp();
 
             return true;
         }
@@ -346,6 +347,18 @@ The file must be referenced as '@filename'",
         return false;
     }
 
+    #region hooks
+    /// <summary>
+    /// Hook for extra help informations
+    /// </summary>
+    protected virtual void ExtraHelp() { }
+
+    /// <summary>
+    /// Hook for extra man informations
+    /// </summary>
+    protected virtual string ExtraMan() => string.Empty;
+    #endregion
+
     #region texts
     /// <summary>
     /// Prints the welcome banner
@@ -377,6 +390,26 @@ The file must be referenced as '@filename'",
   CDV_DPI      Resolution for output files
   CDV_FILL     Color used to fill images
   CDV_BORDER   Border color";
+
+    /// <summary>
+    /// Imagemagick built-in templates
+    /// </summary>
+    protected string BuiltIn => @"Instead of a filename you can use the following built-in templates:
+  xc:color                      Fill the image with the specified color
+  gradient:color1-color2        Fill the image with linear gradient 
+                                from color1 to color2,
+                                if colors are omitted is white to black
+  radial-gradient:color1-color2 Radial gradient as above
+  plasma:color1-color2          Plasma gradient from color1 to color2,
+                                if colors are omitted is black to black
+  plasma:fractal                Creates a random plasma 
+  label:text                    Render the plain text with no word-wrap  
+  caption:text                  Render the plain text with auto word-wrap  
+  pango:text                    Render the text with pango markup
+
+  The parameters can be stored in a file instead of a string.  
+  The file must be referenced as '@filename'
+";
 
     /// <summary>
     /// Text of man page in markdown format
@@ -457,6 +490,7 @@ These are the signatures of the scriptable methods:
 {ScriptTemplate()}
 ~~~
 
+{ExtraMan()}
 # COPYRIGHT
 Casasoft {exeName} is free software:  
 you can redistribute it and/or modify it  
@@ -680,7 +714,8 @@ See the GNU General Public License for more details.");
         sb.AppendLine("valid values are:");
         foreach (var s in Enum.GetValues(typeof(Gravity)).Cast<Gravity>())
         {
-            sb.AppendLine(s.ToString());
+            if (s != 0)
+                sb.AppendLine(s.ToString());
         }
         return sb.ToString();
     }

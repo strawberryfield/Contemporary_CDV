@@ -23,6 +23,7 @@ using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using Mono.Options;
+using System;
 using System.Text.Json;
 
 namespace Casasoft.CCDV;
@@ -100,6 +101,15 @@ public class MontaggioFotoCommandLine : CommandLine
             $"Incorrect padding value '{sPadding}'. Using default value.");
         CanvasGravity = GetGravity(sGravity);
         return false;
+    }
+
+    /// <summary>
+    /// Adds help for built-in images and canvases
+    /// </summary>
+    protected override void ExtraHelp()
+    {
+        Console.WriteLine("\nBuilt-in images and renders");
+        Console.WriteLine(BuiltIn);
     }
 
     /// <summary>

@@ -330,6 +330,16 @@
             <param name="args">command line arguments</param>
             <returns>true if nothing to (ie. help)</returns>
         </member>
+        <member name="M:Casasoft.CCDV.CommandLine.ExtraHelp">
+            <summary>
+            Hook for extra help informations
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.CommandLine.ExtraMan">
+            <summary>
+            Hook for extra man informations
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.WelcomeBanner">
             <summary>
             Prints the welcome banner
@@ -349,6 +359,11 @@
         <member name="P:Casasoft.CCDV.CommandLine.EnvVarsHelp">
             <summary>
             Environment varaibles help
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CommandLine.BuiltIn">
+            <summary>
+            Imagemagick built-in templates
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.PrintMan">
@@ -796,6 +811,16 @@
             <param name="args">command line arguments</param>
             <returns>true if nothing to (ie. help)</returns>
         </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.ExtraHelp">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.ExtraMan">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.JsonTemplate">
             <summary>
             Prints a json schema for pameters
@@ -859,6 +884,11 @@
             </summary>
             <param name="args">command line arguments</param>
             <returns>true if nothing to (ie. help)</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ExtraHelp">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.JsonTemplate">
             <summary>
