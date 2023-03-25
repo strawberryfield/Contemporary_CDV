@@ -212,8 +212,31 @@ public class MontaggioFotoEngine : BaseEngine
 
         if (WithBorder)
         {
+            int offset = Math.Min(fmt.CDV_Full_v.Width - img1.Width, fmt.CDV_Full_v.Height - img1.Height) / 2;
+            int offsetX = 0;
+            int offsetY = 0;
+            switch (CanvasGravity)
+            {
+                case Gravity.Northwest:
+                case Gravity.Northeast:
+                case Gravity.Southwest:
+                case Gravity.Southeast:
+                    offsetX = offset;
+                    offsetY = offset;
+                    break;
+                case Gravity.South:
+                case Gravity.North:
+                    offsetY = offset;
+                    break;
+                case Gravity.West:
+                case Gravity.East:
+                    offsetX = offset;
+                    break;
+                default:
+                    break;
+            }
             MagickImage img2 = img.CDV_Full_v(FillColor);
-            img2.Composite(img1, CanvasGravity);
+            img2.Composite(img1, CanvasGravity, offsetX, offsetY);
             return img2;
         }
 
