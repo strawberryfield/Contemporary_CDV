@@ -97,6 +97,7 @@ public class MontaggioFotoEngine : BaseEngine
         p.WithBorder = WithBorder;
         p.Trim = Trim;
         p.Padding = Padding;
+        p.CanvasGravity = CanvasGravity;
         return JsonSerializer.Serialize(p);
     }
 
@@ -123,6 +124,7 @@ public class MontaggioFotoEngine : BaseEngine
         Trim = p.Trim;
         Padding = p.Padding;
         Script = p.Script;
+        CanvasGravity = p.CanvasGravity;
     }
     #endregion
 

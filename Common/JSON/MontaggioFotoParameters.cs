@@ -19,6 +19,8 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using ImageMagick;
+
 namespace Casasoft.CCDV.JSON;
 
 /// <summary>
@@ -42,6 +44,10 @@ public class MontaggioFotoParameters : CommonParameters
     /// Blank border around the image
     /// </summary>
     public int Padding { get; set; } = 0;
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; }
 
     /// <summary>
     /// Default constructor
