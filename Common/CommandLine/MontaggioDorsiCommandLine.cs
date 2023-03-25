@@ -22,7 +22,6 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Mono.Options;
 using System;
 using System.Text.Json;
@@ -100,7 +99,7 @@ public class MontaggioDorsiCommandLine : CommandLine
     protected override void ExtraHelp()
     {
         Console.WriteLine("\nBuilt-in images and renders");
-        Console.WriteLine(BuiltIn);
+        Console.Write(BuiltInHelp);
     }
 
     /// <summary>
@@ -108,7 +107,7 @@ public class MontaggioDorsiCommandLine : CommandLine
     /// </summary>
     protected override string ExtraMan() =>  @$"
 # BUILT-IN IMAGES AND RENDERS
-{EscapeMarkdown(BuiltIn)}
+{BuiltInMan}
 ";
 
     /// <summary>

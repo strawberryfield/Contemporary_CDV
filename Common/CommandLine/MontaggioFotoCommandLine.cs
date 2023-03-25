@@ -109,8 +109,16 @@ public class MontaggioFotoCommandLine : CommandLine
     protected override void ExtraHelp()
     {
         Console.WriteLine("\nBuilt-in images and renders");
-        Console.WriteLine(BuiltIn);
+        Console.WriteLine(BuiltInHelp);
     }
+
+    /// <summary>
+    /// Adds help for built-in images and canvases
+    /// </summary>
+    protected override string ExtraMan() => @$"
+# BUILT-IN IMAGES AND RENDERS
+{BuiltInMan}
+";
 
     /// <summary>
     /// Prints a json schema for parameters

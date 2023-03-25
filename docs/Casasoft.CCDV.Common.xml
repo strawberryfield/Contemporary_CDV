@@ -366,6 +366,11 @@
             Imagemagick built-in templates
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.CommandLine.BuiltInMan">
+            <summary>
+            Imagemagick built-in templates formatted in Markdown
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.PrintMan">
             <summary>
             Text of man page in markdown format

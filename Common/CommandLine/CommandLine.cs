@@ -394,22 +394,65 @@ The file must be referenced as '@filename'",
     /// <summary>
     /// Imagemagick built-in templates
     /// </summary>
-    protected string BuiltIn => @"Instead of a filename you can use the following built-in templates:
-  xc:color                      Fill the image with the specified color
-  gradient:color1-color2        Fill the image with linear gradient 
-                                from color1 to color2,
-                                if colors are omitted is white to black
-  radial-gradient:color1-color2 Radial gradient as above
-  plasma:color1-color2          Plasma gradient from color1 to color2,
-                                if colors are omitted is black to black
-  plasma:fractal                Creates a random plasma 
-  label:text                    Render the plain text with no word-wrap  
-  caption:text                  Render the plain text with auto word-wrap  
-  pango:text                    Render the text with pango markup
+    protected string BuiltInHelp
+    {
+        get
+        {
+            StringBuilder sb = new();
+            sb.AppendLine("Instead of a filename you can use the following built-in templates:");
+            foreach(builtin item in builtins)
+            {
+                sb.Append("  ");
+                sb.Append(item.syntax.PadRight(32));
+                string[] rdesc = item.desc.Split('\n');
+                sb.AppendLine(rdesc[0]);
+                for(int i = 1; i < rdesc.Length; i++)
+                {
+                    sb.Append(new string(' ', 36));
+                    sb.AppendLine(rdesc[i]);
+                }
+            }
+            sb.AppendLine();
+            sb.AppendLine("The parameters can be stored in a file instead of a string.");
+            sb.AppendLine("The file must be referenced as '@filename'");
+            return sb.ToString();
+        }
+    }
 
-  The parameters can be stored in a file instead of a string.  
-  The file must be referenced as '@filename'
-";
+    /// <summary>
+    /// Imagemagick built-in templates formatted in Markdown
+    /// </summary>
+    protected string BuiltInMan
+    {
+        get
+        {
+            StringBuilder sb = new();
+            sb.AppendLine("Instead of a filename you can use the following built-in templates:\n");
+            foreach (builtin item in builtins)
+            {
+                sb.AppendLine($"**{EscapeMarkdown(item.syntax)}** :  ");
+                sb.AppendLine(EscapeMarkdown(item.desc));
+                sb.AppendLine("\n");
+
+            }
+            sb.AppendLine();
+            sb.AppendLine("The parameters can be stored in a file instead of a string.  ");
+            sb.AppendLine("The file must be referenced as '@filename'");
+            return sb.ToString();
+        }
+    }
+
+    private record builtin(string syntax, string desc);
+    private List<builtin> builtins = new() {
+        new("xc:color","Fill the image with the specified color"),
+        new("gradient:color1-color2","Fill the image with linear gradient\nfrom color1 to color2,\nif colors are omitted is white to black"),
+        new("radial-gradient:color1-color2","Radial gradient as above"),
+        new("plasma:color1-color2","Plasma gradient from color1 to color2,\nif colors are omitted is black to black"),
+        new("plasma:fractal","Creates a random plasma"),
+        new("label:text","Render the plain text with no word-wrap"),
+        new("caption:text","Render the plain text with auto word-wrap"),
+        new("pango:text","Render the text with pango markup")
+    };
 
     /// <summary>
     /// Text of man page in markdown format
