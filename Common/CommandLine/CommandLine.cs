@@ -471,22 +471,8 @@ These are the signatures of the scriptable methods:
 ~~~
 
 {ExtraMan()}
-# COPYRIGHT
-Casasoft {exeName} is free software:  
-you can redistribute it and/or modify it  
-under the terms of the GNU Affero General Public License as published by  
-the Free Software Foundation, either version 3 of the License, or  
-\(at your option\) any later version.  
-
-You should have received a copy of the GNU AGPL v.3  
-along with Casasoft {exeName}.  
-If not, see <http://www.gnu.org/licenses/>.  
-
-# DISCLAIMER
-Casasoft {exeName} is distributed in the hope that it will be useful,  
-but WITHOUT ANY WARRANTY; without even the implied warranty of  
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
-See the GNU General Public License for more details.");
+{HelpUtils.MDCopyright($"Casasoft {exeName}")}
+");
 
         return ret.ToString();
     }
@@ -665,22 +651,6 @@ See the GNU General Public License for more details.");
             ret = Gravity.Center;
         }
         return ret;
-    }
-
-    /// <summary>
-    /// Descriptive values for gravity
-    /// </summary>
-    /// <returns></returns>
-    protected static string GravityDesc()
-    {
-        StringBuilder sb = new();
-        sb.AppendLine("valid values are:");
-        foreach (var s in Enum.GetValues(typeof(Gravity)).Cast<Gravity>())
-        {
-            if (s != 0)
-                sb.AppendLine(s.ToString());
-        }
-        return sb.ToString();
     }
     #endregion
 }

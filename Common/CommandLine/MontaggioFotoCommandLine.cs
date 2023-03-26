@@ -83,7 +83,7 @@ public class MontaggioFotoCommandLine : CommandLine
                 { "withborder", "include border to full format", o => WithBorder = o != null },
                 { "trim", "trim white space", o => Trim = o != null },
                 { "p|padding=", "blank border around the image", s => sPadding = s },
-                { "gravity=", $"canvas gravity, {GravityDesc()}", s => sGravity = s }
+                { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s }
             };
         AddBaseOptions();
     }

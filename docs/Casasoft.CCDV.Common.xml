@@ -431,12 +431,6 @@
             <param name="gravity">Gravity string</param>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.CommandLine.GravityDesc">
-            <summary>
-            Descriptive values for gravity
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Casasoft.CCDV.CreditCardCommandLine">
             <summary>
             Command line extensions for credit cards builder
@@ -663,6 +657,13 @@
             </summary>
             <param name="s">string to process</param>
             <returns>escaped string</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.MDCopyright(System.String)">
+            <summary>
+            Copyright and disclaimer notice for man
+            </summary>
+            <param name="prgName"></param>
+            <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
