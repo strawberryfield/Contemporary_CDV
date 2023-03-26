@@ -358,7 +358,12 @@
         </member>
         <member name="P:Casasoft.CCDV.CommandLine.EnvVarsHelp">
             <summary>
-            Environment varaibles help
+            Environment variables help
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CommandLine.EnvVarsMan">
+            <summary>
+            Environment variables markdown
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.PrintMan">
@@ -663,6 +668,47 @@
             Copyright and disclaimer notice for man
             </summary>
             <param name="prgName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.MDMonoOptions(Mono.Options.OptionSet)">
+            <summary>
+            Converts Mono Options generated help to Markdown
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.HelpUtils.ParItem">
+            <summary>
+            Item for lists of descriptions
+            </summary>
+            <param name="syntax"></param>
+            <param name="desc"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.ParItem.#ctor(System.String,System.String)">
+            <summary>
+            Item for lists of descriptions
+            </summary>
+            <param name="syntax"></param>
+            <param name="desc"></param>
+        </member>
+        <member name="P:Casasoft.CCDV.HelpUtils.ParItem.syntax">
+            <summary></summary>
+        </member>
+        <member name="P:Casasoft.CCDV.HelpUtils.ParItem.desc">
+            <summary></summary>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.OptionsList(System.Collections.Generic.List{Casasoft.CCDV.HelpUtils.ParItem})">
+            <summary>
+            Format a list of options to text
+            </summary>
+            <param name="optList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.MDOptionsList(System.Collections.Generic.List{Casasoft.CCDV.HelpUtils.ParItem})">
+            <summary>
+            Format a list of options to Markdown
+            </summary>
+            <param name="optList"></param>
             <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.ICommandLine">

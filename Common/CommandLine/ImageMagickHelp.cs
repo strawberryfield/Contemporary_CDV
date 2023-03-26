@@ -42,19 +42,7 @@ public static class ImageMagickHelp
         {
             StringBuilder sb = new();
             sb.AppendLine("Instead of a filename you can use the following built-in templates:");
-            foreach (builtin item in builtins)
-            {
-                sb.Append("  ");
-                sb.Append(item.syntax.PadRight(32));
-                string[] rdesc = item.desc.Split('\n');
-                sb.AppendLine(rdesc[0]);
-                for (int i = 1; i < rdesc.Length; i++)
-                {
-                    sb.Append(new string(' ', 36));
-                    sb.AppendLine(rdesc[i]);
-                }
-            }
-            sb.AppendLine();
+            sb.AppendLine(HelpUtils.OptionsList(builtins));
             sb.AppendLine("The parameters can be stored in a file instead of a string.");
             sb.AppendLine("The file must be referenced as '@filename'");
             return sb.ToString();
@@ -70,22 +58,14 @@ public static class ImageMagickHelp
         {
             StringBuilder sb = new();
             sb.AppendLine("Instead of a filename you can use the following built-in templates:\n");
-            foreach (builtin item in builtins)
-            {
-                sb.AppendLine($"**{HelpUtils.EscapeMarkdown(item.syntax)}** :  ");
-                sb.AppendLine(HelpUtils.EscapeMarkdown(item.desc));
-                sb.AppendLine("\n");
-
-            }
-            sb.AppendLine();
+            sb.AppendLine(HelpUtils.MDOptionsList(builtins));
             sb.AppendLine("The parameters can be stored in a file instead of a string.  ");
             sb.AppendLine("The file must be referenced as '@filename'");
             return sb.ToString();
         }
     }
 
-    private record builtin(string syntax, string desc);
-    private static List<builtin> builtins = new() {
+    private static List<HelpUtils.ParItem> builtins = new() {
         new("xc:color","Fill the image with the specified color"),
         new("gradient:color1-color2","Fill the image with linear gradient\nfrom color1 to color2,\nif colors are omitted is white to black"),
         new("radial-gradient:color1-color2","Radial gradient as above"),

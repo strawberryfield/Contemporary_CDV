@@ -1,6 +1,6 @@
 % MONTAGGIODORSI(1)  
 % Roberto Ceccarelli - Casasoft  
-% March 2022
+% April 2023
 
 # NAME
 MontaggioDorsi - Assembling six images over a 20x27 cm paper
@@ -18,6 +18,19 @@ Output paper size:
 Large \(default\) 20x27cm  
 Medium 15x20cm  
 A4 210x297mm  
+
+
+**--gravity=VALUE** :  
+canvas gravity, valid values are:  
+Northwest  
+North  
+Northeast  
+West  
+Center  
+East  
+Southwest  
+South  
+Southeast  
 
 
 **--fillcolor=VALUE** :  
@@ -106,6 +119,7 @@ using the following template:
 ~~~
 {
   "Paper": null,
+  "CanvasGravity": 0,
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",
   "Dpi": 300,
@@ -119,10 +133,24 @@ using the following template:
 
 ## ENVIRONMENT VARIABLES
 The program can read values from these variables:  
-  CDV\_OUTPATH  Base path for output files  
-  CDV\_DPI      Resolution for output files  
-  CDV\_FILL     Color used to fill images  
-  CDV\_BORDER   Border color
+
+**CDV\_OUTPATH** :  
+Base path for output files
+
+
+**CDV\_DPI** :  
+Resolution for output files
+
+
+**CDV\_FILL** :  
+Color used to fill images
+
+
+**CDV\_BORDER** :  
+Border color
+
+
+
 
 # SCRIPTING
 You can add custom c# code, compiled at runtime, with the --script parameter.
@@ -167,19 +195,64 @@ public MagickImage OutputImage() => null;
 public MagickImage ProcessOnLoad(MagickImage image) => image;
 ~~~
 
+
+# BUILT-IN IMAGES AND RENDERS
+Instead of a filename you can use the following built-in templates:
+
+**xc:color** :  
+Fill the image with the specified color
+
+
+**gradient:color1-color2** :  
+Fill the image with linear gradient
+from color1 to color2,
+if colors are omitted is white to black
+
+
+**radial-gradient:color1-color2** :  
+Radial gradient as above
+
+
+**plasma:color1-color2** :  
+Plasma gradient from color1 to color2,
+if colors are omitted is black to black
+
+
+**plasma:fractal** :  
+Creates a random plasma
+
+
+**label:text** :  
+Render the plain text with no word-wrap
+
+
+**caption:text** :  
+Render the plain text with auto word-wrap
+
+
+**pango:text** :  
+Render the text with pango markup
+
+
+
+The parameters can be stored in a file instead of a string.  
+The file must be referenced as '@filename'
+
+
 # COPYRIGHT
-Casasoft MontaggioDorsi is free software:  
+Casasoft Casasoft MontaggioDorsi is free software:  
 you can redistribute it and/or modify it  
 under the terms of the GNU Affero General Public License as published by  
 the Free Software Foundation, either version 3 of the License, or  
 \(at your option\) any later version.  
 
 You should have received a copy of the GNU AGPL v.3  
-along with Casasoft MontaggioDorsi.  
+along with Casasoft Casasoft MontaggioDorsi.  
 If not, see <http://www.gnu.org/licenses/>.  
 
 # DISCLAIMER
-Casasoft MontaggioDorsi is distributed in the hope that it will be useful,  
+Casasoft Casasoft MontaggioDorsi is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
 See the GNU General Public License for more details.
+

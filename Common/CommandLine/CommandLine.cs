@@ -382,14 +382,25 @@ The file must be referenced as '@filename'",
   #rrrrggggbbbbaaaa
   colorname    (use {exeName} --colors  to see all available colors)";
 
+    private static List<HelpUtils.ParItem> variables = new() {
+        new("CDV_OUTPATH","Base path for output files"),
+        new("CDV_DPI","Resolution for output files"),
+        new("CDV_FILL","Color used to fill images"),
+        new("CDV_BORDER","Border color")
+    };
+
     /// <summary>
-    /// Environment varaibles help
+    /// Environment variables help
     /// </summary>
-    protected string EnvVarsHelp => @"The program can read values from these variables:
-  CDV_OUTPATH  Base path for output files
-  CDV_DPI      Resolution for output files
-  CDV_FILL     Color used to fill images
-  CDV_BORDER   Border color";
+    protected string EnvVarsHelp => @$"The program can read values from these variables:
+{HelpUtils.OptionsList(variables)}";
+
+    /// <summary>
+    /// Environment variables markdown
+    /// </summary>
+    protected string EnvVarsMan => @$"The program can read values from these variables:  
+
+{HelpUtils.MDOptionsList(variables)}";
 
     /// <summary>
     /// Text of man page in markdown format
@@ -401,7 +412,7 @@ The file must be referenced as '@filename'",
         ret.AppendLine(
             @$"% {exeName.ToUpper()}(1)  
 % Roberto Ceccarelli - Casasoft  
-% March 2022
+% April 2023
 
 # NAME
 {exeName} - {exeDesc}
@@ -415,31 +426,10 @@ The file must be referenced as '@filename'",
         }
 
         ret.AppendLine("\n# OPTIONS");
-        StringWriter sw = new StringWriter();
-        Options.WriteOptionDescriptions(sw);
-        string[] opts = sw.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-        bool first = true;
-        foreach (string s in opts)
-        {
-            if (string.IsNullOrWhiteSpace(s))
-                continue;
-
-            string o = s.Substring(0, 29).Trim();
-            if (string.IsNullOrWhiteSpace(o))
-            {
-                ret.Append($"{HelpUtils.EscapeMarkdown(s.Trim())}  \n");
-            }
-            else
-            {
-                ret.Append(first ? string.Empty : "\n\n");
-                ret.Append($"**{o}** :  \n{HelpUtils.EscapeMarkdown(s.Substring(29).Trim())}  \n");
-            }
-            first = false;
-        }
+        ret.AppendLine(HelpUtils.MDMonoOptions(Options));
 
         ret.Append(
             $@"
-
 ## COLORS
 {HelpUtils.EscapeMarkdown(ColorsSyntax)}
 
@@ -452,7 +442,7 @@ using the following template:
 ~~~
 
 ## ENVIRONMENT VARIABLES
-{HelpUtils.EscapeMarkdown(EnvVarsHelp)}
+{EnvVarsMan}
 
 # SCRIPTING
 You can add custom c# code, compiled at runtime, with the --script parameter.
