@@ -77,7 +77,7 @@ public static class ImageMagickHelp
         new("label:text", "Render the plain text with no word-wrap"),
         new("caption:text", "Render the plain text with auto word-wrap"),
         new("pango:text", "Render the text with pango markup"),
-        new("pattern:pattern_name", "Creates the image tiling built-in pattern"),
+        new("pattern:pattern_name", "Creates the image tiling built-in pattern\nuse --patterns to see the patterns list"),
     };
 
     private static List<HelpUtils.ParItem> patterns = new()
@@ -176,4 +176,22 @@ public static class ImageMagickHelp
         return sb.ToString();
     }
     #endregion
+
+    #region colors
+    /// <summary>
+    /// List of predefined colors
+    /// </summary>
+    /// <returns></returns>
+    public static string ColorsDesc()
+    {
+        StringBuilder sb = new();
+        sb.AppendLine("Predefined color are:");
+        Colors colors = new();
+        foreach(var color in colors.colorDictionary)
+        {
+            sb.AppendLine($"{color.Key,-24}{color.Value.ToHexString()}");
+        }
+        return sb.ToString();
+    }
+    #endregion 
 }

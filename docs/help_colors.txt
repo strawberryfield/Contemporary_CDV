@@ -1,7 +1,7 @@
 Casasoft Contemporary Carte de Visite MontaggioFoto
-Copyright (c) 2020-2022 Roberto Ceccarelli - Casasoft
+Copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
 
-Available colors are:
+Predefined color are:
 None                    #00000000
 Transparent             #00000000
 AliceBlue               #F0F8FF
@@ -117,6 +117,7 @@ Pink                    #FFC0CB
 Plum                    #DDA0DD
 PowderBlue              #B0E0E6
 Purple                  #800080
+RebeccaPurple           #663399
 Red                     #FF0000
 RosyBrown               #BC8F8F
 RoyalBlue               #4169E1
@@ -144,3 +145,4 @@ White                   #FFFFFF
 WhiteSmoke              #F5F5F5
 Yellow                  #FFFF00
 YellowGreen             #9ACD32
+

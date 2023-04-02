@@ -18,6 +18,7 @@ Options:
                                Southwest
                                South
                                Southeast
+      --patterns             show built-in patterns list
       --fillcolor=VALUE      set the color used to fill the images
                                (default #FFFFFF)
       --bordercolor=VALUE    set the color used to border the images
@@ -73,6 +74,8 @@ Instead of a filename you can use the following built-in templates:
   label:text                      Render the plain text with no word-wrap
   caption:text                    Render the plain text with auto word-wrap
   pango:text                      Render the text with pango markup
+  pattern:pattern_name            Creates the image tiling built-in pattern
+                                    use --patterns to see the patterns list
 
 The parameters can be stored in a file instead of a string.
 The file must be referenced as '@filename'

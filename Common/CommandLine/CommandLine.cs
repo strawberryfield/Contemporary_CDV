@@ -256,7 +256,7 @@ The file must be referenced as '@filename'",
     /// </summary>
     public void AddBaseOptions()
     {
-        foreach (var opt in baseOptions)
+        foreach(var opt in baseOptions)
         {
             Options.Add(opt);
         }
@@ -272,24 +272,23 @@ The file must be referenced as '@filename'",
         try
         {
             FilesList = Options.Parse(args);
-        }
-        catch (OptionException e)
+        } catch(OptionException e)
         {
             Console.Error.WriteLine($"{exeName}: {e.Message}");
             Console.Error.WriteLine($"Try '{exeName} --help' for more informations.");
             return true;
         }
 
-        if (shouldShowMan)
+        if(shouldShowMan)
         {
             Console.WriteLine(PrintMan());
             return true;
         }
 
-        if (!noBanner)
+        if(!noBanner)
             WelcomeBanner();
 
-        if (shouldShowHelp)
+        if(shouldShowHelp)
         {
             Console.WriteLine($"Usage: {exeName} {Usage}");
             Console.WriteLine("\nOptions:");
@@ -303,14 +302,14 @@ The file must be referenced as '@filename'",
             return true;
         }
 
-        if (shouldShowHelpJson)
+        if(shouldShowHelpJson)
         {
             Console.WriteLine($"Json parameters template for: {exeName}\n");
             Console.WriteLine(JsonTemplate());
             return true;
         }
 
-        if (shouldShowHelpScript)
+        if(shouldShowHelpScript)
         {
             Console.WriteLine("-----");
             Console.WriteLine(ScriptTemplate());
@@ -318,26 +317,27 @@ The file must be referenced as '@filename'",
             return true;
         }
 
-        if (shouldShowColors)
+        if(shouldShowColors)
         {
-            Console.WriteLine("Available colors are:");
-            foreach (var color in colors.colorDictionary)
-            {
-                Console.WriteLine("{0,-24}{1}", color.Key, color.Value.ToHexString());
-            }
+            Console.WriteLine(ImageMagickHelp.ColorsDesc());
             return true;
         }
 
-        if (shouldShowLicense)
+        if(shouldShowLicense)
         {
             Console.WriteLine(Utils.GetLicense());
             return true;
         }
 
-        if (!Path.IsPathRooted(OutputName))
+        if(ShouldShowExtra())
+        {
+            return true;
+        }
+
+        if(!Path.IsPathRooted(OutputName))
         {
             outputDir = Environment.GetEnvironmentVariable("CDV_OUTPATH");
-            if (!string.IsNullOrWhiteSpace(outputDir))
+            if(!string.IsNullOrWhiteSpace(outputDir))
                 OutputName = Path.Combine(outputDir, OutputName);
         }
 
@@ -351,12 +351,20 @@ The file must be referenced as '@filename'",
     /// <summary>
     /// Hook for extra help informations
     /// </summary>
-    protected virtual void ExtraHelp() { }
+    protected virtual void ExtraHelp()
+    {
+    }
 
     /// <summary>
     /// Hook for extra man informations
     /// </summary>
     protected virtual string ExtraMan() => string.Empty;
+
+    /// <summary>
+    /// Hook for extra help commands
+    /// </summary>
+    /// <returns></returns>
+    protected virtual bool ShouldShowExtra() => false;
     #endregion
 
     #region texts
@@ -382,11 +390,12 @@ The file must be referenced as '@filename'",
   #rrrrggggbbbbaaaa
   colorname    (use {exeName} --colors  to see all available colors)";
 
-    private static List<HelpUtils.ParItem> variables = new() {
-        new("CDV_OUTPATH","Base path for output files"),
-        new("CDV_DPI","Resolution for output files"),
-        new("CDV_FILL","Color used to fill images"),
-        new("CDV_BORDER","Border color")
+    private static List<HelpUtils.ParItem> variables = new()
+    {
+        new("CDV_OUTPATH", "Base path for output files"),
+        new("CDV_DPI", "Resolution for output files"),
+        new("CDV_FILL", "Color used to fill images"),
+        new("CDV_BORDER", "Border color")
     };
 
     /// <summary>
@@ -420,7 +429,7 @@ The file must be referenced as '@filename'",
 # SYNOPSIS
 **{exeName}** {HelpUtils.EscapeMarkdown(Usage)}");
 
-        if (!string.IsNullOrWhiteSpace(LongDesc))
+        if(!string.IsNullOrWhiteSpace(LongDesc))
         {
             ret.AppendLine($"\n# DESCRIPTION\n{HelpUtils.EscapeMarkdown(LongDesc)}");
         }
@@ -497,15 +506,15 @@ These are the signatures of the scriptable methods:
     protected void GetEnvVars()
     {
         string eDpi = Environment.GetEnvironmentVariable("CDV_DPI");
-        if (!string.IsNullOrWhiteSpace(eDpi))
+        if(!string.IsNullOrWhiteSpace(eDpi))
             Dpi = GetIntParameter(eDpi, Dpi, "Incorrect CDV_DPI environment variable value '{0}'.");
 
         string eFill = Environment.GetEnvironmentVariable("CDV_FILL");
-        if (!string.IsNullOrWhiteSpace(eFill))
+        if(!string.IsNullOrWhiteSpace(eFill))
             sFillColor = eFill;
 
         string eBorder = Environment.GetEnvironmentVariable("CDV_BORDER");
-        if (!string.IsNullOrWhiteSpace(eBorder))
+        if(!string.IsNullOrWhiteSpace(eBorder))
             sFillColor = eBorder;
     }
 
@@ -517,29 +526,26 @@ These are the signatures of the scriptable methods:
     /// <returns></returns>
     protected string GetFileParameter(string p)
     {
-        if (!string.IsNullOrWhiteSpace(p) && p[0] == '@')
+        if(!string.IsNullOrWhiteSpace(p) && p[0] == '@')
         {
             string ret = string.Empty;
             int l = p.Length;
-            if (l < 2)
+            if(l < 2)
             {
                 Console.Error.WriteLine("Missing filename for '@' parameter");
-            }
-            else
+            } else
             {
                 string filename = p.Substring(1);
-                if (File.Exists(filename))
+                if(File.Exists(filename))
                 {
                     ret = File.ReadAllText(filename);
-                }
-                else
+                } else
                 {
                     Console.Error.WriteLine($"File '{filename}' not found.");
                 }
             }
             return ret;
-        }
-        else
+        } else
         {
             return p;
         }
@@ -555,7 +561,7 @@ These are the signatures of the scriptable methods:
     public static int GetIntParameter(string val, int fallback, string message)
     {
         int ret;
-        if (!int.TryParse(val, out ret))
+        if(!int.TryParse(val, out ret))
         {
             Console.Error.WriteLine(string.Format(message, val));
             ret = fallback;
@@ -568,7 +574,7 @@ These are the signatures of the scriptable methods:
     /// </summary>
     protected void GetDPI()
     {
-        if (!string.IsNullOrWhiteSpace(sDpi))
+        if(!string.IsNullOrWhiteSpace(sDpi))
             Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
     }
 
@@ -581,19 +587,17 @@ These are the signatures of the scriptable methods:
     protected MagickColor GetColor(string color)
     {
         MagickColor ret = MagickColors.Transparent;
-        if (!string.IsNullOrWhiteSpace(color))
+        if(!string.IsNullOrWhiteSpace(color))
         {
             MagickColor r = colors.GetColor(color);
-            if (r is not null)
+            if(r is not null)
             {
                 ret = r;
-            }
-            else
+            } else
             {
                 Console.Error.WriteLine($"Unknown color '{color}'\nTry {exeName} --colors");
             }
-        }
-        else
+        } else
         {
             Console.Error.WriteLine("Invalid empty color");
         }
@@ -606,18 +610,17 @@ These are the signatures of the scriptable methods:
     public void ExpandWildcards()
     {
         List<string> files = new();
-        foreach (string filename in FilesList)
+        foreach(string filename in FilesList)
         {
-            if (filename.Contains('*') || filename.Contains('?'))
+            if(filename.Contains('*') || filename.Contains('?'))
             {
                 string path = Path.GetDirectoryName(filename);
-                if (string.IsNullOrWhiteSpace(path))
+                if(string.IsNullOrWhiteSpace(path))
                 {
                     path = ".";
                 }
                 files.AddRange(Directory.GetFiles(path, Path.GetFileName(filename)).ToList());
-            }
-            else
+            } else
             {
                 files.Add(filename);
             }
@@ -636,7 +639,7 @@ These are the signatures of the scriptable methods:
     protected static Gravity GetGravity(string gravity)
     {
         Gravity ret;
-        if (!Enum.TryParse(gravity, true, out ret))
+        if(!Enum.TryParse(gravity, true, out ret))
         {
             ret = Gravity.Center;
         }

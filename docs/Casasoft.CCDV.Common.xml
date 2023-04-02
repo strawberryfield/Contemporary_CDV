@@ -340,6 +340,12 @@
             Hook for extra man informations
             </summary>
         </member>
+        <member name="M:Casasoft.CCDV.CommandLine.ShouldShowExtra">
+            <summary>
+            Hook for extra help commands
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.WelcomeBanner">
             <summary>
             Prints the welcome banner
@@ -847,6 +853,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.ImageMagickHelp.ColorsDesc">
+            <summary>
+            List of predefined colors
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.MontaggioDorsiCommandLine">
             <summary>
             Command line management for MontaggioDorsi
@@ -865,6 +877,11 @@
         <member name="P:Casasoft.CCDV.MontaggioDorsiCommandLine.CanvasGravity">
             <summary>
             Canvas gravity
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.MontaggioDorsiCommandLine.shouldShowPatterns">
+            <summary>
+            true if list of patterns is requested
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.#ctor(System.String,System.String)">
@@ -893,6 +910,12 @@
             <summary>
             Adds help for built-in images and canvases
             </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.ShouldShowExtra">
+            <summary>
+            Handles --patterns
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.ExtraMan">
             <summary>
@@ -941,6 +964,11 @@
             Canvas gravity
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.MontaggioFotoCommandLine.shouldShowPatterns">
+            <summary>
+            true if list of patterns is requested
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -967,6 +995,12 @@
             <summary>
             Adds help for built-in images and canvases
             </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ShouldShowExtra">
+            <summary>
+            Handles --patterns
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ExtraMan">
             <summary>

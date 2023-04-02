@@ -27,6 +27,8 @@ set docs=%repo%docs\
 
 set prg=MontaggioFoto
 @call :CREATE
+%repo%%build%%prg% --colors >%docs%help_colors.txt
+%repo%%build%%prg% --patterns >%docs%help_patterns.txt
 
 set prg=MontaggioDorsi
 @call :CREATE

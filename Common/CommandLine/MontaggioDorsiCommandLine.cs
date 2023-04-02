@@ -53,6 +53,11 @@ public class MontaggioDorsiCommandLine : CommandLine
     private string sGravity = "CENTER";
 
     /// <summary>
+    /// true if list of patterns is requested
+    /// </summary>
+    protected bool shouldShowPatterns { get; set; }
+
+    /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="outputname">Default output file name</param>
@@ -75,7 +80,8 @@ public class MontaggioDorsiCommandLine : CommandLine
         Options = new OptionSet
             {
                 { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm", o => Paper = o  },
-                { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s }
+                { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s },
+                { "patterns", "show built-in patterns list", h => shouldShowPatterns = h != null },
             };
         AddBaseOptions();
     }
@@ -103,14 +109,25 @@ public class MontaggioDorsiCommandLine : CommandLine
     }
 
     /// <summary>
+    /// Handles --patterns
+    /// </summary>
+    /// <returns></returns>
+    protected override bool ShouldShowExtra()
+    {
+        if(shouldShowPatterns)
+        {
+            Console.WriteLine(ImageMagickHelp.PatternsHelp);
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
     /// Adds help for built-in images and canvases
     /// </summary>
     protected override string ExtraMan() =>  @$"
 # BUILT-IN IMAGES AND RENDERS
 {ImageMagickHelp.BuiltInMan}
-
-## Available built-in patterns
-{ImageMagickHelp.PatternsMan}
 ";
 
     /// <summary>

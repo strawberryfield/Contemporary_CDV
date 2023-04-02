@@ -42,6 +42,10 @@ South
 Southeast  
 
 
+**--patterns** :  
+show built-in patterns list  
+
+
 **--fillcolor=VALUE** :  
 set the color used to fill the images  
 \(default \#FFFFFF\)  
@@ -244,6 +248,11 @@ Render the plain text with auto word-wrap
 
 **pango:text** :  
 Render the text with pango markup
+
+
+**pattern:pattern\_name** :  
+Creates the image tiling built-in pattern
+use --patterns to see the patterns list
 
 
 

@@ -57,6 +57,11 @@ public class MontaggioFotoCommandLine : CommandLine
     private string sGravity = "CENTER";
 
     /// <summary>
+    /// true if list of patterns is requested
+    /// </summary>
+    protected bool shouldShowPatterns { get; set; }
+
+    /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="outputname">Default output file name</param>
@@ -83,7 +88,8 @@ public class MontaggioFotoCommandLine : CommandLine
                 { "withborder", "include border to full format", o => WithBorder = o != null },
                 { "trim", "trim white space", o => Trim = o != null },
                 { "p|padding=", "blank border around the image", s => sPadding = s },
-                { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s }
+                { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s },
+                { "patterns", "show built-in patterns list", h => shouldShowPatterns = h != null },
             };
         AddBaseOptions();
     }
@@ -113,14 +119,25 @@ public class MontaggioFotoCommandLine : CommandLine
     }
 
     /// <summary>
+    /// Handles --patterns
+    /// </summary>
+    /// <returns></returns>
+    protected override bool ShouldShowExtra()
+    {
+        if (shouldShowPatterns)
+        {
+            Console.WriteLine(ImageMagickHelp.PatternsHelp);
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
     /// Adds help for built-in images and canvases
     /// </summary>
     protected override string ExtraMan() => @$"
 # BUILT-IN IMAGES AND RENDERS
 {ImageMagickHelp.BuiltInMan}
-
-## Available built-in patterns
-{ImageMagickHelp.PatternsMan}
 ";
 
     /// <summary>
