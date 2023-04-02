@@ -45,7 +45,7 @@ public partial class MontaggioDorsiForm : BaseForm
         eng.Script = commonOptions.Script;
         eng.Tag = commonOptions.ScriptTag;
         eng.PaperFormat = paperFormat.PaperFormat;
-        
+        eng.CanvasGravity = txtGravity.gravity;
     }
 
     protected override void loadJson(string json)
@@ -57,6 +57,7 @@ public partial class MontaggioDorsiForm : BaseForm
         commonOptions.DpiValue = eng.Dpi;
         commonOptions.ScriptTag = eng.Tag;
         paperFormat.PaperFormat = eng.PaperFormat;
+        txtGravity.gravity = eng.CanvasGravity;
 
         addFile(1, filename1);
         addFile(2, filename2);

@@ -48,6 +48,7 @@ public partial class MontaggioFotoForm : BaseForm
         eng.FullSize = isChecked(chkFullSize);
         eng.Trim = isChecked(chkTrim);
         eng.Padding = txtPadding.Value;
+        eng.CanvasGravity = txtGravity.gravity;
     }
 
     protected override void loadJson(string json)
@@ -63,6 +64,7 @@ public partial class MontaggioFotoForm : BaseForm
         chkFullSize.IsChecked = eng.FullSize;
         chkTrim.IsChecked = eng.Trim;
         txtPadding.Value = eng.Padding;
+        txtGravity.gravity = eng.CanvasGravity;
         addFile(1, filename1);
         addFile(2, filename2);
     }

@@ -31,7 +31,7 @@ If not, see <http://www.gnu.org/licenses/>.
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:src="clr-namespace:Casasoft.CCDV.UI"
     Width="800"
-    Height="450"
+    Height="480"
     mc:Ignorable="d"
     Title="Montaggio Dorsi">
     <Grid>
@@ -146,6 +146,7 @@ If not, see <http://www.gnu.org/licenses/>.
                     OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
                     OpenFileDialogTitle="Immagine" />
                 <local:ThickPaperSelectorControl x:Name="paperFormat" Margin="0,5,0,0" />
+                <local:GravityControl x:Name="txtGravity" />
                 <local:CommonOptionsControl
                     x:Name="commonOptions"
                     Margin="0,5,0,0"

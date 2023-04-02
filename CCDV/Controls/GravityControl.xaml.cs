@@ -32,19 +32,7 @@ namespace Casasoft.CCDV.UI;
 /// </summary>
 public partial class GravityControl : UserControl
 {
-    public class ComboBoxPairs
-    {
-        public string _Key { get; set; }
-        public Gravity _Value { get; set; }
-
-        public ComboBoxPairs(string _key, Gravity _value)
-        {
-            _Key = _key;
-            _Value = _value;
-        }
-    }
-
-    List<ComboBoxPairs> cbp = new List<ComboBoxPairs>();
+    public record ComboBoxPairs(string _Key, Gravity _Value);
 
     public GravityControl()
     {
@@ -64,7 +52,7 @@ public partial class GravityControl : UserControl
 
     public Gravity gravity
     {
-        get => ((ComboBoxPairs)txtGravity.SelectedValue)._Value;
+        get => (Gravity)txtGravity.SelectedValue;
         set => txtGravity.SelectedIndex = (int)value - 1;
     }
 
