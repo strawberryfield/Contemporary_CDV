@@ -42,89 +42,113 @@ public static class Utils
     public static MagickImage AutoRotate(MagickImage img, MagickGeometry size)
     {
         MagickImage i = (MagickImage)img.Clone();
-        if (size.Height > size.Width)
+        if(size.Height > size.Width)
         {
             // output must be portrait
-            if (img.Height < img.Width) 
+            if(img.Height < img.Width)
                 i.Rotate(-90);
-        }
-        else
+        } else
         {
             // output must be landscape
-            if (img.Height > img.Width)
+            if(img.Height > img.Width)
                 i.Rotate(-90);
         }
         return i;
     }
 
     /// <summary>
-    /// Resizes an image to the given geometry.<br/>
-    /// Empty space is filled with the given color
+    /// Resizes an image to the given geometry.<br/> Empty space is filled with the given color
     /// </summary>
     /// <param name="img">Image to resize</param>
     /// <param name="size">target size</param>
     /// <param name="fill">color to fill the empty space</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>Image resized and filled</returns>
-    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill)
+    public static MagickImage ResizeAndFill(
+        MagickImage img,
+        MagickGeometry size,
+        MagickColor fill,
+        Gravity gravity = Gravity.Center)
     {
         MagickImage i = (MagickImage)img.Clone();
         i.Resize(size);
-        i.Extent(size, Gravity.Center, fill);
+        i.Extent(size, gravity, fill);
         return i;
     }
+
     /// <summary>
-    /// Resizes an image to the given geometry.<br/>
-    /// Empty space is filled with white
+    /// Resizes an image to the given geometry.<br/> Empty space is filled with white
     /// </summary>
     /// <param name="img">Image to resize</param>
     /// <param name="size">target size</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>Image resized and filled</returns>
-    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size) =>
-        ResizeAndFill(img, size, MagickColors.White);
+    public static MagickImage ResizeAndFill(MagickImage img, MagickGeometry size, Gravity gravity = Gravity.Center) => ResizeAndFill(
+        img,
+        size,
+        MagickColors.White,
+        gravity);
 
     /// <summary>
-    /// Resizes an image to the given geometry.<br/>
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
-    /// Empty space is filled with the given color.
+    /// Resizes an image to the given geometry.<br/> Before resizing the image is rotated with <see
+    /// cref="AutoRotate"/>.<br/> Empty space is filled with the given color.
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
     /// <param name="fill">fill color</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size, MagickColor fill) =>
-        ResizeAndFill(AutoRotate(img, size), size, fill);
+    public static MagickImage RotateResizeAndFill(
+        MagickImage img,
+        MagickGeometry size,
+        MagickColor fill,
+        Gravity gravity = Gravity.Center) => ResizeAndFill(AutoRotate(img, size), size, fill, gravity);
+
     /// <summary>
-    /// Resizes an image to the size of another image.<br/>
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
-    /// Empty space is filled with the given color.
+    /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
+    /// cref="AutoRotate"/>.<br/> Empty space is filled with the given color.
     /// </summary>
     /// <param name="img">Image to process</param>
     /// <param name="size">reference size and orientation</param>
     /// <param name="fill">fill color</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
     /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, MagickColor fill) =>
-        RotateResizeAndFill(img, new MagickGeometry(size.Width, size.Height), fill);
-    /// <summary>
-    /// Resizes an image to the given geometry.
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>
-    /// Empty space is filled with white color.
-    /// </summary>
-    /// <param name="img">Image to process</param>
-    /// <param name="size">reference size and orientation</param>
-    /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickGeometry size) =>
-        RotateResizeAndFill(img, size, MagickColors.White);
-    /// <summary>
-    /// Resizes an image to the size of another image.<br/>
-    /// Before resizing the image is rotated with <see cref="AutoRotate"/>.<br/>
-    /// Empty space is filled with white color.
-    /// </summary>
-    /// <param name="img">Image to process</param>
-    /// <param name="size">reference size and orientation</param>
-    /// <returns>processed image</returns>
-    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size) =>
-        RotateResizeAndFill(img, size, MagickColors.White);
+    public static MagickImage RotateResizeAndFill(
+        MagickImage img,
+        MagickImage size,
+        MagickColor fill,
+        Gravity gravity = Gravity.Center) => RotateResizeAndFill(
+        img,
+        new MagickGeometry(size.Width, size.Height),
+        fill,
+        gravity);
 
+    /// <summary>
+    /// Resizes an image to the given geometry. Before resizing the image is rotated with <see cref="AutoRotate"/> Empty
+    /// space is filled with white color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
+    /// <returns>processed image</returns>
+    public static MagickImage RotateResizeAndFill(
+        MagickImage img,
+        MagickGeometry size,
+        Gravity gravity = Gravity.Center) => RotateResizeAndFill(img, size, MagickColors.White, gravity);
+
+    /// <summary>
+    /// Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
+    /// cref="AutoRotate"/>.<br/> Empty space is filled with white color.
+    /// </summary>
+    /// <param name="img">Image to process</param>
+    /// <param name="size">reference size and orientation</param>
+    /// <param name="gravity">alignment in extended canvas (default Center)</param>
+    /// <returns>processed image</returns>
+    public static MagickImage RotateResizeAndFill(MagickImage img, MagickImage size, Gravity gravity = Gravity.Center) => RotateResizeAndFill(
+        img,
+        size,
+        MagickColors.White,
+        gravity);
     #endregion
 
     #region text
@@ -140,17 +164,26 @@ public static class Utils
     /// <param name="fontBold">use bold font (if available)</param>
     /// <param name="fontItalic">use bold font (if available)</param>
     /// <returns></returns>
-    public static Drawables CenteredText(string text, int size, int width, int height,
-        string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false)
+    public static Drawables CenteredText(
+        string text,
+        int size,
+        int width,
+        int height,
+        string font = "",
+        int rotation = 0,
+        bool fontBold = false,
+        bool fontItalic = false)
     {
         Drawables draw = new();
         draw.Rotation(rotation);
-        if (!string.IsNullOrWhiteSpace(font)) draw.Font(font,
-             fontItalic ? FontStyleType.Italic : FontStyleType.Normal,
-             fontBold ? FontWeight.Bold : FontWeight.Normal,
-             FontStretch.Normal);
+        if(!string.IsNullOrWhiteSpace(font))
+            draw.Font(
+                font,
+                fontItalic ? FontStyleType.Italic : FontStyleType.Normal,
+                fontBold ? FontWeight.Bold : FontWeight.Normal,
+                FontStretch.Normal);
         draw.StrokeColor(MagickColors.Black).FontPointSize(size).TextAlignment(TextAlignment.Center);
-        if (Math.Abs(rotation) != 90)
+        if(Math.Abs(rotation) != 90)
             draw.Text(width / 2, height / 2, text);
         else
             draw.Text(Math.Sign(rotation) * height / 2, width / 2, text);
@@ -169,9 +202,23 @@ public static class Utils
     /// <param name="fontBold">use bold font (if available)</param>
     /// <param name="fontItalic">use bold font (if available)</param>
     /// <returns></returns>
-    public static Drawables CenteredText(string text, int size, MagickGeometry fmt,
-        string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false) =>
-        CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
+    public static Drawables CenteredText(
+        string text,
+        int size,
+        MagickGeometry fmt,
+        string font = "",
+        int rotation = 0,
+        bool fontBold = false,
+        bool fontItalic = false) => CenteredText(
+        text,
+        size,
+        fmt.Width,
+        fmt.Height,
+        font,
+        rotation,
+        fontBold,
+        fontItalic);
+
     /// <summary>
     /// Renders text centered to the given reference image
     /// </summary>
@@ -183,9 +230,22 @@ public static class Utils
     /// <param name="fontBold">use bold font (if available)</param>
     /// <param name="fontItalic">use bold font (if available)</param>
     /// <returns></returns>
-    public static Drawables CenteredText(string text, int size, MagickImage fmt,
-        string font = "", int rotation = 0, bool fontBold = false, bool fontItalic = false) =>
-        CenteredText(text, size, fmt.Width, fmt.Height, font, rotation, fontBold, fontItalic);
+    public static Drawables CenteredText(
+        string text,
+        int size,
+        MagickImage fmt,
+        string font = "",
+        int rotation = 0,
+        bool fontBold = false,
+        bool fontItalic = false) => CenteredText(
+        text,
+        size,
+        fmt.Width,
+        fmt.Height,
+        font,
+        rotation,
+        fontBold,
+        fontItalic);
     #endregion
 
     #region lines
@@ -196,6 +256,7 @@ public static class Utils
     /// <param name="h">Distance from top border</param>
     /// <param name="width"></param>
     public static void HLine(Drawables draw, int h, int width) => draw.Line(0, h, width, h);
+
     /// <summary>
     /// Draws a vertical line from 0 to height
     /// </summary>
@@ -215,25 +276,25 @@ public static class Utils
     public static PaperFormats GetPaperFormat(string Paper, PaperFormats def = PaperFormats.Large)
     {
         PaperFormats ret = def;
-        if (!string.IsNullOrEmpty(Paper))
+        if(!string.IsNullOrEmpty(Paper))
         {
-            if (Paper.ToUpper() == "MEDIUM")
+            if(Paper.ToUpper() == "MEDIUM")
             {
                 ret = PaperFormats.Medium;
             }
-            if (Paper.ToUpper() == "A4")
+            if(Paper.ToUpper() == "A4")
             {
                 ret = PaperFormats.A4;
             }
-            if (Paper.ToUpper() == "LARGE")
+            if(Paper.ToUpper() == "LARGE")
             {
                 ret = PaperFormats.Large;
             }
-            if (Paper.ToUpper() == "SMALL")
+            if(Paper.ToUpper() == "SMALL")
             {
                 ret = PaperFormats.Small;
             }
-            if (Paper.ToUpper() == "PANORAMA")
+            if(Paper.ToUpper() == "PANORAMA")
             {
                 ret = PaperFormats.Panorama;
             }
@@ -249,12 +310,12 @@ public static class Utils
     public static string GetLicense()
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using (Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
+        using(Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
         {
-            using (StreamReader reader = new StreamReader(stream))
+            using(StreamReader reader = new StreamReader(stream))
             {
                 return reader.ReadToEnd();
-           }
+            }
         }
     }
 
@@ -267,10 +328,106 @@ public static class Utils
     {
         int max = final.Count;
         int i = 0;
-        foreach (MagickImage image in final)
+        foreach(MagickImage image in final)
         {
             i++;
             image.Write($"{par.OutputName}-{i}of{max}.{par.Extension}");
         }
     }
+
+    #region image reading
+    /// <summary>
+    /// Available ImageMagick prefixes
+    /// </summary>
+    public static List<string> Prefixes => new()
+    {
+        "xc",
+        "gradient",
+        "radial-gradient",
+        "plasma",
+        "tile",
+        "label",
+        "caption",
+        "pango",
+        "pattern"
+    };
+
+    /// <summary>
+    /// Open image from file or embedded canvas
+    /// </summary>
+    /// <param name="filename">Filename or canvas description</param>
+    /// <param name="geometry">geometry of resulting image</param>
+    /// <param name="gravity"></param>
+    /// <returns></returns>
+    public static MagickImage GetImage(
+        string filename,
+        MagickGeometry geometry = null,
+        Gravity gravity = Gravity.Center)
+    {
+        MagickImage ret = null;
+        if(filename.Contains(':'))
+        {
+            int pos = filename.IndexOf(':');
+            string prefix = filename.Substring(0, pos).ToLower();
+            if(Prefixes.Contains(prefix))
+            {
+                geometry ??= new MagickGeometry(256, 256);
+                Gravity textGravity = gravity;
+                if(prefix == "pango")
+                {
+                    switch(gravity)
+                    {
+                        case Gravity.Northwest:
+                        case Gravity.West:
+                        case Gravity.Southwest:
+                            textGravity = Gravity.East;
+                            break;
+                        case Gravity.North:
+                        case Gravity.South:
+                        case Gravity.Center:
+                            textGravity = Gravity.Center;
+                            break;
+                        case Gravity.Northeast:
+                        case Gravity.East:
+                        case Gravity.Southeast:
+                            textGravity = Gravity.West;
+                            break;
+                        default:
+                            textGravity = Gravity.Undefined;
+                            break;
+                    }
+                }
+                MagickReadSettings settings = new()
+                {
+                    BackgroundColor = MagickColors.Transparent,
+                    Height = prefix == "pango" ? 0 : geometry.Height,
+                    Width = geometry.Width,
+                    TextGravity = textGravity
+                };
+
+                if(filename.Length > pos + 2)
+                {
+                    string argument = filename.Substring(pos + 1);
+                    if(argument[0] == '@')
+                    {
+                        filename = $"{prefix}:{File.ReadAllText(argument.Substring(1))}";
+                    }
+                }
+                ret = new(filename, settings);
+
+                if(prefix == "pango")
+                {
+                    ret = ResizeAndFill(ret, geometry, MagickColors.Transparent, gravity);
+                }
+            } else
+            {
+                ret = new(filename);
+            }
+        } else
+        {
+            ret = new(filename);
+        }
+        return ret;
+    }
+    #endregion
 }

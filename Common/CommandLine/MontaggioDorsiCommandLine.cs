@@ -21,7 +21,9 @@
 
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
+using ImageMagick;
 using Mono.Options;
+using System;
 using System.Text.Json;
 
 namespace Casasoft.CCDV;
@@ -43,6 +45,12 @@ public class MontaggioDorsiCommandLine : CommandLine
     {
         get => Utils.GetPaperFormat(Paper);
     }
+
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; }
+    private string sGravity = "CENTER";
 
     /// <summary>
     /// Constructor
@@ -67,9 +75,40 @@ public class MontaggioDorsiCommandLine : CommandLine
         Options = new OptionSet
             {
                 { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm", o => Paper = o  },
+                { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s }
             };
         AddBaseOptions();
     }
+
+    /// <summary>
+    /// Does the dirty work
+    /// </summary>
+    /// <param name="args">command line arguments</param>
+    /// <returns>true if nothing to (ie. help)</returns>
+    public override bool Parse(string[] args)
+    {
+        if (base.Parse(args)) return true;
+
+        CanvasGravity = GetGravity(sGravity);
+        return false;
+    }
+
+    /// <summary>
+    /// Adds help for built-in images and canvases
+    /// </summary>
+    protected override void ExtraHelp()
+    {
+        Console.WriteLine("\nBuilt-in images and renders");
+        Console.Write(ImageMagickHelp.BuiltInHelp);
+    }
+
+    /// <summary>
+    /// Adds help for built-in images and canvases
+    /// </summary>
+    protected override string ExtraMan() =>  @$"
+# BUILT-IN IMAGES AND RENDERS
+{ImageMagickHelp.BuiltInMan}
+";
 
     /// <summary>
     /// Prints a json schema for pameters

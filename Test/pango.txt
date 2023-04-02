@@ -1,0 +1,2 @@
+<span size="30000" face="Times New Roman" color="darkblue">Roberto Ceccarelli - Cesena</span>
+<span size="20000" face="Arial" color="darkblue"><i>https://strawberryfield.altervista.org</i></span>

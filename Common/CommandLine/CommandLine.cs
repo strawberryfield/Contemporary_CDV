@@ -256,7 +256,7 @@ The file must be referenced as '@filename'",
     /// </summary>
     public void AddBaseOptions()
     {
-        foreach(var opt in baseOptions)
+        foreach (var opt in baseOptions)
         {
             Options.Add(opt);
         }
@@ -272,23 +272,24 @@ The file must be referenced as '@filename'",
         try
         {
             FilesList = Options.Parse(args);
-        } catch(OptionException e)
+        }
+        catch (OptionException e)
         {
             Console.Error.WriteLine($"{exeName}: {e.Message}");
             Console.Error.WriteLine($"Try '{exeName} --help' for more informations.");
             return true;
         }
 
-        if(shouldShowMan)
+        if (shouldShowMan)
         {
             Console.WriteLine(PrintMan());
             return true;
         }
 
-        if(!noBanner)
+        if (!noBanner)
             WelcomeBanner();
 
-        if(shouldShowHelp)
+        if (shouldShowHelp)
         {
             Console.WriteLine($"Usage: {exeName} {Usage}");
             Console.WriteLine("\nOptions:");
@@ -297,18 +298,19 @@ The file must be referenced as '@filename'",
             Console.WriteLine(ColorsSyntax);
             Console.WriteLine("\nEnvironment variables");
             Console.WriteLine(EnvVarsHelp);
+            ExtraHelp();
 
             return true;
         }
 
-        if(shouldShowHelpJson)
+        if (shouldShowHelpJson)
         {
             Console.WriteLine($"Json parameters template for: {exeName}\n");
             Console.WriteLine(JsonTemplate());
             return true;
         }
 
-        if(shouldShowHelpScript)
+        if (shouldShowHelpScript)
         {
             Console.WriteLine("-----");
             Console.WriteLine(ScriptTemplate());
@@ -316,26 +318,26 @@ The file must be referenced as '@filename'",
             return true;
         }
 
-        if(shouldShowColors)
+        if (shouldShowColors)
         {
             Console.WriteLine("Available colors are:");
-            foreach(var color in colors.colorDictionary)
+            foreach (var color in colors.colorDictionary)
             {
                 Console.WriteLine("{0,-24}{1}", color.Key, color.Value.ToHexString());
             }
             return true;
         }
 
-        if(shouldShowLicense)
+        if (shouldShowLicense)
         {
             Console.WriteLine(Utils.GetLicense());
             return true;
         }
 
-        if(!Path.IsPathRooted(OutputName))
+        if (!Path.IsPathRooted(OutputName))
         {
             outputDir = Environment.GetEnvironmentVariable("CDV_OUTPATH");
-            if(!string.IsNullOrWhiteSpace(outputDir))
+            if (!string.IsNullOrWhiteSpace(outputDir))
                 OutputName = Path.Combine(outputDir, OutputName);
         }
 
@@ -344,6 +346,18 @@ The file must be referenced as '@filename'",
         BorderColor = GetColor(sBorderColor);
         return false;
     }
+
+    #region hooks
+    /// <summary>
+    /// Hook for extra help informations
+    /// </summary>
+    protected virtual void ExtraHelp() { }
+
+    /// <summary>
+    /// Hook for extra man informations
+    /// </summary>
+    protected virtual string ExtraMan() => string.Empty;
+    #endregion
 
     #region texts
     /// <summary>
@@ -368,14 +382,25 @@ The file must be referenced as '@filename'",
   #rrrrggggbbbbaaaa
   colorname    (use {exeName} --colors  to see all available colors)";
 
+    private static List<HelpUtils.ParItem> variables = new() {
+        new("CDV_OUTPATH","Base path for output files"),
+        new("CDV_DPI","Resolution for output files"),
+        new("CDV_FILL","Color used to fill images"),
+        new("CDV_BORDER","Border color")
+    };
+
     /// <summary>
-    /// Environment varaibles help
+    /// Environment variables help
     /// </summary>
-    protected string EnvVarsHelp => @"The program can read values from these variables:
-  CDV_OUTPATH  Base path for output files
-  CDV_DPI      Resolution for output files
-  CDV_FILL     Color used to fill images
-  CDV_BORDER   Border color";
+    protected string EnvVarsHelp => @$"The program can read values from these variables:
+{HelpUtils.OptionsList(variables)}";
+
+    /// <summary>
+    /// Environment variables markdown
+    /// </summary>
+    protected string EnvVarsMan => @$"The program can read values from these variables:  
+
+{HelpUtils.MDOptionsList(variables)}";
 
     /// <summary>
     /// Text of man page in markdown format
@@ -387,46 +412,26 @@ The file must be referenced as '@filename'",
         ret.AppendLine(
             @$"% {exeName.ToUpper()}(1)  
 % Roberto Ceccarelli - Casasoft  
-% March 2022
+% April 2023
 
 # NAME
 {exeName} - {exeDesc}
 
 # SYNOPSIS
-**{exeName}** {EscapeMarkdown(Usage)}");
+**{exeName}** {HelpUtils.EscapeMarkdown(Usage)}");
 
-        if(!string.IsNullOrWhiteSpace(LongDesc))
+        if (!string.IsNullOrWhiteSpace(LongDesc))
         {
-            ret.AppendLine($"\n# DESCRIPTION\n{EscapeMarkdown(LongDesc)}");
+            ret.AppendLine($"\n# DESCRIPTION\n{HelpUtils.EscapeMarkdown(LongDesc)}");
         }
 
         ret.AppendLine("\n# OPTIONS");
-        StringWriter sw = new StringWriter();
-        Options.WriteOptionDescriptions(sw);
-        string[] opts = sw.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-        bool first = true;
-        foreach(string s in opts)
-        {
-            if(string.IsNullOrWhiteSpace(s))
-                continue;
-
-            string o = s.Substring(0, 29).Trim();
-            if(string.IsNullOrWhiteSpace(o))
-            {
-                ret.Append($"{EscapeMarkdown(s.Trim())}  \n");
-            } else
-            {
-                ret.Append(first ? string.Empty : "\n\n");
-                ret.Append($"**{o}** :  \n{EscapeMarkdown(s.Substring(29).Trim())}  \n");
-            }
-            first = false;
-        }
+        ret.AppendLine(HelpUtils.MDMonoOptions(Options));
 
         ret.Append(
             $@"
-
 ## COLORS
-{EscapeMarkdown(ColorsSyntax)}
+{HelpUtils.EscapeMarkdown(ColorsSyntax)}
 
 ## JSON
 Parameters can also be passed with a json formatted string  
@@ -437,7 +442,7 @@ using the following template:
 ~~~
 
 ## ENVIRONMENT VARIABLES
-{EscapeMarkdown(EnvVarsHelp)}
+{EnvVarsMan}
 
 # SCRIPTING
 You can add custom c# code, compiled at runtime, with the --script parameter.
@@ -455,22 +460,9 @@ These are the signatures of the scriptable methods:
 {ScriptTemplate()}
 ~~~
 
-# COPYRIGHT
-Casasoft {exeName} is free software:  
-you can redistribute it and/or modify it  
-under the terms of the GNU Affero General Public License as published by  
-the Free Software Foundation, either version 3 of the License, or  
-\(at your option\) any later version.  
-
-You should have received a copy of the GNU AGPL v.3  
-along with Casasoft {exeName}.  
-If not, see <http://www.gnu.org/licenses/>.  
-
-# DISCLAIMER
-Casasoft {exeName} is distributed in the hope that it will be useful,  
-but WITHOUT ANY WARRANTY; without even the implied warranty of  
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
-See the GNU General Public License for more details.");
+{ExtraMan()}
+{HelpUtils.MDCopyright($"Casasoft {exeName}")}
+");
 
         return ret.ToString();
     }
@@ -505,15 +497,15 @@ See the GNU General Public License for more details.");
     protected void GetEnvVars()
     {
         string eDpi = Environment.GetEnvironmentVariable("CDV_DPI");
-        if(!string.IsNullOrWhiteSpace(eDpi))
+        if (!string.IsNullOrWhiteSpace(eDpi))
             Dpi = GetIntParameter(eDpi, Dpi, "Incorrect CDV_DPI environment variable value '{0}'.");
 
         string eFill = Environment.GetEnvironmentVariable("CDV_FILL");
-        if(!string.IsNullOrWhiteSpace(eFill))
+        if (!string.IsNullOrWhiteSpace(eFill))
             sFillColor = eFill;
 
         string eBorder = Environment.GetEnvironmentVariable("CDV_BORDER");
-        if(!string.IsNullOrWhiteSpace(eBorder))
+        if (!string.IsNullOrWhiteSpace(eBorder))
             sFillColor = eBorder;
     }
 
@@ -525,26 +517,29 @@ See the GNU General Public License for more details.");
     /// <returns></returns>
     protected string GetFileParameter(string p)
     {
-        if(!string.IsNullOrWhiteSpace(p) && p[0] == '@')
+        if (!string.IsNullOrWhiteSpace(p) && p[0] == '@')
         {
             string ret = string.Empty;
             int l = p.Length;
-            if(l < 2)
+            if (l < 2)
             {
                 Console.Error.WriteLine("Missing filename for '@' parameter");
-            } else
+            }
+            else
             {
                 string filename = p.Substring(1);
-                if(File.Exists(filename))
+                if (File.Exists(filename))
                 {
                     ret = File.ReadAllText(filename);
-                } else
+                }
+                else
                 {
                     Console.Error.WriteLine($"File '{filename}' not found.");
                 }
             }
             return ret;
-        } else
+        }
+        else
         {
             return p;
         }
@@ -560,7 +555,7 @@ See the GNU General Public License for more details.");
     public static int GetIntParameter(string val, int fallback, string message)
     {
         int ret;
-        if(!Int32.TryParse(val, out ret))
+        if (!int.TryParse(val, out ret))
         {
             Console.Error.WriteLine(string.Format(message, val));
             ret = fallback;
@@ -573,7 +568,7 @@ See the GNU General Public License for more details.");
     /// </summary>
     protected void GetDPI()
     {
-        if(!string.IsNullOrWhiteSpace(sDpi))
+        if (!string.IsNullOrWhiteSpace(sDpi))
             Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
     }
 
@@ -586,17 +581,19 @@ See the GNU General Public License for more details.");
     protected MagickColor GetColor(string color)
     {
         MagickColor ret = MagickColors.Transparent;
-        if(!string.IsNullOrWhiteSpace(color))
+        if (!string.IsNullOrWhiteSpace(color))
         {
             MagickColor r = colors.GetColor(color);
-            if(r is not null)
+            if (r is not null)
             {
                 ret = r;
-            } else
+            }
+            else
             {
                 Console.Error.WriteLine($"Unknown color '{color}'\nTry {exeName} --colors");
             }
-        } else
+        }
+        else
         {
             Console.Error.WriteLine("Invalid empty color");
         }
@@ -609,12 +606,12 @@ See the GNU General Public License for more details.");
     public void ExpandWildcards()
     {
         List<string> files = new();
-        foreach(string filename in FilesList)
+        foreach (string filename in FilesList)
         {
-            if(filename.Contains('*') || filename.Contains('?'))
+            if (filename.Contains('*') || filename.Contains('?'))
             {
                 string path = Path.GetDirectoryName(filename);
-                if(string.IsNullOrWhiteSpace(path))
+                if (string.IsNullOrWhiteSpace(path))
                 {
                     path = ".";
                 }
@@ -628,22 +625,22 @@ See the GNU General Public License for more details.");
         FilesList.Clear();
         FilesList.AddRange(files);
     }
+    #endregion
 
+    #region gravity
     /// <summary>
-    /// Escape markdown special characters
+    /// Get the ImageMagick Gravity
     /// </summary>
-    /// <param name="s">string to process</param>
-    /// <returns>escaped string</returns>
-    public string EscapeMarkdown(string s) => s.Replace("\r", "  \r")
-        .Replace("\\", "\\\\")
-        .Replace("#", "\\#")
-        .Replace("*", "\\*")
-        .Replace("_", "\\_")
-        .Replace("(", "\\(")
-        .Replace(")", "\\)")
-        .Replace("[", "\\[")
-        .Replace("]", "\\]")
-        .Replace("{", "\\{")
-        .Replace("}", "\\}");
+    /// <param name="gravity">Gravity string</param>
+    /// <returns></returns>
+    protected static Gravity GetGravity(string gravity)
+    {
+        Gravity ret;
+        if (!Enum.TryParse(gravity, true, out ret))
+        {
+            ret = Gravity.Center;
+        }
+        return ret;
+    }
     #endregion
 }

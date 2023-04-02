@@ -20,39 +20,40 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Controls;
 
-namespace Casasoft.CCDV.JSON;
+namespace Casasoft.CCDV.UI;
 
 /// <summary>
-/// Parameters for MontaggioFoto
+/// Interaction logic for GravityControl.xaml
 /// </summary>
-public class MontaggioFotoParameters : CommonParameters
+public partial class GravityControl : UserControl
 {
-    /// <summary>
-    /// Set if image has full CDV size (100x64mm)
-    /// </summary>
-    public bool FullSize { get; set; }
-    /// <summary>
-    /// Set if white border is removed
-    /// </summary>
-    public bool Trim { get; set; }
-    /// <summary>
-    /// Set if a border to full CDV size (100x64mm) is added
-    /// </summary>
-    public bool WithBorder { get; set; }
-    /// <summary>
-    /// Blank border around the image
-    /// </summary>
-    public int Padding { get; set; } = 0;
-    /// <summary>
-    /// Canvas gravity
-    /// </summary>
-    public Gravity CanvasGravity { get; set; }
+    public record ComboBoxPairs(string _Key, Gravity _Value);
 
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    public MontaggioFotoParameters() : base()
+    public GravityControl()
     {
+        InitializeComponent();
     }
+
+    private void UserControl_Initialized(object sender, EventArgs e)
+    {
+        txtGravity.Items.Clear();
+        foreach (Gravity s in Enum.GetValues(typeof(Gravity)).Cast<Gravity>())
+        {
+            if (s != 0)
+                txtGravity.Items.Add(new ComboBoxPairs(s.ToString(), s));
+        }
+        txtGravity.SelectedIndex = (int)Gravity.Center - 1;
+    }
+
+    public Gravity gravity
+    {
+        get => (Gravity)txtGravity.SelectedValue;
+        set => txtGravity.SelectedIndex = (int)value - 1;
+    }
+
 }

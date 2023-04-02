@@ -330,6 +330,16 @@
             <param name="args">command line arguments</param>
             <returns>true if nothing to (ie. help)</returns>
         </member>
+        <member name="M:Casasoft.CCDV.CommandLine.ExtraHelp">
+            <summary>
+            Hook for extra help informations
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.CommandLine.ExtraMan">
+            <summary>
+            Hook for extra man informations
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.WelcomeBanner">
             <summary>
             Prints the welcome banner
@@ -348,7 +358,12 @@
         </member>
         <member name="P:Casasoft.CCDV.CommandLine.EnvVarsHelp">
             <summary>
-            Environment varaibles help
+            Environment variables help
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.CommandLine.EnvVarsMan">
+            <summary>
+            Environment variables markdown
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.CommandLine.PrintMan">
@@ -414,12 +429,12 @@
             Windows shell does not expand wildcards
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.CommandLine.EscapeMarkdown(System.String)">
+        <member name="M:Casasoft.CCDV.CommandLine.GetGravity(System.String)">
             <summary>
-            Escape markdown special characters
+            Get the ImageMagick Gravity
             </summary>
-            <param name="s">string to process</param>
-            <returns>escaped string</returns>
+            <param name="gravity">Gravity string</param>
+            <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.CreditCardCommandLine">
             <summary>
@@ -636,6 +651,66 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.HelpUtils">
+            <summary>
+            Utilities for command line help
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.EscapeMarkdown(System.String)">
+            <summary>
+            Escape markdown special characters
+            </summary>
+            <param name="s">string to process</param>
+            <returns>escaped string</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.MDCopyright(System.String)">
+            <summary>
+            Copyright and disclaimer notice for man
+            </summary>
+            <param name="prgName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.MDMonoOptions(Mono.Options.OptionSet)">
+            <summary>
+            Converts Mono Options generated help to Markdown
+            </summary>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Casasoft.CCDV.HelpUtils.ParItem">
+            <summary>
+            Item for lists of descriptions
+            </summary>
+            <param name="syntax"></param>
+            <param name="desc"></param>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.ParItem.#ctor(System.String,System.String)">
+            <summary>
+            Item for lists of descriptions
+            </summary>
+            <param name="syntax"></param>
+            <param name="desc"></param>
+        </member>
+        <member name="P:Casasoft.CCDV.HelpUtils.ParItem.syntax">
+            <summary></summary>
+        </member>
+        <member name="P:Casasoft.CCDV.HelpUtils.ParItem.desc">
+            <summary></summary>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.OptionsList(System.Collections.Generic.List{Casasoft.CCDV.HelpUtils.ParItem})">
+            <summary>
+            Format a list of options to text
+            </summary>
+            <param name="optList"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.HelpUtils.MDOptionsList(System.Collections.Generic.List{Casasoft.CCDV.HelpUtils.ParItem})">
+            <summary>
+            Format a list of options to Markdown
+            </summary>
+            <param name="optList"></param>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.ICommandLine">
             <summary>
             Interface for command line handling
@@ -741,6 +816,27 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.ImageMagickHelp">
+            <summary>
+            Texts for help of ImageMagick options
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ImageMagickHelp.BuiltInHelp">
+            <summary>
+            Imagemagick built-in templates
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ImageMagickHelp.BuiltInMan">
+            <summary>
+            Imagemagick built-in templates formatted in Markdown
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.ImageMagickHelp.GravityDesc">
+            <summary>
+            Descriptive values for gravity
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.MontaggioDorsiCommandLine">
             <summary>
             Command line management for MontaggioDorsi
@@ -754,6 +850,11 @@
         <member name="P:Casasoft.CCDV.MontaggioDorsiCommandLine.PaperFormat">
             <summary>
             Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.MontaggioDorsiCommandLine.CanvasGravity">
+            <summary>
+            Canvas gravity
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.#ctor(System.String,System.String)">
@@ -770,6 +871,23 @@
             <param name="exename">Name of the program exe</param>
             <param name="outputname">Default output file name</param>
             <param name="desc">brief description of the program</param>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.Parse(System.String[])">
+            <summary>
+            Does the dirty work
+            </summary>
+            <param name="args">command line arguments</param>
+            <returns>true if nothing to (ie. help)</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.ExtraHelp">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.ExtraMan">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioDorsiCommandLine.JsonTemplate">
             <summary>
@@ -808,6 +926,11 @@
             Blank border around the image
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.MontaggioFotoCommandLine.CanvasGravity">
+            <summary>
+            Canvas gravity
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -829,6 +952,16 @@
             </summary>
             <param name="args">command line arguments</param>
             <returns>true if nothing to (ie. help)</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ExtraHelp">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.ExtraMan">
+            <summary>
+            Adds help for built-in images and canvases
+            </summary>
         </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.JsonTemplate">
             <summary>
@@ -1750,6 +1883,11 @@
             Montaggio dorsi engine
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioDorsiEngine.CanvasGravity">
+            <summary>
+            Canvas gravity
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">
             <summary>
             Constructor
@@ -1809,6 +1947,11 @@
         <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Padding">
             <summary>
             Blank border around the image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.CanvasGravity">
+            <summary>
+            Canvas gravity
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor">
@@ -2874,6 +3017,11 @@
             Output paper size
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioDorsiParameters.CanvasGravity">
+            <summary>
+            Canvas gravity
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.JSON.MontaggioDorsiParameters.#ctor">
             <summary>
             Default constructor
@@ -2902,6 +3050,11 @@
         <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.Padding">
             <summary>
             Blank border around the image
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.CanvasGravity">
+            <summary>
+            Canvas gravity
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.JSON.MontaggioFotoParameters.#ctor">
@@ -3143,65 +3296,65 @@
             <param name="size">reference geometry</param>
             <returns>rotated image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor)">
+        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor,ImageMagick.Gravity)">
             <summary>
-            Resizes an image to the given geometry.<br/>
-            Empty space is filled with the given color
+            Resizes an image to the given geometry.<br/> Empty space is filled with the given color
             </summary>
             <param name="img">Image to resize</param>
             <param name="size">target size</param>
             <param name="fill">color to fill the empty space</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>Image resized and filled</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry)">
+        <member name="M:Casasoft.CCDV.Utils.ResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.Gravity)">
             <summary>
-            Resizes an image to the given geometry.<br/>
-            Empty space is filled with white
+            Resizes an image to the given geometry.<br/> Empty space is filled with white
             </summary>
             <param name="img">Image to resize</param>
             <param name="size">target size</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>Image resized and filled</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.MagickColor,ImageMagick.Gravity)">
             <summary>
-            Resizes an image to the given geometry.<br/>
-            Before resizing the image is rotated with <see cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/>
-            Empty space is filled with the given color.
+            Resizes an image to the given geometry.<br/> Before resizing the image is rotated with <see
+            cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/> Empty space is filled with the given color.
             </summary>
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
             <param name="fill">fill color</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage,ImageMagick.MagickColor)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage,ImageMagick.MagickColor,ImageMagick.Gravity)">
             <summary>
-            Resizes an image to the size of another image.<br/>
-            Before resizing the image is rotated with <see cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/>
-            Empty space is filled with the given color.
+            Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
+            cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/> Empty space is filled with the given color.
             </summary>
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
             <param name="fill">fill color</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickGeometry,ImageMagick.Gravity)">
             <summary>
-            Resizes an image to the given geometry.
-            Before resizing the image is rotated with <see cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>
-            Empty space is filled with white color.
+            Resizes an image to the given geometry. Before resizing the image is rotated with <see cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/> Empty
+            space is filled with white color.
             </summary>
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Utils.RotateResizeAndFill(ImageMagick.MagickImage,ImageMagick.MagickImage,ImageMagick.Gravity)">
             <summary>
-            Resizes an image to the size of another image.<br/>
-            Before resizing the image is rotated with <see cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/>
-            Empty space is filled with white color.
+            Resizes an image to the size of another image.<br/> Before resizing the image is rotated with <see
+            cref="M:Casasoft.CCDV.Utils.AutoRotate(ImageMagick.MagickImage,ImageMagick.MagickGeometry)"/>.<br/> Empty space is filled with white color.
             </summary>
             <param name="img">Image to process</param>
             <param name="size">reference size and orientation</param>
+            <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
         <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Boolean,System.Boolean)">
@@ -3280,6 +3433,20 @@
             </summary>
             <param name="final">The list of images</param>
             <param name="par">Command line object to retrieve files names</param>
+        </member>
+        <member name="P:Casasoft.CCDV.Utils.Prefixes">
+            <summary>
+            Available ImageMagick prefixes
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Utils.GetImage(System.String,ImageMagick.MagickGeometry,ImageMagick.Gravity)">
+            <summary>
+            Open image from file or embedded canvas
+            </summary>
+            <param name="filename">Filename or canvas description</param>
+            <param name="geometry">geometry of resulting image</param>
+            <param name="gravity"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

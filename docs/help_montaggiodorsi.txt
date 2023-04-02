@@ -8,6 +8,16 @@ Options:
                                Large (default) 20x27cm
                                Medium 15x20cm
                                A4 210x297mm
+      --gravity=VALUE        canvas gravity, valid values are:
+                               Northwest
+                               North
+                               Northeast
+                               West
+                               Center
+                               East
+                               Southwest
+                               South
+                               Southeast
       --fillcolor=VALUE      set the color used to fill the images
                                (default #FFFFFF)
       --bordercolor=VALUE    set the color used to border the images
@@ -44,7 +54,25 @@ Colors can be written in any of these formats:
 
 Environment variables
 The program can read values from these variables:
-  CDV_OUTPATH  Base path for output files
-  CDV_DPI      Resolution for output files
-  CDV_FILL     Color used to fill images
-  CDV_BORDER   Border color
+  CDV_OUTPATH                     Base path for output files
+  CDV_DPI                         Resolution for output files
+  CDV_FILL                        Color used to fill images
+  CDV_BORDER                      Border color
+
+
+Built-in images and renders
+Instead of a filename you can use the following built-in templates:
+  xc:color                        Fill the image with the specified color
+  gradient:color1-color2          Fill the image with linear gradient
+                                    from color1 to color2,
+                                    if colors are omitted is white to black
+  radial-gradient:color1-color2   Radial gradient as above
+  plasma:color1-color2            Plasma gradient from color1 to color2,
+                                    if colors are omitted is black to black
+  plasma:fractal                  Creates a random plasma
+  label:text                      Render the plain text with no word-wrap
+  caption:text                    Render the plain text with auto word-wrap
+  pango:text                      Render the text with pango markup
+
+The parameters can be stored in a file instead of a string.
+The file must be referenced as '@filename'

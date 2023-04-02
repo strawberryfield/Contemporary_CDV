@@ -68,6 +68,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9D6B5EF5-A
 		Test\dorso_v.jpg = Test\dorso_v.jpg
 		Test\Numbers.cmd = Test\Numbers.cmd
 		Test\Numbers.cs = Test\Numbers.cs
+		Test\pango.txt = Test\pango.txt
 		Test\README.md = Test\README.md
 	EndProjectSection
 EndProject
@@ -82,7 +83,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build_tools", "build_tools"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cubetti", "Cubetti\Cubetti.csproj", "{0C503E66-9419-4F29-B29F-F8B2CECE5DB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flexagon", "Flexagon\Flexagon.csproj", "{184D5888-D19C-406C-8833-349413DEDF59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flexagon", "Flexagon\Flexagon.csproj", "{184D5888-D19C-406C-8833-349413DEDF59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

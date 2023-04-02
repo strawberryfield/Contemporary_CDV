@@ -56,7 +56,8 @@ Colors can be written in any of these formats:
 
 Environment variables
 The program can read values from these variables:
-  CDV_OUTPATH  Base path for output files
-  CDV_DPI      Resolution for output files
-  CDV_FILL     Color used to fill images
-  CDV_BORDER   Border color
+  CDV_OUTPATH                     Base path for output files
+  CDV_DPI                         Resolution for output files
+  CDV_FILL                        Color used to fill images
+  CDV_BORDER                      Border color
+

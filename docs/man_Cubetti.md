@@ -1,6 +1,6 @@
 % CUBETTI(1)  
 % Roberto Ceccarelli - Casasoft  
-% March 2022
+% April 2023
 
 # NAME
 Cubetti - Creates a cube matrix with 6 photos.
@@ -140,10 +140,24 @@ using the following template:
 
 ## ENVIRONMENT VARIABLES
 The program can read values from these variables:  
-  CDV\_OUTPATH  Base path for output files  
-  CDV\_DPI      Resolution for output files  
-  CDV\_FILL     Color used to fill images  
-  CDV\_BORDER   Border color
+
+**CDV\_OUTPATH** :  
+Base path for output files
+
+
+**CDV\_DPI** :  
+Resolution for output files
+
+
+**CDV\_FILL** :  
+Color used to fill images
+
+
+**CDV\_BORDER** :  
+Border color
+
+
+
 
 # SCRIPTING
 You can add custom c# code, compiled at runtime, with the --script parameter.
@@ -188,19 +202,21 @@ public MagickImage OutputImage() => null;
 public MagickImage ProcessOnLoad(MagickImage image) => image;
 ~~~
 
+
 # COPYRIGHT
-Casasoft Cubetti is free software:  
+Casasoft Casasoft Cubetti is free software:  
 you can redistribute it and/or modify it  
 under the terms of the GNU Affero General Public License as published by  
 the Free Software Foundation, either version 3 of the License, or  
 \(at your option\) any later version.  
 
 You should have received a copy of the GNU AGPL v.3  
-along with Casasoft Cubetti.  
+along with Casasoft Casasoft Cubetti.  
 If not, see <http://www.gnu.org/licenses/>.  
 
 # DISCLAIMER
-Casasoft Cubetti is distributed in the hope that it will be useful,  
+Casasoft Casasoft Cubetti is distributed in the hope that it will be useful,  
 but WITHOUT ANY WARRANTY; without even the implied warranty of  
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   
 See the GNU General Public License for more details.
+

@@ -19,6 +19,7 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using ImageMagick;
 using System.Text.Json.Serialization;
 
 namespace Casasoft.CCDV.JSON;
@@ -42,6 +43,10 @@ public class MontaggioDorsiParameters : CommonParameters
         get => Utils.GetPaperFormat(Paper);
         set => Paper = value.ToString();
     }
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; }
 
     /// <summary>
     /// Default constructor

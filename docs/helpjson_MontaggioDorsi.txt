@@ -5,6 +5,7 @@ Json parameters template for: MontaggioDorsi
 
 {
   "Paper": null,
+  "CanvasGravity": 0,
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",
   "Dpi": 300,

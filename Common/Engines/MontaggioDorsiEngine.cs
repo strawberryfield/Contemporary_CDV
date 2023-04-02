@@ -32,6 +32,11 @@ namespace Casasoft.CCDV.Engines;
 /// </summary>
 public class MontaggioDorsiEngine : BaseEngine
 {
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; } = Gravity.Center;
+
     #region constructors
     /// <summary>
     /// Constructor
@@ -54,6 +59,7 @@ public class MontaggioDorsiEngine : BaseEngine
         PaperFormat = p.PaperFormat;
         ScriptingClass = new MontaggioDorsiScripting();
         Script = p.Script;
+        CanvasGravity = p.CanvasGravity;
     }
     #endregion
 
@@ -67,6 +73,7 @@ public class MontaggioDorsiEngine : BaseEngine
         GetBaseJsonParams();
         MontaggioDorsiParameters p = (MontaggioDorsiParameters)parameters;
         p.PaperFormat = PaperFormat;
+        p.CanvasGravity = CanvasGravity;
         return JsonSerializer.Serialize(p);
     }
 
@@ -89,6 +96,7 @@ public class MontaggioDorsiEngine : BaseEngine
         parameters = p;
         SetBaseJsonParams();
         PaperFormat = p.PaperFormat;
+        CanvasGravity = p.CanvasGravity;
     }
     #endregion
 
@@ -202,7 +210,7 @@ public class MontaggioDorsiEngine : BaseEngine
         {
             if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
 
-            MagickImage image = new(FilesList[nImg]);
+            MagickImage image = Utils.GetImage(FilesList[nImg], fmt.CDV_Full_v, CanvasGravity);
 
             if (ScriptInstance is not null)
             {

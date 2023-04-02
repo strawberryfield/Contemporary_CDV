@@ -49,6 +49,11 @@ public class MontaggioFotoEngine : BaseEngine
     /// Blank border around the image
     /// </summary>
     public int Padding { get; set; } = 0;
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; } = Gravity.Center;
+
     #endregion
 
     #region constructors
@@ -73,6 +78,7 @@ public class MontaggioFotoEngine : BaseEngine
         Trim = p.Trim ? true : Trim;
         WithBorder = p.WithBorder ? true : WithBorder;
         Padding = p.Padding;
+        CanvasGravity = p.CanvasGravity;
         ScriptingClass = new MontaggioFotoScripting();
         Script = p.Script;
     }
@@ -91,6 +97,7 @@ public class MontaggioFotoEngine : BaseEngine
         p.WithBorder = WithBorder;
         p.Trim = Trim;
         p.Padding = Padding;
+        p.CanvasGravity = CanvasGravity;
         return JsonSerializer.Serialize(p);
     }
 
@@ -110,13 +117,14 @@ public class MontaggioFotoEngine : BaseEngine
 
     private void SetJsonParams(MontaggioFotoParameters p)
     {
-       parameters = p;
+        parameters = p;
         SetBaseJsonParams();
         FullSize = p.FullSize;
         WithBorder = p.WithBorder;
         Trim = p.Trim;
         Padding = p.Padding;
         Script = p.Script;
+        CanvasGravity = p.CanvasGravity;
     }
     #endregion
 
@@ -187,7 +195,7 @@ public class MontaggioFotoEngine : BaseEngine
     private MagickImage Get(string filename, bool quiet)
     {
         if (!quiet) Console.WriteLine($"Processing: {filename}");
-        MagickImage image = new(filename);
+        MagickImage image = Utils.GetImage(filename, fmt.CDV_Internal_v, CanvasGravity);
 
         if (ScriptInstance is not null)
         {
@@ -200,14 +208,37 @@ public class MontaggioFotoEngine : BaseEngine
 
         MagickImage img1 = Utils.RotateResizeAndFill(image,
             FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v,
-            FillColor);
+            FillColor, CanvasGravity);
 
         if (Trim) img1.Trim();
 
         if (WithBorder)
         {
+            int offset = Math.Min(fmt.CDV_Full_v.Width - img1.Width, fmt.CDV_Full_v.Height - img1.Height) / 2;
+            int offsetX = 0;
+            int offsetY = 0;
+            switch (CanvasGravity)
+            {
+                case Gravity.Northwest:
+                case Gravity.Northeast:
+                case Gravity.Southwest:
+                case Gravity.Southeast:
+                    offsetX = offset;
+                    offsetY = offset;
+                    break;
+                case Gravity.South:
+                case Gravity.North:
+                    offsetY = offset;
+                    break;
+                case Gravity.West:
+                case Gravity.East:
+                    offsetX = offset;
+                    break;
+                default:
+                    break;
+            }
             MagickImage img2 = img.CDV_Full_v(FillColor);
-            img2.Composite(img1, Gravity.Center);
+            img2.Composite(img1, CanvasGravity, offsetX, offsetY);
             return img2;
         }
 
@@ -219,7 +250,7 @@ public class MontaggioFotoEngine : BaseEngine
                 size = new MagickGeometry(img1.Width, img1.Height);
             }
             MagickImage img2 = img.Padded(FillColor, size, Padding);
-            img2.Composite(img1, Gravity.Center);
+            img2.Composite(img1, CanvasGravity);
             return img2;
         }
 
