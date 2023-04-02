@@ -831,6 +831,16 @@
             Imagemagick built-in templates formatted in Markdown
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.ImageMagickHelp.PatternsHelp">
+            <summary>
+            Imagemagick built-in patterns
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.ImageMagickHelp.PatternsMan">
+            <summary>
+            Imagemagick built-in patterns formatted in Markdown
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.ImageMagickHelp.GravityDesc">
             <summary>
             Descriptive values for gravity

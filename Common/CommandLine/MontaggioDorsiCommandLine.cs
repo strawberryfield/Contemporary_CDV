@@ -108,6 +108,9 @@ public class MontaggioDorsiCommandLine : CommandLine
     protected override string ExtraMan() =>  @$"
 # BUILT-IN IMAGES AND RENDERS
 {ImageMagickHelp.BuiltInMan}
+
+## Available built-in patterns
+{ImageMagickHelp.PatternsMan}
 ";
 
     /// <summary>
