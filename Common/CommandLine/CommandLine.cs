@@ -555,7 +555,7 @@ These are the signatures of the scriptable methods:
     public static int GetIntParameter(string val, int fallback, string message)
     {
         int ret;
-        if (!Int32.TryParse(val, out ret))
+        if (!int.TryParse(val, out ret))
         {
             Console.Error.WriteLine(string.Format(message, val));
             ret = fallback;
