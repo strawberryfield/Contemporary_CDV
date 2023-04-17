@@ -2,9 +2,9 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
   <Fragment>
 	  <!-- Directory structure for start menu -->
-	  <DirectoryRef Id="ProgramMenuFolder">
+	  <StandardDirectory Id="ProgramMenuFolder">
 		  <Directory Id="ApplicationProgramsFolder" Name="Casasoft CCDV tools"/>
-	  </DirectoryRef>
+	  </StandardDirectory>
 
 	  <!-- Shortcuts in start menu -->
 	  <DirectoryRef Id="ApplicationProgramsFolder">
@@ -83,7 +83,7 @@
 		  </Component>
 	  </DirectoryRef>
 
-	  <DirectoryRef Id="DesktopFolder">
+	  <StandardDirectory Id="DesktopFolder">
 		  <Component Id="ApplicationShortcutDesktop" Guid="{F8F5D127-B79A-4587-87BC-8CFD1CAB030D}">
 			  <Shortcut Id="ApplicationDesktopShortcut"
 				  Name="CdV tools GUI"
@@ -99,7 +99,7 @@
 				  Value="1"
 				  KeyPath="yes"/>
 		  </Component>
-	  </DirectoryRef>
+	  </StandardDirectory>
 
   </Fragment>
 </Wix>

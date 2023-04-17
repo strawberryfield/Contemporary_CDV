@@ -9,27 +9,32 @@
 		<?define binPath = "$(var.ProjectDir)..\bin\publish" ?>
 		<?define binPathGUI = "$(var.ProjectDir)..\bin\publish" ?>
 
-		<ui:WixUI Id="WixUI_Mondo" />
 		<WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)LICENSE.rtf" />
 		<WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)banner.bmp" />
 		<WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)dialog.bmp" />
+		<ui:WixUI Id="WixUI_Mondo" />
 
 		<Feature Id="Complete" Title="Casasoft CdV tools"
 				 Description="[ProductName] complete package."
 				 Display="expand" Level='1' ConfigurableDirectory='INSTALLFOLDER'
 				 AllowAdvertise='no' InstallDefault='local'>
 			<Feature Id="CommonFeature" Title="Common libraries" Level="1"
-					 AllowAdvertise='no' InstallDefault='local'>
+					 Description="Common libraries"
+					 AllowAdvertise='no' InstallDefault='local'
+					 TypicalDefault='install'>
 				<ComponentGroupRef Id="CommonFeatures" />
 				<ComponentRef Id="MagickNet_x64" />
 				<ComponentRef Id="MagickNet_x86" />
 			</Feature>
 			<Feature Id="CommandLineFeature" Title="Command line tools" Level="2"
+					 Description="Command line interfaces"
 					 AllowAdvertise='no' InstallDefault='local'>
 				<ComponentGroupRef Id="CommandLine" />
 			</Feature>
 			<Feature Id="GUIFeature" Title="GUI" Level="2"
-					 AllowAdvertise='no' InstallDefault='local'>
+					 Description="GUI"
+					 AllowAdvertise='no' InstallDefault='local'
+					 TypicalDefault='install'>
 				<ComponentGroupRef Id="GUI" />
 				<ComponentRef Id="ApplicationShortcutStart" />
 				<ComponentRef Id="ApplicationShortcutDesktop" />
