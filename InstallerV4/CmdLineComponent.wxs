@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<?define binPath = "$(var.ProjectDir)..\bin\publish" ?>
+	<?define binPathGUI = "$(var.ProjectDir)..\bin\publish" ?>
+
+	<Fragment>
+	  <ComponentGroup Id="CommandLine" Directory="INSTALLFOLDER">
+		  <Component Id="Cartella" Guid="{87C5E5B8-17B6-4A34-BCC0-61C04A1614C9}">
+			  <File Source="$(var.binPath)\Cartella.dll" KeyPath="yes" />
+			  <File Source="$(var.binPath)\Cartella.exe" />
+			  <File Source="$(var.binPath)\Cartella.runtimeconfig.json" />
+			  <File Source="$(var.binPath)\Cartella.deps.json" />
+		  </Component>
+		  <Component Id="Scatola" Guid="{C35C7850-FDAE-4F58-A9CA-28D6EDB26890}">
+			  <File Source="$(var.binPath)\Scatola.dll" KeyPath="yes" />
+			  <File Source="$(var.binPath)\Scatola.exe" />
+			  <File Source="$(var.binPath)\Scatola.runtimeconfig.json" />
+			  <File Source="$(var.binPath)\Scatola.deps.json" />
+		  </Component>
+		  <Component Id="MontaggioFoto" Guid="{0B3A8995-092A-40A3-B525-7906CE2368E9}">
+			  <File Source="$(var.binPath)\MontaggioFoto.dll" KeyPath="yes" />
+			  <File Source="$(var.binPath)\MontaggioFoto.exe" />
+			  <File Source="$(var.binPath)\MontaggioFoto.runtimeconfig.json" />
+			  <File Source="$(var.binPath)\MontaggioFoto.deps.json" />
+		  </Component>
+		  <Component Id="MontaggioDorsi" Guid="{FDC40C53-C639-45ED-BD81-11AE5DC6F179}">
+			  <File Source="$(var.binPath)\MontaggioDorsi.dll" KeyPath="yes" />
+			  <File Source="$(var.binPath)\MontaggioDorsi.exe" />
+			  <File Source="$(var.binPath)\MontaggioDorsi.runtimeconfig.json" />
+			  <File Source="$(var.binPath)\MontaggioDorsi.deps.json" />
+		  </Component>
+		  <Component Id="CreditCard" Guid="{B87BD3E8-58D9-4269-9B7D-4AD3BA9A977B}">
+			  <File Source="$(var.binPath)\CreditCard.dll" KeyPath="yes" />
+			  <File Source="$(var.binPath)\CreditCard.exe" />
+			  <File Source="$(var.binPath)\CreditCard.runtimeconfig.json" />
+			  <File Source="$(var.binPath)\CreditCard.deps.json" />
+		  </Component>
+		  <Component Id="Cubetti" Guid="{3F4EC383-17A3-42D3-BF72-3D30980BC8AB}">
+			  <File Source="$(var.binPath)\Cubetti.dll" KeyPath="yes" />
+			  <File Source="$(var.binPath)\Cubetti.exe" />
+			  <File Source="$(var.binPath)\Cubetti.runtimeconfig.json" />
+			  <File Source="$(var.binPath)\Cubetti.deps.json" />
+		  </Component>
+		  <Component Id="Flexagon" Guid="{9DCAE7C7-7CED-424E-A760-8968E56A2647}">
+			  <File Source="$(var.binPath)\Flexagon.dll" KeyPath="yes" />
+			  <File Source="$(var.binPath)\Flexagon.exe" />
+			  <File Source="$(var.binPath)\Flexagon.runtimeconfig.json" />
+			  <File Source="$(var.binPath)\Flexagon.deps.json" />
+		  </Component>
+		  <!-- Creates entry in Path environment variable -->
+		  <Component Id="Path" Guid="{6ED4FDB5-2D7E-411B-A59A-A5A6C0D31556}">
+			  <CreateFolder/>
+			  <Environment Id="PATH" Name="PATH" Value="[INSTALLFOLDER]" Permanent="no" Part="last" Action="set" System="no" />
+		  </Component>
+	  </ComponentGroup>
+
+  </Fragment>
+</Wix>

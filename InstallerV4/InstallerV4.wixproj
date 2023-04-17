@@ -1,0 +1,23 @@
+﻿<Project Sdk="WixToolset.Sdk/4.0.0">
+  <ItemGroup>
+    <Content Include="banner.bmp" />
+    <Content Include="dialog.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.0" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cartella\Cartella.csproj" />
+    <ProjectReference Include="..\CCDV\CCDV.csproj" />
+    <ProjectReference Include="..\CreditCard\CreditCard.csproj" />
+    <ProjectReference Include="..\Cubetti\Cubetti.csproj" />
+    <ProjectReference Include="..\Flexagon\Flexagon.csproj" />
+    <ProjectReference Include="..\MontaggioDorsi\MontaggioDorsi.csproj" />
+    <ProjectReference Include="..\MontaggioFoto\MontaggioFoto.csproj" />
+    <ProjectReference Include="..\Scatola\Scatola.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,27 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <!--<StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="!(bind.Property.Manufacturer) !(bind.Property.ProductName)" />
+    </StandardDirectory>-->
+
+	  <Directory Id="TARGETDIR" Name="SourceDir">
+		  <Directory Id="ProgramFiles6432Folder">
+			  <Directory Id="ManufacturerFolder" Name="!(bind.property.Manufacturer)">
+				  <Directory Id="INSTALLFOLDER" Name="CCdV" >
+					  <Directory Id="runtimes" Name="runtimes">
+						  <Directory Id="runtime_x64" Name="win-x64">
+							  <Directory Id="runtime_x64_native" Name="native" />
+						  </Directory>
+						  <Directory Id="runtime_x86" Name="win-x86">
+							  <Directory Id="runtime_x86_native" Name="native" />
+						  </Directory>
+					  </Directory>
+				  </Directory>
+			  </Directory>
+		  </Directory>
+		  <Directory Id="ProgramMenuFolder"/>
+		  <Directory Id="DesktopFolder"/>
+	  </Directory>
+
+  </Fragment>
+</Wix>

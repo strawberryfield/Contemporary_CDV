@@ -183,7 +183,7 @@ If not, see <http://www.gnu.org/licenses/>.
 		<DirectoryRef Id="ProgramMenuFolder">
 			<Directory Id="ApplicationProgramsFolder" Name="Casasoft CCDV tools"/>
 		</DirectoryRef>
-		
+
 		<!-- Shortcuts in start menu -->
 		<DirectoryRef Id="ApplicationProgramsFolder">
 			<Component Id="ApplicationShortcutStart" Guid="{7792B02D-643E-4D5E-B516-36C5F9FDC512}">
@@ -242,14 +242,14 @@ If not, see <http://www.gnu.org/licenses/>.
 				<util:InternetShortcut Id="ProjectSourceShortcut"
 					Name="Source code repository"
 					Target="https://github.com/strawberryfield/Contemporary_CDV"/>
-				
+
 				<!-- Uninstall shortcut -->
 				<Shortcut Id="UninstallProduct"
 						  Name="Uninstall CCDV tools"
 						  Target="[SystemFolder]msiexec.exe"
 						  Arguments="/x [ProductCode]"
 						  Description="Uninstalls My Application" />
-				
+
 				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
 				<RegistryValue
 					Root="HKCU"
