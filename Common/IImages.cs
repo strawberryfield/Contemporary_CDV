@@ -20,150 +20,113 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
-using System;
 
 namespace Casasoft.CCDV;
 
 /// <summary>
-/// This class generates Imagemagick images
+/// The derived classes generate Imagemagick images
 /// based on format defined with <see cref="Formats"/> class
 /// </summary>
-public class Images : IImages
+public interface IImages
 {
-    /// <summary>
-    /// Options for images generation
-    /// </summary>
-    protected IFormats fmt;
-
-    #region constructors
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="dpi">Resolution of images</param>
-    public Images(int dpi)
-    {
-        fmt = new Formats(dpi);
-    }
-
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <remarks>
-    /// The resolution is set to the default 300 DPI
-    /// </remarks>
-    public Images() : this(300) { }
-
-    /// <summary>
-    /// Construcot
-    /// </summary>
-    /// <param name="f">
-    /// Instance of <see cref="Formats"/> class used to set the 
-    /// resolution of the images
-    /// </param>
-    public Images(IFormats f)
-    {
-        fmt = f;
-    }
-    #endregion
-
     #region commercial formats
     /// <summary>
     /// Photocity Digital print over 27x20cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage InCartha20x27_o(MagickColor c) => new(c, fmt.InCartha20x27_o.Width, fmt.InCartha20x27_o.Height);
+    public MagickImage InCartha20x27_o(MagickColor c);
     /// <summary>
     /// Photocity Digital print over 20x27cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage InCartha20x27_v(MagickColor c) => new(c, fmt.InCartha20x27_v.Width, fmt.InCartha20x27_v.Height);
+    public MagickImage InCartha20x27_v(MagickColor c);
     /// <summary>
     /// Photocity Digital print over 15x20cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage InCartha15x20_o(MagickColor c) => new(c, fmt.InCartha15x20_o.Width, fmt.InCartha15x20_o.Height);
+    public MagickImage InCartha15x20_o(MagickColor c);
     /// <summary>
     /// Photocity Digital print over 20x27cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage InCartha15x20_v(MagickColor c) => new(c, fmt.InCartha15x20_v.Width, fmt.InCartha15x20_v.Height);
+    public MagickImage InCartha15x20_v(MagickColor c);
     /// <summary>
     /// 15x10cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage FineArt10x15_o(MagickColor c) => new(c, fmt.FineArt10x15_o.Width, fmt.FineArt10x15_o.Height);
+    public MagickImage FineArt10x15_o(MagickColor c);
     /// <summary>
     /// 10x15cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage FineArt10x15_v(MagickColor c) => new(c, fmt.FineArt10x15_v.Width, fmt.FineArt10x15_v.Height);
+    public MagickImage FineArt10x15_v(MagickColor c);
     /// <summary>
     /// 18x10cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage FineArt10x18_o(MagickColor c) => new(c, fmt.FineArt10x18_o.Width, fmt.FineArt10x18_o.Height);
+    public MagickImage FineArt10x18_o(MagickColor c);
     /// <summary>
     /// 10x18cm paper
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage FineArt10x18_v(MagickColor c) => new(c, fmt.FineArt10x18_v.Width, fmt.FineArt10x18_v.Height);
+    public MagickImage FineArt10x18_v(MagickColor c);
 
     /// <summary>
     /// Photocity Digital print over 27x20cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage InCartha20x27_o() => InCartha20x27_o(MagickColors.White);
+    public MagickImage InCartha20x27_o();
     /// <summary>
     /// Photocity Digital print over 20x27cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage InCartha20x27_v() => InCartha20x27_v(MagickColors.White);
+    public MagickImage InCartha20x27_v();
     /// <summary>
     /// Photocity Digital print over 15x20cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage InCartha15x20_o() => InCartha15x20_o(MagickColors.White);
+    public MagickImage InCartha15x20_o();
     /// <summary>
     /// Photocity Digital print over 15x20cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage InCartha15x20_v() => InCartha15x20_v(MagickColors.White);
+    public MagickImage InCartha15x20_v();
     /// <summary>
     /// 15x10cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage FineArt10x15_o() => FineArt10x15_o(MagickColors.White);
+    public MagickImage FineArt10x15_o();
     /// <summary>
     /// 10x15cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage FineArt10x15_v() => FineArt10x15_v(MagickColors.White);
+    public MagickImage FineArt10x15_v();
     /// <summary>
     /// 18x10cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage FineArt10x18_o() => FineArt10x18_o(MagickColors.White);
+    public MagickImage FineArt10x18_o();
     /// <summary>
     /// 10x18cm paper
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage FineArt10x18_v() => FineArt10x18_v(MagickColors.White);
+    public MagickImage FineArt10x18_v();
     #endregion
 
     #region ISO formats
@@ -172,26 +135,26 @@ public class Images : IImages
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage A4_o(MagickColor c) => new(c, fmt.A4_o.Width, fmt.A4_o.Height);
+    public MagickImage A4_o(MagickColor c);
     /// <summary>
     /// ISO A4 210x297 mm
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage A4_v(MagickColor c) => new(c, fmt.A4_v.Width, fmt.A4_v.Height);
+    public MagickImage A4_v(MagickColor c);
 
     /// <summary>
     /// ISO A4 297x210 mm
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage A4_o() => A4_o(MagickColors.White);
+    public MagickImage A4_o();
     /// <summary>
     /// ISO A4 210x297 mm
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage A4_v() => A4_v(MagickColors.White);
+    public MagickImage A4_v();
     #endregion
 
     #region cdv
@@ -200,50 +163,50 @@ public class Images : IImages
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage CDV_Full_o(MagickColor c) => new(c, fmt.CDV_Full_o.Width, fmt.CDV_Full_o.Height);
+    public MagickImage CDV_Full_o(MagickColor c);
     /// <summary>
     /// Vertical Carte de Visite, 64x100mm
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage CDV_Full_v(MagickColor c) => new(c, fmt.CDV_Full_v.Width, fmt.CDV_Full_v.Height);
+    public MagickImage CDV_Full_v(MagickColor c);
     /// <summary>
     /// Horizontal Carte de Visite reduced to leave a 5 mm border on any side
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage CDV_Internal_o(MagickColor c) => new(c, fmt.CDV_Internal_o.Width, fmt.CDV_Internal_o.Height);
+    public MagickImage CDV_Internal_o(MagickColor c);
     /// <summary>
     /// Vertical Carte de Visite reduced to leave a 5 mm border on any side
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage CDV_Internal_v(MagickColor c) => new(c, fmt.CDV_Internal_v.Width, fmt.CDV_Internal_v.Height);
+    public MagickImage CDV_Internal_v(MagickColor c);
 
     /// <summary>
     /// Horizontal Carte de Visite, 100x64mm
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage CDV_Full_o() => CDV_Full_o(MagickColors.White);
+    public MagickImage CDV_Full_o();
     /// <summary>
     /// Vertical Carte de Visite, 64x100mm
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage CDV_Full_v() => CDV_Full_v(MagickColors.White);
+    public MagickImage CDV_Full_v();
     /// <summary>
     /// Horizontal Carte de Visite reduced to leave a 5 mm border on any side
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage CDV_Internal_o() => CDV_Internal_o(MagickColors.White);
+    public MagickImage CDV_Internal_o();
     /// <summary>
     /// Vertical Carte de Visite reduced to leave a 5 mm border on any side
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage CDV_Internal_v() => CDV_Internal_v(MagickColors.White);
+    public MagickImage CDV_Internal_v();
     #endregion
 
     #region credit card
@@ -252,26 +215,26 @@ public class Images : IImages
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage CC_o(MagickColor c) => new(c, fmt.CC_o.Width, fmt.CC_o.Height);
+    public MagickImage CC_o(MagickColor c);
     /// <summary>
     /// Vertical credit card, 54x86mm
     /// </summary>
     /// <param name="c">Background color</param>
     /// <returns></returns>
-    public MagickImage CC_v(MagickColor c) => new(c, fmt.CC_v.Width, fmt.CC_v.Height);
+    public MagickImage CC_v(MagickColor c);
 
     /// <summary>
     /// Horizontal credit card, 86x54mm
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage CC_o() => CC_o(MagickColors.White);
+    public MagickImage CC_o();
     /// <summary>
     /// Vertical credit card, 54x86mm
     /// </summary>
     /// <remarks>White background</remarks>
     /// <returns></returns>
-    public MagickImage CC_v() => CC_v(MagickColors.White);
+    public MagickImage CC_v();
 
     #endregion
 
@@ -283,61 +246,15 @@ public class Images : IImages
     /// <param name="baseSize"></param>
     /// <param name="Padding">border size in mm</param>
     /// <returns></returns>
-    public MagickImage Padded(MagickColor c, MagickGeometry baseSize, int Padding)
-    {
-        int pad = fmt.ToPixels(Padding) * 2;
-        return new MagickImage(c, baseSize.Width + pad, baseSize.Height + pad);
-    }
+    public MagickImage Padded(MagickColor c, MagickGeometry baseSize, int Padding);
+
     /// <summary>
     /// Creates an image with a border around
     /// </summary>
     /// <param name="baseSize"></param>
     /// <param name="Padding">border size in mm</param>
     /// <returns></returns>
-    public MagickImage Padded(MagickGeometry baseSize, int Padding)
-        => Padded(MagickColors.White, baseSize, Padding);
+    public MagickImage Padded(MagickGeometry baseSize, int Padding);
+        
     #endregion
-
-    /// <summary>
-    /// Draws infos on the image
-    /// </summary>
-    /// <param name="i">input description</param>
-    /// <param name="o">output description</param>
-    /// <param name="p">output format</param>
-    /// <returns></returns>
-    public Drawables Info(string i, string o, PaperFormats p = PaperFormats.Large)
-    {
-        Drawables d = new Drawables();
-
-        d.FontPointSize(fmt.ToPixels(3))
-            .Font("Arial")
-            .FillColor(MagickColors.Black)
-            .TextAlignment(TextAlignment.Left);
-
-        int center;
-        int h;
-        switch (p)
-        {
-            case PaperFormats.Small:
-                break;
-            case PaperFormats.Medium:
-                center = fmt.InCartha15x20_o.Width / 2;
-                h = fmt.InCartha15x20_o.Height / 2 + fmt.CDV_Full_v.Height / 2 + fmt.ToPixels(10);
-                d.Text(center - fmt.CDV_Full_v.Width * 3 / 2 + fmt.ToPixels(5), h, $"{i}Run {DateTime.Now:R}")
-                   .Text(center, h, $"DPI: {fmt.DPI}\nOutput: {o}");
-                break;
-            case PaperFormats.Large:
-            case PaperFormats.A4:
-                h = fmt.ToPixels(185);
-                d.Text(fmt.ToPixels(10), h, $"{i}Run {DateTime.Now:R}")
-                    .Text(fmt.InCartha20x27_o.Width / 2, h, $"DPI: {fmt.DPI}\nOutput: {o}");
-                break;
-            case PaperFormats.Panorama:
-                break;
-            default:
-                break;
-        }
-        return d;
-    }
-
 }
