@@ -34,7 +34,7 @@ public class BaseBuilder : IBuilder
     /// <summary>
     /// Reference to formats
     /// </summary>
-    public Formats fmt { get; set; }
+    public IFormats fmt { get; set; }
     /// <summary>
     /// Reference to command line
     /// </summary>

@@ -20,6 +20,7 @@
 	<PackageIcon>CCDV-128.png</PackageIcon>
 	<PackageTags>ImageMagick;csharpscript;casasoft;contemporarycartedevisite</PackageTags>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageReleaseNotes>Images and Formats classess are now implemented using interfaces</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
