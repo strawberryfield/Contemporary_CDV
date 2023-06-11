@@ -24,41 +24,22 @@ using ImageMagick;
 namespace Casasoft.CCDV;
 
 /// <summary>
-/// This class handles all target formats
+/// The classes that inherit this interface handle all target formats
 /// converting sizes in mm to pixel using the specified dpi resolution
 /// </summary>
-public class Formats : IFormats
+public interface IFormats
 {
-    private int _dpi;
-    private double _inch = 25.4;
-
-    #region constructors
-    /// <summary>
-    /// This constructor ser the resolution to 300 DPI
-    /// </summary>
-    public Formats() : this(300) { }
-
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="dpi">Resolution for conversion in pixels</param>
-    public Formats(int dpi)
-    {
-        _dpi = dpi;
-    }
-    #endregion
-
     /// <summary>
     /// Converts mm to pixels
     /// </summary>
     /// <param name="mm">size to convert</param>
     /// <returns>pixel at defined resolution</returns>
-    public int ToPixels(int mm) => (int)(mm * _dpi / _inch);
+    public int ToPixels(int mm);
 
     /// <summary>
     /// Returns the resolution
     /// </summary>
-    public int DPI => _dpi;
+    public int DPI { get; }
 
     #region commercial formats
     /// <summary>
@@ -67,121 +48,98 @@ public class Formats : IFormats
     /// <remarks>
     /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
     /// </remarks>
-    public MagickGeometry InCartha20x27_o => new(ToPixels((int)(270 * 1.04)), ToPixels((int)(200 * 1.04)));
+    public MagickGeometry InCartha20x27_o { get; }
     /// <summary>
     /// Photocity Digital print over 20x27cm paper
     /// </summary>
     /// <remarks>
     /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
     /// </remarks>
-    public MagickGeometry InCartha20x27_v => swap(InCartha20x27_o);
+    public MagickGeometry InCartha20x27_v { get; }
     /// <summary>
     /// Photocity Digital print over 15x20cm paper
     /// </summary>
     /// <remarks>
     /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
     /// </remarks>
-    public MagickGeometry InCartha15x20_o => new(ToPixels((int)(200 * 1.03)), ToPixels((int)(150 * 1.03)));
+    public MagickGeometry InCartha15x20_o { get; }
     /// <summary>
     /// Photocity Digital print over 15x20cm paper
     /// </summary>
     /// <remarks>
     /// In printing the service enlarges (an cuts!) the image, so I need to take care of this
     /// </remarks>
-    public MagickGeometry InCartha15x20_v => swap(InCartha15x20_o);
+    public MagickGeometry InCartha15x20_v { get; }
     /// <summary>
     /// 15x10cm paper
     /// </summary>
-    public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));
+    public MagickGeometry FineArt10x15_o { get; }
     /// <summary>
     /// 10x15cm paper
     /// </summary>
-    public MagickGeometry FineArt10x15_v => swap(FineArt10x15_o);
+    public MagickGeometry FineArt10x15_v { get; }
     /// <summary>
     /// 18x10cm paper
     /// </summary>
-    public MagickGeometry FineArt10x18_o => new(ToPixels(180), ToPixels(102));
+    public MagickGeometry FineArt10x18_o { get; }
     /// <summary>
     /// 10x18cm paper
     /// </summary>
-    public MagickGeometry FineArt10x18_v => swap(FineArt10x18_o);
+    public MagickGeometry FineArt10x18_v { get; }
     #endregion
 
     #region ISO formats
     /// <summary>
     /// 15x10cm paper
     /// </summary>
-    public MagickGeometry A4_o => new(ToPixels(297), ToPixels(210));
+    public MagickGeometry A4_o { get; }
     /// <summary>
     /// 10x15cm paper
     /// </summary>
-    public MagickGeometry A4_v => swap(A4_o);
+    public MagickGeometry A4_v { get; }
     #endregion
 
     #region cdv
     /// <summary>
     /// Horizontal Carte de Visite, 100x64mm
     /// </summary>
-    public MagickGeometry CDV_Full_o => new(ToPixels(100), ToPixels(64));
+    public MagickGeometry CDV_Full_o { get; }
     /// <summary>
     /// Vertical Carte de Visite, 64x100mm
     /// </summary>
-    public MagickGeometry CDV_Full_v => swap(CDV_Full_o);
+    public MagickGeometry CDV_Full_v { get; }
     /// <summary>
     /// Horizontal Carte de Visite reduced to leave a 5 mm border on any side
     /// </summary>
-    public MagickGeometry CDV_Internal_o => new(ToPixels(90), ToPixels(54));
+    public MagickGeometry CDV_Internal_o { get; }
     /// <summary>
     /// Vertical Carte de Visite reduced to leave a 5 mm border on any side
     /// </summary>
-    public MagickGeometry CDV_Internal_v => swap(CDV_Internal_o);
+    public MagickGeometry CDV_Internal_v { get; }
     #endregion
 
     #region credit card
     /// <summary>
     /// Horizontal credit card, 86x54mm
     /// </summary>
-    public MagickGeometry CC_o => new(ToPixels(86), ToPixels(54));
+    public MagickGeometry CC_o { get; }
     /// <summary>
     /// Vertical credit card, 54x86mm
     /// </summary>
-    public MagickGeometry CC_v => swap(CC_o);
+    public MagickGeometry CC_v { get; }
     #endregion
 
-    private static MagickGeometry swap(MagickGeometry g)
-    {
-        int tmp = g.Width;
-        g.Width = g.Height;
-        g.Height = tmp;
-        return g;
-    }
 
     /// <summary>
     /// Adds Exif infos to image
     /// </summary>
     /// <param name="img">image to process</param>
     /// <param name="ext">extension (file format)</param>
-    public void SetImageParameters(MagickImage img, string ext)
-    {
-        img.Quality = 95;
-        img.Density = new Density(_dpi);
-        img.ColorSpace = ColorSpace.sRGB;
-
-        if (ext == "jpg")
-        {
-            img.Format = MagickFormat.Jpg;
-
-            ExifProfile exif = new();
-            exif.SetValue(ExifTag.Make, "Casasoft");
-            exif.SetValue(ExifTag.Model, "Contemporary Carte de Visite Tools");
-            exif.SetValue(ExifTag.Software, "Casasoft Contemporary Carte de Visite Tools");
-            img.SetProfile(exif);
-        }
-    }
+    public void SetImageParameters(MagickImage img, string ext);
 
     /// <summary>
     /// Adds Exif infos to jpg image
     /// </summary>
     /// <param name="img">image to process</param>
-    public void SetImageParameters(MagickImage img) => SetImageParameters(img, "jpg");
+    public void SetImageParameters(MagickImage img);
 }
