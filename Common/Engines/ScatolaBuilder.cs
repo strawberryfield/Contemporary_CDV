@@ -47,7 +47,7 @@ public class ScatolaBuilder : BaseBuilder
     /// <param name="formats"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public ScatolaBuilder(int Spessore, Formats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public ScatolaBuilder(int Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
        base(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
     { }
     /// <summary>
@@ -89,7 +89,7 @@ public class ScatolaBuilder : BaseBuilder
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
     public ScatolaBuilder(int Spessore,
-        Formats formats,
+        IFormats formats,
         MagickColor fillcolor,
         MagickColor bordercolor,
         TargetType targetype = TargetType.cdv,
@@ -102,7 +102,7 @@ public class ScatolaBuilder : BaseBuilder
     /// </summary>
     /// <param name="par"></param>
     /// <param name="formats"></param>
-    public ScatolaBuilder(BaseBuilderCommandLine par, Formats formats) :
+    public ScatolaBuilder(BaseBuilderCommandLine par, IFormats formats) :
         base(par, formats)
     { }
     #endregion
