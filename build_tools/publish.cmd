@@ -27,13 +27,10 @@ set docs=%repo%docs\
 set bin=%repo%bin\
 set build=%bin%publish\
 set pkgname=Casasoft_CCdV
+set nuget=C:\Users\rober\.nuget\packages\
 set winrar="C:\Program Files\WinRAR\winrar.exe"
-set wix=C:\Program Files (x86)\WiX Toolset v3.11\bin\
-set candle="%wix%candle.exe"
-set light="%wix%light.exe"
-set WixUtils="%wix%WixUtilExtension.dll"
 
-set version=23.06.12
+set version=23.08.22
  
 @del /S /Q %build%
 @del /Q %bin%%pkgname%*.*
@@ -82,13 +79,13 @@ rmdir /s /q man
 %winrar% k ..\%pkgname%_wGUI_%version%.rar
 popd
 
-%candle% %repo%WindowsInstaller\Product.wxs ^
- -dProjectDir=%repo%WindowsInstaller\ ^
- -out %bin%build\product.wixobj ^
- -ext WixUIExtension -ext %WixUtils%
-%light% -out %bin%%pkgname%_%version%.msi ^
- %bin%build\product.wixobj ^
- -ext WixUIExtension -ext %WixUtils%
+wix build ^
+ -ext %nuget%wixtoolset.ui.wixext\4.0.1\wixext4\WixToolset.UI.wixext.dll ^
+ -ext %nuget%wixtoolset.util.wixext\4.0.1\wixext4\WixToolset.Util.wixext.dll ^
+ -d var.ProjectDir=%repo%WindowsInstaller\ ^
+ -outputtype exe ^
+ -o %bin%%pkgname%-%version%.msi ^
+ %repo%WindowsInstaller\product.wxs
  
 dotnet pack %repo%Templates\ScriptTestTemplatesPack.csproj -p:PackageVersion=%version% 
 dotnet pack %repo%ProjectTemplate\CCDV_ProjectTemplate.csproj -p:PackageVersion=%version% 

@@ -256,7 +256,7 @@ public interface IImages
     /// <returns></returns>
     public MagickImage Padded(MagickGeometry baseSize, int Padding);
 
-    /// <summary>
+  /// <summary>
     /// Draws infos on the image
     /// </summary>
     /// <param name="i">input description</param>
@@ -264,5 +264,6 @@ public interface IImages
     /// <param name="p">output format</param>
     /// <returns></returns>
     public Drawables Info(string i, string o, PaperFormats p = PaperFormats.Large);
+
     #endregion
 }

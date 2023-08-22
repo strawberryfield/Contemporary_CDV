@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+﻿<!--
 copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
 http://strawberryfield.altervista.org 
 
@@ -21,38 +20,26 @@ You should have received a copy of the GNU AGPL v.3
 along with Casasoft CCDV Tools.  
 If not, see <http://www.gnu.org/licenses/>.
 -->
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-	 xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-	<Product Id="*" Name="Casasoft Contemporary Carte de Viste tools" Language="1033"
-			 Version="!(bind.fileVersion.CCDV)" Manufacturer="Casasoft"
-			 UpgradeCode="3bf317e8-eb0d-4706-b499-31609f4ccfa0">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+	<Package Name="Casasoft Contemporary Carte de Viste tools" Language="1033" Version="!(bind.fileVersion.CCDV)" Manufacturer="Casasoft" UpgradeCode="3bf317e8-eb0d-4706-b499-31609f4ccfa0" InstallerVersion="200"><MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-
-		<Feature Id="Complete" Title="Casasoft CdV tools"
-				 Description="[ProductName] complete package."
-				 Display="expand" Level='1' ConfigurableDirectory='INSTALLFOLDER'
-				 AllowAdvertise='no' InstallDefault='local'>
-			<Feature Id="CommonFeature" Title="Common libraries" Level="1"
-					 AllowAdvertise='no' InstallDefault='local' Absent='disallow'>
+		<Feature Id="Complete" Title="Casasoft CdV tools" Description="[ProductName] complete package." Display="expand" Level="1" ConfigurableDirectory="INSTALLFOLDER" AllowAdvertise="no" InstallDefault="local">
+			<Feature Id="CommonFeature" Title="Common libraries" Level="1" AllowAdvertise="no" InstallDefault="local" AllowAbsent="no">
 				<ComponentGroupRef Id="CommonFeatures" />
 				<ComponentRef Id="MagickNet_x64" />
 				<ComponentRef Id="MagickNet_x86" />
 			</Feature>
-			<Feature Id="CommandLineFeature" Title="Command line tools" Level="2"
-					 AllowAdvertise='no' InstallDefault='local'>
+			<Feature Id="CommandLineFeature" Title="Command line tools" Level="2" AllowAdvertise="no" InstallDefault="local">
 				<ComponentGroupRef Id="CommandLine" />
 			</Feature>
-			<Feature Id="GUIFeature" Title="GUI" Level="2"
-					 AllowAdvertise='no' InstallDefault='local'>
+			<Feature Id="GUIFeature" Title="GUI" Level="2" AllowAdvertise="no" InstallDefault="local">
 				<ComponentGroupRef Id="GUI" />
 				<ComponentRef Id="ApplicationShortcutStart" />
 				<ComponentRef Id="ApplicationShortcutDesktop" />
 			</Feature>
 		</Feature>
 
-		<UIRef Id="WixUI_Mondo" />
+		<ui:WixUI Id="WixUI_Mondo" />
 		<UIRef Id="WixUI_ErrorProgressText" />
 		<WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)LICENSE.rtf" />
 		<WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)banner.bmp" />
@@ -60,10 +47,149 @@ If not, see <http://www.gnu.org/licenses/>.
 
 		<Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
+		
+
+		<?define binPath = "$(var.ProjectDir)..\bin\publish" ?>
+		<?define binPathGUI = "$(var.ProjectDir)..\bin\publish" ?>
+
+		<!--<?define binPath = "$(var.ProjectDir)..\bin\build\net6.0" ?>
+		<?define binPathGUI = "$(var.ProjectDir)..\bin\GUI\build\net6.0-windows" ?>-->
+
+		<ComponentGroup Id="CommonFeatures" Directory="INSTALLFOLDER">
+			<Component Id="MagickNet" Guid="{F8766EEC-5E83-4889-809A-A0373B334D98}">
+				<File Id="Magick.NET.Core.dll" Source="$(var.binPath)\Magick.NET.Core.dll" KeyPath="yes" />
+				<File Id="Magick.NET.SystemWindowsMedia.dll" Source="$(var.binPathGUI)\Magick.NET.SystemWindowsMedia.dll" />
+				<File Id="Magick.NET_Q16_AnyCPU.dll" Source="$(var.binPath)\Magick.NET-Q16-AnyCPU.dll" />
+			</Component>
+			<Component Id="Mono" Guid="{A35FB286-F632-466D-A7F8-EF83BCD03B2C}">
+				<File Id="Mono.Options.dll" Source="$(var.binPath)\Mono.Options.dll" KeyPath="yes" />
+			</Component>
+			<Component Id="Microsoft" Guid="{15CE51A9-8828-495A-9D97-AA2E329E6A0E}">
+				<File Id="Microsoft.CodeAnalysis.CSharp.dll" Source="$(var.binPath)\Microsoft.CodeAnalysis.CSharp.dll" />
+				<File Id="Microsoft.CodeAnalysis.dll" Source="$(var.binPath)\Microsoft.CodeAnalysis.dll" />
+				<File Id="Microsoft.Xaml.Behaviors.dll" Source="$(var.binPathGUI)\Microsoft.Xaml.Behaviors.dll" KeyPath="yes" />
+			</Component>
+			<Component Id="CCDVcommon" Guid="{5694235F-2C0E-4CDC-98E6-8EF3C8CE82A2}">
+				<File Id="Casasoft.CCDV.Common.dll" Source="$(var.binPath)\Casasoft.CCDV.Common.dll" KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+		<Component Id="MagickNet_x64" Directory="runtime_x64_native" Guid="{CDC4CD49-881F-45BD-B587-ED0B05C728C4}">
+			<File Id="Magick.Native_Q16_x64.dll" Source="$(var.binPath)\runtimes\win-x64\native\Magick.Native-Q16-x64.dll" KeyPath="yes" />
+		</Component>
+		<Component Id="MagickNet_x86" Directory="runtime_x86_native" Guid="{4C46AAA7-95C0-4CCC-BEE5-03FAD587B3B4}">
+			<File Id="Magick.Native_Q16_x86.dll" Source="$(var.binPath)\runtimes\win-x86\native\Magick.Native-Q16-x86.dll" KeyPath="yes" />
+		</Component>
+
+		<ComponentGroup Id="CommandLine" Directory="INSTALLFOLDER">
+			<Component Id="Cartella" Guid="{87C5E5B8-17B6-4A34-BCC0-61C04A1614C9}">
+				<File Id="Cartella.dll" Source="$(var.binPath)\Cartella.dll" KeyPath="yes" />
+				<File Id="Cartella.exe" Source="$(var.binPath)\Cartella.exe" />
+				<File Id="Cartella.runtimeconfig.json" Source="$(var.binPath)\Cartella.runtimeconfig.json" />
+				<File Id="Cartella.deps.json" Source="$(var.binPath)\Cartella.deps.json" />
+			</Component>
+			<Component Id="Scatola" Guid="{C35C7850-FDAE-4F58-A9CA-28D6EDB26890}">
+				<File Id="Scatola.dll" Source="$(var.binPath)\Scatola.dll" KeyPath="yes" />
+				<File Id="Scatola.exe" Source="$(var.binPath)\Scatola.exe" />
+				<File Id="Scatola.runtimeconfig.json" Source="$(var.binPath)\Scatola.runtimeconfig.json" />
+				<File Id="Scatola.deps.json" Source="$(var.binPath)\Scatola.deps.json" />
+			</Component>
+			<Component Id="MontaggioFoto" Guid="{0B3A8995-092A-40A3-B525-7906CE2368E9}">
+				<File Id="MontaggioFoto.dll" Source="$(var.binPath)\MontaggioFoto.dll" KeyPath="yes" />
+				<File Id="MontaggioFoto.exe" Source="$(var.binPath)\MontaggioFoto.exe" />
+				<File Id="MontaggioFoto.runtimeconfig.json" Source="$(var.binPath)\MontaggioFoto.runtimeconfig.json" />
+				<File Id="MontaggioFoto.deps.json" Source="$(var.binPath)\MontaggioFoto.deps.json" />
+			</Component>
+			<Component Id="MontaggioDorsi" Guid="{FDC40C53-C639-45ED-BD81-11AE5DC6F179}">
+				<File Id="MontaggioDorsi.dll" Source="$(var.binPath)\MontaggioDorsi.dll" KeyPath="yes" />
+				<File Id="MontaggioDorsi.exe" Source="$(var.binPath)\MontaggioDorsi.exe" />
+				<File Id="MontaggioDorsi.runtimeconfig.json" Source="$(var.binPath)\MontaggioDorsi.runtimeconfig.json" />
+				<File Id="MontaggioDorsi.deps.json" Source="$(var.binPath)\MontaggioDorsi.deps.json" />
+			</Component>
+			<Component Id="CreditCard" Guid="{B87BD3E8-58D9-4269-9B7D-4AD3BA9A977B}">
+				<File Id="CreditCard.dll" Source="$(var.binPath)\CreditCard.dll" KeyPath="yes" />
+				<File Id="CreditCard.exe" Source="$(var.binPath)\CreditCard.exe" />
+				<File Id="CreditCard.runtimeconfig.json" Source="$(var.binPath)\CreditCard.runtimeconfig.json" />
+				<File Id="CreditCard.deps.json" Source="$(var.binPath)\CreditCard.deps.json" />
+			</Component>
+			<Component Id="Cubetti" Guid="{3F4EC383-17A3-42D3-BF72-3D30980BC8AB}">
+				<File Id="Cubetti.dll" Source="$(var.binPath)\Cubetti.dll" KeyPath="yes" />
+				<File Id="Cubetti.exe" Source="$(var.binPath)\Cubetti.exe" />
+				<File Id="Cubetti.runtimeconfig.json" Source="$(var.binPath)\Cubetti.runtimeconfig.json" />
+				<File Id="Cubetti.deps.json" Source="$(var.binPath)\Cubetti.deps.json" />
+			</Component>
+			<Component Id="Flexagon" Guid="{9DCAE7C7-7CED-424E-A760-8968E56A2647}">
+				<File Id="Flexagon.dll" Source="$(var.binPath)\Flexagon.dll" KeyPath="yes" />
+				<File Id="Flexagon.exe" Source="$(var.binPath)\Flexagon.exe" />
+				<File Id="Flexagon.runtimeconfig.json" Source="$(var.binPath)\Flexagon.runtimeconfig.json" />
+				<File Id="Flexagon.deps.json" Source="$(var.binPath)\Flexagon.deps.json" />
+			</Component>
+			<!-- Creates entry in Path environment variable -->
+			<Component Id="Path" Guid="{6ED4FDB5-2D7E-411B-A59A-A5A6C0D31556}">
+				<CreateFolder />
+				<Environment Id="PATH" Name="PATH" Value="[INSTALLFOLDER]" Permanent="no" Part="last" Action="set" System="no" />
+			</Component>
+		</ComponentGroup>
+
+		<ComponentGroup Id="GUI" Directory="INSTALLFOLDER">
+			<Component Id="CCDV" Guid="{CE4FD052-FE1E-4385-A0EE-DC1F3607B88C}">
+				<File Source="$(var.binPathGUI)\CCDV.dll" KeyPath="yes" Id="CCDV" />
+				<File Id="CCDV.exe" Source="$(var.binPathGUI)\CCDV.exe" />
+				<File Id="CCDV.runtimeconfig.json" Source="$(var.binPathGUI)\CCDV.runtimeconfig.json" />
+				<File Id="CCDV.deps.json" Source="$(var.binPathGUI)\CCDV.deps.json" />
+				<File Id="CCDV.ico" Source="$(var.binPathGUI)\CCDV.ico" />
+			</Component>
+			<Component Id="ColorPicker" Guid="{046CC50F-47EE-419E-86FA-FC0F03EC8317}">
+				<File Id="ColorPIcker.dll" Source="$(var.binPathGUI)\ColorPIcker.dll" KeyPath="yes" />
+			</Component>
+			<Component Id="AnimatedGif" Guid="{B9724055-C96B-4483-B709-FB009B6D3A9D}">
+				<File Id="XamlAnimatedGif.dll" Source="$(var.binPathGUI)\XamlAnimatedGif.dll" KeyPath="yes" />
+			</Component>
+			<Component Id="CasasoftXAMLControls" Guid="{225A2404-0995-4C33-82C6-C928FBE267D7}">
+				<File Id="Casasoft.Xaml.Controls.dll" Source="$(var.binPathGUI)\Casasoft.Xaml.Controls.dll" KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+
+		<!-- Directory structure for start menu -->
+		<StandardDirectory Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="Casasoft CCDV tools" />
+		</StandardDirectory>
+
+		<!-- Shortcuts in start menu -->
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component Id="ApplicationShortcutStart" Guid="{7792B02D-643E-4D5E-B516-36C5F9FDC512}">
+				<Shortcut Id="ApplicationStartShortcut" Name="CdV tools GUI" Description="[ProductName] GUI" Target="[INSTALLFOLDER]CCDV.exe" WorkingDirectory="INSTALLFOLDER" />
+				<Shortcut Id="CreditCardShortcut" Name="Credit Cards builder" Description="[ProductName] Credit Cards builder GUI" Target="[INSTALLFOLDER]CCDV.exe" Arguments="--tool=CreditCard" WorkingDirectory="INSTALLFOLDER" />
+				<Shortcut Id="MontaggioFotoShortcut" Name="Montaggio Foto" Description="[ProductName] MontaggioFoto GUI" Target="[INSTALLFOLDER]CCDV.exe" Arguments="--tool=MontaggioFoto" WorkingDirectory="INSTALLFOLDER" />
+				<Shortcut Id="MontaggioDorsiShortcut" Name="Montaggio Dorsi" Description="[ProductName] MontaggioDorsi GUI" Target="[INSTALLFOLDER]CCDV.exe" Arguments="--tool=MontaggioDorsi" WorkingDirectory="INSTALLFOLDER" />
+				<Shortcut Id="ScatolaShortcut" Name="Box builder" Description="[ProductName] Box builder GUI" Target="[INSTALLFOLDER]CCDV.exe" Arguments="--tool=Scatola" WorkingDirectory="INSTALLFOLDER" />
+				<Shortcut Id="CartellaShortcut" Name="Folder builder" Description="[ProductName] Folder builder GUI" Target="[INSTALLFOLDER]CCDV.exe" Arguments="--tool=Cartella" WorkingDirectory="INSTALLFOLDER" />
+				<Shortcut Id="CubettiShortcut" Name="Cubetti builder" Description="[ProductName] Cubetti builder GUI" Target="[INSTALLFOLDER]CCDV.exe" Arguments="--tool=Cubetti" WorkingDirectory="INSTALLFOLDER" />
+				<Shortcut Id="FlexagonShortcut" Name="Flexagon builder" Description="[ProductName] Flexagon builder GUI" Target="[INSTALLFOLDER]CCDV.exe" Arguments="--tool=Flexagon" WorkingDirectory="INSTALLFOLDER" />
+
+				<!-- Internet links -->
+				<util:InternetShortcut Id="ProjectSiteShortcut" Name="Contemporary CDV tools home page" Target="https://strawberryfield.altervista.org/carte_de_visite/" />
+				<util:InternetShortcut Id="ProjectSourceShortcut" Name="Source code repository" Target="https://github.com/strawberryfield/Contemporary_CDV" />
+
+				<!-- Uninstall shortcut -->
+				<Shortcut Id="UninstallProduct" Name="Uninstall CCDV tools" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstalls My Application" />
+
+				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\CCdV" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+
+		<StandardDirectory Id="DesktopFolder">
+			<Component Id="ApplicationShortcutDesktop" Guid="{F8F5D127-B79A-4587-87BC-8CFD1CAB030D}">
+				<Shortcut Id="ApplicationDesktopShortcut" Name="CdV tools GUI" Description="[ProductName] GUI" Target="[INSTALLFOLDER]CCDV.exe" WorkingDirectory="INSTALLFOLDER" />
+				<RemoveFolder Id="DesktopFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\CCdV" Name="desktop" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</StandardDirectory>
+
+	
+			<StandardDirectory Id="ProgramFilesFolder">
 				<Directory Id="ManufacturerFolder" Name="!(bind.property.Manufacturer)">
-					<Directory Id="INSTALLFOLDER" Name="CCdV" >
+					<Directory Id="INSTALLFOLDER" Name="CCdV">
 						<Directory Id="runtimes" Name="runtimes">
 							<Directory Id="runtime_x64" Name="win-x64">
 								<Directory Id="runtime_x64_native" Name="native" />
@@ -74,210 +200,8 @@ If not, see <http://www.gnu.org/licenses/>.
 						</Directory>
 					</Directory>
 				</Directory>
-			</Directory>
-			<Directory Id="ProgramMenuFolder"/>
-			<Directory Id="DesktopFolder"/>
-		</Directory>
-
-		<?define binPath = "$(var.ProjectDir)..\bin\publish" ?>
-		<?define binPathGUI = "$(var.ProjectDir)..\bin\publish" ?>
-
-		<!--<?define binPath = "$(var.ProjectDir)..\bin\build\net6.0" ?>
-		<?define binPathGUI = "$(var.ProjectDir)..\bin\GUI\build\net6.0-windows" ?>-->
-
-		<ComponentGroup Id="CommonFeatures" Directory="INSTALLFOLDER">
-			<Component Id="MagickNet" Guid="{F8766EEC-5E83-4889-809A-A0373B334D98}">
-				<File Source="$(var.binPath)\Magick.NET.Core.dll" KeyPath="yes" />
-				<File Source="$(var.binPathGUI)\Magick.NET.SystemWindowsMedia.dll" />
-				<File Source="$(var.binPath)\Magick.NET-Q16-AnyCPU.dll" />
-			</Component>
-			<Component Id="Mono" Guid="{A35FB286-F632-466D-A7F8-EF83BCD03B2C}">
-				<File Source="$(var.binPath)\Mono.Options.dll" KeyPath="yes" />
-			</Component>
-			<Component Id="Microsoft" Guid="{15CE51A9-8828-495A-9D97-AA2E329E6A0E}">
-				<File Source="$(var.binPath)\Microsoft.CodeAnalysis.CSharp.dll" />
-				<File Source="$(var.binPath)\Microsoft.CodeAnalysis.dll" />
-				<File Source="$(var.binPathGUI)\Microsoft.Xaml.Behaviors.dll" KeyPath="yes" />
-			</Component>
-			<Component Id="CCDVcommon" Guid="{5694235F-2C0E-4CDC-98E6-8EF3C8CE82A2}">
-				<File Source="$(var.binPath)\Casasoft.CCDV.Common.dll" KeyPath="yes" />
-			</Component>
-		</ComponentGroup>
-		<Component Id="MagickNet_x64" Directory="runtime_x64_native" Guid="{CDC4CD49-881F-45BD-B587-ED0B05C728C4}">
-			<File Source="$(var.binPath)\runtimes\win-x64\native\Magick.Native-Q16-x64.dll" KeyPath="yes" />
-		</Component>
-		<Component Id="MagickNet_x86" Directory="runtime_x86_native" Guid="{4C46AAA7-95C0-4CCC-BEE5-03FAD587B3B4}">
-			<File Source="$(var.binPath)\runtimes\win-x86\native\Magick.Native-Q16-x86.dll" KeyPath="yes" />
-		</Component>
-
-		<ComponentGroup Id="CommandLine" Directory="INSTALLFOLDER">
-			<Component Id="Cartella" Guid="{87C5E5B8-17B6-4A34-BCC0-61C04A1614C9}">
-				<File Source="$(var.binPath)\Cartella.dll" KeyPath="yes" />
-				<File Source="$(var.binPath)\Cartella.exe" />
-				<File Source="$(var.binPath)\Cartella.runtimeconfig.json" />
-				<File Source="$(var.binPath)\Cartella.deps.json" />
-			</Component>
-			<Component Id="Scatola" Guid="{C35C7850-FDAE-4F58-A9CA-28D6EDB26890}">
-				<File Source="$(var.binPath)\Scatola.dll" KeyPath="yes" />
-				<File Source="$(var.binPath)\Scatola.exe" />
-				<File Source="$(var.binPath)\Scatola.runtimeconfig.json" />
-				<File Source="$(var.binPath)\Scatola.deps.json" />
-			</Component>
-			<Component Id="MontaggioFoto" Guid="{0B3A8995-092A-40A3-B525-7906CE2368E9}">
-				<File Source="$(var.binPath)\MontaggioFoto.dll" KeyPath="yes" />
-				<File Source="$(var.binPath)\MontaggioFoto.exe" />
-				<File Source="$(var.binPath)\MontaggioFoto.runtimeconfig.json" />
-				<File Source="$(var.binPath)\MontaggioFoto.deps.json" />
-			</Component>
-			<Component Id="MontaggioDorsi" Guid="{FDC40C53-C639-45ED-BD81-11AE5DC6F179}">
-				<File Source="$(var.binPath)\MontaggioDorsi.dll" KeyPath="yes" />
-				<File Source="$(var.binPath)\MontaggioDorsi.exe" />
-				<File Source="$(var.binPath)\MontaggioDorsi.runtimeconfig.json" />
-				<File Source="$(var.binPath)\MontaggioDorsi.deps.json" />
-			</Component>
-			<Component Id="CreditCard" Guid="{B87BD3E8-58D9-4269-9B7D-4AD3BA9A977B}">
-				<File Source="$(var.binPath)\CreditCard.dll" KeyPath="yes" />
-				<File Source="$(var.binPath)\CreditCard.exe" />
-				<File Source="$(var.binPath)\CreditCard.runtimeconfig.json" />
-				<File Source="$(var.binPath)\CreditCard.deps.json" />
-			</Component>
-			<Component Id="Cubetti" Guid="{3F4EC383-17A3-42D3-BF72-3D30980BC8AB}">
-				<File Source="$(var.binPath)\Cubetti.dll" KeyPath="yes" />
-				<File Source="$(var.binPath)\Cubetti.exe" />
-				<File Source="$(var.binPath)\Cubetti.runtimeconfig.json" />
-				<File Source="$(var.binPath)\Cubetti.deps.json" />
-			</Component>
-			<Component Id="Flexagon" Guid="{9DCAE7C7-7CED-424E-A760-8968E56A2647}">
-				<File Source="$(var.binPath)\Flexagon.dll" KeyPath="yes" />
-				<File Source="$(var.binPath)\Flexagon.exe" />
-				<File Source="$(var.binPath)\Flexagon.runtimeconfig.json" />
-				<File Source="$(var.binPath)\Flexagon.deps.json" />
-			</Component>
-			<!-- Creates entry in Path environment variable -->
-			<Component Id="Path" Guid="{6ED4FDB5-2D7E-411B-A59A-A5A6C0D31556}">
-				<CreateFolder/>
-				<Environment Id="PATH" Name="PATH" Value="[INSTALLFOLDER]" Permanent="no" Part="last" Action="set" System="no" />
-			</Component>
-		</ComponentGroup>
-
-		<ComponentGroup Id="GUI" Directory="INSTALLFOLDER">
-			<Component Id="CCDV" Guid="{CE4FD052-FE1E-4385-A0EE-DC1F3607B88C}">
-				<File Source="$(var.binPathGUI)\CCDV.dll" KeyPath="yes" Id="CCDV" />
-				<File Source="$(var.binPathGUI)\CCDV.exe" />
-				<File Source="$(var.binPathGUI)\CCDV.runtimeconfig.json" />
-				<File Source="$(var.binPathGUI)\CCDV.deps.json" />
-				<File Source="$(var.binPathGUI)\CCDV.ico" />
-			</Component>
-			<Component Id="ColorPicker" Guid="{046CC50F-47EE-419E-86FA-FC0F03EC8317}">
-				<File Source="$(var.binPathGUI)\ColorPIcker.dll" KeyPath="yes" />
-			</Component>
-			<Component Id="AnimatedGif" Guid="{B9724055-C96B-4483-B709-FB009B6D3A9D}">
-				<File Source="$(var.binPathGUI)\XamlAnimatedGif.dll" KeyPath="yes" />
-			</Component>
-			<Component Id="CasasoftXAMLControls" Guid="{225A2404-0995-4C33-82C6-C928FBE267D7}">
-				<File Source="$(var.binPathGUI)\Casasoft.Xaml.Controls.dll" KeyPath="yes" />
-			</Component>
-		</ComponentGroup>
-
-		<!-- Directory structure for start menu -->
-		<DirectoryRef Id="ProgramMenuFolder">
-			<Directory Id="ApplicationProgramsFolder" Name="Casasoft CCDV tools"/>
-		</DirectoryRef>
-		
-		<!-- Shortcuts in start menu -->
-		<DirectoryRef Id="ApplicationProgramsFolder">
-			<Component Id="ApplicationShortcutStart" Guid="{7792B02D-643E-4D5E-B516-36C5F9FDC512}">
-				<Shortcut Id="ApplicationStartShortcut"
-					Name="CdV tools GUI"
-					Description="[ProductName] GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<Shortcut Id="CreditCardShortcut"
-					Name="Credit Cards builder"
-					Description="[ProductName] Credit Cards builder GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					Arguments="--tool=CreditCard"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<Shortcut Id="MontaggioFotoShortcut"
-					Name="Montaggio Foto"
-					Description="[ProductName] MontaggioFoto GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					Arguments="--tool=MontaggioFoto"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<Shortcut Id="MontaggioDorsiShortcut"
-					Name="Montaggio Dorsi"
-					Description="[ProductName] MontaggioDorsi GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					Arguments="--tool=MontaggioDorsi"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<Shortcut Id="ScatolaShortcut"
-					Name="Box builder"
-					Description="[ProductName] Box builder GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					Arguments="--tool=Scatola"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<Shortcut Id="CartellaShortcut"
-					Name="Folder builder"
-					Description="[ProductName] Folder builder GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					Arguments="--tool=Cartella"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<Shortcut Id="CubettiShortcut"
-					Name="Cubetti builder"
-					Description="[ProductName] Cubetti builder GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					Arguments="--tool=Cubetti"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<Shortcut Id="FlexagonShortcut"
-					Name="Flexagon builder"
-					Description="[ProductName] Flexagon builder GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					Arguments="--tool=Flexagon"
-					WorkingDirectory="INSTALLFOLDER"/>
-
-				<!-- Internet links -->
-				<util:InternetShortcut Id="ProjectSiteShortcut"
-					Name="Contemporary CDV tools home page"
-					Target="https://strawberryfield.altervista.org/carte_de_visite/"/>
-				<util:InternetShortcut Id="ProjectSourceShortcut"
-					Name="Source code repository"
-					Target="https://github.com/strawberryfield/Contemporary_CDV"/>
-				
-				<!-- Uninstall shortcut -->
-				<Shortcut Id="UninstallProduct"
-						  Name="Uninstall CCDV tools"
-						  Target="[SystemFolder]msiexec.exe"
-						  Arguments="/x [ProductCode]"
-						  Description="Uninstalls My Application" />
-				
-				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
-				<RegistryValue
-					Root="HKCU"
-					Key="Software\!(bind.property.Manufacturer)\CCdV"
-					Name="installed"
-					Type="integer"
-					Value="1"
-					KeyPath="yes"/>
-			</Component>
-		</DirectoryRef>
-
-		<DirectoryRef Id="DesktopFolder">
-			<Component Id="ApplicationShortcutDesktop" Guid="{F8F5D127-B79A-4587-87BC-8CFD1CAB030D}">
-				<Shortcut Id="ApplicationDesktopShortcut"
-					Name="CdV tools GUI"
-					Description="[ProductName] GUI"
-					Target="[INSTALLFOLDER]CCDV.exe"
-					WorkingDirectory="INSTALLFOLDER"/>
-				<RemoveFolder Id="DesktopFolder" On="uninstall"/>
-				<RegistryValue
-					Root="HKCU"
-					Key="Software\!(bind.property.Manufacturer)\CCdV"
-					Name="desktop"
-					Type="integer"
-					Value="1"
-					KeyPath="yes"/>
-			</Component>
-		</DirectoryRef>
-
-	</Product>
+			</StandardDirectory>
+			<StandardDirectory Id="ProgramMenuFolder" />
+			<StandardDirectory Id="DesktopFolder" />
+		</Package>
 </Wix>
