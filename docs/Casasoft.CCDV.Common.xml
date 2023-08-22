@@ -1134,7 +1134,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -1164,7 +1164,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -1175,7 +1175,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.Formats)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.IFormats)">
             <summary>
             Constructor
             </summary>
@@ -1335,12 +1335,12 @@
             Extra info for user scripting
             </summary>
         </member>
-        <member name="F:Casasoft.CCDV.Engines.BaseEngine.fmt">
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.fmt">
             <summary>
             Instance of formats handler
             </summary>
         </member>
-        <member name="F:Casasoft.CCDV.Engines.BaseEngine.img">
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.img">
             <summary>
             Instance of images handler
             </summary>
@@ -1800,6 +1800,16 @@
             Pointer to the command line (if any)
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.fmt">
+            <summary>
+            Instance of formats handler
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.IEngine.img">
+            <summary>
+            Instance of images handler
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.Engines.IEngine.PaperFormat">
             <summary>
             Output paper size
@@ -2035,7 +2045,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2065,7 +2075,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2076,7 +2086,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.Formats)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.IFormats)">
             <summary>
             Constructor
             </summary>
@@ -2207,7 +2217,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2237,7 +2247,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.Formats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2248,7 +2258,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.Formats)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(Casasoft.CCDV.BaseBuilderCommandLine,Casasoft.CCDV.IFormats)">
             <summary>
             Constructor
             </summary>
@@ -2768,6 +2778,15 @@
             </summary>
             <param name="baseSize"></param>
             <param name="Padding">border size in mm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.Info(System.String,System.String,Casasoft.CCDV.PaperFormats)">
+            <summary>
+            Draws infos on the image
+            </summary>
+            <param name="i">input description</param>
+            <param name="o">output description</param>
+            <param name="p">output format</param>
             <returns></returns>
         </member>
         <member name="T:Casasoft.CCDV.Images">

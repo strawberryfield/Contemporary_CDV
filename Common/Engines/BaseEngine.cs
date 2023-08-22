@@ -43,8 +43,8 @@ public class BaseEngine : IEngine
         set
         {
             _dpi = value;
-            fmt = new(_dpi);
-            img = new(fmt);
+            fmt = new Formats(_dpi);
+            img = new Images(fmt);
         }
     }
     /// <summary>
@@ -75,11 +75,11 @@ public class BaseEngine : IEngine
     /// <summary>
     /// Instance of formats handler
     /// </summary>
-    public Formats fmt;
+    public IFormats fmt { get; set; }
     /// <summary>
     /// Instance of images handler
     /// </summary>
-    public Images img;
+    public IImages img { get; set; }
     /// <summary>
     /// Class for json parameters handling
     /// </summary>

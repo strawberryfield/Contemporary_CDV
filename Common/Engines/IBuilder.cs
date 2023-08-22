@@ -35,7 +35,7 @@ public interface IBuilder
     /// <summary>
     /// Reference to formats
     /// </summary>
-    Formats fmt { get; set; }
+    IFormats fmt { get; set; }
     /// <summary>
     /// Fill color
     /// </summary>

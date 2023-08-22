@@ -80,6 +80,14 @@ public interface IEngine
     /// </summary>
     ICommandLine CommandLine { get; set; }
     /// <summary>
+    /// Instance of formats handler
+    /// </summary>
+    IFormats fmt { get; set; }
+    /// <summary>
+    /// Instance of images handler
+    /// </summary>
+    IImages img { get; set; }
+    /// <summary>
     /// Output paper size
     /// </summary>
     PaperFormats PaperFormat { get; set; }

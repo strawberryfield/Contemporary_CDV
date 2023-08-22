@@ -47,7 +47,7 @@ namespace Casasoft.CCDV
         /// <param name="formats"></param>
         /// <param name="targetype"></param>
         /// <param name="isHor"></param>
-        public FolderBuilder(int Spessore, Formats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+        public FolderBuilder(int Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
            base(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
         { }
         /// <summary>
@@ -89,7 +89,7 @@ namespace Casasoft.CCDV
         /// <param name="targetype"></param>
         /// <param name="isHor"></param>
         public FolderBuilder(int Spessore,
-            Formats formats,
+            IFormats formats,
             MagickColor fillcolor,
             MagickColor bordercolor,
             TargetType targetype = TargetType.cdv,
@@ -102,7 +102,7 @@ namespace Casasoft.CCDV
         /// </summary>
         /// <param name="par"></param>
         /// <param name="formats"></param>
-        public FolderBuilder(BaseBuilderCommandLine par, Formats formats) :
+        public FolderBuilder(BaseBuilderCommandLine par, IFormats formats) :
            base(par, formats)
         { }
         #endregion

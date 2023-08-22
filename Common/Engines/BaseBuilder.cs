@@ -34,7 +34,7 @@ public class BaseBuilder : IBuilder
     /// <summary>
     /// Reference to formats
     /// </summary>
-    public Formats fmt { get; set; }
+    public IFormats fmt { get; set; }
     /// <summary>
     /// Reference to command line
     /// </summary>
@@ -188,7 +188,7 @@ public class BaseBuilder : IBuilder
     /// <param name="formats"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public BaseBuilder(int Spessore, Formats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public BaseBuilder(int Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
        this(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
     { }
 
@@ -232,7 +232,7 @@ public class BaseBuilder : IBuilder
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
     public BaseBuilder(int Spessore,
-        Formats formats,
+        IFormats formats,
         MagickColor fillcolor,
         MagickColor bordercolor,
         TargetType targetype = TargetType.cdv,
@@ -252,7 +252,7 @@ public class BaseBuilder : IBuilder
     /// </summary>
     /// <param name="parameters"></param>
     /// <param name="formats"></param>
-    public BaseBuilder(BaseBuilderCommandLine parameters, Formats formats) :
+    public BaseBuilder(BaseBuilderCommandLine parameters, IFormats formats) :
         this(parameters.thickness, formats, parameters.FillColor, parameters.BorderColor, parameters.targetType, parameters.isHorizontal)
     {
         par = parameters;

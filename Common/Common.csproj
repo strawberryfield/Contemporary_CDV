@@ -20,6 +20,7 @@
 	<PackageIcon>CCDV-128.png</PackageIcon>
 	<PackageTags>ImageMagick;csharpscript;casasoft;contemporarycartedevisite</PackageTags>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageReleaseNotes>Images and Formats classes are now implemented using interfaces</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,9 +32,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.5.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.7.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
     <PackageReference Include="Mono.Options" Version="6.12.0.148" />
   </ItemGroup>
 
