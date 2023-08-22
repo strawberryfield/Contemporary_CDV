@@ -2400,6 +2400,376 @@
             </summary>
             <param name="img">image to process</param>
         </member>
+        <member name="T:Casasoft.CCDV.IFormats">
+            <summary>
+            The classes that inherit this interface handle all target formats
+            converting sizes in mm to pixel using the specified dpi resolution
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.IFormats.ToPixels(System.Int32)">
+            <summary>
+            Converts mm to pixels
+            </summary>
+            <param name="mm">size to convert</param>
+            <returns>pixel at defined resolution</returns>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.DPI">
+            <summary>
+            Returns the resolution
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.InCartha20x27_o">
+            <summary>
+            Photocity Digital print over 27x20cm paper
+            </summary>
+            <remarks>
+            In printing the service enlarges (an cuts!) the image, so I need to take care of this
+            </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.InCartha20x27_v">
+            <summary>
+            Photocity Digital print over 20x27cm paper
+            </summary>
+            <remarks>
+            In printing the service enlarges (an cuts!) the image, so I need to take care of this
+            </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.InCartha15x20_o">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>
+            In printing the service enlarges (an cuts!) the image, so I need to take care of this
+            </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.InCartha15x20_v">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>
+            In printing the service enlarges (an cuts!) the image, so I need to take care of this
+            </remarks>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.FineArt10x15_o">
+            <summary>
+            15x10cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.FineArt10x15_v">
+            <summary>
+            10x15cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.FineArt10x18_o">
+            <summary>
+            18x10cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.FineArt10x18_v">
+            <summary>
+            10x18cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.A4_o">
+            <summary>
+            15x10cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.A4_v">
+            <summary>
+            10x15cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.CDV_Full_o">
+            <summary>
+            Horizontal Carte de Visite, 100x64mm
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.CDV_Full_v">
+            <summary>
+            Vertical Carte de Visite, 64x100mm
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.CDV_Internal_o">
+            <summary>
+            Horizontal Carte de Visite reduced to leave a 5 mm border on any side
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.CDV_Internal_v">
+            <summary>
+            Vertical Carte de Visite reduced to leave a 5 mm border on any side
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.CC_o">
+            <summary>
+            Horizontal credit card, 86x54mm
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.CC_v">
+            <summary>
+            Vertical credit card, 54x86mm
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.IFormats.SetImageParameters(ImageMagick.MagickImage,System.String)">
+            <summary>
+            Adds Exif infos to image
+            </summary>
+            <param name="img">image to process</param>
+            <param name="ext">extension (file format)</param>
+        </member>
+        <member name="M:Casasoft.CCDV.IFormats.SetImageParameters(ImageMagick.MagickImage)">
+            <summary>
+            Adds Exif infos to jpg image
+            </summary>
+            <param name="img">image to process</param>
+        </member>
+        <member name="T:Casasoft.CCDV.IImages">
+            <summary>
+            The derived classes generate Imagemagick images
+            based on format defined with <see cref="T:Casasoft.CCDV.Formats"/> class
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha20x27_o(ImageMagick.MagickColor)">
+            <summary>
+            Photocity Digital print over 27x20cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha20x27_v(ImageMagick.MagickColor)">
+            <summary>
+            Photocity Digital print over 20x27cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha15x20_o(ImageMagick.MagickColor)">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha15x20_v(ImageMagick.MagickColor)">
+            <summary>
+            Photocity Digital print over 20x27cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x15_o(ImageMagick.MagickColor)">
+            <summary>
+            15x10cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x15_v(ImageMagick.MagickColor)">
+            <summary>
+            10x15cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x18_o(ImageMagick.MagickColor)">
+            <summary>
+            18x10cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x18_v(ImageMagick.MagickColor)">
+            <summary>
+            10x18cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha20x27_o">
+            <summary>
+            Photocity Digital print over 27x20cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha20x27_v">
+            <summary>
+            Photocity Digital print over 20x27cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha15x20_o">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha15x20_v">
+            <summary>
+            Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x15_o">
+            <summary>
+            15x10cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x15_v">
+            <summary>
+            10x15cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x18_o">
+            <summary>
+            18x10cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.FineArt10x18_v">
+            <summary>
+            10x18cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.A4_o(ImageMagick.MagickColor)">
+            <summary>
+            ISO A4 297x210 mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.A4_v(ImageMagick.MagickColor)">
+            <summary>
+            ISO A4 210x297 mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.A4_o">
+            <summary>
+            ISO A4 297x210 mm
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.A4_v">
+            <summary>
+            ISO A4 210x297 mm
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Full_o(ImageMagick.MagickColor)">
+            <summary>
+            Horizontal Carte de Visite, 100x64mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Full_v(ImageMagick.MagickColor)">
+            <summary>
+            Vertical Carte de Visite, 64x100mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Internal_o(ImageMagick.MagickColor)">
+            <summary>
+            Horizontal Carte de Visite reduced to leave a 5 mm border on any side
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Internal_v(ImageMagick.MagickColor)">
+            <summary>
+            Vertical Carte de Visite reduced to leave a 5 mm border on any side
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Full_o">
+            <summary>
+            Horizontal Carte de Visite, 100x64mm
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Full_v">
+            <summary>
+            Vertical Carte de Visite, 64x100mm
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Internal_o">
+            <summary>
+            Horizontal Carte de Visite reduced to leave a 5 mm border on any side
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CDV_Internal_v">
+            <summary>
+            Vertical Carte de Visite reduced to leave a 5 mm border on any side
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CC_o(ImageMagick.MagickColor)">
+            <summary>
+            Horizontal credit card, 86x54mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CC_v(ImageMagick.MagickColor)">
+            <summary>
+            Vertical credit card, 54x86mm
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CC_o">
+            <summary>
+            Horizontal credit card, 86x54mm
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.CC_v">
+            <summary>
+            Vertical credit card, 54x86mm
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.Padded(ImageMagick.MagickColor,ImageMagick.MagickGeometry,System.Int32)">
+            <summary>
+            Creates an image with a border around
+            </summary>
+            <param name="c">fill color</param>
+            <param name="baseSize"></param>
+            <param name="Padding">border size in mm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.Padded(ImageMagick.MagickGeometry,System.Int32)">
+            <summary>
+            Creates an image with a border around
+            </summary>
+            <param name="baseSize"></param>
+            <param name="Padding">border size in mm</param>
+            <returns></returns>
+        </member>
         <member name="T:Casasoft.CCDV.Images">
             <summary>
             This class generates Imagemagick images
@@ -2425,7 +2795,7 @@
             The resolution is set to the default 300 DPI
             </remarks>
         </member>
-        <member name="M:Casasoft.CCDV.Images.#ctor(Casasoft.CCDV.Formats)">
+        <member name="M:Casasoft.CCDV.Images.#ctor(Casasoft.CCDV.IFormats)">
             <summary>
             Construcot
             </summary>
