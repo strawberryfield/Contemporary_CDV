@@ -27,9 +27,10 @@ set docs=%repo%docs\
 set bin=%repo%bin\
 set build=%bin%publish\
 set pkgname=Casasoft_CCdV
+set nuget=C:\Users\rober\.nuget\packages\
 set winrar="C:\Program Files\WinRAR\winrar.exe"
 
-set version=23.03.12
+set version=23.08.22
  
 @del /S /Q %build%
 @del /Q %bin%%pkgname%*.*
@@ -78,8 +79,13 @@ rmdir /s /q man
 %winrar% k ..\%pkgname%_wGUI_%version%.rar
 popd
 
-dotnet build -c=Release -a=x64 -o=%bin% ^
- %repo%InstallerV4\InstallerV4.wixproj
+wix build ^
+ -ext %nuget%wixtoolset.ui.wixext\4.0.1\wixext4\WixToolset.UI.wixext.dll ^
+ -ext %nuget%wixtoolset.util.wixext\4.0.1\wixext4\WixToolset.Util.wixext.dll ^
+ -d var.ProjectDir=%repo%WindowsInstaller\ ^
+ -outputtype exe ^
+ -o %bin%%pkgname%-%version%.msi ^
+ %repo%WindowsInstaller\product.wxs
  
 dotnet pack %repo%Templates\ScriptTestTemplatesPack.csproj -p:PackageVersion=%version% 
 dotnet pack %repo%ProjectTemplate\CCDV_ProjectTemplate.csproj -p:PackageVersion=%version% 
