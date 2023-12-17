@@ -78,7 +78,7 @@
     <Content Include="LICENSE.rtf" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.1" />
-    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.1" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.3" />
   </ItemGroup>
 </Project>
