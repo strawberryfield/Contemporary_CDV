@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <AssemblyName>Casasoft.CCDV.Common</AssemblyName>
     <RootNamespace>Casasoft.CCDV</RootNamespace>
     <Authors>Roberto Ceccarelli - Casasoft</Authors>
@@ -21,6 +21,7 @@
 	<PackageTags>ImageMagick;csharpscript;casasoft;contemporarycartedevisite</PackageTags>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageReleaseNotes>Images and Formats classes are now implemented using interfaces</PackageReleaseNotes>
+	<Title>Casasoft CCDV Core</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -72,7 +73,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="README.md">
+    <None Include=".\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
