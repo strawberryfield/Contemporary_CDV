@@ -90,7 +90,7 @@ having to manually add pages and images, I forgot to insert references
 for the cut.
 
 So I dusted off ImageMagick, but instead of driving it in javascript 
-I decided to take advantage of the brand new Net 6.0 
+I decided to take advantage of the brand new Net 6.0 (and from december 2023 also Net 8.0)
 and the Magick.NET library which already incorporates 
 ImageMagick and therefore allows you to create ready-to-use executables.
 
@@ -230,15 +230,15 @@ to help in writing and testing custom scripts
 
 ### .net
 
-The library is compiled for .net 6.0
+The library is compiled for .net 6.0 and .net 8.0
 
 ### Packages
 
 The following packages are required:
 
-- Microsoft.CodeAnalysis.Common Version >= 4.5.0
-- Magick.NET-Q16-AnyCPU Version >= 12.3.0
-- Magick.NET.SystemWindowsMedia >= 6.1.3
-- Microsoft.CodeAnalysis.CSharp Version >= 4.5.0
+- Microsoft.CodeAnalysis.Common Version >= 4.8.0
+- Magick.NET-Q16-AnyCPU Version >= 13.5.0
+- Magick.NET.SystemWindowsMedia >= 7.2.1
+- Microsoft.CodeAnalysis.CSharp Version >= 4.8.0
 - Mono.Options Version >= 6.12.0.148
 - Casasoft.Xaml.Controls >= 22.4.13

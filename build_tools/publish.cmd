@@ -33,7 +33,13 @@ set winrar="C:\Program Files\WinRAR\winrar.exe"
 set version=23.12.17
  
 @del /S /Q %build%
+@del /S /Q %bin%\build\
 @del /Q %bin%%pkgname%*.*
+
+set prj=Common
+@dotnet build -c Release -o %build% -p:version="%version%" %repo%%prj%\%prj%.csproj
+@copy %bin%build\*.nupkg %bin%
+
 set prj=Cartella
 @dotnet publish -c Release -o %build% -p:version="%version%" --no-self-contained %repo%%prj%\%prj%.csproj
 set prj=CreditCard
@@ -89,3 +95,6 @@ wix build ^
  
 dotnet pack %repo%Templates\ScriptTestTemplatesPack.csproj -p:PackageVersion=%version% 
 dotnet pack %repo%ProjectTemplate\CCDV_ProjectTemplate.csproj -p:PackageVersion=%version% 
+
+rem only for debug 
+:end
