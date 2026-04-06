@@ -40,7 +40,6 @@ If not, see <http://www.gnu.org/licenses/>.
         MaxWidth="620"
         MaxHeight="328"
         HorizontalAlignment="Left">
-        <Grid.ColumnDefinitions />
         <Button
             x:Name="btnDorsi"
             Width="128"

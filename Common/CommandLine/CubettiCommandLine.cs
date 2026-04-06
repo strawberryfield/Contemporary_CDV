@@ -34,15 +34,15 @@ public class CubettiCommandLine : CommandLine
     /// <summary>
     /// Number of rows to generate
     /// </summary>
-    public int Rows { get; set; }
+    public uint Rows { get; set; }
     /// <summary>
     /// Number of Columns to generate
     /// </summary>
-    public int Columns { get; set; }
+    public uint Columns { get; set; }
     /// <summary>
     /// Size of any cube (mm)
     /// </summary>
-    public int Size { get; set; }
+    public uint Size { get; set; }
 
     /// <summary>
     /// True if samples images will be created
@@ -105,11 +105,11 @@ public class CubettiCommandLine : CommandLine
     {
         if (base.Parse(args)) return true;
 
-        Rows = GetIntParameter(sRows, Rows,
+        Rows = GetUIntParameter(sRows, Rows,
             $"Incorrect rows value '{sRows}'. Using default value.");
-        Columns = GetIntParameter(sColumns, Columns,
+        Columns = GetUIntParameter(sColumns, Columns,
             $"Incorrect columns value '{sColumns}'. Using default value.");
-        Size = GetIntParameter(sSize, Size,
+        Size = GetUIntParameter(sSize, Size,
             $"Incorrect size value '{sSize}'. Using default value.");
 
         return false;

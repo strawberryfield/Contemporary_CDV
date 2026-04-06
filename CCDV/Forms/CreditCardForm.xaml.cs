@@ -39,7 +39,7 @@ public partial class CreditCardForm : BaseForm
         base.setEngineParameters();
         engine.FillColor = commonOptions.FillColor;
         engine.BorderColor = commonOptions.BorderColor;
-        engine.Dpi = commonOptions.DpiValue;
+        engine.Dpi = (uint)commonOptions.DpiValue;
         engine.Script = commonOptions.Script;
         engine.Tag = commonOptions.ScriptTag;
 
@@ -77,7 +77,7 @@ public partial class CreditCardForm : BaseForm
         mbImage.Value = eng.MagneticBandImage;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
-        commonOptions.DpiValue = eng.Dpi;
+        commonOptions.DpiValue = (int)eng.Dpi;
         commonOptions.ScriptTag = eng.Tag;
     }
 

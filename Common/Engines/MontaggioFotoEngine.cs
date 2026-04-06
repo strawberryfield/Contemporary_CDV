@@ -22,6 +22,7 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 using System.Text.Json;
 
@@ -48,7 +49,7 @@ public class MontaggioFotoEngine : BaseEngine
     /// <summary>
     /// Blank border around the image
     /// </summary>
-    public int Padding { get; set; } = 0;
+    public uint Padding { get; set; } = 0;
     /// <summary>
     /// Canvas gravity
     /// </summary>
@@ -214,9 +215,9 @@ public class MontaggioFotoEngine : BaseEngine
 
         if (WithBorder)
         {
-            int offset = Math.Min(fmt.CDV_Full_v.Width - img1.Width, fmt.CDV_Full_v.Height - img1.Height) / 2;
-            int offsetX = 0;
-            int offsetY = 0;
+            uint offset = Math.Min(fmt.CDV_Full_v.Width - img1.Width, fmt.CDV_Full_v.Height - img1.Height) / 2;
+            uint offsetX = 0;
+            uint offsetY = 0;
             switch (CanvasGravity)
             {
                 case Gravity.Northwest:
@@ -238,7 +239,8 @@ public class MontaggioFotoEngine : BaseEngine
                     break;
             }
             MagickImage img2 = img.CDV_Full_v(FillColor);
-            img2.Composite(img1, CanvasGravity, offsetX, offsetY);
+            // place img1 onto img2 at computed coordinates using Over composite operator
+            img2.Composite(img1, CanvasGravity, (int)offsetX, (int)offsetY);
             return img2;
         }
 

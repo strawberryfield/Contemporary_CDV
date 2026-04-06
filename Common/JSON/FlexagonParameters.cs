@@ -32,7 +32,7 @@ public class FlexagonParameters : CommonParameters
     /// <remarks>
     /// Valid numbers are 3, 4 or 6
     /// </remarks>
-    public int Faces { get; set; } = 3;
+    public uint Faces { get; set; } = 3;
 
     /// <summary>
     /// True if samples images will be created

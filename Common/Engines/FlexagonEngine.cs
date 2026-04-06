@@ -22,6 +22,7 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -40,13 +41,13 @@ public class FlexagonEngine : BaseEngine
     /// <remarks>
     /// Valid numbers are 3, 4 or 6
     /// </remarks>
-    public int Faces
+    public uint Faces
     {
         get => _faces;
         set
         {
             _faces = value;
-            Rows = Faces == 4 ? 3 : 2;
+            Rows = (uint)(Faces == 4 ? 3 : 2);
             Columns = 2;
             tileX = fmt.CDV_Full_v.Width / Columns;
             tileY = fmt.CDV_Full_v.Height / Rows;
@@ -60,12 +61,12 @@ public class FlexagonEngine : BaseEngine
     #endregion
 
     #region private properties
-    int _faces;
+    uint _faces;
 
-    int Rows;
-    int Columns;
-    int tileX;
-    int tileY;
+    uint Rows;
+    uint Columns;
+    uint tileX;
+    uint tileY;
     #endregion
 
     #region constructors
@@ -176,18 +177,18 @@ public class FlexagonEngine : BaseEngine
         MagickImage[,,] tiles = new MagickImage[Faces, Rows, Columns];
         for (int i = 0; i < Faces; i++)
         {
-            for (int r = 0; r < Rows; r++)
+            for (uint r = 0; r < Rows; r++)
             {
-                int startY = r * tileY;
-                for (int c = 0; c < Columns; c++)
+                uint startY = r * tileY;
+                for (uint c = 0; c < Columns; c++)
                 {
-                    int startX = c * tileX;
+                    uint startX = c * tileX;
                     if (!quiet)
                         Console.Write(".");
 
                     tiles[i, r, c] = (MagickImage)sources[i].Clone();
-                    tiles[i, r, c].Crop(new MagickGeometry(startX, startY, tileX, tileY), Gravity.Northwest);
-                    tiles[i, r, c].RePage();
+                    tiles[i, r, c].Crop(new MagickGeometry((int)startX, (int)startY, tileX, tileY), Gravity.Northwest);
+                    tiles[i, r, c].ResetPage();
                     tiles[i, r, c].BorderColor = BorderColor;
                     tiles[i, r, c].Border(1);
                 }

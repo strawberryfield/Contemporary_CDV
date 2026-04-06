@@ -39,7 +39,6 @@ If not, see <http://www.gnu.org/licenses/>.
     WindowStartupLocation="CenterOwner"
     WindowStyle="None">
     <Grid>
-        <Grid.ColumnDefinitions />
         <Label
             x:Name="lblProcessing"
             Margin="79,10,0,0"

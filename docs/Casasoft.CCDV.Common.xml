@@ -412,6 +412,15 @@
             <param name="message">error message</param>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.CommandLine.GetUIntParameter(System.String,System.UInt32,System.String)">
+            <summary>
+            Get unsigned integer value from string
+            </summary>
+            <param name="val">input string</param>
+            <param name="fallback">default value in case of parsing error</param>
+            <param name="message">error message</param>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.CommandLine.GetDPI">
             <summary>
             sets the dpi value from command line string
@@ -1125,7 +1134,7 @@
             Image for back cover
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,System.Int32,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.UInt32,System.UInt32,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -1134,7 +1143,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.UInt32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -1143,7 +1152,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.UInt32,System.UInt32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -1153,7 +1162,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.UInt32,System.UInt32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -1164,7 +1173,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.BaseBuilder.#ctor(System.UInt32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2036,7 +2045,7 @@
             Builds a folder
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,System.Int32,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.UInt32,System.UInt32,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2045,7 +2054,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.UInt32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2054,7 +2063,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.UInt32,System.UInt32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2064,7 +2073,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.UInt32,System.UInt32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2075,7 +2084,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.FolderBuilder.#ctor(System.UInt32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2208,7 +2217,7 @@
             Builds a box
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,System.Int32,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.UInt32,System.UInt32,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2217,7 +2226,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.UInt32,Casasoft.CCDV.IFormats,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2226,7 +2235,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.UInt32,System.UInt32,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2236,7 +2245,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,System.Int32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.UInt32,System.UInt32,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2247,7 +2256,7 @@
             <param name="targetype"></param>
             <param name="isHor"></param>
         </member>
-        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.Int32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
+        <member name="M:Casasoft.CCDV.ScatolaBuilder.#ctor(System.UInt32,Casasoft.CCDV.IFormats,ImageMagick.MagickColor,ImageMagick.MagickColor,Casasoft.CCDV.TargetType,System.Boolean)">
             <summary>
             Constructor
             </summary>
@@ -2287,13 +2296,13 @@
             This constructor ser the resolution to 300 DPI
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.Formats.#ctor(System.Int32)">
+        <member name="M:Casasoft.CCDV.Formats.#ctor(System.UInt32)">
             <summary>
             Constructor
             </summary>
             <param name="dpi">Resolution for conversion in pixels</param>
         </member>
-        <member name="M:Casasoft.CCDV.Formats.ToPixels(System.Int32)">
+        <member name="M:Casasoft.CCDV.Formats.ToPixels(System.UInt32)">
             <summary>
             Converts mm to pixels
             </summary>
@@ -2416,7 +2425,7 @@
             converting sizes in mm to pixel using the specified dpi resolution
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.IFormats.ToPixels(System.Int32)">
+        <member name="M:Casasoft.CCDV.IFormats.ToPixels(System.UInt32)">
             <summary>
             Converts mm to pixels
             </summary>
@@ -2763,7 +2772,7 @@
             <remarks>White background</remarks>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.IImages.Padded(ImageMagick.MagickColor,ImageMagick.MagickGeometry,System.Int32)">
+        <member name="M:Casasoft.CCDV.IImages.Padded(ImageMagick.MagickColor,ImageMagick.MagickGeometry,System.UInt32)">
             <summary>
             Creates an image with a border around
             </summary>
@@ -2772,7 +2781,7 @@
             <param name="Padding">border size in mm</param>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.IImages.Padded(ImageMagick.MagickGeometry,System.Int32)">
+        <member name="M:Casasoft.CCDV.IImages.Padded(ImageMagick.MagickGeometry,System.UInt32)">
             <summary>
             Creates an image with a border around
             </summary>
@@ -2800,7 +2809,7 @@
             Options for images generation
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.Images.#ctor(System.Int32)">
+        <member name="M:Casasoft.CCDV.Images.#ctor(System.UInt32)">
             <summary>
             Constructor
             </summary>
@@ -3047,7 +3056,7 @@
             <remarks>White background</remarks>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.Images.Padded(ImageMagick.MagickColor,ImageMagick.MagickGeometry,System.Int32)">
+        <member name="M:Casasoft.CCDV.Images.Padded(ImageMagick.MagickColor,ImageMagick.MagickGeometry,System.UInt32)">
             <summary>
             Creates an image with a border around
             </summary>
@@ -3056,7 +3065,7 @@
             <param name="Padding">border size in mm</param>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.Images.Padded(ImageMagick.MagickGeometry,System.Int32)">
+        <member name="M:Casasoft.CCDV.Images.Padded(ImageMagick.MagickGeometry,System.UInt32)">
             <summary>
             Creates an image with a border around
             </summary>
@@ -3746,7 +3755,7 @@
             <param name="gravity">alignment in extended canvas (default Center)</param>
             <returns>processed image</returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Boolean,System.Boolean)">
+        <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.UInt32,System.UInt32,System.UInt32,System.String,System.Int32,System.Boolean,System.Boolean)">
             <summary>
             Renders text centered to the given size
             </summary>
@@ -3760,7 +3769,7 @@
             <param name="fontItalic">use bold font (if available)</param>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.Int32,ImageMagick.MagickGeometry,System.String,System.Int32,System.Boolean,System.Boolean)">
+        <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.UInt32,ImageMagick.MagickGeometry,System.String,System.Int32,System.Boolean,System.Boolean)">
             <summary>
             Renders text centered to the given geometry
             </summary>
@@ -3773,7 +3782,7 @@
             <param name="fontItalic">use bold font (if available)</param>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.Int32,ImageMagick.MagickImage,System.String,System.Int32,System.Boolean,System.Boolean)">
+        <member name="M:Casasoft.CCDV.Utils.CenteredText(System.String,System.UInt32,ImageMagick.MagickImage,System.String,System.Int32,System.Boolean,System.Boolean)">
             <summary>
             Renders text centered to the given reference image
             </summary>
@@ -3786,7 +3795,7 @@
             <param name="fontItalic">use bold font (if available)</param>
             <returns></returns>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.HLine(ImageMagick.Drawables,System.Int32,System.Int32)">
+        <member name="M:Casasoft.CCDV.Utils.HLine(ImageMagick.Drawing.Drawables,System.UInt32,System.UInt32)">
             <summary>
             Draws an horizontal line from 0 to width
             </summary>
@@ -3794,7 +3803,7 @@
             <param name="h">Distance from top border</param>
             <param name="width"></param>
         </member>
-        <member name="M:Casasoft.CCDV.Utils.VLine(ImageMagick.Drawables,System.Int32,System.Int32)">
+        <member name="M:Casasoft.CCDV.Utils.VLine(ImageMagick.Drawing.Drawables,System.UInt32,System.UInt32)">
             <summary>
             Draws a vertical line from 0 to height
             </summary>

@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 
 namespace Casasoft.CCDV;
@@ -40,7 +41,7 @@ public class Images : IImages
     /// Constructor
     /// </summary>
     /// <param name="dpi">Resolution of images</param>
-    public Images(int dpi)
+    public Images(uint dpi)
     {
         fmt = new Formats(dpi);
     }
@@ -283,9 +284,9 @@ public class Images : IImages
     /// <param name="baseSize"></param>
     /// <param name="Padding">border size in mm</param>
     /// <returns></returns>
-    public MagickImage Padded(MagickColor c, MagickGeometry baseSize, int Padding)
+    public MagickImage Padded(MagickColor c, MagickGeometry baseSize, uint Padding)
     {
-        int pad = fmt.ToPixels(Padding) * 2;
+        uint pad = fmt.ToPixels(Padding) * 2;
         return new MagickImage(c, baseSize.Width + pad, baseSize.Height + pad);
     }
     /// <summary>
@@ -294,7 +295,7 @@ public class Images : IImages
     /// <param name="baseSize"></param>
     /// <param name="Padding">border size in mm</param>
     /// <returns></returns>
-    public MagickImage Padded(MagickGeometry baseSize, int Padding)
+    public MagickImage Padded(MagickGeometry baseSize, uint Padding)
         => Padded(MagickColors.White, baseSize, Padding);
     #endregion
 
@@ -314,8 +315,8 @@ public class Images : IImages
             .FillColor(MagickColors.Black)
             .TextAlignment(TextAlignment.Left);
 
-        int center;
-        int h;
+        uint center;
+        uint h;
         switch (p)
         {
             case PaperFormats.Small:

@@ -22,6 +22,7 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -37,17 +38,17 @@ public class CubettiEngine : BaseEngine
     /// <summary>
     /// Number of rows to generate
     /// </summary>
-    public int Rows { get; set; } = 2;
+    public uint Rows { get; set; } = 2;
 
     /// <summary>
     /// Number of Columns to generate
     /// </summary>
-    public int Columns { get; set; } = 3;
+    public uint Columns { get; set; } = 3;
 
     /// <summary>
     /// Size of any cube (mm)
     /// </summary>
-    public int Size { get; set; } = 50;
+    public uint Size { get; set; } = 50;
 
     /// <summary>
     /// True if samples images will be created
@@ -129,7 +130,7 @@ public class CubettiEngine : BaseEngine
     #endregion
 
     #region build
-    private int faceSize;
+    private uint faceSize;
 
     /// <summary>
     /// Does the dirty work
@@ -141,8 +142,8 @@ public class CubettiEngine : BaseEngine
         List<MagickImage> final = new();
 
         // Compute grid size
-        int sizeX = fmt.ToPixels(Columns * Size);
-        int sizeY = fmt.ToPixels(Rows * Size);
+        uint sizeX = fmt.ToPixels(Columns * Size);
+        uint sizeY = fmt.ToPixels(Rows * Size);
         MagickGeometry sourceFormat = new(sizeX, sizeY);
         faceSize = fmt.ToPixels(Size);
 
@@ -179,13 +180,13 @@ public class CubettiEngine : BaseEngine
             Console.Write("Splitting:  ");
 
         List<MagickImage[]> faces = new();
-        for (int row = 0; row < Rows; row++)
+        for (uint row = 0; row < Rows; row++)
         {
-            int startY = fmt.ToPixels(row * Size);
-            for (int col = 0; col < Columns; col++)
+            uint startY = fmt.ToPixels(row * Size);
+            for (uint col = 0; col < Columns; col++)
             {
                 MagickImage[] face = new MagickImage[6];
-                int startX = fmt.ToPixels(col * Size);
+                uint startX = fmt.ToPixels(col * Size);
 
                 for (int i = 0; i < 6; i++)
                 {
@@ -193,8 +194,8 @@ public class CubettiEngine : BaseEngine
                         Console.Write(".");
 
                     face[i] = (MagickImage)sources[i].Clone();
-                    face[i].Crop(new MagickGeometry(startX, startY, faceSize, faceSize), Gravity.Northwest);
-                    face[i].RePage();
+                    face[i].Crop(new MagickGeometry((int)startX, (int)startY, faceSize, faceSize), Gravity.Northwest);
+                    face[i].ResetPage();
                     face[i].BorderColor = BorderColor;
                     face[i].Border(1);
                 }
@@ -259,8 +260,8 @@ public class CubettiEngine : BaseEngine
     {
         MagickImage trim = (MagickImage)img.Clone();
         trim.Trim();
-        int h_offset = (img.Width - trim.Width) / 2;
-        int v_offset = (img.Height - trim.Height) / 2;
+        uint h_offset = (img.Width - trim.Width) / 2;
+        uint v_offset = (img.Height - trim.Height) / 2;
 
         Drawables d = new();
         d.StrokeColor(BorderColor).StrokeWidth(1);
@@ -289,13 +290,13 @@ public class CubettiEngine : BaseEngine
     }
 
     #region clips
-    private int clipSize;
+    private uint clipSize;
     private MagickImage TopClipStrip;
     private MagickImage BottomClipStrip;
     private MagickImage RightClip;
     private MagickImage LeftClip;
 
-    private void BuildClips(int size)
+    private void BuildClips(uint size)
     {
         MagickImage BottomClip;
         MagickImage TopClip;
@@ -324,8 +325,8 @@ public class CubettiEngine : BaseEngine
         MagickImage ClipFiller = new(MagickColors.White, clipSize, clipSize);
 
         NoseClip = (MagickImage)EmptyClip.Clone();
-        int noseLeft = faceSize / 2 - clipSize / 2;
-        int noseRight = faceSize / 2 + clipSize / 2;
+        uint noseLeft = faceSize / 2 - clipSize / 2;
+        uint noseRight = faceSize / 2 + clipSize / 2;
         d = new();
         d.StrokeColor(BorderColor)
             .StrokeWidth(1)

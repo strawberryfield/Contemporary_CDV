@@ -42,13 +42,13 @@ public partial class CubettiForm : BaseMultipageForm
         addAllFiles();
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
-        eng.Dpi = commonOptions.DpiValue;
+        eng.Dpi = (uint)commonOptions.DpiValue;
         eng.Script = commonOptions.Script;
         eng.Tag = commonOptions.ScriptTag;
         eng.PaperFormat = paperFormat.PaperFormat;
-        eng.Rows = txtRows.Value;
-        eng.Columns = txtCols.Value;
-        eng.Size = txtSize.Value;
+        eng.Rows = (uint)txtRows.Value;
+        eng.Columns = (uint)txtCols.Value;
+        eng.Size = (uint)txtSize.Value;
     }
 
     protected override void loadJson(string json)
@@ -57,12 +57,12 @@ public partial class CubettiForm : BaseMultipageForm
         CubettiEngine eng = (CubettiEngine)engine;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
-        commonOptions.DpiValue = eng.Dpi;
+        commonOptions.DpiValue = (int)eng.Dpi;
         commonOptions.ScriptTag = eng.Tag;
         paperFormat.PaperFormat = eng.PaperFormat;
-        txtRows.Value = eng.Rows;
-        txtCols.Value = eng.Columns;
-        txtSize.Value = eng.Size;
+        txtRows.Value = (int)eng.Rows;
+        txtCols.Value = (int)eng.Columns;
+        txtSize.Value = (int)eng.Size;
         chkTestImages.IsChecked = eng.useSampleImages;
 
         addFile(1, filename1);

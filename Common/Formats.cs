@@ -29,7 +29,7 @@ namespace Casasoft.CCDV;
 /// </summary>
 public class Formats : IFormats
 {
-    private int _dpi;
+    private uint _dpi;
     private double _inch = 25.4;
 
     #region constructors
@@ -42,7 +42,7 @@ public class Formats : IFormats
     /// Constructor
     /// </summary>
     /// <param name="dpi">Resolution for conversion in pixels</param>
-    public Formats(int dpi)
+    public Formats(uint dpi)
     {
         _dpi = dpi;
     }
@@ -53,12 +53,12 @@ public class Formats : IFormats
     /// </summary>
     /// <param name="mm">size to convert</param>
     /// <returns>pixel at defined resolution</returns>
-    public int ToPixels(int mm) => (int)(mm * _dpi / _inch);
+    public uint ToPixels(uint mm) => (uint)(mm * _dpi / _inch);
 
     /// <summary>
     /// Returns the resolution
     /// </summary>
-    public int DPI => _dpi;
+    public uint DPI => _dpi;
 
     #region commercial formats
     /// <summary>
@@ -150,7 +150,7 @@ public class Formats : IFormats
 
     private static MagickGeometry swap(MagickGeometry g)
     {
-        int tmp = g.Width;
+        uint tmp = g.Width;
         g.Width = g.Height;
         g.Height = tmp;
         return g;

@@ -39,7 +39,7 @@ public class FlexagonCommandLine : CommandLine
     /// <remarks>
     /// Valid numbers are 3, 4 or 6
     /// </remarks>
-    public int Faces { get; set; }
+    public uint Faces { get; set; }
 
     /// <summary>
     /// True if samples images will be created
@@ -82,7 +82,7 @@ public class FlexagonCommandLine : CommandLine
     {
         if (base.Parse(args)) return true;
 
-        Faces = GetIntParameter(sFaces, Faces,
+        Faces = GetUIntParameter(sFaces, Faces,
             $"Incorrect faces value '{sFaces}'. Using default value.");
 
         return false;

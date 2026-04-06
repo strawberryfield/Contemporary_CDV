@@ -38,7 +38,7 @@ public interface ICommandLine
     /// <summary>
     /// Output resolution
     /// </summary>
-    int Dpi { get; set; }
+    uint Dpi { get; set; }
     /// <summary>
     /// Input files list
     /// </summary>

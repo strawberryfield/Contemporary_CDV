@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using ImageMagick.Drawing;
 
 namespace Casasoft.CCDV
 {
@@ -37,7 +38,7 @@ namespace Casasoft.CCDV
         /// <param name="dpi"></param>
         /// <param name="targetype"></param>
         /// <param name="isHor"></param>
-        public FolderBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
+        public FolderBuilder(uint Spessore = 5, uint dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
            base(Spessore, new Formats(dpi), targetype, isHor)
         { }
         /// <summary>
@@ -47,7 +48,7 @@ namespace Casasoft.CCDV
         /// <param name="formats"></param>
         /// <param name="targetype"></param>
         /// <param name="isHor"></param>
-        public FolderBuilder(int Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+        public FolderBuilder(uint Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
            base(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
         { }
         /// <summary>
@@ -58,7 +59,7 @@ namespace Casasoft.CCDV
         /// <param name="fillcolor"></param>
         /// <param name="targetype"></param>
         /// <param name="isHor"></param>
-        public FolderBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
+        public FolderBuilder(uint Spessore, uint dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
           base(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype, isHor)
         { }
         /// <summary>
@@ -70,8 +71,8 @@ namespace Casasoft.CCDV
         /// <param name="bordercolor"></param>
         /// <param name="targetype"></param>
         /// <param name="isHor"></param>
-        public FolderBuilder(int Spessore,
-            int dpi,
+        public FolderBuilder(uint Spessore,
+            uint dpi,
             MagickColor fillcolor,
             MagickColor bordercolor,
             TargetType targetype = TargetType.cdv,
@@ -88,7 +89,7 @@ namespace Casasoft.CCDV
         /// <param name="bordercolor"></param>
         /// <param name="targetype"></param>
         /// <param name="isHor"></param>
-        public FolderBuilder(int Spessore,
+        public FolderBuilder(uint Spessore,
             IFormats formats,
             MagickColor fillcolor,
             MagickColor bordercolor,
@@ -113,14 +114,14 @@ namespace Casasoft.CCDV
         /// <returns></returns>
         public MagickImage Build()
         {
-            int fold = fmt.ToPixels(10);
+            uint fold = fmt.ToPixels(10);
             MagickImage ret = new(MagickColors.White,
-                frontFormat.Width * 2 + spessore * 3 + fold + 2 + fmt.ToPixels(20),
-                frontFormat.Height + spessore * 2 + fold * 2 + 2);
+                frontFormat.Width * 2u + (uint)spessore * 3u + (uint)fold + 2u + (uint)fmt.ToPixels(20),
+                frontFormat.Height + (uint)spessore * 2u + (uint)fold * 2u + 2u);
 
             // Aggiungiamo coperchi e lembi di chiusura
             MagickImage BackWithTop = new(MagickColors.White,
-                frontFormat.Width, frontFormat.Height + (spessore + fold) * 2);
+                frontFormat.Width, (uint)(frontFormat.Height + (spessore + fold) * 2));
             Drawables draw = new();
             draw.StrokeColor(borderColor).StrokeWidth(1);
             cap(draw, frontFormat.Width, fold).Draw(BackWithTop);
@@ -128,8 +129,8 @@ namespace Casasoft.CCDV
             cap(draw, frontFormat.Width, fold).Draw(BackWithTop);
 
             BackWithTop.Composite(backImage, Gravity.Center);
-            BackWithTop.Composite(topImage, Gravity.North, 0, fold);
-            BackWithTop.Composite(bottomImage, Gravity.South, 0, fold);
+            BackWithTop.Composite(topImage, Gravity.North, 0, (int)fold);
+            BackWithTop.Composite(bottomImage, Gravity.South, 0, (int)fold);
 
             // Clip di chiusura
             MagickImage BackClip = (MagickImage)backImage.Clone();
@@ -157,14 +158,14 @@ namespace Casasoft.CCDV
             // Margini di taglio
             draw = new();
             draw.StrokeColor(borderColor).StrokeWidth(1);
-            int bordertop = spessore + fold;
-            int borderbottom = bordertop + +frontFormat.Height;
-            int marginright = ret.Width - 1;
+            uint bordertop = spessore + fold;
+            uint borderbottom = bordertop + +frontFormat.Height;
+            uint marginright = ret.Width - 1;
             draw.Line(0, bordertop + fold, 0, borderbottom - fold);
             draw.Line(0, bordertop + fold, fold, bordertop);
             draw.Line(0, borderbottom - fold, fold, borderbottom);
 
-            int rpos = fold + spessore;
+            uint rpos = fold + spessore;
             draw.Line(fold, bordertop, rpos, bordertop);
             draw.Line(rpos, bordertop, rpos, bordertop - spessore);
             draw.Line(fold, borderbottom, rpos, borderbottom);
@@ -174,13 +175,13 @@ namespace Casasoft.CCDV
             draw.Line(rpos, bordertop, rpos, bordertop - spessore);
             draw.Line(rpos, borderbottom, rpos, borderbottom + spessore);
 
-            int lpos = rpos;
+            uint lpos = rpos;
             rpos += borderFormat.Width + frontFormat.Width;
             draw.Line(lpos, bordertop, rpos, bordertop);
             draw.Line(lpos, borderbottom, rpos, borderbottom);
 
-            int cliptop = bordertop + frontFormat.Height / 2 - fmt.ToPixels(10);
-            int clipbottom = borderbottom - frontFormat.Height / 2 + fmt.ToPixels(10);
+            uint cliptop = bordertop + frontFormat.Height / 2 - fmt.ToPixels(10);
+            uint clipbottom = borderbottom - frontFormat.Height / 2 + fmt.ToPixels(10);
             draw.Line(rpos, bordertop, rpos, cliptop);
             draw.Line(rpos, borderbottom, rpos, clipbottom);
             draw.Line(rpos, cliptop, marginright, cliptop);
@@ -192,7 +193,7 @@ namespace Casasoft.CCDV
             return ret;
         }
 
-        private static Drawables cap(Drawables d, int w, int h) =>
+        private static Drawables cap(Drawables d, uint w, uint h) =>
             (Drawables)d.Line(0, h - 1, h, 0).Line(w - 1, h - 1, w - h, 0).Line(h, 0, w - h, 0);
 
         #region test

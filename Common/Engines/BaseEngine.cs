@@ -33,11 +33,11 @@ namespace Casasoft.CCDV.Engines;
 public class BaseEngine : IEngine
 {
     #region properties
-    private int _dpi;
+    private uint _dpi;
     /// <summary>
     /// Output resolution
     /// </summary>
-    public int Dpi
+    public uint Dpi
     {
         get => _dpi;
         set

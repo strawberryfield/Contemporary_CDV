@@ -22,6 +22,7 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 using System.Text.Json;
 
@@ -204,8 +205,8 @@ public class CreditCardEngine : BaseEngine
         }
 
         MagickImage front = Get(FilesList[0], quiet);
-        int bordertop = final.Height / 2 - front.Height;
-        int borderleft = (final.Width - front.Width) / 2;
+        uint bordertop = final.Height / 2 - front.Height;
+        uint borderleft = (final.Width - front.Width) / 2;
 
         // Create rear image
         MagickImage rear;
@@ -267,7 +268,7 @@ public class CreditCardEngine : BaseEngine
                 new MagickGeometry(rear.Width, fmt.ToPixels(12)),
                 MagickColors.Transparent);
             overlay.Flop();
-            rear.Composite(overlay, Gravity.North, 0, fmt.ToPixels(4), CompositeOperator.Over);
+            rear.Composite(overlay, Gravity.North, 0, (int)fmt.ToPixels(4));
         }
 
         // Back text
@@ -280,7 +281,7 @@ public class CreditCardEngine : BaseEngine
 
             MagickImage backText = new(BackText, settings);
             backText.Flop();
-            rear.Composite(backText, Gravity.South, 0, fmt.ToPixels(4), CompositeOperator.Over);
+            rear.Composite(backText, Gravity.South, 0, (int)fmt.ToPixels(4));
         }
 
         // Final assembly
@@ -330,7 +331,7 @@ Run {DateTime.Now.ToString("R")}")
         return img1;
     }
 
-    private void CutLines(MagickImage final, int bordertop, int borderleft)
+    private void CutLines(MagickImage final, uint bordertop, uint borderleft)
     {
         // Margini di taglio
         Drawables draw = new();

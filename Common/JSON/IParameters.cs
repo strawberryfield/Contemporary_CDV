@@ -39,7 +39,7 @@ public interface IParameters
     /// <summary>
     /// Output resolution
     /// </summary>
-    int Dpi { get; set; }
+    uint Dpi { get; set; }
     /// <summary>
     /// Output file name
     /// </summary>

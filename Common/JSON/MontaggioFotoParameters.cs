@@ -43,7 +43,7 @@ public class MontaggioFotoParameters : CommonParameters
     /// <summary>
     /// Blank border around the image
     /// </summary>
-    public int Padding { get; set; } = 0;
+    public uint Padding { get; set; } = 0;
     /// <summary>
     /// Canvas gravity
     /// </summary>

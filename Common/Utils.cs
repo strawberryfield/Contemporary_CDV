@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,15 +43,16 @@ public static class Utils
     public static MagickImage AutoRotate(MagickImage img, MagickGeometry size)
     {
         MagickImage i = (MagickImage)img.Clone();
-        if(size.Height > size.Width)
+        if (size.Height > size.Width)
         {
             // output must be portrait
-            if(img.Height < img.Width)
+            if (img.Height < img.Width)
                 i.Rotate(-90);
-        } else
+        }
+        else
         {
             // output must be landscape
-            if(img.Height > img.Width)
+            if (img.Height > img.Width)
                 i.Rotate(-90);
         }
         return i;
@@ -166,9 +168,9 @@ public static class Utils
     /// <returns></returns>
     public static Drawables CenteredText(
         string text,
-        int size,
-        int width,
-        int height,
+        uint size,
+        uint width,
+        uint height,
         string font = "",
         int rotation = 0,
         bool fontBold = false,
@@ -176,14 +178,14 @@ public static class Utils
     {
         Drawables draw = new();
         draw.Rotation(rotation);
-        if(!string.IsNullOrWhiteSpace(font))
+        if (!string.IsNullOrWhiteSpace(font))
             draw.Font(
                 font,
                 fontItalic ? FontStyleType.Italic : FontStyleType.Normal,
                 fontBold ? FontWeight.Bold : FontWeight.Normal,
                 FontStretch.Normal);
         draw.StrokeColor(MagickColors.Black).FontPointSize(size).TextAlignment(TextAlignment.Center);
-        if(Math.Abs(rotation) != 90)
+        if (Math.Abs(rotation) != 90)
             draw.Text(width / 2, height / 2, text);
         else
             draw.Text(Math.Sign(rotation) * height / 2, width / 2, text);
@@ -204,7 +206,7 @@ public static class Utils
     /// <returns></returns>
     public static Drawables CenteredText(
         string text,
-        int size,
+        uint size,
         MagickGeometry fmt,
         string font = "",
         int rotation = 0,
@@ -232,7 +234,7 @@ public static class Utils
     /// <returns></returns>
     public static Drawables CenteredText(
         string text,
-        int size,
+        uint size,
         MagickImage fmt,
         string font = "",
         int rotation = 0,
@@ -255,7 +257,7 @@ public static class Utils
     /// <param name="draw"></param>
     /// <param name="h">Distance from top border</param>
     /// <param name="width"></param>
-    public static void HLine(Drawables draw, int h, int width) => draw.Line(0, h, width, h);
+    public static void HLine(Drawables draw, uint h, uint width) => draw.Line(0, h, width, h);
 
     /// <summary>
     /// Draws a vertical line from 0 to height
@@ -263,7 +265,7 @@ public static class Utils
     /// <param name="draw"></param>
     /// <param name="l">Distance from left border</param>
     /// <param name="height"></param>
-    public static void VLine(Drawables draw, int l, int height) => draw.Line(l, 0, l, height);
+    public static void VLine(Drawables draw, uint l, uint height) => draw.Line(l, 0, l, height);
     #endregion
 
     #region paper formats
@@ -276,25 +278,25 @@ public static class Utils
     public static PaperFormats GetPaperFormat(string Paper, PaperFormats def = PaperFormats.Large)
     {
         PaperFormats ret = def;
-        if(!string.IsNullOrEmpty(Paper))
+        if (!string.IsNullOrEmpty(Paper))
         {
-            if(Paper.ToUpper() == "MEDIUM")
+            if (Paper.ToUpper() == "MEDIUM")
             {
                 ret = PaperFormats.Medium;
             }
-            if(Paper.ToUpper() == "A4")
+            if (Paper.ToUpper() == "A4")
             {
                 ret = PaperFormats.A4;
             }
-            if(Paper.ToUpper() == "LARGE")
+            if (Paper.ToUpper() == "LARGE")
             {
                 ret = PaperFormats.Large;
             }
-            if(Paper.ToUpper() == "SMALL")
+            if (Paper.ToUpper() == "SMALL")
             {
                 ret = PaperFormats.Small;
             }
-            if(Paper.ToUpper() == "PANORAMA")
+            if (Paper.ToUpper() == "PANORAMA")
             {
                 ret = PaperFormats.Panorama;
             }
@@ -310,9 +312,9 @@ public static class Utils
     public static string GetLicense()
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        using(Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
+        using (Stream stream = assembly.GetManifestResourceStream("Casasoft.CCDV.LICENSE"))
         {
-            using(StreamReader reader = new StreamReader(stream))
+            using (StreamReader reader = new StreamReader(stream))
             {
                 return reader.ReadToEnd();
             }
@@ -328,7 +330,7 @@ public static class Utils
     {
         int max = final.Count;
         int i = 0;
-        foreach(MagickImage image in final)
+        foreach (MagickImage image in final)
         {
             i++;
             image.Write($"{par.OutputName}-{i}of{max}.{par.Extension}");
@@ -365,17 +367,17 @@ public static class Utils
         Gravity gravity = Gravity.Center)
     {
         MagickImage ret = null;
-        if(filename.Contains(':'))
+        if (filename.Contains(':'))
         {
             int pos = filename.IndexOf(':');
             string prefix = filename.Substring(0, pos).ToLower();
-            if(Prefixes.Contains(prefix))
+            if (Prefixes.Contains(prefix))
             {
                 geometry ??= new MagickGeometry(256, 256);
                 Gravity textGravity = gravity;
-                if(prefix == "pango")
+                if (prefix == "pango")
                 {
-                    switch(gravity)
+                    switch (gravity)
                     {
                         case Gravity.Northwest:
                         case Gravity.West:
@@ -405,25 +407,27 @@ public static class Utils
                     TextGravity = textGravity
                 };
 
-                if(filename.Length > pos + 2)
+                if (filename.Length > pos + 2)
                 {
                     string argument = filename.Substring(pos + 1);
-                    if(argument[0] == '@')
+                    if (argument[0] == '@')
                     {
                         filename = $"{prefix}:{File.ReadAllText(argument.Substring(1))}";
                     }
                 }
                 ret = new(filename, settings);
 
-                if(prefix == "pango")
+                if (prefix == "pango")
                 {
                     ret = ResizeAndFill(ret, geometry, MagickColors.Transparent, gravity);
                 }
-            } else
+            }
+            else
             {
                 ret = new(filename);
             }
-        } else
+        }
+        else
         {
             ret = new(filename);
         }

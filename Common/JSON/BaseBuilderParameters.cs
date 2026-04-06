@@ -73,7 +73,7 @@ public class BaseBuilderParameters : CommonParameters
     /// <summary>
     /// Thickness of the box (mm)
     /// </summary>
-    public int spessore { get; set; } = 5;
+    public uint spessore { get; set; } = 5;
     /// <summary>
     /// Set if box is landscape
     /// </summary>

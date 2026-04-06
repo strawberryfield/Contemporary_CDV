@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using ImageMagick.Drawing;
 
 namespace Casasoft.CCDV;
 
@@ -246,7 +247,7 @@ public interface IImages
     /// <param name="baseSize"></param>
     /// <param name="Padding">border size in mm</param>
     /// <returns></returns>
-    public MagickImage Padded(MagickColor c, MagickGeometry baseSize, int Padding);
+    public MagickImage Padded(MagickColor c, MagickGeometry baseSize, uint Padding);
 
     /// <summary>
     /// Creates an image with a border around
@@ -254,7 +255,7 @@ public interface IImages
     /// <param name="baseSize"></param>
     /// <param name="Padding">border size in mm</param>
     /// <returns></returns>
-    public MagickImage Padded(MagickGeometry baseSize, int Padding);
+    public MagickImage Padded(MagickGeometry baseSize, uint Padding);
 
   /// <summary>
     /// Draws infos on the image

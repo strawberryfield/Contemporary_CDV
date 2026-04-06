@@ -107,7 +107,7 @@ public class CommandLine : ICommandLine
     /// <summary>
     /// Output resolution
     /// </summary>
-    public int Dpi { get; set; }
+    public uint Dpi { get; set; }
 
     /// <summary>
     /// Input files list
@@ -195,7 +195,7 @@ public class CommandLine : ICommandLine
         exeName = exename;
         exeDesc = desc;
         OutputName = outputname;
-        Dpi = Convert.ToInt16(sDpi);
+        Dpi = Convert.ToUInt32(sDpi);
         sDpi = string.Empty;
         shouldShowHelp = false;
         shouldShowHelpJson = false;
@@ -498,7 +498,7 @@ These are the signatures of the scriptable methods:
     {
         string eDpi = Environment.GetEnvironmentVariable("CDV_DPI");
         if (!string.IsNullOrWhiteSpace(eDpi))
-            Dpi = GetIntParameter(eDpi, Dpi, "Incorrect CDV_DPI environment variable value '{0}'.");
+            Dpi = GetUIntParameter(eDpi, Dpi, "Incorrect CDV_DPI environment variable value '{0}'.");
 
         string eFill = Environment.GetEnvironmentVariable("CDV_FILL");
         if (!string.IsNullOrWhiteSpace(eFill))
@@ -564,12 +564,30 @@ These are the signatures of the scriptable methods:
     }
 
     /// <summary>
+    /// Get unsigned integer value from string
+    /// </summary>
+    /// <param name="val">input string</param>
+    /// <param name="fallback">default value in case of parsing error</param>
+    /// <param name="message">error message</param>
+    /// <returns></returns>
+    public static uint GetUIntParameter(string val, uint fallback, string message)
+    {
+        uint ret;
+        if (!uint.TryParse(val, out ret))
+        {
+            Console.Error.WriteLine(string.Format(message, val));
+            ret = fallback;
+        }
+        return ret;
+    }
+
+    /// <summary>
     /// sets the dpi value from command line string
     /// </summary>
     protected void GetDPI()
     {
         if (!string.IsNullOrWhiteSpace(sDpi))
-            Dpi = GetIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
+            Dpi = GetUIntParameter(sDpi, Dpi, "Incorrect dpi value '{0}'. Using default value.");
     }
 
 

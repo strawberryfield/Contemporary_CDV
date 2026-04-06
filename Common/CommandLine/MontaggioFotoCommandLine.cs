@@ -48,7 +48,7 @@ public class MontaggioFotoCommandLine : CommandLine
     /// <summary>
     /// Blank border around the image
     /// </summary>
-    public int Padding { get; set; }
+    public uint Padding { get; set; }
     private string sPadding = "0";
     /// <summary>
     /// Canvas gravity
@@ -97,7 +97,7 @@ public class MontaggioFotoCommandLine : CommandLine
     {
         if (base.Parse(args)) return true;
 
-        Padding = GetIntParameter(sPadding, Padding,
+        Padding = GetUIntParameter(sPadding, Padding,
             $"Incorrect padding value '{sPadding}'. Using default value.");
         CanvasGravity = GetGravity(sGravity);
         return false;

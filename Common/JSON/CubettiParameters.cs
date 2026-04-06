@@ -31,15 +31,15 @@ public class CubettiParameters : CommonParameters
     /// <summary>
     /// Number of rows to generate
     /// </summary>
-    public int Rows { get; set; } = 2;
+    public uint Rows { get; set; } = 2;
     /// <summary>
     /// Number of Columns to generate
     /// </summary>
-    public int Columns { get; set; } = 3;
+    public uint Columns { get; set; } = 3;
     /// <summary>
     /// Size of any cube (mm)
     /// </summary>
-    public int Size { get; set; } = 50;
+    public uint Size { get; set; } = 50;
 
     /// <summary>
     /// Output paper size

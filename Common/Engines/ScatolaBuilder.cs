@@ -20,6 +20,7 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
+using ImageMagick.Drawing;
 
 namespace Casasoft.CCDV;
 
@@ -37,7 +38,7 @@ public class ScatolaBuilder : BaseBuilder
     /// <param name="dpi"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public ScatolaBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public ScatolaBuilder(uint Spessore = 5, uint dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
        base(Spessore, new Formats(dpi), targetype, isHor)
     { }
     /// <summary>
@@ -47,7 +48,7 @@ public class ScatolaBuilder : BaseBuilder
     /// <param name="formats"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public ScatolaBuilder(int Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public ScatolaBuilder(uint Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
        base(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
     { }
     /// <summary>
@@ -58,7 +59,7 @@ public class ScatolaBuilder : BaseBuilder
     /// <param name="fillcolor"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public ScatolaBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public ScatolaBuilder(uint Spessore, uint dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
       base(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype, isHor)
     { }
     /// <summary>
@@ -70,8 +71,8 @@ public class ScatolaBuilder : BaseBuilder
     /// <param name="bordercolor"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public ScatolaBuilder(int Spessore,
-        int dpi,
+    public ScatolaBuilder(uint Spessore,
+        uint dpi,
         MagickColor fillcolor,
         MagickColor bordercolor,
         TargetType targetype = TargetType.cdv,
@@ -88,7 +89,7 @@ public class ScatolaBuilder : BaseBuilder
     /// <param name="bordercolor"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public ScatolaBuilder(int Spessore,
+    public ScatolaBuilder(uint Spessore,
         IFormats formats,
         MagickColor fillcolor,
         MagickColor bordercolor,
@@ -114,7 +115,7 @@ public class ScatolaBuilder : BaseBuilder
     /// <returns></returns>
     public MagickImage Build()
     {
-        int fold = fmt.ToPixels(12);
+        uint fold = fmt.ToPixels(12);
         MagickImage ret = new(MagickColors.White,
             frontFormat.Width * 2 + spessore * 2 + fold + 2,
             frontFormat.Height + spessore * 2 + fold * 2 + 2);
@@ -146,10 +147,10 @@ public class ScatolaBuilder : BaseBuilder
         FrontWithBottom.Rotate(180);
 
         FrontWithBottom.Composite(frontImage, Gravity.North);
-        FrontWithBottom.Composite(bottomImage, Gravity.South, 0, fold);
+        FrontWithBottom.Composite(bottomImage, Gravity.South, 0, (int)fold);
         BackWithTop.Composite(backImage, Gravity.South);
         topImage.Rotate(180);
-        BackWithTop.Composite(topImage, Gravity.North, 0, fold);
+        BackWithTop.Composite(topImage, Gravity.North, 0, (int)fold);
         MagickImage frontTopImage = (MagickImage)frontImage.Clone();
         frontTopImage.Crop(frontFormat.Width - 2, fold, Gravity.North);
         frontTopImage.Rotate(180);
@@ -157,16 +158,16 @@ public class ScatolaBuilder : BaseBuilder
 
         // Assembliamo le immagini
         ret.Composite(BackWithTop, Gravity.Northwest, 1, 0);
-        ret.Composite(LeftBorderWithExtra, Gravity.West, 1 + frontFormat.Width, 0);
-        ret.Composite(FrontWithBottom, Gravity.Southwest, 1 + frontFormat.Width + borderFormat.Width, 0);
-        ret.Composite(RightBorderWithExtra, Gravity.West, 1 + frontFormat.Width * 2 + borderFormat.Width, 0);
+        ret.Composite(LeftBorderWithExtra, Gravity.West, 1 + (int)frontFormat.Width, 0);
+        ret.Composite(FrontWithBottom, Gravity.Southwest, 1 + (int)frontFormat.Width + (int)borderFormat.Width, 0);
+        ret.Composite(RightBorderWithExtra, Gravity.West, 1 + (int)frontFormat.Width * 2 + (int)borderFormat.Width, 0);
 
         // Margini di taglio
         draw = new();
         draw.StrokeColor(borderColor).StrokeWidth(1);
-        int bordertop = spessore + fold;
-        int borderbottom = bordertop + +frontFormat.Height;
-        int marginright = ret.Width - 1;
+        uint bordertop = spessore + fold;
+        uint borderbottom = bordertop + +frontFormat.Height;
+        uint marginright = ret.Width - 1;
         draw.Line(0, bordertop - spessore, 0, borderbottom);
         draw.Line(marginright, bordertop, marginright, borderbottom);
         draw.Line(marginright - fold, bordertop, marginright, bordertop);
@@ -179,7 +180,7 @@ public class ScatolaBuilder : BaseBuilder
         return ret;
     }
 
-    private Drawables cap(Drawables d, int w, int h) =>
+    private Drawables cap(Drawables d, uint w, uint h) =>
         (Drawables)d.Line(0, h - 1, 0, 0).Line(w - 1, h - 1, w - 1, 0).Line(0, 0, w - 1, 0);
 
     #region test

@@ -39,7 +39,7 @@ public class CommonParameters : IParameters
     /// <summary>
     /// Output resolution
     /// </summary>
-    public int Dpi { get; set; } = 300;
+    public uint Dpi { get; set; } = 300;
     /// <summary>
     /// Output file name
     /// </summary>

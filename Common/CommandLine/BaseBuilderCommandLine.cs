@@ -51,7 +51,7 @@ public class BaseBuilderCommandLine : CommandLine
     /// <summary>
     /// Box thickness
     /// </summary>
-    public int thickness { get; set; }
+    public uint thickness { get; set; }
     /// <summary>
     /// Image for top border
     /// </summary>
@@ -181,7 +181,7 @@ public class BaseBuilderCommandLine : CommandLine
     {
         if (base.Parse(args)) return true;
 
-        thickness = GetIntParameter(sThickness, thickness,
+        thickness = GetUIntParameter(sThickness, thickness,
             $"Incorrect thickness value '{sThickness}'. Using default value.");
 
         if (sTargetType == "CDV")

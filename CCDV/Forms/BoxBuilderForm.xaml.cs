@@ -60,7 +60,7 @@ public partial class BoxBuilderForm : BaseForm
         BaseBuilder builder = (BaseBuilder)eng.Builder;
         builder.fillColor = commonOptions.FillColor;
         builder.borderColor = commonOptions.BorderColor;
-        eng.Dpi = commonOptions.DpiValue;
+        eng.Dpi = (uint)commonOptions.DpiValue;
         builder.fmt = eng.fmt;
         builder.borderText = boxImages.BorderText;
         builder.font = boxImages.Font;
@@ -69,7 +69,7 @@ public partial class BoxBuilderForm : BaseForm
         builder.isHorizontal = boxImages.isHorizontal;
         builder.targetType = boxImages.TargetType;
         builder.PaperFormat = paperFormat.PaperFormat;
-        builder.Thickness = boxImages.Thickness;
+        builder.Thickness = (uint)boxImages.Thickness;
 
         builder.makeEmptyImages();
         if (boxImages.UseTestImages) builder.CreateTestImages();
@@ -88,7 +88,7 @@ public partial class BoxBuilderForm : BaseForm
         BaseBuilder builder = (BaseBuilder)eng.Builder;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
-        commonOptions.DpiValue = eng.Dpi;
+        commonOptions.DpiValue = (int)eng.Dpi;
 
         boxImages.BorderText = builder.borderText;
         boxImages.Font = builder.font;
@@ -97,7 +97,7 @@ public partial class BoxBuilderForm : BaseForm
         boxImages.isHorizontal = builder.isHorizontal;
         boxImages.TargetType = builder.targetType;
         paperFormat.PaperFormat = builder.PaperFormat;
-        boxImages.Thickness = builder.Thickness;
+        boxImages.Thickness = (int)builder.Thickness;
 
         boxImages.FrontImage = builder.frontImagePath;
         boxImages.BackImage = builder.backImagePath;

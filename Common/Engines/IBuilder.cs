@@ -31,7 +31,7 @@ public interface IBuilder
     /// <summary>
     /// Thickness of the box (mm)
     /// </summary>
-    int Thickness { get; set; }
+    uint Thickness { get; set; }
     /// <summary>
     /// Reference to formats
     /// </summary>

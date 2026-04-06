@@ -21,6 +21,7 @@
 
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using ImageMagick.Drawing;
 using System.IO;
 
 namespace Casasoft.CCDV;
@@ -51,11 +52,11 @@ public class BaseBuilder : IBuilder
     /// <summary>
     /// Box thickness in pixels
     /// </summary>
-    protected int spessore;
+    protected uint spessore;
     /// <summary>
     /// Thickness of the box (mm)
     /// </summary>
-    public int Thickness
+    public uint Thickness
     {
         get => spessore / fmt.ToPixels(1); 
         set => spessore = fmt.ToPixels(value);
@@ -177,7 +178,7 @@ public class BaseBuilder : IBuilder
     /// <param name="dpi"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public BaseBuilder(int Spessore = 5, int dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public BaseBuilder(uint Spessore = 5, uint dpi = 300, TargetType targetype = TargetType.cdv, bool isHor = false) :
        this(Spessore, new Formats(dpi), targetype, isHor)
     { }
 
@@ -188,7 +189,7 @@ public class BaseBuilder : IBuilder
     /// <param name="formats"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public BaseBuilder(int Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public BaseBuilder(uint Spessore, IFormats formats, TargetType targetype = TargetType.cdv, bool isHor = false) :
        this(Spessore, formats, MagickColors.White, MagickColors.Black, targetype, isHor)
     { }
 
@@ -200,7 +201,7 @@ public class BaseBuilder : IBuilder
     /// <param name="fillcolor"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public BaseBuilder(int Spessore, int dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
+    public BaseBuilder(uint Spessore, uint dpi, MagickColor fillcolor, TargetType targetype = TargetType.cdv, bool isHor = false) :
        this(Spessore, new Formats(dpi), fillcolor, MagickColors.Black, targetype, isHor)
     { }
 
@@ -213,8 +214,8 @@ public class BaseBuilder : IBuilder
     /// <param name="bordercolor"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public BaseBuilder(int Spessore,
-        int dpi,
+    public BaseBuilder(uint Spessore,
+        uint dpi,
         MagickColor fillcolor,
         MagickColor bordercolor,
         TargetType targetype = TargetType.cdv,
@@ -231,7 +232,7 @@ public class BaseBuilder : IBuilder
     /// <param name="bordercolor"></param>
     /// <param name="targetype"></param>
     /// <param name="isHor"></param>
-    public BaseBuilder(int Spessore,
+    public BaseBuilder(uint Spessore,
         IFormats formats,
         MagickColor fillcolor,
         MagickColor bordercolor,
@@ -414,8 +415,8 @@ public class BaseBuilder : IBuilder
     {
         MagickImage trim = (MagickImage)img.Clone();
         trim.Trim();
-        int h_offset = (img.Width - trim.Width) / 2;
-        int v_offset = (img.Height - trim.Height) / 2;
+        uint h_offset = (img.Width - trim.Width) / 2;
+        uint v_offset = (img.Height - trim.Height) / 2;
 
         Drawables d = new();
         d.StrokeColor(borderColor).StrokeWidth(1);

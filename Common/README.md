@@ -230,7 +230,7 @@ to help in writing and testing custom scripts
 
 ### .net
 
-The library is compiled for .net 6.0 and .net 8.0
+The library is compiled for .net 8.0 and .net 10.0
 
 ### Packages
 

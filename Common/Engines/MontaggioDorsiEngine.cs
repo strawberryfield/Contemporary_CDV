@@ -22,6 +22,7 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 using System.Text.Json;
 
@@ -159,8 +160,8 @@ public class MontaggioDorsiEngine : BaseEngine
         draw.StrokeColor(BorderColor).StrokeWidth(1);
         if (PaperFormat == PaperFormats.Medium)
         {
-            int top = (final.Height - fmt.CDV_Full_v.Height) / 2;
-            int left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
+            uint top = (final.Height - fmt.CDV_Full_v.Height) / 2;
+            uint left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
 
             Utils.HLine(draw, top, final.Width);
             Utils.HLine(draw, final.Height - top, final.Width);
@@ -169,7 +170,7 @@ public class MontaggioDorsiEngine : BaseEngine
         }
         else
         {
-            int h = fmt.ToPixels(PaperFormat == PaperFormats.A4 ? 5 : 10);
+            uint h = fmt.ToPixels((uint)(PaperFormat == PaperFormats.A4 ? 5 : 10));
             Utils.HLine(draw, h, final.Width);
             h += fmt.CDV_Full_v.Height;
             Utils.HLine(draw, h, final.Width);
@@ -184,14 +185,14 @@ public class MontaggioDorsiEngine : BaseEngine
                 final.Composite(imagesV.AppendHorizontally(), Gravity.Center, 0, 0);
                 break;
             case PaperFormats.Large:
-                final.Composite(imagesV.AppendHorizontally(), Gravity.North, 0, fmt.ToPixels(10));
+                final.Composite(imagesV.AppendHorizontally(),  Gravity.North, 0, (int)fmt.ToPixels(10));
                 final.Composite(imagesO.AppendHorizontally(), Gravity.North,
-                    0, fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1);
+                    0, (int)(fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
                 break;
             case PaperFormats.A4:
-                final.Composite(imagesV.AppendHorizontally(), Gravity.North, 0, fmt.ToPixels(5));
+                final.Composite(imagesV.AppendHorizontally(), Gravity.North, 0, (int)fmt.ToPixels(5));
                 final.Composite(imagesO.AppendHorizontally(), Gravity.North,
-                    0, fmt.ToPixels(5) + fmt.CDV_Full_v.Height - 1);
+                    0, (int)(fmt.ToPixels(5) + fmt.CDV_Full_v.Height - 1));
                 break;
         }
 

@@ -34,12 +34,12 @@ public interface IFormats
     /// </summary>
     /// <param name="mm">size to convert</param>
     /// <returns>pixel at defined resolution</returns>
-    public int ToPixels(int mm);
+    public uint ToPixels(uint mm);
 
     /// <summary>
     /// Returns the resolution
     /// </summary>
-    public int DPI { get; }
+    public uint DPI { get; }
 
     #region commercial formats
     /// <summary>

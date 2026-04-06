@@ -36,7 +36,7 @@ public interface IEngine
     /// <summary>
     /// Output resolution
     /// </summary>
-    int Dpi { get; set; }
+    uint Dpi { get; set; }
     /// <summary>
     /// List of files to process
     /// </summary>

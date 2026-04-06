@@ -41,7 +41,7 @@ public partial class MontaggioDorsiForm : BaseForm
         addAllFiles();
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
-        eng.Dpi = commonOptions.DpiValue;
+        eng.Dpi = (uint)commonOptions.DpiValue;
         eng.Script = commonOptions.Script;
         eng.Tag = commonOptions.ScriptTag;
         eng.PaperFormat = paperFormat.PaperFormat;
@@ -54,7 +54,7 @@ public partial class MontaggioDorsiForm : BaseForm
         MontaggioDorsiEngine eng = (MontaggioDorsiEngine)engine;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
-        commonOptions.DpiValue = eng.Dpi;
+        commonOptions.DpiValue = (int)eng.Dpi;
         commonOptions.ScriptTag = eng.Tag;
         paperFormat.PaperFormat = eng.PaperFormat;
         txtGravity.gravity = eng.CanvasGravity;

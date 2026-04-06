@@ -41,13 +41,13 @@ public partial class MontaggioFotoForm : BaseForm
         MontaggioFotoEngine eng = (MontaggioFotoEngine)engine;
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
-        eng.Dpi = commonOptions.DpiValue;
+        eng.Dpi = (uint)commonOptions.DpiValue;
         eng.Script = commonOptions.Script;
         eng.Tag = commonOptions.ScriptTag;
         eng.WithBorder = isChecked(chkWithBorders);
         eng.FullSize = isChecked(chkFullSize);
         eng.Trim = isChecked(chkTrim);
-        eng.Padding = txtPadding.Value;
+        eng.Padding = (uint)txtPadding.Value;
         eng.CanvasGravity = txtGravity.gravity;
     }
 
@@ -57,13 +57,13 @@ public partial class MontaggioFotoForm : BaseForm
         MontaggioFotoEngine eng = (MontaggioFotoEngine)engine;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
-        commonOptions.DpiValue = eng.Dpi;
+        commonOptions.DpiValue = (int)eng.Dpi;
         commonOptions.ScriptTag = eng.Tag;
 
         chkWithBorders.IsChecked = eng.WithBorder;
         chkFullSize.IsChecked = eng.FullSize;
         chkTrim.IsChecked = eng.Trim;
-        txtPadding.Value = eng.Padding;
+        txtPadding.Value = (int)eng.Padding;
         txtGravity.gravity = eng.CanvasGravity;
         addFile(1, filename1);
         addFile(2, filename2);

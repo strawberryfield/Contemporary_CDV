@@ -59,10 +59,10 @@ public partial class FlexagonForm : BaseMultipageForm
         addAllFiles();
         eng.FillColor = commonOptions.FillColor;
         eng.BorderColor = commonOptions.BorderColor;
-        eng.Dpi = commonOptions.DpiValue;
+        eng.Dpi = (uint)commonOptions.DpiValue;
         eng.Script = commonOptions.Script;
         eng.Tag = commonOptions.ScriptTag;
-        eng.Faces = Faces;
+        eng.Faces = (uint)Faces;
     }
 
     protected override void loadJson(string json)
@@ -71,10 +71,10 @@ public partial class FlexagonForm : BaseMultipageForm
         FlexagonEngine eng = (FlexagonEngine)engine;
         commonOptions.FillColor = eng.FillColor;
         commonOptions.BorderColor = eng.BorderColor;
-        commonOptions.DpiValue = eng.Dpi;
+        commonOptions.DpiValue = (int)eng.Dpi;
         commonOptions.ScriptTag = eng.Tag;
         chkTestImages.IsChecked = eng.useSampleImages;
-        Faces = eng.Faces;
+        Faces = (int)eng.Faces;
 
         addFile(1, filename1);
         addFile(2, filename2);
