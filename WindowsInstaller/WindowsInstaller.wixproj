@@ -1,10 +1,13 @@
-<Project Sdk="WixToolset.Sdk/4.0.1">
+﻿<Project Sdk="WixToolset.Sdk/7.0.0">
   <PropertyGroup>
     <OutputName>Casasoft_CCdV</OutputName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DefineConstants>Debug</DefineConstants>
-    <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AcceptEula>wix7</AcceptEula>
+    <UserSecretsId>11dae389-07bc-490a-baff-5eb3f83c31c8</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cartella\Cartella.csproj">
@@ -78,7 +81,8 @@
     <Content Include="LICENSE.rtf" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
-    <PackageReference Include="WixToolset.Util.wixext" Version="6.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="7.0.0" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="7.0.0" />
   </ItemGroup>
+
 </Project>
