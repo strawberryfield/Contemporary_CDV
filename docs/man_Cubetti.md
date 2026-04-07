@@ -1,6 +1,6 @@
 % CUBETTI(1)  
 % Roberto Ceccarelli - Casasoft  
-% April 2023
+% April 2026
 
 # NAME
 Cubetti - Creates a cube matrix with 6 photos.

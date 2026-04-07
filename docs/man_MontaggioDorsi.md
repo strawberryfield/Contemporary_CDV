@@ -1,6 +1,6 @@
 % MONTAGGIODORSI(1)  
 % Roberto Ceccarelli - Casasoft  
-% April 2023
+% April 2026
 
 # NAME
 MontaggioDorsi - Assembling six images over a 20x27 cm paper

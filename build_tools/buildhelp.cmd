@@ -1,5 +1,5 @@
 @echo off
-rem copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
+rem copyright (c) 2020-2026 Roberto Ceccarelli - Casasoft
 rem http://strawberryfield.altervista.org 
 rem 
 rem This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -22,7 +22,7 @@ rem If not, see <http://www.gnu.org/licenses/>.
 @echo on
 
 set repo=C:\projects\Contemporary_CDV\
-set build=bin\build\net6.0\
+set build=bin\build\net10.0\
 set docs=%repo%docs\
 
 set prg=MontaggioFoto

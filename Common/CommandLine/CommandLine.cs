@@ -1,4 +1,4 @@
-﻿// copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
+﻿// copyright (c) 2020-2026 Roberto Ceccarelli - Casasoft
 // http://strawberryfield.altervista.org 
 // 
 // This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -369,7 +369,7 @@ The file must be referenced as '@filename'",
     /// Text for welcome banner
     /// </summary>
     /// <returns></returns>
-    public virtual string WelcomeBannerText() => $"Casasoft Contemporary Carte de Visite {exeName}\nCopyright (c) 2020-2023 Roberto Ceccarelli - Casasoft\n";
+    public virtual string WelcomeBannerText() => $"Casasoft Contemporary Carte de Visite {exeName}\ncopyright (c) 2020-2026 Roberto Ceccarelli - Casasoft\n";
 
     /// <summary>
     /// Colors syntax help
@@ -412,7 +412,7 @@ The file must be referenced as '@filename'",
         ret.AppendLine(
             @$"% {exeName.ToUpper()}(1)  
 % Roberto Ceccarelli - Casasoft  
-% April 2023
+% April 2026
 
 # NAME
 {exeName} - {exeDesc}

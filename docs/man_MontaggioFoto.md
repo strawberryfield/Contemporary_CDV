@@ -1,6 +1,6 @@
 % MONTAGGIOFOTO(1)  
 % Roberto Ceccarelli - Casasoft  
-% April 2023
+% April 2026
 
 # NAME
 MontaggioFoto - Assembling two images over a 10x15 cm paper

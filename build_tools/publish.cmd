@@ -1,5 +1,5 @@
 @echo off
-rem copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
+rem copyright (c) 2020-2026 Roberto Ceccarelli - Casasoft
 rem http://strawberryfield.altervista.org 
 rem 
 rem This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -30,7 +30,7 @@ set pkgname=Casasoft_CCdV
 set nuget=C:\Users\rober\.nuget\packages\
 set winrar="C:\Program Files\WinRAR\winrar.exe"
 
-set version=23.12.17
+set version=26.04.07
  
 @del /S /Q %build%
 @del /S /Q %bin%\build\
@@ -87,8 +87,8 @@ rmdir /s /q man
 popd
 
 wix build ^
- -ext %nuget%wixtoolset.ui.wixext\4.0.1\wixext4\WixToolset.UI.wixext.dll ^
- -ext %nuget%wixtoolset.util.wixext\4.0.1\wixext4\WixToolset.Util.wixext.dll ^
+ -ext %nuget%wixtoolset.ui.wixext\7.0.0\wixext7\WixToolset.UI.wixext.dll ^
+ -ext %nuget%wixtoolset.util.wixext\7.0.0\wixext7\WixToolset.Util.wixext.dll ^
  -d var.ProjectDir=%repo%WindowsInstaller\ ^
  -outputtype exe ^
  -o %bin%%pkgname%-%version%.msi ^

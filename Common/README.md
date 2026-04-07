@@ -90,7 +90,7 @@ having to manually add pages and images, I forgot to insert references
 for the cut.
 
 So I dusted off ImageMagick, but instead of driving it in javascript 
-I decided to take advantage of the brand new Net 6.0 (and from december 2023 also Net 8.0)
+I decided to take advantage of the brand new Net 8.0 (and from april 2026 also Net 10.0)
 and the Magick.NET library which already incorporates 
 ImageMagick and therefore allows you to create ready-to-use executables.
 

@@ -1,6 +1,6 @@
 % SCATOLA(1)  
 % Roberto Ceccarelli - Casasoft  
-% April 2023
+% April 2026
 
 # NAME
 Scatola - Box builder using a 20x27 cm paper

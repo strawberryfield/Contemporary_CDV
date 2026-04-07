@@ -1,6 +1,6 @@
 % FLEXAGON(1)  
 % Roberto Ceccarelli - Casasoft  
-% April 2023
+% April 2026
 
 # NAME
 Flexagon - Creates a flexagon with 3, 4 or 6 photos.

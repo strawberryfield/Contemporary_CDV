@@ -1,5 +1,5 @@
 Casasoft Contemporary Carte de Visite MontaggioFoto
-Copyright (c) 2020-2023 Roberto Ceccarelli - Casasoft
+copyright (c) 2020-2026 Roberto Ceccarelli - Casasoft
 
 Json parameters template for: MontaggioFoto
 
