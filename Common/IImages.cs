@@ -128,6 +128,19 @@ public interface IImages
     /// <remarks>White background</remarks>
     /// <returns></returns>
     public MagickImage FineArt10x18_v();
+
+    /// <summary>
+    /// 30x20cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage FineArt30x20_o();
+    /// <summary>
+    /// 20x30cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage FineArt20x30_v();
     #endregion
 
     #region ISO formats

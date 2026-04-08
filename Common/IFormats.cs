@@ -86,6 +86,16 @@ public interface IFormats
     /// 10x18cm paper
     /// </summary>
     public MagickGeometry FineArt10x18_v { get; }
+
+    /// <summary>
+    /// 30x20cm paper
+    /// </summary>
+    public MagickGeometry FineArt30x20_o { get; }
+    /// <summary>
+    /// 20x30cm paper
+    /// </summary>
+    public MagickGeometry FineArt20x30_v { get; }
+
     #endregion
 
     #region ISO formats

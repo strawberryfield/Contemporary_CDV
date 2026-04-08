@@ -74,7 +74,7 @@ public class MontaggioDorsiCommandLine : CommandLine
 
         Options = new OptionSet
             {
-                { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm", o => Paper = o  },
+                { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm\n20x30 20x30cm", o => Paper = o  },
                 { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s }
             };
         AddBaseOptions();

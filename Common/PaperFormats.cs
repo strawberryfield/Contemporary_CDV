@@ -45,5 +45,10 @@ public enum PaperFormats
     /// <summary>
     /// ISO A4 210x297
     /// </summary>
-    A4
+    A4,
+    /// <summary>
+    /// 20x30 cm
+    /// </summary>
+    Large20x30
+
 }

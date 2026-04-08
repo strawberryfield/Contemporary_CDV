@@ -145,6 +145,7 @@ public class MontaggioDorsiEngine : BaseEngine
                     _ = LoadImages(3, nImg, imagesV, quiet, fmt.CDV_Full_v);
                     break;
                 case PaperFormats.Large:
+                case PaperFormats.Large20x30:
                     nImg = LoadImages(4, nImg, imagesV, quiet, fmt.CDV_Full_v);
                     _ = LoadImages(2, nImg, imagesO, quiet, fmt.CDV_Full_o);
                     break;
@@ -185,7 +186,8 @@ public class MontaggioDorsiEngine : BaseEngine
                 final.Composite(imagesV.AppendHorizontally(), Gravity.Center, 0, 0);
                 break;
             case PaperFormats.Large:
-                final.Composite(imagesV.AppendHorizontally(),  Gravity.North, 0, (int)fmt.ToPixels(10));
+            case PaperFormats.Large20x30:
+                final.Composite(imagesV.AppendHorizontally(), Gravity.North, 0, (int)fmt.ToPixels(10));
                 final.Composite(imagesO.AppendHorizontally(), Gravity.North,
                     0, (int)(fmt.ToPixels(10) + fmt.CDV_Full_v.Height - 1));
                 break;

@@ -32,7 +32,7 @@ If not, see <http://www.gnu.org/licenses/>.
     <StackPanel Orientation="Horizontal">
         <RadioButton
             x:Name="rbLarge"
-            Width="70"
+            Width="60"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="20x27"
@@ -40,10 +40,17 @@ If not, see <http://www.gnu.org/licenses/>.
             IsChecked="True" />
         <RadioButton
             x:Name="rbMedium"
-            Width="70"
+            Width="60"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="15x20"
+            GroupName="paperFormat" />
+        <RadioButton
+            x:Name="rb20x30"
+            Width="60"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="20x30"
             GroupName="paperFormat" />
         <RadioButton
             x:Name="rbA4"

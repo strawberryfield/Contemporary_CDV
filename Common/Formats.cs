@@ -105,6 +105,17 @@ public class Formats : IFormats
     /// 10x18cm paper
     /// </summary>
     public MagickGeometry FineArt10x18_v => swap(FineArt10x18_o);
+
+    /// <summary>
+    /// 30x20cm paper
+    /// </summary>
+    public MagickGeometry FineArt30x20_o => new(ToPixels(305), ToPixels(203));
+
+    /// <summary>
+    /// 20x30cm paper
+    /// </summary>
+    public MagickGeometry FineArt20x30_v => swap(FineArt30x20_o);
+
     #endregion
 
     #region ISO formats

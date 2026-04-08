@@ -284,6 +284,9 @@ public class BaseEngine : IEngine
             case PaperFormats.Panorama:
                 final = img.FineArt10x18_o();
                 break;
+            case PaperFormats.Large20x30:
+                final = img.FineArt30x20_o();
+                break;
             default:
                 final = new();
                 break;

@@ -118,6 +118,19 @@ public class Images : IImages
     public MagickImage FineArt10x18_v(MagickColor c) => new(c, fmt.FineArt10x18_v.Width, fmt.FineArt10x18_v.Height);
 
     /// <summary>
+    /// 30x20cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage FineArt30x20_o(MagickColor c) => new(c, fmt.FineArt30x20_o.Width, fmt.FineArt30x20_o.Height);
+    /// <summary>
+    /// 20x30cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage FineArt20x30_v(MagickColor c) => new(c, fmt.FineArt20x30_v.Width, fmt.FineArt20x30_v.Height);
+
+    /// <summary>
     /// Photocity Digital print over 27x20cm paper
     /// </summary>
     /// <remarks>White background</remarks>
@@ -165,6 +178,20 @@ public class Images : IImages
     /// <remarks>White background</remarks>
     /// <returns></returns>
     public MagickImage FineArt10x18_v() => FineArt10x18_v(MagickColors.White);
+
+    /// <summary>
+    /// 30x20cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage FineArt30x20_o() => FineArt30x20_o(MagickColors.White);
+    /// <summary>
+    /// 20x30cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage FineArt20x30_v() => FineArt20x30_v(MagickColors.White);
+
     #endregion
 
     #region ISO formats

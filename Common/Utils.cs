@@ -280,25 +280,26 @@ public static class Utils
         PaperFormats ret = def;
         if (!string.IsNullOrEmpty(Paper))
         {
-            if (Paper.ToUpper() == "MEDIUM")
+            switch (Paper.ToUpper())
             {
-                ret = PaperFormats.Medium;
-            }
-            if (Paper.ToUpper() == "A4")
-            {
-                ret = PaperFormats.A4;
-            }
-            if (Paper.ToUpper() == "LARGE")
-            {
-                ret = PaperFormats.Large;
-            }
-            if (Paper.ToUpper() == "SMALL")
-            {
-                ret = PaperFormats.Small;
-            }
-            if (Paper.ToUpper() == "PANORAMA")
-            {
-                ret = PaperFormats.Panorama;
+                case "MEDIUM":
+                    ret = PaperFormats.Medium;
+                    break;
+                case "A4":
+                    ret = PaperFormats.A4;
+                    break;
+                case "LARGE":
+                    ret = PaperFormats.Large;
+                    break;
+                case "SMALL":
+                    ret = PaperFormats.Small;
+                    break;
+                case "PANORAMA":
+                    ret = PaperFormats.Panorama;
+                    break;
+                case "20X30":
+                    ret = PaperFormats.Large20x30;
+                    break;
             }
         }
         return ret;
