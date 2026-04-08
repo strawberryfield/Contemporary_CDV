@@ -86,11 +86,10 @@ rmdir /s /q man
 %winrar% k ..\%pkgname%_wGUI_%version%.rar
 popd
 
-wix build ^
+wix build -acceptEula wix7 ^
  -ext %nuget%wixtoolset.ui.wixext\7.0.0\wixext7\WixToolset.UI.wixext.dll ^
  -ext %nuget%wixtoolset.util.wixext\7.0.0\wixext7\WixToolset.Util.wixext.dll ^
  -d var.ProjectDir=%repo%WindowsInstaller\ ^
- -outputtype exe ^
  -o %bin%%pkgname%-%version%.msi ^
  %repo%WindowsInstaller\product.wxs
  
