@@ -32,6 +32,7 @@ Output paper size:
 Large 20x27cm  
 Medium \(default\) 15x20cm  
 A4 210x297mm  
+20x30 20x30cm  
 
 
 **--sample** :  

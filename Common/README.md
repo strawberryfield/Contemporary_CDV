@@ -236,9 +236,8 @@ The library is compiled for .net 8.0 and .net 10.0
 
 The following packages are required:
 
-- Microsoft.CodeAnalysis.Common Version >= 4.8.0
-- Magick.NET-Q16-AnyCPU Version >= 13.5.0
-- Magick.NET.SystemWindowsMedia >= 7.2.1
-- Microsoft.CodeAnalysis.CSharp Version >= 4.8.0
+- Microsoft.CodeAnalysis.Common Version >= 5.3.0
+- Magick.NET-Q16-AnyCPU Version >= 14.11.1
+- Microsoft.CodeAnalysis.CSharp Version >= 5.3.0
 - Mono.Options Version >= 6.12.0.148
 - Casasoft.Xaml.Controls >= 22.4.13

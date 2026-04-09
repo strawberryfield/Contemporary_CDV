@@ -90,7 +90,7 @@ public class CubettiCommandLine : CommandLine
                 { "r|rows=", $"set the number of rows of the output matrix (default {sRows})", t => sRows = t },
                 { "c|columns=", $"set the number of columns of the output matrix (default {sRows})", t => sColumns = t },
                 { "s|size=", $"set the size of each cube (default {sSize}mm)", t => sSize = t },
-                { "paper=", "Output paper size:\nLarge 20x27cm\nMedium (default) 15x20cm\nA4 210x297mm", o => Paper = o  },
+                { "paper=", "Output paper size:\nLarge 20x27cm\nMedium (default) 15x20cm\nA4 210x297mm\n20x30 20x30cm", o => Paper = o  },
                 { "sample", "generate sample images", s => useSampleImages = s != null },
             };
         AddBaseOptions();

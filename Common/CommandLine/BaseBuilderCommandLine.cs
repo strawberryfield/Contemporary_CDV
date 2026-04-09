@@ -166,7 +166,7 @@ public class BaseBuilderCommandLine : CommandLine
                 { "fontitalic", "use italic font style", s => fontItalic = s != null },
                 { "format=", $"size of the box: 'cdv' or 'cc' (default '{sTargetType}')", t => sTargetType = t.ToUpper() },
                 { "orientation=", $"orientation of the box: 'portrait' or 'landscape' (default '{sOrientation}')", t => sOrientation = t.ToUpper() },
-                { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm", o => Paper = o  },
+                { "paper=", "Output paper size:\nLarge (default) 20x27cm\nMedium 15x20cm\nA4 210x297mm\n20x30 20x30cm", o => Paper = o  },
                 { "sample", "generate sample images", s => useSampleImages = s != null },
             };
         AddBaseOptions();
