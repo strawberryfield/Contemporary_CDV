@@ -20,7 +20,7 @@
     
     <PackageTags>dotnet-new;templates;casasoft;contemporarycartedevisite</PackageTags>
 
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
 
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>

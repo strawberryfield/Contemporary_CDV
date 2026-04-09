@@ -27,7 +27,7 @@ dotnet new --install Casasoft.CCDV.ProjectTemplate
 
 ### .net
 
-The library is designed for .net 6.0
+The library is designed for .net 10.0
 
 ### Packages
 
