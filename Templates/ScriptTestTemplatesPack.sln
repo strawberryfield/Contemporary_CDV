@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptTestTemplatesPack", "ScriptTestTemplatesPack.csproj", "{AF1654CF-1264-0D00-3E8B-24CD0BC7CC9E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF1654CF-1264-0D00-3E8B-24CD0BC7CC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1654CF-1264-0D00-3E8B-24CD0BC7CC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1654CF-1264-0D00-3E8B-24CD0BC7CC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1654CF-1264-0D00-3E8B-24CD0BC7CC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1436650E-8B36-4303-9BD6-CC5C92CE1BE5}
+	EndGlobalSection
+EndGlobal

@@ -940,6 +940,16 @@
             Canvas gravity
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.MontaggioFotoCommandLine.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.MontaggioFotoCommandLine.PaperFormat">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.MontaggioFotoCommandLine.#ctor(System.String,System.String)">
             <summary>
             Constructor
@@ -3515,6 +3525,16 @@
         <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.CanvasGravity">
             <summary>
             Canvas gravity
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.Paper">
+            <summary>
+            Output paper size
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.MontaggioFotoParameters.PaperFormat">
+            <summary>
+            Output paper size
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.JSON.MontaggioFotoParameters.#ctor">

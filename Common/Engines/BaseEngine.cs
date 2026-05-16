@@ -186,8 +186,7 @@ public class BaseEngine : IEngine
         parameters.Dpi = Dpi;
         parameters.Script = Script;
         parameters.Tag = Tag;
-        parameters.FilesList = new();
-        parameters.FilesList.AddRange(FilesList);
+        parameters.FilesList = [.. FilesList];
     }
 
     /// <summary>

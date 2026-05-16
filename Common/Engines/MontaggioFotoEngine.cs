@@ -65,6 +65,7 @@ public class MontaggioFotoEngine : BaseEngine
     {
         parameters = new MontaggioFotoParameters();
         ScriptingClass = new MontaggioFotoScripting();
+        OutputName = "front";
     }
 
     /// <summary>
@@ -75,6 +76,7 @@ public class MontaggioFotoEngine : BaseEngine
     {
         parameters = new MontaggioFotoParameters();
         MontaggioFotoCommandLine p = (MontaggioFotoCommandLine)par;
+        PaperFormat = p.PaperFormat;
         FullSize = p.FullSize ? true : FullSize;
         Trim = p.Trim ? true : Trim;
         WithBorder = p.WithBorder ? true : WithBorder;
@@ -94,6 +96,7 @@ public class MontaggioFotoEngine : BaseEngine
     {
         GetBaseJsonParams();
         MontaggioFotoParameters p = (MontaggioFotoParameters)parameters;
+        p.PaperFormat = PaperFormat;
         p.FullSize = FullSize;
         p.WithBorder = WithBorder;
         p.Trim = Trim;
@@ -125,6 +128,7 @@ public class MontaggioFotoEngine : BaseEngine
         Trim = p.Trim;
         Padding = p.Padding;
         Script = p.Script;
+        PaperFormat = p.PaperFormat;
         CanvasGravity = p.CanvasGravity;
     }
     #endregion
