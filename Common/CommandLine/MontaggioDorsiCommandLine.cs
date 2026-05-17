@@ -116,7 +116,7 @@ public class MontaggioDorsiCommandLine : CommandLine
     /// <returns></returns>
     public override string JsonTemplate()
     {
-        MontaggioDorsiParameters p = new();
+        BaseMontaggioParameters p = new();
         return JsonSerializer.Serialize(p, new JsonSerializerOptions { WriteIndented = true });
     }
 

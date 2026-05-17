@@ -22,7 +22,6 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
-using ImageMagick.Drawing;
 using System;
 using System.Text.Json;
 
@@ -39,7 +38,7 @@ public class MontaggioDorsiEngine : BaseMontaggioEngine
     /// </summary>
     public MontaggioDorsiEngine() : base()
     {
-        parameters = new MontaggioDorsiParameters();
+        parameters = new BaseMontaggioParameters();
         ScriptingClass = new MontaggioDorsiScripting();
         OutputName = "dorsi";
     }
@@ -55,7 +54,7 @@ public class MontaggioDorsiEngine : BaseMontaggioEngine
 
         if (string.IsNullOrWhiteSpace(par.JSON))
         {
-            parameters = new MontaggioDorsiParameters();
+            parameters = new BaseMontaggioParameters();
             PaperFormat = p.PaperFormat;
             CanvasGravity = p.CanvasGravity;
             Script = p.Script;
@@ -70,7 +69,7 @@ public class MontaggioDorsiEngine : BaseMontaggioEngine
     /// <returns></returns>
     public override string GetJsonParams()
     {
-        MontaggioDorsiParameters p = (MontaggioDorsiParameters)parameters;
+        BaseMontaggioParameters p = (BaseMontaggioParameters)parameters;
         GetBaseMontaggioJsonParams(p);
         return JsonSerializer.Serialize(p);
     }
@@ -80,16 +79,16 @@ public class MontaggioDorsiEngine : BaseMontaggioEngine
     /// </summary>
     /// <param name="json"></param>
     public override void SetJsonParams(string json) =>
-        SetJsonParams(JsonSerializer.Deserialize<MontaggioDorsiParameters>(json));
+        SetJsonParams(JsonSerializer.Deserialize<BaseMontaggioParameters>(json));
 
     /// <summary>
     /// Sets the parameters from json deserialized object
     /// </summary>
     /// <param name="json"></param>
     public override void SetJsonParams(IParameters json) =>
-        SetJsonParams((MontaggioDorsiParameters)json);
+        SetJsonParams((BaseMontaggioParameters)json);
 
-    private void SetJsonParams(MontaggioDorsiParameters p)
+    private void SetJsonParams(BaseMontaggioParameters p)
     {
         parameters = p;
         SetBaseMontaggioJsonParams(p);
@@ -151,29 +150,7 @@ public class MontaggioDorsiEngine : BaseMontaggioEngine
             }
         }
 
-        // Margini di taglio
-        Drawables draw = new();
-        draw.StrokeColor(BorderColor).StrokeWidth(1);
-        if (PaperFormat == PaperFormats.Medium)
-        {
-            uint top = (final.Height - fmt.CDV_Full_v.Height) / 2;
-            uint left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
-
-            Utils.HLine(draw, top, final.Width);
-            Utils.HLine(draw, final.Height - top, final.Width);
-            Utils.VLine(draw, left, final.Height);
-            Utils.VLine(draw, final.Width - left, final.Height);
-        }
-        else
-        {
-            uint h = fmt.ToPixels((uint)(PaperFormat == PaperFormats.A4 ? 5 : 10));
-            Utils.HLine(draw, h, final.Width);
-            h += fmt.CDV_Full_v.Height;
-            Utils.HLine(draw, h, final.Width);
-            h += PaperFormat == PaperFormats.A4 ? fmt.CDV_Full_v.Height : fmt.CDV_Full_v.Width;
-            Utils.HLine(draw, h, final.Width);
-        }
-        draw.Draw(final);
+        DrawCutMarks(final, PaperFormat);
 
         switch (PaperFormat)
         {

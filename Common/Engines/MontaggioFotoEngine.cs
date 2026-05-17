@@ -135,6 +135,7 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         WithBorder = p.WithBorder;
         Trim = p.Trim;
         Padding = p.Padding;
+        Script = p.Script;
     }
     #endregion
 
@@ -154,14 +155,6 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     public MagickImage GetResult(bool quiet, int startIndex)
     {
         _ = base.GetResult(quiet);
-
-        if (!quiet)
-        {
-            Console.WriteLine($"DEBUG PaperFormat: {PaperFormat}");
-            Console.WriteLine($"DEBUG FilesList.Count: {FilesList.Count}");
-            foreach (var f in FilesList)
-                Console.WriteLine($"DEBUG file: {f}");
-        }
 
         return PaperFormat switch
         {
@@ -232,16 +225,21 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         MagickImageCollection imagesV = new();
         MagickImageCollection imagesO = new();
 
-        // Load at CDV_Internal size so GetProcessed can apply Trim/WithBorder/
-        // Padding correctly (those options are defined relative to the internal
-        // area). LoadImages then resizes the result to CDV_Full for compositing.
         int nImg = startIndex;
-        nImg = LoadImages(portraitCount, nImg, imagesV, quiet,
-            fmt.CDV_Internal_v, fmt.CDV_Full_v, GetProcessed);
-        _ = LoadImages(landscapeCount, nImg, imagesO, quiet,
-            fmt.CDV_Internal_v, fmt.CDV_Full_o, GetProcessed);
+        for (int i = 0; i < portraitCount; i++)
+        {
+            imagesV.Add(GetSlot(nImg, fmt.CDV_Full_v, quiet));
+            nImg++;
+            if (nImg >= FilesList.Count) nImg = 0;
+        }
+        for (int i = 0; i < landscapeCount; i++)
+        {
+            imagesO.Add(GetSlot(nImg, fmt.CDV_Full_o, quiet));
+            nImg++;
+            if (nImg >= FilesList.Count) nImg = 0;
+        }
 
-        DrawCutMarks(final);
+        DrawCutMarks(final, PaperFormat);
 
         switch (PaperFormat)
         {
@@ -270,41 +268,34 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     }
 
     /// <summary>
-    /// Builds a single CDV slot: loads and processes the image (applying
-    /// border/padding options at CDV_Internal scale), then resizes the result
-    /// to <paramref name="orientation"/> (CDV_Full_v or CDV_Full_o) and adds
-    /// a 1-px border.  The two-step sizing mirrors MontaggioDorsiEngine and
-    /// preserves all border/padding semantics regardless of the paper format.
+    /// Builds a single CDV slot for multi-row layouts.
+    /// 1. Loads and resizes the image to CDV_Internal_v (or CDV_Full_v if
+    ///    FullSize) via <see cref="BaseMontaggioEngine.LoadSingleImage"/>,
+    ///    which handles AutoRotate so landscape sources fit portrait cells
+    ///    and vice-versa.
+    /// 2. Applies Trim / WithBorder / Padding via <see cref="GetProcessed"/>
+    ///    → result is always CDV_Full_v.
+    /// 3. Calls RotateResizeAndFill to fit the CDV_Full_v result into
+    ///    <paramref name="orientation"/>: no-op for portrait slots, 90°
+    ///    rotation for landscape slots — same pipeline as
+    ///    <see cref="MontaggioDorsiEngine"/>.
     /// </summary>
-    /// <summary>
-    /// Draws cut-mark lines on <paramref name="final"/> according to the
-    /// current <see cref="BaseEngine.PaperFormat"/>.
-    /// </summary>
-    private void DrawCutMarks(MagickImage final)
+    private MagickImage GetSlot(int fileIndex, MagickGeometry orientation, bool quiet)
     {
-        Drawables draw = new();
-        draw.StrokeColor(BorderColor).StrokeWidth(1);
+        MagickGeometry loadGeom = FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v;
 
-        if (PaperFormat == PaperFormats.Medium)
-        {
-            uint top = (final.Height - fmt.CDV_Full_v.Height) / 2;
-            uint left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
-            Utils.HLine(draw, top, final.Width);
-            Utils.HLine(draw, final.Height - top, final.Width);
-            Utils.VLine(draw, left, final.Height);
-            Utils.VLine(draw, final.Width - left, final.Height);
-        }
-        else
-        {
-            uint h = fmt.ToPixels((uint)(PaperFormat == PaperFormats.A4 ? 5 : 10));
-            Utils.HLine(draw, h, final.Width);
-            h += fmt.CDV_Full_v.Height;
-            Utils.HLine(draw, h, final.Width);
-            h += PaperFormat == PaperFormats.A4 ? fmt.CDV_Full_v.Height : fmt.CDV_Full_v.Width;
-            Utils.HLine(draw, h, final.Width);
-        }
+        // LoadSingleImage: loads, auto-rotates, resizes to loadGeom, applies script.
+        MagickImage image = LoadSingleImage(FilesList[fileIndex], loadGeom, quiet);
 
-        draw.Draw(final);
+        // Apply border/trim/padding — result is always CDV_Full_v portrait canvas.
+        MagickImage processed = GetProcessed(image);
+
+        // Rotate/resize to the target slot orientation (portrait = no-op,
+        // landscape = AutoRotate -90° + resize).
+        MagickImage slot = Utils.RotateResizeAndFill(processed, orientation, FillColor, CanvasGravity);
+        slot.BorderColor = BorderColor;
+        slot.Border(1);
+        return slot;
     }
 
     // -----------------------------------------------------------------------
@@ -312,10 +303,10 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     // -----------------------------------------------------------------------
 
     /// <summary>
-    /// Applies Trim / WithBorder / Padding to an already-loaded image.
-    /// Signature matches <c>Func&lt;MagickImage, MagickImage&gt;</c> so it can
-    /// be passed directly to
-    /// <see cref="BaseMontaggioEngine.LoadImages"/> as a post-processor.
+    /// Applies Trim, WithBorder or Padding to an image already resized to
+    /// CDV_Internal_v (or CDV_Full_v when FullSize is true) and returns a
+    /// CDV_Full_v portrait canvas ready for the final RotateResizeAndFill
+    /// call in <see cref="GetSlot"/>.
     /// </summary>
     private MagickImage GetProcessed(MagickImage image)
     {
@@ -324,7 +315,17 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         if (WithBorder) return ApplyWithBorder(image);
         if (Padding > 0) return ApplyPadding(image);
 
-        return image;
+        if (FullSize)
+        {
+            // Image was loaded at CDV_Full already — return as-is.
+            return image;
+        }
+
+        // Default: place the CDV_Internal image centred on a CDV_Full canvas
+        // so the 5 mm white border is preserved.
+        MagickImage canvas = img.CDV_Full_v(FillColor);
+        canvas.Composite(image, Gravity.Center);
+        return canvas;
     }
 
     /// <summary>

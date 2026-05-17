@@ -1561,11 +1561,6 @@
             script and before the final resize to <paramref name="orientation"/>.
             Pass <c>null</c> for no post-processing (equivalent to the plain overload).
             </summary>
-            <param name="n"></param>
-            <param name="counter"></param>
-            <param name="dest"></param>
-            <param name="quiet"></param>
-            <param name="orientation"></param>
             <param name="postProcess">
             Optional transform applied after the script hook and before the final
             resize. Receives the raw loaded image and must return the image to
@@ -1580,13 +1575,8 @@
             Separating the two geometries lets callers load at a smaller size
             (e.g. CDV_Internal_v) and composite at a larger one (e.g. CDV_Full_v).
             </summary>
-            <param name="n"></param>
-            <param name="counter"></param>
-            <param name="dest"></param>
-            <param name="quiet"></param>
             <param name="loadGeometry">Geometry passed to Utils.GetImage for initial load.</param>
             <param name="orientation">Final target geometry after post-processing.</param>
-            <param name="postProcess"></param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.LoadSingleImage(System.String,ImageMagick.MagickGeometry,System.Boolean)">
             <summary>
@@ -1607,34 +1597,21 @@
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.GetLayoutParameters(Casasoft.CCDV.PaperFormats,System.Int32@,System.Int32@,System.Int32@)">
-             <summary>
-             Calculates the horizontal layout for portrait and landscape CDV slots on a given
-             paper format and the vertical pixel offset for the first row.
-             </summary>
-             <remarks>
-             Subclasses call this helper to drive their compositing loops when placing multiple
-             CDV canvases onto a sheet. The method returns:
-             - <paramref name="portraitCount"/>: how many portrait-oriented CDV columns fit
-               horizontally on the sheet.
-             - <paramref name="landscapeCount"/>: how many landscape-oriented CDV columns fit
-               horizontally (zero when not used by that format).
-             - <paramref name="topOffset"/>: vertical offset in pixels for the first row of
-               images measured from the top of the sheet. The offset is computed using the
-               engine's <c>fmt</c> instance (which reflects the current __Dpi__ setting).
-            
-             Note: the returned <c>topOffset</c> depends on the engine's resolution because
-             it is computed with <c>fmt.ToPixels(...)</c>. Typical values:
-             - <see cref="F:Casasoft.CCDV.PaperFormats.Small"/>: portraitCount=2, landscapeCount=0, topOffset=0
-             - <see cref="F:Casasoft.CCDV.PaperFormats.Medium"/>: portraitCount=3, landscapeCount=0, topOffset=0
-             - <see cref="F:Casasoft.CCDV.PaperFormats.Large"/> / <see cref="F:Casasoft.CCDV.PaperFormats.Large20x30"/>:
-               portraitCount=4, landscapeCount=2, topOffset ~= <c>fmt.ToPixels(10)</c>
-             - <see cref="F:Casasoft.CCDV.PaperFormats.A4"/>: portraitCount=4, landscapeCount=4, topOffset ~= <c>fmt.ToPixels(5)</c>
-             - <see cref="F:Casasoft.CCDV.PaperFormats.Panorama"/>: portraitCount=2, landscapeCount=0, topOffset=0
-             </remarks>
-             <param name="format">Output paper format to evaluate (see <see cref="T:Casasoft.CCDV.PaperFormats"/>).</param>
-             <param name="portraitCount">Output: number of portrait CDV slots per row.</param>
-             <param name="landscapeCount">Output: number of landscape CDV slots per row (0 when none).</param>
-             <param name="topOffset">Output: Y offset in pixels for the first row of images.</param>
+            <summary>
+            Returns how many portrait CDV columns fit horizontally on the given
+            paper format, and the vertical offset (in pixels) of the first row.
+            Used by subclasses to drive their compositing loops.
+            </summary>
+            <param name="format">Output paper format</param>
+            <param name="portraitCount">Number of portrait CDV slots on the sheet</param>
+            <param name="landscapeCount">Number of landscape CDV slots on the sheet (0 when none)</param>
+            <param name="topOffset">Y offset in pixels for the first row of images</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.DrawCutMarks(ImageMagick.MagickImage,Casasoft.CCDV.PaperFormats)">
+            <summary>
+            Draws cut-mark lines on <paramref name="final"/> according to
+            <paramref name="format"/>. Shared by all montagio engines.
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.Engines.CreditCardEngine">
             <summary>
@@ -2172,25 +2149,27 @@
             Cut marks are drawn as in <see cref="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine"/>.
             </summary>
         </member>
-        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.DrawCutMarks(ImageMagick.MagickImage)">
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetSlot(System.Int32,ImageMagick.MagickGeometry,System.Boolean)">
             <summary>
-            Builds a single CDV slot: loads and processes the image (applying
-            border/padding options at CDV_Internal scale), then resizes the result
-            to <paramref name="orientation"/> (CDV_Full_v or CDV_Full_o) and adds
-            a 1-px border.  The two-step sizing mirrors MontaggioDorsiEngine and
-            preserves all border/padding semantics regardless of the paper format.
-            </summary>
-            <summary>
-            Draws cut-mark lines on <paramref name="final"/> according to the
-            current <see cref="P:Casasoft.CCDV.Engines.BaseEngine.PaperFormat"/>.
+            Builds a single CDV slot for multi-row layouts.
+            1. Loads and resizes the image to CDV_Internal_v (or CDV_Full_v if
+               FullSize) via <see cref="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.LoadSingleImage(System.String,ImageMagick.MagickGeometry,System.Boolean)"/>,
+               which handles AutoRotate so landscape sources fit portrait cells
+               and vice-versa.
+            2. Applies Trim / WithBorder / Padding via <see cref="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetProcessed(ImageMagick.MagickImage)"/>
+               → result is always CDV_Full_v.
+            3. Calls RotateResizeAndFill to fit the CDV_Full_v result into
+               <paramref name="orientation"/>: no-op for portrait slots, 90°
+               rotation for landscape slots — same pipeline as
+               <see cref="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine"/>.
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetProcessed(ImageMagick.MagickImage)">
             <summary>
-            Applies Trim / WithBorder / Padding to an already-loaded image.
-            Signature matches <c>Func&lt;MagickImage, MagickImage&gt;</c> so it can
-            be passed directly to
-            <see cref="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.LoadImages(System.Int32,System.Int32,ImageMagick.MagickImageCollection,System.Boolean,ImageMagick.MagickGeometry)"/> as a post-processor.
+            Applies Trim, WithBorder or Padding to an image already resized to
+            CDV_Internal_v (or CDV_Full_v when FullSize is true) and returns a
+            CDV_Full_v portrait canvas ready for the final RotateResizeAndFill
+            call in <see cref="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetSlot(System.Int32,ImageMagick.MagickGeometry,System.Boolean)"/>.
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.ApplyWithBorder(ImageMagick.MagickImage)">
@@ -3698,20 +3677,6 @@
         <member name="P:Casasoft.CCDV.JSON.IParameters.FilesList">
             <summary>
             Files to process
-            </summary>
-        </member>
-        <member name="T:Casasoft.CCDV.JSON.MontaggioDorsiParameters">
-            <summary>
-            Parameters for MontaggioDorsi
-            </summary>
-        </member>
-        <member name="M:Casasoft.CCDV.JSON.MontaggioDorsiParameters.#ctor">
-            <summary>
-            Default constructor.
-            Initializes a new instance of <see cref="T:Casasoft.CCDV.JSON.MontaggioDorsiParameters"/>.
-            This class currently extends <see cref="T:Casasoft.CCDV.JSON.BaseMontaggioParameters"/> and does not add
-            additional fields beyond the base parameters; the constructor is provided for
-            symmetry with other parameter classes and for future extensibility.
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.JSON.MontaggioFotoParameters">

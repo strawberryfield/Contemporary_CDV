@@ -22,6 +22,7 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
+using ImageMagick.Drawing;
 using System;
 using System.Collections.Generic;
 
@@ -78,7 +79,6 @@ public abstract class BaseMontaggioEngine : BaseEngine
         SetBaseJsonParams();
         PaperFormat = p.PaperFormat;
         CanvasGravity = p.CanvasGravity;
-        Script = p.Script;
     }
     #endregion
 
@@ -106,11 +106,6 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// script and before the final resize to <paramref name="orientation"/>.
     /// Pass <c>null</c> for no post-processing (equivalent to the plain overload).
     /// </summary>
-    /// <param name="n"></param>
-    /// <param name="counter"></param>
-    /// <param name="dest"></param>
-    /// <param name="quiet"></param>
-    /// <param name="orientation"></param>
     /// <param name="postProcess">
     /// Optional transform applied after the script hook and before the final
     /// resize. Receives the raw loaded image and must return the image to
@@ -132,13 +127,8 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// Separating the two geometries lets callers load at a smaller size
     /// (e.g. CDV_Internal_v) and composite at a larger one (e.g. CDV_Full_v).
     /// </summary>
-    /// <param name="n"></param>
-    /// <param name="counter"></param>
-    /// <param name="dest"></param>
-    /// <param name="quiet"></param>
     /// <param name="loadGeometry">Geometry passed to Utils.GetImage for initial load.</param>
     /// <param name="orientation">Final target geometry after post-processing.</param>
-    /// <param name="postProcess"></param>
     protected int LoadImages(
         int n,
         int counter,
@@ -194,7 +184,7 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// <paramref name="image"/> when a script is present, otherwise returns
     /// <paramref name="image"/> unchanged.
     /// </summary>
-    private MagickImage ApplyLoadScript(MagickImage image)
+    protected MagickImage ApplyLoadScript(MagickImage image)
     {
         if (ScriptInstance is not null)
         {
@@ -208,33 +198,14 @@ public abstract class BaseMontaggioEngine : BaseEngine
 
     #region layout helpers
     /// <summary>
-    /// Calculates the horizontal layout for portrait and landscape CDV slots on a given
-    /// paper format and the vertical pixel offset for the first row.
+    /// Returns how many portrait CDV columns fit horizontally on the given
+    /// paper format, and the vertical offset (in pixels) of the first row.
+    /// Used by subclasses to drive their compositing loops.
     /// </summary>
-    /// <remarks>
-    /// Subclasses call this helper to drive their compositing loops when placing multiple
-    /// CDV canvases onto a sheet. The method returns:
-    /// - <paramref name="portraitCount"/>: how many portrait-oriented CDV columns fit
-    ///   horizontally on the sheet.
-    /// - <paramref name="landscapeCount"/>: how many landscape-oriented CDV columns fit
-    ///   horizontally (zero when not used by that format).
-    /// - <paramref name="topOffset"/>: vertical offset in pixels for the first row of
-    ///   images measured from the top of the sheet. The offset is computed using the
-    ///   engine's <c>fmt</c> instance (which reflects the current __Dpi__ setting).
-    ///
-    /// Note: the returned <c>topOffset</c> depends on the engine's resolution because
-    /// it is computed with <c>fmt.ToPixels(...)</c>. Typical values:
-    /// - <see cref="PaperFormats.Small"/>: portraitCount=2, landscapeCount=0, topOffset=0
-    /// - <see cref="PaperFormats.Medium"/>: portraitCount=3, landscapeCount=0, topOffset=0
-    /// - <see cref="PaperFormats.Large"/> / <see cref="PaperFormats.Large20x30"/>:
-    ///   portraitCount=4, landscapeCount=2, topOffset ~= <c>fmt.ToPixels(10)</c>
-    /// - <see cref="PaperFormats.A4"/>: portraitCount=4, landscapeCount=4, topOffset ~= <c>fmt.ToPixels(5)</c>
-    /// - <see cref="PaperFormats.Panorama"/>: portraitCount=2, landscapeCount=0, topOffset=0
-    /// </remarks>
-    /// <param name="format">Output paper format to evaluate (see <see cref="PaperFormats"/>).</param>
-    /// <param name="portraitCount">Output: number of portrait CDV slots per row.</param>
-    /// <param name="landscapeCount">Output: number of landscape CDV slots per row (0 when none).</param>
-    /// <param name="topOffset">Output: Y offset in pixels for the first row of images.</param>
+    /// <param name="format">Output paper format</param>
+    /// <param name="portraitCount">Number of portrait CDV slots on the sheet</param>
+    /// <param name="landscapeCount">Number of landscape CDV slots on the sheet (0 when none)</param>
+    /// <param name="topOffset">Y offset in pixels for the first row of images</param>
     protected void GetLayoutParameters(
         PaperFormats format,
         out int portraitCount,
@@ -275,6 +246,36 @@ public abstract class BaseMontaggioEngine : BaseEngine
                 topOffset = 0;
                 break;
         }
+    }
+    /// <summary>
+    /// Draws cut-mark lines on <paramref name="final"/> according to
+    /// <paramref name="format"/>. Shared by all montagio engines.
+    /// </summary>
+    protected void DrawCutMarks(MagickImage final, PaperFormats format)
+    {
+        Drawables draw = new();
+        draw.StrokeColor(BorderColor).StrokeWidth(1);
+
+        if (format == PaperFormats.Medium)
+        {
+            uint top = (final.Height - fmt.CDV_Full_v.Height) / 2;
+            uint left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
+            Utils.HLine(draw, top, final.Width);
+            Utils.HLine(draw, final.Height - top, final.Width);
+            Utils.VLine(draw, left, final.Height);
+            Utils.VLine(draw, final.Width - left, final.Height);
+        }
+        else
+        {
+            uint h = fmt.ToPixels((uint)(format == PaperFormats.A4 ? 5 : 10));
+            Utils.HLine(draw, h, final.Width);
+            h += fmt.CDV_Full_v.Height;
+            Utils.HLine(draw, h, final.Width);
+            h += format == PaperFormats.A4 ? fmt.CDV_Full_v.Height : fmt.CDV_Full_v.Width;
+            Utils.HLine(draw, h, final.Width);
+        }
+
+        draw.Draw(final);
     }
     #endregion
 }
