@@ -298,6 +298,7 @@ public static class Utils
                     ret = PaperFormats.Panorama;
                     break;
                 case "20X30":
+                case "LARGE20X30":
                     ret = PaperFormats.Large20x30;
                     break;
             }

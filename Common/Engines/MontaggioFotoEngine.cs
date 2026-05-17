@@ -258,7 +258,7 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
                 break;
         }
 
-        if (PaperFormat is PaperFormats.Large or PaperFormats.Medium)
+        if (PaperFormat is PaperFormats.Large or PaperFormats.Medium or PaperFormats.Large20x30)
         {
             SetImageInfo(WelcomeBannerText(), $"{OutputName}.{Extension}", final, PaperFormat);
         }
