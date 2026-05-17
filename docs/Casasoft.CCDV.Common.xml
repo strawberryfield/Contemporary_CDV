@@ -1505,6 +1505,90 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Casasoft.CCDV.Engines.BaseMontaggioEngine">
+            <summary>
+            Intermediate base class for engines that mount multiple CDV images
+            onto a standard paper sheet, sharing canvas gravity and per-image
+            load/script/resize logic.
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseMontaggioEngine.CanvasGravity">
+            <summary>
+            Gravity used when placing the source image onto the CDV canvas
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.#ctor(Casasoft.CCDV.CommandLine)">
+            <summary>
+            Constructor from command line
+            </summary>
+            <param name="par">Command line options</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.GetBaseMontaggioJsonParams(Casasoft.CCDV.JSON.IMontaggioParameters)">
+            <summary>
+            Populates a <see cref="T:Casasoft.CCDV.JSON.IMontaggioParameters"/> instance with the
+            shared montagio fields (PaperFormat, CanvasGravity) plus all base
+            fields. Call this from the concrete override of
+            <see cref="M:Casasoft.CCDV.Engines.BaseEngine.GetJsonParams"/>.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.SetBaseMontaggioJsonParams(Casasoft.CCDV.JSON.IMontaggioParameters)">
+            <summary>
+            Restores the shared montagio fields from a deserialised
+            <see cref="T:Casasoft.CCDV.JSON.IMontaggioParameters"/> instance. Call this from the
+            concrete private SetJsonParams overload.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.LoadImages(System.Int32,System.Int32,ImageMagick.MagickImageCollection,System.Boolean,ImageMagick.MagickGeometry)">
+            <summary>
+            Loads <paramref name="n"/> images starting at position
+            <paramref name="counter"/> in <see cref="P:Casasoft.CCDV.Engines.BaseEngine.FilesList"/>,
+            resizes each one to <paramref name="orientation"/>, applies the
+            optional user script, adds a 1-px border and appends the result to
+            <paramref name="dest"/>.  When the file list is exhausted it wraps
+            around from the beginning.
+            </summary>
+            <param name="n">Number of images to load</param>
+            <param name="counter">Starting index in FilesList</param>
+            <param name="dest">Destination collection</param>
+            <param name="quiet">Suppress console messages when true</param>
+            <param name="orientation">Target geometry (CDV_Full_v / CDV_Full_o …)</param>
+            <returns>Next value of the running counter (for chained calls)</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.LoadSingleImage(System.String,ImageMagick.MagickGeometry,System.Boolean)">
+            <summary>
+            Loads a single image from <paramref name="filename"/>, fits it into
+            <paramref name="targetGeometry"/> respecting
+            <see cref="P:Casasoft.CCDV.Engines.BaseMontaggioEngine.CanvasGravity"/> and runs the optional "ProcessOnLoad"
+            user script entry-point.
+            </summary>
+            <param name="filename">Path of the source image</param>
+            <param name="targetGeometry">Geometry to fit the image into</param>
+            <param name="quiet">Suppress console messages when true</param>
+            <returns>Processed image sized to <paramref name="targetGeometry"/></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.ApplyLoadScript(ImageMagick.MagickImage)">
+            <summary>
+            Runs the "ProcessOnLoad" entry-point of the compiled user script on
+            <paramref name="image"/> when a script is present, otherwise returns
+            <paramref name="image"/> unchanged.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseMontaggioEngine.GetLayoutParameters(Casasoft.CCDV.PaperFormats,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            Returns how many portrait CDV columns fit horizontally on the given
+            paper format, and the vertical offset (in pixels) of the first row.
+            Used by subclasses to drive their compositing loops.
+            </summary>
+            <param name="format">Output paper format</param>
+            <param name="portraitCount">Number of portrait CDV slots on the sheet</param>
+            <param name="landscapeCount">Number of landscape CDV slots on the sheet (0 when none)</param>
+            <param name="topOffset">Y offset in pixels for the first row of images</param>
+        </member>
         <member name="T:Casasoft.CCDV.Engines.CreditCardEngine">
             <summary>
             Creates a credit card
@@ -1912,11 +1996,6 @@
             Montaggio dorsi engine
             </summary>
         </member>
-        <member name="P:Casasoft.CCDV.Engines.MontaggioDorsiEngine.CanvasGravity">
-            <summary>
-            Canvas gravity
-            </summary>
-        </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">
             <summary>
             Constructor
@@ -1955,77 +2034,137 @@
         </member>
         <member name="T:Casasoft.CCDV.Engines.MontaggioFotoEngine">
             <summary>
-            MontaggioFoto engine
+            MontaggioFoto engine.
+            Supports all paper formats defined in <see cref="T:Casasoft.CCDV.PaperFormats"/>:
+            <list type="bullet">
+              <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Small"/> – 2 portrait CDV side by side (original behaviour)</description></item>
+              <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Medium"/> – 3 portrait CDV side by side</description></item>
+              <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Large"/> / <see cref="F:Casasoft.CCDV.PaperFormats.Large20x30"/> – 4 portrait + 2 landscape CDV</description></item>
+              <item><description><see cref="F:Casasoft.CCDV.PaperFormats.A4"/> – 4 portrait + 4 landscape CDV</description></item>
+              <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Panorama"/> – 2 portrait CDV side by side on panoramic paper</description></item>
+            </list>
+            All border/padding options (<see cref="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.FullSize"/>, <see cref="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Trim"/>,
+            <see cref="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.WithBorder"/>, <see cref="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Padding"/>) are applied uniformly to
+            every slot regardless of format.
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.FullSize">
             <summary>
-            Set if image has full CDV size (100x64mm)
+            When true the image is fitted to the full CDV size (100×64 mm)
+            instead of the internal area (90×54 mm).
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Trim">
             <summary>
-            Set if white border is removed
+            When true any white border left by the resize is trimmed away.
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.WithBorder">
             <summary>
-            Set if a border to full CDV size (100x64mm) is added
+            When true the image (already fitted to CDV_Internal) is placed onto a
+            full-CDV-sized canvas, adding a visible border around it.
             </summary>
         </member>
         <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Padding">
             <summary>
-            Blank border around the image
-            </summary>
-        </member>
-        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.CanvasGravity">
-            <summary>
-            Canvas gravity
+            Uniform blank padding (in pixels) added around each image.
+            Ignored when <see cref="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.WithBorder"/> is true.
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor">
             <summary>
-            Constructor
+            Default constructor
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor(Casasoft.CCDV.CommandLine)">
             <summary>
-            Constructor
+            Constructor from command line
             </summary>
-            <param name="par"></param>
+            <param name="par">Command line options</param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetJsonParams">
             <summary>
             Returns the parameters in json format
             </summary>
-            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.SetJsonParams(System.String)">
             <summary>
             Sets the parameters from json formatted string
             </summary>
-            <param name="json"></param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.SetJsonParams(Casasoft.CCDV.JSON.IParameters)">
             <summary>
             Sets the parameters from json deserialized object
             </summary>
-            <param name="json"></param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetResult(System.Boolean)">
             <summary>
-            Does the dirty work
+            Does the dirty work – entry point that starts from the first file.
             </summary>
-            <param name="quiet"></param>
-            <returns></returns>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetResult(System.Boolean,System.Int32)">
             <summary>
-            Does the dirty work
+            Does the dirty work starting from file index <paramref name="startIndex"/>.
+            Dispatches to the appropriate layout method based on
+            <see cref="P:Casasoft.CCDV.Engines.BaseEngine.PaperFormat"/>.
             </summary>
-            <param name="quiet"></param>
-            <param name="i"></param>
-            <returns></returns>
+            <param name="quiet">Suppress console messages when true</param>
+            <param name="startIndex">Index of the first file to process</param>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.BuildTwoUp(System.Boolean,System.Int32,ImageMagick.MagickGeometry)">
+            <summary>
+            Produces a sheet with two portrait CDV images placed side by side.
+            Each half also carries the informational text overlay.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.BuildMultiRow(System.Boolean,System.Int32)">
+            <summary>
+            Produces a multi-row sheet.  Portrait CDV images fill the first row;
+            landscape CDV images (rotated 90°) fill a second row where the format
+            requires it.  The same border/padding options are applied to every slot.
+            Cut marks are drawn as in <see cref="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine"/>.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetSlot(System.Int32,ImageMagick.MagickGeometry,System.Boolean)">
+            <summary>
+            Builds a single CDV slot: loads and processes the image (applying
+            border/padding options at CDV_Internal scale), then resizes the result
+            to <paramref name="orientation"/> (CDV_Full_v or CDV_Full_o) and adds
+            a 1-px border.  The two-step sizing mirrors MontaggioDorsiEngine and
+            preserves all border/padding semantics regardless of the paper format.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.DrawCutMarks(ImageMagick.MagickImage)">
+            <summary>
+            Draws cut-mark lines on <paramref name="final"/> according to the
+            current <see cref="P:Casasoft.CCDV.Engines.BaseEngine.PaperFormat"/>.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetProcessed(System.String,System.Boolean)">
+            <summary>
+            Loads, scripts and applies all border/padding options to a single image
+            at <see cref="P:Casasoft.CCDV.IFormats.CDV_Internal_v"/> size, returning it ready to be
+            placed into a slot (where <see cref="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetSlot(System.Int32,ImageMagick.MagickGeometry,System.Boolean)"/> will resize it to the
+            target orientation) or directly into a half-card (2-up layouts).
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.ApplyWithBorder(ImageMagick.MagickImage)">
+            <summary>
+            Places <paramref name="image"/> (CDV_Internal size) onto a full-CDV
+            canvas, offsetting it so that it appears centred within the border area.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.ApplyPadding(ImageMagick.MagickImage)">
+            <summary>
+            Adds a uniform blank border of <see cref="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.Padding"/> pixels around
+            <paramref name="image"/> using the fill colour.
+            </summary>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.HalfCard(ImageMagick.MagickImage,System.String,ImageMagick.MagickGeometry)">
+            <summary>
+            Wraps <paramref name="image"/> in a half-sheet canvas and overlays
+            the informational text (source filename, banner, run timestamp).
+            </summary>
         </member>
         <member name="T:Casasoft.CCDV.Engines.ScatolaEngine">
             <summary>
@@ -3425,6 +3564,25 @@
         <member name="M:Casasoft.CCDV.JSON.FlexagonParameters.#ctor">
             <summary>
             Default constructor
+            </summary>
+        </member>
+        <member name="T:Casasoft.CCDV.JSON.IMontaggioParameters">
+            <summary>
+            Contract for JSON parameter objects that belong to engines derived from
+            <see cref="T:Casasoft.CCDV.Engines.BaseMontaggioEngine"/>.
+            Extends <see cref="T:Casasoft.CCDV.JSON.IParameters"/> with the two properties shared by every
+            montagio engine: the output paper format and the canvas gravity used when
+            placing source images.
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IMontaggioParameters.PaperFormat">
+            <summary>
+            Output paper format
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.JSON.IMontaggioParameters.CanvasGravity">
+            <summary>
+            Gravity used when placing the source image onto the CDV canvas
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.JSON.IParameters">

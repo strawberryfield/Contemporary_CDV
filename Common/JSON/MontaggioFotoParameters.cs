@@ -27,7 +27,7 @@ namespace Casasoft.CCDV.JSON;
 /// <summary>
 /// Parameters for MontaggioFoto
 /// </summary>
-public class MontaggioFotoParameters : CommonParameters
+public class MontaggioFotoParameters : CommonParameters, IMontaggioParameters
 {
     /// <summary>
     /// Set if image has full CDV size (100x64mm)

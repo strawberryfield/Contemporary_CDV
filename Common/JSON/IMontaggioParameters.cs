@@ -1,4 +1,4 @@
-﻿// copyright (c) 2020-2026 Roberto Ceccarelli - Casasoft
+// copyright (c) 2020-2026 Roberto Ceccarelli - Casasoft
 // http://strawberryfield.altervista.org 
 // 
 // This file is part of Casasoft Contemporary Carte de Visite Tools
@@ -20,38 +20,25 @@
 // If not, see <http://www.gnu.org/licenses/>.
 
 using ImageMagick;
-using System.Text.Json.Serialization;
 
 namespace Casasoft.CCDV.JSON;
 
 /// <summary>
-/// Parameters for MontaggioDorsi
+/// Contract for JSON parameter objects that belong to engines derived from
+/// <see cref="Casasoft.CCDV.Engines.BaseMontaggioEngine"/>.
+/// Extends <see cref="IParameters"/> with the two properties shared by every
+/// montagio engine: the output paper format and the canvas gravity used when
+/// placing source images.
 /// </summary>
-public class MontaggioDorsiParameters : CommonParameters, IMontaggioParameters
+public interface IMontaggioParameters : IParameters
 {
     /// <summary>
-    /// Output paper size
+    /// Output paper format
     /// </summary>
-    public string Paper { get; set; }
+    PaperFormats PaperFormat { get; set; }
 
     /// <summary>
-    /// Output paper size
+    /// Gravity used when placing the source image onto the CDV canvas
     /// </summary>
-    [JsonIgnore]
-    public PaperFormats PaperFormat
-    {
-        get => Utils.GetPaperFormat(Paper);
-        set => Paper = value.ToString();
-    }
-    /// <summary>
-    /// Canvas gravity
-    /// </summary>
-    public Gravity CanvasGravity { get; set; }
-
-    /// <summary>
-    /// Default constructor
-    /// </summary>
-    public MontaggioDorsiParameters()
-    {
-    }
+    Gravity CanvasGravity { get; set; }
 }

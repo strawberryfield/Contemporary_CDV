@@ -2,8 +2,8 @@
   "profiles": {
     "MontaggioFoto": {
       "commandName": "Project",
-      "commandLineArgs": "--fillcolor=lightgray --gravity=north --withborder=5 C:\\projects\\Contemporary_CDV\\Test\\cdv_v.jpg pango:@C:\\projects\\Contemporary_CDV\\Test\\pango.txt",
-      "workingDirectory": "C:\\projects\\Contemporary_CDV\\bin\\build\\net6.0"
+      "commandLineArgs": "--json=@c:\\foto\\cdv2026\\front1.json",
+      "workingDirectory": "C:\\projects\\Contemporary_CDV\\bin\\build\\net10.0"
     }
   }
 }

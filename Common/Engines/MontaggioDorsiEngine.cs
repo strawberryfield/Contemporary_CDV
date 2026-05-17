@@ -31,13 +31,8 @@ namespace Casasoft.CCDV.Engines;
 /// <summary>
 /// Montaggio dorsi engine
 /// </summary>
-public class MontaggioDorsiEngine : BaseEngine
+public class MontaggioDorsiEngine : BaseMontaggioEngine
 {
-    /// <summary>
-    /// Canvas gravity
-    /// </summary>
-    public Gravity CanvasGravity { get; set; } = Gravity.Center;
-
     #region constructors
     /// <summary>
     /// Constructor
@@ -71,10 +66,8 @@ public class MontaggioDorsiEngine : BaseEngine
     /// <returns></returns>
     public override string GetJsonParams()
     {
-        GetBaseJsonParams();
         MontaggioDorsiParameters p = (MontaggioDorsiParameters)parameters;
-        p.PaperFormat = PaperFormat;
-        p.CanvasGravity = CanvasGravity;
+        GetBaseMontaggioJsonParams(p);
         return JsonSerializer.Serialize(p);
     }
 
@@ -95,9 +88,7 @@ public class MontaggioDorsiEngine : BaseEngine
     private void SetJsonParams(MontaggioDorsiParameters p)
     {
         parameters = p;
-        SetBaseJsonParams();
-        PaperFormat = p.PaperFormat;
-        CanvasGravity = p.CanvasGravity;
+        SetBaseMontaggioJsonParams(p);
     }
     #endregion
 
@@ -204,38 +195,5 @@ public class MontaggioDorsiEngine : BaseEngine
         }
         return final;
     }
-
-    #region functions
-    private int LoadImages(int n, int counter, MagickImageCollection dest, bool quiet, MagickGeometry orientation)
-    {
-        int nImg = counter;
-        for (int i = 0; i < n; i++)
-        {
-            if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
-
-            MagickImage image = Utils.GetImage(FilesList[nImg], fmt.CDV_Full_v, CanvasGravity);
-
-            if (ScriptInstance is not null)
-            {
-                var im = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
-                if (im is not null)
-                {
-                    image = (MagickImage)im;
-                }
-            }
-
-            MagickImage dorso = Utils.RotateResizeAndFill(image, orientation, FillColor);
-            dorso.BorderColor = BorderColor;
-            dorso.Border(1);
-            dest.Add(dorso);
-
-            nImg++;
-            if (nImg >= FilesList.Count) nImg = 0;
-        }
-        return nImg;
-    }
-
-    #endregion
-
     #endregion
 }
