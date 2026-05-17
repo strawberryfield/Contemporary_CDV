@@ -42,7 +42,7 @@ par.ExpandWildcards();
 
 #region main
 MontaggioFotoEngine engine = new(par);
-for (int i = 0; i < par.FilesList.Count; i += 2)
+for (int i = 0; i < engine.FilesList.Count; i += 2)
 {
     MagickImage final = engine.GetResult(false, i);
     engine.fmt.SetImageParameters(final, par.Extension);

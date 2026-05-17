@@ -27,7 +27,7 @@ namespace Casasoft.CCDV.JSON;
 /// <summary>
 /// Parameters for MontaggioFoto
 /// </summary>
-public class MontaggioFotoParameters : CommonParameters, IMontaggioParameters
+public class MontaggioFotoParameters : BaseMontaggioParameters
 {
     /// <summary>
     /// Set if image has full CDV size (100x64mm)
@@ -48,26 +48,11 @@ public class MontaggioFotoParameters : CommonParameters, IMontaggioParameters
     /// <summary>
     /// Canvas gravity
     /// </summary>
-    public Gravity CanvasGravity { get; set; }
-    /// <summary>
-    /// Output paper size
-    /// </summary>
-    public string Paper { get; set; }
-
-    /// <summary>
-    /// Output paper size
-    /// </summary>
-    [JsonIgnore]
-    public PaperFormats PaperFormat
-    {
-        get => Utils.GetPaperFormat(Paper);
-        set => Paper = value.ToString();
-    }
 
     /// <summary>
     /// Default constructor
     /// </summary>
-    public MontaggioFotoParameters() : base()
+    public MontaggioFotoParameters() 
     {
     }
 }

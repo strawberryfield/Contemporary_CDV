@@ -78,6 +78,7 @@ public abstract class BaseMontaggioEngine : BaseEngine
         SetBaseJsonParams();
         PaperFormat = p.PaperFormat;
         CanvasGravity = p.CanvasGravity;
+        Script = p.Script;
     }
     #endregion
 
@@ -87,35 +88,81 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// <paramref name="counter"/> in <see cref="BaseEngine.FilesList"/>,
     /// resizes each one to <paramref name="orientation"/>, applies the
     /// optional user script, adds a 1-px border and appends the result to
-    /// <paramref name="dest"/>.  When the file list is exhausted it wraps
-    /// around from the beginning.
+    /// <paramref name="dest"/>. When the file list is exhausted it wraps
+    /// around from the beginning. Equivalent to calling the overload with
+    /// <c>postProcess: null</c>.
     /// </summary>
-    /// <param name="n">Number of images to load</param>
-    /// <param name="counter">Starting index in FilesList</param>
-    /// <param name="dest">Destination collection</param>
-    /// <param name="quiet">Suppress console messages when true</param>
-    /// <param name="orientation">Target geometry (CDV_Full_v / CDV_Full_o …)</param>
-    /// <returns>Next value of the running counter (for chained calls)</returns>
     protected int LoadImages(
         int n,
         int counter,
         MagickImageCollection dest,
         bool quiet,
-        MagickGeometry orientation)
+        MagickGeometry orientation) =>
+        LoadImages(n, counter, dest, quiet, orientation, orientation, null);
+
+    /// <summary>
+    /// Same as <see cref="LoadImages(int,int,MagickImageCollection,bool,MagickGeometry)"/>
+    /// but applies <paramref name="postProcess"/> to each image after the user
+    /// script and before the final resize to <paramref name="orientation"/>.
+    /// Pass <c>null</c> for no post-processing (equivalent to the plain overload).
+    /// </summary>
+    /// <param name="n"></param>
+    /// <param name="counter"></param>
+    /// <param name="dest"></param>
+    /// <param name="quiet"></param>
+    /// <param name="orientation"></param>
+    /// <param name="postProcess">
+    /// Optional transform applied after the script hook and before the final
+    /// resize. Receives the raw loaded image and must return the image to
+    /// composite (may be a different instance).
+    /// </param>
+    protected int LoadImages(
+        int n,
+        int counter,
+        MagickImageCollection dest,
+        bool quiet,
+        MagickGeometry orientation,
+        Func<MagickImage, MagickImage> postProcess) =>
+        LoadImages(n, counter, dest, quiet, orientation, orientation, postProcess);
+
+    /// <summary>
+    /// Full overload: loads images at <paramref name="loadGeometry"/>, applies
+    /// the optional script hook and <paramref name="postProcess"/>, then resizes
+    /// to <paramref name="orientation"/> before adding to <paramref name="dest"/>.
+    /// Separating the two geometries lets callers load at a smaller size
+    /// (e.g. CDV_Internal_v) and composite at a larger one (e.g. CDV_Full_v).
+    /// </summary>
+    /// <param name="n"></param>
+    /// <param name="counter"></param>
+    /// <param name="dest"></param>
+    /// <param name="quiet"></param>
+    /// <param name="loadGeometry">Geometry passed to Utils.GetImage for initial load.</param>
+    /// <param name="orientation">Final target geometry after post-processing.</param>
+    /// <param name="postProcess"></param>
+    protected int LoadImages(
+        int n,
+        int counter,
+        MagickImageCollection dest,
+        bool quiet,
+        MagickGeometry loadGeometry,
+        MagickGeometry orientation,
+        Func<MagickImage, MagickImage> postProcess)
     {
         int nImg = counter;
         for (int i = 0; i < n; i++)
         {
             if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
 
-            MagickImage image = Utils.GetImage(FilesList[nImg], fmt.CDV_Full_v, CanvasGravity);
-
+            MagickImage image = Utils.GetImage(FilesList[nImg], loadGeometry, CanvasGravity);
             image = ApplyLoadScript(image);
 
-            MagickImage dorso = Utils.RotateResizeAndFill(image, orientation, FillColor);
-            dorso.BorderColor = BorderColor;
-            dorso.Border(1);
-            dest.Add(dorso);
+            if (postProcess is not null)
+                image = postProcess(image);
+
+            MagickImage slot = Utils.RotateResizeAndFill(image, orientation, FillColor, CanvasGravity);
+            slot.BorderColor = BorderColor;
+            slot.Border(1);
+            dest.Add(slot);
 
             nImg++;
             if (nImg >= FilesList.Count) nImg = 0;
@@ -125,9 +172,8 @@ public abstract class BaseMontaggioEngine : BaseEngine
 
     /// <summary>
     /// Loads a single image from <paramref name="filename"/>, fits it into
-    /// <paramref name="targetGeometry"/> respecting
-    /// <see cref="CanvasGravity"/> and runs the optional "ProcessOnLoad"
-    /// user script entry-point.
+    /// <paramref name="targetGeometry"/> respecting <see cref="CanvasGravity"/>
+    /// and runs the optional "ProcessOnLoad" user script entry-point.
     /// </summary>
     /// <param name="filename">Path of the source image</param>
     /// <param name="targetGeometry">Geometry to fit the image into</param>
@@ -162,14 +208,33 @@ public abstract class BaseMontaggioEngine : BaseEngine
 
     #region layout helpers
     /// <summary>
-    /// Returns how many portrait CDV columns fit horizontally on the given
-    /// paper format, and the vertical offset (in pixels) of the first row.
-    /// Used by subclasses to drive their compositing loops.
+    /// Calculates the horizontal layout for portrait and landscape CDV slots on a given
+    /// paper format and the vertical pixel offset for the first row.
     /// </summary>
-    /// <param name="format">Output paper format</param>
-    /// <param name="portraitCount">Number of portrait CDV slots on the sheet</param>
-    /// <param name="landscapeCount">Number of landscape CDV slots on the sheet (0 when none)</param>
-    /// <param name="topOffset">Y offset in pixels for the first row of images</param>
+    /// <remarks>
+    /// Subclasses call this helper to drive their compositing loops when placing multiple
+    /// CDV canvases onto a sheet. The method returns:
+    /// - <paramref name="portraitCount"/>: how many portrait-oriented CDV columns fit
+    ///   horizontally on the sheet.
+    /// - <paramref name="landscapeCount"/>: how many landscape-oriented CDV columns fit
+    ///   horizontally (zero when not used by that format).
+    /// - <paramref name="topOffset"/>: vertical offset in pixels for the first row of
+    ///   images measured from the top of the sheet. The offset is computed using the
+    ///   engine's <c>fmt</c> instance (which reflects the current __Dpi__ setting).
+    ///
+    /// Note: the returned <c>topOffset</c> depends on the engine's resolution because
+    /// it is computed with <c>fmt.ToPixels(...)</c>. Typical values:
+    /// - <see cref="PaperFormats.Small"/>: portraitCount=2, landscapeCount=0, topOffset=0
+    /// - <see cref="PaperFormats.Medium"/>: portraitCount=3, landscapeCount=0, topOffset=0
+    /// - <see cref="PaperFormats.Large"/> / <see cref="PaperFormats.Large20x30"/>:
+    ///   portraitCount=4, landscapeCount=2, topOffset ~= <c>fmt.ToPixels(10)</c>
+    /// - <see cref="PaperFormats.A4"/>: portraitCount=4, landscapeCount=4, topOffset ~= <c>fmt.ToPixels(5)</c>
+    /// - <see cref="PaperFormats.Panorama"/>: portraitCount=2, landscapeCount=0, topOffset=0
+    /// </remarks>
+    /// <param name="format">Output paper format to evaluate (see <see cref="PaperFormats"/>).</param>
+    /// <param name="portraitCount">Output: number of portrait CDV slots per row.</param>
+    /// <param name="landscapeCount">Output: number of landscape CDV slots per row (0 when none).</param>
+    /// <param name="topOffset">Output: Y offset in pixels for the first row of images.</param>
     protected void GetLayoutParameters(
         PaperFormats format,
         out int portraitCount,

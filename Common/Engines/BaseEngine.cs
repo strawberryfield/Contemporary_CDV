@@ -151,14 +151,9 @@ public class BaseEngine : IEngine
     {
         colors = new();
         FilesList = new();
-        FilesList.AddRange(par.FilesList);
         PaperFormat = PaperFormats.Small;
 
-        if (!string.IsNullOrWhiteSpace(par.JSON))
-        {
-            SetJsonParams(par.JSON);
-        }
-
+        // Apply command-line values first as defaults.
         Dpi = par.Dpi;
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
@@ -166,6 +161,19 @@ public class BaseEngine : IEngine
         OutputName = par.OutputName;
         Extension = par.Extension;
         CommandLine = par;
+
+        if (!string.IsNullOrWhiteSpace(par.JSON))
+        {
+            // JSON overrides everything: SetJsonParams repopulates FilesList,
+            // Dpi, colors, Tag, PaperFormat, CanvasGravity and all
+            // engine-specific fields from the JSON content.
+            SetJsonParams(par.JSON);
+        }
+        else
+        {
+            // No JSON: files come from the command line only.
+            FilesList.AddRange(par.FilesList);
+        }
     }
     #endregion
 
@@ -214,8 +222,13 @@ public class BaseEngine : IEngine
         FillColor = colors.GetColor(parameters.FillColor);
         Dpi = parameters.Dpi;
         Tag = parameters.Tag;
+        if (!string.IsNullOrWhiteSpace(parameters.OutputName))
+            OutputName = parameters.OutputName;
+        if (!string.IsNullOrWhiteSpace(parameters.Extension))
+            Extension = parameters.Extension;
         FilesList.Clear();
-        FilesList.AddRange(parameters.FilesList);
+        if (parameters.FilesList is not null)
+            FilesList.AddRange(parameters.FilesList);
     }
     #endregion
 

@@ -19,21 +19,39 @@
 // along with Casasoft CCDV Tools.  
 // If not, see <http://www.gnu.org/licenses/>.
 
+using ImageMagick;
+using System.Text.Json.Serialization;
+
 namespace Casasoft.CCDV.JSON;
 
 /// <summary>
 /// Parameters for MontaggioDorsi
 /// </summary>
-public class MontaggioDorsiParameters : BaseMontaggioParameters
+public class BaseMontaggioParameters : CommonParameters, IMontaggioParameters
 {
     /// <summary>
-    /// Default constructor.
-    /// Initializes a new instance of <see cref="MontaggioDorsiParameters"/>.
-    /// This class currently extends <see cref="BaseMontaggioParameters"/> and does not add
-    /// additional fields beyond the base parameters; the constructor is provided for
-    /// symmetry with other parameter classes and for future extensibility.
+    /// Output paper size
     /// </summary>
-    public MontaggioDorsiParameters()
+    public string Paper { get; set; }
+
+    /// <summary>
+    /// Output paper size
+    /// </summary>
+    [JsonIgnore]
+    public PaperFormats PaperFormat
+    {
+        get => Utils.GetPaperFormat(Paper);
+        set => Paper = value.ToString();
+    }
+    /// <summary>
+    /// Canvas gravity
+    /// </summary>
+    public Gravity CanvasGravity { get; set; }
+
+    /// <summary>
+    /// Default constructor
+    /// </summary>
+    public BaseMontaggioParameters()
     {
     }
 }

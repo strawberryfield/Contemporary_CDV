@@ -2,7 +2,7 @@
   "profiles": {
     "MontaggioDorsi": {
       "commandName": "Project",
-      "commandLineArgs": "--gravity=center --fillcolor=#f0f0f0 xc:red plasma:white-white gradient: pango:@C:\\projects\\Contemporary_CDV\\Test\\pango.txt label:@C:\\projects\\Contemporary_CDV\\Test\\readme.md radial-gradient:blue-yellow"
+      "commandLineArgs": "--json=@c:\\foto\\cdv2026\\front1.json"
     }
   }
 }

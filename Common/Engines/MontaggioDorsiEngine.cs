@@ -50,12 +50,16 @@ public class MontaggioDorsiEngine : BaseMontaggioEngine
     /// <param name="par"></param>
     public MontaggioDorsiEngine(CommandLine par) : base(par)
     {
-        parameters = new MontaggioDorsiParameters();
         MontaggioDorsiCommandLine p = (MontaggioDorsiCommandLine)par;
-        PaperFormat = p.PaperFormat;
         ScriptingClass = new MontaggioDorsiScripting();
-        Script = p.Script;
-        CanvasGravity = p.CanvasGravity;
+
+        if (string.IsNullOrWhiteSpace(par.JSON))
+        {
+            parameters = new MontaggioDorsiParameters();
+            PaperFormat = p.PaperFormat;
+            CanvasGravity = p.CanvasGravity;
+            Script = p.Script;
+        }
     }
     #endregion
 

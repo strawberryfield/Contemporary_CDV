@@ -83,16 +83,20 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     /// <param name="par">Command line options</param>
     public MontaggioFotoEngine(CommandLine par) : base(par)
     {
-        parameters = new MontaggioFotoParameters();
         MontaggioFotoCommandLine p = (MontaggioFotoCommandLine)par;
-        PaperFormat = p.PaperFormat;
-        FullSize = p.FullSize ? true : FullSize;
-        Trim = p.Trim ? true : Trim;
-        WithBorder = p.WithBorder ? true : WithBorder;
-        Padding = p.Padding;
-        CanvasGravity = p.CanvasGravity;
         ScriptingClass = new MontaggioFotoScripting();
-        Script = p.Script;
+
+        if (string.IsNullOrWhiteSpace(par.JSON))
+        {
+            parameters = new MontaggioFotoParameters();
+            PaperFormat = p.PaperFormat;
+            FullSize = p.FullSize;
+            Trim = p.Trim;
+            WithBorder = p.WithBorder;
+            Padding = p.Padding;
+            CanvasGravity = p.CanvasGravity;
+            Script = p.Script;
+        }
     }
     #endregion
 
@@ -131,7 +135,6 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         WithBorder = p.WithBorder;
         Trim = p.Trim;
         Padding = p.Padding;
-        Script = p.Script;
     }
     #endregion
 
@@ -151,6 +154,14 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     public MagickImage GetResult(bool quiet, int startIndex)
     {
         _ = base.GetResult(quiet);
+
+        if (!quiet)
+        {
+            Console.WriteLine($"DEBUG PaperFormat: {PaperFormat}");
+            Console.WriteLine($"DEBUG FilesList.Count: {FilesList.Count}");
+            foreach (var f in FilesList)
+                Console.WriteLine($"DEBUG file: {f}");
+        }
 
         return PaperFormat switch
         {
@@ -177,16 +188,16 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         MagickImage final = GetOutputPaper(PaperFormat);
 
         int i = startIndex;
-        MagickImage img1 = GetProcessed(FilesList[i], quiet);
         string name1 = FilesList[i];
+        MagickImage img1 = GetProcessed(LoadSingleImage(name1, fmt.CDV_Internal_v, quiet));
         i++;
 
         MagickImage img2;
         string name2;
         if (i < FilesList.Count)
         {
-            img2 = GetProcessed(FilesList[i], quiet);
             name2 = FilesList[i];
+            img2 = GetProcessed(LoadSingleImage(name2, fmt.CDV_Internal_v, quiet));
         }
         else
         {
@@ -221,25 +232,17 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         MagickImageCollection imagesV = new();
         MagickImageCollection imagesO = new();
 
+        // Load at CDV_Internal size so GetProcessed can apply Trim/WithBorder/
+        // Padding correctly (those options are defined relative to the internal
+        // area). LoadImages then resizes the result to CDV_Full for compositing.
         int nImg = startIndex;
-        for (int i = 0; i < portraitCount; i++)
-        {
-            imagesV.Add(GetSlot(nImg, fmt.CDV_Full_v, quiet));
-            nImg++;
-            if (nImg >= FilesList.Count) nImg = 0;
-        }
+        nImg = LoadImages(portraitCount, nImg, imagesV, quiet,
+            fmt.CDV_Internal_v, fmt.CDV_Full_v, GetProcessed);
+        _ = LoadImages(landscapeCount, nImg, imagesO, quiet,
+            fmt.CDV_Internal_v, fmt.CDV_Full_o, GetProcessed);
 
-        for (int i = 0; i < landscapeCount; i++)
-        {
-            imagesO.Add(GetSlot(nImg, fmt.CDV_Full_o, quiet));
-            nImg++;
-            if (nImg >= FilesList.Count) nImg = 0;
-        }
-
-        // Cut marks
         DrawCutMarks(final);
 
-        // Composite rows
         switch (PaperFormat)
         {
             case PaperFormats.Medium:
@@ -273,16 +276,6 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     /// a 1-px border.  The two-step sizing mirrors MontaggioDorsiEngine and
     /// preserves all border/padding semantics regardless of the paper format.
     /// </summary>
-    private MagickImage GetSlot(int fileIndex, MagickGeometry orientation, bool quiet)
-    {
-        string filename = FilesList[fileIndex];
-        MagickImage processed = GetProcessed(filename, quiet);
-        MagickImage slot = Utils.RotateResizeAndFill(processed, orientation, FillColor, CanvasGravity);
-        slot.BorderColor = BorderColor;
-        slot.Border(1);
-        return slot;
-    }
-
     /// <summary>
     /// Draws cut-mark lines on <paramref name="final"/> according to the
     /// current <see cref="BaseEngine.PaperFormat"/>.
@@ -319,28 +312,17 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     // -----------------------------------------------------------------------
 
     /// <summary>
-    /// Loads, scripts and applies all border/padding options to a single image
-    /// at <see cref="IFormats.CDV_Internal_v"/> size, returning it ready to be
-    /// placed into a slot (where <see cref="GetSlot"/> will resize it to the
-    /// target orientation) or directly into a half-card (2-up layouts).
+    /// Applies Trim / WithBorder / Padding to an already-loaded image.
+    /// Signature matches <c>Func&lt;MagickImage, MagickImage&gt;</c> so it can
+    /// be passed directly to
+    /// <see cref="BaseMontaggioEngine.LoadImages"/> as a post-processor.
     /// </summary>
-    private MagickImage GetProcessed(string filename, bool quiet)
+    private MagickImage GetProcessed(MagickImage image)
     {
-        // Note: Console.WriteLine is NOT called here — LoadSingleImage handles
-        // the log so it appears exactly once per image.
-        MagickImage image = LoadSingleImage(filename, fmt.CDV_Internal_v, quiet);
-
         if (Trim) image.Trim();
 
-        if (WithBorder)
-        {
-            return ApplyWithBorder(image);
-        }
-
-        if (Padding > 0)
-        {
-            return ApplyPadding(image);
-        }
+        if (WithBorder) return ApplyWithBorder(image);
+        if (Padding > 0) return ApplyPadding(image);
 
         return image;
     }
