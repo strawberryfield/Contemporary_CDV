@@ -42,10 +42,23 @@ par.ExpandWildcards();
 
 #region main
 MontaggioFotoEngine engine = new(par);
-for (int i = 0; i < engine.FilesList.Count; i += 2)
+if (par.PaperFormat == PaperFormats.Small || par.PaperFormat == PaperFormats.Panorama)
 {
-    MagickImage final = engine.GetResult(false, i);
-    engine.fmt.SetImageParameters(final, par.Extension);
-    final.Write($"{par.OutputName}-{i / 2 + 1,3:D3}.{par.Extension}");
+    // 2-up formats: one output card per pair of input files, numbered.
+    for (int i = 0; i < engine.FilesList.Count; i += 2)
+    {
+        MagickImage final = engine.GetResult(false, i);
+        engine.fmt.SetImageParameters(final, par.Extension);
+        final.Write($"{par.OutputName}-{i / 2 + 1,3:D3}.{par.Extension}");
+    }
 }
+else
+{
+    // Multi-row formats (Medium, Large, Large20x30, A4):
+    // all files fill the sheet cyclically, one output image — same as MontaggioDorsi.
+    MagickImage final = engine.GetResult();
+    engine.fmt.SetImageParameters(final, par.Extension);
+    final.Write($"{par.OutputName}.{par.Extension}");
+}
+
 #endregion
