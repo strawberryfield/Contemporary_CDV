@@ -24,7 +24,6 @@ using Casasoft.CCDV.Scripting;
 using ImageMagick;
 using ImageMagick.Drawing;
 using System;
-using System.Collections.Generic;
 
 namespace Casasoft.CCDV.Engines;
 
@@ -62,8 +61,11 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// fields. Call this from the concrete override of
     /// <see cref="BaseEngine.GetJsonParams"/>.
     /// </summary>
+    /// <param name="p">The parameters instance to populate. Must not be null.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="p"/> is null.</exception>
     protected void GetBaseMontaggioJsonParams(IMontaggioParameters p)
     {
+        if (p is null) throw new ArgumentNullException(nameof(p));
         GetBaseJsonParams();
         p.PaperFormat = PaperFormat;
         p.CanvasGravity = CanvasGravity;
@@ -74,8 +76,11 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// <see cref="IMontaggioParameters"/> instance. Call this from the
     /// concrete private SetJsonParams overload.
     /// </summary>
+    /// <param name="p">The deserialised parameters to read values from. Must not be null.</param>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="p"/> is null.</exception>
     protected void SetBaseMontaggioJsonParams(IMontaggioParameters p)
     {
+        if (p is null) throw new ArgumentNullException(nameof(p));
         SetBaseJsonParams();
         PaperFormat = p.PaperFormat;
         CanvasGravity = p.CanvasGravity;
@@ -92,6 +97,12 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// around from the beginning. Equivalent to calling the overload with
     /// <c>postProcess: null</c>.
     /// </summary>
+    /// <param name="n">Number of images to load.</param>
+    /// <param name="counter">Start position index in <see cref="BaseEngine.FilesList"/>.</param>
+    /// <param name="dest">Destination <see cref="MagickImageCollection"/> where loaded images are appended.</param>
+    /// <param name="quiet">If true suppresses per-file console messages.</param>
+    /// <param name="orientation">Final geometry for each loaded image.</param>
+    /// <returns>The next index into <see cref="BaseEngine.FilesList"/> after loading <paramref name="n"/> images.</returns>
     protected int LoadImages(
         int n,
         int counter,
@@ -106,11 +117,13 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// script and before the final resize to <paramref name="orientation"/>.
     /// Pass <c>null</c> for no post-processing (equivalent to the plain overload).
     /// </summary>
-    /// <param name="postProcess">
-    /// Optional transform applied after the script hook and before the final
-    /// resize. Receives the raw loaded image and must return the image to
-    /// composite (may be a different instance).
-    /// </param>
+    /// <param name="n">Number of images to load.</param>
+    /// <param name="counter">Start position index in <see cref="BaseEngine.FilesList"/>.</param>
+    /// <param name="dest">Destination <see cref="MagickImageCollection"/> where loaded images are appended.</param>
+    /// <param name="quiet">If true suppresses per-file console messages.</param>
+    /// <param name="orientation">Final geometry for each loaded image.</param>
+    /// <param name="postProcess">Optional transform applied after the script hook and before the final resize. May be null.</param>
+    /// <returns>The next index into <see cref="BaseEngine.FilesList"/> after loading <paramref name="n"/> images.</returns>
     protected int LoadImages(
         int n,
         int counter,
@@ -127,8 +140,15 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// Separating the two geometries lets callers load at a smaller size
     /// (e.g. CDV_Internal_v) and composite at a larger one (e.g. CDV_Full_v).
     /// </summary>
-    /// <param name="loadGeometry">Geometry passed to Utils.GetImage for initial load.</param>
+    /// <param name="n">Number of images to load.</param>
+    /// <param name="counter">Start position index in <see cref="BaseEngine.FilesList"/>.</param>
+    /// <param name="dest">Destination <see cref="MagickImageCollection"/> where loaded images are appended.</param>
+    /// <param name="quiet">If true suppresses per-file console messages.</param>
+    /// <param name="loadGeometry">Geometry passed to <c>Utils.GetImage</c> for initial load.</param>
     /// <param name="orientation">Final target geometry after post-processing.</param>
+    /// <param name="postProcess">Optional transform applied after the script hook and before the final resize. May be null.</param>
+    /// <returns>The next index into <see cref="BaseEngine.FilesList"/> after loading <paramref name="n"/> images.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="dest"/> is null.</exception>
     protected int LoadImages(
         int n,
         int counter,
@@ -138,12 +158,20 @@ public abstract class BaseMontaggioEngine : BaseEngine
         MagickGeometry orientation,
         Func<MagickImage, MagickImage> postProcess)
     {
+        if (dest is null) throw new ArgumentNullException(nameof(dest));
+        if (n <= 0) return counter;
+        if (FilesList is null || FilesList.Count == 0) return counter;
+
+        // ensure fmt is available to avoid possible null-reference warnings
+        var localFmt = fmt ?? throw new InvalidOperationException("Formats instance (fmt) is not initialized.");
+
         int nImg = counter;
         for (int i = 0; i < n; i++)
         {
-            if (!quiet) Console.WriteLine($"Processing: {FilesList[nImg]}");
+            string filename = FilesList[nImg] ?? string.Empty;
+            if (!quiet) Console.WriteLine($"Processing: {filename}");
 
-            MagickImage image = Utils.GetImage(FilesList[nImg], loadGeometry, CanvasGravity);
+            MagickImage image = Utils.GetImage(filename, loadGeometry, CanvasGravity);
             image = ApplyLoadScript(image);
 
             if (postProcess is not null)
@@ -165,12 +193,14 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// <paramref name="targetGeometry"/> respecting <see cref="CanvasGravity"/>
     /// and runs the optional "ProcessOnLoad" user script entry-point.
     /// </summary>
-    /// <param name="filename">Path of the source image</param>
-    /// <param name="targetGeometry">Geometry to fit the image into</param>
-    /// <param name="quiet">Suppress console messages when true</param>
-    /// <returns>Processed image sized to <paramref name="targetGeometry"/></returns>
+    /// <param name="filename">Path of the source image. Must not be null or empty.</param>
+    /// <param name="targetGeometry">Geometry to fit the image into.</param>
+    /// <param name="quiet">Suppress console messages when true.</param>
+    /// <returns>Processed image sized to <paramref name="targetGeometry"/>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="filename"/> is null or whitespace.</exception>
     protected MagickImage LoadSingleImage(string filename, MagickGeometry targetGeometry, bool quiet)
     {
+        if (string.IsNullOrWhiteSpace(filename)) throw new ArgumentException("Filename must be provided", nameof(filename));
         if (!quiet) Console.WriteLine($"Processing: {filename}");
 
         MagickImage image = Utils.GetImage(filename, targetGeometry, CanvasGravity);
@@ -184,8 +214,12 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// <paramref name="image"/> when a script is present, otherwise returns
     /// <paramref name="image"/> unchanged.
     /// </summary>
+    /// <param name="image">Image to process. Must not be null.</param>
+    /// <returns>The processed <see cref="MagickImage"/> or the original image when no script is present.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="image"/> is null.</exception>
     protected MagickImage ApplyLoadScript(MagickImage image)
     {
+        if (image is null) throw new ArgumentNullException(nameof(image));
         if (ScriptInstance is not null)
         {
             var result = Compiler.Run(ScriptInstance, "ProcessOnLoad", new object[] { image });
@@ -203,15 +237,18 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// Used by subclasses to drive their compositing loops.
     /// </summary>
     /// <param name="format">Output paper format</param>
-    /// <param name="portraitCount">Number of portrait CDV slots on the sheet</param>
-    /// <param name="landscapeCount">Number of landscape CDV slots on the sheet (0 when none)</param>
-    /// <param name="topOffset">Y offset in pixels for the first row of images</param>
+    /// <param name="portraitCount">Number of portrait CDV slots on the sheet (output).</param>
+    /// <param name="landscapeCount">Number of landscape CDV slots on the sheet (output).</param>
+    /// <param name="topOffset">Y offset in pixels for the first row of images (output).</param>
     protected void GetLayoutParameters(
         PaperFormats format,
         out int portraitCount,
         out int landscapeCount,
         out int topOffset)
     {
+        // guard fmt to avoid possible null reference warnings
+        var localFmt = fmt ?? throw new InvalidOperationException("Formats instance (fmt) is not initialized.");
+
         switch (format)
         {
             case PaperFormats.Small:
@@ -228,12 +265,12 @@ public abstract class BaseMontaggioEngine : BaseEngine
             case PaperFormats.Large20x30:
                 portraitCount = 4;
                 landscapeCount = 2;
-                topOffset = (int)fmt.ToPixels(10);
+                topOffset = (int)localFmt.ToPixels(10);
                 break;
             case PaperFormats.A4:
                 portraitCount = 4;
                 landscapeCount = 4;
-                topOffset = (int)fmt.ToPixels(5);
+                topOffset = (int)localFmt.ToPixels(5);
                 break;
             case PaperFormats.Panorama:
                 portraitCount = 2;
@@ -251,15 +288,23 @@ public abstract class BaseMontaggioEngine : BaseEngine
     /// Draws cut-mark lines on <paramref name="final"/> according to
     /// <paramref name="format"/>. Shared by all montagio engines.
     /// </summary>
+    /// <param name="final">The destination <see cref="MagickImage"/> that will be modified in-place. Must not be null.</param>
+    /// <param name="format">Target <see cref="PaperFormats"/> that determines the placement of cut marks.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="final"/> is null.</exception>
     protected void DrawCutMarks(MagickImage final, PaperFormats format)
     {
+        if (final is null) throw new ArgumentNullException(nameof(final));
+
+        // guard fmt to avoid possible null reference warnings
+        var localFmt = fmt ?? throw new InvalidOperationException("Formats instance (fmt) is not initialized.");
+
         Drawables draw = new();
         draw.StrokeColor(BorderColor).StrokeWidth(1);
 
         if (format == PaperFormats.Medium)
         {
-            uint top = (final.Height - fmt.CDV_Full_v.Height) / 2;
-            uint left = (final.Width - fmt.CDV_Full_v.Width * 3) / 2;
+            uint top = (final.Height - localFmt.CDV_Full_v.Height) / 2;
+            uint left = (final.Width - localFmt.CDV_Full_v.Width * 3) / 2;
             Utils.HLine(draw, top, final.Width);
             Utils.HLine(draw, final.Height - top, final.Width);
             Utils.VLine(draw, left, final.Height);
@@ -267,11 +312,11 @@ public abstract class BaseMontaggioEngine : BaseEngine
         }
         else
         {
-            uint h = fmt.ToPixels((uint)(format == PaperFormats.A4 ? 5 : 10));
+            uint h = localFmt.ToPixels((uint)(format == PaperFormats.A4 ? 5 : 10));
             Utils.HLine(draw, h, final.Width);
-            h += fmt.CDV_Full_v.Height;
+            h += localFmt.CDV_Full_v.Height;
             Utils.HLine(draw, h, final.Width);
-            h += format == PaperFormats.A4 ? fmt.CDV_Full_v.Height : fmt.CDV_Full_v.Width;
+            h += format == PaperFormats.A4 ? localFmt.CDV_Full_v.Height : localFmt.CDV_Full_v.Width;
             Utils.HLine(draw, h, final.Width);
         }
 

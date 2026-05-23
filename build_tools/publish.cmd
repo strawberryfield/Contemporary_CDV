@@ -30,7 +30,7 @@ set pkgname=Casasoft_CCdV
 set nuget=C:\Users\rober\.nuget\packages\
 set winrar="C:\Program Files\WinRAR\winrar.exe"
 
-set version=26.04.09
+set version=26.05.23
  
 @del /S /Q %build%
 @del /S /Q %bin%\build\
