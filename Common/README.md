@@ -12,30 +12,68 @@ command-line parsing, JSON parameter serialisation, and run-time C# scripting.
 
 ## The photographic "carte de visite"
 
-In 1854 the Parisian photographer André Adolphe Eugène Disdéri found the method to obtain
-eight different negatives on a single plate. The camera incorporated four lenses and a
-sliding plate holder frame that allowed the same negative to be exposed several times,
-effectively enabling serial production of small prints.
+In 1854, the Parisian photographer [André Adolphe Eugène Disderi](https://it.wikipedia.org/wiki/Andr%C3%A9-Adolphe-Eug%C3%A8ne_Disd%C3%A9ri) , 
+who had owned a studio on the Boulevard des Italiens since 1848, discovered a method for producing eight different negatives on a single plate, 
+probably drawing inspiration from stereoscopic photographs, taken with twin-lens cameras and already in use since 1850.
 
-The resulting prints were mounted on rigid card stock approximately **64 × 100 mm**
-(2.5 × 4 in.), with the narrow white margin between the printed image and the card edge
-used for studio stamps, titles, or awards.
+The camera designed and patented by Disdéri incorporated four lenses and a sliding plate holder, 
+which allowed the negative to be positioned so that it could be exposed multiple times. 
+Ten exposures were envisaged and described in the 1854 patent, though in reality only eight survived intact on the uncut sheets.
 
-The _carte de visite_ became a social phenomenon: people of every social class had their
-portrait taken, and collecting the cards of celebrities became a fashionable pastime in
-Victorian society.
+In this way, it was possible to expose, develop and print many small-format images simultaneously, 
+thereby reducing the production costs of each individual photograph.
+
+This led to the development of a form of mass production of images that brought about significant changes in the world of photography. 
+The dimensions of a carte de visite were approximately 54 mm (2.125 in.) in width and 89 mm (3.5 in.) in height for vertical images, 
+and the reverse for horizontal ones.
+
+The image was printed on thin, compact paper, usually albumen paper. 
+It is possible to find antique examples printed on salted paper, but these are very rare and valuable. 
+More recent were the collodion, aristotype and other processes.
+
+These prints were then mounted, almost always using heat, onto a rigid paper backing. The dimensions of the card were approximately 64 mm (2.5 in.) by 100 mm (4 in.)
+
+The difference between the printed paper and the backing onto which it was glued created a sort of passe-partout where it was possible to insert 
+the imprint of the stamp, either inked or embossed, of the photographic studio, the location of the photograph, the title of the image or other details. 
+The reverse of the card was also used to provide this information, either printed or handwritten. Usually, any medals and prizes won were also listed on the reverse.
+
+Visiting cards proved an enormous success, captivating both the powerful and ordinary people: 
+thus, even those of modest social standing had their portraits taken surrounded by an air of apparent wealth, 
+thanks to the furnishings and decorative items in Disderi’s studios. 
+Before long, a fashion took hold for collecting carte de visite of figures from politics, culture and current affairs: 
+in Victorian circles, the portrait of the Queen Mother opened the albums dedicated to celebrities, albums with more or less elaborate bindings, 
+but all equally designed to house the magical format in series.
+
+In short, the Facebook of the 19th century.
+
+Initially, the carte de visite was a tool for recognition and self-celebration among the rising middle class, 
+but it soon proved to be a convenient cultural resource for learning about distant places and works of art.
+
+The CdV chronicles and bears witness to an entire historical period stretching from the Risorgimento to the First World War, 
+documenting customs, values and attitudes. 
+Its irreplaceable value as a resource for historical and social study and research, combined with its characteristic form as a simple sticker, 
+has made it a sought-after collector’s item over time.
 
 ### The contemporary carte de visite
 
-The idea of a physical, pocket-sized photographic "business card" remains revolutionary
-today. The **Contemporary Carte de Visite** contest re-proposes its relevance as a tool
-for communication, social testimony, and artistic expression in an era of ephemeral digital
-images.
+The idea of a photographic business card, on a permanent physical medium, 
+remains revolutionary even today, in this age of fleeting images and information.
+
+The aim of those involved in **contemporary carte-de-viste** is to highlight their relevance today in terms of their function 
+as a means of communication and a record of society, and in their role as a tiny vehicle for artistic expression: 
+pocket-sized, practical, affordable; a tangible and lasting mark of presence in an age of fleeting images.
+
+The first [international competition for Contemporary Carte de Visite, Gianluigi Parpani Award 'Il Mondo in Tasca', Lodi, 2019](https://www.gri.it//support/catalogo-cdv-2019.pdf)
+revealed that there is still ample scope for innovation and wonder in the photography of the future, which knows how to reinvent the past.
+
+This is confirmed by the reinterpretation of traditional processes, from oleotype to bichromate gum, salt print and cyanotype... 
+Contemporary artists who today creatively reinterpret the Carte de Visite take up the challenge of working within a tiny space 
+to create something grand and innovative.
 
 ### About these tools
 
 Commercial print services use standard paper formats larger than a single CDV, so multiple
-cards must be laid out on a single sheet — exactly as Disdéri originally did with his glass
+cards must be laid out on a single sheet; exactly as Disdéri originally did with his glass
 plates. These tools automate that layout step with precise cut marks, multiple paper formats,
 and optional run-time C# scripting for custom per-image processing.
 
@@ -49,10 +87,11 @@ A more detailed story (in Italian) is on
 | Dependency | Minimum version |
 |---|---|
 | .NET | 8.0 or 10.0 |
-| Magick.NET-Q16-AnyCPU | ≥ 14.11.1 |
+| Magick.NET-Q16-AnyCPU | ≥ 14.13.1 |
 | Microsoft.CodeAnalysis.Common | ≥ 5.3.0 |
 | Microsoft.CodeAnalysis.CSharp | ≥ 5.3.0 |
 | Mono.Options | ≥ 6.12.0.148 |
+| Casasoft.XAML.Controls | ≥ 26.5.23 |
 
 A companion package
 [Casasoft.CCDV.Script.Templates](https://www.nuget.org/packages/Casasoft.CCDV.Script.Templates/)

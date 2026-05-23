@@ -81,6 +81,8 @@ epoca che ha segnato l’unificazione nazionale italiana sarebbe lacunosa.
 
 ### Bibliografia
 
+[Gabriele Chiesa - L'eopea della Carte de Visite](https://www.gri.it/index.php/carte-de-visite/carte-de-visite)
+
 [Fototeca dei Civici Musei di Storia e Arte di Trieste - La carte de visite: un nuovo formato fotografico](https://fototecatrieste.it/i-mercoledi-della-fototeca/la-fotografia-giappone-e-cina-in-posa/notizie-sulla-fotografia-la-carte-de-visite-un-nuovo-formato-fotografico/)
 
 [youmanist - Storia della fotografia: i ritratti tascabili delle carte de visite](https://youmanist.it/categories/fotografia/storia-della-fotografia-carte-de-visite)
@@ -175,9 +177,7 @@ utilizzando la [libreria Magick.NET](https://github.com/dlemstra/Magick.NET) che
 già ImageMagick e quindi non necessita di una installazione separata.
 
 I programmi compilati possono funzionare su Windows 10, Mac OSX e Linux, 
-anche su processori ARM a 64 bit e dunque
-non si possono eseguire su computer in formato "carte de visite" come il
-[Raspberry Pi](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/).
+anche su processori ARM a 64 bit.
 
 Sul mio sito sono disponibili [i manuali utente](https://strawberryfield.altervista.org/carte_de_visite/manuali_utente.php) ed 
 una più esaustiva [documentazione del codice sorgente](https://strawberryfield.altervista.org/carte_de_visite/sorgente_commentato.php).
