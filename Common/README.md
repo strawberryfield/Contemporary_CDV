@@ -1,243 +1,407 @@
-﻿### Casasoft Contemporary Carte de Visite Tools
+﻿# Casasoft Contemporary Carte de Visite Tools — Common Library
 
-# The photographic "carte de visite"
+[![NuGet](https://img.shields.io/nuget/v/Casasoft.CCDV.Common)](https://www.nuget.org/packages/Casasoft.CCDV.Common/)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
-## The history
+Core library for the
+[Casasoft Contemporary Carte de Visite Tools suite](https://github.com/strawberryfield/Contemporary_CDV).  
+All tools in the suite share this library for image processing, format management,
+command-line parsing, JSON parameter serialisation, and run-time C# scripting.
 
-In 1854 the Parisian photographer André Adolphe Eugène Disderi, 
-owner of a studio on Boulevard des Italiens since 1848, 
-found the method to obtain eight different negatives on a single plate, 
-probably inspired by stereoscopic photographs, 
-taken with dual-lens cameras and already in use since 1850.
+---
 
-The camera designed and patented by Disdéri incorporated four lenses 
-and a sliding plate holder frame, 
-which allowed the positioning of the negative to be able to impress it 
-several times. There were ten shots envisaged and described in the 1854 
-patent, eight, in reality, those received intact on the uncut sheets.
+## The photographic "carte de visite"
 
-In this way it was possible to impress, 
-develop and print many small images at the same time and reduce 
-the production costs of each single photograph.
+In 1854 the Parisian photographer André Adolphe Eugène Disdéri found the method to obtain
+eight different negatives on a single plate. The camera incorporated four lenses and a
+sliding plate holder frame that allowed the same negative to be exposed several times,
+effectively enabling serial production of small prints.
 
-A sort of serial production of images was thus conceived that brought 
-notable changes in the world of photography. The dimensions of a 
-visiting card were around 54 mm (2.125 in. = Inch = inch) at the base 
-and 89 mm (3.5 in.) in height for vertical images, 
-vice versa for horizontal ones.
+The resulting prints were mounted on rigid card stock approximately **64 × 100 mm**
+(2.5 × 4 in.), with the narrow white margin between the printed image and the card edge
+used for studio stamps, titles, or awards.
 
-The image was printed on thin, compact paper, usually albumin. 
-It is possible to find ancient copies printed on salted paper, 
-but they are very rare and precious.  
-More recent was the use with collodion, aristotype or other procedures.
+The _carte de visite_ became a social phenomenon: people of every social class had their
+portrait taken, and collecting the cards of celebrities became a fashionable pastime in
+Victorian society.
 
-These prints were then mounted, on a rigid paper support. 
-Card stock dimensions were approximately 64 mm (2.5 in.) by 100 mm (4 in.)
+### The contemporary carte de visite
 
-The difference between the printed paper and the support on which 
-it was glued created a sort of passepartout 
-where it was possible to insert the imprint of the stamp, in ink or dry, 
-of the photographic studio, the place of shooting, 
-the title of the image or other indications.   
-The reverse of the card was also used to indicate these data, 
-printed or handwritten. Usually the medals and prizes won were 
-also indicated on the reverse.
-
-The carte de visite have an enormous success involving a lot of people: 
-men and women of even modest social extraction, are immortalized 
-surrounded by an apparent wealth thanks to the furnishings 
-present in Disderi's studios. 
-In a short time, the fashion of collecting visiting cards
-of personalities from politics, culture and current affairs 
-became established: in Victorian environments, the portrait of the 
-Queen Mother opens albums dedicated to celebrities, 
-albums with more or less precious finishes, 
-but all equally conceived to host the magical format in series.
-
-## The contemporary carte de visite
-
-The idea of ​​a photographic business card, on permanent physical support, 
-remains revolutionary today, in the current era of images 
-and fluid information.
-
-The ambition of the "Contemporary Carte de Visite" contest 
-is to re-propose their relevance in its function of communication 
-and social testimony, in its role as a tiny instrument 
-of artistic expression: pocket-sized, practical, economic; 
-concrete and persistent sign of presence in an era of ephemeral figures.
-
-The first world competition for Contemporary Carte de Visite, 
-Gianluigi Parpani Prize “Il Mondo in Tasca”, Lodi, 2019 
-revealed that there is still ample room for innovation and wonder 
-in the photography of the future that knows how to reinvent the past.
-
-This is confirmed by the reinterpretation of ancient processes, 
-from oleotype, to bichromate gum, to salt, to cyanotype ... 
-The contemporary artists who today creatively reinterpret 
-the Carte de Visite take up the challenge of a tiny space 
-to create something great and innovative.
+The idea of a physical, pocket-sized photographic "business card" remains revolutionary
+today. The **Contemporary Carte de Visite** contest re-proposes its relevance as a tool
+for communication, social testimony, and artistic expression in an era of ephemeral digital
+images.
 
 ### About these tools
 
-Print services use standard formats, larger than those needed 
-to produce a carte de visite.  
-We will therefore have to combine the prints on a single support, 
-exactly as it happened for Disderi's plates.
+Commercial print services use standard paper formats larger than a single CDV, so multiple
+cards must be laid out on a single sheet — exactly as Disdéri originally did with his glass
+plates. These tools automate that layout step with precise cut marks, multiple paper formats,
+and optional run-time C# scripting for custom per-image processing.
 
-For my first series I had organized myself with templates 
-for the DTP Scribus program, but besides the inconvenience of 
-having to manually add pages and images, I forgot to insert references 
-for the cut.
+A more detailed story (in Italian) is on
+[«The Strawberry Field»](https://strawberryfield.altervista.org/carte_de_visite/).
 
-So I dusted off ImageMagick, but instead of driving it in javascript 
-I decided to take advantage of the brand new Net 8.0 (and from april 2026 also Net 10.0)
-and the Magick.NET library which already incorporates 
-ImageMagick and therefore allows you to create ready-to-use executables.
-
-A more long story is (in Italian) on the my site
-[«The Strawberry Field»](https://strawberryfield.altervista.org/carte_de_visite/)
-
-
-# The Contemporary Carte de Visite Tools common library
-
-This library contains the kernel of the
-[Casasoft Contemporary Carte de Visite Tools suite](https://github.com/strawberryfield/Contemporary_CDV)
-
-## Classes areas
-
-### ImageMagick related classes
-
-- *Colors*  
-Handles conversions from string with rgb values or mnemonic names to MagickColor class
-- *Formats*  
-Hosts formats for input and output images
-- *Images*  
-Predefined empty images
-- *PaperFormats*  
-Enum with predefined output formats
-- *Utils*  
-Static class with spare utilities
-
-### Command line handling
-These classes handle the command line interface for each tool using **Mono.Options**
-
-- *ICommandLine*  
-Interface for all command line related classes
-- *CommandLine*  
-Base command line class
-- *BaseBuilderCommandLine*  
-**Scatola** and **Cartella** command line handling
-- *CreditCardCommandLine*  
-**CreditCard** command line handling
-- *CubettiCommandLine*  
-**Cubetti** command line handling
-- *FlexagonCommandLine*  
-**Flexagon** command line handling
-- *MontaggioDorsiCommandLine*  
-**MontaggioDorsi** command line handling
-- *MontaggioFotoCommandLine*  
-**MontaggioFoto** command line handling
-
-### Json handling
-In order to save parameters from GUIs there are these classes that
-can be serialized / deserialized in json
-
-- *IParameters*  
-Interface for all json serializable classes
-- *CommonParameters*  
-Class with the parameters common to all tools
-- *BaseBuilderParameters*  
-**Scatola** and **Cartella** parameters
-- *CreditCardParameters*  
-**CreditCard** parameters
-- *CubettiParameters*  
-**Cubetti** parameters
-- *FlexagonParameters*  
-**Flexagon** parameters
-- *MontaggioDorsiParameters*  
-**MontaggioDorsi** parameters
-- *MontaggioFotoParameters*  
-**MontaggioFoto** parameters
-
-### Tools engines
-These classes do the dirty work for each tool; **Scatola** and **Cartella**,
-before a refactory, had their engines, named "builder" so there are "engines"
-that are only wrappers for the pre-existing "builders"
-
-- *IEngine*   
-Interface for all engines
-- *IBaseBuilderEngine*  
-Extended interface for **Scatola** and **Cartella**
-- *BaseEngine*  
-Common engines class
-- *BaseBuilderEngine*  
-Common wrapper for **Scatola** and **Cartella** builders
-- *CreditCardEngine*  
-**CreditCard** core engine
-- *CubettiEngine*  
-**Cubetti** core engine
-- *FlexagonEngine*  
-**Flexagon** core engine
-- *FolderEngine*  
-**Cartella** builder wrapper
-- *MontaggioDorsiEngine*  
-**MontaggioDorsi** core engine
-- *MontaggioFotoEngine*  
-**MontaggioFoto** core engine
-- *ScatolaEngine*  
-**Scatola** builder wrapper
-
-The old "builders":
-
-- *IBuilder*  
-Interface for **Scatola** and **Cartella** builders
-- *BaseBuilder*  
-Common builder for **Scatola** and **Cartella**
-- *FolderBuilder*  
-Builder for **Cartella**
-- *ScatolaBuilder*  
-Builder for **Scatola**
-
-### Scripting
-- *Compiler*  
-This class compiles at run-time the c# scripts; 
-there are other classes that wraps the scripts in a class
-specific for any tool.  
-These classes are listed below.
-
-- *IScripting*  
-Interface for script wrapping classes
-- *BaseScripting*  
-The base script wrapping
-- *BaseBuilderScripting*  
-The script wrapping for **Scatola** and **Cartella**
-- *CreditCardScripting*  
-The script wrapping for **CreditCard**
-- *CubettiScripting*  
-The script wrapping for **Cubetti**
-- *FlexagonScripting*  
-The script wrapping for **Flexagon**
-- *MontaggioDorsiScripting*  
-The script wrapping for **MontaggioDorsi**
-- *MontaggioFotoScripting*  
-The script wrapping for **MontaggioFoto**
-
-A companion package offers 
-[Test templates](https://www.nuget.org/packages/Casasoft.CCDV.Script.Templates/)
-to help in writing and testing custom scripts
+---
 
 ## Requirements
 
-### .net
+| Dependency | Minimum version |
+|---|---|
+| .NET | 8.0 or 10.0 |
+| Magick.NET-Q16-AnyCPU | ≥ 14.11.1 |
+| Microsoft.CodeAnalysis.Common | ≥ 5.3.0 |
+| Microsoft.CodeAnalysis.CSharp | ≥ 5.3.0 |
+| Mono.Options | ≥ 6.12.0.148 |
 
-The library is compiled for .net 8.0 and .net 10.0
+A companion package
+[Casasoft.CCDV.Script.Templates](https://www.nuget.org/packages/Casasoft.CCDV.Script.Templates/)
+provides test templates to help write and test custom scripts.
 
-### Packages
+---
 
-The following packages are required:
+## Paper formats
 
-- Microsoft.CodeAnalysis.Common Version >= 5.3.0
-- Magick.NET-Q16-AnyCPU Version >= 14.11.1
-- Microsoft.CodeAnalysis.CSharp Version >= 5.3.0
-- Mono.Options Version >= 6.12.0.148
-- Casasoft.Xaml.Controls >= 22.4.13
+All engines share the `PaperFormats` enum:
+
+| Value | Dimensions | Typical use |
+|---|---|---|
+| `Small` | 10 × 15 cm | 2 portrait CDV side by side |
+| `Panorama` | 10 × 18 cm | 2 portrait CDV side by side (panoramic strip) |
+| `Medium` | 15 × 20 cm | 3 portrait CDV side by side |
+| `Large` | 20 × 27 cm | 4 portrait + 2 landscape CDV (InCartha service) |
+| `Large20x30` | 20 × 30 cm | 4 portrait + 2 landscape CDV (FineArt paper) |
+| `A4` | 21 × 29.7 cm | 4 portrait + 4 landscape CDV |
+
+For `Large` and `Large20x30` the engine adds a 10 mm top margin; for `A4` a 5 mm margin.
+Cut marks are drawn automatically on all multi-row formats.
+
+---
+
+## CDV dimensions
+
+| Geometry | Size |
+|---|---|
+| `CDV_Full_v` / `CDV_Full_o` | 64 × 100 mm (portrait / landscape) |
+| `CDV_Internal_v` / `CDV_Internal_o` | 54 × 90 mm — leaves a 5 mm border on every side |
+
+`MontaggioFoto` loads images at `CDV_Internal` size by default, then composites them on a
+`CDV_Full` canvas so the characteristic white border is preserved. Use `--fullsize` /
+`FullSize = true` to skip the border.
+
+---
+
+## Class reference
+
+### ImageMagick-related classes
+
+**`Colors`**  
+Converts between string representations (`#rrggbb`, `#rrggbbaa`, named colours) and
+`MagickColor`. The full list of named colours can be queried with `--colors` on any
+command-line tool.
+
+**`Formats` / `IFormats`**  
+Converts millimetres to pixels at the configured DPI and exposes all standard geometries
+(`CDV_Full_v`, `FineArt10x15_o`, `InCartha20x27_o`, `A4_o`, …).
+
+**`Images` / `IImages`**  
+Factory for pre-sized blank `MagickImage` canvases at each standard format.
+
+**`PaperFormats`**  
+Enum (`Small`, `Medium`, `Large`, `Panorama`, `A4`, `Large20x30`).
+
+**`Utils`**  
+Static helpers:
+- `AutoRotate` — rotates an image so its orientation matches a target geometry.
+- `ResizeAndFill` — resizes and extends the canvas with a fill colour.
+- `RotateResizeAndFill` — combines `AutoRotate` + `ResizeAndFill` in one call.
+- `GetImage` — loads an image from a file path or from an ImageMagick built-in canvas
+  specification (`xc:color`, `gradient:c1-c2`, `pango:text`, …).
+- `GetPaperFormat` — parses a paper format string (case-insensitive, supports both
+  `"Large20x30"` and `"20x30"`).
+- `CenteredText`, `HLine`, `VLine` — drawing helpers.
+- `GetLicense` — returns the embedded AGPL 3.0 licence text.
+
+---
+
+### Command-line handling
+
+All classes use **Mono.Options** and implement `ICommandLine`.
+
+**`CommandLine`**  
+Base class. Provides `--fillcolor`, `--bordercolor`, `--dpi`, `--json`, `--script`,
+`--output`, `--extension`, `--tag`, `--help`, `--helpjson`, `--helpscript`, `--colors`,
+`--license`, `--man`, `--nobanner`. Reads environment variables `CDV_OUTPATH`, `CDV_DPI`,
+`CDV_FILL`, `CDV_BORDER`. The `--json=@filename` syntax lets parameters be stored in a
+file.
+
+**`MontaggioDorsiCommandLine`**  
+Adds `--paper` (Large / Medium / A4 / 20x30) and `--gravity`.
+
+**`MontaggioFotoCommandLine`**  
+Adds `--paper` (Small / Medium / Large / A4 / 20x30), `--fullsize`, `--withborder`,
+`--trim`, `--padding`, `--gravity`.
+
+**`BaseBuilderCommandLine`**  
+Shared base for `Scatola` and `Cartella`. Adds image paths for all six faces, thickness,
+border text, font, orientation, and target format (CDV or credit card).
+
+**`CreditCardCommandLine`**  
+Adds front-text options, magnetic-band colour and overlay, back image, and back text
+(Pango markup supported).
+
+**`CubettiCommandLine`**  
+Adds `--rows`, `--columns`, `--size`, `--paper`, `--sample`.
+
+**`FlexagonCommandLine`**  
+Adds `--faces` (3, 4, or 6) and `--sample`.
+
+---
+
+### JSON parameter classes
+
+All classes implement `IParameters` and can be serialised/deserialised with
+`System.Text.Json`. The `--helpjson` flag on any tool prints a ready-to-use template.
+
+**`CommonParameters`**  
+`FillColor`, `BorderColor`, `Dpi`, `OutputName`, `Extension`, `Script`, `Tag`,
+`FilesList`.
+
+**`BaseMontaggioParameters : CommonParameters, IMontaggioParameters`**  
+Adds `Paper` (string, round-trips through `PaperFormats`) and `CanvasGravity`.
+Used by `MontaggioDorsiEngine`.
+
+**`MontaggioFotoParameters : BaseMontaggioParameters`**  
+Adds `FullSize`, `Trim`, `WithBorder`, `Padding`.
+
+**`BaseBuilderParameters : CommonParameters`**  
+Adds all six face image paths, thickness, border text, font, orientation, target format,
+`Paper`, `PaperFormat`.
+
+**`CreditCardParameters`, `CubettiParameters`, `FlexagonParameters`**  
+Tool-specific parameter sets.
+
+**`IMontaggioParameters`**  
+Interface shared by `BaseMontaggioParameters` and `MontaggioFotoParameters`. Exposes
+`PaperFormat` and `CanvasGravity` so `BaseMontaggioEngine` can handle JSON without
+knowing the concrete type.
+
+---
+
+### Engine classes
+
+All engines implement `IEngine` and inherit from `BaseEngine`.
+
+#### `BaseEngine`
+
+Manages `FilesList`, `FillColor`, `BorderColor`, `Dpi`, `OutputName`, `Extension`,
+`Tag`, `Script`, `PaperFormat`, and the scripting infrastructure (`ScriptingClass`,
+`CustomCode`, `ScriptInstance`).
+
+Constructor priority when both `--json` and command-line values are present:
+**JSON wins**. The constructor applies command-line values first as defaults, then calls
+`SetJsonParams` which overwrites everything, including `FilesList`.
+
+Key methods: `GetResult()`, `GetResult(bool quiet)`, `GetResults()`,
+`GetOutputPaper(PaperFormats)`, `SetImageParameters(MagickImage)`,
+`SetImageInfo(…)`, `GetJsonParams()`, `SetJsonParams(string)`.
+
+#### `BaseMontaggioEngine : BaseEngine`
+
+Abstract intermediate class for engines that tile CDV images onto a sheet.
+
+Additional members:
+- `CanvasGravity` — `Gravity` used when placing source images.
+- `LoadImages(n, counter, dest, quiet, orientation)` — loads _n_ images from `FilesList`
+  (wrapping cyclically), applies `AutoRotate`, resizes to `orientation`, runs the
+  `ProcessOnLoad` script hook, adds a 1-px border.
+- `LoadImages(…, loadGeometry, orientation, postProcess)` — full overload: loads at
+  `loadGeometry`, applies the optional `Func<MagickImage, MagickImage>` post-processor,
+  then resizes to `orientation`. Used by `MontaggioFotoEngine` to separate the internal
+  load size from the final slot size.
+- `LoadSingleImage(filename, targetGeometry, quiet)` — loads, auto-rotates, and resizes
+  a single image; also runs the script hook.
+- `ApplyLoadScript(image)` — runs the `ProcessOnLoad` entry-point of the compiled user
+  script, or returns the image unchanged.
+- `GetLayoutParameters(format, out portraitCount, out landscapeCount, out topOffset)` —
+  returns the slot counts and vertical offset for each paper format.
+- `DrawCutMarks(final, format)` — draws cut-mark lines shared by both montagio engines.
+- `GetBaseMontaggioJsonParams(p)` / `SetBaseMontaggioJsonParams(p)` — JSON round-trip
+  helpers for `PaperFormat`, `CanvasGravity`, and all base fields.
+
+#### `MontaggioDorsiEngine : BaseMontaggioEngine`
+
+Assembles CDV **back** images on a sheet. Supports `Medium` (3 portrait), `Large` /
+`Large20x30` (4 portrait + 2 landscape), and `A4` (4 portrait + 4 landscape). When no
+files are supplied, blank placeholders are used. Uses `BaseMontaggioParameters` for JSON.
+
+#### `MontaggioFotoEngine : BaseMontaggioEngine`
+
+Assembles CDV **front** images on a sheet. Supports all six paper formats:
+
+| Format | Layout | Output mode |
+|---|---|---|
+| `Small` / `Panorama` | 2-up with info overlay | One numbered file per pair |
+| `Medium` | 3 portrait | Single file |
+| `Large` / `Large20x30` | 4 portrait + 2 landscape | Single file |
+| `A4` | 4 portrait + 4 landscape | Single file |
+
+Border/padding options applied uniformly to every slot regardless of format:
+- `FullSize` — fit image to full 100 × 64 mm CDV area.
+- `WithBorder` — place the image (CDV_Internal size) on a full-CDV canvas with a visible
+  5 mm white border.
+- `Trim` — remove any white border introduced by the resize.
+- `Padding` — add a uniform blank margin (in mm) around the image.
+
+The 2-up layout (`BuildTwoUp`) also overlays informational text (source filename, tool
+banner, run timestamp) in the margin of each half-card.
+
+`GetResult(bool quiet, int startIndex)` lets the caller start from an arbitrary position
+in `FilesList`, enabling the multi-file loop in `Program.cs` for `Small` / `Panorama`.
+
+#### `BaseBuilderEngine : BaseEngine`
+
+Abstract wrapper for box and folder builders. Holds a reference to `IBuilder` and
+forwards `SetJsonParams` / `GetResult` to the builder.
+
+#### `ScatolaEngine` / `FolderEngine`
+
+Thin wrappers over `ScatolaBuilder` / `FolderBuilder` that place the built image on the
+output paper and add cut marks.
+
+#### `CreditCardEngine`
+
+Produces a two-sided credit-card layout (front + rear, landscape) with optional magnetic
+band, front text (with background rectangle), and Pango-formatted back text.
+
+#### `CubettiEngine`
+
+Generates a puzzle of cubes from six source images, sliced into a _rows × columns_ grid.
+Each cube face gets its own output file with cut and fold marks. Supports sample images
+for testing.
+
+#### `FlexagonEngine`
+
+Generates TetraFlexagons with 3, 4, or 6 faces from source CDV images.
+
+---
+
+### Scripting
+
+Scripts are C# source files compiled at run-time by `Compiler` (Roslyn). They are wrapped
+in a class that receives a strongly-typed engine reference, so all engine properties and
+methods are accessible.
+
+Enable with `--script=path/to/script.cs` or `--script=@filename`. Use `--helpscript` to
+print the template for any tool.
+
+**Available entry-points** (return `null` to keep the default behaviour):
+
+| Method | Description |
+|---|---|
+| `void Init()` | Called once after the engine is constructed |
+| `MagickImage OutputImage()` | Override the blank output canvas |
+| `MagickImage ProcessOnLoad(MagickImage image)` | Transform each source image after loading |
+| `MagickImage ProcessOnLoad{Face}(MagickImage image)` | Per-face hook for box/folder builders (`Front`, `Back`, `Top`, `Bottom`, `Left`, `Right`) |
+
+**Scripting classes:**
+
+| Class | Wraps engine |
+|---|---|
+| `BaseScripting` | `BaseEngine` |
+| `MontaggioDorsiScripting` | `MontaggioDorsiEngine` |
+| `MontaggioFotoScripting` | `MontaggioFotoEngine` |
+| `BaseBuilderScripting` | `BaseBuilderEngine` |
+| `CreditCardScripting` | `CreditCardEngine` |
+| `CubettiScripting` | `CubettiEngine` |
+| `FlexagonScripting` | `FlexagonEngine` |
+
+The `Compiler` static class exposes `Compile(string sourceCode)`, `New(assembly, engine)`,
+and `Run(obj, method, args)` for instantiating and invoking user scripts.
+
+---
+
+## JSON parameter files
+
+Any tool accepts `--json=@parameters.json` to load all settings from a file. The JSON
+completely overrides command-line defaults for colours, DPI, paper format, gravity, and
+file lists. Use `--helpjson` to print a ready-to-use template. A minimal example for
+`MontaggioFoto`:
+
+```json
+{
+  "Paper": "Large20x30",
+  "CanvasGravity": 5,
+  "FullSize": false,
+  "WithBorder": false,
+  "Trim": false,
+  "Padding": 0,
+  "FillColor": "#FFFFFF",
+  "BorderColor": "#000000",
+  "Dpi": 300,
+  "OutputName": "",
+  "Extension": "jpg",
+  "Script": "",
+  "Tag": "",
+  "FilesList": [
+    "C:\\photos\\01_front.jpg",
+    "C:\\photos\\02_front.jpg"
+  ]
+}
+```
+
+---
+
+## Environment variables
+
+| Variable | Description |
+|---|---|
+| `CDV_OUTPATH` | Base directory prepended to relative output paths |
+| `CDV_DPI` | Default output resolution (overrides the built-in 300 DPI default) |
+| `CDV_FILL` | Default fill colour |
+| `CDV_BORDER` | Default border colour |
+
+---
+
+## Colour syntax
+
+Colours can be specified in any of these formats:
+
+```
+#rgb
+#rrggbb
+#rrggbbaa
+#rrrrggggbbbb
+#rrrrggggbbbbaaaa
+colorname          (use --colors to list all named colours)
+```
+
+---
+
+## Built-in canvas generators
+
+Instead of a file path, any image slot can use an ImageMagick canvas specification:
+
+| Prefix | Description |
+|---|---|
+| `xc:color` | Solid fill |
+| `gradient:c1-c2` | Linear gradient (top to bottom) |
+| `radial-gradient:c1-c2` | Radial gradient |
+| `plasma:c1-c2` | Plasma gradient |
+| `plasma:fractal` | Random plasma |
+| `label:text` | Plain text, no word-wrap |
+| `caption:text` | Plain text, auto word-wrap |
+| `pango:text` | Pango-markup formatted text |
+
+The text argument can be stored in a file and referenced as `pango:@filename`.
+
+---
+
+## Licence
+
+Casasoft Contemporary Carte de Visite Tools is free software distributed under the
+**GNU Affero General Public License v3.0** or later.  
+See [http://www.gnu.org/licenses/](http://www.gnu.org/licenses/).
+
+Copyright © 2020-2026 Roberto Ceccarelli — Casasoft  
+[https://strawberryfield.altervista.org/carte_de_visite/](https://strawberryfield.altervista.org/carte_de_visite/)
