@@ -20,7 +20,6 @@ You should have received a copy of the GNU AGPL v.3
 along with Casasoft CCDV Tools.  
 If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <src:BaseForm
     x:Class="Casasoft.CCDV.UI.MontaggioDorsiForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -31,7 +30,7 @@ If not, see <http://www.gnu.org/licenses/>.
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:src="clr-namespace:Casasoft.CCDV.UI"
     Width="800"
-    Height="480"
+    Height="580"
     mc:Ignorable="d"
     Title="Montaggio Dorsi">
     <Grid>
@@ -63,96 +62,116 @@ If not, see <http://www.gnu.org/licenses/>.
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel>
-                <Label
-                    x:Name="lblFilenames"
-                    Width="230"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    Content="Immagini da caricare"
-                    FontSize="18"
-                    FontWeight="Bold" />
-                <casasoft:FileTextBox
-                    x:Name="filename1"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename2"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename3"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename4"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename5"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename6"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename7"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <casasoft:FileTextBox
-                    x:Name="filename8"
-                    Height="18"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top"
-                    Panel.ZIndex="1"
-                    OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
-                    OpenFileDialogTitle="Immagine" />
-                <local:ThickPaperSelectorControl x:Name="paperFormat" Margin="0,5,0,0" />
-                <local:GravityControl x:Name="txtGravity" />
-                <local:CommonOptionsControl
-                    x:Name="commonOptions"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Top" />
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Formato foglio -->
+                    <Label
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Formato foglio"
+                        FontWeight="Bold" />
+                    <local:ThickPaperSelectorControl
+                        x:Name="paperFormat"
+                        Margin="0,0,0,5"
+                        FormatChanged="paperFormat_FormatChanged" />
+
+                    <Label
+                        x:Name="lblFilenames"
+                        Width="230"
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Content="Immagini da caricare"
+                        FontSize="16"
+                        FontWeight="Bold" />
+
+                    <!-- 8 file slots — visibilità gestita dal code-behind -->
+                    <casasoft:FileTextBox
+                        x:Name="filename1"
+                        Height="18"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+                    <casasoft:FileTextBox
+                        x:Name="filename2"
+                        Height="18"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+                    <casasoft:FileTextBox
+                        x:Name="filename3"
+                        Height="18"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+                    <casasoft:FileTextBox
+                        x:Name="filename4"
+                        Height="18"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Visibility="Collapsed"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+                    <casasoft:FileTextBox
+                        x:Name="filename5"
+                        Height="18"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Visibility="Collapsed"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+                    <casasoft:FileTextBox
+                        x:Name="filename6"
+                        Height="18"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Visibility="Collapsed"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+                    <casasoft:FileTextBox
+                        x:Name="filename7"
+                        Height="18"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Visibility="Collapsed"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+                    <casasoft:FileTextBox
+                        x:Name="filename8"
+                        Height="18"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        Panel.ZIndex="1"
+                        Visibility="Collapsed"
+                        OpenFileDialogFilter="Image files (*.jpg;*.jpeg;*.png;*.psd)|*.jpg;*.jpeg;*.png;*.psd|All files (*.*)|*.*"
+                        OpenFileDialogTitle="Immagine" />
+
+                    <local:GravityControl x:Name="txtGravity" />
+                    <local:CommonOptionsControl
+                        x:Name="commonOptions"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top" />
+                </StackPanel>
+            </ScrollViewer>
             <local:CommonCommandsControl
                 x:Name="ucCommands"
                 Grid.Row="2"
@@ -166,5 +185,4 @@ If not, see <http://www.gnu.org/licenses/>.
                 DoUpdate="btnUpdate_Click" />
         </Grid>
     </Grid>
-
 </src:BaseForm>

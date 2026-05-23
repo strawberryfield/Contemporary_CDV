@@ -20,7 +20,6 @@ You should have received a copy of the GNU AGPL v.3
 along with Casasoft CCDV Tools.  
 If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <UserControl
     x:Class="Casasoft.CCDV.UI.ThickPaperSelectorControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -37,26 +36,30 @@ If not, see <http://www.gnu.org/licenses/>.
             VerticalAlignment="Top"
             Content="20x27"
             GroupName="paperFormat"
-            IsChecked="True" />
+            IsChecked="True"
+            Checked="Format_Checked" />
         <RadioButton
             x:Name="rbMedium"
             Width="60"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="15x20"
-            GroupName="paperFormat" />
+            GroupName="paperFormat"
+            Checked="Format_Checked" />
         <RadioButton
             x:Name="rb20x30"
             Width="60"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="20x30"
-            GroupName="paperFormat" />
+            GroupName="paperFormat"
+            Checked="Format_Checked" />
         <RadioButton
             x:Name="rbA4"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="A4"
-            GroupName="paperFormat" />
+            GroupName="paperFormat"
+            Checked="Format_Checked" />
     </StackPanel>
 </UserControl>
