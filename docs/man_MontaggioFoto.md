@@ -29,6 +29,15 @@ trim white space
 blank border around the image  
 
 
+**--paper=VALUE** :  
+Output paper size:  
+Small \(default\) 10x15cm  
+Medium 15x20cm  
+Large 20x27cm  
+A4 210x297mm  
+20x30 20x30cm  
+
+
 **--gravity=VALUE** :  
 canvas gravity, valid values are:  
 Northwest  
@@ -131,6 +140,7 @@ using the following template:
   "Trim": false,
   "WithBorder": false,
   "Padding": 0,
+  "Paper": null,
   "CanvasGravity": 0,
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",

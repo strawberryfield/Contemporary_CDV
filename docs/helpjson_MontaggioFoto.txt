@@ -8,6 +8,7 @@ Json parameters template for: MontaggioFoto
   "Trim": false,
   "WithBorder": false,
   "Padding": 0,
+  "Paper": null,
   "CanvasGravity": 0,
   "FillColor": "#FFFFFF",
   "BorderColor": "#000000",
