@@ -108,6 +108,7 @@ All engines share the `PaperFormats` enum:
 | `Small` | 10 × 15 cm | 2 portrait CDV side by side |
 | `Panorama` | 10 × 18 cm | 2 portrait CDV side by side (panoramic strip) |
 | `Medium` | 15 × 20 cm | 3 portrait CDV side by side |
+| `Medium13x17` | 12.7 × 16.7 cm | MontaggioDorsi/MontaggioFoto: 2 carte verticali affiancate (stesso layout di `Small`). Folder/Scatola: stesso esploso di `Medium`, tagliato sul lato destro se non entra nel foglio. |
 | `Large` | 20 × 27 cm | 4 portrait + 2 landscape CDV (InCartha service) |
 | `Large20x30` | 20 × 30 cm | 4 portrait + 2 landscape CDV (FineArt paper) |
 | `A4` | 21 × 29.7 cm | 4 portrait + 4 landscape CDV |
@@ -280,7 +281,7 @@ Assembles CDV **front** images on a sheet. Supports all six paper formats:
 
 | Format | Layout | Output mode |
 |---|---|---|
-| `Small` / `Panorama` | 2-up with info overlay | One numbered file per pair |
+| `Small` / `Panorama` / `Medium13x17` | 2-up with info overlay | One numbered file per pair |
 | `Medium` | 3 portrait | Single file |
 | `Large` / `Large20x30` | 4 portrait + 2 landscape | Single file |
 | `A4` | 4 portrait + 4 landscape | Single file |

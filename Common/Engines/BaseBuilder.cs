@@ -428,6 +428,31 @@ public class BaseBuilder : IBuilder
     }
 
     /// <summary>
+    /// Creates lines for cut, assuming the layout was anchored to the left edge
+    /// of the canvas (<see cref="Gravity.West"/>) instead of centred. Used for
+    /// <see cref="PaperFormats.Medium13x17"/>, where the layout may be wider
+    /// than the paper: the right cutting line reflects that the excess has
+    /// already been cut away by the composite operation, instead of being
+    /// centred and cut on both sides.
+    /// </summary>
+    /// <param name="img">canvas image to draw onto, modified in place</param>
+    /// <param name="contentWidth">width of the layout composited onto <paramref name="img"/></param>
+    /// <param name="contentHeight">height of the layout composited onto <paramref name="img"/></param>
+    public void AddCuttingLinesLeftAligned(MagickImage img, uint contentWidth, uint contentHeight)
+    {
+        uint h_offset_right = img.Width > contentWidth ? img.Width - contentWidth : 0;
+        uint v_offset = img.Height > contentHeight ? (img.Height - contentHeight) / 2 : 0;
+
+        Drawables d = new();
+        d.StrokeColor(borderColor).StrokeWidth(1);
+        d.Line(0, v_offset, img.Width, v_offset);
+        d.Line(0, img.Height - v_offset, img.Width, img.Height - v_offset);
+        d.Line(0, 0, 0, img.Height - v_offset);
+        d.Line(img.Width - h_offset_right, 0, img.Width - h_offset_right, img.Height);
+        d.Draw(img);
+    }
+
+    /// <summary>
     /// Returns empty final image
     /// </summary>
     /// <returns></returns>
@@ -437,6 +462,10 @@ public class BaseBuilder : IBuilder
         if (PaperFormat == PaperFormats.Medium)
         {
             return img.InCartha15x20_o();
+        }
+        else if (PaperFormat == PaperFormats.Medium13x17)
+        {
+            return img.InCartha13x17_o();
         }
         else
         {

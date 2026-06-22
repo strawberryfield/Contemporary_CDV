@@ -42,7 +42,7 @@ par.ExpandWildcards();
 
 #region main
 MontaggioFotoEngine engine = new(par);
-if (par.PaperFormat == PaperFormats.Small || par.PaperFormat == PaperFormats.Panorama)
+if (engine.IsTwoUpFormat)
 {
     // 2-up formats: one output card per pair of input files, numbered.
     for (int i = 0; i < engine.FilesList.Count; i += 2)
@@ -60,5 +60,4 @@ else
     engine.fmt.SetImageParameters(final, par.Extension);
     final.Write($"{par.OutputName}.{par.Extension}");
 }
-
 #endregion

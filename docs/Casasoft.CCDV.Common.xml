@@ -1258,6 +1258,19 @@
             </summary>
             <param name="img"></param>
         </member>
+        <member name="M:Casasoft.CCDV.BaseBuilder.AddCuttingLinesLeftAligned(ImageMagick.MagickImage,System.UInt32,System.UInt32)">
+            <summary>
+            Creates lines for cut, assuming the layout was anchored to the left edge
+            of the canvas (<see cref="F:ImageMagick.Gravity.West"/>) instead of centred. Used for
+            <see cref="F:Casasoft.CCDV.PaperFormats.Medium13x17"/>, where the layout may be wider
+            than the paper: the right cutting line reflects that the excess has
+            already been cut away by the composite operation, instead of being
+            centred and cut on both sides.
+            </summary>
+            <param name="img">canvas image to draw onto, modified in place</param>
+            <param name="contentWidth">width of the layout composited onto <paramref name="img"/></param>
+            <param name="contentHeight">height of the layout composited onto <paramref name="img"/></param>
+        </member>
         <member name="M:Casasoft.CCDV.BaseBuilder.GetOutputImage">
             <summary>
             Returns empty final image
@@ -1290,6 +1303,14 @@
             Common builder reference
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseBuilderEngine.DeferJsonParams">
+            <summary>
+            <see cref="P:Casasoft.CCDV.Engines.BaseBuilderEngine.Builder"/> viene creato nel corpo del costruttore della
+            sottoclasse concreta (<see cref="T:Casasoft.CCDV.Engines.FolderEngine"/>/<see cref="T:Casasoft.CCDV.Engines.ScatolaEngine"/>),
+            che gira DOPO che <see cref="M:Casasoft.CCDV.Engines.BaseEngine.#ctor(Casasoft.CCDV.ICommandLine)"/> ha finito.
+            L'applicazione del JSON va quindi rimandata fino a quel momento.
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.GetJsonParams">
             <summary>
             Returns the parameters in json format
@@ -1313,6 +1334,16 @@
             Does the dirty work
             </summary>
             <returns>Image to print</returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Engines.BaseBuilderEngine.IsLeftAlignedLayout(Casasoft.CCDV.PaperFormats)">
+            <summary>
+            True when the output paper requires the box/folder layout to be
+            anchored to the left edge instead of centred, so any part of the
+            layout that does not fit is cut off on the right side rather than
+            symmetrically on both sides. Currently only
+            <see cref="F:Casasoft.CCDV.PaperFormats.Medium13x17"/> uses this.
+            </summary>
+            <param name="format">Output paper format</param>
         </member>
         <member name="T:Casasoft.CCDV.Engines.BaseEngine">
             <summary>
@@ -1409,11 +1440,36 @@
             Constructor
             </summary>
         </member>
+        <member name="P:Casasoft.CCDV.Engines.BaseEngine.DeferJsonParams">
+            <summary>
+            When true, the <see cref="M:Casasoft.CCDV.Engines.BaseEngine.#ctor(Casasoft.CCDV.ICommandLine)"/> constructor does
+            NOT call <see cref="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)"/> even if <c>par.JSON</c> is
+            set. Used by engines (e.g. <see cref="T:Casasoft.CCDV.Engines.BaseBuilderEngine"/>) whose
+            <see cref="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)"/> override needs an object that is
+            only created in the most-derived constructor body, which runs after
+            this base constructor completes. Those derived constructors are
+            responsible for calling <see cref="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)"/> themselves
+            once everything they depend on is ready.
+            </summary>
+        </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.#ctor(Casasoft.CCDV.ICommandLine)">
             <summary>
-            Constructor
+            Initializes a new instance of <see cref="T:Casasoft.CCDV.Engines.BaseEngine"/> using the provided
+            command-line parameters.
             </summary>
-            <param name="par">Command line options</param>
+            <param name="par">
+            The <see cref="T:Casasoft.CCDV.ICommandLine"/> instance containing runtime options:
+            - <c>Dpi</c>, <c>FillColor</c>, <c>BorderColor</c>, <c>Tag</c>,
+              <c>OutputName</c> and <c>Extension</c> are copied to the new engine.
+            - If <c>par.JSON</c> is non-empty and <see cref="P:Casasoft.CCDV.Engines.BaseEngine.DeferJsonParams"/> is
+              <c>false</c>, <see cref="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)"/> is invoked to
+              override and repopulate engine state (including <see cref="P:Casasoft.CCDV.Engines.BaseEngine.FilesList"/>).
+            - If <see cref="P:Casasoft.CCDV.Engines.BaseEngine.DeferJsonParams"/> is <c>true</c>, the most-derived
+              constructor is expected to call <see cref="M:Casasoft.CCDV.Engines.BaseEngine.SetJsonParams(System.String)"/>
+              when it has finished its own initialization.
+            - When no JSON is provided, <c>par.FilesList</c> entries are appended to
+              <see cref="P:Casasoft.CCDV.Engines.BaseEngine.FilesList"/>.
+            </param>
         </member>
         <member name="M:Casasoft.CCDV.Engines.BaseEngine.GetJsonParams">
             <summary>
@@ -2043,8 +2099,17 @@
         </member>
         <member name="T:Casasoft.CCDV.Engines.MontaggioDorsiEngine">
             <summary>
-            Montaggio dorsi engine
+            Montaggio dorsi engine.
             </summary>
+            <remarks>
+            Supports <see cref="F:Casasoft.CCDV.PaperFormats.Medium"/>, <see cref="F:Casasoft.CCDV.PaperFormats.Large"/>,
+            <see cref="F:Casasoft.CCDV.PaperFormats.Large20x30"/> and <see cref="F:Casasoft.CCDV.PaperFormats.A4"/>.
+            <see cref="F:Casasoft.CCDV.PaperFormats.Small"/>, <see cref="F:Casasoft.CCDV.PaperFormats.Panorama"/> and
+            <see cref="F:Casasoft.CCDV.PaperFormats.Medium13x17"/> are intentionally not handled here
+            (printing CDV backs makes no sense for the small 2-up photo formats), so
+            selecting one of them yields a blank sheet with no specific layout —
+            exactly the same (lack of) behaviour as <see cref="F:Casasoft.CCDV.PaperFormats.Small"/>.
+            </remarks>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioDorsiEngine.#ctor">
             <summary>
@@ -2088,6 +2153,7 @@
             Supports all paper formats defined in <see cref="T:Casasoft.CCDV.PaperFormats"/>:
             <list type="bullet">
               <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Small"/> – 2 portrait CDV side by side (original behaviour)</description></item>
+              <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Medium13x17"/> – 2 portrait CDV side by side (same layout as <see cref="F:Casasoft.CCDV.PaperFormats.Small"/>, smaller paper)</description></item>
               <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Medium"/> – 3 portrait CDV side by side</description></item>
               <item><description><see cref="F:Casasoft.CCDV.PaperFormats.Large"/> / <see cref="F:Casasoft.CCDV.PaperFormats.Large20x30"/> – 4 portrait + 2 landscape CDV</description></item>
               <item><description><see cref="F:Casasoft.CCDV.PaperFormats.A4"/> – 4 portrait + 4 landscape CDV</description></item>
@@ -2119,6 +2185,16 @@
             <summary>
             Uniform blank padding (in pixels) added around each image.
             Ignored when <see cref="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.WithBorder"/> is true.
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Engines.MontaggioFotoEngine.IsTwoUpFormat">
+            <summary>
+            True when <see cref="P:Casasoft.CCDV.Engines.BaseEngine.PaperFormat"/> uses the 2-up
+            (<see cref="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.BuildTwoUp(System.Boolean,System.Int32,ImageMagick.MagickGeometry)"/>) layout — currently <see cref="F:Casasoft.CCDV.PaperFormats.Small"/>,
+            <see cref="F:Casasoft.CCDV.PaperFormats.Panorama"/> and <see cref="F:Casasoft.CCDV.PaperFormats.Medium13x17"/>.
+            The command-line entry point uses this to decide whether to loop over
+            pairs of files producing one numbered output per pair, or to call
+            <see cref="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.GetResult(System.Boolean)"/> once for a single multi-row sheet.
             </summary>
         </member>
         <member name="M:Casasoft.CCDV.Engines.MontaggioFotoEngine.#ctor">
@@ -2395,6 +2471,17 @@
             </summary>
             <param name="img"></param>
         </member>
+        <member name="M:Casasoft.CCDV.IBuilder.AddCuttingLinesLeftAligned(ImageMagick.MagickImage,System.UInt32,System.UInt32)">
+            <summary>
+            adds lines to help in cutting images when the layout has been anchored
+            to the left edge of the canvas instead of centred (used when the layout
+            may be wider than the output paper, so the excess is cut off on the
+            right side rather than symmetrically on both sides)
+            </summary>
+            <param name="img">canvas image to draw onto</param>
+            <param name="contentWidth">width of the layout composited onto <paramref name="img"/></param>
+            <param name="contentHeight">height of the layout composited onto <paramref name="img"/></param>
+        </member>
         <member name="M:Casasoft.CCDV.IBuilder.CreateTestImages">
             <summary>
             Set of images for testing
@@ -2545,6 +2632,16 @@
             In printing the service enlarges (an cuts!) the image, so I need to take care of this
             </remarks>
         </member>
+        <member name="P:Casasoft.CCDV.Formats.InCartha13x17_o">
+            <summary>
+            17x13cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.Formats.InCartha13x17_v">
+            <summary>
+            13x17cm paper
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.Formats.FineArt10x15_o">
             <summary>
             15x10cm paper
@@ -2678,6 +2775,16 @@
             In printing the service enlarges (an cuts!) the image, so I need to take care of this
             </remarks>
         </member>
+        <member name="P:Casasoft.CCDV.IFormats.InCartha13x17_o">
+            <summary>
+            17x13cm paper
+            </summary>
+        </member>
+        <member name="P:Casasoft.CCDV.IFormats.InCartha13x17_v">
+            <summary>
+            13x17cm paper
+            </summary>
+        </member>
         <member name="P:Casasoft.CCDV.IFormats.FineArt10x15_o">
             <summary>
             15x10cm paper
@@ -2795,6 +2902,20 @@
             <param name="c">Background color</param>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha13x17_o(ImageMagick.MagickColor)">
+            <summary>
+            17x13cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha13x17_v(ImageMagick.MagickColor)">
+            <summary>
+            13x17cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.IImages.FineArt10x15_o(ImageMagick.MagickColor)">
             <summary>
             15x10cm paper
@@ -2847,6 +2968,20 @@
         <member name="M:Casasoft.CCDV.IImages.InCartha15x20_v">
             <summary>
             Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha13x17_o">
+            <summary>
+            17x13cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.IImages.InCartha13x17_v">
+            <summary>
+            13x17cm paper
             </summary>
             <remarks>White background</remarks>
             <returns></returns>
@@ -3093,6 +3228,20 @@
             <param name="c">Background color</param>
             <returns></returns>
         </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha13x17_o(ImageMagick.MagickColor)">
+            <summary>
+            17x13cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha13x17_v(ImageMagick.MagickColor)">
+            <summary>
+            13x17cm paper
+            </summary>
+            <param name="c">Background color</param>
+            <returns></returns>
+        </member>
         <member name="M:Casasoft.CCDV.Images.FineArt10x15_o(ImageMagick.MagickColor)">
             <summary>
             15x10cm paper
@@ -3159,6 +3308,20 @@
         <member name="M:Casasoft.CCDV.Images.InCartha15x20_v">
             <summary>
             Photocity Digital print over 15x20cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha13x17_o">
+            <summary>
+            17x13cm paper
+            </summary>
+            <remarks>White background</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Casasoft.CCDV.Images.InCartha13x17_v">
+            <summary>
+            13x17cm paper
             </summary>
             <remarks>White background</remarks>
             <returns></returns>
@@ -3771,6 +3934,11 @@
         <member name="F:Casasoft.CCDV.PaperFormats.Large20x30">
             <summary>
             20x30 cm
+            </summary>
+        </member>
+        <member name="F:Casasoft.CCDV.PaperFormats.Medium13x17">
+            <summary>
+            13x17 cm (127x167mm)
             </summary>
         </member>
         <member name="T:Casasoft.CCDV.Properties.Resources">

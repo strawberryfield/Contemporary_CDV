@@ -33,6 +33,7 @@ namespace Casasoft.CCDV.Engines;
 /// Supports all paper formats defined in <see cref="PaperFormats"/>:
 /// <list type="bullet">
 ///   <item><description><see cref="PaperFormats.Small"/> – 2 portrait CDV side by side (original behaviour)</description></item>
+///   <item><description><see cref="PaperFormats.Medium13x17"/> – 2 portrait CDV side by side (same layout as <see cref="PaperFormats.Small"/>, smaller paper)</description></item>
 ///   <item><description><see cref="PaperFormats.Medium"/> – 3 portrait CDV side by side</description></item>
 ///   <item><description><see cref="PaperFormats.Large"/> / <see cref="PaperFormats.Large20x30"/> – 4 portrait + 2 landscape CDV</description></item>
 ///   <item><description><see cref="PaperFormats.A4"/> – 4 portrait + 4 landscape CDV</description></item>
@@ -64,6 +65,16 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     /// Ignored when <see cref="WithBorder"/> is true.
     /// </summary>
     public uint Padding { get; set; } = 0;
+
+    /// <summary>
+    /// True when <see cref="BaseEngine.PaperFormat"/> uses the 2-up
+    /// (<see cref="BuildTwoUp"/>) layout — currently <see cref="PaperFormats.Small"/>,
+    /// <see cref="PaperFormats.Panorama"/> and <see cref="PaperFormats.Medium13x17"/>.
+    /// The command-line entry point uses this to decide whether to loop over
+    /// pairs of files producing one numbered output per pair, or to call
+    /// <see cref="GetResult(bool)"/> once for a single multi-row sheet.
+    /// </summary>
+    public bool IsTwoUpFormat => PaperFormat is PaperFormats.Small or PaperFormats.Panorama or PaperFormats.Medium13x17;
     #endregion
 
     #region constructors
@@ -160,6 +171,7 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         {
             PaperFormats.Small => BuildTwoUp(quiet, startIndex, fmt.FineArt10x15_o),
             PaperFormats.Panorama => BuildTwoUp(quiet, startIndex, fmt.FineArt10x18_o),
+            PaperFormats.Medium13x17 => BuildTwoUp(quiet, startIndex, fmt.InCartha13x17_o),   // ← nuovo
             PaperFormats.Medium => BuildMultiRow(quiet, startIndex),
             PaperFormats.Large => BuildMultiRow(quiet, startIndex),
             PaperFormats.Large20x30 => BuildMultiRow(quiet, startIndex),

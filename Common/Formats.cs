@@ -90,6 +90,14 @@ public class Formats : IFormats
     /// </remarks>
     public MagickGeometry InCartha15x20_v => swap(InCartha15x20_o);
     /// <summary>
+    /// 17x13cm paper
+    /// </summary>
+    public MagickGeometry InCartha13x17_o => new(ToPixels(167), ToPixels(127));
+    /// <summary>
+    /// 13x17cm paper
+    /// </summary>
+    public MagickGeometry InCartha13x17_v => swap(InCartha13x17_o);
+    /// <summary>
     /// 15x10cm paper
     /// </summary>
     public MagickGeometry FineArt10x15_o => new(ToPixels(152), ToPixels(102));

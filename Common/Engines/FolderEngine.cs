@@ -51,7 +51,13 @@ public class FolderEngine : BaseBuilderEngine
         parameters = new BaseBuilderParameters();
         Builder = new FolderBuilder((BaseBuilderCommandLine)par, fmt);
         ScriptingClass = new BaseBuilderScripting();
-        Script = parameters.Script;
+        Script = ((BaseBuilderCommandLine)par).Script;   // bug bonus: prima leggeva da `parameters` (sempre vuoto)
+
+        // Builder ora esiste: applica il JSON (la base l'aveva rimandato).
+        if (!string.IsNullOrWhiteSpace(par.JSON))
+        {
+            SetJsonParams(par.JSON);
+        }
     }
     #endregion
 
@@ -66,14 +72,25 @@ public class FolderEngine : BaseBuilderEngine
         _ = base.GetResult(quiet);
         FolderBuilder sc = (FolderBuilder)Builder;
         MagickImage output = GetOutputPaper(sc.PaperFormat);
-        output.Composite(sc.Build(), Gravity.Center);
-        sc.AddCuttingLines(output);
+        MagickImage layout = sc.Build();
+
+        if (IsLeftAlignedLayout(sc.PaperFormat))
+        {
+            output.Composite(layout, Gravity.West);
+            sc.AddCuttingLinesLeftAligned(output, layout.Width, layout.Height);
+        }
+        else
+        {
+            output.Composite(layout, Gravity.Center);
+            sc.AddCuttingLines(output);
+        }
+
         if (sc.PaperFormat is PaperFormats.Large or PaperFormats.A4)
         {
             img.Info(WelcomeBannerText(), $"{OutputName}.{Extension}").Draw(output);
         }
 
         return output;
-    }
+    } 
     #endregion
 }

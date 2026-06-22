@@ -49,6 +49,9 @@ public enum PaperFormats
     /// <summary>
     /// 20x30 cm
     /// </summary>
-    Large20x30
-
+    Large20x30,
+    /// <summary>
+    /// 13x17 cm (127x167mm)
+    /// </summary>
+    Medium13x17
 }

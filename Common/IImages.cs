@@ -31,6 +31,8 @@ namespace Casasoft.CCDV;
 public interface IImages
 {
     #region commercial formats
+
+    #region colored background
     /// <summary>
     /// Photocity Digital print over 27x20cm paper
     /// </summary>
@@ -56,6 +58,18 @@ public interface IImages
     /// <returns></returns>
     public MagickImage InCartha15x20_v(MagickColor c);
     /// <summary>
+    /// 17x13cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_o(MagickColor c);
+    /// <summary>
+    /// 13x17cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_v(MagickColor c);
+    /// <summary>
     /// 15x10cm paper
     /// </summary>
     /// <param name="c">Background color</param>
@@ -79,7 +93,9 @@ public interface IImages
     /// <param name="c">Background color</param>
     /// <returns></returns>
     public MagickImage FineArt10x18_v(MagickColor c);
+    #endregion
 
+    #region white background
     /// <summary>
     /// Photocity Digital print over 27x20cm paper
     /// </summary>
@@ -104,6 +120,18 @@ public interface IImages
     /// <remarks>White background</remarks>
     /// <returns></returns>
     public MagickImage InCartha15x20_v();
+    /// <summary>
+    /// 17x13cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_o();
+    /// <summary>
+    /// 13x17cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_v();
     /// <summary>
     /// 15x10cm paper
     /// </summary>
@@ -141,6 +169,8 @@ public interface IImages
     /// <remarks>White background</remarks>
     /// <returns></returns>
     public MagickImage FineArt20x30_v();
+    #endregion
+
     #endregion
 
     #region ISO formats

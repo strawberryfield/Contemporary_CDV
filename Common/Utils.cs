@@ -285,6 +285,10 @@ public static class Utils
                 case "MEDIUM":
                     ret = PaperFormats.Medium;
                     break;
+                case "MEDIUM13X17":
+                case "13X17":
+                    ret = PaperFormats.Medium13x17;
+                    break;
                 case "A4":
                     ret = PaperFormats.A4;
                     break;

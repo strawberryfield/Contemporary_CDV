@@ -50,6 +50,14 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
     /// </summary>
     public IBuilder Builder { get; set; }
 
+    /// <summary>
+    /// <see cref="Builder"/> viene creato nel corpo del costruttore della
+    /// sottoclasse concreta (<see cref="FolderEngine"/>/<see cref="ScatolaEngine"/>),
+    /// che gira DOPO che <see cref="BaseEngine(ICommandLine)"/> ha finito.
+    /// L'applicazione del JSON va quindi rimandata fino a quel momento.
+    /// </summary>
+    protected override bool DeferJsonParams => true;
+
     #region json
     /// <summary>
     /// Returns the parameters in json format
@@ -97,27 +105,40 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
     private void SetJsonParams(BaseBuilderParameters p)
     {
         parameters = p;
-        SetBaseJsonParams();
+        SetBaseJsonParams();      // imposta anche Dpi → ricrea fmt/img sull'Engine
+        Script = p.Script;
 
         BaseBuilder builder = (BaseBuilder)Builder;
         builder.fillColor = colors.GetColor(p.FillColor);
         builder.borderColor = colors.GetColor(p.BorderColor);
-        Dpi = p.Dpi;
-        builder.borderText = p.borderText;
+        builder.fmt = fmt; // tiene la geometria del Builder sincronizzata col Dpi del JSON
+
         builder.font = p.font;
         builder.fontBold = p.fontBold;
         builder.fontItalic = p.fontItalic;
+        builder.borderText = p.borderText;
         builder.isHorizontal = p.isHorizontal;
         builder.targetType = (TargetType)p.targetFormat;
         builder.Thickness = p.spessore;
-
-        builder.frontImagePath = p.frontImage;
-        builder.backImagePath = p.backImage;
-        builder.topImagePath = p.topImage;
-        builder.bottomImagePath = p.bottomImage;
-        builder.leftImagePath = p.leftImage;
-        builder.rightImagePath = p.rightImage;
         builder.PaperFormat = p.PaperFormat;
+
+        // targetType / isHorizontal / Thickness / Dpi possono differire da
+        // quelli usati quando Builder è stato creato dalla command line:
+        // ricostruisce i canvas vuoti con la geometria corretta, esattamente
+        // come fa il costruttore BaseBuilder(BaseBuilderCommandLine, IFormats).
+        builder.makeEmptyImages();
+
+        if (p.useTestImages)
+            builder.CreateTestImages();
+
+        // Carica davvero le immagini (non solo il path), così il JSON si
+        // comporta come le rispettive opzioni da riga di comando.
+        builder.SetFrontImage(p.frontImage);
+        builder.SetBackImage(p.backImage, p.isHorizontal);
+        builder.SetTopImage(p.topImage);
+        builder.SetBottomImage(p.bottomImage);
+        builder.SetLeftImage(p.leftImage);
+        builder.SetRightImage(p.rightImage);
     }
     #endregion
 
@@ -131,4 +152,14 @@ public class BaseBuilderEngine : BaseEngine, IBaseBuilderEngine
         Builder.ScriptInstance = ScriptInstance;
         return ret;
     }
+
+    /// <summary>
+    /// True when the output paper requires the box/folder layout to be
+    /// anchored to the left edge instead of centred, so any part of the
+    /// layout that does not fit is cut off on the right side rather than
+    /// symmetrically on both sides. Currently only
+    /// <see cref="PaperFormats.Medium13x17"/> uses this.
+    /// </summary>
+    /// <param name="format">Output paper format</param>
+    protected static bool IsLeftAlignedLayout(PaperFormats format) => format == PaperFormats.Medium13x17;
 }

@@ -100,6 +100,17 @@ public interface IBuilder
     void AddCuttingLines(MagickImage img);
 
     /// <summary>
+    /// adds lines to help in cutting images when the layout has been anchored
+    /// to the left edge of the canvas instead of centred (used when the layout
+    /// may be wider than the output paper, so the excess is cut off on the
+    /// right side rather than symmetrically on both sides)
+    /// </summary>
+    /// <param name="img">canvas image to draw onto</param>
+    /// <param name="contentWidth">width of the layout composited onto <paramref name="img"/></param>
+    /// <param name="contentHeight">height of the layout composited onto <paramref name="img"/></param>
+    void AddCuttingLinesLeftAligned(MagickImage img, uint contentWidth, uint contentHeight);
+
+    /// <summary>
     /// Set of images for testing
     /// </summary>
     void CreateTestImages();

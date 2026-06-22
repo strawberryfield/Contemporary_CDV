@@ -71,6 +71,14 @@ public interface IFormats
     /// </remarks>
     public MagickGeometry InCartha15x20_v { get; }
     /// <summary>
+    /// 17x13cm paper
+    /// </summary>
+    public MagickGeometry InCartha13x17_o { get; }
+    /// <summary>
+    /// 13x17cm paper
+    /// </summary>
+    public MagickGeometry InCartha13x17_v { get; }
+    /// <summary>
     /// 15x10cm paper
     /// </summary>
     public MagickGeometry FineArt10x15_o { get; }

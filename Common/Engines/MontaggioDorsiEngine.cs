@@ -22,14 +22,22 @@
 using Casasoft.CCDV.JSON;
 using Casasoft.CCDV.Scripting;
 using ImageMagick;
-using System;
 using System.Text.Json;
 
 namespace Casasoft.CCDV.Engines;
 
 /// <summary>
-/// Montaggio dorsi engine
+/// Montaggio dorsi engine.
 /// </summary>
+/// <remarks>
+/// Supports <see cref="PaperFormats.Medium"/>, <see cref="PaperFormats.Large"/>,
+/// <see cref="PaperFormats.Large20x30"/> and <see cref="PaperFormats.A4"/>.
+/// <see cref="PaperFormats.Small"/>, <see cref="PaperFormats.Panorama"/> and
+/// <see cref="PaperFormats.Medium13x17"/> are intentionally not handled here
+/// (printing CDV backs makes no sense for the small 2-up photo formats), so
+/// selecting one of them yields a blank sheet with no specific layout —
+/// exactly the same (lack of) behaviour as <see cref="PaperFormats.Small"/>.
+/// </remarks>
 public class MontaggioDorsiEngine : BaseMontaggioEngine
 {
     #region constructors

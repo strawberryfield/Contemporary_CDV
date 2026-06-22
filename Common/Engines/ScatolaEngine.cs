@@ -51,7 +51,12 @@ public class ScatolaEngine : BaseBuilderEngine
         parameters = new BaseBuilderParameters();
         Builder = new ScatolaBuilder((BaseBuilderCommandLine)par, fmt);
         ScriptingClass = new BaseBuilderScripting();
-        Script = parameters.Script;
+        Script = ((BaseBuilderCommandLine)par).Script;
+
+        if (!string.IsNullOrWhiteSpace(par.JSON))
+        {
+            SetJsonParams(par.JSON);
+        }
     }
     #endregion
 
@@ -66,14 +71,25 @@ public class ScatolaEngine : BaseBuilderEngine
         _ = base.GetResult(quiet);
         ScatolaBuilder sc = (ScatolaBuilder)Builder;
         MagickImage output = GetOutputPaper(sc.PaperFormat);
-        output.Composite(sc.Build(), Gravity.Center);
-        sc.AddCuttingLines(output);
+        MagickImage layout = sc.Build();
+
+        if (IsLeftAlignedLayout(sc.PaperFormat))
+        {
+            output.Composite(layout, Gravity.West);
+            sc.AddCuttingLinesLeftAligned(output, layout.Width, layout.Height);
+        }
+        else
+        {
+            output.Composite(layout, Gravity.Center);
+            sc.AddCuttingLines(output);
+        }
+
         if (sc.PaperFormat is PaperFormats.Large or PaperFormats.A4)
         {
             img.Info(WelcomeBannerText(), $"{OutputName}.{Extension}").Draw(output);
         }
 
         return output;
-    }
+    } 
     #endregion
 }

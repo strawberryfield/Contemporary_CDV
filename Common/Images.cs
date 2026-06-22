@@ -68,6 +68,8 @@ public class Images : IImages
     #endregion
 
     #region commercial formats
+
+    #region colored background
     /// <summary>
     /// Photocity Digital print over 27x20cm paper
     /// </summary>
@@ -92,6 +94,18 @@ public class Images : IImages
     /// <param name="c">Background color</param>
     /// <returns></returns>
     public MagickImage InCartha15x20_v(MagickColor c) => new(c, fmt.InCartha15x20_v.Width, fmt.InCartha15x20_v.Height);
+    /// <summary>
+    /// 17x13cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_o(MagickColor c) => new(c, fmt.InCartha13x17_o.Width, fmt.InCartha13x17_o.Height);
+    /// <summary>
+    /// 13x17cm paper
+    /// </summary>
+    /// <param name="c">Background color</param>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_v(MagickColor c) => new(c, fmt.InCartha13x17_v.Width, fmt.InCartha13x17_v.Height);
     /// <summary>
     /// 15x10cm paper
     /// </summary>
@@ -129,7 +143,9 @@ public class Images : IImages
     /// <param name="c">Background color</param>
     /// <returns></returns>
     public MagickImage FineArt20x30_v(MagickColor c) => new(c, fmt.FineArt20x30_v.Width, fmt.FineArt20x30_v.Height);
+    #endregion
 
+    #region white background
     /// <summary>
     /// Photocity Digital print over 27x20cm paper
     /// </summary>
@@ -154,6 +170,18 @@ public class Images : IImages
     /// <remarks>White background</remarks>
     /// <returns></returns>
     public MagickImage InCartha15x20_v() => InCartha15x20_v(MagickColors.White);
+    /// <summary>
+    /// 17x13cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_o() => InCartha13x17_o(MagickColors.White);
+    /// <summary>
+    /// 13x17cm paper
+    /// </summary>
+    /// <remarks>White background</remarks>
+    /// <returns></returns>
+    public MagickImage InCartha13x17_v() => InCartha13x17_v(MagickColors.White);
     /// <summary>
     /// 15x10cm paper
     /// </summary>
@@ -191,6 +219,7 @@ public class Images : IImages
     /// <remarks>White background</remarks>
     /// <returns></returns>
     public MagickImage FineArt20x30_v() => FineArt20x30_v(MagickColors.White);
+    #endregion
 
     #endregion
 

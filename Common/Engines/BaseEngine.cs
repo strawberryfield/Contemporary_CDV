@@ -144,16 +144,40 @@ public class BaseEngine : IEngine
         PaperFormat = PaperFormats.Small;
     }
     /// <summary>
-    /// Constructor
+    /// When true, the <see cref="BaseEngine(ICommandLine)"/> constructor does
+    /// NOT call <see cref="SetJsonParams(string)"/> even if <c>par.JSON</c> is
+    /// set. Used by engines (e.g. <see cref="BaseBuilderEngine"/>) whose
+    /// <see cref="SetJsonParams(string)"/> override needs an object that is
+    /// only created in the most-derived constructor body, which runs after
+    /// this base constructor completes. Those derived constructors are
+    /// responsible for calling <see cref="SetJsonParams(string)"/> themselves
+    /// once everything they depend on is ready.
     /// </summary>
-    /// <param name="par">Command line options</param>
+    protected virtual bool DeferJsonParams => false;
+
+    /// <summary>
+    /// Initializes a new instance of <see cref="BaseEngine"/> using the provided
+    /// command-line parameters.
+    /// </summary>
+    /// <param name="par">
+    /// The <see cref="ICommandLine"/> instance containing runtime options:
+    /// - <c>Dpi</c>, <c>FillColor</c>, <c>BorderColor</c>, <c>Tag</c>,
+    ///   <c>OutputName</c> and <c>Extension</c> are copied to the new engine.
+    /// - If <c>par.JSON</c> is non-empty and <see cref="DeferJsonParams"/> is
+    ///   <c>false</c>, <see cref="SetJsonParams(string)"/> is invoked to
+    ///   override and repopulate engine state (including <see cref="FilesList"/>).
+    /// - If <see cref="DeferJsonParams"/> is <c>true</c>, the most-derived
+    ///   constructor is expected to call <see cref="SetJsonParams(string)"/>
+    ///   when it has finished its own initialization.
+    /// - When no JSON is provided, <c>par.FilesList</c> entries are appended to
+    ///   <see cref="FilesList"/>.
+    /// </param>
     public BaseEngine(ICommandLine par)
     {
         colors = new();
         FilesList = new();
         PaperFormat = PaperFormats.Small;
 
-        // Apply command-line values first as defaults.
         Dpi = par.Dpi;
         FillColor = par.FillColor;
         BorderColor = par.BorderColor;
@@ -164,17 +188,21 @@ public class BaseEngine : IEngine
 
         if (!string.IsNullOrWhiteSpace(par.JSON))
         {
-            // JSON overrides everything: SetJsonParams repopulates FilesList,
-            // Dpi, colors, Tag, PaperFormat, CanvasGravity and all
-            // engine-specific fields from the JSON content.
-            SetJsonParams(par.JSON);
+            if (!DeferJsonParams)
+            {
+                // JSON overrides everything: SetJsonParams repopulates FilesList,
+                // Dpi, colors, Tag, PaperFormat, CanvasGravity and all
+                // engine-specific fields from the JSON content.
+                SetJsonParams(par.JSON);
+            }
+            // else: DeferJsonParams is true — the most-derived constructor
+            // calls SetJsonParams(par.JSON) itself once ready.
         }
         else
         {
-            // No JSON: files come from the command line only.
             FilesList.AddRange(par.FilesList);
         }
-    }
+    } 
     #endregion
 
     #region json
@@ -299,11 +327,13 @@ public class BaseEngine : IEngine
             case PaperFormats.Large20x30:
                 final = img.FineArt30x20_o();
                 break;
+            case PaperFormats.Medium13x17:               // ← nuovo
+                final = img.InCartha13x17_o();
+                break;
             default:
                 final = new();
                 break;
         }
-
         if (ScriptInstance is not null)
         {
             var f = Compiler.Run(ScriptInstance, "OutputImage", null);

@@ -96,8 +96,7 @@ public class MontaggioFotoCommandLine : CommandLine
                 { "withborder", "include border to full format", o => WithBorder = o != null },
                 { "trim", "trim white space", o => Trim = o != null },
                 { "p|padding=", "blank border around the image", s => sPadding = s },
-                { "paper=", "Output paper size:\nSmall (default) 10x15cm\nMedium 15x20cm\nLarge 20x27cm\nA4 210x297mm\n20x30 20x30cm", o => Paper = o  },
-              { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s }
+                { "paper=", "Output paper size:\nSmall (default) 10x15cm\nMedium 15x20cm\nMedium13x17 13x17cm\nLarge 20x27cm\nA4 210x297mm\n20x30 20x30cm", o => Paper = o  },              { "gravity=", $"canvas gravity, {ImageMagickHelp.GravityDesc()}", s => sGravity = s }
             };
         AddBaseOptions();
     }
