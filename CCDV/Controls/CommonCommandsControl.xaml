@@ -41,7 +41,8 @@ If not, see <http://www.gnu.org/licenses/>.
                 Click="btnUpdate_Click"
                 Content="&#xE149;"
                 FontFamily="Segoe MDL2 Assets"
-                FontWeight="Bold" />
+                FontWeight="Bold"
+                ToolTip="Rigenera immagine" />
             <Button
                 x:Name="btnOpenJson"
                 Width="20"
@@ -52,7 +53,8 @@ If not, see <http://www.gnu.org/licenses/>.
                 Click="btnOpenJson_Click"
                 Content="1"
                 FontFamily="Wingdings"
-                FontWeight="Bold" />
+                FontWeight="Bold"
+                ToolTip="Carica parametri" />
             <Button
                 x:Name="btnSaveJson"
                 Width="20"
@@ -63,7 +65,8 @@ If not, see <http://www.gnu.org/licenses/>.
                 Click="btnSaveJson_Click"
                 Content="&#xE105;"
                 FontFamily="Segoe MDL2 Assets"
-                FontWeight="Bold" />
+                FontWeight="Bold"
+                ToolTip="Salva parametri" />
             <Button
                 x:Name="btnPrint"
                 Width="20"
@@ -74,7 +77,8 @@ If not, see <http://www.gnu.org/licenses/>.
                 Click="btnPrint_Click"
                 Content="&#xE749;"
                 FontFamily="Segoe MDL2 Assets"
-                FontWeight="Bold" />
+                FontWeight="Bold"
+                ToolTip="Stampa" />
         </StackPanel>
         <Button
             x:Name="btnSave"
