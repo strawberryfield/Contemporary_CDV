@@ -192,9 +192,12 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
     {
         MagickImage final = GetOutputPaper(PaperFormat);
 
+        // Stesso criterio di GetSlot(): rispetta FullSize anche nel layout 2-up.
+        MagickGeometry loadGeom = FullSize ? fmt.CDV_Full_v : fmt.CDV_Internal_v;
+
         int i = startIndex;
         string name1 = FilesList[i];
-        MagickImage img1 = GetProcessed(LoadSingleImage(name1, fmt.CDV_Internal_v, quiet));
+        MagickImage img1 = GetProcessed(LoadSingleImage(name1, loadGeom, quiet));
         i++;
 
         MagickImage img2;
@@ -202,11 +205,11 @@ public class MontaggioFotoEngine : BaseMontaggioEngine
         if (i < FilesList.Count)
         {
             name2 = FilesList[i];
-            img2 = GetProcessed(LoadSingleImage(name2, fmt.CDV_Internal_v, quiet));
+            img2 = GetProcessed(LoadSingleImage(name2, loadGeom, quiet));
         }
         else
         {
-            img2 = img.CDV_Internal_v();
+            img2 = FullSize ? img.CDV_Full_v() : img.CDV_Internal_v();
             name2 = string.Empty;
         }
 
